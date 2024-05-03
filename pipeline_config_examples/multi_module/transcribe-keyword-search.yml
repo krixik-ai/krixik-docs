@@ -1,0 +1,44 @@
+pipeline:
+  name: transcribe-keyword-search-pipeline
+  modules:
+  - name: transcribe
+    models:
+    - name: whisper-tiny
+    - name: whisper-base
+    - name: whisper-small
+    - name: whisper-medium
+    - name: whisper-large-v3
+    defaults:
+      model: whisper-tiny
+    input:
+      type: audio
+      permitted_extensions:
+      - .mp3
+      - .mp4
+    output:
+      type: json
+  - name: json-to-txt
+    models:
+    - name: base
+    defaults:
+      model: base
+    input:
+      type: json
+      permitted_extensions:
+      - .json
+    output:
+      type: text
+  - name: keyword-search
+    models:
+    - name: base
+    defaults:
+      model: base
+    input:
+      type: text
+      permitted_extensions:
+      - .txt
+      - .pdf
+      - .docx
+      - .pptx
+    output:
+      type: db

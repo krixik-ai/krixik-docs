@@ -1,0 +1,33 @@
+pipeline:
+  name: transcribe-sentiment-pipeline
+  modules:
+  - name: transcribe
+    models:
+    - name: whisper-tiny
+    - name: whisper-base
+    - name: whisper-small
+    - name: whisper-medium
+    - name: whisper-large-v3
+    defaults:
+      model: whisper-tiny
+    input:
+      type: audio
+      permitted_extensions:
+      - .mp3
+      - .mp4
+    output:
+      type: json
+  - name: sentiment
+    models:
+    - name: distilbert-base-uncased-finetuned-sst-2-english
+    - name: bert-base-multilingual-uncased-sentiment
+    - name: distilbert-base-multilingual-cased-sentiments-student
+    - name: distilroberta-finetuned-financial-news-sentiment-analysis
+    defaults:
+      model: distilbert-base-uncased-finetuned-sst-2-english
+    input:
+      type: json
+      permitted_extensions:
+      - .json
+    output:
+      type: json

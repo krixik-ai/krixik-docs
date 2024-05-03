@@ -1,0 +1,19 @@
+pipeline:
+  name: transcribe-pipeline
+  modules:
+  - name: transcribe
+    models:
+    - name: whisper-tiny
+    - name: whisper-base
+    - name: whisper-small
+    - name: whisper-medium
+    - name: whisper-large-v3
+    defaults:
+      model: whisper-tiny
+    input:
+      type: audio
+      permitted_extensions:
+      - .mp3
+      - .mp4
+    output:
+      type: json

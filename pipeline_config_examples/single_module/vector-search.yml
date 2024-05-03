@@ -1,0 +1,14 @@
+pipeline:
+  name: vector-search-pipeline
+  modules:
+  - name: vector-search
+    models:
+    - name: faiss
+    defaults:
+      model: faiss
+    input:
+      type: npy
+      permitted_extensions:
+      - .npy
+    output:
+      type: faiss

@@ -1,0 +1,17 @@
+pipeline:
+  name: ocr-pipeline
+  modules:
+  - name: ocr
+    models:
+    - name: tesseract-en
+    - name: tesseract-es
+    defaults:
+      model: tesseract-en
+    input:
+      type: image
+      permitted_extensions:
+      - .jpg
+      - .jpeg
+      - .png
+    output:
+      type: json

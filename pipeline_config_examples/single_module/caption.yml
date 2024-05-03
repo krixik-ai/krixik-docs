@@ -1,0 +1,19 @@
+pipeline:
+  name: caption-pipeline
+  modules:
+  - name: caption
+    models:
+    - name: vit-gpt2-image-captioning
+    - name: git-base
+    - name: blip-image-captioning-base
+    - name: blip-image-captioning-large
+    defaults:
+      model: vit-gpt2-image-captioning
+    input:
+      type: image
+      permitted_extensions:
+      - .jpg
+      - .jpeg
+      - .png
+    output:
+      type: json

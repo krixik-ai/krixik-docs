@@ -1,0 +1,32 @@
+pipeline:
+  name: summarize-sentiment-pipeline
+  modules:
+  - name: summarize
+    models:
+    - name: bart-large-cnn
+    - name: text-summarization
+    defaults:
+      model: bart-large-cnn
+    input:
+      type: text
+      permitted_extensions:
+      - .txt
+      - .pdf
+      - .docx
+      - .pptx
+    output:
+      type: json
+  - name: sentiment
+    models:
+    - name: distilbert-base-uncased-finetuned-sst-2-english
+    - name: bert-base-multilingual-uncased-sentiment
+    - name: distilbert-base-multilingual-cased-sentiments-student
+    - name: distilroberta-finetuned-financial-news-sentiment-analysis
+    defaults:
+      model: distilbert-base-uncased-finetuned-sst-2-english
+    input:
+      type: json
+      permitted_extensions:
+      - .json
+    output:
+      type: json

@@ -1,0 +1,69 @@
+site_name: krixik docs
+nav:
+  - Home: index.md
+  - About: about.md
+  - Quickstart: quickstart.md
+  - Pipeline examples:
+    - transcribe examples:
+      - 'overview': examples/transcribe/overview.md
+      - 'semantically searchable transcription': examples/transcribe/transcribe-semantic.md
+      - 'multilingual transcription': examples/transcribe/transcribe-multilingual.md
+      - 'semantically searchable multilingual transcription': examples/transcribe/transcribe-multilingual-semantic.md
+      - 'transcribe to sentiment analysis': examples/transcribe/transcribe-sentiment.md
+    - summarize examples:
+      - 'overview': examples/summarize/overview.md
+      - 'recursive summarization': examples/summarize/
+  - Modules:
+    - currently available:
+      - 'overview': modules/overview.md
+      - 'caption': modules/caption.md
+      - 'json-to-txt': modules/json-to-txt.md
+      - 'keyword-db': modules/keyword-db.md
+      - 'ocr': modules/ocr.md
+      - 'parser': modules/parser.md
+      - 'sentiment': modules/sentiment.md
+      - 'summarize': modules/summarize.md
+      - 'text-embedder': modules/text-embedder.md
+      - 'transcribe': modules/transcribe.md
+      - 'translate': modules/translate.md
+      - 'vector-db': modules/vector-db.md
+  - System:
+    - methods:
+      - 'overview': system/overview.md
+      - 'base pipeline setup': system/base.md
+      - 'the process method': system/process.md
+      - 'the process_status method': system/process_status.md
+      - 'the fetch_output method': system/fetch_output.md
+      - 'the list method': system/list.md
+      - 'the update method': system/update.md
+      - 'the delete method': system/delete.md
+      - 'the show_tree method': system/show_tree.md
+      - 'the keyword_search method': system/keyword_search_method.md
+      - 'the vector_search method': system/vector_search_method.md
+  - Pipeline builder:
+    - Overview:
+      - 'introduction': pipeline_builder/introduction.md
+      - 'view modules': pipeline_builder/existing_modules.md
+      - 'create module': pipeline_builder/create_module.md
+      - 'view a module config': pipeline_builder/view_module_config.md
+      - 'build your first custom pipeline': pipeline_builder/first_pipeline.md
+      - 'test your pipeline': pipeline_builder/testing_pipeline.md
+      - 'useful pipeline properties': pipeline_builder/useful_pipeline_properties.md
+      - 'save and load your pipeline config': pipeline_builder/save_load.md
+    - Modules - advanced details:
+      - 'introduction': advanced_details/modules/introduction.md
+      - 'click data': advanced_details/modules/click_data.md
+      - 'module io data': advanced_details/modules/io_data.md
+      - 'module io dataclasses': advanced_details/modules/io_dataclasses.md
+    - Pipelines - advanced details:
+      - 'introduction': advanced_details/pipelines/introduction.md
+      - 'building module by module': advanced_details/pipelines/modular_build.md
+
+
+theme: 
+  name: readthedocs
+plugins:
+  - mkdocstrings:
+      default_handler: python
+  - search
+  # - section-index

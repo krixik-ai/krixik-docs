@@ -1,0 +1,14 @@
+pipeline:
+  name: vector-db-pipeline-1
+  modules:
+  - name: vector-db
+    models:
+    - name: faiss
+    defaults:
+      model: faiss
+    input:
+      type: npy
+      permitted_extensions:
+      - .npy
+    output:
+      type: faiss

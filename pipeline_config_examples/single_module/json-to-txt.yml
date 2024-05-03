@@ -1,0 +1,14 @@
+pipeline:
+  name: json-to-txt-pipeline
+  modules:
+  - name: json-to-txt
+    models:
+    - name: base
+    defaults:
+      model: base
+    input:
+      type: json
+      permitted_extensions:
+      - .json
+    output:
+      type: text

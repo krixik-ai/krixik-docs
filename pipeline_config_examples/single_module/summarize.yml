@@ -1,0 +1,18 @@
+pipeline:
+  name: summarize-pipeline
+  modules:
+  - name: summarize
+    models:
+    - name: bart-large-cnn
+    - name: text-summarization
+    defaults:
+      model: bart-large-cnn
+    input:
+      type: text
+      permitted_extensions:
+      - .txt
+      - .pdf
+      - .docx
+      - .pptx
+    output:
+      type: json

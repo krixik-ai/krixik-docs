@@ -1,0 +1,61 @@
+pipeline:
+  name: ocr-sentiment-pipeline
+  modules:
+  - name: ocr
+    models:
+    - name: tesseract-en
+    - name: tesseract-es
+    defaults:
+      model: tesseract-en
+    input:
+      type: image
+      permitted_extensions:
+      - .jpg
+      - .jpeg
+      - .png
+    output:
+      type: json
+  - name: json-to-txt
+    models:
+    - name: base
+    defaults:
+      model: base
+    input:
+      type: json
+      permitted_extensions:
+      - .json
+    output:
+      type: text
+  - name: parser
+    models:
+    - name: fixed
+      params:
+        chunk_size:
+          type: int
+        overlap_size:
+          type: int
+    defaults:
+      model: fixed
+    input:
+      type: text
+      permitted_extensions:
+      - .txt
+      - .pdf
+      - .docx
+      - .pptx
+    output:
+      type: json
+  - name: sentiment
+    models:
+    - name: distilbert-base-uncased-finetuned-sst-2-english
+    - name: bert-base-multilingual-uncased-sentiment
+    - name: distilbert-base-multilingual-cased-sentiments-student
+    - name: distilroberta-finetuned-financial-news-sentiment-analysis
+    defaults:
+      model: distilbert-base-uncased-finetuned-sst-2-english
+    input:
+      type: json
+      permitted_extensions:
+      - .json
+    output:
+      type: json
