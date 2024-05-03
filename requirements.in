@@ -5,6 +5,7 @@ pytest
 pytest-subtests
 python-dotenv
 python-magic
+faiss-cpu
 pypdf
 python-docx
 python-pptx
