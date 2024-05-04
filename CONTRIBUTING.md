@@ -31,7 +31,7 @@ Follow best practices in your notebook layout by abiding by the following conten
 
 1.  Tag any cells you want removed / output removed when converted to markdown
     - `remove_output`: tag to remove cell output 
-    - `remove_convert`: remove entire cell (input and output)
+    - `remove_cell`: remove entire cell (input and output)
     - `ignore_test`: add to code cells you want ignored in testing
     - `should_fail`: add to any code cell that should fail in testing
 2.  Clean up your pipelines at the end of each notebook
@@ -104,6 +104,6 @@ After all notebooks have passed the previous step they are converted again to ma
 
 Tag any cells you want removed / output removed when converted to markdown
     - `remove_output`: tag to remove cell output 
-    - `remove_convert`: remove entire cell (input and output)
+    - `remove_cell`: remove entire cell (input and output)
     - `ignore_test`: add to code cells you want ignored in testing
     - `should_fail`: add to any code cell that should fail in testing
