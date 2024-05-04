@@ -75,12 +75,19 @@ demos/mydemos/my_new_demo.ipynb
 exists.
 
 
-3.  Noteobook formatting
+3.  Notebook-unique pipeline check
+
+All pipeline name(s) declared in a notebook must be unique to that notebook.  This is to avoid un-wanted collisions that could confuse new users when using multiple notebooks at the same time / fail tests unnecessarily.
+
+At this step all pipeline name(s) from each notebook are collected and a check is made to ensure that no pipeline name is found two notebooks.
+
+
+4.  Noteobook formatting
 
 Next notebooks are formatted (using [ruff](https://github.com/astral-sh/ruff)).  This does not change the content of your notebook, it will just clean it up (e.g., remove un-needed spacing) and standardize it. 
 
 
-4.  Link validation
+5.  Link validation
 
 All referenced notebooks are converted to markdown for link validation.  This includes
 
@@ -94,13 +101,15 @@ All referenced notebooks are converted to markdown for link validation.  This in
 - outbound links: any links to outbound sites like [my link](https://google.com) are checked using the `requests` library
 
 
-5.  Notebook execution
+6.  Notebook execution
 
 Each notebook is executed and successful completion of each code cell *not* marked with the tag `ignore_test` is confirmed.
 
-6.  Final markdown rendering
+7.  Final markdown rendering
 
 After all notebooks have passed the previous step they are converted again to markdown.
+
+Each notebook must contain unique pipeilne name(s) - this is to avoid collision when testing / using other notebooks.
 
 Tag any cells you want removed / output removed when converted to markdown
     - `remove_output`: tag to remove cell output 
