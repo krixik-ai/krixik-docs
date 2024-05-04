@@ -33,6 +33,7 @@ Follow best practices in your notebook layout by abiding by the following conten
     - `remove_output`: tag to remove cell output 
     - `remove_convert`: remove entire cell (input and output)
     - `ignore_test`: add to code cells you want ignored in testing
+    - `should_fail`: add to any code cell that should fail in testing
 2.  Clean up your pipelines at the end of each notebook
     - Make sure your notebook ends with a python cell invoking `reset_pipeline` on any pipeline(s) created
 
@@ -83,7 +84,12 @@ Next notebooks are formatted (using [ruff](https://github.com/astral-sh/ruff)). 
 
 All referenced notebooks are converted to markdown for link validation.  This includes
 
-- local link validation: local links to documentation pages of the form [a local link](demos/mydemos/my_new_demo.md) are validated by checking that the linked-to file `demos/mydemos/my_new_demo.md` exists in its proposed location under the `docs` directory
+- local intra-page link validation: intra page links are validated.  These are typically links to sections of a page listed in the page's table of contents, and look like
+
+[my demo section](#my-demo-section)
+
+
+- local inter-page link validation: local links to documentation pages of the form [a local link](demos/mydemos/my_new_demo.md) are validated by checking that the linked-to file `demos/mydemos/my_new_demo.md` exists in its proposed location under the `docs` directory
 
 - outbound links: any links to outbound sites like [my link](https://google.com) are checked using the `requests` library
 
@@ -100,3 +106,4 @@ Tag any cells you want removed / output removed when converted to markdown
     - `remove_output`: tag to remove cell output 
     - `remove_convert`: remove entire cell (input and output)
     - `ignore_test`: add to code cells you want ignored in testing
+    - `should_fail`: add to any code cell that should fail in testing
