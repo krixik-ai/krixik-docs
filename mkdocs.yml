@@ -30,7 +30,9 @@ nav:
   - System:
     - methods:
       - 'overview': system/overview.md
-      - 'base pipeline setup': system/base.md
+      - 'initialize': initialize_and_authenticate.md
+      - 'basic pipeline setup': system/basic_pipeline_setup.md
+      
       - 'the process method': system/process.md
       - 'the process_status method': system/process_status.md
       - 'the fetch_output method': system/fetch_output.md
