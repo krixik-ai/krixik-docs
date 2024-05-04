@@ -11,8 +11,7 @@ nav:
       - 'semantically searchable multilingual transcription': examples/transcribe/transcribe-multilingual-semantic.md
       - 'transcribe to sentiment analysis': examples/transcribe/transcribe-sentiment.md
     - summarize examples:
-      - 'overview': examples/summarize/overview.md
-      - 'recursive summarization': examples/summarize/
+      - 'recursive summarization': examples/summarize/recursive_summarize.md
   - Modules:
     - currently available:
       - 'overview': modules/overview.md
@@ -30,7 +29,7 @@ nav:
   - System:
     - methods:
       - 'overview': system/overview.md
-      - 'initialize': initialize.md
+      - 'initialize': system/initialize.md
       - 'create, save, and load pipelines': system/create_save_load.md
       - 'the process method': system/process.md
       - 'the process_status method': system/process_status.md

@@ -1,22 +1,23 @@
-from nbconvert import NotebookExporter
+from nbconvert import MarkdownExporter, TagRemovePreprocessor
 import nbformat
 
-# Load the notebook
-notebook_path = "docs/modules/summarize.ipynb"
-with open(notebook_path, 'r', encoding='utf-8') as f:
-    notebook_content = f.read()
 
-notebook = nbformat.reads(notebook_content, as_version=4)
+def convert_notebook_to_md(notebook_path: str) -> None:
+    # Load the notebook
+    with open(notebook_path, 'r', encoding='utf-8') as f:
+        notebook_content = f.read()
 
-# Define the configuration for the exporter
-exporter = NotebookExporter()
-exporter.exclude_input_tags = {'remove_convert'}
-exporter.exclude_output_tags = {'remove_output'}
+    notebook = nbformat.reads(notebook_content, as_version=4)
 
-# Export the notebook to Markdown
-output, _ = exporter.from_notebook_node(notebook)
+    # Define the configuration for the exporter
+    exporter = MarkdownExporter()
+    exporter.remove = {'remove_cell'}
+    exporter.exclude_output_tags = {'remove_output'}
 
-# Save the Markdown output to a file
-markdown_output_path = "summarize.md"
-with open(markdown_output_path, 'w', encoding='utf-8') as f:
-    f.write(output)
+    # Export the notebook to Markdown
+    output, _ = exporter.from_filename(notebook)
+
+    # Save the Markdown output to a file
+    markdown_output_path = notebook_path.replace(".ipynb", ".md")
+    with open(markdown_output_path, 'w', encoding='utf-8') as f:
+        f.write(output)

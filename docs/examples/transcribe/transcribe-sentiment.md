@@ -1,48 +1,14 @@
-# transcription with sentiment analysis pipeline
+## Transcription with sentiment analysis pipeline
 
 This document details a modular pipeline that takes in an audio/video file in the english language, transcribes it, and then performs sentiment analysis on each sentence of the transcript.
-
-To follow along with this demonstration be sure to initialize your krixik session with your api key and url as shown below. 
-
-We illustrate loading these required secrets in via [python-dotenv](https://pypi.org/project/python-dotenv/), storing those secrets in a `.env` file.  This is always good practice for storing / loading secrets (e.g., doing so will reduce the chance you inadvertantly push secrets to a repo).
-
-
-
-```python
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
-This small function prints dictionaries very nicely in notebooks / markdown.
-
-
-```python
-# print dictionaries / json nicely in notebooks / markdown
-import json
-def json_print(data):
-    print(json.dumps(data, indent=2))
-```
 
 A table of contents for the remainder of this document is shown below.
 
 
 - [pipeline setup](#pipeline-setup)
 - [processing a file](#processing-a-file)
-- [saving the pipeline config for future use](#saving-the-pipeline-config-for-future-use)
 
-## pipeline setup
+## Pipeline setup
 
 Below we setup a multi module pipeline to serve our intended purpose, which is to build a pipeline that will transcribe any audio/video and make it semantically searchable in any language.
 
@@ -53,42 +19,30 @@ To do this we will use the following modules:
 - [`parser`](modules/parser.md): takes in text, slices into (possibly overlapping) strings
 - [`sentiment`](modules/sentiment): takes in text snippets and returns scores for their sentiments
 
+We do this by passing the module names to the `module_chain` argument of [`create_pipeline`](system/create_save_load.md) along with a name for our pipeline.
+
 
 ```python
-from krixik.pipeline_builder.module import Module
-from krixik.pipeline_builder.pipeline import CreatePipeline
-
-# select modules
-module_1 = Module(module_type="transcribe")
-module_2 = Module(module_type="json-to-txt")
-module_3 = Module(module_type="parser")
-module_4 = Module(module_type="sentiment")
-
-# create custom pipeline object
-custom = CreatePipeline(name='transcribe-sentiment-pipeline', 
-                        module_chain=[module_1, module_2, module_3, module_4])
-
-# pass the custom object to the krixik operator (note you can also do this by passing its config)
-pipeline = krixik.load_pipeline(pipeline=custom)
+# create a multi-module pipeline
+pipeline = krixik.create_pipeline(name="examples-transcribe-sentiment-docs",
+                                  module_chain=["transcribe",
+                                                "json-to-txt",
+                                                "parser",
+                                                "sentiment"])
 ```
 
-With our `custom` pipeline built we now pass it, along with a test file, to our operator to process the file.
+This pipeline's available modeling options and parameters are stored in your custom [pipeline's configuration](system/create_save_load.md).
 
-## processing a file
+## Processing a file
 
 We first define a path to a local input file.
-
-
-```python
-# define path to an input file
-test_file = "../../input_data/Interesting Facts About Colombia.mp4"
-```
 
 Lets take a quick look at this file before processing.
 
 
 ```python
 # examine contents of input file
+test_file = "../../data/input/Interesting Facts About Colombia.mp4"
 from IPython.display import Video
 Video(test_file)
 ```
@@ -107,11 +61,12 @@ For this run we will use the default models for the entire chain of modules.
 
 ```python
 # test file
-test_file = "../../input_data/Interesting Facts About Colombia.mp4"
+test_file = "../../data/input/Interesting Facts About Colombia.mp4"
 
 # process test input
 process_output = pipeline.process(local_file_path = test_file,
-                                  expire_time=60*5)
+                                  expire_time=60*10,
+                                  verbose=False)
 ```
 
     INFO: Checking that file size falls within acceptable parameters...
@@ -139,7 +94,7 @@ The output of this process is printed below.  Because the output of this particu
 
 ```python
 # nicely print the output of this process
-json_print(process_output)
+print(json.dumps(process_output, indent=2))
 ```
 
     {
@@ -408,8 +363,8 @@ We can also load the output from file to see the pipeline output.
 
 ```python
 # load in process output from file
-with open(process_output['process_output_files'][0], "r") as file:
-   json_print(json.load(file))
+with open(process_output["process_output_files"][0]) as f:
+  print(json.dumps(json.load(f), indent=2))
 ```
 
     [
@@ -661,15 +616,3 @@ with open(process_output['process_output_files'][0], "r") as file:
       }
     ]
 
-
-## saving the pipeline config for future use
-
-You can save the configuration of this pipeline using the `custom` object, and use it later direclty without building it again in python.
-
-
-```python
-# save your config for later use (that way you don't need to re-build in python)
-custom.save(config_path='transcribe-sentiment-pipeline.yml')
-```
-
-See more about [saving and loading pipeline configuration files](LINNK GOES HERE).
