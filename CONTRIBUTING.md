@@ -104,12 +104,23 @@ All pipeline name(s) declared in a notebook must be unique to that notebook.  Th
 At this step all pipeline name(s) from each notebook are collected and a check is made to ensure that no pipeline name is found two notebooks.
 
 
-4.  Notebook execution
+4.  Reset end
+
+To prevent pipeline collisions and general good practice cleanup the final code cell in every notebook containing a `create_pipeline` invoccation should end with `.reset_pipeline`.
+
+We test that the final code cell of such notebooks contain
+
+```python
+reset_pipeline(...)
+```
+
+
+5.  Notebook execution
 
 Each notebook is executed and successful completion of each code cell *not* marked with the tag `ignore_test` is confirmed.
 
 
-5.  Final markdown rendering
+6.  Final markdown rendering
 
 After all notebooks have passed the previous step they are converted again to markdown.
 
