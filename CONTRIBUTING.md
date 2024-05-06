@@ -14,9 +14,7 @@ Each new page in documentation begins as a jupyter notebook.  This notebook is c
 If you want a notebook included in documentation / testing it **must** be 
 
 - placed in a (subdirectory of) the `docs` directory
-- referenced in `mkdocs.yml` at the base of this repository
-
-**Do not leave any notebook in docs that you do not want run during tests.**
+- reference your page in `mkdocs.yml` at the base of this repository
 
 Note that a valid reference listing in `mkdocks.yml` does not include `docs`, and starts with any subdirectory/path *after* `docs`.  For example, if a page called `my_new_demo.md` is located in `docs/demos/mydemos/my_new_demo.md` then its reference in `mkdocs.yml` should look like
 
@@ -28,22 +26,28 @@ demos/mydemos/my_new_demo.ipynb
 
 in the same location.  You do **not** need to generate the associated markdown yourself - this will be done when tests are run.
 
+**Do not leave any notebook in docs that you do not want run during tests.**
+
 
 Follow best practices in your notebook layout by abiding by the following content rules:
 
 1.  Tag any cells you want removed / output removed when converted to markdown
-    - `remove_output`: tag to remove cell output 
-    - `remove_cell`: remove entire cell (input and output)
-    - `ignore_test`: add to code cells you want ignored in testing
-    - `raises-exception`: add to any code cell that should fail in testing
+    - `remove_output`: tag to remove cell output when converting to markdown
+    - `remove_cell`: remove entire cell (input and output) when converting to markdown
+    - `skip-execution`: add to code cells you want ignored in testing notebook
+    - `raises-exception`: add to any code cell that should fail in testing notebook
 2.  Clean up your pipelines at the end of each notebook
-    - Make sure your notebook ends with a python cell invoking `reset_pipeline` on any pipeline(s) created
+    - Make sure your notebook ends with a python cell invoking `reset_pipeline` on any pipeline(s) created (this will be tested and if you do not do this your tests will  fail)
+3.  Direct `local_save_directory` for `.process` or `.fetch_output` return files to `data/output`.  This output should be pushed along with new pages - this is so any user who views your page can also examine the corresponding output
+
 
 ## Before pushing checklist
 
 - make sure all notebooks pass tests locally
 - clean up the `data/output` directory - remove everything.  This directory is where all output from demo notebooks is directed so that users can easily see input-output.  If we do not clean it up before each push the data will aggregate.
+- cleanup the `data/pipeline_configs` directory - remove everything.  This directory is where all saved configs from documentation are stored.
 - add any new pages to the `mkdocs` table of contents
+
 
 WARNING: if you change the structure of the `mkdocs` table of contents beyond adding pages - e.g., its basic section - you may break step 1 of testing described below. 
 
@@ -126,8 +130,8 @@ After all notebooks have passed the previous step they are converted again to ma
 
 Each notebook must contain unique pipeilne name(s) - this is to avoid collision when testing / using other notebooks.
 
-Tag any cells you want removed / output removed when converted to markdown
-    - `remove_output`: tag to remove cell output 
-    - `remove_cell`: remove entire cell (input and output)
-    - `ignore_test`: add to code cells you want ignored in testing
-    - `raises-exception`: add to any code cell that should fail in testing
+Tag any cells you want removed / output removed when converted to markdown or testing
+    - `remove_output`: tag to remove cell output when converting to markdown
+    - `remove_cell`: remove entire cell (input and output) when converting to markdown
+    - `skip-execution`: add to code cells you want ignored in testing notebook
+    - `raises-exception`: add to any code cell that should fail in testing notebook
