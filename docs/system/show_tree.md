@@ -7,7 +7,7 @@ To illustrate its usage we first process several files.
 A table of contents for the remainder of this document is shown below.
 
 - [basic pipeline setup](#basic-pipeline-setup)
-- [basic usage, required input, and output breakdown](#basic-usage-required-input-and-output-breakdown)
+- [basic usage, required input, and output breakdown](#basic-usage,-required-input,-and-output-breakdown)
 
 ## Basic pipeline setup
 
@@ -22,7 +22,7 @@ pipeline = krixik.create_pipeline(name="system-show-tree-docs",
 
 ## Basic usage, required input, and output breakdown
 
-To illustrate the usage of `show_tree` we process a short file illustrated in the introduction to the [`parser` method](modules/parser.md#basic-usage-and-output-breakdown) - using various different metadata including `file_name`'s and `symbolic_directory_path`'s to illustrate the `show_tree` method.
+To illustrate the usage of `show_tree` we process a short file illustrated in the introduction to the [`parser` method](modules/parser.md) - using various different metadata including `file_name`'s and `symbolic_directory_path`'s to illustrate the `show_tree` method.
 
 
 ```python

@@ -15,7 +15,6 @@ A table of contents for the remainder of this document is shown below.
 - [using the default model](#using-the-default-model)
 - [examining process output locally](#examining-process-output-locally)
 - [processing with a non-default model](#processing-with-a-non-default-model)
-- [using a non-default model](#using-a-non-default-model)
 
 ## Pipeline setup
 

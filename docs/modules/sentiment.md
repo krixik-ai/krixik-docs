@@ -14,7 +14,6 @@ A table of contents for the remainder of this document is shown below.
 - [pipeline setup](#pipeline-setup)
 - [required input format](#required-input-format)
 - [using the default model](#using-the-default-model)
-- [using a non-default model](#using-a-non-default-model)
 
 
 ```python

@@ -8,7 +8,7 @@ A table of contents for the remainder of this document is shown below.
 
 
 - [basic pipeline setup](#basic-pipeline-setup)
-- [basic usage, required input, and output breakdown](#basic-usage-required-input-and-output-breakdown)
+- [basic usage, required input, and output breakdown](#basic-usage,-required-input,-and-output-breakdown)
 - [listing by `file_ids`](#listing-by-file_ids)
 - [listing by `file_names`](#listing-by-file_names)
 - [listing by `symbolic_directory_paths`](#listing-by-symbolic_directory_paths)
@@ -30,7 +30,7 @@ pipeline = krixik.create_pipeline(name="system-list-docs",
 
 ## Basic usage, required input, and output breakdown
 
-To illustrate the usage of `list` we process a short file illustrated in the introduction to the [`parser` method](modules/parser.md#basic-usage-and-output-breakdown).
+To illustrate the usage of `list` we process a short file illustrated in the introduction to the [`parser` method](modules/parser.md).
 
 
 ```python

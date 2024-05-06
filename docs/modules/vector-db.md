@@ -14,7 +14,7 @@ A table of contents for the remainder of this document is shown below.
 - [pipeline setup](#pipeline-setup)
 - [required input format](#required-input-format)
 - [using the default model](#using-the-default-model)
-- [using the `semantic_search` method](#using-the-semantic-search-method)
+- [using the `semantic_search` method](#using-the-semantic_search-method)
 - [querying output databases locally](#querying-output-databases-locally)
 
 ## Pipeline setup

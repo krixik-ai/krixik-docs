@@ -38,7 +38,7 @@ pipeline = krixik.create_pipeline(name="system-create-save-load-2",
                                                 "vector-db"])
 ```
 
-An array of multi-module pipeline examples can be found in the [examples section](examples/overview.md) of this documentation.
+An array of multi-module pipeline examples can be found in the of this documentation.
 
 Upon execution, the krixik cli performs checks to ensure that these three modules will run properly in the provided sequence.  If they do not, a local exception is thrown with a message about why a module pair cannot be placed in a particular order.
 

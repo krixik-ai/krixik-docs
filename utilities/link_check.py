@@ -1,5 +1,6 @@
 import markdown
 import re
+import requests
 
 
 def extract_links_from_markdown(markdown_file: str) -> list:
@@ -39,4 +40,11 @@ def check_file_links(filepath: str,
     for link in links:
         if link not in toc_files and link not in headings:
             dead_links.append(link)
-    return dead_links
+            
+    # check dead links with requests
+    last_dead_links = []
+    for link in dead_links:
+        response = requests.get(link)
+        if response.status_code != 200:
+            last_dead_links.append(link)
+    return last_dead_links

@@ -5,7 +5,7 @@ The `keyword_search` method can be used with any pipeline that ends with `keywor
 A table of contents for the remainder of this document is shown below.
 
 - [basic pipeline setup](#basic-pipeline-setup)
-- [basic usage, required input, and output breakdown](#basic-usage-required-input-and-output-breakdown)
+- [basic usage, required input, and output breakdown](#basic-usage,-required-input,-and-output-breakdown)
 
 ## Basic pipeline setup
 

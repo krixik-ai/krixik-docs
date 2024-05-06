@@ -7,10 +7,7 @@ This method is especially useful when using [`process`](system/process.md) with 
 A table of contents for the remainder of this document is shown below.
 
 - [basic pipeline setup](#basic-pipeline-setup)
-- [basic usage, required input, and output breakdown](#basic-usage-required-input-and-output-breakdown)
-- [optional input arguments](#optional-input-arguments)
-- [defaults when using `process`](#defaults-when-using-process)
-- [automatic data type transformations](#automatic-data-type-transformations)
+- [basic usage, required input, and output breakdown](#basic-usage,-required-input,-and-output-breakdown)
 
 ## Basic pipeline setup
 
@@ -25,7 +22,7 @@ pipeline = krixik.create_pipeline(name="system-process-status-docs",
 
 ## Basic usage, required input, and output breakdown
 
-To illustrate the usage of `process_status` we process a short file illustrated in the introduction to the [`parser` method](modules/parser.md#basic-usage-and-output-breakdown).
+To illustrate the usage of `process_status` we process a short file illustrated in the introduction to the [`parser` method](modules/parser.md).
 
 
 ```python

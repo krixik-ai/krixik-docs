@@ -9,7 +9,7 @@ We will illustrate its usage by processing a simple file, deleting it using the 
 A table of contents for the remainder of this document is shown below.
 
 - [basic pipeline setup](#basic-pipeline-setup)
-- [basic usage, required input, and output breakdown](#basic-usage-required-input-and-output-breakdown)
+- [basic usage, required input, and output breakdown](#basic-usage,-required-input,-and-output-breakdown)
 
 ## Basic pipeline setup
 
@@ -24,7 +24,7 @@ pipeline = krixik.create_pipeline(name="system-delete-docs",
 
 ## Basic usage, required input, and output breakdown
 
-To illustrate the usage of `update` we process a short file illustrated in the introduction to the [`parser` method](modules/parser.md#basic-usage-and-output-breakdown).
+To illustrate the usage of `update` we process a short file illustrated in the introduction to the [`parser` method](modules/parser.md).
 
 
 ```python

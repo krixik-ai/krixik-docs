@@ -14,7 +14,7 @@ A table of contents for the remainder of this document is shown below.
 - [pipeline setup](#pipeline-setup)
 - [required input format](#required-input-format)
 - [using the default model](#using-the-default-model)
-- [using the `keyword_search` method](#using-the-keyword-search-method)
+- [using the `keyword_search` method](#using-the-keyword_search-method)
 - [querying output databases locally](#querying-output-databases-locally)
 
 ## Pipeline setup
@@ -98,7 +98,7 @@ print(json.dumps(process_output, indent=2))
 
 ## Using the `keyword_search` method
 
-Any pipeline containing a `keyword-search` module automatically inherits access to the [`keyword_search` method](keyword_search_method.md).  This provides convenient sophisticated query access to the newly created keyword database in krixik.
+Any pipeline containing a `keyword-search` module automatically inherits access to the [`keyword_search` method](system/keyword_search.md).  This provides convenient sophisticated query access to the newly created keyword database in krixik.
 
 The `keyword_search` method takes in an input `query` containing desired keywords separated by spaces, and searches through your database(s) for these keywords as well as their lemmatized stems.
 

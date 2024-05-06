@@ -20,7 +20,7 @@ pipeline = krixik.create_pipeline(name="fetch-output-docs",
 
 ## Basic usage, required input, and output breakdown
 
-To illustrate the usage of `fetch_output` we process a short file illustrated in the introduction to the [`parser` method](modules/parser.md#basic-usage-and-output-breakdown).
+To illustrate the usage of `fetch_output` we process a short file illustrated in the introduction to the [`parser` method](modules/parser.md).
 
 
 ```python
