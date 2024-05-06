@@ -1,6 +1,6 @@
 ## recursive summarization pipeline
 
-One of the most practical ways to achieve a short, abstract, but representative summary of a long document is to apply summarization *recursively*.  This concept was discussed in our introduction to the [`summarize` module](modules/summarize.md#recursive-summarization).  There we applied a single `summarize` module pipeline several times to create terser and terser summary representations of an input text.
+One of the most practical ways to achieve a short, abstract, but representative summary of a long document is to apply summarization *recursively*.  This concept was discussed in our introduction to the [`summarize` module](modules/summarize.md).  There we applied a single `summarize` module pipeline several times to create terser and terser summary representations of an input text.
 
 In this document we reproduce the same result via a pipeline consisting of multiple [`summarize`](modules/summarize.md) modules in immediate succession.  Processing files through this pipeline applies `summarize` recursively with a single pipeline invocation.
 
@@ -131,11 +131,11 @@ with open(test_file, "r") as file:
 
 When introducing the [`summarize` module](modules/summarize.md) we applied a single module `summarize` pipeline to this document.  This produced a summary that was about half the length of the original text.
 
-In the [recursive summarization](modules/summarize.md#recursive-summarization) section of that introduction we then applied the same single module pipeline two more times to produce a one paragraph summary of the text above.
+In the [recursive summarization](modules/summarize.md) section of that introduction we then applied the same single module pipeline two more times to produce a one paragraph summary of the text above.
 
 Here we will produce the same one paragraph summary by applying the recursive `summarize` pipeline defined above a single time to the input text.
 
-Below we [process](#system/process.md) the input through our pipeline.  Here we use the default model for[`summarize`](modules/summarize.md) for each of the three instances of the module.
+Below we [process](system/process.md) the input through our pipeline.  Here we use the default model for[`summarize`](modules/summarize.md) for each of the three instances of the module.
 
 
 ```python

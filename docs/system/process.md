@@ -5,10 +5,10 @@ The `process` method is available on every krixik pipeline, and is invoked whene
 A table of contents for the remainder of this document is shown below.
 
 - [basic pipeline setup](#basic-pipeline-setup)
-- [core inputs to the `process` method](#core-inputs-to-the-process-method)
+- [core inputs to the `process` method](#core-inputs-to-the-`process`-method)
 - [basic usage and output breakdown](#basic-usage-and-output-breakdown)
 - [optional input arguments](#optional-input-arguments)
-- [defaults when using `process`](#defaults-when-using-process)
+- [defaults when using `process`](#defaults-when-using-`process`)
 - [automatic data type transformations](#automatic-data-type-transformations)
 
 ## Basic pipeline setup

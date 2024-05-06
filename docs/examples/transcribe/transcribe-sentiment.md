@@ -17,7 +17,7 @@ To do this we will use the following modules:
 - [`transcribe`](modules/transcribe.md): takes in audio/video input, outputs json of content transcription
 - [`json-to-txt`](modules/json-to-txt.md): takes in json of text snippets, merges into text file
 - [`parser`](modules/parser.md): takes in text, slices into (possibly overlapping) strings
-- [`sentiment`](modules/sentiment): takes in text snippets and returns scores for their sentiments
+- [`sentiment`](modules/sentiment.md): takes in text snippets and returns scores for their sentiments
 
 We do this by passing the module names to the `module_chain` argument of [`create_pipeline`](system/create_save_load.md) along with a name for our pipeline.
 

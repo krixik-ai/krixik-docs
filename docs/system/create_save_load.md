@@ -4,10 +4,10 @@ In this document we introduce how to create, save, and load a pipeline from disk
 
 A table of contents for the remainder of this document is shown below.
 
-- [using the `create_pipeline` method](#using-the-create-pipeline-method)
+- [using the `create_pipeline` method](#using-the-create_pipeline-method)
 - [using the `config` method](#using-the-config-method)
-- [using the `save_pipeline` method](#using-the-save-pipeline-method)
-- [using the `load_pipeline` method](#using-the-load-pipeline-method)
+- [using the `save_pipeline` method](#using-the-save_pipeline-method)
+- [using the `load_pipeline` method](#using-the-load_pipeline-method)
 
 ## Using the `create_pipeline` method
 

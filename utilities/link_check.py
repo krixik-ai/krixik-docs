@@ -17,7 +17,7 @@ def extract_headings_from_markdown(markdown_file) -> list:
     del headings[0]
     toc_headings = []
     for h in headings:
-        ht = "#" + "-".join(h.lower().split(" "))
+        ht = "#" + "-".join(h.lower().replace("`","").split(" "))
         toc_headings.append(ht)
     return toc_headings
 

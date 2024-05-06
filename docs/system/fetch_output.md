@@ -5,7 +5,7 @@ The `fetch_output` method is used to download the output of a pipeline process. 
 A table of contents for the remainder of this document is shown below.
 
 - [basic pipeline setup](#basic-pipeline-setup)
-- [basic usage, required input, and output breakdown](#basic-usage-required-input-and-output-breakdown)
+- [basic usage, required input, and output breakdown](#basic-usage,-required-input,-and-output-breakdown)
 
 ## Basic pipeline setup
 
