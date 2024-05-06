@@ -55,7 +55,7 @@ Video(test_file)
 
 
 
-<video src="../../input_data/Interesting Facts About Colombia.mp4" controls  >
+<video src="../../../data/input/Interesting Facts About Colombia.mp4" controls  >
       Your browser does not support the <code>video</code> element.
     </video>
 
@@ -68,6 +68,16 @@ For this run we will use the default models for the remainder of the modules.
 
 
 ```python
+dictionary = {"transcript": "hi"}
+for key, value in dictionary.items():
+    print(len(key))
+```
+
+    10
+
+
+
+```python
 # test file
 test_file = "../../../data/input/Interesting Facts About Colombia.mp4"
 
@@ -75,20 +85,20 @@ test_file = "../../../data/input/Interesting Facts About Colombia.mp4"
 process_output = pipeline.process(local_file_path = test_file,
                                   expire_time=60*10,
                                   modules={"translate": {"model": "opus-mt-en-es"}},
-                                  verbose=False)
+                                  verbose=True)
 ```
 
     INFO: Checking that file size falls within acceptable parameters...
     INFO:...success!
-    converted ../../input_data/Interesting Facts About Colombia.mp4 to: /var/folders/k9/0vtmhf0s5h56gt15mkf07b1r0000gn/T/tmps__us5t0/krixik_converted_version_Interesting Facts About Colombia.mp3
-    INFO: hydrated input modules: {'transcribe': {'model': 'whisper-tiny', 'params': {}}, 'translate': {'model': 'opus-mt-en-es', 'params': {}}, 'json-to-txt': {'model': 'base', 'params': {}}, 'parser': {'model': 'sentence', 'params': {}}, 'text-embedder': {'model': 'multi-qa-MiniLM-L6-cos-v1', 'params': {'quantize': True}}, 'vector-db': {'model': 'faiss', 'params': {}}}
+    converted ../../../data/input/Interesting Facts About Colombia.mp4 to: /var/folders/k9/0vtmhf0s5h56gt15mkf07b1r0000gn/T/tmpvnfz4nvg/krixik_converted_version_Interesting Facts About Colombia.mp3
+    INFO: hydrated input modules: {'module_1': {'model': 'whisper-tiny', 'params': {}}, 'module_2': {'model': 'opus-mt-en-es', 'params': {}}, 'module_3': {'model': 'base', 'params': {}}, 'module_4': {'model': 'sentence', 'params': {}}, 'module_5': {'model': 'all-MiniLM-L6-v2', 'params': {'quantize': True}}, 'module_6': {'model': 'faiss', 'params': {}}}
     INFO: symbolic_directory_path was not set by user - setting to default of /etc
-    INFO: file_name was not set by user - setting to random file name: krixik_generated_file_name_oogbwiauhc.mp3
+    INFO: file_name was not set by user - setting to random file name: krixik_generated_file_name_qfgbnrugsa.mp3
     INFO: wait_for_process is set to True.
-    INFO: file will expire and be removed from you account in 300 seconds, at Mon Apr 29 18:06:15 2024 UTC
-    INFO: transcribe-translate-semantic-pipeline file process and input processing started...
+    INFO: file will expire and be removed from you account in 600 seconds, at Mon May  6 12:23:47 2024 UTC
+    INFO: examples-transcribe-semantic-multilingual-docs file process and input processing started...
     INFO: metadata can be updated using the .update api.
-    INFO: This process's request_id is: 3a4197ea-3507-c901-245f-a8faffa69009
+    INFO: This process's request_id is: 8842c45c-bce2-3d52-8426-f26c872ed546
     INFO: File process and processing status:
     SUCCESS: module 1 (of 6) - transcribe processing complete.
     SUCCESS: module 2 (of 6) - translate processing complete.
@@ -110,14 +120,14 @@ print(json.dumps(process_output, indent=2))
 
     {
       "status_code": 200,
-      "pipeline": "transcribe-translate-semantic-pipeline",
-      "request_id": "b4e43bd1-bb20-4872-b93e-8f640fb34193",
-      "file_id": "2926aa4e-5c01-4e49-9e83-5eb10a926ef1",
-      "message": "SUCCESS - output fetched for file_id 2926aa4e-5c01-4e49-9e83-5eb10a926ef1.Output saved to location(s) listed in process_output_files.",
+      "pipeline": "examples-transcribe-semantic-multilingual-docs",
+      "request_id": "f8ed48c3-b318-48f0-961f-0b9e4cc34b1c",
+      "file_id": "600b873e-1bef-471a-a5e9-ae675c0514bc",
+      "message": "SUCCESS - output fetched for file_id 600b873e-1bef-471a-a5e9-ae675c0514bc.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "/Users/jeremywatt/Desktop/krixik-cli/docs/examples/transcribe/2926aa4e-5c01-4e49-9e83-5eb10a926ef1.faiss"
+        "/Users/jeremywatt/Desktop/krixik/code/krixik-docs/docs/examples/transcribe/600b873e-1bef-471a-a5e9-ae675c0514bc.faiss"
       ]
     }
 
@@ -137,19 +147,19 @@ print(json.dumps(search_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "3b4f827c-e685-4157-b445-6c79c1ad7ab3",
+      "request_id": "b9452617-37da-47c6-aac4-70c82074e94d",
       "message": "Successfully queried 1 user file.",
       "warnings": [],
       "items": [
         {
-          "file_id": "2926aa4e-5c01-4e49-9e83-5eb10a926ef1",
+          "file_id": "600b873e-1bef-471a-a5e9-ae675c0514bc",
           "file_metadata": {
-            "file_name": "krixik_generated_file_name_oogbwiauhc.mp3",
+            "file_name": "krixik_generated_file_name_qfgbnrugsa.mp3",
             "symbolic_directory_path": "/etc",
             "file_tags": [],
             "num_vectors": 39,
-            "created_at": "2024-04-30 01:01:18",
-            "last_updated": "2024-04-30 01:01:18"
+            "created_at": "2024-05-06 19:13:50",
+            "last_updated": "2024-05-06 19:13:50"
           },
           "search_results": [
             {
@@ -157,35 +167,35 @@ print(json.dumps(search_output, indent=2))
               "line_numbers": [
                 1
               ],
-              "distance": 0.093
+              "distance": 0.058
             },
             {
               "snippet": "Bienvenidos de nuevo a los hechos F2D.",
               "line_numbers": [
                 1
               ],
-              "distance": 0.267
+              "distance": 0.2
             },
             {
-              "snippet": "Es interesante el hecho de que en 2007, los principales lugares que equivalan a una zona de amortiguacin de aproximadamente 207.000 hectreas, que se denominan el paisaje cultural del caf, fueron considerados Patrimonio de la Humanidad por la UNESCO.",
+              "snippet": "Pero comencemos.",
               "line_numbers": [
                 1
               ],
-              "distance": 0.292
+              "distance": 0.23
             },
             {
               "snippet": "S. Entonces me estoy pagando por esto.",
               "line_numbers": [
                 1
               ],
-              "distance": 0.313
+              "distance": 0.242
             },
             {
-              "snippet": "Bueno, lo soy.",
+              "snippet": "Lo que me recuerda chicos, esto es parte de nuestra lista de Columbia.",
               "line_numbers": [
                 1
               ],
-              "distance": 0.337
+              "distance": 0.244
             }
           ]
         }
