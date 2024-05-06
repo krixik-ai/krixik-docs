@@ -54,6 +54,11 @@ Tests should be run locally if any changes are made to documentation that are to
 
 Documentation tests consist of the following steps
 
+0.  Noteobook formatting
+
+Next notebooks are formatted (using [ruff](https://github.com/astral-sh/ruff)).  This does not change the content of your notebook, it will just clean it up (e.g., remove un-needed spacing) and standardize it. 
+
+
 1.  the `mkdocs.yml` table of contents is analyzed, and all references to documentation pages are collected.  
 
 A list of references to markdown files are gathered at this step.  For example, from a reference like this
@@ -67,17 +72,17 @@ demos/mydemos/my_new_demo.md
 is collected.
 
 
-2.  Reference to notebook check
+2.  Link checking
 
 The validity of all links in each page are checked.  These links come in three flavors.
 
-1.  Intra page link: a link to a section in the page itself
+A.  Intra page link: a link to a section in the page itself
 
 These are typically in the table of contents of the page near the top.  They look like:
 
 [a page section](#a-page-section)
 
-2.  Inter-page links
+B.  Inter-page links
 
 These can be scattered throughout a page and link from one to another.  They look like
 
@@ -85,7 +90,7 @@ These can be scattered throughout a page and link from one to another.  They loo
 
 All subdirs must belong to the `docs` directory for these links.
 
-3.  General web links
+C.  General web links
 
 General web links look like
 
@@ -99,30 +104,12 @@ All pipeline name(s) declared in a notebook must be unique to that notebook.  Th
 At this step all pipeline name(s) from each notebook are collected and a check is made to ensure that no pipeline name is found two notebooks.
 
 
-4.  Noteobook formatting
-
-Next notebooks are formatted (using [ruff](https://github.com/astral-sh/ruff)).  This does not change the content of your notebook, it will just clean it up (e.g., remove un-needed spacing) and standardize it. 
-
-
-5.  Link validation
-
-All referenced notebooks are converted to markdown for link validation.  This includes
-
-- local intra-page link validation: intra page links are validated.  These are typically links to sections of a page listed in the page's table of contents, and look like
-
-[my demo section](#my-demo-section)
-
-
-- local inter-page link validation: local links to documentation pages of the form [a local link](demos/mydemos/my_new_demo.md) are validated by checking that the linked-to file `demos/mydemos/my_new_demo.md` exists in its proposed location under the `docs` directory
-
-- outbound links: any links to outbound sites like [my link](https://google.com) are checked using the `requests` library
-
-
-6.  Notebook execution
+4.  Notebook execution
 
 Each notebook is executed and successful completion of each code cell *not* marked with the tag `ignore_test` is confirmed.
 
-7.  Final markdown rendering
+
+5.  Final markdown rendering
 
 After all notebooks have passed the previous step they are converted again to markdown.
 

@@ -2,6 +2,7 @@ import pytest
 from utilities.converter import convert_all_notebooks
 from utilities.converter import collect_mkdocks_toc
 from utilities.link_check import check_file_links
+from utilities.name_check import duplicate_name_check
 
 
 def test_1():
@@ -17,3 +18,6 @@ def test_2(docfile):
     assert len(dead_links) == 0, f"doc {docfile} has deadlinks: {dead_links}"
 
 
+def test_3():
+    """ success test that pipeline names are unique per page """
+    assert duplicate_name_check()

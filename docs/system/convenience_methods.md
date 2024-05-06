@@ -99,13 +99,17 @@ Suppose we create a multi-module pipeline like the one below - which is discusse
 
 ```python
 # create a multi-module pipeline
-pipeline = krixik.create_pipeline(name="system-transcribe-semantic-multilingual-docs",
-                                  module_chain=["transcribe",
-                                                "translate",
-                                                "json-to-txt",
-                                                "parser",
-                                                "text-embedder",
-                                                "vector-db"])
+pipeline = krixik.create_pipeline(
+    name="system-transcribe-semantic-multilingual-docs",
+    module_chain=[
+        "transcribe",
+        "translate",
+        "json-to-txt",
+        "parser",
+        "text-embedder",
+        "vector-db",
+    ],
+)
 ```
 
 To view the module chain of this or any pipeline, use the `module_chain` property.
@@ -221,12 +225,13 @@ You can get a quick sense of its required structure by looking at a sample datap
 # exampine the required input / output data structure for the parser module by printing an example of each
 from krixik.modules.parser import io
 import json
-print('input data example')
-print('-----')
+
+print("input data example")
+print("-----")
 print(io.InputStructure().data_example)
-print('\n')
-print('output data example')
-print('-----')
+print("\n")
+print("output data example")
+print("-----")
 print(json.dumps(io.OutputStructure().data_example, indent=2))
 ```
 

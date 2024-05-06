@@ -26,8 +26,9 @@ We do this by passing the module name to the `module_chain` argument of [`create
 
 ```python
 # create a pipeline with a single module
-pipeline = krixik.create_pipeline(name="modules-vector-db-docs",
-                                  module_chain=["vector-db"])
+pipeline = krixik.create_pipeline(
+    name="modules-vector-db-docs", module_chain=["vector-db"]
+)
 ```
 
 The `vector-search` module comes with a single model:
@@ -46,6 +47,7 @@ Let's look at an example of a small valid input - and then process it.
 ```python
 # examine contents of input file
 import numpy as np
+
 test_file = "../../data/input/vectors.npy"
 np.load(test_file)
 ```
@@ -69,11 +71,13 @@ Now let's process it using the default model - `faiss`.  Because `faiss` is the 
 test_file = "../../data/input/vectors.npy"
 
 # process for search
-process_output = pipeline.process(local_file_path=test_file,
-                                  local_save_directory="../../data/output", # save output repo data output subdir
-                                  expire_time=60 * 10,  # set all process data to expire in 5 minutes
-                                  wait_for_process=True,  # wait for process to complete before regaining ide
-                                  verbose=False)  # set verbosity to False
+process_output = pipeline.process(
+    local_file_path=test_file,
+    local_save_directory="../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 5 minutes
+    wait_for_process=True,  # wait for process to complete before regaining ide
+    verbose=False,
+)  # set verbosity to False
 ```
 
 The output of this process is printed below.  Because the output of this particular module-model pair is a faiss database, the process output is provided in this object is null.  However the file itself has been returned to the address noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
@@ -157,8 +161,10 @@ Below we construct the simplest custom pipeline that satisfies this criteria - a
 
 ```python
 # create custom pipeline object
-pipeline = krixik.create_pipeline(name="vector-search-pipeline-check", 
-                                  module_chain=["parser", "text-embedder", "vector-db"])
+pipeline = krixik.create_pipeline(
+    name="vector-search-pipeline-check",
+    module_chain=["parser", "text-embedder", "vector-db"],
+)
 ```
 
 
@@ -176,11 +182,13 @@ Lets first process a file with our new pipeline.  The `vector-db` module takes i
 test_file = "../../data/input/1984_very_short.txt"
 
 # process for search
-process_output = pipeline.process(local_file_path=test_file,
-                                  local_save_directory="../../data/output", # save output repo data output subdir
-                                  expire_time=60 * 10,    # set all process data to expire in 10 minutes
-                                  wait_for_process=True,  # wait for process to complete before regaining ide
-                                  verbose=False)          # set verbosity to False
+process_output = pipeline.process(
+    local_file_path=test_file,
+    local_save_directory="../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    wait_for_process=True,  # wait for process to complete before regaining ide
+    verbose=False,
+)  # set verbosity to False
 
 # nicely print the output of this process
 print(json.dumps(process_output, indent=2))

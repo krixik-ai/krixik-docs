@@ -31,7 +31,7 @@ Lets take a quick look at this file before processing.
 
 ```python
 # examine contents of input file
-test_file = "../../data/input/1984_short.txt"
+test_file = "../../../data/input/1984_short.txt"
 with open(test_file, "r") as file:
     print(file.read())
     
@@ -140,7 +140,7 @@ Below we [process](system/process.md) the input through our pipeline.  Here we u
 
 ```python
 # define path to an input file from examples directory
-test_file = "../../data/input/1984_short.txt"
+test_file = "../../../data/input/1984_short.txt"
 
 # process a file through the pipeline
 process_output = pipeline.process(local_file_path = test_file,

@@ -16,8 +16,9 @@ For this document we will use a pipeline consisting of a single [`parser` module
 
 ```python
 # create a pipeline with a single module
-pipeline = krixik.create_pipeline(name="system-process-status-docs",
-                                  module_chain=["parser"])
+pipeline = krixik.create_pipeline(
+    name="system-process-status-docs", module_chain=["parser"]
+)
 ```
 
 ## Basic usage, required input, and output breakdown
@@ -30,11 +31,13 @@ To illustrate the usage of `process_status` we process a short file illustrated 
 test_file = "../../data/input/1984_very_short.txt"
 
 # process short input file
-process_output = pipeline.process(local_file_path = test_file,
-                                  local_save_directory="../../data/output", # save output repo data output subdir
-                                  expire_time=60 * 10,       # set all process data to expire in 10 minutes
-                                  wait_for_process=False,    # wait for process to complete before regaining ide
-                                  verbose=False)             # set verbosity to False
+process_output = pipeline.process(
+    local_file_path=test_file,
+    local_save_directory="../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    wait_for_process=False,  # wait for process to complete before regaining ide
+    verbose=False,
+)  # set verbosity to False
 ```
 
 Let us examine the returned output.

@@ -26,8 +26,9 @@ We do this by passing the module name to the `module_chain` argument of [`create
 
 ```python
 # create a pipeline with a single module
-pipeline = krixik.create_pipeline(name="modules-keyword-db-docs",
-                                  module_chain=["keyword-db"])
+pipeline = krixik.create_pipeline(
+    name="modules-keyword-db-docs", module_chain=["keyword-db"]
+)
 ```
 
 The `keyword-search` module comes with a single model:
@@ -67,11 +68,13 @@ Now let's process it using our default model - `base`.  Because `base` is the de
 test_file = "../../data/input/1984_very_short.txt"
 
 # process for search
-process_output = pipeline.process(local_file_path = test_file,
-                                  local_save_directory="../../data/output", # save output repo data output subdir
-                                  expire_time=60 * 10,    # set all process data to expire in 10 minutes
-                                  wait_for_process=True,    # wait for process to complete before regaining ide
-                                  verbose=False)            # set verbosity to False
+process_output = pipeline.process(
+    local_file_path=test_file,
+    local_save_directory="../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    wait_for_process=True,  # wait for process to complete before regaining ide
+    verbose=False,
+)  # set verbosity to False
 ```
 
 The output of this process is printed below.  Because the output of this particular module-model pair is a sqlite database, the process output is provided in this object is null.  However the file itself has been returned to the address noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
@@ -107,8 +110,9 @@ An example use if given below.
 
 ```python
 # perform keyword_search over the input file
-keyword_output = pipeline.keyword_search(query="it was cold night",
-                                         file_ids=[process_output["file_id"]])
+keyword_output = pipeline.keyword_search(
+    query="it was cold night", file_ids=[process_output["file_id"]]
+)
 
 # nicely print the output of this process
 print(json.dumps(keyword_output, indent=2))
@@ -159,12 +163,12 @@ Below is a simple function for performing single keyword queries on this databas
 ```python
 import sqlite3
 
-def query_db(query_keyword: str,
-             keyword_db_local_file_name: str) -> list:
+
+def query_db(query_keyword: str, keyword_db_local_file_name: str) -> list:
     # load keyword_db
     keyword_db = sqlite3.connect(keyword_db_local_file_name)
     keyword_cursor = keyword_db.cursor()
-    
+
     # create query pattern
     query_pattern = f"""
     SELECT
@@ -182,7 +186,7 @@ def query_db(query_keyword: str,
         line_number,
         keyword_number
     """
-    
+
     # excute query
     keyword_cursor.execute(query_pattern)
 
@@ -197,8 +201,7 @@ Below we query our small database using a single keyword query.
 ```python
 # query database
 query = "cold"
-query_db(query,
-         process_output['process_output_files'][0])
+query_db(query, process_output["process_output_files"][0])
 ```
 
 

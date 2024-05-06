@@ -14,8 +14,9 @@ For this document we will use a pipeline consisting of a single [`keyword-db` mo
 
 ```python
 # create a pipeline with a single module
-pipeline = krixik.create_pipeline(name="system-keyword-db-docs",
-                                  module_chain=["keyword-db"])
+pipeline = krixik.create_pipeline(
+    name="system-keyword-db-docs", module_chain=["keyword-db"]
+)
 ```
 
 ## Basic usage, required input, and output breakdown
@@ -30,11 +31,13 @@ Lets first process a file with our new pipeline.  The `keyword-search` module ta
 test_file = "../../data/input/1984_very_short.txt"
 
 # process for search
-process_output = pipeline.process(local_file_path = test_file,
-                                  local_save_directory="../../data/output", # save output repo data output subdir
-                                  expire_time=60 * 10,      # set all process data to expire in 10 minutes
-                                  wait_for_process=True,    # wait for process to complete before regaining ide
-                                  verbose=False)            # set verbosity to False
+process_output = pipeline.process(
+    local_file_path=test_file,
+    local_save_directory="../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    wait_for_process=True,  # wait for process to complete before regaining ide
+    verbose=False,
+)  # set verbosity to False
 
 # nicely print the output of this process
 print(json.dumps(process_output, indent=2))
@@ -67,8 +70,9 @@ Let's look at an example.
 
 ```python
 # perform keyword_search over the input file
-keyword_output = pipeline.keyword_search(query="it was cold night",
-                                         file_ids=[process_output["file_id"]])
+keyword_output = pipeline.keyword_search(
+    query="it was cold night", file_ids=[process_output["file_id"]]
+)
 
 # nicely print the output of this process
 print(json.dumps(process_output, indent=2))

@@ -1,4 +1,7 @@
 import re
+from utilities.converter import collect_mkdocks_toc
+from utilities import base_dir
+
 
 def get_code_from_markdown(lines: list[str], *, language: str = "python") -> list[str]:
     """Outputs extracted code blocks from a list of strings of markdown text"""
@@ -37,6 +40,7 @@ def gather_pipeline_names(md_filepath: str) -> list:
     except Exception as e:
         raise Exception(f"FAILURE: gather_pipeline_names failed on file {markdown_file} with exception {e}")
 
+
 def duplicate_name_check():
     try:
         # collect all paths to md docs
@@ -55,7 +59,6 @@ def duplicate_name_check():
         # determine duplicates
         my_dict = {i:all_names.count(i) for i in all_names}
         keys = list(my_dict.keys())
-        values = list(my_dict.values())
         duplicates = [key for key in keys if my_dict[key] > 1]
 
         if len(duplicates) > 0:

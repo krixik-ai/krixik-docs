@@ -25,8 +25,9 @@ We do this by passing the module name to the `module_chain` argument of [`create
 
 ```python
 # create a pipeline with a single module
-pipeline = krixik.create_pipeline(name="modules-summarize-docs",
-                                  module_chain=["summarize"])
+pipeline = krixik.create_pipeline(
+    name="modules-summarize-docs", module_chain=["summarize"]
+)
 ```
 
 The `summarize` module comes with a single model:
@@ -152,11 +153,13 @@ Now let's process it using our default model - [bart-large-cnn](https://huggingf
 test_file = "../../data/input/1984_short.txt"
 
 # process a file through the pipeline
-process_output = pipeline.process(local_file_path = test_file,
-                                  local_save_directory="../../data/output", # save output repo data output subdir
-                                  expire_time=60 * 10,      # set all process data to expire in 10 minutes
-                                  wait_for_process=True,    # wait for process to complete before regaining ide
-                                  verbose=False)            # set verbosity to False
+process_output = pipeline.process(
+    local_file_path=test_file,
+    local_save_directory="../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    wait_for_process=True,  # wait for process to complete before regaining ide
+    verbose=False,
+)  # set verbosity to False
 ```
 
 The output of this process is printed below.  Because the output of this particular module-model pair is a json, the process output is provided in this object is as well.  The file itself has been returned to the address noted in the `process_output_files` key.  The `file_id` of the processed file is used as a filename prefix for both output files.
@@ -186,8 +189,8 @@ We load in the text file output from `process_output_files` below.
 
 ```python
 # load in process output from file
-with open(process_output['process_output_files'][0], "r") as file:
-    print(file.read())  
+with open(process_output["process_output_files"][0], "r") as file:
+    print(file.read())
 ```
 
     Winston Smith walked through the glass doors of Victory Mansions. The hallway
@@ -234,14 +237,16 @@ This involves executing `process` on our pipeline in precisely the same manner w
 
 ```python
 # assign the summary above to a variable for reference
-first_summary = process_output['process_output_files'][0]
+first_summary = process_output["process_output_files"][0]
 
 # process a file through the pipeline
-process_output = pipeline.process(local_file_path = first_summary,
-                                  local_save_directory="../../data/output", # save output repo data output subdir
-                                  expire_time=60 * 10,      # set all process data to expire in 10 minutes
-                                  wait_for_process=True,    # wait for process to complete before regaining ide
-                                  verbose=False)            # set verbosity to False
+process_output = pipeline.process(
+    local_file_path=first_summary,
+    local_save_directory="../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    wait_for_process=True,  # wait for process to complete before regaining ide
+    verbose=False,
+)  # set verbosity to False
 ```
 
 Once `.process` completes we receive our shorter summary as an output file just as when we performed summarization the first time above.
@@ -251,8 +256,8 @@ Let's examine the new shorter summary file.
 
 ```python
 # load in process output from file
-with open(process_output['process_output_files'][0], "r") as file:
-    print(file.read())  
+with open(process_output["process_output_files"][0], "r") as file:
+    print(file.read())
 ```
 
     Winston Smith walked through the glass doors of Victory Mansions. The hallway
@@ -276,14 +281,16 @@ Again nothing will change about how we use `.process` - we only point `local_fil
 
 ```python
 # assign the summary above to a variable for reference
-second_summary = process_output['process_output_files'][0]
+second_summary = process_output["process_output_files"][0]
 
 # process a file through the pipeline
-process_output = pipeline.process(local_file_path = second_summary,
-                                  local_save_directory="../../data/output", # save output repo data output subdir
-                                  expire_time=60 * 10,      # set all process data to expire in 10 minutes
-                                  wait_for_process=True,    # wait for process to complete before regaining ide
-                                  verbose=False)            # set verbosity to False
+process_output = pipeline.process(
+    local_file_path=second_summary,
+    local_save_directory="../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    wait_for_process=True,  # wait for process to complete before regaining ide
+    verbose=False,
+)  # set verbosity to False
 ```
 
 And we can view the now shorter summary below.
@@ -291,8 +298,8 @@ And we can view the now shorter summary below.
 
 ```python
 # load in process output from file
-with open(process_output['process_output_files'][0], "r") as file:
-    print(file.read())  
+with open(process_output["process_output_files"][0], "r") as file:
+    print(file.read())
 ```
 
     Winston Smith walked through the glass doors of Victory Mansions. The hallway
@@ -328,16 +335,14 @@ to `.process`.
 test_file = "../../data/input/1984_short.txt"
 
 # process a file through the pipeline
-process_output = pipeline.process(local_file_path = test_file,
-                                  local_save_directory="../../data/output", # save output repo data output subdir
-                                  expire_time=60 * 10,      # set all process data to expire in 10 minutes
-                                  wait_for_process=True,    # wait for process to complete before regaining ide
-                                  verbose=False,            # set verbosity to False
-                                  modules = {
-                                    "summarize": {
-                                        "model": "text-summarization"
-                                    }
-                                })
+process_output = pipeline.process(
+    local_file_path=test_file,
+    local_save_directory="../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    wait_for_process=True,  # wait for process to complete before regaining ide
+    verbose=False,  # set verbosity to False
+    modules={"summarize": {"model": "text-summarization"}},
+)
 ```
 
 And we can view the summary by loading in the output file.  The offset punctuation seen in this summary is an artifact of the model, as seen in the [model card](https://huggingface.co/Falconsai/text_summarization) on huggingface.
@@ -345,8 +350,8 @@ And we can view the summary by loading in the output file.  The offset punctuati
 
 ```python
 # load in process output from file
-with open(process_output['process_output_files'][0], "r") as file:
-    print(file.read())  
+with open(process_output["process_output_files"][0], "r") as file:
+    print(file.read())
 ```
 
     Winston Smith, his chin nuzzled into his breast in an effort to

@@ -24,8 +24,7 @@ For this document we will use a pipeline consisting of a single [`parser` module
 
 ```python
 # create a pipeline with a single module
-pipeline = krixik.create_pipeline(name="system-list-docs",
-                                  module_chain=["parser"])
+pipeline = krixik.create_pipeline(name="system-list-docs", module_chain=["parser"])
 ```
 
 ## Basic usage, required input, and output breakdown
@@ -38,15 +37,17 @@ To illustrate the usage of `list` we process a short file illustrated in the int
 test_file = "../../data/input/1984_very_short.txt"
 
 # process short input file
-process_output = pipeline.process(local_file_path = test_file,
-                                  local_save_directory="../../data/output", # save output repo data output subdir
-                                  expire_time=60 * 10,    # set all process data to expire in 10 minutes
-                                  wait_for_process=True,    # wait for process to complete before regaining ide
-                                  verbose=False,            # set verbosity to False
-                                  symbolic_directory_path = "/my/custom/filepath",
-                                  file_name = "some_snippets.txt",
-                                  file_tags = [{"author": "orwell"}, {"category": "fiction"}],
-                                  file_description = "the first paragraph of 1984")
+process_output = pipeline.process(
+    local_file_path=test_file,
+    local_save_directory="../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    wait_for_process=True,  # wait for process to complete before regaining ide
+    verbose=False,  # set verbosity to False
+    symbolic_directory_path="/my/custom/filepath",
+    file_name="some_snippets.txt",
+    file_tags=[{"author": "orwell"}, {"category": "fiction"}],
+    file_description="the first paragraph of 1984",
+)
 ```
 
 Let us examine the returned output.
@@ -316,11 +317,13 @@ To illustrate how to list by timestamp bookends we first process a file and reco
 test_file = "../../data/input/1984_very_short.txt"
 
 # process for search
-process_output = pipeline.process(local_file_path = test_file,
-                                  local_save_directory="../../data/output", # save output repo data output subdir
-                                  expire_time=60 * 10,    # set all process data to expire in 10 minutes
-                                  wait_for_process=True,    # wait for process to complete before regaining ide
-                                  verbose=False)            # set verbosity to False
+process_output = pipeline.process(
+    local_file_path=test_file,
+    local_save_directory="../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    wait_for_process=True,  # wait for process to complete before regaining ide
+    verbose=False,
+)  # set verbosity to False
 
 # nicely print the output of this process
 print(json.dumps(process_output, indent=2))
@@ -508,8 +511,7 @@ You can use multiple input arguments jointly with `list`.  Multiple inputs are c
 
 ```python
 # list process records using a mix of input args
-list_output = pipeline.list(file_names = ["some*"],
-                            symbolic_directory_paths=["/my/*"])
+list_output = pipeline.list(file_names=["some*"], symbolic_directory_paths=["/my/*"])
 
 # nicely print the output of this process
 print(json.dumps(list_output, indent=2))

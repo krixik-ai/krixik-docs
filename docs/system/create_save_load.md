@@ -21,8 +21,9 @@ Below we setup a simple one module pipeline using the [`parser` module](modules/
 
 ```python
 # create a pipeline with a single module
-pipeline = krixik.create_pipeline(name="system-create-save-load-1",
-                                  module_chain=["parser"])
+pipeline = krixik.create_pipeline(
+    name="system-create-save-load-1", module_chain=["parser"]
+)
 ```
 
 Make sure you have [initialized your session](system/initialize.md) before executing this code.
@@ -32,10 +33,10 @@ Now we setup a pipeline consisting of three modules: a [`parser`](modules/parser
 
 ```python
 # create a pipeline basic document based semantic search pipeline
-pipeline = krixik.create_pipeline(name="system-create-save-load-2",
-                                  module_chain=["parser", 
-                                                "text-embedder", 
-                                                "vector-db"])
+pipeline = krixik.create_pipeline(
+    name="system-create-save-load-2",
+    module_chain=["parser", "text-embedder", "vector-db"],
+)
 ```
 
 An array of multi-module pipeline examples can be found in the of this documentation.
@@ -47,9 +48,9 @@ For example, attempting to build the following two module pipeline consisting of
 
 ```python
 # create a pipeline basic document based semantic search pipeline
-pipeline = krixik.create_pipeline(name="system-create-save-load-3",
-                                  module_chain=["parser", 
-                                                "caption"])
+pipeline = krixik.create_pipeline(
+    name="system-create-save-load-3", module_chain=["parser", "caption"]
+)
 ```
 
 ## Using the `config` method
@@ -59,10 +60,10 @@ View the configuration of a pipeline by using the `.config` method on a pipeline
 
 ```python
 # create a valid pipeline - here a basic document based semantic search pipeline
-pipeline = krixik.create_pipeline(name="system-create-save-load-4",
-                                  module_chain=["parser", 
-                                                "text-embedder", 
-                                                "vector-db"])
+pipeline = krixik.create_pipeline(
+    name="system-create-save-load-4",
+    module_chain=["parser", "text-embedder", "vector-db"],
+)
 
 # view the pipeline's configuration file
 pipeline.config
@@ -81,7 +82,9 @@ Your `config_path` must end with a `.yml` or `.yaml` extension.
 
 ```python
 # save a pipeline's configuration to disk - to the data/pipeline_configs directory of the docs repository
-pipeline.save_pipeline(config_path="../../data/pipeline_configs/save-pipeline-demo.yaml")
+pipeline.save_pipeline(
+    config_path="../../data/pipeline_configs/save-pipeline-demo.yaml"
+)
 ```
 
 ## Using the `load_pipeline` method
@@ -93,5 +96,7 @@ Any valid config file can be loaded into krixik, re-instantiating its associated
 
 ```python
 # load a pipeline into memory via its valid configuration file - stored in the data/pipeline_configs directory of the krixik docs repository
-pipeline = krixik.load_pipeline(config_path="../../data/pipeline_configs/save-pipeline-demo.yaml")
+pipeline = krixik.load_pipeline(
+    config_path="../../data/pipeline_configs/save-pipeline-demo.yaml"
+)
 ```

@@ -1,4 +1,4 @@
-# multilingual transcription pipeline
+# Multilingual transcription pipeline
 
 This document details a modular pipeline that takes in an audio/video file, transcribes it, and translates the transcription into a desired language.
 
@@ -40,7 +40,7 @@ Lets take a quick look at this file before processing.
 
 ```python
 # examine contents of input file
-test_file = "../../data/input/Interesting Facts About Colombia.mp4"
+test_file = "../../../data/input/Interesting Facts About Colombia.mp4"
 from IPython.display import Video
 Video(test_file)
 ```
@@ -62,7 +62,7 @@ For this run we will use the default models for the remainder of the modules.
 
 ```python
 # test file
-test_file = "../../data/input/Interesting Facts About Colombia.mp4"
+test_file = "../../../data/input/Interesting Facts About Colombia.mp4"
 
 # process test input
 process_output = pipeline.process(local_file_path = test_file,

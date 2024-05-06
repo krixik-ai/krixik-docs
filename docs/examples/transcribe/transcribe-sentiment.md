@@ -42,7 +42,7 @@ Lets take a quick look at this file before processing.
 
 ```python
 # examine contents of input file
-test_file = "../../data/input/Interesting Facts About Colombia.mp4"
+test_file = "../../../data/input/Interesting Facts About Colombia.mp4"
 from IPython.display import Video
 Video(test_file)
 ```
@@ -61,7 +61,7 @@ For this run we will use the default models for the entire chain of modules.
 
 ```python
 # test file
-test_file = "../../data/input/Interesting Facts About Colombia.mp4"
+test_file = "../../../data/input/Interesting Facts About Colombia.mp4"
 
 # process test input
 process_output = pipeline.process(local_file_path = test_file,
