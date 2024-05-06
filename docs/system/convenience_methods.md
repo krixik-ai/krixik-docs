@@ -11,32 +11,6 @@ A table of contents for the remainder of this document is shown below.
 - [viewing example module input](#viewing-example-module-input)
 - [viewing module click data](#viewing-module-click-data)
 
-
-```python
-# import utilities
-import sys
-
-sys.path.append("../../")
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-import importlib
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-load_dotenv("../../.env")
-MY_API_KEY = os.getenv("MY_API_KEY")
-MY_API_URL = os.getenv("MY_API_URL")
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-
-krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### Viewing available modules locally
 
 To view all available modules locally use the `available_modules` method.  This can be used without first [initializing](system/initialize.md).
@@ -353,9 +327,3 @@ The latter connection ( `vector-search` -> `text-embedder`) will not work since 
 - `vector-search` output_format (`faiss`) != `text-embedder` input_format (`json`)
 
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```
