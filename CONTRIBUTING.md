@@ -64,15 +64,27 @@ is collected.
 
 2.  Reference to notebook check
 
-For each reference collected like
+The validity of all links in each page are checked.  These links come in three flavors.
 
-demos/mydemos/my_new_demo.md
+1.  Intra page link: a link to a section in the page itself
 
-a check is made to ensure that the corresponding notebook
+These are typically in the table of contents of the page near the top.  They look like:
 
-demos/mydemos/my_new_demo.ipynb
+[a page section](#a-page-section)
 
-exists.
+2.  Inter-page links
+
+These can be scattered throughout a page and link from one to another.  They look like
+
+[a link to another page](subdir/some_other_page.md)
+
+All subdirs must belong to the `docs` directory for these links.
+
+3.  General web links
+
+General web links look like
+
+[an example web link](https://example.com)
 
 
 3.  Notebook-unique pipeline check

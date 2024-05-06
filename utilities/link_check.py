@@ -45,6 +45,6 @@ def check_file_links(filepath: str,
     last_dead_links = []
     for link in dead_links:
         response = requests.get(link)
-        if response.status_code != 200:
+        if response.status_code not in range(200, 300):
             last_dead_links.append(link)
     return last_dead_links
