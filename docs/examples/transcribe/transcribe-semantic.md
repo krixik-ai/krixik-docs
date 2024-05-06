@@ -46,7 +46,7 @@ Lets take a quick look at this file before processing.
 
 ```python
 # examine contents of input file
-test_file = "../../data/input/Interesting Facts About Colombia.mp4"
+test_file = "../../../data/input/Interesting Facts About Colombia.mp4"
 from IPython.display import Video
 Video(test_file)
 ```
@@ -65,12 +65,13 @@ For this run we will use the default models for the each module of the pipeline.
 
 ```python
 # test file
-test_file = "../../data/input/Interesting Facts About Colombia.mp4"
+test_file = "../../../data/input/Interesting Facts About Colombia.mp4"
 
 # process test input
 process_output = pipeline.process(local_file_path = test_file,
                                   expire_time=60*10,
-                                  verbose=False)
+                                  verbose=False,
+                                  local_save_directory="../../../data/output")
 ```
 
     INFO: Checking that file size falls within acceptable parameters...

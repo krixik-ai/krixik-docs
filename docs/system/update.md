@@ -7,7 +7,7 @@ You can update any of the following metadata: `expire_time`,  `symbolic_director
 A table of contents for the remainder of this document is shown below.
 
 - [basic pipeline setup](#basic-pipeline-setup)
-- [basic usage, required input, and output breakdown](#basic-usage-required-input-and-output-breakdown)
+- [basic usage, required input, and output breakdown](#basic-usage,-required-input,-and-output-breakdown)
 
 ## Basic pipeline setup
 
@@ -16,13 +16,12 @@ For this document we will use a pipeline consisting of a single [`parser` module
 
 ```python
 # create a pipeline with a single module
-pipeline = krixik.create_pipeline(name="system-update-docs",
-                                  module_chain=["parser"])
+pipeline = krixik.create_pipeline(name="system-update-docs", module_chain=["parser"])
 ```
 
 ## Basic usage, required input, and output breakdown
 
-To illustrate the usage of `update` we process a short file illustrated in the introduction to the [`parser` method](modules/parser.md#basic-usage-and-output-breakdown).
+To illustrate the usage of `update` we process a short file illustrated in the introduction to the [`parser` method](modules/parser.md).
 
 
 ```python
@@ -30,11 +29,13 @@ To illustrate the usage of `update` we process a short file illustrated in the i
 test_file = "../../data/input/1984_very_short.txt"
 
 # process short input file
-process_output = pipeline.process(local_file_path = test_file,
-                                  local_save_directory="../../data/output", # save output repo data output subdir
-                                  expire_time=60 * 10,       # set all process data to expire in 10 minutes
-                                  wait_for_process=True,     # wait for process to complete before regaining ide
-                                  verbose=False)             # set verbosity to False
+process_output = pipeline.process(
+    local_file_path=test_file,
+    local_save_directory="../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    wait_for_process=True,  # wait for process to complete before regaining ide
+    verbose=False,
+)  # set verbosity to False
 ```
 
 Let us examine the returned output.
@@ -54,8 +55,9 @@ Next we use `update` to change its `file_name`.
 
 ```python
 # update a process record metadata
-update_output = pipeline.update(file_id=process_output["file_id"],
-                                file_name="a_new_filename.txt")
+update_output = pipeline.update(
+    file_id=process_output["file_id"], file_name="a_new_filename.txt"
+)
 
 # nicely print the output of this process
 print(json.dumps(process_output, indent=2))

@@ -5,10 +5,10 @@ The `process` method is available on every krixik pipeline, and is invoked whene
 A table of contents for the remainder of this document is shown below.
 
 - [basic pipeline setup](#basic-pipeline-setup)
-- [core inputs to the `process` method](#core-inputs-to-the-process-method)
+- [core inputs to the `process` method](#core-inputs-to-the-`process`-method)
 - [basic usage and output breakdown](#basic-usage-and-output-breakdown)
 - [optional input arguments](#optional-input-arguments)
-- [defaults when using `process`](#defaults-when-using-process)
+- [defaults when using `process`](#defaults-when-using-`process`)
 - [automatic data type transformations](#automatic-data-type-transformations)
 
 ## Basic pipeline setup
@@ -18,8 +18,7 @@ For this document we will use a pipeline consisting of a single [`parser` module
 
 ```python
 # create a pipeline with a single module
-pipeline = krixik.create_pipeline(name="system-process-docs",
-                                  module_chain=["parser"])
+pipeline = krixik.create_pipeline(name="system-process-docs", module_chain=["parser"])
 ```
 
 ## Core inputs to the `process` method
@@ -61,11 +60,13 @@ Now let's process it using our sentence parser and explore `.process` inputs.
 test_file = "../../data/input/1984_very_short.txt"
 
 # process short input file
-process_output = pipeline.process(local_file_path = test_file,
-                                  local_save_directory="../../data/output", # save output repo data output subdir
-                                  expire_time=60 * 10,    # set all process data to expire in 10 minutes
-                                  wait_for_process=True,    # wait for process to complete before regaining ide
-                                  verbose=False)            # set verbosity to False
+process_output = pipeline.process(
+    local_file_path=test_file,
+    local_save_directory="../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    wait_for_process=True,  # wait for process to complete before regaining ide
+    verbose=False,
+)  # set verbosity to False
 ```
 
 The output of this process is printed below.  Because the output of this particular module-model pair is json, the process output is provided in the return response.
@@ -74,6 +75,7 @@ The output of this process is printed below.  Because the output of this particu
 ```python
 # nicely print the output of this process
 import json
+
 json.dumps(process_output, indent=2)
 ```
 
@@ -126,7 +128,8 @@ This process output is also stored in the file contained in `process_output_file
 ```python
 # load in process output from file
 import json
-with open(process_output['process_output_files'][0], "r") as file:
+
+with open(process_output["process_output_files"][0], "r") as file:
     json.dumps(json.load(file), indent=2)
 ```
 
@@ -174,15 +177,17 @@ Lets use the `process` method with and without these arguments.
 test_file = "../../data/input/1984_very_short.txt"
 
 # process for search
-process_output = pipeline.process(local_file_path = test_file,
-                                  local_save_directory="../../data/output", # save output repo data output subdir
-                                  expire_time=60 * 10,    # set all process data to expire in 10 minutes
-                                  wait_for_process=True,    # wait for process to complete before regaining ide
-                                  verbose=False,            # set verbosity to False
-                                  symbolic_directory_path = "/my/custom/filepath",
-                                  file_name = "some_snippets.txt",
-                                  file_tags = [{"author": "orwell"}, {"category": "fiction"}],
-                                  file_description = "the first paragraph of 1984")
+process_output = pipeline.process(
+    local_file_path=test_file,
+    local_save_directory="../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    wait_for_process=True,  # wait for process to complete before regaining ide
+    verbose=False,  # set verbosity to False
+    symbolic_directory_path="/my/custom/filepath",
+    file_name="some_snippets.txt",
+    file_tags=[{"author": "orwell"}, {"category": "fiction"}],
+    file_description="the first paragraph of 1984",
+)
 ```
 
 ## Defaults when using `process`

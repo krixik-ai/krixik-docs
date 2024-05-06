@@ -5,7 +5,7 @@ krixik's `semantic_search` method is a convenience function for both embedding a
 A table of contents for the remainder of this document is shown below.
 
 - [basic pipeline setup](#basic-pipeline-setup)
-- [basic usage, required input, and output breakdown](#basic-usage-required-input-and-output-breakdown)
+- [basic usage, required input, and output breakdown](#basic-usage,-required-input,-and-output-breakdown)
 
 ## Basic pipeline setup
 
@@ -14,13 +14,15 @@ For this document we will use a pipeline consisting of three modules: a [`parser
 
 ```python
 # create a pipeline with multiple modules
-pipeline = krixik.create_pipeline(name="vector-search-system-intro",
-                                  module_chain=["parser", "text-embedder", "vector-db"])
+pipeline = krixik.create_pipeline(
+    name="vector-search-system-intro",
+    module_chain=["parser", "text-embedder", "vector-db"],
+)
 ```
 
 ## Basic usage, required input, and output breakdown
 
-To illustrate the usage of `semantic_search` we process a short file illustrated in the introduction to the [`parser` method](modules/parser.md#basic-usage-and-output-breakdown).
+To illustrate the usage of `semantic_search` we process a short file illustrated in the introduction to the [`parser` method](modules/parser.md).
 
 
 ```python
@@ -28,13 +30,15 @@ To illustrate the usage of `semantic_search` we process a short file illustrated
 test_file = "../../data/input/1984_very_short.txt"
 
 # process for search
-process_output = pipeline.process(local_file_path = test_file,
-                                  local_save_directory="../../data/output", # save output repo data output subdir
-                                  expire_time=60 * 10,       # set all process data to expire in 10 minutes
-                                  wait_for_process=True,     # wait for process to complete before regaining ide
-                                  verbose=False)             # set verbosity to False
+process_output = pipeline.process(
+    local_file_path=test_file,
+    local_save_directory="../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    wait_for_process=True,  # wait for process to complete before regaining ide
+    verbose=False,
+)  # set verbosity to False
 
-# 
+#
 print(json.dumps(process_output, indent=2))
 ```
 
@@ -58,11 +62,13 @@ Lets first process a file with our new pipeline.  The [`vector-db`](modules/vect
 test_file = "../../data/input/1984_very_short.txt"
 
 # process for search
-process_output = pipeline.process(local_file_path = test_file,
-                                  local_save_directory="../../data/output", # save output repo data output subdir
-                                  expire_time=60 * 10,      # set all process data to expire in 10 minutes
-                                  wait_for_process=True,    # wait for process to complete before regaining ide
-                                  verbose=False)            # set verbosity to False
+process_output = pipeline.process(
+    local_file_path=test_file,
+    local_save_directory="../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    wait_for_process=True,  # wait for process to complete before regaining ide
+    verbose=False,
+)  # set verbosity to False
 
 # nicely print the output of this process
 print(json.dumps(process_output, indent=2))
@@ -95,8 +101,9 @@ Let's look at an example.
 
 ```python
 # perform semantic_search over the input file
-semantic_output = pipeline.semantic_search(query="it was cold night",
-                                           file_ids=[process_output["file_id"]])
+semantic_output = pipeline.semantic_search(
+    query="it was cold night", file_ids=[process_output["file_id"]]
+)
 
 # nicely print the output of this process
 print(json.dumps(semantic_output, indent=2))

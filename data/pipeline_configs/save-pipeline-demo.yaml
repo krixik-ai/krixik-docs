@@ -1,16 +1,19 @@
 pipeline:
-  name: vector-pipeline-1
+  name: system-create-save-load-4
   modules:
   - name: parser
     models:
+    - name: sentence
     - name: fixed
       params:
         chunk_size:
           type: int
+          default: 10
         overlap_size:
           type: int
+          default: 4
     defaults:
-      model: fixed
+      model: sentence
     input:
       type: text
       permitted_extensions:
@@ -22,35 +25,42 @@ pipeline:
       type: json
   - name: text-embedder
     models:
-    - name: multi-qa-MiniLM-L6-cos-v1
-      params:
-        quantize:
-          type: bool
-    - name: msmarco-distilbert-dot-v5
-      params:
-        quantize:
-          type: bool
-    - name: all-MiniLM-L12-v2
-      params:
-        quantize:
-          type: bool
-    - name: all-mpnet-base-v2
-      params:
-        quantize:
-          type: bool
     - name: all-MiniLM-L6-v2
       params:
         quantize:
           type: bool
+          default: true
+    - name: all-mpnet-base-v2
+      params:
+        quantize:
+          type: bool
+          default: true
+    - name: all-MiniLM-L12-v2
+      params:
+        quantize:
+          type: bool
+          default: true
+    - name: multi-qa-MiniLM-L6-cos-v1
+      params:
+        quantize:
+          type: bool
+          default: true
+    - name: msmarco-distilbert-dot-v5
+      params:
+        quantize:
+          type: bool
+          default: true
     defaults:
-      model: multi-qa-MiniLM-L6-cos-v1
+      model: all-MiniLM-L6-v2
+      params:
+        quantize: true
     input:
       type: json
       permitted_extensions:
       - .json
     output:
       type: npy
-  - name: vector-search
+  - name: vector-db
     models:
     - name: faiss
     defaults:

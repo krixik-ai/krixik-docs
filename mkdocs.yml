@@ -30,6 +30,7 @@ nav:
     - methods:
       - 'overview': system/overview.md
       - 'initialize': system/initialize.md
+      - 'convenience methods': system/convenience_methods.md
       - 'create, save, and load pipelines': system/create_save_load.md
       - 'the process method': system/process.md
       - 'the process_status method': system/process_status.md
@@ -40,26 +41,6 @@ nav:
       - 'the show_tree method': system/show_tree.md
       - 'the keyword_search method': system/keyword_search.md
       - 'the semantic_search method': system/semantic_search.md
-  - Pipeline builder:
-    - Overview:
-      - 'introduction': pipeline_builder/introduction.md
-      - 'view modules': pipeline_builder/existing_modules.md
-      - 'create module': pipeline_builder/create_module.md
-      - 'view a module config': pipeline_builder/view_module_config.md
-      - 'build your first custom pipeline': pipeline_builder/first_pipeline.md
-      - 'test your pipeline': pipeline_builder/testing_pipeline.md
-      - 'useful pipeline properties': pipeline_builder/useful_pipeline_properties.md
-      - 'save and load your pipeline config': pipeline_builder/save_load.md
-    - Modules - advanced details:
-      - 'introduction': advanced_details/modules/introduction.md
-      - 'click data': advanced_details/modules/click_data.md
-      - 'module io data': advanced_details/modules/io_data.md
-      - 'module io dataclasses': advanced_details/modules/io_dataclasses.md
-    - Pipelines - advanced details:
-      - 'introduction': advanced_details/pipelines/introduction.md
-      - 'building module by module': advanced_details/pipelines/modular_build.md
-
-
 theme: 
   name: readthedocs
 plugins:

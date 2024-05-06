@@ -10,14 +10,14 @@ A table of contents for the remainder of this document is shown below.
 
 ## Pipeline setup
 
-Below we setup a multi module pipeline to serve our intended purpose, which is to build a pipeline that will transcribe any audio/video and make it semantically searchable in any language.
+Below we setup a multi module pipeline to serve our intended purpose, which is to build a pipeline that will transcribe any audio/video and perform sentiment analysis on the output transcription - sentence by sentence.
 
 To do this we will use the following modules:
 
 - [`transcribe`](modules/transcribe.md): takes in audio/video input, outputs json of content transcription
 - [`json-to-txt`](modules/json-to-txt.md): takes in json of text snippets, merges into text file
 - [`parser`](modules/parser.md): takes in text, slices into (possibly overlapping) strings
-- [`sentiment`](modules/sentiment): takes in text snippets and returns scores for their sentiments
+- [`sentiment`](modules/sentiment.md): takes in text snippets and returns scores for their sentiments
 
 We do this by passing the module names to the `module_chain` argument of [`create_pipeline`](system/create_save_load.md) along with a name for our pipeline.
 
@@ -42,7 +42,7 @@ Lets take a quick look at this file before processing.
 
 ```python
 # examine contents of input file
-test_file = "../../data/input/Interesting Facts About Colombia.mp4"
+test_file = "../../../data/input/Interesting Facts About Colombia.mp4"
 from IPython.display import Video
 Video(test_file)
 ```
@@ -61,12 +61,13 @@ For this run we will use the default models for the entire chain of modules.
 
 ```python
 # test file
-test_file = "../../data/input/Interesting Facts About Colombia.mp4"
+test_file = "../../../data/input/Interesting Facts About Colombia.mp4"
 
 # process test input
 process_output = pipeline.process(local_file_path = test_file,
                                   expire_time=60*10,
-                                  verbose=False)
+                                  verbose=False,
+                                  local_save_directory="../../../data/output")
 ```
 
     INFO: Checking that file size falls within acceptable parameters...

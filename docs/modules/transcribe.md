@@ -25,8 +25,9 @@ We do this by passing the module name to the `module_chain` argument of [`create
 
 ```python
 # create a pipeline with a single module
-pipeline = krixik.create_pipeline(name="modules-transcribe-docs",
-                                  module_chain=["transcribe"])
+pipeline = krixik.create_pipeline(
+    name="modules-transcribe-docs", module_chain=["transcribe"]
+)
 ```
 
 The `transcribe` module comes with the current range of [whisper](https://openai.com/research/whisper) transcription models.  These range from tiny to large, and offer a trade-off of transcription accuracy versus computational cost, with smaller models being less accurate but cheaper to run.  
@@ -50,6 +51,7 @@ Lets take a quick look at a valid input file - and then process it.
 # examine contents of a valid input file
 test_file = "../../data/input/Interesting Facts About Colombia.mp4"
 from IPython.display import Video
+
 Video(test_file)
 ```
 
@@ -72,11 +74,13 @@ Now let's process it using the default model - `whisper-tiny`.  Because `whisper
 test_file = "../../data/input/Interesting Facts About Colombia.mp4"
 
 # process for search
-process_output = pipeline.process(local_file_path = test_file,
-                                  local_save_directory="../../data/output", # save output repo data output subdir
-                                  expire_time=60 * 10,      # set all process data to expire in 10 minutes
-                                  wait_for_process=True,    # wait for process to complete before regaining ide
-                                  verbose=False)            # set verbosity to False
+process_output = pipeline.process(
+    local_file_path=test_file,
+    local_save_directory="../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    wait_for_process=True,  # wait for process to complete before regaining ide
+    verbose=False,
+)  # set verbosity to False
 ```
 
 The output of this process is printed below.  Because the output of this particular module-model pair is json, the process output is provided in this object as well.  The output file itself has been returned to the address noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
@@ -3947,7 +3951,7 @@ We load in the text file output from `process_output_files` below.
 ```python
 # load in process output from file
 with open(process_output["process_output_files"][0]) as f:
-  print(json.dumps(json.load(f), indent=2))
+    print(json.dumps(json.load(f), indent=2))
 ```
 
     [
@@ -7805,12 +7809,14 @@ We use it below to process the same input file shown above.
 test_file = "../../data/input/Interesting Facts About Colombia.mp4"
 
 # process for search
-process_output = pipeline.process(local_file_path = test_file,
-                                  local_save_directory="../../data/output", # save output repo data output subdir
-                                  expire_time=60*10,         # set all process data to expire in 10 minutes
-                                  wait_for_process=True,    # wait for process to complete before regaining ide
-                                  verbose=False,            # set verbosity to False
-                                  modules={"transcribe":{"model":"whisper-large-v3"}})
+process_output = pipeline.process(
+    local_file_path=test_file,
+    local_save_directory="../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    wait_for_process=True,  # wait for process to complete before regaining ide
+    verbose=False,  # set verbosity to False
+    modules={"transcribe": {"model": "whisper-large-v3"}},
+)
 ```
 
 The output of this process is printed below.  Because the output of this particular module-model pair is json, the process output is provided in this object as well.  The output file itself has been returned to the address noted in the `process_output_files` key.

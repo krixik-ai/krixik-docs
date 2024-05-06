@@ -1,23 +1,97 @@
-from nbconvert import MarkdownExporter, TagRemovePreprocessor
-import nbformat
+import yaml
+import subprocess
+from utilities import base_dir
 
 
-def convert_notebook_to_md(notebook_path: str) -> None:
-    # Load the notebook
-    with open(notebook_path, 'r', encoding='utf-8') as f:
-        notebook_content = f.read()
+def collect_mkdocks_toc():
+    # open mkdocs toc and collect all entries
+    file_path = f"{base_dir}/mkdocs.yml"
+    with open(file_path, "r") as file:
+        mkdocks_toc = yaml.safe_load(file)
 
-    notebook = nbformat.reads(notebook_content, as_version=4)
+    # upnack toc
+    pipeline_examples_docs = mkdocks_toc["nav"][3]["Pipeline examples"]
+    system_docs = mkdocks_toc["nav"][5]["System"][0]["methods"]
+    modules_docs = mkdocks_toc["nav"][4]["Modules"][0]["currently available"]
 
-    # Define the configuration for the exporter
-    exporter = MarkdownExporter()
-    exporter.remove = {'remove_cell'}
-    exporter.exclude_output_tags = {'remove_output'}
+    # collect paths to example docs
+    examples_mds = []
+    for item in pipeline_examples_docs:
+        item_values = list(item.values())[0]
+        for subitem in item_values:
+            docpath = list(subitem.values())[0]
+            examples_mds.append(docpath)
+            
+    # collect paths to system docs
+    system_mds = []
+    for item in system_docs:
+        docpath = list(item.values())[0]
+        system_mds.append(docpath)
+        
+    # collect paths to modules docs
+    modules_mds = []
+    for item in modules_docs:
+        docpath = list(item.values())[0]
+        modules_mds.append(docpath)
+        
+    # merge all mds
+    all_mds = examples_mds + system_mds + modules_mds
+    return all_mds
 
-    # Export the notebook to Markdown
-    output, _ = exporter.from_filename(notebook)
 
-    # Save the Markdown output to a file
-    markdown_output_path = notebook_path.replace(".ipynb", ".md")
-    with open(markdown_output_path, 'w', encoding='utf-8') as f:
-        f.write(output)
+def convert_notebook_remove(docpath: str) -> None:
+    try:
+        command = [
+            "jupyter",
+            "nbconvert",
+            f"{docpath}",
+            "--TagRemovePreprocessor.enabled=True",
+            "--TagRemovePreprocessor.remove_cell_tags=['remove_cell']",
+            "--TagRemovePreprocessor.remove_all_outputs_tags=['remove_output']",
+            "--to",
+            "markdown"
+        ]
+        process = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+        if process.returncode != 0:
+            print(f"FAILURE: notebook to markdown conversion failed with error: {process.stderr.decode().strip()}")
+    except Exception as e:
+        print(f"FAILURE: notebook to markdown conversion failed with exception {e}")
+
+
+def convert_all_notebooks_remove():
+    # collect all toc entries from mkdocs yaml
+    all_toc_files = collect_mkdocks_toc()
+
+    # convert files
+    for i in range(len(all_toc_files)):
+        docpath = f"{base_dir}/docs/" + all_toc_files[i].replace(".md",".ipynb")
+        convert_notebook_remove(docpath)
+
+
+def convert_notebook_no_remove(docpath: str) -> None:
+    try:
+        command = [
+            "jupyter",
+            "nbconvert",
+            f"{docpath}",
+            "--TagRemovePreprocessor.enabled=True",
+            "--to",
+            "markdown"
+        ]
+        process = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+        if process.returncode != 0:
+            print(f"FAILURE: notebook to markdown conversion failed with error: {process.stderr.decode().strip()}")
+    except Exception as e:
+        print(f"FAILURE: notebook to markdown conversion failed with exception {e}")
+
+
+def convert_all_notebooks_no_remove():
+    # collect all toc entries from mkdocs yaml
+    all_toc_files = collect_mkdocks_toc()
+
+    # convert files
+    for i in range(len(all_toc_files)):
+        docpath = f"{base_dir}/docs/" + all_toc_files[i].replace(".md",".ipynb")
+        convert_notebook_no_remove(docpath)

@@ -14,7 +14,7 @@ Each new page in documentation begins as a jupyter notebook.  This notebook is c
 If you want a notebook included in documentation / testing it **must** be 
 
 - placed in a (subdirectory of) the `docs` directory
-- referenced in `mkdocs.yml` at the base of this repository
+- reference your page in `mkdocs.yml` at the base of this repository
 
 Note that a valid reference listing in `mkdocks.yml` does not include `docs`, and starts with any subdirectory/path *after* `docs`.  For example, if a page called `my_new_demo.md` is located in `docs/demos/mydemos/my_new_demo.md` then its reference in `mkdocs.yml` should look like
 
@@ -26,21 +26,30 @@ demos/mydemos/my_new_demo.ipynb
 
 in the same location.  You do **not** need to generate the associated markdown yourself - this will be done when tests are run.
 
+**Do not leave any notebook in docs that you do not want run during tests.**
+
 
 Follow best practices in your notebook layout by abiding by the following content rules:
 
 1.  Tag any cells you want removed / output removed when converted to markdown
-    - `remove_output`: tag to remove cell output 
-    - `remove_cell`: remove entire cell (input and output)
-    - `ignore_test`: add to code cells you want ignored in testing
-    - `should_fail`: add to any code cell that should fail in testing
+    - `remove_output`: tag to remove cell output when converting to markdown
+    - `remove_cell`: remove entire cell (input and output) when converting to markdown
+    - `skip-execution`: add to code cells you want ignored in testing notebook
+    - `raises-exception`: add to any code cell that should fail in testing notebook
 2.  Clean up your pipelines at the end of each notebook
-    - Make sure your notebook ends with a python cell invoking `reset_pipeline` on any pipeline(s) created
+    - Make sure your notebook ends with a python cell invoking `reset_pipeline` on any pipeline(s) created (this will be tested and if you do not do this your tests will  fail)
+3.  Direct `local_save_directory` for `.process` or `.fetch_output` return files to `data/output`.  This output should be pushed along with new pages - this is so any user who views your page can also examine the corresponding output
+
 
 ## Before pushing checklist
 
 - make sure all notebooks pass tests locally
 - clean up the `data/output` directory - remove everything.  This directory is where all output from demo notebooks is directed so that users can easily see input-output.  If we do not clean it up before each push the data will aggregate.
+- cleanup the `data/pipeline_configs` directory - remove everything.  This directory is where all saved configs from documentation are stored.
+- add any new pages to the `mkdocs` table of contents
+
+
+WARNING: if you change the structure of the `mkdocs` table of contents beyond adding pages - e.g., its basic section - you may break step 1 of testing described below. 
 
 
 ## Testing overview
@@ -48,6 +57,11 @@ Follow best practices in your notebook layout by abiding by the following conten
 Tests should be run locally if any changes are made to documentation that are to be proposed for changes upstream.  Tests will be run on github with any changes merged to the main branch of documentation.
 
 Documentation tests consist of the following steps
+
+0.  Noteobook formatting
+
+Next notebooks are formatted (using [ruff](https://github.com/astral-sh/ruff)).  This does not change the content of your notebook, it will just clean it up (e.g., remove un-needed spacing) and standardize it. 
+
 
 1.  the `mkdocs.yml` table of contents is analyzed, and all references to documentation pages are collected.  
 
@@ -62,17 +76,29 @@ demos/mydemos/my_new_demo.md
 is collected.
 
 
-2.  Reference to notebook check
+2.  Link checking
 
-For each reference collected like
+The validity of all links in each page are checked.  These links come in three flavors.
 
-demos/mydemos/my_new_demo.md
+A.  Intra page link: a link to a section in the page itself
 
-a check is made to ensure that the corresponding notebook
+These are typically in the table of contents of the page near the top.  They look like:
 
-demos/mydemos/my_new_demo.ipynb
+[a page section](#a-page-section)
 
-exists.
+B.  Inter-page links
+
+These can be scattered throughout a page and link from one to another.  They look like
+
+[a link to another page](subdir/some_other_page.md)
+
+All subdirs must belong to the `docs` directory for these links.
+
+C.  General web links
+
+General web links look like
+
+[an example web link](https://example.com)
 
 
 3.  Notebook-unique pipeline check
@@ -82,37 +108,30 @@ All pipeline name(s) declared in a notebook must be unique to that notebook.  Th
 At this step all pipeline name(s) from each notebook are collected and a check is made to ensure that no pipeline name is found two notebooks.
 
 
-4.  Noteobook formatting
+4.  Reset end
 
-Next notebooks are formatted (using [ruff](https://github.com/astral-sh/ruff)).  This does not change the content of your notebook, it will just clean it up (e.g., remove un-needed spacing) and standardize it. 
+To prevent pipeline collisions and general good practice cleanup the final code cell in every notebook containing a `create_pipeline` invoccation should end with `.reset_pipeline`.
 
+We test that the final code cell of such notebooks contain
 
-5.  Link validation
-
-All referenced notebooks are converted to markdown for link validation.  This includes
-
-- local intra-page link validation: intra page links are validated.  These are typically links to sections of a page listed in the page's table of contents, and look like
-
-[my demo section](#my-demo-section)
+```python
+reset_pipeline(...)
+```
 
 
-- local inter-page link validation: local links to documentation pages of the form [a local link](demos/mydemos/my_new_demo.md) are validated by checking that the linked-to file `demos/mydemos/my_new_demo.md` exists in its proposed location under the `docs` directory
-
-- outbound links: any links to outbound sites like [my link](https://google.com) are checked using the `requests` library
-
-
-6.  Notebook execution
+5.  Notebook execution
 
 Each notebook is executed and successful completion of each code cell *not* marked with the tag `ignore_test` is confirmed.
 
-7.  Final markdown rendering
+
+6.  Final markdown rendering
 
 After all notebooks have passed the previous step they are converted again to markdown.
 
 Each notebook must contain unique pipeilne name(s) - this is to avoid collision when testing / using other notebooks.
 
-Tag any cells you want removed / output removed when converted to markdown
-    - `remove_output`: tag to remove cell output 
-    - `remove_cell`: remove entire cell (input and output)
-    - `ignore_test`: add to code cells you want ignored in testing
-    - `should_fail`: add to any code cell that should fail in testing
+Tag any cells you want removed / output removed when converted to markdown or testing
+    - `remove_output`: tag to remove cell output when converting to markdown
+    - `remove_cell`: remove entire cell (input and output) when converting to markdown
+    - `skip-execution`: add to code cells you want ignored in testing notebook
+    - `raises-exception`: add to any code cell that should fail in testing notebook

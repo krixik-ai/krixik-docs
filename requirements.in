@@ -21,3 +21,4 @@ mkdocstrings-python
 mkdocs-section-index
 mkdocs-material
 nbconvert
+nbmake

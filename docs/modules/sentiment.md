@@ -14,29 +14,30 @@ A table of contents for the remainder of this document is shown below.
 - [pipeline setup](#pipeline-setup)
 - [required input format](#required-input-format)
 - [using the default model](#using-the-default-model)
-- [using a non-default model](#using-a-non-default-model)
 
 
 ```python
 # import utilities
-import sys 
+import sys
 import json
 import importlib
-sys.path.append('../../')
+
+sys.path.append("../../")
 reset = importlib.import_module("utilities.reset")
 reset_pipeline = reset.reset_pipeline
 
 # load secrets from a .env file using python-dotenv
 from dotenv import load_dotenv
 import os
+
 load_dotenv("../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
+MY_API_KEY = os.getenv("MY_API_KEY")
+MY_API_URL = os.getenv("MY_API_URL")
 
 # import krixik and initialize it with your personal secrets
 from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
+
+krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
 ```
 
 ## Pipeline setup
@@ -48,8 +49,9 @@ We do this by passing the module name to the `module_chain` argument of [`create
 
 ```python
 # create a pipeline with a single module
-pipeline = krixik.create_pipeline(name="modules-sentiment-docs",
-                                  module_chain=["sentiment"])
+pipeline = krixik.create_pipeline(
+    name="modules-sentiment-docs", module_chain=["sentiment"]
+)
 ```
 
 The `sentiment` module comes with a single model:
@@ -69,7 +71,7 @@ Let's look at an example of a small valid input - and then process it.
 # examine contents of a valid input file
 test_file = "../../data/input/valid.json"
 with open(test_file) as f:
-  print(json.dumps(json.load(f), indent=2))
+    print(json.dumps(json.load(f), indent=2))
 ```
 
     [
@@ -92,11 +94,13 @@ Let's process the small input file above using the default model - `base`.  Beca
 test_file = "../../data/input/valid.json"
 
 # process for search
-process_output = pipeline.process(local_file_path = test_file,
-                                  local_save_directory="../../data/output", # save output repo data output subdir
-                                  expire_time=60 * 10,      # set all process data to expire in 10 minutes
-                                  wait_for_process=True,    # wait for process to complete before regaining ide
-                                  verbose=False)            # set verbosity to False
+process_output = pipeline.process(
+    local_file_path=test_file,
+    local_save_directory="../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    wait_for_process=True,  # wait for process to complete before regaining ide
+    verbose=False,
+)  # set verbosity to False
 ```
 
 The output of this process is printed below.  Because the output of this particular module-model pair is text, the process output is provided in this object is null.  However the file itself has been returned to the address noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
@@ -140,7 +144,7 @@ We load in the text file output from `process_output_files` below.
 ```python
 # load in process output from file
 with open(process_output["process_output_files"][0]) as f:
-  print(json.dumps(json.load(f), indent=2))
+    print(json.dumps(json.load(f), indent=2))
 ```
 
     [

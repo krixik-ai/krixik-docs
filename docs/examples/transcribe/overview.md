@@ -2,7 +2,7 @@
 
 This collection of pipelines implements a range of functionality centering on transcription.  That is, where the [`transcribe` module](modules/transcribe.md) is central to the functional outcome of the desired pipeline.
 
-Each can be constructed in just a few minutes with a proper arrangement of currently available [modules](/modules/overview.md).
+Each can be constructed in just a few minutes with a proper arrangement of currently available [modules](modules/overview.md).
 
 These example pipelines include:
 

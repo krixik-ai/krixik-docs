@@ -15,7 +15,6 @@ A table of contents for the remainder of this document is shown below.
 - [using the default model](#using-the-default-model)
 - [examining process output locally](#examining-process-output-locally)
 - [processing with a non-default model](#processing-with-a-non-default-model)
-- [using a non-default model](#using-a-non-default-model)
 
 ## Pipeline setup
 
@@ -26,8 +25,9 @@ We do this by passing the module name to the `module_chain` argument of [`create
 
 ```python
 # create a pipeline with a single module
-pipeline = krixik.create_pipeline(name="modules-text-embedder-docs",
-                                  module_chain=["text-embedder"])
+pipeline = krixik.create_pipeline(
+    name="modules-text-embedder-docs", module_chain=["text-embedder"]
+)
 ```
 
 The `text-embedder` module comes with a five very popular models from huggingface.  Each model functions in the same general manner - transforming text into dense vectors.
@@ -89,11 +89,13 @@ Let's process our small input example using the `default` model: .  Because [all
 test_file = "../../data/input/1984_very_short.json"
 
 # process for search
-process_output = pipeline.process(local_file_path = test_file,
-                                  local_save_directory="../../data/output", # save output repo data output subdir
-                                  expire_time=60 * 10,      # set all process data to expire in 10 minutes
-                                  wait_for_process=True,    # wait for process to complete before regaining ide
-                                  verbose=False)            # set verbosity to False
+process_output = pipeline.process(
+    local_file_path=test_file,
+    local_save_directory="../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    wait_for_process=True,  # wait for process to complete before regaining ide
+    verbose=False,
+)  # set verbosity to False
 ```
 
 The output of this process is printed below.  
@@ -128,7 +130,8 @@ The `.npy` containing embedding vectors of our input data can be examined as fol
 ```python
 # examine vector output
 import numpy as np
-vectors = np.load(process_output['process_output_files'][0])
+
+vectors = np.load(process_output["process_output_files"][0])
 print(vectors.shape)
 ```
 
@@ -161,14 +164,16 @@ modules={
 test_file = "../../data/input/1984_very_short.json"
 
 # process for search
-process_output = pipeline.process(local_file_path = test_file,
-                                  local_save_directory="../../data/output", # save output repo data output subdir
-                                  expire_time=60 * 10,      # set all process data to expire in 10 minutes
-                                  wait_for_process=True,    # wait for process to complete before regaining ide
-                                  verbose=False,            # set verbosity to False
-                                  modules={"text-embedder":
-                                            {"model": "all-mpnet-base-v2",
-                                             "params":{"quantize": False}}})
+process_output = pipeline.process(
+    local_file_path=test_file,
+    local_save_directory="../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    wait_for_process=True,  # wait for process to complete before regaining ide
+    verbose=False,  # set verbosity to False
+    modules={
+        "text-embedder": {"model": "all-mpnet-base-v2", "params": {"quantize": False}}
+    },
+)
 ```
 
 Now we can examine the output as we did above.

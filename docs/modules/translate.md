@@ -26,8 +26,9 @@ We do this by passing the module name to the `module_chain` argument of [`create
 
 ```python
 # create a pipeline with a single module
-pipeline = krixik.create_pipeline(name="modules-translate-docs",
-                                  module_chain=["translate"])
+pipeline = krixik.create_pipeline(
+    name="modules-translate-docs", module_chain=["translate"]
+)
 ```
 
 The `translate` module comes with a subset of popular translation models created at the [University of Hellsinki](https://huggingface.co/Helsinki-NLP).  These include
@@ -76,11 +77,13 @@ Now let's process the small example input above using the default model - the en
 test_file = "../../data/input/valid.json"
 
 # process for search
-process_output = pipeline.process(local_file_path = test_file,
-                                  local_save_directory="../../data/output", # save output repo data output subdir
-                                  expire_time=60 * 10,      # set all process data to expire in 10 minutes
-                                  wait_for_process=True,    # wait for process to complete before regaining ide
-                                  verbose=False)            # set verbosity to False
+process_output = pipeline.process(
+    local_file_path=test_file,
+    local_save_directory="../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    wait_for_process=True,  # wait for process to complete before regaining ide
+    verbose=False,
+)  # set verbosity to False
 ```
 
 The output of this process is printed below.  Because the output of this particular module-model pair is json, the process output is provided in this object as well.  The output file itself has been returned to the address noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
@@ -118,7 +121,7 @@ We load in the text file output from `process_output_files` below.
 ```python
 # load in process output from file
 with open(process_output["process_output_files"][0]) as f:
-  print(json.dumps(json.load(f), indent=2))
+    print(json.dumps(json.load(f), indent=2))
 ```
 
     [{"snippet": "Me encanta esta pelcula y la vea una y otra vez!"}, {"snippet": "El beneficio de explotacin ascendi a 9,4 millones EUR, frente a 11,7 millones EUR en 2004."}]
@@ -154,12 +157,14 @@ with open(test_file, "r") as file:
 test_file = "../../data/input/valid_spanish.json"
 
 # process for search
-process_output = pipeline.process(local_file_path = test_file,
-                                  local_save_directory="../../data/output", # save output repo data output subdir
-                                  expire_time=60 * 10,      # set all process data to expire in 10 minutes
-                                  wait_for_process=True,    # wait for process to complete before regaining ide
-                                  verbose=False,            # set verbosity to False
-                                  modules={"translate":{"model":"opus-mt-es-en"}})
+process_output = pipeline.process(
+    local_file_path=test_file,
+    local_save_directory="../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    wait_for_process=True,  # wait for process to complete before regaining ide
+    verbose=False,  # set verbosity to False
+    modules={"translate": {"model": "opus-mt-es-en"}},
+)
 ```
 
 The output of this process is printed below.  Because the output of this particular module-model pair is json, the process output is provided in this object as well.  The output file itself has been returned to the address noted in the `process_output_files` key.
