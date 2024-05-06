@@ -17,10 +17,15 @@ def get_code_from_markdown(lines: list[str], *, language: str = "python") -> lis
     return [block for block_language, block in blocks if block_language == language]
 
 
+def load_md_doc(md_filepath: str) -> str:
+    with open(md_filepath, 'r', encoding='utf-8') as file:
+        markdown_content = file.read()
+    return markdown_content
+
+
 def gather_pipeline_names(md_filepath: str) -> list:
     try:
-        with open(md_filepath, 'r', encoding='utf-8') as file:
-            markdown_content = file.read()
+        markdown_content = load_md_doc(md_filepath)
         code_blocks = get_code_from_markdown([markdown_content])
         create_pattern = r'\.create_pipeline\([^)]*\)'
         name_pattern = r'name="([^"]*)"'

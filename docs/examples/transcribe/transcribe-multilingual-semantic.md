@@ -9,6 +9,32 @@ A table of contents for the remainder of this document is shown below.
 - [processing a file](#processing-a-file)
 - [performing semantic search](#performing-semantic-search)
 
+
+```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ## Pipeline setup
 
 Below we setup a multi module pipeline to serve our intended purpose, which is to build a pipeline that will transcribe any audio/video and make it semantically searchable in any language.
@@ -37,6 +63,12 @@ pipeline = krixik.create_pipeline(name="examples-transcribe-semantic-multilingua
 ```
 
 This pipeline's available modeling options and parameters are stored in your custom [pipeline's configuration](system/create_save_load.md).
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+reset_pipeline(pipeline)
+```
 
 ## Processing a file
 
@@ -85,7 +117,8 @@ test_file = "../../../data/input/Interesting Facts About Colombia.mp4"
 process_output = pipeline.process(local_file_path = test_file,
                                   expire_time=60*10,
                                   modules={"translate": {"model": "opus-mt-en-es"}},
-                                  verbose=True)
+                                  verbose=True,
+                                  local_save_directory="../../../data/output")
 ```
 
     INFO: Checking that file size falls within acceptable parameters...
@@ -204,3 +237,9 @@ print(json.dumps(search_output, indent=2))
 
 
 Learn more about the [`semantic_search` method here](system/semantic_search.md).
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+reset_pipeline(pipeline)
+```

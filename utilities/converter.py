@@ -39,7 +39,7 @@ def collect_mkdocks_toc():
     return all_mds
 
 
-def convert_notebook(docpath: str) -> None:
+def convert_notebook_remove(docpath: str) -> None:
     try:
         command = [
             "jupyter",
@@ -59,11 +59,39 @@ def convert_notebook(docpath: str) -> None:
         print(f"FAILURE: notebook to markdown conversion failed with exception {e}")
 
 
-def convert_all_notebooks():
+def convert_all_notebooks_remove():
     # collect all toc entries from mkdocs yaml
     all_toc_files = collect_mkdocks_toc()
 
     # convert files
     for i in range(len(all_toc_files)):
         docpath = f"{base_dir}/docs/" + all_toc_files[i].replace(".md",".ipynb")
-        convert_notebook(docpath)
+        convert_notebook_remove(docpath)
+
+
+def convert_notebook_no_remove(docpath: str) -> None:
+    try:
+        command = [
+            "jupyter",
+            "nbconvert",
+            f"{docpath}",
+            "--TagRemovePreprocessor.enabled=True",
+            "--to",
+            "markdown"
+        ]
+        process = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+        if process.returncode != 0:
+            print(f"FAILURE: notebook to markdown conversion failed with error: {process.stderr.decode().strip()}")
+    except Exception as e:
+        print(f"FAILURE: notebook to markdown conversion failed with exception {e}")
+
+
+def convert_all_notebooks_no_remove():
+    # collect all toc entries from mkdocs yaml
+    all_toc_files = collect_mkdocks_toc()
+
+    # convert files
+    for i in range(len(all_toc_files)):
+        docpath = f"{base_dir}/docs/" + all_toc_files[i].replace(".md",".ipynb")
+        convert_notebook_no_remove(docpath)

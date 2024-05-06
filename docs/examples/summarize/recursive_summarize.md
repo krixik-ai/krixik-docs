@@ -11,6 +11,32 @@ A table of contents for the remainder of this document is shown below.
 - [processing an input file](#processing-an-input-file)
 
 
+
+```python
+# import utilities
+import sys 
+import json
+sys.path.append('../../../')
+import importlib
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ## Pipeline setup
 
 Below we setup a pipeline consisting of three `summarize` modules in sequence.
@@ -20,6 +46,12 @@ Below we setup a pipeline consisting of three `summarize` modules in sequence.
 # create a pipeline with a single module
 pipeline = krixik.create_pipeline(name="my-recursive-summarize-pipeline",
                                   module_chain=["summarize", "summarize", "summarize"])
+```
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+reset_pipeline(pipeline)
 ```
 
 ## Processing an input file
@@ -144,7 +176,7 @@ test_file = "../../../data/input/1984_short.txt"
 
 # process a file through the pipeline
 process_output = pipeline.process(local_file_path = test_file,
-                                  local_save_directory=".",  # save output in current directory
+                                  local_save_directory="../../../data/output",  # save output in current directory
                                   expire_time=60*10,         # set all process data to expire in 5 minutes
                                   wait_for_process=True,     # wait for process to complete before regaining ide
                                   verbose=False)             # set verbosity to False
@@ -185,3 +217,9 @@ with open(process_output['process_output_files'][0], "r") as file:
     smelled of boiled cabbage and old rag mats. A kilometre away the
     Ministry of Truth, his place of work, towered vast.
 
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+reset_pipeline(pipeline)
+```
