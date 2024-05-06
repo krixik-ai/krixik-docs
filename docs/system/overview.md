@@ -1,11 +1,12 @@
 ## Overview of krixik system apis
 
-In this Section we illustrate the usage of krixik system apis.  These are apis avaiilable with all pipelines built with krixik.
+In this Section we describe the core krixik system methods -  which are used to manage data processed with krixik.  These are methods avaiilable with all pipelines built with krixik.
 
 A table of contents for this section is shown below.
 
 - [initialize your session](system/initialize.md)
 - [create, save, and load pipelines](system/create_save_load.md)
+- [convenience methods](system/convenience_methods.md)
 - [the `process` method](system/process.md)
 - [the `process_status` method](system/process_status.md)
 - [the `fetch_output` method](system/fetch_output.md)
