@@ -1,10 +1,11 @@
 import yaml
 import subprocess
+from utilities import base_dir
 
 
 def collect_mkdocks_toc():
     # open mkdocs toc and collect all entries
-    file_path = "../mkdocs.yml"
+    file_path = f"{base_dir}/mkdocs.yml"
     with open(file_path, "r") as file:
         mkdocks_toc = yaml.safe_load(file)
 
@@ -61,8 +62,8 @@ def convert_notebook(docpath: str) -> None:
 def convert_all_notebooks():
     # collect all toc entries from mkdocs yaml
     all_toc_files = collect_mkdocks_toc()
-    
+
     # convert files
     for i in range(len(all_toc_files)):
-        docpath = "../docs/" + all_toc_files[i].replace(".md",".ipynb")
+        docpath = f"{base_dir}/docs/" + all_toc_files[i].replace(".md",".ipynb")
         convert_notebook(docpath)

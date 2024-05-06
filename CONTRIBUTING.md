@@ -33,7 +33,7 @@ Follow best practices in your notebook layout by abiding by the following conten
     - `remove_output`: tag to remove cell output 
     - `remove_cell`: remove entire cell (input and output)
     - `ignore_test`: add to code cells you want ignored in testing
-    - `should_fail`: add to any code cell that should fail in testing
+    - `raises-exception`: add to any code cell that should fail in testing
 2.  Clean up your pipelines at the end of each notebook
     - Make sure your notebook ends with a python cell invoking `reset_pipeline` on any pipeline(s) created
 
@@ -41,6 +41,9 @@ Follow best practices in your notebook layout by abiding by the following conten
 
 - make sure all notebooks pass tests locally
 - clean up the `data/output` directory - remove everything.  This directory is where all output from demo notebooks is directed so that users can easily see input-output.  If we do not clean it up before each push the data will aggregate.
+- add any new pages to the `mkdocs` table of contents
+
+WARNING: if you change the structure of the `mkdocs` table of contents beyond adding pages - e.g., its basic section - you may break step 1 of testing described below. 
 
 
 ## Testing overview
@@ -127,4 +130,4 @@ Tag any cells you want removed / output removed when converted to markdown
     - `remove_output`: tag to remove cell output 
     - `remove_cell`: remove entire cell (input and output)
     - `ignore_test`: add to code cells you want ignored in testing
-    - `should_fail`: add to any code cell that should fail in testing
+    - `raises-exception`: add to any code cell that should fail in testing

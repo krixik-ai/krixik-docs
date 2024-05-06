@@ -76,4 +76,5 @@ build-backend = "poetry.core.masonry.api"
 addopts = [
     # Allow test files to have the same name in different directories.
     "--import-mode=importlib",
+    "-x",
 ]

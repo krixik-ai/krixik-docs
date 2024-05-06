@@ -1,6 +1,7 @@
 import markdown
 import re
 import requests
+from utilities import base_dir
 
 
 def extract_links_from_markdown(markdown_file: str) -> list:
@@ -28,8 +29,8 @@ def check_file_links(filepath: str,
     links = []
     headings = []
     try:
-        links = extract_links_from_markdown("../docs/" + filepath)
-        headings = extract_headings_from_markdown("../docs/" + filepath)
+        links = extract_links_from_markdown(f"{base_dir}/docs/" + filepath)
+        headings = extract_headings_from_markdown(f"{base_dir}/docs/" + filepath)
     except FileNotFoundError:
         print(f"FAILURE: check_file_links failed - file {filepath} does not exist")
     except Exception as e:
