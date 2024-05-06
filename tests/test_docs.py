@@ -15,3 +15,5 @@ def test_2(docfile):
     """success test that all links from each notebook are valid"""
     dead_links = check_file_links(docfile, toc_files)
     assert len(dead_links) == 0, f"doc {docfile} has deadlinks: {dead_links}"
+
+

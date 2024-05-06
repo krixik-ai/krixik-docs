@@ -16,6 +16,8 @@ If you want a notebook included in documentation / testing it **must** be
 - placed in a (subdirectory of) the `docs` directory
 - referenced in `mkdocs.yml` at the base of this repository
 
+**Do not leave any notebook in docs that you do not want run during tests.**
+
 Note that a valid reference listing in `mkdocks.yml` does not include `docs`, and starts with any subdirectory/path *after* `docs`.  For example, if a page called `my_new_demo.md` is located in `docs/demos/mydemos/my_new_demo.md` then its reference in `mkdocs.yml` should look like
 
 - 'my new demo name': demos/mydemos/my_new_demo.md
