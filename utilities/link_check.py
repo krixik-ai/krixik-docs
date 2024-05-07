@@ -1,15 +1,32 @@
 import markdown
 import re
+import os
 import requests
 from utilities import base_dir
 
 
-def extract_links_from_markdown(markdown_file: str) -> list:
+def extract_links_from_markdown(markdown_file: str) -> tuple:
     with open(markdown_file, 'r', encoding='utf-8') as file:
         markdown_content = file.read()
     html_content = markdown.markdown(markdown_content)
     links = re.findall(r'<a\s+(?:[^>]*?\s+)?href="([^"]*)"', html_content)
-    return links
+    
+    # split into intra, inter, and outer links
+    inter_links = []
+    intra_links = []
+    outer_links = []
+    for link in links:
+        if link[0] == "#":
+            intra_links.append(link)
+        elif link[:4] == "http":
+            outer_links.append(link)
+        else:
+            # convert to absolute link
+            absolute_link = os.path.abspath(os.path.join(os.path.dirname(markdown_file_path), link))
+            absolute_link = "docs/" + absolute_link.split("docs", 1)[-1][1:]
+            inter_links.append(absolute_link)
+            
+    return intra_links, inter_links, outer_links
 
 
 def extract_headings_from_markdown(markdown_file) -> list:
@@ -25,30 +42,35 @@ def extract_headings_from_markdown(markdown_file) -> list:
 
 
 def check_file_links(filepath: str,
-                     toc_files: list) -> list:
-    links = []
+                     toc_files: list) -> list:    
+    intra_links = []
+    inter_links = []
+    outer_links = []
     headings = []
     try:
-        links = extract_links_from_markdown(f"{base_dir}/docs/" + filepath)
+        intra_links, inter_links, outer_links = extract_links_from_markdown(f"{base_dir}/docs/" + filepath)
         headings = extract_headings_from_markdown(f"{base_dir}/docs/" + filepath)
     except FileNotFoundError:
         print(f"FAILURE: check_file_links failed - file {filepath} does not exist")
     except Exception as e:
         print(f"FAILURE: check_file_links failed for file {filepath} with exception {e}")
     
-    # section
-    
-    # filter out toc links and headings
     dead_links = []
-    for link in links:
-        if link not in toc_files and link not in headings:
+    
+    # check intra_links for dead links
+    for link in intra_links:
+        if link not in headings:
             dead_links.append(link)
             
-    # check dead links with requests
-    last_dead_links = []
-    for link in dead_links:
+    # check inter_links for dead links
+    toc_files = ["docs/" + v for v in toc_files]
+    for link in inter_links:
+        if link not in toc_files:
+            dead_links.append(link)
+            
+    # check outer_links for dead links
+    for link in outer_links:
         response = requests.get(link)
         if response.status_code not in range(200, 404):
-            last_dead_links.append(link)
-    return last_dead_links
-
+            dead_links.append(link)
+    return dead_links
