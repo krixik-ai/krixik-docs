@@ -3,14 +3,17 @@ nav:
   - Home: index.md
   - Pipeline examples:
     - 'overview': examples/overview.md
-    - transcribe examples:
-      - 'semantically searchable transcription': examples/transcribe/transcribe-semantic.md
-      - 'keyword searchable transcription': examples/transcribe/transcribe-keyword.md
-      - 'multilingual transcription': examples/transcribe/transcribe-multilingual.md
-      - 'semantically searchable multilingual transcription': examples/transcribe/transcribe-multilingual-semantic.md
-      - 'transcribe to sentiment analysis': examples/transcribe/transcribe-sentiment.md
-    - summarize examples:
-      - 'recursive summarization': examples/summarize/recursive_summarize.md
+    - transcribe/translate examples:
+      - 'semantically searchable transcription': examples/transcribe_translate/transcribe-semantic.md
+      - 'keyword searchable transcription': examples/transcribe_translate/transcribe-keyword.md
+      - 'translate semantic search': examples/transcribe_translate/translate_semantic_search.md
+      - 'multilingual transcription': examples/transcribe_translate/transcribe-multilingual.md
+      - 'semantically searchable multilingual transcription': examples/transcribe_translate/transcribe-multilingual-semantic.md
+    - summarize/sentiment examples:
+      - 'recursive summarization': examples/summarize_sentiment/recursive_summarize.md
+      - 'transcribe to sentiment analysis': examples/summarize_sentiment/transcribe-sentiment.md
+      - 'translate to sentiment analysis': examples/summarize_sentiment/translate-sentiment.md
+      - 'sentiment of multilingual transcription': examples/summarize_sentiment/transcribe-multilingual-sentiment.md
     - image to text examples:
       - 'ocr keyword search': examples/image-to-text/orc-keyword.md
       - 'caption semantic search': examples/image-to-text/caption-semantic.md
