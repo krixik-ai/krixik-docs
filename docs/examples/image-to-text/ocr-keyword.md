@@ -9,6 +9,32 @@ A table of contents for the remainder of this document is shown below.
 - [processing a file](#processing-a-file)
 - [performing keyword search](#performing-keyword-search)
 
+
+```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ## Pipeline setup
 
 Below we setup a multi module pipeline to serve our intended purpose, which is to build a pipeline that will extract text from an input image and make it keyword searchable.
@@ -51,12 +77,18 @@ Image(filename=test_file)
 
 
     
-![png](ocr-keyword_files/ocr-keyword_9_0.png)
+![png](ocr-keyword_files/ocr-keyword_10_0.png)
     
 
 
 
 For this run we will use the default models for the each module of the pipeline.
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+reset_pipeline(pipeline)
+```
 
 
 ```python
@@ -180,3 +212,9 @@ print(json.dumps(search_output, indent=2))
       ]
     }
 
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+reset_pipeline(pipeline)
+```

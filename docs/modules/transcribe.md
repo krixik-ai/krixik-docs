@@ -10,6 +10,34 @@ A table of contents for the remainder of this document is shown below.
 - [using the default model](#using-the-default-model)
 - [using a non-default model](#using-a-non-default-model)
 
+
+```python
+# import utilities
+import sys
+import json
+import importlib
+
+sys.path.append("../../")
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+
+load_dotenv("../../.env")
+MY_API_KEY = os.getenv("MY_API_KEY")
+MY_API_URL = os.getenv("MY_API_URL")
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+
+krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ## Pipeline setup
 
 Below we setup a simple one module pipeline using the `transcribe` module. 
@@ -33,6 +61,12 @@ The `transcribe` module comes with the current range of [whisper](https://openai
 - [`whisper-large-v3`](https://huggingface.co/openai/whisper-large-v3): about 2x model parameters compared to medium - most costly to run, most accurate
 
 These available modeling options and parameters are stored in your custom [pipeline's configuration](system/create_save_load.md).
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+reset_pipeline(pipeline)
+```
 
 ## Required input format
 
@@ -11388,3 +11422,9 @@ print(json.dumps(process_output, indent=2))
       ]
     }
 
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+reset_pipeline(pipeline)
+```
