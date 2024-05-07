@@ -2,12 +2,6 @@
 
 This document reviews the `transcribe` module - which takes as input an audio or video file and returns a transcription of spoken words made in the input.  Transcription data is returned as a json.
 
-This document includes an overview of custom pipeline setup, current model set, parameters, and `.process` usage for this module.
-
-To follow along with this demonstration be sure to initialize your krixik session with your api key and url as shown below. 
-
-We illustrate loading these required secrets in via [python-dotenv](https://pypi.org/project/python-dotenv/), storing those secrets in a `.env` file.  This is always good practice for storing / loading secrets (e.g., doing so will reduce the chance you inadvertantly push secrets to a repo).
-
 A table of contents for the remainder of this document is shown below.
 
 
@@ -20,7 +14,7 @@ A table of contents for the remainder of this document is shown below.
 
 Below we setup a simple one module pipeline using the `transcribe` module. 
 
-We do this by passing the module name to the `module_chain` argument of [`create_pipeline`](system/create_save_load.md) along with a name for our pipeline.
+We do this by passing the module name to the `module_chain` argument of [`create_pipeline`](../system/create_save_load.md) along with a name for our pipeline.
 
 
 ```python
@@ -38,7 +32,7 @@ The `transcribe` module comes with the current range of [whisper](https://openai
 - [`whisper-medium`](https://huggingface.co/openai/whisper-medium): about 3x model parameters compared to small - more costly to run, accurate
 - [`whisper-large-v3`](https://huggingface.co/openai/whisper-large-v3): about 2x model parameters compared to medium - most costly to run, most accurate
 
-These available modeling options and parameters are stored in your custom [pipeline's configuration](system/create_save_load.md).
+These available modeling options and parameters are stored in your custom [pipeline's configuration](../system/create_save_load.md).
 
 ## Required input format
 
@@ -93,10 +87,10 @@ print(json.dumps(process_output, indent=2))
 
     {
       "status_code": 200,
-      "pipeline": "my-transcribe-pipeline",
-      "request_id": "3014697d-cbb3-4431-9af4-35c223b4e870",
-      "file_id": "7205bdec-c637-4226-bb4a-d36043944f7b",
-      "message": "SUCCESS - output fetched for file_id 7205bdec-c637-4226-bb4a-d36043944f7b.Output saved to location(s) listed in process_output_files.",
+      "pipeline": "modules-transcribe-docs",
+      "request_id": "e9408bc0-a12f-4366-a168-bfed0b22dad4",
+      "file_id": "cd5f2dad-f63b-46ed-8076-c0499cae8e5f",
+      "message": "SUCCESS - output fetched for file_id cd5f2dad-f63b-46ed-8076-c0499cae8e5f.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -881,7 +875,7 @@ print(json.dumps(process_output, indent=2))
               "start": 28.92,
               "end": 30.91,
               "text": " So put it down in the description box below, and I'll talk about",
-              "no_speech_prob": 0.1353943943977356,
+              "no_speech_prob": 0.13539506494998932,
               "confidence": 0.773,
               "words": [
                 {
@@ -969,7 +963,7 @@ print(json.dumps(process_output, indent=2))
               "start": 30.91,
               "end": 32.3,
               "text": " that more in the video.",
-              "no_speech_prob": 0.1353943943977356,
+              "no_speech_prob": 0.13539506494998932,
               "confidence": 0.704,
               "words": [
                 {
@@ -1009,7 +1003,7 @@ print(json.dumps(process_output, indent=2))
               "start": 32.72,
               "end": 35.02,
               "text": " But if you're new here, join me every single Monday to learn",
-              "no_speech_prob": 0.1353943943977356,
+              "no_speech_prob": 0.13539506494998932,
               "confidence": 0.954,
               "words": [
                 {
@@ -1091,7 +1085,7 @@ print(json.dumps(process_output, indent=2))
               "start": 35.02,
               "end": 36.38,
               "text": " about new countries from around the world.",
-              "no_speech_prob": 0.1353943943977356,
+              "no_speech_prob": 0.13539506494998932,
               "confidence": 0.992,
               "words": [
                 {
@@ -1143,7 +1137,7 @@ print(json.dumps(process_output, indent=2))
               "start": 36.38,
               "end": 38.4,
               "text": " You can do that by hitting that subscribe and that belt",
-              "no_speech_prob": 0.1353943943977356,
+              "no_speech_prob": 0.13539506494998932,
               "confidence": 0.852,
               "words": [
                 {
@@ -1219,7 +1213,7 @@ print(json.dumps(process_output, indent=2))
               "start": 38.4,
               "end": 39.23,
               "text": " notification button.",
-              "no_speech_prob": 0.1353943943977356,
+              "no_speech_prob": 0.13539506494998932,
               "confidence": 0.953,
               "words": [
                 {
@@ -1241,7 +1235,7 @@ print(json.dumps(process_output, indent=2))
               "start": 39.23,
               "end": 41.5,
               "text": " But let's get started.",
-              "no_speech_prob": 0.1353943943977356,
+              "no_speech_prob": 0.13539506494998932,
               "confidence": 0.845,
               "words": [
                 {
@@ -1275,7 +1269,7 @@ print(json.dumps(process_output, indent=2))
               "start": 41.5,
               "end": 42.7,
               "text": " Learn about Columbia.",
-              "no_speech_prob": 0.1353943943977356,
+              "no_speech_prob": 0.13539506494998932,
               "confidence": 0.765,
               "words": [
                 {
@@ -1303,7 +1297,7 @@ print(json.dumps(process_output, indent=2))
               "start": 43.24,
               "end": 46.6,
               "text": " So we all know Columbia is famous for its coffee, right?",
-              "no_speech_prob": 0.1353943943977356,
+              "no_speech_prob": 0.13539506494998932,
               "confidence": 0.903,
               "words": [
                 {
@@ -1379,7 +1373,7 @@ print(json.dumps(process_output, indent=2))
               "start": 46.84,
               "end": 47.42,
               "text": " Yes, right.",
-              "no_speech_prob": 0.1353943943977356,
+              "no_speech_prob": 0.13539506494998932,
               "confidence": 0.983,
               "words": [
                 {
@@ -1401,7 +1395,7 @@ print(json.dumps(process_output, indent=2))
               "start": 47.54,
               "end": 47.75,
               "text": " I know.",
-              "no_speech_prob": 0.1353943943977356,
+              "no_speech_prob": 0.13539506494998932,
               "confidence": 0.975,
               "words": [
                 {
@@ -1423,7 +1417,7 @@ print(json.dumps(process_output, indent=2))
               "start": 47.75,
               "end": 49.87,
               "text": " You guys are sitting there going, five bucks says",
-              "no_speech_prob": 0.1353943943977356,
+              "no_speech_prob": 0.13539506494998932,
               "confidence": 0.831,
               "words": [
                 {
@@ -1487,7 +1481,7 @@ print(json.dumps(process_output, indent=2))
               "start": 49.87,
               "end": 50.77,
               "text": " he's going to talk about coffee.",
-              "no_speech_prob": 0.1353943943977356,
+              "no_speech_prob": 0.13539506494998932,
               "confidence": 0.858,
               "words": [
                 {
@@ -1533,7 +1527,7 @@ print(json.dumps(process_output, indent=2))
               "start": 50.77,
               "end": 51.8,
               "text": " Well, I am.",
-              "no_speech_prob": 0.1353943943977356,
+              "no_speech_prob": 0.13539506494998932,
               "confidence": 0.988,
               "words": [
                 {
@@ -1561,7 +1555,7 @@ print(json.dumps(process_output, indent=2))
               "start": 52.18,
               "end": 53.18,
               "text": " That's right, because I got my van.",
-              "no_speech_prob": 0.1353943943977356,
+              "no_speech_prob": 0.13539506494998932,
               "confidence": 0.986,
               "words": [
                 {
@@ -1613,7 +1607,7 @@ print(json.dumps(process_output, indent=2))
               "start": 53.18,
               "end": 54.92,
               "text": " You Columbia coffee right here.",
-              "no_speech_prob": 0.1353943943977356,
+              "no_speech_prob": 0.13539506494998932,
               "confidence": 0.615,
               "words": [
                 {
@@ -1653,7 +1647,7 @@ print(json.dumps(process_output, indent=2))
               "start": 55.26,
               "end": 56.34,
               "text": " Boom advertisement.",
-              "no_speech_prob": 0.1353943943977356,
+              "no_speech_prob": 0.13539506494998932,
               "confidence": 0.757,
               "words": [
                 {
@@ -1675,7 +1669,7 @@ print(json.dumps(process_output, indent=2))
               "start": 56.68,
               "end": 56.88,
               "text": " Yeah.",
-              "no_speech_prob": 0.1353943943977356,
+              "no_speech_prob": 0.13539506494998932,
               "confidence": 0.863,
               "words": [
                 {
@@ -1691,7 +1685,7 @@ print(json.dumps(process_output, indent=2))
               "start": 57.12,
               "end": 58.24,
               "text": " Then I'm paying me for this.",
-              "no_speech_prob": 0.023453695699572563,
+              "no_speech_prob": 0.023453781381249428,
               "confidence": 0.68,
               "words": [
                 {
@@ -1737,7 +1731,7 @@ print(json.dumps(process_output, indent=2))
               "start": 58.3,
               "end": 58.76,
               "text": " I'm care.",
-              "no_speech_prob": 0.023453695699572563,
+              "no_speech_prob": 0.023453781381249428,
               "confidence": 0.894,
               "words": [
                 {
@@ -1759,7 +1753,7 @@ print(json.dumps(process_output, indent=2))
               "start": 59.1,
               "end": 61.4,
               "text": " So which might not know about coffee is yes, you probably",
-              "no_speech_prob": 0.023453695699572563,
+              "no_speech_prob": 0.023453781381249428,
               "confidence": 0.853,
               "words": [
                 {
@@ -1835,7 +1829,7 @@ print(json.dumps(process_output, indent=2))
               "start": 61.48,
               "end": 63.46,
               "text": " already know that a lot of companies actually",
-              "no_speech_prob": 0.023453695699572563,
+              "no_speech_prob": 0.023453781381249428,
               "confidence": 0.977,
               "words": [
                 {
@@ -1893,7 +1887,7 @@ print(json.dumps(process_output, indent=2))
               "start": 63.52,
               "end": 64.02,
               "text": " buy it up.",
-              "no_speech_prob": 0.023453695699572563,
+              "no_speech_prob": 0.023453781381249428,
               "confidence": 0.877,
               "words": [
                 {
@@ -1921,7 +1915,7 @@ print(json.dumps(process_output, indent=2))
               "start": 64.32,
               "end": 67.2,
               "text": " Starbucks buys all had a coffee from Columbia.",
-              "no_speech_prob": 0.023453695699572563,
+              "no_speech_prob": 0.023453781381249428,
               "confidence": 0.772,
               "words": [
                 {
@@ -1979,7 +1973,7 @@ print(json.dumps(process_output, indent=2))
               "start": 67.7,
               "end": 69.68,
               "text": " It's kind of like their favorite place to buy coffee.",
-              "no_speech_prob": 0.023453695699572563,
+              "no_speech_prob": 0.023453781381249428,
               "confidence": 0.95,
               "words": [
                 {
@@ -2049,7 +2043,7 @@ print(json.dumps(process_output, indent=2))
               "start": 70.02,
               "end": 73.08,
               "text": " And kind of to pay tribute to that Starbucks when they're",
-              "no_speech_prob": 0.023453695699572563,
+              "no_speech_prob": 0.023453781381249428,
               "confidence": 0.771,
               "words": [
                 {
@@ -2125,7 +2119,7 @@ print(json.dumps(process_output, indent=2))
               "start": 73.08,
               "end": 77.51,
               "text": " making their 1,000th store in 2016, they decided,",
-              "no_speech_prob": 0.023453695699572563,
+              "no_speech_prob": 0.023453781381249428,
               "confidence": 0.917,
               "words": [
                 {
@@ -2183,7 +2177,7 @@ print(json.dumps(process_output, indent=2))
               "start": 77.51,
               "end": 79.32,
               "text": " yo, we're going to put it in Columbia.",
-              "no_speech_prob": 0.023453695699572563,
+              "no_speech_prob": 0.023453781381249428,
               "confidence": 0.943,
               "words": [
                 {
@@ -2241,7 +2235,7 @@ print(json.dumps(process_output, indent=2))
               "start": 79.32,
               "end": 82.28,
               "text": " And this was in the town of Medellin, Columbia.",
-              "no_speech_prob": 0.023453695699572563,
+              "no_speech_prob": 0.023453781381249428,
               "confidence": 0.905,
               "words": [
                 {
@@ -2305,7 +2299,7 @@ print(json.dumps(process_output, indent=2))
               "start": 82.6,
               "end": 85.38,
               "text": " Now here's the thing, when it comes to coffee in Columbia,",
-              "no_speech_prob": 0.023453695699572563,
+              "no_speech_prob": 0.023453781381249428,
               "confidence": 0.924,
               "words": [
                 {
@@ -2381,7 +2375,7 @@ print(json.dumps(process_output, indent=2))
               "start": 85.44,
               "end": 90.5,
               "text": " they are the third largest producing and exporting coffee",
-              "no_speech_prob": 0.0022645951248705387,
+              "no_speech_prob": 0.0022646081633865833,
               "confidence": 0.826,
               "words": [
                 {
@@ -2445,7 +2439,7 @@ print(json.dumps(process_output, indent=2))
               "start": 90.54,
               "end": 91.9,
               "text": " country in the world.",
-              "no_speech_prob": 0.0022645951248705387,
+              "no_speech_prob": 0.0022646081633865833,
               "confidence": 0.996,
               "words": [
                 {
@@ -2479,7 +2473,7 @@ print(json.dumps(process_output, indent=2))
               "start": 92.22,
               "end": 95.07,
               "text": " The amount of coffee that is exported from Columbia equals",
-              "no_speech_prob": 0.0022645951248705387,
+              "no_speech_prob": 0.0022646081633865833,
               "confidence": 0.907,
               "words": [
                 {
@@ -2549,7 +2543,7 @@ print(json.dumps(process_output, indent=2))
               "start": 95.07,
               "end": 102.52,
               "text": " about 810,000 metric tons or approximately 11.5 million",
-              "no_speech_prob": 0.0022645951248705387,
+              "no_speech_prob": 0.0022646081633865833,
               "confidence": 0.819,
               "words": [
                 {
@@ -2607,7 +2601,7 @@ print(json.dumps(process_output, indent=2))
               "start": 102.66,
               "end": 102.94,
               "text": " bags.",
-              "no_speech_prob": 0.0022645951248705387,
+              "no_speech_prob": 0.0022646081633865833,
               "confidence": 0.986,
               "words": [
                 {
@@ -2623,7 +2617,7 @@ print(json.dumps(process_output, indent=2))
               "start": 102.94,
               "end": 107.28,
               "text": " However, although it might be beaten by countries like Brazil,",
-              "no_speech_prob": 0.0022645951248705387,
+              "no_speech_prob": 0.0022646081633865833,
               "confidence": 0.975,
               "words": [
                 {
@@ -2693,7 +2687,7 @@ print(json.dumps(process_output, indent=2))
               "start": 107.92,
               "end": 111.12,
               "text": " it is actually the number one or highest country for producing",
-              "no_speech_prob": 0.0022645951248705387,
+              "no_speech_prob": 0.0022646081633865833,
               "confidence": 0.906,
               "words": [
                 {
@@ -2769,7 +2763,7 @@ print(json.dumps(process_output, indent=2))
               "start": 111.18,
               "end": 115.28,
               "text": " and growing a specific type of bean known as the Arab",
-              "no_speech_prob": 0.0022645951248705387,
+              "no_speech_prob": 0.0022646081633865833,
               "confidence": 0.821,
               "words": [
                 {
@@ -2845,7 +2839,7 @@ print(json.dumps(process_output, indent=2))
               "start": 115.32,
               "end": 116.3,
               "text": " Beka bean.",
-              "no_speech_prob": 0.008894873782992363,
+              "no_speech_prob": 0.008894940838217735,
               "confidence": 0.348,
               "words": [
                 {
@@ -2867,7 +2861,7 @@ print(json.dumps(process_output, indent=2))
               "start": 116.68,
               "end": 119.55,
               "text": " And I know coffee is really important when it comes to talking",
-              "no_speech_prob": 0.008894873782992363,
+              "no_speech_prob": 0.008894940838217735,
               "confidence": 0.917,
               "words": [
                 {
@@ -2949,7 +2943,7 @@ print(json.dumps(process_output, indent=2))
               "start": 119.55,
               "end": 121.62,
               "text": " about Columbia, but you guys really don't know how important",
-              "no_speech_prob": 0.008894873782992363,
+              "no_speech_prob": 0.008894940838217735,
               "confidence": 0.882,
               "words": [
                 {
@@ -3019,7 +3013,7 @@ print(json.dumps(process_output, indent=2))
               "start": 121.62,
               "end": 122.64,
               "text": " it is with its culture.",
-              "no_speech_prob": 0.008894873782992363,
+              "no_speech_prob": 0.008894940838217735,
               "confidence": 0.974,
               "words": [
                 {
@@ -3059,7 +3053,7 @@ print(json.dumps(process_output, indent=2))
               "start": 123.08,
               "end": 126.61,
               "text": " Interesting fact that in 2007, major spots",
-              "no_speech_prob": 0.008894873782992363,
+              "no_speech_prob": 0.008894940838217735,
               "confidence": 0.929,
               "words": [
                 {
@@ -3111,7 +3105,7 @@ print(json.dumps(process_output, indent=2))
               "start": 126.61,
               "end": 131.2,
               "text": " equaling a buffer zone of approximately 207,000 hectares,",
-              "no_speech_prob": 0.008894873782992363,
+              "no_speech_prob": 0.008894940838217735,
               "confidence": 0.836,
               "words": [
                 {
@@ -3169,7 +3163,7 @@ print(json.dumps(process_output, indent=2))
               "start": 131.64,
               "end": 134.16,
               "text": " which are called the coffee cultural landscape,",
-              "no_speech_prob": 0.008894873782992363,
+              "no_speech_prob": 0.008894940838217735,
               "confidence": 0.965,
               "words": [
                 {
@@ -3221,7 +3215,7 @@ print(json.dumps(process_output, indent=2))
               "start": 134.5,
               "end": 137.22,
               "text": " were considered a UNESCO World Heritage Site.",
-              "no_speech_prob": 0.008894873782992363,
+              "no_speech_prob": 0.008894940838217735,
               "confidence": 0.881,
               "words": [
                 {
@@ -3273,7 +3267,7 @@ print(json.dumps(process_output, indent=2))
               "start": 137.62,
               "end": 140.74,
               "text": " And also in 2007, the EU, the European Union,",
-              "no_speech_prob": 0.008894873782992363,
+              "no_speech_prob": 0.008894940838217735,
               "confidence": 0.965,
               "words": [
                 {
@@ -3337,7 +3331,7 @@ print(json.dumps(process_output, indent=2))
               "start": 140.76,
               "end": 145.82,
               "text": " granted Colombian coffee a protected designation of origin status.",
-              "no_speech_prob": 0.001799984835088253,
+              "no_speech_prob": 0.0017999779665842652,
               "confidence": 0.833,
               "words": [
                 {
@@ -3401,7 +3395,7 @@ print(json.dumps(process_output, indent=2))
               "start": 146.12,
               "end": 149.08,
               "text": " Now interesting enough when it comes to the coffee in Columbia,",
-              "no_speech_prob": 0.001799984835088253,
+              "no_speech_prob": 0.0017999779665842652,
               "confidence": 0.825,
               "words": [
                 {
@@ -3477,7 +3471,7 @@ print(json.dumps(process_output, indent=2))
               "start": 149.12,
               "end": 153.1,
               "text": " believe it or not, it is not actually native to the country.",
-              "no_speech_prob": 0.001799984835088253,
+              "no_speech_prob": 0.0017999779665842652,
               "confidence": 0.984,
               "words": [
                 {
@@ -3559,7 +3553,7 @@ print(json.dumps(process_output, indent=2))
               "start": 153.54,
               "end": 156.72,
               "text": " It's come from somewhere else, not really an invasive species",
-              "no_speech_prob": 0.001799984835088253,
+              "no_speech_prob": 0.0017999779665842652,
               "confidence": 0.924,
               "words": [
                 {
@@ -3629,7 +3623,7 @@ print(json.dumps(process_output, indent=2))
               "start": 156.72,
               "end": 158.42,
               "text": " because it's very much welcomed.",
-              "no_speech_prob": 0.001799984835088253,
+              "no_speech_prob": 0.0017999779665842652,
               "confidence": 0.994,
               "words": [
                 {
@@ -3669,7 +3663,7 @@ print(json.dumps(process_output, indent=2))
               "start": 158.84,
               "end": 161.98,
               "text": " Now you may have also seen this guy on many different Colombian",
-              "no_speech_prob": 0.001799984835088253,
+              "no_speech_prob": 0.0017999779665842652,
               "confidence": 0.897,
               "words": [
                 {
@@ -3751,7 +3745,7 @@ print(json.dumps(process_output, indent=2))
               "start": 161.98,
               "end": 162.81,
               "text": " coffee brands.",
-              "no_speech_prob": 0.001799984835088253,
+              "no_speech_prob": 0.0017999779665842652,
               "confidence": 0.971,
               "words": [
                 {
@@ -3773,7 +3767,7 @@ print(json.dumps(process_output, indent=2))
               "start": 162.81,
               "end": 164.68,
               "text": " Now his name is Juan Valdez.",
-              "no_speech_prob": 0.001799984835088253,
+              "no_speech_prob": 0.0017999779665842652,
               "confidence": 0.892,
               "words": [
                 {
@@ -3819,7 +3813,7 @@ print(json.dumps(process_output, indent=2))
               "start": 164.74,
               "end": 167.42,
               "text": " Now some people think that this guy is actually really",
-              "no_speech_prob": 0.001799984835088253,
+              "no_speech_prob": 0.0017999779665842652,
               "confidence": 0.93,
               "words": [
                 {
@@ -3889,7 +3883,7 @@ print(json.dumps(process_output, indent=2))
               "start": 167.52,
               "end": 170.0,
               "text": " a real coffee farmer, somebody just drew.",
-              "no_speech_prob": 0.6980557441711426,
+              "no_speech_prob": 0.6980549693107605,
               "confidence": 0.65,
               "words": [
                 {
@@ -3940,7 +3934,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../data/output/7205bdec-c637-4226-bb4a-d36043944f7b.json"
+        "../../data/output/cd5f2dad-f63b-46ed-8076-c0499cae8e5f.json"
       ]
     }
 
@@ -4737,7 +4731,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 28.92,
             "end": 30.91,
             "text": " So put it down in the description box below, and I'll talk about",
-            "no_speech_prob": 0.1353943943977356,
+            "no_speech_prob": 0.13539506494998932,
             "confidence": 0.773,
             "words": [
               {
@@ -4825,7 +4819,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 30.91,
             "end": 32.3,
             "text": " that more in the video.",
-            "no_speech_prob": 0.1353943943977356,
+            "no_speech_prob": 0.13539506494998932,
             "confidence": 0.704,
             "words": [
               {
@@ -4865,7 +4859,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 32.72,
             "end": 35.02,
             "text": " But if you're new here, join me every single Monday to learn",
-            "no_speech_prob": 0.1353943943977356,
+            "no_speech_prob": 0.13539506494998932,
             "confidence": 0.954,
             "words": [
               {
@@ -4947,7 +4941,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 35.02,
             "end": 36.38,
             "text": " about new countries from around the world.",
-            "no_speech_prob": 0.1353943943977356,
+            "no_speech_prob": 0.13539506494998932,
             "confidence": 0.992,
             "words": [
               {
@@ -4999,7 +4993,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 36.38,
             "end": 38.4,
             "text": " You can do that by hitting that subscribe and that belt",
-            "no_speech_prob": 0.1353943943977356,
+            "no_speech_prob": 0.13539506494998932,
             "confidence": 0.852,
             "words": [
               {
@@ -5075,7 +5069,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 38.4,
             "end": 39.23,
             "text": " notification button.",
-            "no_speech_prob": 0.1353943943977356,
+            "no_speech_prob": 0.13539506494998932,
             "confidence": 0.953,
             "words": [
               {
@@ -5097,7 +5091,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 39.23,
             "end": 41.5,
             "text": " But let's get started.",
-            "no_speech_prob": 0.1353943943977356,
+            "no_speech_prob": 0.13539506494998932,
             "confidence": 0.845,
             "words": [
               {
@@ -5131,7 +5125,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 41.5,
             "end": 42.7,
             "text": " Learn about Columbia.",
-            "no_speech_prob": 0.1353943943977356,
+            "no_speech_prob": 0.13539506494998932,
             "confidence": 0.765,
             "words": [
               {
@@ -5159,7 +5153,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 43.24,
             "end": 46.6,
             "text": " So we all know Columbia is famous for its coffee, right?",
-            "no_speech_prob": 0.1353943943977356,
+            "no_speech_prob": 0.13539506494998932,
             "confidence": 0.903,
             "words": [
               {
@@ -5235,7 +5229,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 46.84,
             "end": 47.42,
             "text": " Yes, right.",
-            "no_speech_prob": 0.1353943943977356,
+            "no_speech_prob": 0.13539506494998932,
             "confidence": 0.983,
             "words": [
               {
@@ -5257,7 +5251,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 47.54,
             "end": 47.75,
             "text": " I know.",
-            "no_speech_prob": 0.1353943943977356,
+            "no_speech_prob": 0.13539506494998932,
             "confidence": 0.975,
             "words": [
               {
@@ -5279,7 +5273,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 47.75,
             "end": 49.87,
             "text": " You guys are sitting there going, five bucks says",
-            "no_speech_prob": 0.1353943943977356,
+            "no_speech_prob": 0.13539506494998932,
             "confidence": 0.831,
             "words": [
               {
@@ -5343,7 +5337,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 49.87,
             "end": 50.77,
             "text": " he's going to talk about coffee.",
-            "no_speech_prob": 0.1353943943977356,
+            "no_speech_prob": 0.13539506494998932,
             "confidence": 0.858,
             "words": [
               {
@@ -5389,7 +5383,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 50.77,
             "end": 51.8,
             "text": " Well, I am.",
-            "no_speech_prob": 0.1353943943977356,
+            "no_speech_prob": 0.13539506494998932,
             "confidence": 0.988,
             "words": [
               {
@@ -5417,7 +5411,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 52.18,
             "end": 53.18,
             "text": " That's right, because I got my van.",
-            "no_speech_prob": 0.1353943943977356,
+            "no_speech_prob": 0.13539506494998932,
             "confidence": 0.986,
             "words": [
               {
@@ -5469,7 +5463,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 53.18,
             "end": 54.92,
             "text": " You Columbia coffee right here.",
-            "no_speech_prob": 0.1353943943977356,
+            "no_speech_prob": 0.13539506494998932,
             "confidence": 0.615,
             "words": [
               {
@@ -5509,7 +5503,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 55.26,
             "end": 56.34,
             "text": " Boom advertisement.",
-            "no_speech_prob": 0.1353943943977356,
+            "no_speech_prob": 0.13539506494998932,
             "confidence": 0.757,
             "words": [
               {
@@ -5531,7 +5525,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 56.68,
             "end": 56.88,
             "text": " Yeah.",
-            "no_speech_prob": 0.1353943943977356,
+            "no_speech_prob": 0.13539506494998932,
             "confidence": 0.863,
             "words": [
               {
@@ -5547,7 +5541,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 57.12,
             "end": 58.24,
             "text": " Then I'm paying me for this.",
-            "no_speech_prob": 0.023453695699572563,
+            "no_speech_prob": 0.023453781381249428,
             "confidence": 0.68,
             "words": [
               {
@@ -5593,7 +5587,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 58.3,
             "end": 58.76,
             "text": " I'm care.",
-            "no_speech_prob": 0.023453695699572563,
+            "no_speech_prob": 0.023453781381249428,
             "confidence": 0.894,
             "words": [
               {
@@ -5615,7 +5609,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 59.1,
             "end": 61.4,
             "text": " So which might not know about coffee is yes, you probably",
-            "no_speech_prob": 0.023453695699572563,
+            "no_speech_prob": 0.023453781381249428,
             "confidence": 0.853,
             "words": [
               {
@@ -5691,7 +5685,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 61.48,
             "end": 63.46,
             "text": " already know that a lot of companies actually",
-            "no_speech_prob": 0.023453695699572563,
+            "no_speech_prob": 0.023453781381249428,
             "confidence": 0.977,
             "words": [
               {
@@ -5749,7 +5743,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 63.52,
             "end": 64.02,
             "text": " buy it up.",
-            "no_speech_prob": 0.023453695699572563,
+            "no_speech_prob": 0.023453781381249428,
             "confidence": 0.877,
             "words": [
               {
@@ -5777,7 +5771,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 64.32,
             "end": 67.2,
             "text": " Starbucks buys all had a coffee from Columbia.",
-            "no_speech_prob": 0.023453695699572563,
+            "no_speech_prob": 0.023453781381249428,
             "confidence": 0.772,
             "words": [
               {
@@ -5835,7 +5829,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 67.7,
             "end": 69.68,
             "text": " It's kind of like their favorite place to buy coffee.",
-            "no_speech_prob": 0.023453695699572563,
+            "no_speech_prob": 0.023453781381249428,
             "confidence": 0.95,
             "words": [
               {
@@ -5905,7 +5899,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 70.02,
             "end": 73.08,
             "text": " And kind of to pay tribute to that Starbucks when they're",
-            "no_speech_prob": 0.023453695699572563,
+            "no_speech_prob": 0.023453781381249428,
             "confidence": 0.771,
             "words": [
               {
@@ -5981,7 +5975,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 73.08,
             "end": 77.51,
             "text": " making their 1,000th store in 2016, they decided,",
-            "no_speech_prob": 0.023453695699572563,
+            "no_speech_prob": 0.023453781381249428,
             "confidence": 0.917,
             "words": [
               {
@@ -6039,7 +6033,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 77.51,
             "end": 79.32,
             "text": " yo, we're going to put it in Columbia.",
-            "no_speech_prob": 0.023453695699572563,
+            "no_speech_prob": 0.023453781381249428,
             "confidence": 0.943,
             "words": [
               {
@@ -6097,7 +6091,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 79.32,
             "end": 82.28,
             "text": " And this was in the town of Medellin, Columbia.",
-            "no_speech_prob": 0.023453695699572563,
+            "no_speech_prob": 0.023453781381249428,
             "confidence": 0.905,
             "words": [
               {
@@ -6161,7 +6155,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 82.6,
             "end": 85.38,
             "text": " Now here's the thing, when it comes to coffee in Columbia,",
-            "no_speech_prob": 0.023453695699572563,
+            "no_speech_prob": 0.023453781381249428,
             "confidence": 0.924,
             "words": [
               {
@@ -6237,7 +6231,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 85.44,
             "end": 90.5,
             "text": " they are the third largest producing and exporting coffee",
-            "no_speech_prob": 0.0022645951248705387,
+            "no_speech_prob": 0.0022646081633865833,
             "confidence": 0.826,
             "words": [
               {
@@ -6301,7 +6295,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 90.54,
             "end": 91.9,
             "text": " country in the world.",
-            "no_speech_prob": 0.0022645951248705387,
+            "no_speech_prob": 0.0022646081633865833,
             "confidence": 0.996,
             "words": [
               {
@@ -6335,7 +6329,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 92.22,
             "end": 95.07,
             "text": " The amount of coffee that is exported from Columbia equals",
-            "no_speech_prob": 0.0022645951248705387,
+            "no_speech_prob": 0.0022646081633865833,
             "confidence": 0.907,
             "words": [
               {
@@ -6405,7 +6399,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 95.07,
             "end": 102.52,
             "text": " about 810,000 metric tons or approximately 11.5 million",
-            "no_speech_prob": 0.0022645951248705387,
+            "no_speech_prob": 0.0022646081633865833,
             "confidence": 0.819,
             "words": [
               {
@@ -6463,7 +6457,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 102.66,
             "end": 102.94,
             "text": " bags.",
-            "no_speech_prob": 0.0022645951248705387,
+            "no_speech_prob": 0.0022646081633865833,
             "confidence": 0.986,
             "words": [
               {
@@ -6479,7 +6473,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 102.94,
             "end": 107.28,
             "text": " However, although it might be beaten by countries like Brazil,",
-            "no_speech_prob": 0.0022645951248705387,
+            "no_speech_prob": 0.0022646081633865833,
             "confidence": 0.975,
             "words": [
               {
@@ -6549,7 +6543,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 107.92,
             "end": 111.12,
             "text": " it is actually the number one or highest country for producing",
-            "no_speech_prob": 0.0022645951248705387,
+            "no_speech_prob": 0.0022646081633865833,
             "confidence": 0.906,
             "words": [
               {
@@ -6625,7 +6619,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 111.18,
             "end": 115.28,
             "text": " and growing a specific type of bean known as the Arab",
-            "no_speech_prob": 0.0022645951248705387,
+            "no_speech_prob": 0.0022646081633865833,
             "confidence": 0.821,
             "words": [
               {
@@ -6701,7 +6695,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 115.32,
             "end": 116.3,
             "text": " Beka bean.",
-            "no_speech_prob": 0.008894873782992363,
+            "no_speech_prob": 0.008894940838217735,
             "confidence": 0.348,
             "words": [
               {
@@ -6723,7 +6717,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 116.68,
             "end": 119.55,
             "text": " And I know coffee is really important when it comes to talking",
-            "no_speech_prob": 0.008894873782992363,
+            "no_speech_prob": 0.008894940838217735,
             "confidence": 0.917,
             "words": [
               {
@@ -6805,7 +6799,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 119.55,
             "end": 121.62,
             "text": " about Columbia, but you guys really don't know how important",
-            "no_speech_prob": 0.008894873782992363,
+            "no_speech_prob": 0.008894940838217735,
             "confidence": 0.882,
             "words": [
               {
@@ -6875,7 +6869,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 121.62,
             "end": 122.64,
             "text": " it is with its culture.",
-            "no_speech_prob": 0.008894873782992363,
+            "no_speech_prob": 0.008894940838217735,
             "confidence": 0.974,
             "words": [
               {
@@ -6915,7 +6909,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 123.08,
             "end": 126.61,
             "text": " Interesting fact that in 2007, major spots",
-            "no_speech_prob": 0.008894873782992363,
+            "no_speech_prob": 0.008894940838217735,
             "confidence": 0.929,
             "words": [
               {
@@ -6967,7 +6961,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 126.61,
             "end": 131.2,
             "text": " equaling a buffer zone of approximately 207,000 hectares,",
-            "no_speech_prob": 0.008894873782992363,
+            "no_speech_prob": 0.008894940838217735,
             "confidence": 0.836,
             "words": [
               {
@@ -7025,7 +7019,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 131.64,
             "end": 134.16,
             "text": " which are called the coffee cultural landscape,",
-            "no_speech_prob": 0.008894873782992363,
+            "no_speech_prob": 0.008894940838217735,
             "confidence": 0.965,
             "words": [
               {
@@ -7077,7 +7071,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 134.5,
             "end": 137.22,
             "text": " were considered a UNESCO World Heritage Site.",
-            "no_speech_prob": 0.008894873782992363,
+            "no_speech_prob": 0.008894940838217735,
             "confidence": 0.881,
             "words": [
               {
@@ -7129,7 +7123,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 137.62,
             "end": 140.74,
             "text": " And also in 2007, the EU, the European Union,",
-            "no_speech_prob": 0.008894873782992363,
+            "no_speech_prob": 0.008894940838217735,
             "confidence": 0.965,
             "words": [
               {
@@ -7193,7 +7187,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 140.76,
             "end": 145.82,
             "text": " granted Colombian coffee a protected designation of origin status.",
-            "no_speech_prob": 0.001799984835088253,
+            "no_speech_prob": 0.0017999779665842652,
             "confidence": 0.833,
             "words": [
               {
@@ -7257,7 +7251,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 146.12,
             "end": 149.08,
             "text": " Now interesting enough when it comes to the coffee in Columbia,",
-            "no_speech_prob": 0.001799984835088253,
+            "no_speech_prob": 0.0017999779665842652,
             "confidence": 0.825,
             "words": [
               {
@@ -7333,7 +7327,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 149.12,
             "end": 153.1,
             "text": " believe it or not, it is not actually native to the country.",
-            "no_speech_prob": 0.001799984835088253,
+            "no_speech_prob": 0.0017999779665842652,
             "confidence": 0.984,
             "words": [
               {
@@ -7415,7 +7409,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 153.54,
             "end": 156.72,
             "text": " It's come from somewhere else, not really an invasive species",
-            "no_speech_prob": 0.001799984835088253,
+            "no_speech_prob": 0.0017999779665842652,
             "confidence": 0.924,
             "words": [
               {
@@ -7485,7 +7479,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 156.72,
             "end": 158.42,
             "text": " because it's very much welcomed.",
-            "no_speech_prob": 0.001799984835088253,
+            "no_speech_prob": 0.0017999779665842652,
             "confidence": 0.994,
             "words": [
               {
@@ -7525,7 +7519,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 158.84,
             "end": 161.98,
             "text": " Now you may have also seen this guy on many different Colombian",
-            "no_speech_prob": 0.001799984835088253,
+            "no_speech_prob": 0.0017999779665842652,
             "confidence": 0.897,
             "words": [
               {
@@ -7607,7 +7601,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 161.98,
             "end": 162.81,
             "text": " coffee brands.",
-            "no_speech_prob": 0.001799984835088253,
+            "no_speech_prob": 0.0017999779665842652,
             "confidence": 0.971,
             "words": [
               {
@@ -7629,7 +7623,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 162.81,
             "end": 164.68,
             "text": " Now his name is Juan Valdez.",
-            "no_speech_prob": 0.001799984835088253,
+            "no_speech_prob": 0.0017999779665842652,
             "confidence": 0.892,
             "words": [
               {
@@ -7675,7 +7669,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 164.74,
             "end": 167.42,
             "text": " Now some people think that this guy is actually really",
-            "no_speech_prob": 0.001799984835088253,
+            "no_speech_prob": 0.0017999779665842652,
             "confidence": 0.93,
             "words": [
               {
@@ -7745,7 +7739,7 @@ with open(process_output["process_output_files"][0]) as f:
             "start": 167.52,
             "end": 170.0,
             "text": " a real coffee farmer, somebody just drew.",
-            "no_speech_prob": 0.6980557441711426,
+            "no_speech_prob": 0.6980549693107605,
             "confidence": 0.65,
             "words": [
               {
@@ -7829,10 +7823,10 @@ print(json.dumps(process_output, indent=2))
 
     {
       "status_code": 200,
-      "pipeline": "my-transcribe-pipeline",
-      "request_id": "b9458dfb-fec4-43c6-a56d-5fa4eef304a3",
-      "file_id": "28322342-6148-43e8-bd31-48f279bbe7d7",
-      "message": "SUCCESS - output fetched for file_id 28322342-6148-43e8-bd31-48f279bbe7d7.Output saved to location(s) listed in process_output_files.",
+      "pipeline": "modules-transcribe-docs",
+      "request_id": "585bf2b7-aa0a-4ffa-9180-2a823086551c",
+      "file_id": "09342ea4-cf52-4bb8-9f63-6785af3cb117",
+      "message": "SUCCESS - output fetched for file_id 09342ea4-cf52-4bb8-9f63-6785af3cb117.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -11390,7 +11384,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../data/output/28322342-6148-43e8-bd31-48f279bbe7d7.json"
+        "../../data/output/09342ea4-cf52-4bb8-9f63-6785af3cb117.json"
       ]
     }
 

@@ -2,12 +2,6 @@
 
 This document reviews the `sentiment` module - which takes as input a json of string snippets and returns the snippets in a json along with their sentiment scores.
 
-This document includes an overview of custom pipeline setup, current model set, parameters, and `.process` usage for this module.
-
-To follow along with this demonstration be sure to initialize your krixik session with your api key and url as shown below. 
-
-We illustrate loading these required secrets in via [python-dotenv](https://pypi.org/project/python-dotenv/), storing those secrets in a `.env` file.  This is always good practice for storing / loading secrets (e.g., doing so will reduce the chance you inadvertantly push secrets to a repo).
-
 A table of contents for the remainder of this document is shown below.
 
 
@@ -44,7 +38,7 @@ krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
 
 Below we setup a simple one module pipeline using the `sentiment` module.
 
-We do this by passing the module name to the `module_chain` argument of [`create_pipeline`](system/create_save_load.md) along with a name for our pipeline.
+We do this by passing the module name to the `module_chain` argument of [`create_pipeline`](../system/create_save_load.md) along with a name for our pipeline.
 
 
 ```python
@@ -58,7 +52,7 @@ The `sentiment` module comes with a single model:
 
 - `distilbert-base-uncased-finetuned-sst-2-english`: (default)
 
-These available modeling options and parameters are stored in your custom [pipeline's configuration](system/create_save_load.md).
+These available modeling options and parameters are stored in your custom [pipeline's configuration](../system/create_save_load.md).
 
 ## Required input format
 

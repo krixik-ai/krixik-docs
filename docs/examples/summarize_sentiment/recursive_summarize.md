@@ -1,4 +1,4 @@
-## recursive summarization pipeline
+## Recursive summarization pipeline
 
 One of the most practical ways to achieve a short, abstract, but representative summary of a long document is to apply summarization *recursively*.  This concept was discussed in our introduction to the [`summarize` module](modules/summarize.md).  There we applied a single `summarize` module pipeline several times to create terser and terser summary representations of an input text.
 
@@ -15,18 +15,20 @@ A table of contents for the remainder of this document is shown below.
 
 Below we setup a pipeline consisting of three `summarize` modules in sequence.
 
+We do this by passing the module names to the `module_chain` argument of [`create_pipeline`](../../system/create_save_load.md) along with a name for our pipeline.
+
 
 ```python
-# create a pipeline with a single module
-pipeline = krixik.create_pipeline(name="my-recursive-summarize-pipeline",
+# create a pipeline with a multi module pipeline
+pipeline = krixik.create_pipeline(name="examples-summarize-recursive-summarize-pipeline",
                                   module_chain=["summarize", "summarize", "summarize"])
 ```
 
+This pipeline's available modeling options and parameters are stored in your custom [pipeline's configuration](../../system/create_save_load.md).
+
 ## Processing an input file
 
-We first define a path to a local input file.
-
-Lets take a quick look at this file before processing.
+Lets take a quick look at a short test file before processing.
 
 
 ```python
@@ -129,13 +131,13 @@ with open(test_file, "r") as file:
       IGNORANCE IS STRENGTH
 
 
-When introducing the [`summarize` module](modules/summarize.md) we applied a single module `summarize` pipeline to this document.  This produced a summary that was about half the length of the original text.
+When introducing the [`summarize` module](../../modules/summarize.md) we applied a single module `summarize` pipeline to this document.  This produced a summary that was about half the length of the original text.
 
-In the [recursive summarization](modules/summarize.md) section of that introduction we then applied the same single module pipeline two more times to produce a one paragraph summary of the text above.
+In the [recursive summarization](../../modules/summarize.md) section of that introduction we then applied the same single module pipeline two more times to produce a one paragraph summary of the text above.
 
 Here we will produce the same one paragraph summary by applying the recursive `summarize` pipeline defined above a single time to the input text.
 
-Below we [process](system/process.md) the input through our pipeline.  Here we use the default model for[`summarize`](modules/summarize.md) for each of the three instances of the module.
+Below we [process](../../system/process.md) the input through our pipeline.  Here we use the default model for[`summarize`](../../modules/summarize.md) for each of the three instances of the module.
 
 
 ```python

@@ -1,6 +1,6 @@
 ## The `list` method
 
-After using [`process`](system/process.md) to process a file with your chosen pipeline, you can retrieve the associated record if this file using `list` method using its `file_id` and any other optional metadata you included.  
+After using [`process`](../system/process.md) to process a file with your chosen pipeline, you can retrieve the associated record if this file using `list` method using its `file_id` and any other optional metadata you included.  
 
 This document reviews the `list` method available to every krixik pipeline.
 
@@ -19,7 +19,7 @@ A table of contents for the remainder of this document is shown below.
 
 ## Basic pipeline setup
 
-For this document we will use a pipeline consisting of a single [`parser` module](modules/parser.md).  We use [`create_pipeline`](system/create_save_load.md) to instantiate the pipeline.
+For this document we will use a pipeline consisting of a single [`parser` module](../modules/parser.md).  We use [`create_pipeline`](../system/create_save_load.md) to instantiate the pipeline.
 
 
 ```python
@@ -29,7 +29,7 @@ pipeline = krixik.create_pipeline(name="system-list-docs", module_chain=["parser
 
 ## Basic usage, required input, and output breakdown
 
-To illustrate the usage of `list` we process a short file illustrated in the introduction to the [`parser` method](modules/parser.md).
+To illustrate the usage of `list` we process a short file illustrated in the introduction to the [`parser` method](../modules/parser.md).
 
 
 ```python

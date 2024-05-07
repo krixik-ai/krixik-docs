@@ -1,6 +1,6 @@
 ## The `fetch_output` method
 
-The `fetch_output` method is used to download the output of a pipeline process.  This is particularly useful when using [`process`](system/process.md) with `wait_for_process` set to `False`, as your output is not immediately yielded by [`process`](system/process.md).
+The `fetch_output` method is used to download the output of a pipeline process.  This is particularly useful when using [`process`](../system/process.md) with `wait_for_process` set to `False`, as your output is not immediately yielded by [`process`](../system/process.md).
 
 A table of contents for the remainder of this document is shown below.
 
@@ -9,7 +9,7 @@ A table of contents for the remainder of this document is shown below.
 
 ## Basic pipeline setup
 
-For this document we will use a pipeline consisting of a single [`parser` module](modules/parser.md).  We use [`create_pipeline`](system/create_save_load.md) to instantiate the pipeline.
+For this document we will use a pipeline consisting of a single [`parser` module](../modules/parser.md).  We use [`create_pipeline`](../system/create_save_load.md) to instantiate the pipeline.
 
 
 ```python
@@ -19,7 +19,7 @@ pipeline = krixik.create_pipeline(name="fetch-output-docs", module_chain=["parse
 
 ## Basic usage, required input, and output breakdown
 
-To illustrate the usage of `fetch_output` we process a short file illustrated in the introduction to the [`parser` method](modules/parser.md).
+To illustrate the usage of `fetch_output` we process a short file illustrated in the introduction to the [`parser` method](../modules/parser.md).
 
 
 ```python

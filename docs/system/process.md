@@ -13,7 +13,7 @@ A table of contents for the remainder of this document is shown below.
 
 ## Basic pipeline setup
 
-For this document we will use a pipeline consisting of a single [`parser` module](modules/parser.md).  We use [`create_pipeline`](system/create_save_load.md) to instantiate the pipeline.
+For this document we will use a pipeline consisting of a single [`parser` module](../modules/parser.md).  We use [`create_pipeline`](../system/create_save_load.md) to instantiate the pipeline.
 
 
 ```python
@@ -165,7 +165,7 @@ Optional inputs include
 - `file_tags` - a list of custom file tags (none by default)
 - `file_description` - a custom file description (none by default)
 
-The first three of these  - `symbolic_directory_path`, `file_name`, and `file_tags` - can be used to retrieve the record of your process at a later time using the (`list`)(system/list.md).  They can also be used as filters for search if your pipeline ends with a [`keyword-db`](modules/keyword-db.md) or [`vector-db`](modules/vector-db.md) module.
+The first three of these  - `symbolic_directory_path`, `file_name`, and `file_tags` - can be used to retrieve the record of your process at a later time using the (`list`)(system/list.md).  They can also be used as filters for search if your pipeline ends with a [`keyword-db`](../modules/keyword-db.md) or [`vector-db`](../modules/vector-db.md) module.
 
 The `file_description` can be used to provide a description of the file.
 

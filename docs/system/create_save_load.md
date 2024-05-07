@@ -14,9 +14,9 @@ A table of contents for the remainder of this document is shown below.
 `create_pipeline` is used to instantiate a modular pipeline with krixik.  Required input to this method include the following:
 
 - `name`: your custom pipeline name (required)
-- `module_chain`: a list of [module names](modules/overview.md) constituting your desired processing steps
+- `module_chain`: a list of [module names](../modules/overview.md) constituting your desired processing steps
 
-Below we setup a simple one module pipeline using the [`parser` module](modules/parser.md).  This is an example of a single module pipeline.
+Below we setup a simple one module pipeline using the [`parser` module](../modules/parser.md).  This is an example of a single module pipeline.
 
 
 ```python
@@ -26,9 +26,9 @@ pipeline = krixik.create_pipeline(
 )
 ```
 
-Make sure you have [initialized your session](system/initialize.md) before executing this code.
+Make sure you have [initialized your session](../system/initialize.md) before executing this code.
 
-Now we setup a pipeline consisting of three modules: a [`parser`](modules/parser.md), [`text-embedder`](modules/text-embedder.md), and [`vector-db`](modules/vector-db.md).  This `module_chain` constitutes a basic document-based semantic (or vector) search pipeline.
+Now we setup a pipeline consisting of three modules: a [`parser`](../modules/parser.md), [`text-embedder`](../modules/text-embedder.md), and [`vector-db`](../modules/vector-db.md).  This `module_chain` constitutes a basic document-based semantic (or vector) search pipeline.
 
 
 ```python
@@ -43,7 +43,7 @@ An array of multi-module pipeline examples can be found in the of this documenta
 
 Upon execution, the krixik cli performs checks to ensure that these three modules will run properly in the provided sequence.  If they do not, a local exception is thrown with a message about why a module pair cannot be placed in a particular order.
 
-For example, attempting to build the following two module pipeline consisting of [`parser`](modules/parser.md) and [`caption`](modules/caption.md) modules in sequence will rightly produce failure with local exception.  This is because the `parser` outputs a json file, while `caption` takes in images.
+For example, attempting to build the following two module pipeline consisting of [`parser`](../modules/parser.md) and [`caption`](../modules/caption.md) modules in sequence will rightly produce failure with local exception.  This is because the `parser` outputs a json file, while `caption` takes in images.
 
 
 ```python

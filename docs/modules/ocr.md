@@ -2,12 +2,6 @@
 
 This document reviews the `ocr` module - which takes as input an image and returns text detected from the input image.  Output data is returned as a json.
 
-This document includes an overview of custom pipeline setup, current model set, parameters, and `.process` usage for this module.
-
-To follow along with this demonstration be sure to initialize your krixik session with your api key and url as shown below. 
-
-We illustrate loading these required secrets in via [python-dotenv](https://pypi.org/project/python-dotenv/), storing those secrets in a `.env` file.  This is always good practice for storing / loading secrets (e.g., doing so will reduce the chance you inadvertantly push secrets to a repo).
-
 A table of contents for the remainder of this document is shown below.
 
 
@@ -19,7 +13,7 @@ A table of contents for the remainder of this document is shown below.
 
 Below we setup a simple one module pipeline using the `ocr` module. 
 
-We do this by passing the module name to the `module_chain` argument of [`create_pipeline`](system/create_save_load.md) along with a name for our pipeline.
+We do this by passing the module name to the `module_chain` argument of [`create_pipeline`](../system/create_save_load.md) along with a name for our pipeline.
 
 
 ```python
@@ -32,7 +26,7 @@ The `ocr` module comes with a subset of popular caption models including the fol
 - [tesseract-en](https://github.com/tesseract-ocr/tesseract): Tesseract OCR is an open-source software tool that performs optical character recognition, converting images containing printed or handwritten text into machine-encoded text data.
 - [tesseract-es](https://github.com/tesseract-ocr/tesseract): Tesseract OCR with spanish language detection.
 
-These available modeling options and parameters are stored in your custom [pipeline's configuration](system/create_save_load.md).
+These available modeling options and parameters are stored in your custom [pipeline's configuration](../system/create_save_load.md).
 
 ## Required input format
 

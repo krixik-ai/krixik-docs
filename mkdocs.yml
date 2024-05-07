@@ -1,20 +1,28 @@
 site_name: krixik docs
 nav:
   - Home: index.md
-  - About: about.md
-  - Quickstart: quickstart.md
   - Pipeline examples:
-    - transcribe examples:
-      - 'overview': examples/transcribe/overview.md
-      - 'semantically searchable transcription': examples/transcribe/transcribe-semantic.md
-      - 'multilingual transcription': examples/transcribe/transcribe-multilingual.md
-      - 'semantically searchable multilingual transcription': examples/transcribe/transcribe-multilingual-semantic.md
-      - 'transcribe to sentiment analysis': examples/transcribe/transcribe-sentiment.md
-    - summarize examples:
-      - 'recursive summarization': examples/summarize/recursive_summarize.md
+    - 'overview': examples/overview.md
+    - transcribe/translate examples:
+      - 'semantically searchable transcription': examples/transcribe_translate/transcribe-semantic.md
+      - 'keyword searchable transcription': examples/transcribe_translate/transcribe-keyword.md
+      - 'translate semantic search': examples/transcribe_translate/translate_semantic_search.md
+      - 'multilingual transcription': examples/transcribe_translate/transcribe-multilingual.md
+      - 'semantically searchable multilingual transcription': examples/transcribe_translate/transcribe-multilingual-semantic.md
+    - summarize/sentiment examples:
+      - 'recursive summarization': examples/summarize_sentiment/recursive_summarize.md
+      - 'transcribe to sentiment analysis': examples/summarize_sentiment/transcribe-sentiment.md
+      - 'translate to sentiment analysis': examples/summarize_sentiment/translate-sentiment.md
+      - 'sentiment of multilingual transcription': examples/summarize_sentiment/transcribe-multilingual-sentiment.md
+    - image to text examples:
+      - 'ocr keyword search': examples/image-to-text/ocr-keyword.md
+      - 'caption semantic search': examples/image-to-text/caption-semantic.md
+    - text search:
+      - 'keyword search': examples/text-search/keyword_search.md
+      - 'semantic search': examples/text-search/semantic_search.md
   - Modules:
+    - 'overview': modules/overview.md
     - currently available:
-      - 'overview': modules/overview.md
       - 'caption': modules/caption.md
       - 'json-to-txt': modules/json-to-txt.md
       - 'keyword-db': modules/keyword-db.md
@@ -27,8 +35,9 @@ nav:
       - 'translate': modules/translate.md
       - 'vector-db': modules/vector-db.md
   - System:
+    - 'overview': system/overview.md
     - methods:
-      - 'overview': system/overview.md
+      - 'install cli': system/install.md
       - 'initialize': system/initialize.md
       - 'convenience methods': system/convenience_methods.md
       - 'create, save, and load pipelines': system/create_save_load.md

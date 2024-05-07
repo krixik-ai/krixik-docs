@@ -9,7 +9,7 @@ A table of contents for the remainder of this document is shown below.
 
 ## Basic pipeline setup
 
-For this document we will use a pipeline consisting of a single [`keyword-db` module](modules/keyword-db.md).  We use [`create_pipeline`](system/create_save_load.md) to instantiate the pipeline.
+For this document we will use a pipeline consisting of a single [`keyword-db` module](../modules/keyword-db.md).  We use [`create_pipeline`](../system/create_save_load.md) to instantiate the pipeline.
 
 
 ```python

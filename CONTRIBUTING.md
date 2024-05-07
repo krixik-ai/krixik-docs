@@ -63,22 +63,25 @@ Documentation tests consist of the following steps
 Next notebooks are formatted (using [ruff](https://github.com/astral-sh/ruff)).  This does not change the content of your notebook, it will just clean it up (e.g., remove un-needed spacing) and standardize it. 
 
 
-1.  the `mkdocs.yml` table of contents is analyzed, and all references to documentation pages are collected.  
+1.  Initial notebook conversion
 
-A list of references to markdown files are gathered at this step.  For example, from a reference like this
+The toc from the `mkdocs.yml` is examined.  The notebook associated with each markdown file found is converted to markdown - with all "remove_cell" tags ignored.  
 
-- 'my new demo name': demos/mydemos/my_new_demo.md
+This initial conversion is done so that the tests that follow  - tests 2- 4  (the toc_file_check, links check, and names check) - can be performed.
 
-the link 
-
-demos/mydemos/my_new_demo.md
-
-is collected.
+The "remove_cell" tags are ignored so that the reset test (test 5) can be performed properly.
 
 
-2.  Link checking
+2.  Toc - docs check
 
-The validity of all links in each page are checked.  These links come in three flavors.
+This test cross-references the markdown files named in the `mkdocks.yml` toc with those present in the `docs/` directory.
+
+If any entries in the `mkdocks.yml` toc are not found in `docs/` and vice-versa - the test fails.
+
+
+3.  Link checking
+
+The validity of all links in each page are checked.  These links come in three flavors. 
 
 A.  Intra page link: a link to a section in the page itself
 
@@ -94,6 +97,8 @@ These can be scattered throughout a page and link from one to another.  They loo
 
 All subdirs must belong to the `docs` directory for these links.
 
+**IMPORTANT:** all inter-page links must be relative - absolute links [are not supported yet](https://www.mkdocs.org/user-guide/writing-your-docs/).
+
 C.  General web links
 
 General web links look like
@@ -101,14 +106,14 @@ General web links look like
 [an example web link](https://example.com)
 
 
-3.  Notebook-unique pipeline check
+4.  Notebook-unique pipeline check
 
 All pipeline name(s) declared in a notebook must be unique to that notebook.  This is to avoid un-wanted collisions that could confuse new users when using multiple notebooks at the same time / fail tests unnecessarily.
 
 At this step all pipeline name(s) from each notebook are collected and a check is made to ensure that no pipeline name is found two notebooks.
 
 
-4.  Reset end
+5.  Reset end
 
 To prevent pipeline collisions and general good practice cleanup the final code cell in every notebook containing a `create_pipeline` invoccation should end with `.reset_pipeline`.
 
@@ -118,20 +123,15 @@ We test that the final code cell of such notebooks contain
 reset_pipeline(...)
 ```
 
+This cell is tagged with `remove_cell` and will be removed in the final markdown conversion.
 
-5.  Notebook execution
+
+6.  Notebook execution
 
 Each notebook is executed and successful completion of each code cell *not* marked with the tag `ignore_test` is confirmed.
 
 
-6.  Final markdown rendering
+7.  Final markdown conversion
 
-After all notebooks have passed the previous step they are converted again to markdown.
+After all notebooks have passed the previous step they are converted again to markdown.  All `remove_cell` tags are obeyed.
 
-Each notebook must contain unique pipeilne name(s) - this is to avoid collision when testing / using other notebooks.
-
-Tag any cells you want removed / output removed when converted to markdown or testing
-    - `remove_output`: tag to remove cell output when converting to markdown
-    - `remove_cell`: remove entire cell (input and output) when converting to markdown
-    - `skip-execution`: add to code cells you want ignored in testing notebook
-    - `raises-exception`: add to any code cell that should fail in testing notebook

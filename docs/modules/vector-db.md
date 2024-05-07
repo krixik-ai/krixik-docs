@@ -2,12 +2,6 @@
 
 This document reviews the `vector-db` module - which takes as input a numpy array, indexes its vectors, and returns an indexed [faiss database](https://github.com/facebookresearch/faiss).
 
-This document includes an overview of custom pipeline setup, current model set, parameters, and `.process` usage for this module.
-
-To follow along with this demonstration be sure to initialize your krixik session with your api key and url as shown below. 
-
-We illustrate loading these required secrets in via [python-dotenv](https://pypi.org/project/python-dotenv/), storing those secrets in a `.env` file.  This is always good practice for storing / loading secrets (e.g., doing so will reduce the chance you inadvertantly push secrets to a repo).
-
 A table of contents for the remainder of this document is shown below.
 
 
@@ -19,9 +13,9 @@ A table of contents for the remainder of this document is shown below.
 
 ## Pipeline setup
 
-Below we setup a simple one module pipeline using the `keyword-search` module.
+Below we setup a simple one module pipeline using the `vector-db` module.
 
-We do this by passing the module name to the `module_chain` argument of [`create_pipeline`](system/create_save_load.md) along with a name for our pipeline.
+We do this by passing the module name to the `module_chain` argument of [`create_pipeline`](../system/create_save_load.md) along with a name for our pipeline.
 
 
 ```python
@@ -31,11 +25,11 @@ pipeline = krixik.create_pipeline(
 )
 ```
 
-The `vector-search` module comes with a single model:
+The `vector-db` module comes with a single model:
 
 - `faiss`: (default) indexes a numpy array of input vectors
 
-These available modeling options and parameters are stored in your custom [pipeline's configuration](system/create_save_load.md).
+These available modeling options and parameters are stored in your custom [pipeline's configuration](../system/create_save_load.md).
 
 ## Required input format
 
@@ -154,9 +148,9 @@ print(f"distance from query to this vector: {distances[0][1]}")
 
 ## Using the `semantic_search` method
 
-krixik's `vector_search` method is a convenience function for both embedding and querying - and so can only be used with pipelines containing both `text-embedder` and `vector-search` modules in succession.
+krixik's `semantic_search` method is a convenience function for both embedding and querying - and so can only be used with pipelines containing both `text-embedder` and `vector-db` modules in succession.
 
-Below we construct the simplest custom pipeline that satisfies this criteria - a standard vector search pipeline consisting of three modules: a `parser`, `text-embedder`, and `vector-search` index.
+Below we construct the simplest custom pipeline that satisfies this criteria - a standard vector search pipeline consisting of three modules: a `parser`, `text-embedder`, and `vector-db` index.
 
 
 ```python
@@ -172,7 +166,7 @@ pipeline = krixik.create_pipeline(
 reset_pipeline(pipeline)
 ```
 
-We can now perform any of the core system methods on our custom pipeline (e.g., [`process`](system/process.md), [`list`](system/list.md), etc.,).  Additionally we can invoke the [`semantic_search`](system/semantic_search.md) method.
+We can now perform any of the core system methods on our custom pipeline (e.g., [`process`](../system/process.md), [`list`](../system/list.md), etc.,).  Additionally we can invoke the [`semantic_search`](../system/semantic_search.md) method.
 
 Lets first process a file with our new pipeline.  The `vector-db` module takes in a text file, and returns `faiss` vector database consisting of all non-trivial `(snippet, line_numbers)` tuples from the input.
 

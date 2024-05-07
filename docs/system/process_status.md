@@ -2,7 +2,7 @@
 
 The `process_status` method is available on every krixik pipeline, and is invoked whenever you want to check the status of files being processed through your defined pipeline.
 
-This method is especially useful when using [`process`](system/process.md) with `wait_for_process` set to `False`.
+This method is especially useful when using [`process`](../system/process.md) with `wait_for_process` set to `False`.
 
 A table of contents for the remainder of this document is shown below.
 
@@ -11,7 +11,7 @@ A table of contents for the remainder of this document is shown below.
 
 ## Basic pipeline setup
 
-For this document we will use a pipeline consisting of a single [`parser` module](modules/parser.md).  We use [`create_pipeline`](system/create_save_load.md) to instantiate the pipeline.
+For this document we will use a pipeline consisting of a single [`parser` module](../modules/parser.md).  We use [`create_pipeline`](../system/create_save_load.md) to instantiate the pipeline.
 
 
 ```python
@@ -23,7 +23,7 @@ pipeline = krixik.create_pipeline(
 
 ## Basic usage, required input, and output breakdown
 
-To illustrate the usage of `process_status` we process a short file illustrated in the introduction to the [`parser` method](modules/parser.md).
+To illustrate the usage of `process_status` we process a short file illustrated in the introduction to the [`parser` method](../modules/parser.md).
 
 
 ```python

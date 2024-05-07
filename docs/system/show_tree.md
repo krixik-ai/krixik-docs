@@ -11,7 +11,7 @@ A table of contents for the remainder of this document is shown below.
 
 ## Basic pipeline setup
 
-For this document we will use a pipeline consisting of a single [`parser` module](modules/parser.md).  We use [`create_pipeline`](system/create_save_load.md) to instantiate the pipeline.
+For this document we will use a pipeline consisting of a single [`parser` module](../modules/parser.md).  We use [`create_pipeline`](../system/create_save_load.md) to instantiate the pipeline.
 
 
 ```python
@@ -21,7 +21,7 @@ pipeline = krixik.create_pipeline(name="system-show-tree-docs", module_chain=["p
 
 ## Basic usage, required input, and output breakdown
 
-To illustrate the usage of `show_tree` we process a short file illustrated in the introduction to the [`parser` method](modules/parser.md) - using various different metadata including `file_name`'s and `symbolic_directory_path`'s to illustrate the `show_tree` method.
+To illustrate the usage of `show_tree` we process a short file illustrated in the introduction to the [`parser` method](../modules/parser.md) - using various different metadata including `file_name`'s and `symbolic_directory_path`'s to illustrate the `show_tree` method.
 
 
 ```python

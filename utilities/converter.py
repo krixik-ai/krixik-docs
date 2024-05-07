@@ -8,20 +8,26 @@ def collect_mkdocks_toc():
     file_path = f"{base_dir}/mkdocs.yml"
     with open(file_path, "r") as file:
         mkdocks_toc = yaml.safe_load(file)
-
+                
     # upnack toc
-    pipeline_examples_docs = mkdocks_toc["nav"][3]["Pipeline examples"]
-    system_docs = mkdocks_toc["nav"][5]["System"][0]["methods"]
-    modules_docs = mkdocks_toc["nav"][4]["Modules"][0]["currently available"]
+    home_doc = mkdocks_toc["nav"][0]["Home"]
+    pipeline_examples_docs = mkdocks_toc["nav"][1]["Pipeline examples"]
+    modules_overview = mkdocks_toc["nav"][2]["Modules"][0]["overview"]
+    modules_docs = mkdocks_toc["nav"][2]["Modules"][1]["currently available"]
+    system_overview = mkdocks_toc["nav"][3]["System"][0]["overview"]
+    system_docs = mkdocks_toc["nav"][3]["System"][1]["methods"]
 
     # collect paths to example docs
-    examples_mds = []
+    examples_mds = [home_doc, modules_overview, system_overview]
     for item in pipeline_examples_docs:
         item_values = list(item.values())[0]
-        for subitem in item_values:
-            docpath = list(subitem.values())[0]
-            examples_mds.append(docpath)
-            
+        if isinstance(item_values, str):
+            examples_mds.append(item_values)
+        else:
+            for subitem in item_values:
+                docpath = list(subitem.values())[0]
+                examples_mds.append(docpath)
+        
     # collect paths to system docs
     system_mds = []
     for item in system_docs:

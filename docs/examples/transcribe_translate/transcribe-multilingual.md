@@ -15,11 +15,11 @@ Below we setup a multi module pipeline to serve our intended purpose, which is t
 
 To do this we will use the following modules:
 
-- [`transcribe`](modules/transcribe.md): takes in audio/video input, outputs json of content transcription
-- [`translate`](modules/translate.md): takes in json of text snippets, outputs json of translated snippets
+- [`transcribe`](../../modules/transcribe.md): takes in audio/video input, outputs json of content transcription
+- [`translate`](../../modules/translate.md): takes in json of text snippets, outputs json of translated snippets
 
 
-We do this by passing the module names to the `module_chain` argument of [`create_pipeline`](system/create_save_load.md) along with a name for our pipeline.
+We do this by passing the module names to the `module_chain` argument of [`create_pipeline`](../../system/create_save_load.md) along with a name for our pipeline.
 
 
 ```python
@@ -29,7 +29,7 @@ pipeline = krixik.create_pipeline(name="examples-transcribe-translate-docs",
                                                 "translate"])
 ```
 
-This pipeline's available modeling options and parameters are stored in your custom [pipeline's configuration](system/create_save_load.md).
+This pipeline's available modeling options and parameters are stored in your custom [pipeline's configuration](../../system/create_save_load.md).
 
 ## Processing a file
 
@@ -48,13 +48,13 @@ Video(test_file)
 
 
 
-<video src="../input_data/Interesting Facts About Colombia.mp4" controls  >
+<video src="../../../data/input/Interesting Facts About Colombia.mp4" controls  >
       Your browser does not support the <code>video</code> element.
     </video>
 
 
 
-The input video content language content is English.  We will use the `opus-mt-en-es` model of the [`translate`](modules/translate.md) to translate the transcript of this video into Spanish.
+The input video content language content is English.  We will use the `opus-mt-en-es` model of the [`translate`](../../modules/translate.md) to translate the transcript of this video into Spanish.
 
 For this run we will use the default models for the remainder of the modules.
 

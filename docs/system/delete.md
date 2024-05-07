@@ -4,7 +4,7 @@ You can delete the record of your process on demand using the `delete` method.  
 
 The `delete` method takes in a single argument: the `file_id` of the file you wish to delete.
 
-We will illustrate its usage by processing a simple file, deleting it using the `delete` method, and then checking that it no longer exists using the [`list` method](system/list.md).
+We will illustrate its usage by processing a simple file, deleting it using the `delete` method, and then checking that it no longer exists using the [`list` method](../system/list.md).
 
 A table of contents for the remainder of this document is shown below.
 
@@ -13,7 +13,7 @@ A table of contents for the remainder of this document is shown below.
 
 ## Basic pipeline setup
 
-For this document we will use a pipeline consisting of a single [`parser` module](modules/parser.md).  We use [`create_pipeline`](system/create_save_load.md) to instantiate the pipeline.
+For this document we will use a pipeline consisting of a single [`parser` module](../modules/parser.md).  We use [`create_pipeline`](../system/create_save_load.md) to instantiate the pipeline.
 
 
 ```python
@@ -23,7 +23,7 @@ pipeline = krixik.create_pipeline(name="system-delete-docs", module_chain=["pars
 
 ## Basic usage, required input, and output breakdown
 
-To illustrate the usage of `update` we process a short file illustrated in the introduction to the [`parser` method](modules/parser.md).
+To illustrate the usage of `update` we process a short file illustrated in the introduction to the [`parser` method](../modules/parser.md).
 
 
 ```python
