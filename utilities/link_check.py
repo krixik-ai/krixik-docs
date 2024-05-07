@@ -36,6 +36,8 @@ def check_file_links(filepath: str,
     except Exception as e:
         print(f"FAILURE: check_file_links failed for file {filepath} with exception {e}")
     
+    # section
+    
     # filter out toc links and headings
     dead_links = []
     for link in links:

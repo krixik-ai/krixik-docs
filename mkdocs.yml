@@ -1,10 +1,9 @@
 site_name: krixik docs
 nav:
   - Home: index.md
-  - Quickstart: quickstart.md
   - Pipeline examples:
+    - 'overview': examples/overview.md
     - transcribe examples:
-      - 'overview': examples/transcribe/overview.md
       - 'semantically searchable transcription': examples/transcribe/transcribe-semantic.md
       - 'multilingual transcription': examples/transcribe/transcribe-multilingual.md
       - 'semantically searchable multilingual transcription': examples/transcribe/transcribe-multilingual-semantic.md
@@ -12,8 +11,8 @@ nav:
     - summarize examples:
       - 'recursive summarization': examples/summarize/recursive_summarize.md
   - Modules:
+    - 'overview': modules/overview.md
     - currently available:
-      - 'overview': modules/overview.md
       - 'caption': modules/caption.md
       - 'json-to-txt': modules/json-to-txt.md
       - 'keyword-db': modules/keyword-db.md
@@ -26,8 +25,8 @@ nav:
       - 'translate': modules/translate.md
       - 'vector-db': modules/vector-db.md
   - System:
+    - 'overview': system/overview.md
     - methods:
-      - 'overview': system/overview.md
       - 'install cli': system/install.md
       - 'initialize': system/initialize.md
       - 'convenience methods': system/convenience_methods.md

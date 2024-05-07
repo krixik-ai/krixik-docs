@@ -7863,10 +7863,10 @@ print(json.dumps(process_output, indent=2))
 
     {
       "status_code": 200,
-      "pipeline": "my-transcribe-pipeline",
-      "request_id": "b9458dfb-fec4-43c6-a56d-5fa4eef304a3",
-      "file_id": "28322342-6148-43e8-bd31-48f279bbe7d7",
-      "message": "SUCCESS - output fetched for file_id 28322342-6148-43e8-bd31-48f279bbe7d7.Output saved to location(s) listed in process_output_files.",
+      "pipeline": "modules-transcribe-docs",
+      "request_id": "585bf2b7-aa0a-4ffa-9180-2a823086551c",
+      "file_id": "09342ea4-cf52-4bb8-9f63-6785af3cb117",
+      "message": "SUCCESS - output fetched for file_id 09342ea4-cf52-4bb8-9f63-6785af3cb117.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -11424,7 +11424,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../data/output/28322342-6148-43e8-bd31-48f279bbe7d7.json"
+        "../../data/output/09342ea4-cf52-4bb8-9f63-6785af3cb117.json"
       ]
     }
 
