@@ -72,6 +72,7 @@ Lets take a quick look at a valid input file - and then process it.
 # examine contents of a valid input file
 test_file = "../../data/input/resturant.png"
 from IPython.display import Image
+
 Image(filename=test_file)
 ```
 

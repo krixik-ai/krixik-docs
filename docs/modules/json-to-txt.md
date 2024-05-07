@@ -145,6 +145,7 @@ We load in the text file output from `process_output_files` below.
 ```python
 # load in process output from file
 import json
+
 with open(process_output["process_output_files"][0], "r") as file:
     print(file.read())
 ```
