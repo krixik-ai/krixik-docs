@@ -11,31 +11,6 @@ A table of contents for the remainder of this document is shown below.
 - [defaults when using `process`](#defaults-when-using-`process`)
 - [automatic data type transformations](#automatic-data-type-transformations)
 
-
-```python
-# import utilities
-import sys
-
-sys.path.append("../../")
-import importlib
-
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-
-load_dotenv("../../.env")
-MY_API_KEY = os.getenv("MY_API_KEY")
-MY_API_URL = os.getenv("MY_API_URL")
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-
-krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
-```
-
 ## Basic pipeline setup
 
 For this document we will use a pipeline consisting of a single [`parser` module](modules/parser.md).  We use [`create_pipeline`](system/create_save_load.md) to instantiate the pipeline.
@@ -44,12 +19,6 @@ For this document we will use a pipeline consisting of a single [`parser` module
 ```python
 # create a pipeline with a single module
 pipeline = krixik.create_pipeline(name="system-process-docs", module_chain=["parser"])
-```
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
 ```
 
 ## Core inputs to the `process` method
@@ -239,9 +208,3 @@ The `.process` method automatically transforms the following input data types fr
 - `pptx` -> `txt`
 - `mp4` -> `mp3`
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```
