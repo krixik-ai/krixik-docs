@@ -11,6 +11,9 @@ nav:
       - 'transcribe to sentiment analysis': examples/transcribe/transcribe-sentiment.md
     - summarize examples:
       - 'recursive summarization': examples/summarize/recursive_summarize.md
+    - image to text examples:
+      - 'ocr keyword search': examples/image-to-text/orc-keyword.md
+      - 'caption semantic search': examples/image-to-text/caption-semantic.md
     - text search:
       - 'keyword search': examples/text-search/keyword_search.md
       - 'semantic search': examples/text-search/semantic_search.md
