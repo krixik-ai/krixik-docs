@@ -35,7 +35,7 @@ Here  `MY_API_KEY` and `MY_API_URL` are your account secrets.
 
 Note: [krixik](https://github.com/krixik-ai/krixik-cli) is currently in closed beta.  Please reach out to us directly if you have any issues initializing a session.
 
-## Start building
+### Start building
 
 Start building modular pipelines!
 
