@@ -2,12 +2,6 @@
 
 This document reviews the `caption` module - which takes as input an image and returns a text description of the input image.  Output data is returned as a json.
 
-This document includes an overview of custom pipeline setup, current model set, parameters, and `.process` usage for this module.
-
-To follow along with this demonstration be sure to initialize your krixik session with your api key and url as shown below. 
-
-We illustrate loading these required secrets in via [python-dotenv](https://pypi.org/project/python-dotenv/), storing those secrets in a `.env` file.  This is always good practice for storing / loading secrets (e.g., doing so will reduce the chance you inadvertantly push secrets to a repo).
-
 A table of contents for the remainder of this document is shown below.
 
 - [pipeline setup](#pipeline-setup)
@@ -78,7 +72,6 @@ Lets take a quick look at a valid input file - and then process it.
 # examine contents of a valid input file
 test_file = "../../data/input/resturant.png"
 from IPython.display import Image
-
 Image(filename=test_file)
 ```
 

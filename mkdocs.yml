@@ -15,12 +15,11 @@ nav:
       - 'translate to sentiment analysis': examples/summarize_sentiment/translate-sentiment.md
       - 'sentiment of multilingual transcription': examples/summarize_sentiment/transcribe-multilingual-sentiment.md
     - image to text examples:
-      - 'ocr keyword search': examples/image-to-text/orc-keyword.md
+      - 'ocr keyword search': examples/image-to-text/ocr-keyword.md
       - 'caption semantic search': examples/image-to-text/caption-semantic.md
     - text search:
       - 'keyword search': examples/text-search/keyword_search.md
       - 'semantic search': examples/text-search/semantic_search.md
-      - 'translate semantic search': examples/text-search/translate_semantic_search.md
   - Modules:
     - 'overview': modules/overview.md
     - currently available:

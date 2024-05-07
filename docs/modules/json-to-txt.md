@@ -2,12 +2,6 @@
 
 This document reviews the `json-to-txt` module - which takes as input a json of string snippets, joins them into a single string separated by double spaces, and returns a text file document.
 
-This document includes an overview of custom pipeline setup, current model set, parameters, and `.process` usage for this module.
-
-To follow along with this demonstration be sure to initialize your krixik session with your api key and url as shown below. 
-
-We illustrate loading these required secrets in via [python-dotenv](https://pypi.org/project/python-dotenv/), storing those secrets in a `.env` file.  This is always good practice for storing / loading secrets (e.g., doing so will reduce the chance you inadvertantly push secrets to a repo).
-
 A table of contents for the remainder of this document is shown below.
 
 
@@ -151,7 +145,6 @@ We load in the text file output from `process_output_files` below.
 ```python
 # load in process output from file
 import json
-
 with open(process_output["process_output_files"][0], "r") as file:
     print(file.read())
 ```

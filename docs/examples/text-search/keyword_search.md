@@ -1,15 +1,13 @@
-## The `keyword-db` module
+## A simple keyword search pipeline
 
-This document reviews the `keyword-db` module - which takes as input a document, parses the documents for non-trivial keywords and their lemmatized stems, and returns a database with this content.
+This document reviews a simple keyword search pipeline that can be used to make any input text keyword-searchable.
 
 A table of contents for the remainder of this document is shown below.
 
 
 - [pipeline setup](#pipeline-setup)
-- [required input format](#required-input-format)
-- [using the default model](#using-the-default-model)
+- [processing a file](#processing-a-file)
 - [using the `keyword_search` method](#using-the-keyword_search-method)
-- [querying output databases locally](#querying-output-databases-locally)
 
 
 ```python
@@ -38,23 +36,19 @@ krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
 
 ## Pipeline setup
 
-Below we setup a simple one module pipeline using the `keyword-db` module. 
+Below we setup a simple one module pipeline using the [keyword-db module](modules/keyword-db.md). 
 
-We do this by passing the module name to the `module_chain` argument of [`create_pipeline`](system/create_save_load.md) along with a name for our pipeline.
+We do this by passing the module names to the `module_chain` argument of [`create_pipeline`](system/create_save_load.md) along with a name for our pipeline.
 
 
 ```python
-# create a pipeline with a single module
+# create a pipeline with a multi module pipeline
 pipeline = krixik.create_pipeline(
-    name="modules-keyword-db-docs", module_chain=["keyword-db"]
+    name="examples-text-search-keyword-docs", module_chain=["keyword-db"]
 )
 ```
 
-The `keyword-search` module comes with a single model:
-
-- `base`: (default) parses input document for non-trivial keywords
-
-These available modeling options and parameters are stored in your custom [pipeline's configuration](system/create_save_load.md).
+This pipeline's available modeling options and parameters are stored in your custom [pipeline's configuration](system/create_save_load.md).
 
 
 ```python
@@ -62,7 +56,7 @@ These available modeling options and parameters are stored in your custom [pipel
 reset_pipeline(pipeline)
 ```
 
-## Required input format
+## Processing a file
 
 The `keyword-db` module accepts `.txt`, `.pdf`, `.docx`, and `.pptx` file formats as input.  The latter three (`.pdf`, `.docx`, and `.pptx`) are first converted to `.txt` prior to processing.
 
@@ -83,9 +77,7 @@ with open(test_file, "r") as file:
     along with him.
 
 
-## Using the default model
-
-Now let's process it using our default model - `base`.  Because `base` is the default model we need not input the optional `modules` argument into `.process`.
+Now let's process this file using our default model.
 
 
 ```python
@@ -102,7 +94,7 @@ process_output = pipeline.process(
 )  # set verbosity to False
 ```
 
-The output of this process is printed below.  Because the output of this particular module-model pair is a sqlite database, the process output is provided in this object is null.  However the file itself has been returned to the address noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
+The output of this process is printed below.  Because the output of this particular pipeline is a sqlite database, the process output is provided in this object is null.  However the file itself has been returned to the address noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 
 
 ```python
@@ -176,64 +168,6 @@ print(json.dumps(keyword_output, indent=2))
         }
       ]
     }
-
-
-## Querying output databases locally
-
-We can now perform queries on the pulled keyword database whose location is given in `process_output_files`.
-
-Below is a simple function for performing single keyword queries on this database locally.
-
-
-```python
-import sqlite3
-
-
-def query_db(query_keyword: str, keyword_db_local_file_name: str) -> list:
-    # load keyword_db
-    keyword_db = sqlite3.connect(keyword_db_local_file_name)
-    keyword_cursor = keyword_db.cursor()
-
-    # create query pattern
-    query_pattern = f"""
-    SELECT
-        original_keyword,
-        line_number,
-        keyword_number
-    FROM
-        keyword_search
-    where original_keyword="{query_keyword}"
-    GROUP BY
-        original_keyword,
-        line_number,
-        keyword_number
-    ORDER BY
-        line_number,
-        keyword_number
-    """
-
-    # excute query
-    keyword_cursor.execute(query_pattern)
-
-    # Fetch and process the results
-    rows = keyword_cursor.fetchall()
-    return rows
-```
-
-Below we query our small database using a single keyword query.
-
-
-```python
-# query database
-query = "cold"
-query_db(query, process_output["process_output_files"][0])
-```
-
-
-
-
-    [('cold', 1, 5)]
-
 
 
 

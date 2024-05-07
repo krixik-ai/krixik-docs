@@ -40,10 +40,12 @@ For this document we will use a pipeline consisting of three modules: a [`parser
 ```python
 # create a pipeline with multiple modules
 pipeline = krixik.create_pipeline(
-    name="vector-search-system-intro",
+    name="system-semantic-search",
     module_chain=["parser", "text-embedder", "vector-db"],
 )
 ```
+
+These available modeling options and parameters are stored in your custom [pipeline's configuration](system/create_save_load.md).
 
 
 ```python

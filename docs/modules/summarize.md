@@ -2,12 +2,6 @@
 
 This document reviews the `summarize` module - which takes as input a document and returns a summary of its (text) contents.
 
-This document includes an overview of custom pipeline setup, current model set, parameters, and `.process` usage for this module.
-
-To follow along with this demonstration be sure to initialize your krixik session with your api key and url as shown below. 
-
-We illustrate loading these required secrets in via [python-dotenv](https://pypi.org/project/python-dotenv/), storing those secrets in a `.env` file.  This is always good practice for storing / loading secrets (e.g., doing so will reduce the chance you inadvertantly push secrets to a repo).
-
 A table of contents for the remainder of this document is shown below.
 
 - [pipeline setup](#pipeline-setup)
@@ -342,7 +336,7 @@ And indeed this is very terse but representative summary of our original text.
 
 If we wanted - we could reproduce this result (of summarizing a document recursively three times) by building a new pipeline that contained three `summarize` modules in succession.
 
-We explore just such an example in a [recursive summarization pipeline example](examples/summarize/recursive_summarize.md).
+We explore just such an example in a [recursive summarization pipeline example](examples/summarize_sentiment/recursive_summarize.md).
 
 ## Using a non-default model
 

@@ -1,10 +1,6 @@
-## Recursive summarization pipeline
+## A simple semantic search pipeline
 
-One of the most practical ways to achieve a short, abstract, but representative summary of a long document is to apply summarization *recursively*.  This concept was discussed in our introduction to the [`summarize` module](modules/summarize.md).  There we applied a single `summarize` module pipeline several times to create terser and terser summary representations of an input text.
-
-In this document we reproduce the same result via a pipeline consisting of multiple [`summarize`](modules/summarize.md) modules in immediate succession.  Processing files through this pipeline applies `summarize` recursively with a single pipeline invocation.
-
-A table of contents for the remainder of this document is shown below.
+This document reviews a simple semantic search pipeline that can be used to make any input text semantically-searchable.
 
 
 - [pipeline setup](#pipeline-setup)
@@ -39,15 +35,15 @@ krixik.init(api_key = MY_API_KEY,
 
 ## Pipeline setup
 
-Below we setup a pipeline consisting of three `summarize` modules in sequence.
+Below we setup a pipeline consisting of a [`parser`](modules/parser.md), [`text-embedder`](modules/text-embedder.md), and [`vector-db`](modules/vector-db.md) modules.  This will allow us to process input files and make them semantically searchable.
 
 We do this by passing the module names to the `module_chain` argument of [`create_pipeline`](system/create_save_load.md) along with a name for our pipeline.
 
 
 ```python
 # create a pipeline with a multi module pipeline
-pipeline = krixik.create_pipeline(name="examples-summarize-recursive-summarize-pipeline",
-                                  module_chain=["summarize", "summarize", "summarize"])
+pipeline = krixik.create_pipeline(name="examples-text-search-semantic-pipeline",
+                                  module_chain=["parser", "text-embedder", "vector-db"])
 ```
 
 This pipeline's available modeling options and parameters are stored in your custom [pipeline's configuration](system/create_save_load.md).
@@ -163,13 +159,7 @@ with open(test_file, "r") as file:
       IGNORANCE IS STRENGTH
 
 
-When introducing the [`summarize` module](modules/summarize.md) we applied a single module `summarize` pipeline to this document.  This produced a summary that was about half the length of the original text.
-
-In the [recursive summarization](modules/summarize.md) section of that introduction we then applied the same single module pipeline two more times to produce a one paragraph summary of the text above.
-
-Here we will produce the same one paragraph summary by applying the recursive `summarize` pipeline defined above a single time to the input text.
-
-Below we [process](system/process.md) the input through our pipeline.  Here we use the default model for[`summarize`](modules/summarize.md) for each of the three instances of the module.
+Below we [process](system/process.md) the input through our pipeline using the default model for each of our three modules.
 
 
 ```python
@@ -184,7 +174,7 @@ process_output = pipeline.process(local_file_path = test_file,
                                   verbose=False)             # set verbosity to False
 ```
 
-The output of this process is printed below.  Because the output of this particular module-model pair is a json, the process output is provided in this object is as well.  The file itself has been returned to the address noted in the `process_output_files` key.  The `file_id` of the processed file is used as a filename prefix for both output files.
+The output of this process is printed below.  Because the output of this particular module-model pair is a faiss database, the process output is provided in this object is null.  However the file itself has been returned to the address noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 
 
 ```python
@@ -194,30 +184,99 @@ print(json.dumps(process_output, indent=2))
 
     {
       "status_code": 200,
-      "pipeline": "my-recursive-summarize-pipeline",
-      "request_id": "3e9e54ef-5f66-4434-98bf-672c3dd7ed6f",
-      "file_id": "affbb8e6-4289-4231-80f8-894d4f868506",
-      "message": "SUCCESS - output fetched for file_id affbb8e6-4289-4231-80f8-894d4f868506.Output saved to location(s) listed in process_output_files.",
+      "pipeline": "examples-text-search-semantic-pipeline",
+      "request_id": "262563c3-6841-4aa8-8694-01c056fb4ce8",
+      "file_id": "b20fa17b-1df9-4185-94c9-ae17ac187822",
+      "message": "SUCCESS - output fetched for file_id b20fa17b-1df9-4185-94c9-ae17ac187822.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "./affbb8e6-4289-4231-80f8-894d4f868506.txt"
+        "../../../data/output/b20fa17b-1df9-4185-94c9-ae17ac187822.faiss"
       ]
     }
 
 
-We load in the text file output from `process_output_files` below. 
+## Using the `semantic_search` method
+
+krixik's [`semantic_search` method](system/semantic_search.md) is a convenience function for both embedding and querying - and so can only be used with pipelines containing both `text-embedder` and `vector-db` modules in succession.  Since our pipeline here satisfies this condition, it has access to the `semantic_search` method.
+
+Now we can query our text with natural language as shown below.
 
 
 ```python
-# load in process output from file
-with open(process_output['process_output_files'][0], "r") as file:
-    print(file.read())  
+# perform semantic_search over the input file
+semantic_output = pipeline.semantic_search(
+    query="it was cold night", file_ids=[process_output["file_id"]]
+)
+
+# nicely print the output of this process
+print(json.dumps(semantic_output, indent=2))
 ```
 
-    Winston Smith walked through the glass doors of Victory Mansions. The hallway
-    smelled of boiled cabbage and old rag mats. A kilometre away the
-    Ministry of Truth, his place of work, towered vast.
+    {
+      "status_code": 200,
+      "request_id": "57a797f5-bc77-4774-a2b0-b5f13007b356",
+      "message": "Successfully queried 1 user file.",
+      "warnings": [],
+      "items": [
+        {
+          "file_id": "b20fa17b-1df9-4185-94c9-ae17ac187822",
+          "file_metadata": {
+            "file_name": "krixik_generated_file_name_toyzuamynf.txt",
+            "symbolic_directory_path": "/etc",
+            "file_tags": [],
+            "num_vectors": 50,
+            "created_at": "2024-05-07 18:30:32",
+            "last_updated": "2024-05-07 18:30:32"
+          },
+          "search_results": [
+            {
+              "snippet": "Outside, even through the shut window-pane, the world looked cold.",
+              "line_numbers": [
+                32,
+                33
+              ],
+              "distance": 0.232
+            },
+            {
+              "snippet": "It was a bright cold day in April, and the clocks were striking thirteen.",
+              "line_numbers": [
+                1
+              ],
+              "distance": 0.236
+            },
+            {
+              "snippet": "His hair was very fair, his face\nnaturally sanguine, his skin roughened by coarse soap and blunt razor\nblades and the cold of the winter that had just ended.",
+              "line_numbers": [
+                29,
+                30,
+                31
+              ],
+              "distance": 0.324
+            },
+            {
+              "snippet": "Down in\nthe street little eddies of wind were whirling dust and torn paper into\nspirals, and though the sun was shining and the sky a harsh blue, there\nseemed to be no colour in anything, except the posters that were plastered\neverywhere.",
+              "line_numbers": [
+                33,
+                34,
+                35,
+                36,
+                37
+              ],
+              "distance": 0.33
+            },
+            {
+              "snippet": "It was the police patrol, snooping into people's\nwindows.",
+              "line_numbers": [
+                44,
+                45
+              ],
+              "distance": 0.352
+            }
+          ]
+        }
+      ]
+    }
 
 
 

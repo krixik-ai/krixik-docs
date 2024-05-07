@@ -121,7 +121,7 @@ krixik.view_module_config(module_name="transcribe")
 
 ### Viewing a pipeline module chain
 
-Suppose we create a multi-module pipeline like the one below - which is discussed in further detail [in this example](examples/transcribe/transcribe-multilingual-semantic.md).
+Suppose we create a multi-module pipeline like the one below - which is discussed in further detail [in this example](examples/transcribe_translate/transcribe-multilingual-semantic.md).
 
 
 ```python
