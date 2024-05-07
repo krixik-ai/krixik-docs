@@ -17,6 +17,7 @@ nav:
     - text search:
       - 'keyword search': examples/text-search/keyword_search.md
       - 'semantic search': examples/text-search/semantic_search.md
+      - 'translate semantic search': examples/text-search/translate_semantic_search.md
   - Modules:
     - 'overview': modules/overview.md
     - currently available:
