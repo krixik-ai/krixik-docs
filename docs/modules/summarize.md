@@ -10,36 +10,11 @@ A table of contents for the remainder of this document is shown below.
 - [recursive summarization](#recursive-summarization)
 - [using a non-default model](#using-a-non-default-model)
 
-
-```python
-# import utilities
-import sys
-import json
-import importlib
-
-sys.path.append("../../")
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-
-load_dotenv("../../.env")
-MY_API_KEY = os.getenv("MY_API_KEY")
-MY_API_URL = os.getenv("MY_API_URL")
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-
-krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
-```
-
 ## Pipeline setup
 
 Below we setup a simple one module pipeline using the `summarize` module. 
 
-We do this by passing the module name to the `module_chain` argument of [`create_pipeline`](system/create_save_load.md) along with a name for our pipeline.
+We do this by passing the module name to the `module_chain` argument of [`create_pipeline`](../system/create_save_load.md) along with a name for our pipeline.
 
 
 ```python
@@ -54,13 +29,7 @@ The `summarize` module comes with a single model:
 - [bart-large-cnn](https://huggingface.co/facebook/bart-large-cnn) (default)
 - [text-summarization](https://huggingface.co/Falconsai/text_summarization)
 
-These available modeling options and parameters are stored in your custom [pipeline's configuration](system/create_save_load.md).
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```
+These available modeling options and parameters are stored in your custom [pipeline's configuration](../system/create_save_load.md).
 
 ## Required input format
 
@@ -336,7 +305,7 @@ And indeed this is very terse but representative summary of our original text.
 
 If we wanted - we could reproduce this result (of summarizing a document recursively three times) by building a new pipeline that contained three `summarize` modules in succession.
 
-We explore just such an example in a [recursive summarization pipeline example](examples/summarize_sentiment/recursive_summarize.md).
+We explore just such an example in a [recursive summarization pipeline example](../examples/summarize_sentiment/recursive_summarize.md).
 
 ## Using a non-default model
 
@@ -408,9 +377,3 @@ with open(process_output["process_output_files"][0], "r") as file:
     Winston stood it was just possible to read, picked out on its
     white face in elegant lettering .
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

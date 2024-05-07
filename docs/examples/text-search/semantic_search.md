@@ -7,37 +7,11 @@ This document reviews a simple semantic search pipeline that can be used to make
 - [processing an input file](#processing-an-input-file)
 
 
-
-```python
-# import utilities
-import sys 
-import json
-sys.path.append('../../../')
-import importlib
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ## Pipeline setup
 
-Below we setup a pipeline consisting of a [`parser`](modules/parser.md), [`text-embedder`](modules/text-embedder.md), and [`vector-db`](modules/vector-db.md) modules.  This will allow us to process input files and make them semantically searchable.
+Below we setup a pipeline consisting of a [`parser`](../../modules/parser.md), [`text-embedder`](../../modules/text-embedder.md), and [`vector-db`](../../modules/vector-db.md) modules.  This will allow us to process input files and make them semantically searchable.
 
-We do this by passing the module names to the `module_chain` argument of [`create_pipeline`](system/create_save_load.md) along with a name for our pipeline.
+We do this by passing the module names to the `module_chain` argument of [`create_pipeline`](../../system/create_save_load.md) along with a name for our pipeline.
 
 
 ```python
@@ -46,13 +20,7 @@ pipeline = krixik.create_pipeline(name="examples-text-search-semantic-pipeline",
                                   module_chain=["parser", "text-embedder", "vector-db"])
 ```
 
-This pipeline's available modeling options and parameters are stored in your custom [pipeline's configuration](system/create_save_load.md).
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```
+This pipeline's available modeling options and parameters are stored in your custom [pipeline's configuration](../../system/create_save_load.md).
 
 ## Processing an input file
 
@@ -198,7 +166,7 @@ print(json.dumps(process_output, indent=2))
 
 ## Using the `semantic_search` method
 
-krixik's [`semantic_search` method](system/semantic_search.md) is a convenience function for both embedding and querying - and so can only be used with pipelines containing both `text-embedder` and `vector-db` modules in succession.  Since our pipeline here satisfies this condition, it has access to the `semantic_search` method.
+krixik's [`semantic_search` method](../../system/semantic_search.md) is a convenience function for both embedding and querying - and so can only be used with pipelines containing both `text-embedder` and `vector-db` modules in succession.  Since our pipeline here satisfies this condition, it has access to the `semantic_search` method.
 
 Now we can query our text with natural language as shown below.
 
@@ -278,9 +246,3 @@ print(json.dumps(semantic_output, indent=2))
       ]
     }
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

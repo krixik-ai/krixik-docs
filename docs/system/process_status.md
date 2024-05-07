@@ -2,44 +2,16 @@
 
 The `process_status` method is available on every krixik pipeline, and is invoked whenever you want to check the status of files being processed through your defined pipeline.
 
-This method is especially useful when using [`process`](system/process.md) with `wait_for_process` set to `False`.
+This method is especially useful when using [`process`](../system/process.md) with `wait_for_process` set to `False`.
 
 A table of contents for the remainder of this document is shown below.
 
 - [basic pipeline setup](#basic-pipeline-setup)
 - [basic usage, required input, and output breakdown](#basic-usage,-required-input,-and-output-breakdown)
 
-
-```python
-# import utilities
-import sys
-import json
-import importlib
-
-sys.path.append("../../")
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-
-load_dotenv("../../.env")
-MY_API_KEY = os.getenv("MY_API_KEY")
-MY_API_URL = os.getenv("MY_API_URL")
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-
-krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ## Basic pipeline setup
 
-For this document we will use a pipeline consisting of a single [`parser` module](modules/parser.md).  We use [`create_pipeline`](system/create_save_load.md) to instantiate the pipeline.
+For this document we will use a pipeline consisting of a single [`parser` module](../modules/parser.md).  We use [`create_pipeline`](../system/create_save_load.md) to instantiate the pipeline.
 
 
 ```python
@@ -49,15 +21,9 @@ pipeline = krixik.create_pipeline(
 )
 ```
 
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```
-
 ## Basic usage, required input, and output breakdown
 
-To illustrate the usage of `process_status` we process a short file illustrated in the introduction to the [`parser` method](modules/parser.md).
+To illustrate the usage of `process_status` we process a short file illustrated in the introduction to the [`parser` method](../modules/parser.md).
 
 
 ```python
@@ -138,12 +104,3 @@ print(json.dumps(status_output, indent=2))
       "overall_status": "complete"
     }
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-import time
-
-time.sleep(10)
-reset_pipeline(pipeline)
-```

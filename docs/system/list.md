@@ -1,6 +1,6 @@
 ## The `list` method
 
-After using [`process`](system/process.md) to process a file with your chosen pipeline, you can retrieve the associated record if this file using `list` method using its `file_id` and any other optional metadata you included.  
+After using [`process`](../system/process.md) to process a file with your chosen pipeline, you can retrieve the associated record if this file using `list` method using its `file_id` and any other optional metadata you included.  
 
 This document reviews the `list` method available to every krixik pipeline.
 
@@ -17,34 +17,9 @@ A table of contents for the remainder of this document is shown below.
 - [wildcard arguments](#wildcard-arguments)
 - [using multiple arguments with `list`](#using-multiple-arguments-with-list)
 
-
-```python
-# import utilities
-import sys
-import json
-import importlib
-
-sys.path.append("../../")
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-
-load_dotenv("../../.env")
-MY_API_KEY = os.getenv("MY_API_KEY")
-MY_API_URL = os.getenv("MY_API_URL")
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-
-krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
-```
-
 ## Basic pipeline setup
 
-For this document we will use a pipeline consisting of a single [`parser` module](modules/parser.md).  We use [`create_pipeline`](system/create_save_load.md) to instantiate the pipeline.
+For this document we will use a pipeline consisting of a single [`parser` module](../modules/parser.md).  We use [`create_pipeline`](../system/create_save_load.md) to instantiate the pipeline.
 
 
 ```python
@@ -52,15 +27,9 @@ For this document we will use a pipeline consisting of a single [`parser` module
 pipeline = krixik.create_pipeline(name="system-list-docs", module_chain=["parser"])
 ```
 
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```
-
 ## Basic usage, required input, and output breakdown
 
-To illustrate the usage of `list` we process a short file illustrated in the introduction to the [`parser` method](modules/parser.md).
+To illustrate the usage of `list` we process a short file illustrated in the introduction to the [`parser` method](../modules/parser.md).
 
 
 ```python
@@ -571,9 +540,3 @@ print(json.dumps(list_output, indent=2))
       "items": []
     }
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

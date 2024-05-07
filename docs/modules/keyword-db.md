@@ -11,36 +11,11 @@ A table of contents for the remainder of this document is shown below.
 - [using the `keyword_search` method](#using-the-keyword_search-method)
 - [querying output databases locally](#querying-output-databases-locally)
 
-
-```python
-# import utilities
-import sys
-import json
-import importlib
-
-sys.path.append("../../")
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-
-load_dotenv("../../.env")
-MY_API_KEY = os.getenv("MY_API_KEY")
-MY_API_URL = os.getenv("MY_API_URL")
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-
-krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
-```
-
 ## Pipeline setup
 
 Below we setup a simple one module pipeline using the `keyword-db` module. 
 
-We do this by passing the module name to the `module_chain` argument of [`create_pipeline`](system/create_save_load.md) along with a name for our pipeline.
+We do this by passing the module name to the `module_chain` argument of [`create_pipeline`](../system/create_save_load.md) along with a name for our pipeline.
 
 
 ```python
@@ -54,13 +29,7 @@ The `keyword-search` module comes with a single model:
 
 - `base`: (default) parses input document for non-trivial keywords
 
-These available modeling options and parameters are stored in your custom [pipeline's configuration](system/create_save_load.md).
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```
+These available modeling options and parameters are stored in your custom [pipeline's configuration](../system/create_save_load.md).
 
 ## Required input format
 
@@ -126,7 +95,7 @@ print(json.dumps(process_output, indent=2))
 
 ## Using the `keyword_search` method
 
-Any pipeline containing a `keyword-search` module automatically inherits access to the [`keyword_search` method](system/keyword_search.md).  This provides convenient sophisticated query access to the newly created keyword database in krixik.
+Any pipeline containing a `keyword-search` module automatically inherits access to the [`keyword_search` method](../system/keyword_search.md).  This provides convenient sophisticated query access to the newly created keyword database in krixik.
 
 The `keyword_search` method takes in an input `query` containing desired keywords separated by spaces, and searches through your database(s) for these keywords as well as their lemmatized stems.
 
@@ -235,9 +204,3 @@ query_db(query, process_output["process_output_files"][0])
     [('cold', 1, 5)]
 
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

@@ -10,36 +10,11 @@ A table of contents for the remainder of this document is shown below.
 - [examining process output locally](#examining-process-output-locally)
 - [processing with a non-default model](#processing-with-a-non-default-model)
 
-
-```python
-# import utilities
-import sys
-import json
-import importlib
-
-sys.path.append("../../")
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-
-load_dotenv("../../.env")
-MY_API_KEY = os.getenv("MY_API_KEY")
-MY_API_URL = os.getenv("MY_API_URL")
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-
-krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
-```
-
 ## Pipeline setup
 
 Below we setup a simple one module pipeline using the `text-embedder` module.
 
-We do this by passing the module name to the `module_chain` argument of [`create_pipeline`](system/create_save_load.md) along with a name for our pipeline.
+We do this by passing the module name to the `module_chain` argument of [`create_pipeline`](../system/create_save_load.md) along with a name for our pipeline.
 
 
 ```python
@@ -61,13 +36,7 @@ Quantized versions of each are also available for use.
 
 Each model has a single parameter - `quantize` - that can be set to a boolean value `True/False`.  By default the `quantize` is `True`.
 
-These available modeling options and parameters are stored in your custom [pipeline's configuration](system/create_save_load.md).
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```
+These available modeling options and parameters are stored in your custom [pipeline's configuration](../system/create_save_load.md).
 
 ## Required input format
 
@@ -222,9 +191,3 @@ print(json.dumps(process_output, indent=2))
       ]
     }
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

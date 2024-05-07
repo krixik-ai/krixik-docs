@@ -11,37 +11,11 @@ A table of contents for the remainder of this document is shown below.
 - [processing an input file](#processing-an-input-file)
 
 
-
-```python
-# import utilities
-import sys 
-import json
-sys.path.append('../../../')
-import importlib
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ## Pipeline setup
 
 Below we setup a pipeline consisting of three `summarize` modules in sequence.
 
-We do this by passing the module names to the `module_chain` argument of [`create_pipeline`](system/create_save_load.md) along with a name for our pipeline.
+We do this by passing the module names to the `module_chain` argument of [`create_pipeline`](../../system/create_save_load.md) along with a name for our pipeline.
 
 
 ```python
@@ -50,13 +24,7 @@ pipeline = krixik.create_pipeline(name="examples-summarize-recursive-summarize-p
                                   module_chain=["summarize", "summarize", "summarize"])
 ```
 
-This pipeline's available modeling options and parameters are stored in your custom [pipeline's configuration](system/create_save_load.md).
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```
+This pipeline's available modeling options and parameters are stored in your custom [pipeline's configuration](../../system/create_save_load.md).
 
 ## Processing an input file
 
@@ -163,13 +131,13 @@ with open(test_file, "r") as file:
       IGNORANCE IS STRENGTH
 
 
-When introducing the [`summarize` module](modules/summarize.md) we applied a single module `summarize` pipeline to this document.  This produced a summary that was about half the length of the original text.
+When introducing the [`summarize` module](../../modules/summarize.md) we applied a single module `summarize` pipeline to this document.  This produced a summary that was about half the length of the original text.
 
-In the [recursive summarization](modules/summarize.md) section of that introduction we then applied the same single module pipeline two more times to produce a one paragraph summary of the text above.
+In the [recursive summarization](../../modules/summarize.md) section of that introduction we then applied the same single module pipeline two more times to produce a one paragraph summary of the text above.
 
 Here we will produce the same one paragraph summary by applying the recursive `summarize` pipeline defined above a single time to the input text.
 
-Below we [process](system/process.md) the input through our pipeline.  Here we use the default model for[`summarize`](modules/summarize.md) for each of the three instances of the module.
+Below we [process](../../system/process.md) the input through our pipeline.  Here we use the default model for[`summarize`](../../modules/summarize.md) for each of the three instances of the module.
 
 
 ```python
@@ -219,9 +187,3 @@ with open(process_output['process_output_files'][0], "r") as file:
     smelled of boiled cabbage and old rag mats. A kilometre away the
     Ministry of Truth, his place of work, towered vast.
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

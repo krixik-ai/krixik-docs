@@ -1,40 +1,15 @@
 ## The `semantic_search` method
 
-krixik's `semantic_search` method is a convenience function for both embedding and querying - and so can only be used with pipelines containing both [`text-embedder`](modules/text-embedder.md) and [`vector-db`](modules/vector-db.md) modules in succession.
+krixik's `semantic_search` method is a convenience function for both embedding and querying - and so can only be used with pipelines containing both [`text-embedder`](../modules/text-embedder.md) and [`vector-db`](../modules/vector-db.md) modules in succession.
 
 A table of contents for the remainder of this document is shown below.
 
 - [basic pipeline setup](#basic-pipeline-setup)
 - [basic usage, required input, and output breakdown](#basic-usage,-required-input,-and-output-breakdown)
 
-
-```python
-# import utilities
-import sys
-import json
-import importlib
-
-sys.path.append("../../")
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-
-load_dotenv("../../.env")
-MY_API_KEY = os.getenv("MY_API_KEY")
-MY_API_URL = os.getenv("MY_API_URL")
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-
-krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
-```
-
 ## Basic pipeline setup
 
-For this document we will use a pipeline consisting of three modules: a [`parser`](modules/parser.md), [`text-embedder`](modules/text-embedder.md), and [`vector-db`](modules/vector-db.md) index.  We use [`create_pipeline`](system/create_save_load.md) to instantiate the pipeline.
+For this document we will use a pipeline consisting of three modules: a [`parser`](../modules/parser.md), [`text-embedder`](../modules/text-embedder.md), and [`vector-db`](../modules/vector-db.md) index.  We use [`create_pipeline`](../system/create_save_load.md) to instantiate the pipeline.
 
 
 ```python
@@ -45,17 +20,11 @@ pipeline = krixik.create_pipeline(
 )
 ```
 
-These available modeling options and parameters are stored in your custom [pipeline's configuration](system/create_save_load.md).
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```
+These available modeling options and parameters are stored in your custom [pipeline's configuration](../system/create_save_load.md).
 
 ## Basic usage, required input, and output breakdown
 
-To illustrate the usage of `semantic_search` we process a short file illustrated in the introduction to the [`parser` method](modules/parser.md).
+To illustrate the usage of `semantic_search` we process a short file illustrated in the introduction to the [`parser` method](../modules/parser.md).
 
 
 ```python
@@ -87,7 +56,7 @@ print(json.dumps(process_output, indent=2))
     '{\n  "file_id": "3d435c55-05ae-41b6-aee3-76da8c7b0841",\n  "request_id": "5e723bee-4939-21f1-52ef-ca0596dd3f1f",\n  "file_name": "krixik_generated_file_name_vplttsahnp.txt",\n  "symbolic_directory_path": "/etc",\n  "file_tags": null,\n  "file_description": null\n}'
 
 
-Lets first process a file with our new pipeline.  The [`vector-db`](modules/vector-db.md) module takes in a text file, and returns `faiss` vector database consisting of all non-trivial `(snippet, line_numbers)` tuples from the input.
+Lets first process a file with our new pipeline.  The [`vector-db`](../modules/vector-db.md) module takes in a text file, and returns `faiss` vector database consisting of all non-trivial `(snippet, line_numbers)` tuples from the input.
 
 
 ```python
@@ -127,7 +96,7 @@ Here the `process_output` key value is `null` since the return object is a datab
 
 With `.process` complete we can run `semantic_search` on our input file. 
 
-The `semantic_search` method takes in the exact same arguments as [`list`](system/list.md) - that is `file_ids`, `file_names`, etc., - plus one additional argument: `query`.  The `query` is a string of words to be queried individually.
+The `semantic_search` method takes in the exact same arguments as [`list`](../system/list.md) - that is `file_ids`, `file_names`, etc., - plus one additional argument: `query`.  The `query` is a string of words to be queried individually.
 
 Let's look at an example.
 
@@ -183,9 +152,3 @@ print(json.dumps(semantic_output, indent=2))
 
 
 Here we can see one returned search result in `items`.
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

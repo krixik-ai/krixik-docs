@@ -9,46 +9,20 @@ A table of contents for the remainder of this document is shown below.
 - [processing a file](#processing-a-file)
 - [performing semantic search](#performing-semantic-search)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ## Pipeline setup
 
 Below we setup a multi module pipeline to serve our intended purpose, which is to build a pipeline that will transcribe any audio/video and make it semantically searchable in any language.
 
 To do this we will use the following modules:
 
-- [`transcribe`](modules/transcribe.md): takes in audio/video input, outputs json of content transcription
-- [`translate`](modules/translate.md): takes in json of text snippets, outputs json of translated snippets
-- [`json-to-txt`](modules/json-to-txt.md): takes in json of text snippets, merges into text file
-- [`parser`](modules/parser.md): takes in text, slices into (possibly overlapping) strings
-- [`text-embedder`](modules/text-embedder.md): takes in text snippets, creates vector representation of each outputing an npy file
-- [`vector-db`](modules/vector-db.md): takes in npy of vectors, outputs vector db
+- [`transcribe`](../../modules/transcribe.md): takes in audio/video input, outputs json of content transcription
+- [`translate`](../../modules/translate.md): takes in json of text snippets, outputs json of translated snippets
+- [`json-to-txt`](../../modules/json-to-txt.md): takes in json of text snippets, merges into text file
+- [`parser`](../../modules/parser.md): takes in text, slices into (possibly overlapping) strings
+- [`text-embedder`](../../modules/text-embedder.md): takes in text snippets, creates vector representation of each outputing an npy file
+- [`vector-db`](../../modules/vector-db.md): takes in npy of vectors, outputs vector db
 
-We do this by passing the module names to the `module_chain` argument of [`create_pipeline`](system/create_save_load.md) along with a name for our pipeline.
+We do this by passing the module names to the `module_chain` argument of [`create_pipeline`](../../system/create_save_load.md) along with a name for our pipeline.
 
 
 ```python
@@ -62,13 +36,7 @@ pipeline = krixik.create_pipeline(name="examples-transcribe-semantic-multilingua
                                                 "vector-db"])
 ```
 
-This pipeline's available modeling options and parameters are stored in your custom [pipeline's configuration](system/create_save_load.md).
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```
+This pipeline's available modeling options and parameters are stored in your custom [pipeline's configuration](../../system/create_save_load.md).
 
 ## Processing a file
 
@@ -93,7 +61,7 @@ Video(test_file)
 
 
 
-The input video content language content is English.  We will use the `opus-mt-en-es` model of the [`translate`](modules/translate.md) to translate the transcript of this video into Spanish.
+The input video content language content is English.  We will use the `opus-mt-en-es` model of the [`translate`](../../modules/translate.md) to translate the transcript of this video into Spanish.
 
 For this run we will use the default models for the remainder of the modules.
 
@@ -236,10 +204,4 @@ print(json.dumps(search_output, indent=2))
     }
 
 
-Learn more about the [`semantic_search` method here](system/semantic_search.md).
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```
+Learn more about the [`semantic_search` method here](../../system/semantic_search.md).

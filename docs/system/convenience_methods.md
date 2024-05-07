@@ -11,36 +11,9 @@ A table of contents for the remainder of this document is shown below.
 - [viewing example module input](#viewing-example-module-input)
 - [viewing module click data](#viewing-module-click-data)
 
-
-```python
-# import utilities
-import sys
-
-sys.path.append("../../")
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-import importlib
-
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-load_dotenv("../../.env")
-MY_API_KEY = os.getenv("MY_API_KEY")
-MY_API_URL = os.getenv("MY_API_URL")
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-
-krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### Viewing available modules locally
 
-To view all available modules locally use the `available_modules` method.  This can be used without first [initializing](system/initialize.md).
+To view all available modules locally use the `available_modules` method.  This can be used without first [initializing](../system/initialize.md).
 
 
 ```python
@@ -121,7 +94,7 @@ krixik.view_module_config(module_name="transcribe")
 
 ### Viewing a pipeline module chain
 
-Suppose we create a multi-module pipeline like the one below - which is discussed in further detail [in this example](examples/transcribe_translate/transcribe-multilingual-semantic.md).
+Suppose we create a multi-module pipeline like the one below - which is discussed in further detail [in this example](../examples/transcribe_translate/transcribe-multilingual-semantic.md).
 
 
 ```python
@@ -179,7 +152,7 @@ pipeline.test_input(local_file_path=test_file)
     SUCCESS: local file ../../data/input/Interesting Facts About Colombia.mp4 passed pipeline input test passed
 
 
-If you test an input in your pipeline that will not flow correctly you will receive an error like the one below.  Here we test whether or not a text file can be used as input to a pipeline that begins with a [transcribe module](modules/transcribe.md).  It cannot, so we get an error.
+If you test an input in your pipeline that will not flow correctly you will receive an error like the one below.  Here we test whether or not a text file can be used as input to a pipeline that begins with a [transcribe module](../modules/transcribe.md).  It cannot, so we get an error.
 
 
 ```python
@@ -245,7 +218,7 @@ pipeline.test_input(local_file_path=test_file)
 
 Examine the relevant data class of your starting module to ensure your input satisfies the required input structure requirements.
 
-You can get a quick sense of its required structure by looking at a sample datapoint as shown in the next few cells.  These actions can be performed for any [currently available module](modules/overview.md).  Below we illustrate using the [parser module](modules/parser.md).
+You can get a quick sense of its required structure by looking at a sample datapoint as shown in the next few cells.  These actions can be performed for any [currently available module](../modules/overview.md).  Below we illustrate using the [parser module](../modules/parser.md).
 
 
 ```python
@@ -354,9 +327,3 @@ The latter connection ( `vector-search` -> `text-embedder`) will not work since 
 - `vector-search` output_format (`faiss`) != `text-embedder` input_format (`json`)
 
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```
