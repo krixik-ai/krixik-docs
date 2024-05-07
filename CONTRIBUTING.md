@@ -81,7 +81,7 @@ If any entries in the `mkdocks.yml` toc are not found in `docs/` and vice-versa 
 
 3.  Link checking
 
-The validity of all links in each page are checked.  These links come in three flavors.
+The validity of all links in each page are checked.  These links come in three flavors. 
 
 A.  Intra page link: a link to a section in the page itself
 
@@ -96,6 +96,8 @@ These can be scattered throughout a page and link from one to another.  They loo
 [a link to another page](subdir/some_other_page.md)
 
 All subdirs must belong to the `docs` directory for these links.
+
+**IMPORTANT:** all inter-page links must be relative - absolute links [are not supported yet](https://www.mkdocs.org/user-guide/writing-your-docs/).
 
 C.  General web links
 
