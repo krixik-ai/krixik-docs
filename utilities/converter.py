@@ -10,9 +10,9 @@ def collect_mkdocks_toc():
         mkdocks_toc = yaml.safe_load(file)
 
     # upnack toc
-    pipeline_examples_docs = mkdocks_toc["nav"][3]["Pipeline examples"]
-    system_docs = mkdocks_toc["nav"][5]["System"][0]["methods"]
-    modules_docs = mkdocks_toc["nav"][4]["Modules"][0]["currently available"]
+    pipeline_examples_docs = mkdocks_toc["nav"][2]["Pipeline examples"]
+    modules_docs = mkdocks_toc["nav"][3]["Modules"][0]["currently available"]
+    system_docs = mkdocks_toc["nav"][4]["System"][0]["methods"]
 
     # collect paths to example docs
     examples_mds = []

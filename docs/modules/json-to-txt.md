@@ -15,6 +15,34 @@ A table of contents for the remainder of this document is shown below.
 - [required input format](#required-input-format)
 - [using the default model](#using-the-default-model)
 
+
+```python
+# import utilities
+import sys
+import json
+import importlib
+
+sys.path.append("../../")
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+
+load_dotenv("../../.env")
+MY_API_KEY = os.getenv("MY_API_KEY")
+MY_API_URL = os.getenv("MY_API_URL")
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+
+krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ## Pipeline setup
 
 Below we setup a simple one module pipeline using the `json-to-txt` module.
@@ -34,6 +62,12 @@ The `json-to-txt` module comes with a single model:
 - `base`: (default) joins a json of text snippets into a single text separated by double spaces
 
 These available modeling options and parameters are stored in your custom [pipeline's configuration](system/create_save_load.md).
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+reset_pipeline(pipeline)
+```
 
 ## Required input format
 
@@ -130,3 +164,9 @@ with open(process_output["process_output_files"][0], "r") as file:
 
 
 Here we see that the module has merged the two *snippet* values from the input dictionaries.
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+reset_pipeline(pipeline)
+```

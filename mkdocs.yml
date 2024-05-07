@@ -1,7 +1,6 @@
 site_name: krixik docs
 nav:
   - Home: index.md
-  - About: about.md
   - Quickstart: quickstart.md
   - Pipeline examples:
     - transcribe examples:
@@ -29,6 +28,7 @@ nav:
   - System:
     - methods:
       - 'overview': system/overview.md
+      - 'install cli': system/install.md
       - 'initialize': system/initialize.md
       - 'convenience methods': system/convenience_methods.md
       - 'create, save, and load pipelines': system/create_save_load.md

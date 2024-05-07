@@ -4,6 +4,7 @@ In this Section we describe the core krixik system methods -  which are used to 
 
 A table of contents for this section is shown below.
 
+- [install the cli](system/install.md)
 - [initialize your session](system/initialize.md)
 - [create, save, and load pipelines](system/create_save_load.md)
 - [convenience methods](system/convenience_methods.md)
