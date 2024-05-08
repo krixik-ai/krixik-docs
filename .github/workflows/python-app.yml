@@ -36,11 +36,8 @@ jobs:
         python-version: '3.10'
     - name: Install dependencies
       run: |
-        sudo add-apt-repository ppa:savoury1/ffmpeg4
-        sudo apt-get update
-        sudo apt-get install ffmpeg
         python -m pip install --upgrade pip
-        pip install .[test]
+        pip install -r requirements.in
     - name: Run pytest
       run: |
         PYTHONPATH=. python3.10 -m pytest tests
