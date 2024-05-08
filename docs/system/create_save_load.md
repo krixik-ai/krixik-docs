@@ -9,6 +9,32 @@ A table of contents for the remainder of this document is shown below.
 - [using the `save_pipeline` method](#using-the-save_pipeline-method)
 - [using the `load_pipeline` method](#using-the-load_pipeline-method)
 
+
+```python
+import os
+import sys
+import importlib
+from dotenv import load_dotenv
+
+# add path to data
+sys.path.append("../../")
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+load_dotenv()
+MY_API_KEY = os.getenv("MY_API_KEY")
+MY_API_URL = os.getenv("MY_API_URL")
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+
+krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ## Using the `create_pipeline` method
 
 `create_pipeline` is used to instantiate a modular pipeline with krixik.  Required input to this method include the following:
@@ -21,9 +47,7 @@ Below we setup a simple one module pipeline using the [`parser` module](../modul
 
 ```python
 # create a pipeline with a single module
-pipeline = krixik.create_pipeline(
-    name="system-create-save-load-1", module_chain=["parser"]
-)
+pipeline = krixik.create_pipeline(name="system-create-save-load-1", module_chain=["parser"])
 ```
 
 Make sure you have [initialized your session](../system/initialize.md) before executing this code.
@@ -48,9 +72,7 @@ For example, attempting to build the following two module pipeline consisting of
 
 ```python
 # create a pipeline basic document based semantic search pipeline
-pipeline = krixik.create_pipeline(
-    name="system-create-save-load-3", module_chain=["parser", "caption"]
-)
+pipeline = krixik.create_pipeline(name="system-create-save-load-3", module_chain=["parser", "caption"])
 ```
 
 
@@ -166,9 +188,7 @@ Your `config_path` must end with a `.yml` or `.yaml` extension.
 
 ```python
 # save a pipeline's configuration to disk - to the data/pipeline_configs directory of the docs repository
-pipeline.save_pipeline(
-    config_path="../../data/pipeline_configs/save-pipeline-demo.yaml"
-)
+pipeline.save_pipeline(config_path="../../data/pipeline_configs/save-pipeline-demo.yaml")
 ```
 
 ## Using the `load_pipeline` method
@@ -180,7 +200,11 @@ Any valid config file can be loaded into krixik, re-instantiating its associated
 
 ```python
 # load a pipeline into memory via its valid configuration file - stored in the data/pipeline_configs directory of the krixik docs repository
-pipeline = krixik.load_pipeline(
-    config_path="../../data/pipeline_configs/save-pipeline-demo.yaml"
-)
+pipeline = krixik.load_pipeline(config_path="../../data/pipeline_configs/save-pipeline-demo.yaml")
+```
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+reset_pipeline(pipeline)
 ```

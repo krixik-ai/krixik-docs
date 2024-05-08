@@ -11,6 +11,31 @@ A table of contents for the remainder of this document is shown below.
 - [using the `semantic_search` method](#using-the-semantic_search-method)
 - [querying output databases locally](#querying-output-databases-locally)
 
+
+```python
+# import utilities
+import sys
+import json
+import importlib
+
+sys.path.append("../../")
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+
+load_dotenv("../../.env")
+MY_API_KEY = os.getenv("MY_API_KEY")
+MY_API_URL = os.getenv("MY_API_URL")
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+
+krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
+```
+
 ## Pipeline setup
 
 Below we setup a simple one module pipeline using the `vector-db` module.
@@ -20,9 +45,7 @@ We do this by passing the module name to the `module_chain` argument of [`create
 
 ```python
 # create a pipeline with a single module
-pipeline = krixik.create_pipeline(
-    name="modules-vector-db-docs", module_chain=["vector-db"]
-)
+pipeline = krixik.create_pipeline(name="modules-vector-db-docs", module_chain=["vector-db"])
 ```
 
 The `vector-db` module comes with a single model:
@@ -30,6 +53,12 @@ The `vector-db` module comes with a single model:
 - `faiss`: (default) indexes a numpy array of input vectors
 
 These available modeling options and parameters are stored in your custom [pipeline's configuration](../system/create_save_load.md).
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+reset_pipeline(pipeline)
+```
 
 ## Required input format
 
@@ -110,9 +139,7 @@ import numpy as np
 from typing import Tuple
 
 
-def query_vector_db(
-    query_vector: np.ndarray, k: int, db_file_path: str
-) -> Tuple[list, list]:
+def query_vector_db(query_vector: np.ndarray, k: int, db_file_path: str) -> Tuple[list, list]:
     # read in vector db
     faiss_index = faiss.read_index(db_file_path)
 
@@ -129,9 +156,7 @@ Perform a simple query using the test function above.
 # perform test query using the above query function
 original_vectors = np.load(test_file)
 query_vector = np.array([[0, 1]])
-distances, indices = query_vector_db(
-    query_vector, 2, process_output["process_output_files"][0]
-)
+distances, indices = query_vector_db(query_vector, 2, process_output["process_output_files"][0])
 print(f"input query vector: {query_vector[0]}")
 print(f"closest vector from original: {original_vectors[indices[0][0]]}")
 print(f"distance from query to this vector: {distances[0][0]}")
@@ -200,9 +225,7 @@ Now we can query our text with natural language as shown below.
 
 ```python
 # perform semantic_search over the input file
-semantic_output = pipeline.semantic_search(
-    query="it was cold night", file_ids=[process_output["file_id"]]
-)
+semantic_output = pipeline.semantic_search(query="it was cold night", file_ids=[process_output["file_id"]])
 
 # nicely print the output of this process
 print(json.dumps(semantic_output, indent=2))
@@ -247,3 +270,9 @@ print(json.dumps(semantic_output, indent=2))
       ]
     }
 
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+reset_pipeline(pipeline)
+```
