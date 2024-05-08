@@ -27,7 +27,7 @@ Initialize a session by executing the following in a notebook or ide.
 
 ```python
 from krixik import krixik
-krixik.init(api_key=MY_API_KEY, 
+krixik.init(api_key=MY_API_KEY,
             api_url=MY_API_URL)
 ```
 

@@ -11,32 +11,6 @@ A table of contents for the remainder of this document is shown below.
 - [processing an input file](#processing-an-input-file)
 
 
-
-```python
-# import utilities
-import sys 
-import json
-sys.path.append('../../../')
-import importlib
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ## Pipeline setup
 
 Below we setup a pipeline consisting of three `summarize` modules in sequence.
@@ -51,12 +25,6 @@ pipeline = krixik.create_pipeline(name="examples-summarize-recursive-summarize-p
 ```
 
 This pipeline's available modeling options and parameters are stored in your custom [pipeline's configuration](../../system/create_save_load.md).
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```
 
 ## Processing an input file
 
@@ -219,9 +187,3 @@ with open(process_output['process_output_files'][0], "r") as file:
     smelled of boiled cabbage and old rag mats. A kilometre away the
     Ministry of Truth, his place of work, towered vast.
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

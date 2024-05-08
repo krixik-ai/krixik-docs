@@ -34,9 +34,6 @@ from krixik import krixik
 krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
 ```
 
-    SUCCESS: You are now authenticated.
-
-
 ## Pipeline setup
 
 Below we setup a simple one module pipeline using the `sentiment` module.
@@ -54,12 +51,6 @@ The `sentiment` module comes with a single model:
 - `distilbert-base-uncased-finetuned-sst-2-english`: (default)
 
 These available modeling options and parameters are stored in your custom [pipeline's configuration](../system/create_save_load.md).
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```
 
 ## Required input format
 
@@ -165,9 +156,3 @@ with open(process_output["process_output_files"][0]) as f:
 
 
 Here we see our two input sentences from the input have been concatenated successfully into a single text.
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

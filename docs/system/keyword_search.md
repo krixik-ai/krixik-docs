@@ -7,31 +7,6 @@ A table of contents for the remainder of this document is shown below.
 - [basic pipeline setup](#basic-pipeline-setup)
 - [basic usage, required input, and output breakdown](#basic-usage,-required-input,-and-output-breakdown)
 
-
-```python
-# import utilities
-import sys
-import json
-import importlib
-
-sys.path.append("../../")
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-
-load_dotenv("../../.env")
-MY_API_KEY = os.getenv("MY_API_KEY")
-MY_API_URL = os.getenv("MY_API_URL")
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-
-krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
-```
-
 ## Basic pipeline setup
 
 For this document we will use a pipeline consisting of a single [`keyword-db` module](../modules/keyword-db.md).  We use [`create_pipeline`](../system/create_save_load.md) to instantiate the pipeline.
@@ -40,12 +15,6 @@ For this document we will use a pipeline consisting of a single [`keyword-db` mo
 ```python
 # create a pipeline with a single module
 pipeline = krixik.create_pipeline(name="system-keyword-db-docs", module_chain=["keyword-db"])
-```
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
 ```
 
 ## Basic usage, required input, and output breakdown
@@ -141,9 +110,3 @@ print(json.dumps(process_output, indent=2))
 
 
 Here we can see one returned search result in `items`, as well as stop words removed from the input query shown in the return `warnings`.
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

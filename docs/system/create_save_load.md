@@ -9,32 +9,6 @@ A table of contents for the remainder of this document is shown below.
 - [using the `save_pipeline` method](#using-the-save_pipeline-method)
 - [using the `load_pipeline` method](#using-the-load_pipeline-method)
 
-
-```python
-import os
-import sys
-import importlib
-from dotenv import load_dotenv
-
-# add path to data
-sys.path.append("../../")
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-load_dotenv()
-MY_API_KEY = os.getenv("MY_API_KEY")
-MY_API_URL = os.getenv("MY_API_URL")
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-
-krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ## Using the `create_pipeline` method
 
 `create_pipeline` is used to instantiate a modular pipeline with krixik.  Required input to this method include the following:
@@ -201,10 +175,4 @@ Any valid config file can be loaded into krixik, re-instantiating its associated
 ```python
 # load a pipeline into memory via its valid configuration file - stored in the data/pipeline_configs directory of the krixik docs repository
 pipeline = krixik.load_pipeline(config_path="../../data/pipeline_configs/save-pipeline-demo.yaml")
-```
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
 ```
