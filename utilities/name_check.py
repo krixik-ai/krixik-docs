@@ -10,15 +10,12 @@ def get_code_from_markdown(lines: list[str], *, language: str = "python") -> lis
         r"(?P<start>^```(?P<block_language>(\w|-)+)\n)(?P<code>.*?\n)(?P<end>```)",
         re.DOTALL | re.MULTILINE,
     )
-    blocks = [
-        (match.group("block_language"), match.group("code"))
-        for match in regex.finditer("".join(lines))
-    ]
+    blocks = [(match.group("block_language"), match.group("code")) for match in regex.finditer("".join(lines))]
     return [block for block_language, block in blocks if block_language == language]
 
 
 def load_md_doc(md_filepath: str) -> str:
-    with open(md_filepath, 'r', encoding='utf-8') as file:
+    with open(md_filepath, "r", encoding="utf-8") as file:
         markdown_content = file.read()
     return markdown_content
 
@@ -27,7 +24,7 @@ def gather_pipeline_names(md_filepath: str) -> list:
     try:
         markdown_content = load_md_doc(md_filepath)
         code_blocks = get_code_from_markdown([markdown_content])
-        create_pattern = r'\.create_pipeline\([^)]*\)'
+        create_pattern = r"\.create_pipeline\([^)]*\)"
         name_pattern = r'name="([^"]*)"'
         pipeline_names = []
         for block in code_blocks:
@@ -55,27 +52,27 @@ def duplicate_name_check():
         all_names = []
         all_md_names = []
         for i in range(len(all_docs)):
-            md_filepath = base_dir + "/docs/" +  all_docs[i]
+            md_filepath = base_dir + "/docs/" + all_docs[i]
             pipeline_names = gather_pipeline_names(md_filepath)
             all_md_names.append(pipeline_names)
             for name in pipeline_names:
                 all_names.append(name)
-                
+
         # determine duplicates
-        my_dict = {i:all_names.count(i) for i in all_names}
+        my_dict = {i: all_names.count(i) for i in all_names}
         keys = list(my_dict.keys())
         duplicates = [key for key in keys if my_dict[key] > 1]
 
         if len(duplicates) > 0:
             # gather all paths to mds containing duplicate pipeline names
-            duplicates_dict = {v:[] for v in duplicates}
-            
+            duplicates_dict = {v: [] for v in duplicates}
+
             for d in duplicates:
                 for i in range(len(all_docs)):
                     docs_names = all_md_names[i]
                     if d in docs_names:
                         duplicates_dict[d].append(all_docs[i])
-                        
+
             print(f"FAILURE: the following pipeline names are found in multiple markdown docs: {duplicate_dicts}")
             return False
         return True

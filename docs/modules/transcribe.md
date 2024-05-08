@@ -19,9 +19,7 @@ We do this by passing the module name to the `module_chain` argument of [`create
 
 ```python
 # create a pipeline with a single module
-pipeline = krixik.create_pipeline(
-    name="modules-transcribe-docs", module_chain=["transcribe"]
-)
+pipeline = krixik.create_pipeline(name="modules-transcribe-docs", module_chain=["transcribe"])
 ```
 
 The `transcribe` module comes with the current range of [whisper](https://openai.com/research/whisper) transcription models.  These range from tiny to large, and offer a trade-off of transcription accuracy versus computational cost, with smaller models being less accurate but cheaper to run.  

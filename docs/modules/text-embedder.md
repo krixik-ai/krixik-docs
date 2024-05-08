@@ -19,9 +19,7 @@ We do this by passing the module name to the `module_chain` argument of [`create
 
 ```python
 # create a pipeline with a single module
-pipeline = krixik.create_pipeline(
-    name="modules-text-embedder-docs", module_chain=["text-embedder"]
-)
+pipeline = krixik.create_pipeline(name="modules-text-embedder-docs", module_chain=["text-embedder"])
 ```
 
 The `text-embedder` module comes with a five very popular models from huggingface.  Each model functions in the same general manner - transforming text into dense vectors.
@@ -164,9 +162,7 @@ process_output = pipeline.process(
     expire_time=60 * 10,  # set all process data to expire in 10 minutes
     wait_for_process=True,  # wait for process to complete before regaining ide
     verbose=False,  # set verbosity to False
-    modules={
-        "text-embedder": {"model": "all-mpnet-base-v2", "params": {"quantize": False}}
-    },
+    modules={"text-embedder": {"model": "all-mpnet-base-v2", "params": {"quantize": False}}},
 )
 ```
 

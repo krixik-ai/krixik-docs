@@ -1,4 +1,4 @@
 mkdocs
 mkdocstrings
-mkdocstrings-python
-mkdocs-section-index
+mkdocstrings - python
+mkdocs - section - index

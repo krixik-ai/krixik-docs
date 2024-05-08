@@ -16,9 +16,7 @@ For this document we will use a pipeline consisting of a single [`parser` module
 
 ```python
 # create a pipeline with a single module
-pipeline = krixik.create_pipeline(
-    name="system-process-status-docs", module_chain=["parser"]
-)
+pipeline = krixik.create_pipeline(name="system-process-status-docs", module_chain=["parser"])
 ```
 
 ## Basic usage, required input, and output breakdown

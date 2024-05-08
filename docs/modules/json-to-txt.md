@@ -18,9 +18,7 @@ We do this by passing the module name to the `module_chain` argument of [`create
 
 ```python
 # create a pipeline with a single module
-pipeline = krixik.create_pipeline(
-    name="modules-json-to-txt-docs", module_chain=["json-to-txt"]
-)
+pipeline = krixik.create_pipeline(name="modules-json-to-txt-docs", module_chain=["json-to-txt"])
 ```
 
 The `json-to-txt` module comes with a single model:

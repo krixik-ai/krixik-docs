@@ -20,9 +20,7 @@ We do this by passing the module name to the `module_chain` argument of [`create
 
 ```python
 # create a pipeline with a single module
-pipeline = krixik.create_pipeline(
-    name="modules-translate-docs", module_chain=["translate"]
-)
+pipeline = krixik.create_pipeline(name="modules-translate-docs", module_chain=["translate"])
 ```
 
 The `translate` module comes with a subset of popular translation models created at the [University of Hellsinki](https://huggingface.co/Helsinki-NLP).  These include

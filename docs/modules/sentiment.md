@@ -43,9 +43,7 @@ We do this by passing the module name to the `module_chain` argument of [`create
 
 ```python
 # create a pipeline with a single module
-pipeline = krixik.create_pipeline(
-    name="modules-sentiment-docs", module_chain=["sentiment"]
-)
+pipeline = krixik.create_pipeline(name="modules-sentiment-docs", module_chain=["sentiment"])
 ```
 
 The `sentiment` module comes with a single model:

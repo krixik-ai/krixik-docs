@@ -19,9 +19,7 @@ We do this by passing the module name to the `module_chain` argument of [`create
 
 ```python
 # create a pipeline with a single module
-pipeline = krixik.create_pipeline(
-    name="modules-summarize-docs", module_chain=["summarize"]
-)
+pipeline = krixik.create_pipeline(name="modules-summarize-docs", module_chain=["summarize"])
 ```
 
 The `summarize` module comes with a single model:

@@ -103,9 +103,7 @@ Let's look at an example.
 
 ```python
 # perform semantic_search over the input file
-semantic_output = pipeline.semantic_search(
-    query="it was cold night", file_ids=[process_output["file_id"]]
-)
+semantic_output = pipeline.semantic_search(query="it was cold night", file_ids=[process_output["file_id"]])
 
 # nicely print the output of this process
 print(json.dumps(semantic_output, indent=2))

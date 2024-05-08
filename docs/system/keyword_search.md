@@ -14,9 +14,7 @@ For this document we will use a pipeline consisting of a single [`keyword-db` mo
 
 ```python
 # create a pipeline with a single module
-pipeline = krixik.create_pipeline(
-    name="system-keyword-db-docs", module_chain=["keyword-db"]
-)
+pipeline = krixik.create_pipeline(name="system-keyword-db-docs", module_chain=["keyword-db"])
 ```
 
 ## Basic usage, required input, and output breakdown
@@ -70,9 +68,7 @@ Let's look at an example.
 
 ```python
 # perform keyword_search over the input file
-keyword_output = pipeline.keyword_search(
-    query="it was cold night", file_ids=[process_output["file_id"]]
-)
+keyword_output = pipeline.keyword_search(query="it was cold night", file_ids=[process_output["file_id"]])
 
 # nicely print the output of this process
 print(json.dumps(process_output, indent=2))

@@ -8,7 +8,7 @@ def collect_mkdocks_toc():
     file_path = f"{base_dir}/mkdocs.yml"
     with open(file_path, "r") as file:
         mkdocks_toc = yaml.safe_load(file)
-                
+
     # upnack toc
     home_doc = mkdocks_toc["nav"][0]["Home"]
     pipeline_examples_docs = mkdocks_toc["nav"][1]["Pipeline examples"]
@@ -27,19 +27,19 @@ def collect_mkdocks_toc():
             for subitem in item_values:
                 docpath = list(subitem.values())[0]
                 examples_mds.append(docpath)
-        
+
     # collect paths to system docs
     system_mds = []
     for item in system_docs:
         docpath = list(item.values())[0]
         system_mds.append(docpath)
-        
+
     # collect paths to modules docs
     modules_mds = []
     for item in modules_docs:
         docpath = list(item.values())[0]
         modules_mds.append(docpath)
-        
+
     # merge all mds
     all_mds = examples_mds + system_mds + modules_mds
     return all_mds
@@ -55,7 +55,7 @@ def convert_notebook_remove(docpath: str) -> None:
             "--TagRemovePreprocessor.remove_cell_tags=['remove_cell']",
             "--TagRemovePreprocessor.remove_all_outputs_tags=['remove_output']",
             "--to",
-            "markdown"
+            "markdown",
         ]
         process = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
@@ -71,20 +71,13 @@ def convert_all_notebooks_remove():
 
     # convert files
     for i in range(len(all_toc_files)):
-        docpath = f"{base_dir}/docs/" + all_toc_files[i].replace(".md",".ipynb")
+        docpath = f"{base_dir}/docs/" + all_toc_files[i].replace(".md", ".ipynb")
         convert_notebook_remove(docpath)
 
 
 def convert_notebook_no_remove(docpath: str) -> None:
     try:
-        command = [
-            "jupyter",
-            "nbconvert",
-            f"{docpath}",
-            "--TagRemovePreprocessor.enabled=True",
-            "--to",
-            "markdown"
-        ]
+        command = ["jupyter", "nbconvert", f"{docpath}", "--TagRemovePreprocessor.enabled=True", "--to", "markdown"]
         process = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         if process.returncode != 0:
@@ -99,5 +92,5 @@ def convert_all_notebooks_no_remove():
 
     # convert files
     for i in range(len(all_toc_files)):
-        docpath = f"{base_dir}/docs/" + all_toc_files[i].replace(".md",".ipynb")
+        docpath = f"{base_dir}/docs/" + all_toc_files[i].replace(".md", ".ipynb")
         convert_notebook_no_remove(docpath)

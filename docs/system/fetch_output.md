@@ -58,9 +58,7 @@ Since the file has completed processing we can now use `fetch_output`.
 
 ```python
 # fetch the output of our process using file_id
-fetch_output = pipeline.fetch_output(
-    file_id=process_output["file_id"], local_save_directory="../../data/output"
-)
+fetch_output = pipeline.fetch_output(file_id=process_output["file_id"], local_save_directory="../../data/output")
 ```
 
 Printing the fetched output return we have our json returned in the `fetch_output` key-value.  

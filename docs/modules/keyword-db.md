@@ -20,9 +20,7 @@ We do this by passing the module name to the `module_chain` argument of [`create
 
 ```python
 # create a pipeline with a single module
-pipeline = krixik.create_pipeline(
-    name="modules-keyword-db-docs", module_chain=["keyword-db"]
-)
+pipeline = krixik.create_pipeline(name="modules-keyword-db-docs", module_chain=["keyword-db"])
 ```
 
 The `keyword-search` module comes with a single model:
@@ -104,9 +102,7 @@ An example use if given below.
 
 ```python
 # perform keyword_search over the input file
-keyword_output = pipeline.keyword_search(
-    query="it was cold night", file_ids=[process_output["file_id"]]
-)
+keyword_output = pipeline.keyword_search(query="it was cold night", file_ids=[process_output["file_id"]])
 
 # nicely print the output of this process
 print(json.dumps(keyword_output, indent=2))

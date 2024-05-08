@@ -55,9 +55,7 @@ Next we use `update` to change its `file_name`.
 
 ```python
 # update a process record metadata
-update_output = pipeline.update(
-    file_id=process_output["file_id"], file_name="a_new_filename.txt"
-)
+update_output = pipeline.update(file_id=process_output["file_id"], file_name="a_new_filename.txt")
 
 # nicely print the output of this process
 print(json.dumps(process_output, indent=2))

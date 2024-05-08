@@ -169,9 +169,7 @@ process_output = pipeline.process(
     expire_time=60 * 10,  # set all process data to expire in 10 minutes
     wait_for_process=True,  # wait for process to complete before regaining ide
     verbose=False,  # set verbosity to False
-    modules={
-        "parser": {"model": "fixed", "params": {"chunk_size": 10, "overlap_size": 2}}
-    },
+    modules={"parser": {"model": "fixed", "params": {"chunk_size": 10, "overlap_size": 2}}},
 )
 ```
 
