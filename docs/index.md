@@ -12,7 +12,7 @@ Get started in three easy steps.
 
 ### Install the krixik cli using pip
 
-Install the krixik Python CLI using `pip` by executing the following at a terminal.
+Install the [krixik Python CLI](https://github.com/krixik-ai/krixik-cli) using `pip` by executing the following at a terminal.
 
 ```python
 # install the krixik cli
@@ -27,7 +27,7 @@ Initialize a session by executing the following in a notebook or ide.
 
 ```python
 from krixik import krixik
-krixik.init(api_key=MY_API_KEY,
+krixik.init(api_key=MY_API_KEY, 
             api_url=MY_API_URL)
 ```
 

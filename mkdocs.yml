@@ -1,4 +1,3 @@
-site_name: krixik docs
 nav:
   - Home: index.md
   - Pipeline examples:
@@ -56,4 +55,9 @@ plugins:
   - mkdocstrings:
       default_handler: python
   - search
+site_name: krixik docs
+repo_name: krixik-docs
+repo_url: https://github.com/krixik-ai/krixik-docs
+edit_uri: blob/main/docs/
+copyright: © Krixik 2024 All Rights Reserved
   # - section-index
