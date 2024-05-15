@@ -47,5 +47,5 @@ jobs:
         PYTHONPATH=. python3.10 -m pytest tests/test_3_links.py &&
         PYTHONPATH=. python3.10 -m pytest tests/test_4_names.py &&
         PYTHONPATH=. python3.10 -m pytest tests/test_5_data.py &&
-        PYTHONPATH=. python3.10 -m pytest tests/test_7_reset.py &&
+        PYTHONPATH=. python3.10 -m pytest tests/test_6_reset.py &&
         PYTHONPATH=. python3.10 -m pytest tests/test_8_conversion_remove.py
