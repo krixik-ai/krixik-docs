@@ -2,36 +2,6 @@
 
 Easily assemble and serverlessly consume modular AI pipelines through secure Python APIs.
 
-
-```python
-# if on collab pull required subdirectories
-import os
-
-if os.getenv("COLAB_RELEASE_TAG"):
-    # install github clone - allows for easy cloning of subdirectories
-    !pip install github-clone
-    from pathlib import Path
-
-    # clone datasets
-    if not Path("data").is_dir():
-        !ghclone https://github.com/krixik-ai/krixik-docs/tree/main/data
-    else:
-        print("docs datasets already cloned!")
-
-    # append path for data import
-    import sys
-
-    sys.path.append("./data")
-
-    %load_ext autoreload
-    %autoreload 2
-```
-
-
-```python
-
-```
-
 ## Quickstart guide
 
 Get started in three easy steps.
