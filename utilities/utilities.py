@@ -1,4 +1,11 @@
 import re
+from pathlib import Path
+
+
+def list_files_in_directory(directory: str) -> list:
+    path = Path(directory)
+    files = [str(file) for file in path.iterdir() if file.is_file()]
+    return files
 
 
 def get_code_from_markdown(lines: list[str], *, language: str = "python") -> list[str]:
