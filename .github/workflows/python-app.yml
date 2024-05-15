@@ -10,7 +10,7 @@ on:
       - '**/README.md'
       - '**/CONTRIBUTING.md'
   pull_request:
-    branches: [ "main", "sta" ]
+    branches: [ "main" ]
     paths-ignore:
       - '**/README.md'
       - '**/CONTRIBUTING.md'
@@ -46,5 +46,6 @@ jobs:
         PYTHONPATH=. python3.10 -m pytest tests/test_2_toc_file_check.py &&
         PYTHONPATH=. python3.10 -m pytest tests/test_3_links.py &&
         PYTHONPATH=. python3.10 -m pytest tests/test_4_names.py &&
-        PYTHONPATH=. python3.10 -m pytest tests/test_5_reset.py &&
-        PYTHONPATH=. python3.10 -m pytest tests/test_7_conversion_remove.py
+        PYTHONPATH=. python3.10 -m pytest tests/test_5_data.py &&
+        PYTHONPATH=. python3.10 -m pytest tests/test_7_reset.py &&
+        PYTHONPATH=. python3.10 -m pytest tests/test_8_conversion_remove.py

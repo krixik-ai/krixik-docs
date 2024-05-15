@@ -34,7 +34,7 @@ Let's look at an example of a small valid input - and then process it.
 
 ```python
 # examine contents of a valid test input file
-test_file = "../../data/input/1984_very_short.txt"
+test_file = "../../../data/input/1984_very_short.txt"
 with open(test_file, "r") as file:
     print(file.read())
 ```
@@ -51,12 +51,12 @@ Now let's process this file using our default model.
 
 ```python
 # define path to an input file from examples directory
-test_file = "../../data/input/1984_very_short.txt"
+test_file = "../../../data/input/1984_very_short.txt"
 
 # process for search
 process_output = pipeline.process(
     local_file_path=test_file,
-    local_save_directory="../../data/output",  # save output repo data output subdir
+    local_save_directory="../../../data/output",  # save output repo data output subdir
     expire_time=60 * 10,  # set all process data to expire in 10 minutes
     wait_for_process=True,  # wait for process to complete before regaining ide
     verbose=False,

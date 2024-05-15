@@ -113,7 +113,17 @@ All pipeline name(s) declared in a notebook must be unique to that notebook.  Th
 At this step all pipeline name(s) from each notebook are collected and a check is made to ensure that no pipeline name is found two notebooks.
 
 
-5.  Reset end
+5.  Data link check
+
+A similar check to 4 - only on links to data input into pipelines.  This check is done in two ways:
+
+- all pages are scanned, any link containing the required "/data/input/" is checked to ensure the corresponding file exists in the /data/input/ directory.  this helps ensure every page links to a real file in the data/input directory
+
+- the /data/input/ directory is examined, if any file is un-used in all pages it is flagged.  this helps ensure that the data/input directory contains only files used in pages.
+
+
+
+6.  Reset end
 
 To prevent pipeline collisions and general good practice cleanup the final code cell in every notebook containing a `create_pipeline` invoccation should end with `.reset_pipeline`.
 
@@ -126,12 +136,12 @@ reset_pipeline(...)
 This cell is tagged with `remove_cell` and will be removed in the final markdown conversion.
 
 
-6.  Notebook execution
+7.  Notebook execution
 
 Each notebook is executed and successful completion of each code cell *not* marked with the tag `ignore_test` is confirmed.
 
 
-7.  Final markdown conversion
+8.  Final markdown conversion
 
 After all notebooks have passed the previous step they are converted again to markdown.  All `remove_cell` tags are obeyed.
 

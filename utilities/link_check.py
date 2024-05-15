@@ -1,6 +1,6 @@
-import markdown
 import re
 import os
+import markdown
 import requests
 from utilities import base_dir
 

@@ -1,23 +1,7 @@
 import re
 from utilities.converter import collect_mkdocks_toc
 from utilities import base_dir
-
-
-def get_code_from_markdown(lines: list[str], *, language: str = "python") -> list[str]:
-    """Outputs extracted code blocks from a list of strings of markdown text"""
-    # from: https://github.com/tassaron/get_code_from_markdown
-    regex = re.compile(
-        r"(?P<start>^```(?P<block_language>(\w|-)+)\n)(?P<code>.*?\n)(?P<end>```)",
-        re.DOTALL | re.MULTILINE,
-    )
-    blocks = [(match.group("block_language"), match.group("code")) for match in regex.finditer("".join(lines))]
-    return [block for block_language, block in blocks if block_language == language]
-
-
-def load_md_doc(md_filepath: str) -> str:
-    with open(md_filepath, "r", encoding="utf-8") as file:
-        markdown_content = file.read()
-    return markdown_content
+from utilities.utilities import load_md_doc, get_code_from_markdown
 
 
 def gather_pipeline_names(md_filepath: str) -> list:

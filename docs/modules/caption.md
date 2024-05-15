@@ -39,7 +39,7 @@ Lets take a quick look at a valid input file - and then process it.
 
 ```python
 # examine contents of a valid input file
-test_file = "../../data/input/resturant.png"
+test_file = "../../data/input/restaurant.png"
 from IPython.display import Image
 
 Image(filename=test_file)
@@ -61,7 +61,7 @@ Let's process our test input file using the `default` model - `vit-gpt2-image-ca
 
 ```python
 # define path to an input file
-test_file = "../../data/input/resturant.png"
+test_file = "../../data/input/restaurant.png"
 
 # process for search
 process_output = pipeline.process(
@@ -122,7 +122,7 @@ To use a non-default model like `blip-image-captioning-base` we enter it explici
 
 ```python
 # define path to an input file
-test_file = "../../data/input/resturant.png"
+test_file = "../../data/input/restaurant.png"
 
 # process for search
 process_output = pipeline.process(
