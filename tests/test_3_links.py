@@ -4,6 +4,8 @@ from utilities.link_check import check_file_links
 
 
 toc_files = collect_mkdocks_toc()
+
+
 @pytest.mark.parametrize("docfile", toc_files)
 def test_1(docfile):
     """success test that all links from each notebook are valid"""

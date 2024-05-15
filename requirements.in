@@ -1,11 +1,11 @@
 krixik
 pytest
-pytest-xdist
+pytest - xdist
 mkdocs
 mkdocstrings
-mkdocstrings-python
-mkdocs-section-index
-mkdocs-material
+mkdocstrings - python
+mkdocs - section - index
+mkdocs - material
 nbconvert
 nbmake
 markdown

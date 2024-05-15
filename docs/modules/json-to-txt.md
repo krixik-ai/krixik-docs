@@ -9,6 +9,8 @@ A table of contents for the remainder of this document is shown below.
 - [required input format](#required-input-format)
 - [using the default model](#using-the-default-model)
 
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/modules/json-to-txt.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## Pipeline setup
 
 Below we setup a simple one module pipeline using the `json-to-txt` module.
