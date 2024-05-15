@@ -1,3 +1,4 @@
+docs_venv/*
 requirements.in
 scratch.ipynb
 wip/
