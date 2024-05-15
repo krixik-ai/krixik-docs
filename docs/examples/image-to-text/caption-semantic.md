@@ -44,7 +44,7 @@ Lets take a quick look at this file before processing.
 
 ```python
 # examine contents of a valid input file
-test_file = "../../../data/input/resturant.png"
+test_file = "../../../data/input/restaurant.png"
 from IPython.display import Image
 Image(filename=test_file)
 ```
@@ -63,7 +63,7 @@ For this run we will use the default models for the each module of the pipeline.
 
 ```python
 # test file
-test_file = "../../../data/input/resturant.png"
+test_file = "../../../data/input/restaurant.png"
 
 # process test input
 process_output = pipeline.process(local_file_path = test_file,

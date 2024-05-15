@@ -164,14 +164,14 @@ print(json.dumps(process_output, indent=2))
 
     {
       "status_code": 200,
-      "pipeline": "my-summarize-pipeline",
-      "request_id": "ae8cb093-b55f-4f2d-bd45-9048238bb26e",
-      "file_id": "d65f3b9e-39d2-4ca5-939b-d317a9a406cf",
-      "message": "SUCCESS - output fetched for file_id d65f3b9e-39d2-4ca5-939b-d317a9a406cf.Output saved to location(s) listed in process_output_files.",
+      "pipeline": "modules-summarize-docs",
+      "request_id": "98dd9c9f-6d61-4468-9c48-6c5d53ac0077",
+      "file_id": "77912c04-82f3-4106-b57e-2c381db2bf75",
+      "message": "SUCCESS - output fetched for file_id 77912c04-82f3-4106-b57e-2c381db2bf75.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../data/output/d65f3b9e-39d2-4ca5-939b-d317a9a406cf.txt"
+        "../../data/output/77912c04-82f3-4106-b57e-2c381db2bf75.txt"
       ]
     }
 
@@ -201,13 +201,13 @@ with open(process_output["process_output_files"][0], "r") as file:
     Winston kept his back turned to the telescreen. It was safer; though,
     as he well knew, even a back can be revealing. A kilometre
     away the Ministry of Truth, his place of work, towered vast and
-    white above the grimy landscape.
+    white above the grimy landscape. Winston tried to squeeze out some childhood
+    memory that should tell him whether London had always been quite like
+    this.
     
-    The Ministry of Truth --Minitrue, in Newspeak -- was startlingly different from
-    any other object in sight. It was an enormous pyramidal structure of
-    glittering white concrete, soaring 300 metres into the air. From where Winston
-    stood it was just possible to read, picked out on its white
-    face, the three slogans of the Party.
+    The Ministry of Truth--Minitrue, in Newspeak [Newspeak was the officiallanguage of Oceania]--was
+    startlingly different from any other object in sight. It was an enormous
+    pyramidal structure of glittering white concrete, soaring 300 metres into the air.
 
 
 We have just summarized a test input of around 5500 characters into a summary of less than half that length.
@@ -259,9 +259,8 @@ with open(process_output["process_output_files"][0], "r") as file:
     a metre wide.
     
     Winston kept his back turned to the telescreen. It was safer; though,
-    as he well knew, even a back can be revealing. A kilometre
-    away the Ministry of Truth, his place of work, towered vast and
-    white above the grimy landscape.
+    he well knew, even a back can be revealing. A kilometre away
+    the Ministry of Truth, his place of work, towered vast and white.
 
 
 This is an even shorter, more abstract, summary of the original input text.
@@ -295,8 +294,8 @@ with open(process_output["process_output_files"][0], "r") as file:
 ```
 
     Winston Smith walked through the glass doors of Victory Mansions. The hallway
-    smelled of boiled cabbage and old rag mats. A kilometre away the
-    Ministry of Truth, his place of work, towered vast.
+    smelled of boiled cabbage and old rag mats. A kilometre away, his
+    place of work, the Ministry of Truth, towered vast and white.
 
 
 And indeed this is very terse but representative summary of our original text.
@@ -364,10 +363,9 @@ with open(process_output["process_output_files"][0], "r") as file:
     
     There was no way of knowing whether you were being watched at
     any given moment . How often, or on what system, the Thought
-    Police plugged in on any individual wire was guesswork . But at
-    any rate they could plug in your wire whenever they wanted to
-    . The Ministry of Truth towered vast and white above the grimy
-    landscape .
+    Police plugged in on any individual wire was guesswork . You had
+    to live, from habit that became instinct--in the assumption that every sound
+    you made was overheard, and, except in darkness, every movement scrutinized .
     
     The Ministry of Truth--Minitrue, in Newspeak, was the official language of Oceania
     . It was an enormous pyramidal structure of glittering white concrete, soaring
