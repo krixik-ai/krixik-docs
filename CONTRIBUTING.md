@@ -117,9 +117,9 @@ At this step all pipeline name(s) from each notebook are collected and a check i
 
 A similar check to 4 - only on links to data input into pipelines.  This check is done in two ways:
 
-- all pages are scanned, any link containing the required "/data/input/" is checked to ensure the corresponding file exists in the /data/input/ directory
+- all pages are scanned, any link containing the required "/data/input/" is checked to ensure the corresponding file exists in the /data/input/ directory.  this helps ensure every page links to a real file in the data/input directory
 
-- the /data/input/ directory is examined, if any file is un-used in all pages it is flagged
+- the /data/input/ directory is examined, if any file is un-used in all pages it is flagged.  this helps ensure that the data/input directory contains only files used in pages.
 
 
 
