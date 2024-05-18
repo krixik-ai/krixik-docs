@@ -1,54 +1,78 @@
 nav:
   - Home: index.md
-  - Pipeline examples:
-    - 'overview': examples/overview.md
-    - transcribe/translate examples:
-      - 'semantically searchable transcription': examples/transcribe_translate/transcribe-semantic.md
-      - 'keyword searchable transcription': examples/transcribe_translate/transcribe-keyword.md
-      - 'translate semantic search': examples/transcribe_translate/translate_semantic_search.md
-      - 'multilingual transcription': examples/transcribe_translate/transcribe-multilingual.md
-      - 'semantically searchable multilingual transcription': examples/transcribe_translate/transcribe-multilingual-semantic.md
-    - summarize/sentiment examples:
-      - 'recursive summarization': examples/summarize_sentiment/recursive_summarize.md
-      - 'transcribe to sentiment analysis': examples/summarize_sentiment/transcribe-sentiment.md
-      - 'translate to sentiment analysis': examples/summarize_sentiment/translate-sentiment.md
-      - 'sentiment of multilingual transcription': examples/summarize_sentiment/transcribe-multilingual-sentiment.md
-    - image to text examples:
-      - 'ocr keyword search': examples/image-to-text/ocr-keyword.md
-      - 'caption semantic search': examples/image-to-text/caption-semantic.md
-    - text search:
-      - 'keyword search': examples/text-search/keyword_search.md
-      - 'semantic search': examples/text-search/semantic_search.md
-  - Modules:
-    - 'overview': modules/overview.md
-    - currently available:
-      - 'caption': modules/caption.md
-      - 'json-to-txt': modules/json-to-txt.md
-      - 'keyword-db': modules/keyword-db.md
-      - 'ocr': modules/ocr.md
-      - 'parser': modules/parser.md
-      - 'sentiment': modules/sentiment.md
-      - 'summarize': modules/summarize.md
-      - 'text-embedder': modules/text-embedder.md
-      - 'transcribe': modules/transcribe.md
-      - 'translate': modules/translate.md
-      - 'vector-db': modules/vector-db.md
   - System:
-    - 'overview': system/overview.md
-    - methods:
-      - 'install cli': system/install.md
-      - 'initialize': system/initialize.md
-      - 'convenience methods': system/convenience_methods.md
-      - 'create, save, and load pipelines': system/create_save_load.md
-      - 'the process method': system/process.md
-      - 'the process_status method': system/process_status.md
-      - 'the fetch_output method': system/fetch_output.md
-      - 'the list method': system/list.md
-      - 'the update method': system/update.md
-      - 'the delete method': system/delete.md
-      - 'the show_tree method': system/show_tree.md
-      - 'the keyword_search method': system/keyword_search.md
-      - 'the semantic_search method': system/semantic_search.md
+    - 'overview': system/system_overview.md
+    - initialization:
+      - 'install your cli': system/initialization/install_cli.md
+      - 'initialize and authenticate': system/initialization/initialize_and_authenticate.md  
+    - pipeline creation:
+      - 'create a pipeline': system/pipeline_creation/create_pipeline.md
+      - 'pipeline .config': system/pipeline_creation/pipeline_config.md
+      - 'save and load a pipeline': system/pipeline_creation/saving_and_loading_pipelines.md
+    - parameters + processing files through pipelines:
+      - 'the parameterizable .process method': system/parameters_processing_files_through_pipelines/process_method.md
+      - 'json input format': system/parameters_processing_files_through_pipelines/JSON_input_format.md
+      - 'the .process_status method': system/parameters_processing_files_through_pipelines/process_status_method.md
+      - 'the .fetch_output method': system/parameters_processing_files_through_pipelines/fetch_output_method.md
+    - file system:
+      - 'the .list method': system/file_system/list_method.md
+      - 'the .update method': system/file_system/update_method.md
+      - 'the .delete method': system/file_system/delete_method.md
+      - 'the .show_tree method': system/file_system/show_tree_method.md
+    - search methods:
+      - 'semantic (vector) search': system/search_methods/semantic_search_method.md
+      - 'keyword search': system/search_methods/keyword_search_method.md
+    - convenience methods:
+      - 'convenience methods': system/convenience_methods/convenience_methods.md
+  - Modules:
+    - 'overview': modules/modules_overview.md
+    - ai model modules:
+      - 'image caption': modules/ai_model_modules/caption_module.md
+      - 'ocr (optical character recognition)': modules/ai_model_modules/ocr_module.md
+      - 'sentiment analysis': modules/ai_model_modules/sentiment_module.md
+      - 'summarization': modules/ai_model_modules/summarize_module.md
+      - 'text embedder': modules/ai_model_modules/text-embedder_module.md
+      - 'text parser': modules/ai_model_modules/parser_module.md
+      - 'transcription': modules/ai_model_modules/transcribe_module.md
+      - 'translation': modules/ai_model_modules/translate_module.md
+    - database modules:
+      - 'vector database': modules/database_modules/vector-db_module.md
+      - 'keyword database': modules/database_modules/keyword-db_module.md
+    - support function models:
+      - 'json to txt': modules/support_function_modules/json-to-txt_module.md
+  - Pipeline examples:
+    - 'overview': examples/pipeline_examples_overview.md
+    - single-module pipelines:
+      - 'image caption': examples/single_module_pipelines/single_caption.md
+      - 'ocr (optical character recognition)': examples/single_module_pipelines/single_ocr.md
+      - 'sentiment analysis': examples/single_module_pipelines/single_sentiment.md
+      - 'summarization': examples/single_module_pipelines/single_summarize.md
+      - 'text embedder': examples/single_module_pipelines/single_text-embedder.md
+      - 'text parser': examples/single_module_pipelines/single_parser.md
+      - 'transcription': examples/single_module_pipelines/single_transcribe.md
+      - 'translation': examples/single_module_pipelines/single_translate.md
+      - 'keyword database': examples/single_module_pipelines/single_keyword-db.md
+      - 'vector database': examples/single_module_pipelines/single_vector-db.md
+      - 'json to txt': examples/single_module_pipelines/single_json-to-txt.md
+    - multi-module (non-search) pipeline examples:
+      - 'recursive summarization': examples/multi_module_non_search_pipeline_examples/multi_recursive_summarization.md
+      - 'translated transcription': examples/multi_module_non_search_pipeline_examples/multi_translated_transcription.md
+      - 'sentiment analysis on transcription': examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_transcription.md
+      - 'sentiment analysis on translation': examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_translation.md
+      - 'sentiment analysis on translated transcription': examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_translated_transcription.md
+    - search pipeline examples:
+      - 'overview': examples/search_pipeline_examples/search_pipelines_overview.md
+      - 'semantic search': examples/search_pipeline_examples/multi_basic_semantic_search.md
+      - 'semantic search on snippets': examples/search_pipeline_examples/multi_snippet_semantic_search.md
+      - 'keyword search': examples/search_pipeline_examples/multi_basic_keyword-search.md
+      - 'semantically-searchable transcription': examples/search_pipeline_examples/multi_semantically_searchable_transcription.md
+      - 'keyword-searchable transcription': examples/search_pipeline_examples/multi_keyword_searchable_transcription.md
+      - 'semantically-searchable translation': examples/search_pipeline_examples/multi_semantically_searchable_translation.md
+      - 'semantically-searchable translated transcription': examples/search_pipeline_examples/multi_semantically_searchable_translated_transcription.md
+      - 'semantically-searchable ocr': examples/search_pipeline_examples/multi_semantically_searchable_ocr.md
+      - 'keyword-searchable image captions': examples/search_pipeline_examples/multi_keyword_searchable_image_captions.md
+  - The future of Krixik:
+    - 'the future of krixik': future/future_of_krixik.md
 theme: 
   name: readthedocs
 plugins:

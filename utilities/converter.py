@@ -3,46 +3,35 @@ import subprocess
 from utilities import base_dir
 
 
+def get_all_values(nested_dict: dict) -> list:
+    values = []
+    
+    def extract_values(d):
+        if isinstance(d, dict):
+            for key, value in d.items():
+                if isinstance(value, dict):
+                    extract_values(value)
+                elif isinstance(value, list):
+                    for item in value:
+                        extract_values(item)
+                else:
+                    values.append(value)
+        elif isinstance(d, list):
+            for item in d:
+                extract_values(item)
+        else:
+            values.append(d)
+
+    extract_values(nested_dict)
+    return values
+
+
 def collect_mkdocks_toc():
     # open mkdocs toc and collect all entries
     file_path = f"{base_dir}/mkdocs.yml"
     with open(file_path, "r") as file:
         mkdocks_toc = yaml.safe_load(file)
-
-    # upnack toc
-    home_doc = mkdocks_toc["nav"][0]["Home"]
-    pipeline_examples_docs = mkdocks_toc["nav"][1]["Pipeline examples"]
-    modules_overview = mkdocks_toc["nav"][2]["Modules"][0]["overview"]
-    modules_docs = mkdocks_toc["nav"][2]["Modules"][1]["currently available"]
-    system_overview = mkdocks_toc["nav"][3]["System"][0]["overview"]
-    system_docs = mkdocks_toc["nav"][3]["System"][1]["methods"]
-
-    # collect paths to example docs
-    examples_mds = [home_doc, modules_overview, system_overview]
-    for item in pipeline_examples_docs:
-        item_values = list(item.values())[0]
-        if isinstance(item_values, str):
-            examples_mds.append(item_values)
-        else:
-            for subitem in item_values:
-                docpath = list(subitem.values())[0]
-                examples_mds.append(docpath)
-
-    # collect paths to system docs
-    system_mds = []
-    for item in system_docs:
-        docpath = list(item.values())[0]
-        system_mds.append(docpath)
-
-    # collect paths to modules docs
-    modules_mds = []
-    for item in modules_docs:
-        docpath = list(item.values())[0]
-        modules_mds.append(docpath)
-
-    # merge all mds
-    all_mds = examples_mds + system_mds + modules_mds
-    return all_mds
+    return get_all_values(mkdocks_toc["nav"])
 
 
 def convert_notebook_remove(docpath: str) -> None:

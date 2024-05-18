@@ -22,8 +22,8 @@ def extract_links_from_markdown(markdown_file: str) -> tuple:
             outer_links.append(link)
         else:
             # convert to absolute link
-            absolute_link = os.path.abspath(os.path.join(os.path.dirname(markdown_file_path), link))
-            absolute_link = "docs/" + absolute_link.split("docs", 1)[-1][1:]
+            absolute_link = os.path.abspath(os.path.join(os.path.dirname(markdown_file), link))
+            absolute_link = absolute_link.split("docs", 1)[-1][1:]
             inter_links.append(absolute_link)
 
     return intra_links, inter_links, outer_links
