@@ -4,12 +4,38 @@ This document introduces several useful properties of the main Krixik object and
 
 The document is broken down as follows:
 
-- [View All Available Modules with the `.available_modules` Property](#view-all-available-modules-with-the-.available_modules-property)
-- [Examine a Module's Configuration with the `.module_details` method](#examine-a-module's-configuration-with-the-.module_details-method)
-- [View a Pipeline's Module Chain with the `.module_chain` Property](#view-a-pipeline's-module-chain-with-the-module_chain-property)
-- [Test Pipeline Input with the `.test_input` Method](#test-pipeline-input-with-the-.test_input-method)
+- [View All Available Modules with the `.available_modules` Property](#view-all-available-modules-with-the-available_modules-property)
+- [Examine Configuration of a Module with the `.module_details` method](#examine-configuration-of-a-module-with-the-module_details-method)
+- [View Pipeline Module Chain with the `.module_chain` Property](#view-pipeline-module-chain-with-the-module_chain-property)
+- [Test Pipeline Input with the `.test_input` Method](#test-pipeline-input-with-the-test_input-method)
 - [View Module Input and Output Examples](#view-module-input-and-output-examples)
-- [View Module "Click Data" with the `.click_data` Method](#view-module-click-data-with-the-.click_data-method)
+- [View Module "Click Data" with the `.click_data` Method](#view-module-click-data-with-the-click_data-method)
+
+
+```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
 
 ### View All Available Modules with the `.available_modules` Property
 
@@ -41,7 +67,7 @@ krixik.available_modules
 
 The above is a list of the exact module names you would use when setting up a [new pipeline's](../pipeline_creation/create_pipeline.md) `module_chain`.
 
-### Examine a Module's Configuration with the `.module_details` Method
+### Examine Configuration of a Module with the `.module_details` Method
 
 Any module's [configuration](../pipeline_creation/pipeline_config.md) can be viewed using the Krixik `.module_details` method. This can be done locally and without [first initializing](../initialization/initialize_and_authenticate.md), as follows:
 
@@ -49,7 +75,7 @@ Any module's [configuration](../pipeline_creation/pipeline_config.md) can be vie
 ```python
 # view the configuration of a Krixik module - in this example, transcribe
 
-krixik.module_details(module_name="transcribe")
+krixik.view_module_config(module_name="transcribe")
 ```
 
 
@@ -96,7 +122,7 @@ krixik.module_details(module_name="transcribe")
 
 
 
-### View a Pipeline's Module Chain with the .`module_chain` Property
+### View Pipeline Module Chain with the .`module_chain` Property
 
 Sometimes you want to quickly view a pipeline's `module_chain` without having to resort to examining a [config](../pipeline_creation/pipeline_config.md) file. This is where the `.module_chain` property comes in handy.
 
@@ -115,7 +141,7 @@ pipeline_1 = krixik.create_pipeline(name="system-transcribe-semantic-multilingua
                                                   "vector-db"])
 ```
 
-To view the module chain of this (or any pipeline), use the `module_chain` property. This can be done locally and without [first initializing](../system/initialization/initialize_and_authenticate.md), as follows:
+To view the module chain of this (or any pipeline), use the `module_chain` property. This can be done locally and without [first initializing](../initialization/initialize_and_authenticate.md), as follows:
 
 
 ```python
@@ -140,20 +166,20 @@ pipeline_1.module_chain
 
 You can test whether inputs to a pipeline will flow properly through it by using the `.test_input` method. 
 
-We illustrate this below for both valid and invalid files using the [pipeline we created above](#view-a-pipeline's-module-chain-with-the-module_chain-property). 
+We illustrate this below for both valid and invalid files using the [pipeline we created above](#view-pipeline-module-chain-with-the-module_chain-property). 
 
 Note that this test method does **not** execute your pipeline.  Nothing is sent server-side; it simply makes sure that your input file is consumable by the first module of your pipeline. Flow-through across the rest of your pipeline was already confirmed upon [pipeline instantiation](../pipeline_creation/create_pipeline.md).
 
-Let's first test with a file that is valid for this pipeline. Since the first module is a [`transcribe`](../../modules/ai_model_modules/transcribe_module.md) module, an MP4 with clear spoken English in it will do the trick. This can be done locally and without [first initializing](../initialization/initialize_and_authenticate.md), as follows:
+Let's first test with a file that is valid for this pipeline. Since the first module is a [`transcribe`](../../modules/ai_model_modules/transcribe_module.md) module, an MP3 with clear spoken English in it will do the trick. This can be done locally and without [first initializing](../initialization/initialize_and_authenticate.md), as follows:
 
 
 ```python
 # use .test_input on a valid file for this pipeline
 
-pipeline_1.test_input(local_file_path="../../data/input/Interesting Facts About Colombia.mp4")
+pipeline_1.test_input(local_file_path="../../../data/input/Interesting Facts About Colombia.mp3")
 ```
 
-    SUCCESS: local file ../../data/input/Interesting Facts About Colombia.mp4 passed pipeline input test passed
+    SUCCESS: local file '../../../data/input/Interesting Facts About Colombia.mp3' passed pipeline input test passed
 
 
 Now let's test with an input that won't work with this pipeline. The [`transcribe`](../../modules/ai_model_modules/transcribe_module.md) module that the pipeline begins with will **not** accept a TXT file, so the result of this test looks thus:
@@ -161,27 +187,64 @@ Now let's test with an input that won't work with this pipeline. The [`transcrib
 
 ```python
 # use .test_input on a file that won't work for this pipeline
-pipeline_1.test_input(local_file_path="../../data/input/1984_very_short.txt")
+pipeline_1.test_input(local_file_path="../../../data/input/1984_very_short.txt")
 ```
 
 
     ---------------------------------------------------------------------------
 
-    NameError                                 Traceback (most recent call last)
+    TypeError                                 Traceback (most recent call last)
 
-    Cell In[1], line 3
+    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\utilities\validators\data\utilities\decorators.py:47, in datatype_validator.<locals>.wrapper(*args, **kwargs)
+         46             raise ValueError(f"invalid file extension: '{extension}'")
+    ---> 47     return func(*args, **kwargs)
+         48 except ValueError as e:
+
+
+    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\pipeline_builder\pipeline.py:130, in BuildPipeline.test_input(self, local_file_path)
+        123 """test input file will flow through pipeline correctly via simulation (currently in beta)
+        124 
+        125 Parameters
+       (...)
+        128     path to local file to test for pipeline threadthrough
+        129 """
+    --> 130 input_check(local_file_path, self.__module_chain)
+        131 print(f"SUCCESS: local file '{local_file_path}' passed pipeline input test passed")
+
+
+    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\pipeline_builder\utilities\input_checker.py:20, in input_check(local_file_path, module_chain)
+         19 if file_ext_format != first_module_input_format:
+    ---> 20     raise TypeError(f"file extension '{file_ext}' does not match the expected input format {first_module_input_format}")
+         21 is_valid(first_module.name, local_file_path)
+
+
+    TypeError: file extension '.txt' does not match the expected input format audio
+
+    
+    During handling of the above exception, another exception occurred:
+
+
+    Exception                                 Traceback (most recent call last)
+
+    Cell In[8], line 2
           1 # use .test_input on a file that won't work for this pipeline
-    ----> 3 pipeline_1.test_input(local_file_path="../../data/input/1984_very_short.txt")
+    ----> 2 pipeline_1.test_input(local_file_path="../../../data/input/1984_very_short.txt")
 
 
-    NameError: name 'pipeline_1' is not defined
+    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\utilities\validators\data\utilities\decorators.py:51, in datatype_validator.<locals>.wrapper(*args, **kwargs)
+         49     raise ValueError(e)
+         50 except Exception as e:
+    ---> 51     raise Exception(e)
+
+
+    Exception: file extension '.txt' does not match the expected input format audio
 
 
 ### View Module Input and Output Examples
 
 Examine the applicable data class of your starting module to ensure that your potential input satisfies required input structure requirements.
 
-You can get a quick sense of a module's input/output structure by looking at an example datapoint, like the one printed below the following code. This can be done for any [currently available module](../../modules/modules_overview.md), so we'll illustrate using the [`parser`](../../modules/ai_model_modules/parser_module.md) module. This can be done locally and without [first initializing](..initialization/initialize_and_authenticate.md), as follows:
+You can get a quick sense of a module's input/output structure by looking at an example datapoint, like the one printed below the following code. This can be done for any [currently available module](../../modules/modules_overview.md), so we'll illustrate using the [`parser`](../../modules/ai_model_modules/parser_module.md) module. This can be done locally and without [first initializing](../initialization/initialize_and_authenticate.md), as follows:
 
 
 ```python
@@ -220,7 +283,7 @@ print(json.dumps(io.OutputStructure().data_example, indent=2))
 
 Here `"other"` denotes any other key in your input.  Its value is arbitrary because, as far as any model you connect the [`parser`](../../modules/ai_model_modules/parser_module.md) module into is concerned, it's irrelevant. Only the snippet is passed through.
 
-### View Module Click Data with the `.click_data` Method
+### View Module "Click Data" with the `.click_data` Method
 
 The `.click_data` method displays all the basic data required to know which modules can be "clicked" into which other modules.  This is the data referenced "under the hood" of Krixik when you build a pipeline with the [`.create_pipeline`](../pipeline_creation/create_pipeline.md) method. Let's go through this piece by piece.
 
@@ -293,3 +356,10 @@ The latter connection, (`vector-search` → `text-embedder`), will instead not w
 - `vector-search` output_format (`faiss`) != `text-embedder` input_format (`json`)
 
 
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+
+reset_pipeline(pipeline_1)
+```

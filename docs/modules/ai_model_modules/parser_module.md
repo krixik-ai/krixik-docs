@@ -6,9 +6,9 @@ This overview of the `parser` module is divided into the following sections:
 
 - [Inputs and Outputs of the `parser` Module](#inputs-and-outputs-of-the-parser-module)
 - [Available Models in the `parser` Module](#available-models-in-the-parser-module)
-- [Model Parameters in the `parser` Module](#model-parameters-in-the-parser-Module)
+- [Model Parameters in the `parser` Module](#model-parameters-in-the-parser-module)
 - [A Single-Module Pipeline for the `parser` Module](#a-single-module-pipeline-for-the-parser-module)
-- [Further Information on `parser` Module I/O and Clickability](#further-information-on-parser-module-i/o-and-clickability)
+- [Further Information on `parser` Module I/O and Clickability](#further-information-on-parser-module-io-and-clickability)
 
 ### Inputs and Outputs of the `parser` Module
 
@@ -64,20 +64,18 @@ print(json.dumps(sample_process_output, indent=2))
 ### Available Models in the `parser` Module
 
 You can activate any of the following models when using the `parser` module:
- 
-# NEED A LINK HERE OR WHAT
 
-- [sentence](https://www.nltk.org/api/nltk.tokenize.html) (default)
+- [sentence](https://www.nltk.org/api/nltk.tokenize.html) - (default)
 
-- `fixed`: Krixik-made. Splits a text into potentially overlapping chunks of consecutive words that always have the same length.
+- `fixed` - Krixik-made. Splits a text into potentially overlapping chunks of consecutive words that always have the same length.
 
-Use the [`modules`](../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method to determine what model you'd like active when you process files through the `parser` module.
+Use the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method to determine what model you'd like active when you process files through the `parser` module.
 
 ### Model Parameters in the `parser` Module
 
 Different parameter sets apply for the different `parser` models.
 
-The [`sentence`](https://www.nltk.org/api/nltk.tokenize.html) (default) model _is not_ parameterizable. Consequently, if selecting that model through the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method's [`modules`](../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument, `params` will be set to an empty dictionary, as follows:
+The [`sentence`](https://www.nltk.org/api/nltk.tokenize.html) (default) model _is not_ parameterizable. Consequently, if selecting that model through the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method's [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument, `params` will be set to an empty dictionary, as follows:
 
 ```python
 # example model selection for parser module in .process
@@ -85,7 +83,7 @@ modules={'parser': {'model':'sentence',
                     'params': {}}}
 ```
 
-The `fixed` model _is_ parameterizable. Consequently, if selecting that model through the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method's [`modules`](../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument, `params` can include a value for two different parameters:
+The `fixed` model _is_ parameterizable. Consequently, if selecting that model through the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method's [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument, `params` can include a value for two different parameters:
 
 - `chunk_size` (int) - Number of consecutive words (a.k.a. tokens) in every chunk/snippet. Defaults to 10.
 - `overlap_size` (int) - Number of words that a chunk/snippet overlaps/shares with the previous chunk. If 0, chunks are lined up end-to-end. Defaults to 2.
@@ -100,12 +98,12 @@ modules={'parser': {"model": "fixed",
 
 ### A Single-Module Pipeline for the `parser` Module
 
-Please click [here](../examples/single_module_pipelines/single_parser.md) to visit the `Pipeline Examples` section of our documentation and review an example of a single-module pipeline for the `parser` module.
+Please click [here](../../examples/single_module_pipelines/single_parser.md) to visit the `Pipeline Examples` section of our documentation and review an example of a single-module pipeline for the `parser` module.
 
 ### Further Information on `parser` Module I/O and Clickability
 
-Please click [here](../system/convenience_methods/convenience_methods.md) to visit the `Convenience Methods (and More!)` documentation. There you will find two tools to learn more about the `parser` module:
+Please click [here](../../system/convenience_methods/convenience_methods.md) to visit the `Convenience Methods (and More!)` documentation. There you will find two tools to learn more about the `parser` module:
 
-- [View Module Input and Output Examples](../system/convenience_methods/convenience_methods.md#view-module-input-and-output-examples)
+- [View Module Input and Output Examples](../../system/convenience_methods/convenience_methods.md#view-module-input-and-output-examples)
 
-- [View Module Click Data with the `.click_data` Method](../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-.click_data-method)
+- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-click_data-method)

@@ -6,6 +6,32 @@ Using the `.config` method is very simple. First let's create a pipeline to try 
 
 
 ```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
+
+```python
 # first create a valid pipeline
 
 pipeline_1 = krixik.create_pipeline(name="pipeline_config_1_parser_translate_sentiment",
@@ -20,5 +46,31 @@ Now let's view this pipeline's configuration with the `.config` method:
 
 pipeline_1.config
 ```
+
+
+
+
+    {'pipeline': {'name': 'pipeline_config_1_parser_translate_sentiment',
+      'modules': [{'name': 'translate',
+        'models': [{'name': 'opus-mt-de-en'},
+         {'name': 'opus-mt-en-es'},
+         {'name': 'opus-mt-es-en'},
+         {'name': 'opus-mt-en-fr'},
+         {'name': 'opus-mt-fr-en'},
+         {'name': 'opus-mt-it-en'},
+         {'name': 'opus-mt-zh-en'}],
+        'defaults': {'model': 'opus-mt-en-es'},
+        'input': {'type': 'json', 'permitted_extensions': ['.json']},
+        'output': {'type': 'json'}},
+       {'name': 'sentiment',
+        'models': [{'name': 'distilbert-base-uncased-finetuned-sst-2-english'},
+         {'name': 'bert-base-multilingual-uncased-sentiment'},
+         {'name': 'distilbert-base-multilingual-cased-sentiments-student'},
+         {'name': 'distilroberta-finetuned-financial-news-sentiment-analysis'}],
+        'defaults': {'model': 'distilbert-base-uncased-finetuned-sst-2-english'},
+        'input': {'type': 'json', 'permitted_extensions': ['.json']},
+        'output': {'type': 'json'}}]}}
+
+
 
 As you can see, the `.config` method has provided all relevant details for this pipeline's modules, which are a [`translate module`](../../modules/ai_model_modules/translate_module.md) and a [`sentiment module`](../../modules/ai_model_modules/sentiment_module.md). A blueprint of sorts has been displayed.

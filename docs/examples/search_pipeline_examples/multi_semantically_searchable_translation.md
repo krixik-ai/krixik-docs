@@ -1,6 +1,6 @@
 ## Multi-Module Pipeline: Semantically-Searchable Translation
 
-This document details a modular pipeline that takes in text, [`translates`](../modules/ai_model_modules/translate_module.md) it into a desired language, and makes the result [`semantically searchable`](../system/search_methods/semantic_search_method.md).
+This document details a modular pipeline that takes in text, [`translates`](../../modules/ai_model_modules/translate_module.md) it into a desired language, and makes the result [`semantically searchable`](../../system/search_methods/semantic_search_method.md).
 
 The document is divided into the following sections:
 
@@ -8,19 +8,45 @@ The document is divided into the following sections:
 - [Processing an Input File](#processing-an-input-file)
 - [Performing Semantic Search](#performing-semantic-search)
 
+
+```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ### Pipeline Setup
 
 To achieve what we've described above, let's set up a pipeline sequentially consisting of the following modules:
 
-- A [`parser`](../modules/ai_model_modules/parser_module.md) module.
+- A [`parser`](../../modules/ai_model_modules/parser_module.md) module.
 
-- A [`translate`](../modules/ai_model_modules/translate_module.md) module.
+- A [`translate`](../../modules/ai_model_modules/translate_module.md) module.
 
-- A [`text-embedder`](../modules/ai_model_modules/text-embedder_module.md) module.
+- A [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) module.
 
-- A [`vector-db`](../modules/database_modules/vector-db_module.md) module.
+- A [`vector-db`](../../modules/database_modules/vector-db_module.md) module.
 
-We do this by leveraging the [`.create_pipeline`](../system/pipeline_creation/create_pipeline.md) method, as follows:
+We do this by leveraging the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
 
 
 ```python
@@ -75,9 +101,9 @@ with open("../../../data/input/don_esp.txt", "r") as file:
     que dijeres della.
 
 
-Since the input text is in Spanish, we'll use the (non-default) [`opus-mt-es-en`](https://huggingface.co/Helsinki-NLP/opus-mt-es-en) model of the [`translate`](../modules/ai_model_modules/translate_module.md) module to translate it into English.
+Since the input text is in Spanish, we'll use the (non-default) [`opus-mt-es-en`](https://huggingface.co/Helsinki-NLP/opus-mt-es-en) model of the [`translate`](../../modules/ai_model_modules/translate_module.md) module to translate it into English.
 
-We will use the default models for every other module in the pipeline, so they don't have to be specified in the [`modules`](../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method.
+We will use the default models for every other module in the pipeline, so they don't have to be specified in the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 
 ```python
@@ -91,23 +117,7 @@ process_output_1 = pipeline_1.process(local_file_path = "../../../data/input/don
                                       modules={"translate": {"model": "opus-mt-es-en"}}) # specify a non-default model for use in the translate module
 ```
 
-    INFO: hydrated input modules: {'module_1': {'model': 'sentence', 'params': {}}, 'module_2': {'model': 'opus-mt-es-en', 'params': {}}, 'module_3': {'model': 'base', 'params': {}}}
-    INFO: symbolic_directory_path was not set by user - setting to default of /etc
-    INFO: file_name was not set by user - setting to random file name: krixik_generated_file_name_bkryhqmkdo.txt
-    INFO: wait_for_process is set to True.
-    INFO: file will expire and be removed from you account in 600 seconds, at Tue May  7 12:45:30 2024 UTC
-    INFO: examples-translate-text-search-pipeline file process and input processing started...
-    INFO: metadata can be updated using the .update api.
-    INFO: This process's request_id is: 890866e1-3a68-1927-5439-628eac7dca13
-    INFO: File process and processing status:
-    SUCCESS: module 1 (of 3) - parser processing complete.
-    SUCCESS: module 2 (of 3) - translate processing complete.
-    SUCCESS: module 3 (of 3) - json-to-txt processing complete.
-    SUCCESS: pipeline process complete.
-    SUCCESS: process output downloaded
-
-
-The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method.
+The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 Because the output of this particular module-model pair is a [FAISS](https://github.com/facebookresearch/faiss) database file, `process_output` is "null". However, the output file has been saved to the location noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 
@@ -120,30 +130,30 @@ print(json.dumps(process_output_1, indent=2))
 
     {
       "status_code": 200,
-      "pipeline": "examples-translate-text-search-pipeline",
-      "request_id": "d8363ef8-4fe9-4ba1-904a-76a603a8d4d3",
-      "file_id": "8b907667-1472-4130-83f5-9b4a82bdb5ee",
-      "message": "SUCCESS - output fetched for file_id 8b907667-1472-4130-83f5-9b4a82bdb5ee.Output saved to location(s) listed in process_output_files.",
+      "pipeline": "multi_keyword_searchable_transcription",
+      "request_id": "73ff0f28-089e-427c-af46-e60188fbea7b",
+      "file_id": "50f929a9-5b2d-44d8-b6a3-270553b1abd6",
+      "message": "SUCCESS - output fetched for file_id 50f929a9-5b2d-44d8-b6a3-270553b1abd6.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../../data/output/8b907667-1472-4130-83f5-9b4a82bdb5ee.txt"
+        "../../../data/output/50f929a9-5b2d-44d8-b6a3-270553b1abd6.faiss"
       ]
     }
 
 
 ### Performing Semantic Search
 
-Krixik's [`.semantic_search`](../system/search_methods/semantic_search_method.md) method enables semantic search on documents processed through certain pipelines. Given that the [`.semantic_search`](../system/search_methods/semantic_search_method.md) method both [embeds](../modules/ai_model_modules/text-embedder_module.md) the query and performs the search, it can only be used with pipelines containing both a [`text-embedder`](../modules/ai_model_modules/text-embedder_module.md) module and a [`vector-db`](../modules/database_modules/vector-db_module.md) module in immediate succession.
+Krixik's [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method enables semantic search on documents processed through certain pipelines. Given that the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method both [embeds](../../modules/ai_model_modules/text-embedder_module.md) the query and performs the search, it can only be used with pipelines containing both a [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) module and a [`vector-db`](../../modules/database_modules/vector-db_module.md) module in immediate succession.
 
-Since our pipeline satisfies this condition, it has access to the [`.semantic_search`](../system/search_methods/semantic_search_method.md) method. Let's use it to query our text with natural language, as shown below:
+Since our pipeline satisfies this condition, it has access to the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method. Let's use it to query our text with natural language, as shown below:
 
 
 ```python
 # perform semantic_search over the file in the pipeline
 
 semantic_output_1 = pipeline_1.semantic_search(query="Sterile ideas bring little to man", 
-                                               file_ids=["XXXXX"])
+                                               file_ids=["50f929a9-5b2d-44d8-b6a3-270553b1abd6"])
 
 # nicely print the output of this process
 
@@ -152,55 +162,55 @@ print(json.dumps(semantic_output_1, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "d88bf437-a742-41c1-8b28-5981d5c44bcc",
+      "request_id": "9b24b166-e2cb-4a48-bddc-a0937fe01902",
       "message": "Successfully queried 1 user file.",
       "warnings": [],
       "items": [
         {
-          "file_id": "e0024f60-9192-4e05-8bb3-a0a0423305ab",
+          "file_id": "50f929a9-5b2d-44d8-b6a3-270553b1abd6",
           "file_metadata": {
-            "file_name": "krixik_generated_file_name_tnzlfqdsly.mp3",
+            "file_name": "krixik_generated_file_name_ooezcrxdjg.txt",
             "symbolic_directory_path": "/etc",
             "file_tags": [],
-            "num_vectors": 41,
-            "created_at": "2024-04-29 22:57:52",
-            "last_updated": "2024-04-29 22:57:52"
+            "num_vectors": 7,
+            "created_at": "2024-05-20 20:59:28",
+            "last_updated": "2024-05-20 20:59:28"
           },
           "search_results": [
             {
-              "snippet": "Learn about Columbia.",
+              "snippet": "And so, what can breed the strill and ill-cultivated wit mo, but the story of a dry son, haphazard, craving and full of various thoughts and never imagined of any other, well as who begets in a crcel, where all discomfort has its seat and where all sad noise makes its habitation?",
               "line_numbers": [
-                1
+                3
               ],
-              "distance": 0.263
+              "distance": 0.361
             },
             {
-              "snippet": "And I know coffee is really important when it comes to talking about Columbia, but you guys really don't know how important it is with its culture.",
+              "snippet": "The quietness, the peaceful place, the abundance of the fields, the serenity of the heavens, the murmuring of the fountains, the stillness of the spirit are a great part for the most strile muses to show themselves fruitful and to give birth to the world that fills it with wonder and contentment.",
               "line_numbers": [
-                1
+                4
               ],
-              "distance": 0.287
+              "distance": 0.404
             },
             {
-              "snippet": "You Columbia coffee right here.",
+              "snippet": "It happens to have a father an ugly son with no grace at all, and the love he has puts a blindfold in his eyes so that he does not see his faults, but judges them by discretions and lindezas and tells his friends for acuity and donaires.",
               "line_numbers": [
-                1
+                5
               ],
-              "distance": 0.292
+              "distance": 0.413
             },
             {
-              "snippet": "Now interesting enough when it comes to the coffee in Columbia, believe it or not, it is not actually native to the country.",
+              "snippet": "But I, who, though I look like a father, am Don Quixote's stepfather, do not want to go away with the current of use, nor beg you, almost with the tears in your eyes, as others do, hearty reader, to forgive or to dispel the faults that you see in this my son; and you are neither his relative nor his friend, and you have your soul in your body and your free albedro as the most painted, and you are in your house, where you are seor della, as the king of his palaces, and you know what is commonly said: that under my robe, I kill the king.",
               "line_numbers": [
-                1
+                6
               ],
-              "distance": 0.298
+              "distance": 0.422
             },
             {
-              "snippet": "So we all know Columbia is famous for its coffee, right?",
+              "snippet": "But I have not been able to contradict the order of nature; for in it every thing begets its fellowman.",
               "line_numbers": [
-                1
+                2
               ],
-              "distance": 0.306
+              "distance": 0.426
             }
           ]
         }

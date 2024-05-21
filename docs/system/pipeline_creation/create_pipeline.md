@@ -1,5 +1,37 @@
 ## Creating a Pipeline
 
+This overview on creating pipelines is divided into the following sections:
+
+- [The `.create_pipeline` Method](#the-create_pipeline-method)
+- [A Single-Module Pipeline](#a-single-module-pipeline)
+- [A Multi-Module Pipeline](#a-multi-module-pipeline)
+
+
+```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ### The `.create_pipeline` Method
 
 The `.create_pipeline` method instantiates new pipelines. It's a very simple method that takes two arguments, both required:
@@ -11,7 +43,7 @@ The `.create_pipeline` method instantiates new pipelines. It's a very simple met
 
 ### A Single-Module Pipeline
 
-Let's use the `.create_pipeline` method to create a single-module pipeline. We'll use the [`parser module`](../../modules/ai_model_modules/parser_module.md), which divides input text files into shorter snippets.
+Let's use the `.create_pipeline` method to create a single-module pipeline. We'll use the [`parser`](../../modules/ai_model_modules/parser_module.md) module, which divides input text files into shorter snippets.
 
 
 ```python
@@ -23,11 +55,11 @@ pipeline_1 = krixik.create_pipeline(name="create_pipeline_1_parser",
 
 Make sure that you have [initialized your session](../initialization/initialize_and_authenticate.md) before executing this code.
 
-Note that the `name` argument can be whatever string you want it to be. However, the `module_chain` list can only be comprised of established [module identifiers](../17-convenience_methods#view-all-available-modules-with-the-available_modules-property).
+Note that the `name` argument can be whatever string you want it to be. However, the `module_chain` list can only be comprised of established [module identifiers](../convenience_methods/convenience_methods.md#view-all-available-modules-with-the-.available_modules-property).
 
 ### A Multi-Module Pipeline
 
-Now let's set up a pipeline sequentially consisting of three modules: a [`parser module`](../../modules/ai_model_modules/parser_module.md), a [`text-embedder module`](../../modules/modules/ai_model_modules/text-embedder_module.md), and a [`vector-db module`](../modules/database_modules/vector-db_module.md).  This popular `module_chain` arises often: it's the basic document-based semantic (a.k.a. vector) search [pipeline](../../examples/search_pipeline_examples/multi_basic_semantic_search.md).
+Now let's set up a pipeline sequentially consisting of three modules: a [`parser module`](../../modules/ai_model_modules/parser_module.md), a [`text-embedder module`](../../modules/ai_model_modules/text-embedder_module.md), and a [`vector-db module`](../../modules/database_modules/vector-db_module.md).  This popular `module_chain` arises often: it's the basic document-based semantic (a.k.a. vector) search [pipeline](../../examples/search_pipeline_examples/multi_basic_semantic_search.md).
 
 As you can see, pipeline setup syntax is the same as above. The order of the modules in `module_chain` is the the order they'll process pipeline input in:
 
@@ -60,44 +92,40 @@ pipeline_3 = krixik.create_pipeline(name="create_pipeline_3_parser_caption",
 
     TypeError                                 Traceback (most recent call last)
 
-    Cell In[5], line 3
+    Cell In[4], line 3
           1 # attempt to create a pipeline sequentially comprised of a parser and a caption module
     ----> 3 pipeline_3 = krixik.create_pipeline(name="create_pipeline_3_parser_caption",
           4                                     module_chain=["parser", "caption"])
 
 
-    File c:\Users\Lucas\Desktop\Krixik Documentation 1\Version One\System\krixik\main.py:72, in krixik.create_pipeline(cls, name, module_chain)
-         70         raise ValueError(f"module_chain item - {item} - is not a currently one of the currently available modules -{available_modules}")
-         71 module_chain_ = [Module(m_name) for m_name in module_chain]
-    ---> 72 custom = CreatePipeline(name=name,
-         73                         module_chain=module_chain_)
-         74 return cls.load_pipeline(pipeline=custom)
+    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\main.py:70, in krixik.create_pipeline(cls, name, module_chain)
+         68         raise ValueError(f"module_chain item - {item} - is not a currently one of the currently available modules -{available_modules}")
+         69 module_chain_ = [Module(m_name) for m_name in module_chain]
+    ---> 70 custom = BuildPipeline(name=name, module_chain=module_chain_)
+         71 return cls.load_pipeline(pipeline=custom)
 
 
-    File c:\Users\Lucas\Desktop\Krixik Documentation 1\Version One\System\krixik\pipeline_builder\pipeline.py:58, in CreatePipeline.__init__(self, name, module_chain, config_path)
-         56 chain_check(module_chain)
-         57 for module in module_chain:
-    ---> 58     self.add(module)
-         59 self.test_connections()
+    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\pipeline_builder\pipeline.py:63, in BuildPipeline.__init__(self, name, module_chain, config_path)
+         61 chain_check(module_chain)
+         62 for module in module_chain:
+    ---> 63     self._add(module)
+         64 self.test_connections()
 
 
-    File c:\Users\Lucas\Desktop\Krixik Documentation 1\Version One\System\krixik\pipeline_builder\pipeline.py:85, in CreatePipeline.add(self, module, insert_index)
-         82 self.__module_chain_configs.append(module.config)
-         83 self.__module_chain_output_process_keys.append(module.output_process_key)
-    ---> 85 self.test_connections()
+    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\pipeline_builder\pipeline.py:86, in BuildPipeline._add(self, module, insert_index)
+         83 self.__module_chain_configs.append(module.config)
+         84 self.__module_chain_output_process_keys.append(module.output_process_key)
+    ---> 86 self.test_connections()
 
 
-    File c:\Users\Lucas\Desktop\Krixik Documentation 1\Version One\System\krixik\pipeline_builder\pipeline.py:154, in CreatePipeline.test_connections(self)
-        152 # check format compatibility
-        153 if prev_module_output_format != curr_module_input_format:
-    --> 154     raise TypeError(
-        155         f"format type mismatch between {prev_module.name} - whose output format is {prev_module_output_format} - and {curr_module.name} - whose input format is {curr_module_input_format}"
-        156     )
-        158 # check process key type compatibility
-        159 if (
-        160     prev_module_output_process_key_type
-        161     != curr_module_input_process_key_type
-        162 ):
+    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\pipeline_builder\pipeline.py:160, in BuildPipeline.test_connections(self)
+        158 # check format compatibility
+        159 if prev_module_output_format != curr_module_input_format:
+    --> 160     raise TypeError(
+        161         f"format type mismatch between {prev_module.name} - whose output format is {prev_module_output_format} - and {curr_module.name} - whose input format is {curr_module_input_format}"
+        162     )
+        164 # check process key type compatibility
+        165 if prev_module_output_process_key_type != curr_module_input_process_key_type:
 
 
     TypeError: format type mismatch between parser - whose output format is json - and caption - whose input format is image
@@ -105,26 +133,20 @@ pipeline_3 = krixik.create_pipeline(name="create_pipeline_3_parser_caption",
 
 ### Pipeline Name Repetition
 
-Krixik will not allow you to create a pipeline with the name of a pipeline you have already created. The only exception is if the new pipeline has a module chain identical to the old one.
+Krixik will not allow you to create a pipeline with the `name` of a pipeline you have already created. The only exception is if the new pipeline has a module chain identical to the old one.
 
-For instance, with the following code you'll create another pipeline with the name "create_pipeline_1_parser", a name you used to create a pipeline earlier in this document. Since the module chain you're using is the same one as above, no issue will arise:
-
-
-```python
-# valid creation of a pipeline with a pre-existing name
-
-pipeline_4 = krixik.create_pipeline(name="create_pipeline_1_parser",
-                                    module_chain=["parser"])
-```
-
-Now suppose you want to use the same pipeline name, but this time adding a [`summarize module`](../../modules/ai_model_modules/summarize_module.md) to the [`parser module`](../../modules/ai_model_modules/parser_module.md). Since the `module_chain` has changed, Krixik will not allow you to use the same name as above, and pipeline creation will fail:
+If you attempt to create a new pipeline with the `name` of a previous pipeline and with a different `module_chain`, initial pipeline instantiation will not fail; in other words, you will be able to run the `.create_pipeline` method without issue. However, when two pipelines with the same name and different `module_chain`s exist and you've already [`processed`](../parameters_processing_files_through_pipelines/process_method.md) one file through one of them, you will **not** be allowed to process a file through the other because of pipeline `name` duplication.
 
 
 ```python
-# invalid creation of a pipeline with a pre-existing name
+# delete all processed datapoints belonging to this pipeline
 
-pipeline_5 = krixik.create_pipeline(name="create_pipeline_1_parser",
-                                    module_chain=["parser", "summarize"])
+reset_pipeline(pipeline_1)
 ```
 
-Note that the name itself does not matter; instead of the string "create_pipeline_1_parser", you could have used the string "apples are red" for a name, and the outcome would have been the same.
+
+```python
+# delete all processed datapoints belonging to this pipeline
+
+reset_pipeline(pipeline_2)
+```

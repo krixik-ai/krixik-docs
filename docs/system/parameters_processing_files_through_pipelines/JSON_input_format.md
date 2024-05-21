@@ -20,7 +20,7 @@ A description of the format follows:
 
 ### A JSON Input Example
 
-We know that the above might be confusing, so here's an example. The following list is what the contents of a JSON file should look like if you wanted to separately submit the first two sentences of George Orwell's <u>1984</u> to a Krixik pipeline:
+Here's an example of the above in action. The following list is what the contents of a JSON file should look like if you wanted to separately submit the first two sentences of George Orwell's <u>1984</u> to a Krixik pipeline:
 
 
 ```python
@@ -37,6 +37,16 @@ We know that the above might be confusing, so here's an example. The following l
   }
 ]
 ```
+
+
+
+
+    [{'snippet': 'It was a bright cold day in April, and the clocks were striking thirteen.',
+      'line_numbers': [1]},
+     {'snippet': 'Winston Smith, his chin nuzzled into his breast in an effort to escape the vile wind, slipped quickly through the glass doors of Victory Mansions, though not quickly enough to prevent a swirl of gritty dust from entering along with him.',
+      'line_numbers': [2, 3, 4, 5]}]
+
+
 
 ### Creating the JSON File
 

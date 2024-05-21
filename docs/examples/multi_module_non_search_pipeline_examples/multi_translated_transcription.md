@@ -1,21 +1,47 @@
 ## Multi-Module Pipeline: Translated Transcription
 
-This document details a modular pipeline that takes in an audio/video file, [`transcribes`](../modules/ai_model_modules/transcribe_module.md) it, and [`translates`](../modules/ai_model_modules/translate_module.md) the transcription into a desired language.
+This document details a modular pipeline that takes in an audio file, [`transcribes`](../../modules/ai_model_modules/transcribe_module.md) it, and [`translates`](../../modules/ai_model_modules/translate_module.md) the transcription into a desired language.
 
 The document is divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Processing an Input File](#processing-an-input-file)
 
+
+```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ### Pipeline Setup
 
 To achieve what we've described above, let's set up a pipeline sequentially consisting of the following modules:
 
-- A [`transcribe`](../modules/ai_model_modules/transcribe_module.md) module.
+- A [`transcribe`](../../modules/ai_model_modules/transcribe_module.md) module.
 
-- A [`translate`](../modules/ai_model_modules/translate_module.md) module.
+- A [`translate`](../../modules/ai_model_modules/translate_module.md) module.
 
-We do this by leveraging the [`.create_pipeline`](../system/pipeline_creation/create_pipeline.md) method, as follows:
+We do this by leveraging the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
 
 
 ```python
@@ -35,7 +61,7 @@ Lets take a quick look at a short test file before processing.
 # examine contents of input file
 
 from IPython.display import Video
-Video("../../../data/input/Interesting Facts About Colombia.mp4")
+Video("../../../data/input/Interesting Facts About Colombia.mp3")
 ```
 
 
@@ -47,40 +73,154 @@ Video("../../../data/input/Interesting Facts About Colombia.mp4")
 
 
 
-Since the input video is in English,  we'll use the default [`opus-mt-en-es`](https://huggingface.co/Helsinki-NLP/opus-mt-en-es) model of the [`translate`](../modules/ai_model_modules/translate_module.md) module to translate the content into Spanish.
+Since the input audio is in English,  we'll use the default [`opus-mt-en-es`](https://huggingface.co/Helsinki-NLP/opus-mt-en-es) model of the [`translate`](../../modules/ai_model_modules/translate_module.md) module to translate the content into Spanish.
 
-We will use the default models for every other module in the pipeline as well, so the [`modules`](../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method doesn't need to be leveraged.
+We will use the default models for every other module in the pipeline as well, so the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method doesn't need to be leveraged.
 
 
 ```python
 # process the file through the pipeline, as described above
 
-process_output_1 = pipeline_1.process(local_file_path = "../../../data/input/Interesting Facts About Colombia.mp4", # the initial local filepath where the input file is stored
+process_output_1 = pipeline_1.process(local_file_path = "../../../data/input/Interesting Facts About Colombia.mp3", # the initial local filepath where the input file is stored
                                       local_save_directory="../../../data/output", # the local directory that the output file will be saved to
                                       expire_time=60*30, # process data will be deleted from the Krixik system in 30 minutes
                                       wait_for_process=True, # wait for process to complete before returning IDE control to user
                                       verbose=False) # do not display process update printouts upon running code
 ```
 
-    INFO: Checking that file size falls within acceptable parameters...
-    INFO:...success!
-    converted ../input_data/Interesting Facts About Colombia.mp4 to: /var/folders/k9/0vtmhf0s5h56gt15mkf07b1r0000gn/T/tmppaeads7s/krixik_converted_version_Interesting Facts About Colombia.mp3
-    INFO: hydrated input modules: {'transcribe': {'model': 'whisper-tiny', 'params': {}}, 'translate': {'model': 'opus-mt-en-es', 'params': {}}}
-    INFO: symbolic_directory_path was not set by user - setting to default of /etc
-    INFO: file_name was not set by user - setting to random file name: krixik_generated_file_name_xqpbbvidoq.mp3
-    INFO: wait_for_process is set to True.
-    INFO: file will expire and be removed from you account in 300 seconds, at Mon Apr 29 15:12:17 2024 UTC
-    INFO: transcribe-translate-pipeline file process and input processing started...
-    INFO: metadata can be updated using the .update api.
-    INFO: This process's request_id is: 2cbc5bbb-bc0e-a552-a439-61e25bdfa4cc
-    INFO: File process and processing status:
-    SUCCESS: module 1 (of 2) - transcribe processing complete.
-    SUCCESS: module 2 (of 2) - translate processing complete.
-    SUCCESS: pipeline process complete.
-    SUCCESS: process output downloaded
+
+    ---------------------------------------------------------------------------
+
+    PermissionError                           Traceback (most recent call last)
+
+    File ~\AppData\Local\Programs\Python\Python312\Lib\shutil.py:634, in _rmtree_unsafe(path, onexc)
+        633 try:
+    --> 634     os.unlink(fullname)
+        635 except OSError as err:
 
 
-The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method.
+    PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Lucas\\AppData\\Local\\Temp\\tmpngu3ckhg\\krixik_converted_version_Interesting Facts About Colombia.mp3'
+
+    
+    During handling of the above exception, another exception occurred:
+
+
+    PermissionError                           Traceback (most recent call last)
+
+    File ~\AppData\Local\Programs\Python\Python312\Lib\tempfile.py:891, in TemporaryDirectory._rmtree.<locals>.onexc(func, path, exc)
+        890 try:
+    --> 891     _os.unlink(path)
+        892 # PermissionError is raised on FreeBSD for directories
+
+
+    PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Lucas\\AppData\\Local\\Temp\\tmpngu3ckhg\\krixik_converted_version_Interesting Facts About Colombia.mp3'
+
+    
+    During handling of the above exception, another exception occurred:
+
+
+    NotADirectoryError                        Traceback (most recent call last)
+
+    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\utilities\converters\utilities\decorators.py:28, in datatype_converter_wrapper.<locals>.converter_wrapper(*args, **kwargs)
+         27 if conversion is not None:
+    ---> 28     with tempfile.TemporaryDirectory() as conversion_save_directory:
+         29         og_local_file_path = copy.deepcopy(local_file_path)
+
+
+    File ~\AppData\Local\Programs\Python\Python312\Lib\tempfile.py:919, in TemporaryDirectory.__exit__(self, exc, value, tb)
+        918 if self._delete:
+    --> 919     self.cleanup()
+
+
+    File ~\AppData\Local\Programs\Python\Python312\Lib\tempfile.py:923, in TemporaryDirectory.cleanup(self)
+        922 if self._finalizer.detach() or _os.path.exists(self.name):
+    --> 923     self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+
+
+    File ~\AppData\Local\Programs\Python\Python312\Lib\tempfile.py:903, in TemporaryDirectory._rmtree(cls, name, ignore_errors)
+        901             raise
+    --> 903 _shutil.rmtree(name, onexc=onexc)
+
+
+    File ~\AppData\Local\Programs\Python\Python312\Lib\shutil.py:796, in rmtree(path, ignore_errors, onerror, onexc, dir_fd)
+        795     return
+    --> 796 return _rmtree_unsafe(path, onexc)
+
+
+    File ~\AppData\Local\Programs\Python\Python312\Lib\shutil.py:636, in _rmtree_unsafe(path, onexc)
+        635         except OSError as err:
+    --> 636             onexc(os.unlink, fullname, err)
+        637 try:
+
+
+    File ~\AppData\Local\Programs\Python\Python312\Lib\tempfile.py:894, in TemporaryDirectory._rmtree.<locals>.onexc(func, path, exc)
+        893     except (IsADirectoryError, PermissionError):
+    --> 894         cls._rmtree(path, ignore_errors=ignore_errors)
+        895 except FileNotFoundError:
+
+
+    File ~\AppData\Local\Programs\Python\Python312\Lib\tempfile.py:903, in TemporaryDirectory._rmtree(cls, name, ignore_errors)
+        901             raise
+    --> 903 _shutil.rmtree(name, onexc=onexc)
+
+
+    File ~\AppData\Local\Programs\Python\Python312\Lib\shutil.py:796, in rmtree(path, ignore_errors, onerror, onexc, dir_fd)
+        795     return
+    --> 796 return _rmtree_unsafe(path, onexc)
+
+
+    File ~\AppData\Local\Programs\Python\Python312\Lib\shutil.py:612, in _rmtree_unsafe(path, onexc)
+        611 except OSError as err:
+    --> 612     onexc(os.scandir, path, err)
+        613     entries = []
+
+
+    File ~\AppData\Local\Programs\Python\Python312\Lib\shutil.py:609, in _rmtree_unsafe(path, onexc)
+        608 try:
+    --> 609     with os.scandir(path) as scandir_it:
+        610         entries = list(scandir_it)
+
+
+    NotADirectoryError: [WinError 267] The directory name is invalid: 'C:\\Users\\Lucas\\AppData\\Local\\Temp\\tmpngu3ckhg\\krixik_converted_version_Interesting Facts About Colombia.mp3'
+
+    
+    During handling of the above exception, another exception occurred:
+
+
+    Exception                                 Traceback (most recent call last)
+
+    Cell In[4], line 3
+          1 # process the file through the pipeline, as described above
+    ----> 3 process_output_1 = pipeline_1.process(local_file_path = "../../../data/input/Interesting Facts About Colombia.mp4", # the initial local filepath where the input file is stored
+          4                                       local_save_directory="../../../data/output", # the local directory that the output file will be saved to
+          5                                       expire_time=60*30, # process data will be deleted from the Krixik system in 30 minutes
+          6                                       wait_for_process=True, # wait for process to complete before returning IDE control to user
+          7                                       verbose=False) # do not display process update printouts upon running code
+
+
+    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\system_builder\utilities\decorators.py:97, in kwargs_checker.<locals>.wrapper(*args, **kwargs)
+         95 if unexpected_args:
+         96     raise TypeError(f"unexpected keyword argument(s) for '{func_name}': {', '.join(unexpected_args)}")
+    ---> 97 return func(*args, **kwargs)
+
+
+    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\system_builder\functions\checkin.py:67, in check_init_decorator.<locals>.wrapper(self, *args, **kwargs)
+         64 @functools.wraps(func)
+         65 def wrapper(self, *args, **kwargs):
+         66     check_init(self)
+    ---> 67     return func(self, *args, **kwargs)
+
+
+    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\utilities\converters\utilities\decorators.py:93, in datatype_converter_wrapper.<locals>.converter_wrapper(*args, **kwargs)
+         91     raise PermissionError(e)
+         92 except Exception as e:
+    ---> 93     raise Exception(e)
+
+
+    Exception: [WinError 267] The directory name is invalid: 'C:\\Users\\Lucas\\AppData\\Local\\Temp\\tmpngu3ckhg\\krixik_converted_version_Interesting Facts About Colombia.mp3'
+
+
+The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 Because the output of this particular module-model pair is a JSON file, the process output is provided in this object as well (this is only the case for JSON outputs).  Moreover, the output file itself has been saved to the location noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 
@@ -123,3 +263,10 @@ with open(process_output_1['process_output_files'][0], "r") as file:
     smelled of boiled cabbage and old rag mats. A kilometre away the
     Ministry of Truth, his place of work, towered vast.
 
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+
+reset_pipeline(pipeline_1)
+```

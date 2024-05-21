@@ -1,19 +1,45 @@
 ## Multi-Module Pipeline: Recursive Summarization
 
-A practical way to achieve short and abstract (but representative) summaries of long or medium-length documents is to apply summarization *recursively*.  This concept was discussed in our overview of the single-module [`summarize` pipeline](../examples/single_module_pipelines/single_summarize.md), where we applied a single [`summarize`](../modules/ai_model_modules/summarize_module.md) module pipeline several times to create terser and terser summary representations of an input text.
+A practical way to achieve short and abstract (but representative) summaries of long or medium-length documents is to apply summarization *recursively*.  This concept was discussed in our overview of the single-module [`summarize` pipeline](../single_module_pipelines/single_summarize.md), where we applied a single [`summarize`](../../modules/ai_model_modules/summarize_module.md) module pipeline several times to create terser and terser summary representations of an input text.
 
-In this document we reproduce the same result via a pipeline consisting of multiple [`summarize`](../modules/ai_model_modules/summarize_module.md) modules in immediate succession. Processing files through this pipeline recursively summarizes with a single pipeline invocation. If you require further summarization, you can build a similar pipeline with more [`summarize`](../modules/ai_model_modules/summarize_module.md) models in it.
+In this document we reproduce the same result via a pipeline consisting of multiple [`summarize`](../../modules/ai_model_modules/summarize_module.md) modules in immediate succession. Processing files through this pipeline recursively summarizes with a single pipeline invocation. If you require further summarization, you can build a similar pipeline with more [`summarize`](../../modules/ai_model_modules/summarize_module.md) models in it.
 
 The document is divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Processing an Input File](#processing-an-input-file)
 
+
+```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ### Pipeline Setup
 
-To achieve what we've described above, let's set up a pipeline consisting of three sequential [`summarize`](../modules/ai_model_modules/summarize_module.md) modules.
+To achieve what we've described above, let's set up a pipeline consisting of three sequential [`summarize`](../../modules/ai_model_modules/summarize_module.md) modules.
 
-We do this by leveraging the [`.create_pipeline`](../system/pipeline_creation/create_pipeline.md) method, as follows:
+We do this by leveraging the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
 
 
 ```python
@@ -129,7 +155,7 @@ with open("../../../data/input/1984_short.txt", "r") as file:
       IGNORANCE IS STRENGTH
 
 
-With the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method we run this input through the pipeline. We use the default model for the [`summarize`](../modules/ai_model_modules/summarize_module.md) module each time, so the [`modules`](../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument doesn't have to be leveraged.
+With the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method we run this input through the pipeline. We use the default model for the [`summarize`](../../modules/ai_model_modules/summarize_module.md) module each time, so the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument doesn't have to be leveraged.
 
 
 ```python
@@ -142,7 +168,7 @@ process_output_1 = pipeline_1.process(local_file_path = "../../../data/input/198
                                       verbose=False) # do not display process update printouts upon running code
 ```
 
-The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method.
+The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 The output text file itself has been saved to the location noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 
@@ -155,14 +181,14 @@ print(json.dumps(process_output_1, indent=2))
 
     {
       "status_code": 200,
-      "pipeline": "my-recursive-summarize-pipeline",
-      "request_id": "3e9e54ef-5f66-4434-98bf-672c3dd7ed6f",
-      "file_id": "affbb8e6-4289-4231-80f8-894d4f868506",
-      "message": "SUCCESS - output fetched for file_id affbb8e6-4289-4231-80f8-894d4f868506.Output saved to location(s) listed in process_output_files.",
+      "pipeline": "multi_recursive_summarization",
+      "request_id": "e4c27728-313e-4315-b166-21238faba8aa",
+      "file_id": "d360a6f5-918f-47df-86b2-45a83ca232ae",
+      "message": "SUCCESS - output fetched for file_id d360a6f5-918f-47df-86b2-45a83ca232ae.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "./affbb8e6-4289-4231-80f8-894d4f868506.txt"
+        "../../../data/output/d360a6f5-918f-47df-86b2-45a83ca232ae.txt"
       ]
     }
 
@@ -178,6 +204,13 @@ with open(process_output_1['process_output_files'][0], "r") as file:
 ```
 
     Winston Smith walked through the glass doors of Victory Mansions. The hallway
-    smelled of boiled cabbage and old rag mats. A kilometre away the
-    Ministry of Truth, his place of work, towered vast.
+    smelled of boiled cabbage and old rag mats. A kilometre away, his
+    place of work, the Ministry of Truth, towered vast and white.
 
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+
+reset_pipeline(pipeline_1)
+```

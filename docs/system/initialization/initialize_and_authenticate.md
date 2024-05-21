@@ -28,8 +28,8 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-MY_API_KEY = os.getenv("DEMO_API_KEY")
-MY_API_URL = os.getenv("DEMO_API_URL")
+MY_API_KEY = os.getenv("MY_API_KEY")
+MY_API_URL = os.getenv("MY_API_URL")
 ```
 
 Your secrets loaded, you can now import Krixik and initialize/authenticate to begin your session.
@@ -52,5 +52,8 @@ Now initialize your session with your secrets:
 krixik.init(api_key=MY_API_KEY,
             api_url=MY_API_URL)
 ```
+
+    SUCCESS: You are now authenticated.
+
 
 Alright, you're good to go! It's time to [assemble some pipelines](../pipeline_creation/create_pipeline.md).

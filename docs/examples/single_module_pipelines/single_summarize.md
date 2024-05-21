@@ -1,6 +1,6 @@
 ## Single-Module Pipeline: `summarize`
 
-This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`summarize`](../modules/ai_model_modules/summarize_module.md) module. It's divided into the following sections:
+This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`summarize`](../../modules/ai_model_modules/summarize_module.md) module. It's divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)
@@ -8,11 +8,37 @@ This document is a walkthrough of how to assemble and use a single-module pipeli
 - [Using a Non-Default Model](#using-a-non-default-model)
 - [Recursive Summarization](#recursive-summarization)
 
+
+```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ### Pipeline Setup
 
-Let's first instantiate a single-module [`summarize`](../modules/ai_model_modules/summarize_module.md) pipeline.
+Let's first instantiate a single-module [`summarize`](../../modules/ai_model_modules/summarize_module.md) pipeline.
 
-We use the [`.create_pipeline`](../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`summarize`](../modules/ai_model_modules/summarize_module.md) module name into `module_chain`.
+We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`summarize`](../../modules/ai_model_modules/summarize_module.md) module name into `module_chain`.
 
 
 ```python
@@ -24,7 +50,7 @@ pipeline_1 = krixik.create_pipeline(name="single_summarize_1",
 
 ### Required Input Format
 
-The [`summarize`](../modules/ai_model_modules/summarize_module.md) module accepts document inputs. Acceptable file formats are TXT, PDF, DOCX, and PPTX, although the last three formats are automatically converted to TXT before processing.
+The [`summarize`](../../modules/ai_model_modules/summarize_module.md) module accepts document inputs. Acceptable file formats are TXT, PDF, DOCX, and PPTX, although the last three formats are automatically converted to TXT before processing.
 
 Let's take a quick look at a valid input file, and then process it:
 
@@ -32,7 +58,7 @@ Let's take a quick look at a valid input file, and then process it:
 ```python
 # examine contents of a valid test input file
 
-with open("../../data/input/1984_short.txt", "r") as file:
+with open("../../../data/input/1984_short.txt", "r") as file:
     print(file.read())
 ```
 
@@ -130,22 +156,22 @@ with open("../../data/input/1984_short.txt", "r") as file:
 
 ### Using the Default Model
 
-Let's process our test input file using the [`summarize`](../modules/ai_model_modules/summarize_module.md) module's [default model](../modules/ai_model_modules/summarize_module.md#available-models-in-the-summarize-module): [`bart-large-cnn`](https://huggingface.co/facebook/bart-large-cnn).
+Let's process our test input file using the [`summarize`](../../modules/ai_model_modules/summarize_module.md) module's [default model](../../modules/ai_model_modules/summarize_module.md#available-models-in-the-summarize-module): [`bart-large-cnn`](https://huggingface.co/facebook/bart-large-cnn).
 
-Given that this is the default model, we need not specify model selection through the optional [`modules`](../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method.
+Given that this is the default model, we need not specify model selection through the optional [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 
 ```python
 # process the file with the default model
 
-process_output_1 = pipeline_1.process(local_file_path="../../data/input/1984_short.txt", # the initial local filepath where the input file is stored
-                                      local_save_directory="../../data/output", # the local directory that the output file will be saved to
+process_output_1 = pipeline_1.process(local_file_path="../../../data/input/1984_short.txt", # the initial local filepath where the input file is stored
+                                      local_save_directory="../../../data/output", # the local directory that the output file will be saved to
                                       expire_time=60 * 30, # process data will be deleted from the Krixik system in 30 minutes
                                       wait_for_process=True, # wait for process to complete before returning IDE control to user
                                       verbose=False) # do not display process update printouts upon running code
 ```
 
-The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method.
+The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 The output file itself has been saved to the location noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 
@@ -158,14 +184,14 @@ print(json.dumps(process_output_1, indent=2))
 
     {
       "status_code": 200,
-      "pipeline": "my-summarize-pipeline",
-      "request_id": "ae8cb093-b55f-4f2d-bd45-9048238bb26e",
-      "file_id": "d65f3b9e-39d2-4ca5-939b-d317a9a406cf",
-      "message": "SUCCESS - output fetched for file_id d65f3b9e-39d2-4ca5-939b-d317a9a406cf.Output saved to location(s) listed in process_output_files.",
+      "pipeline": "single_summarize_1",
+      "request_id": "da4802ec-297f-4541-aa19-f6eaf883497f",
+      "file_id": "069d2bbe-3ed2-472c-bf5f-d6e5e13367c5",
+      "message": "SUCCESS - output fetched for file_id 069d2bbe-3ed2-472c-bf5f-d6e5e13367c5.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../data/output/d65f3b9e-39d2-4ca5-939b-d317a9a406cf.txt"
+        "../../../data/output/069d2bbe-3ed2-472c-bf5f-d6e5e13367c5.txt"
       ]
     }
 
@@ -196,25 +222,25 @@ with open(process_output_1["process_output_files"][0], "r") as file:
     Winston kept his back turned to the telescreen. It was safer; though,
     as he well knew, even a back can be revealing. A kilometre
     away the Ministry of Truth, his place of work, towered vast and
-    white above the grimy landscape.
+    white above the grimy landscape. Winston tried to squeeze out some childhood
+    memory that should tell him whether London had always been quite like
+    this.
     
-    The Ministry of Truth --Minitrue, in Newspeak -- was startlingly different from
-    any other object in sight. It was an enormous pyramidal structure of
-    glittering white concrete, soaring 300 metres into the air. From where Winston
-    stood it was just possible to read, picked out on its white
-    face, the three slogans of the Party.
+    The Ministry of Truth--Minitrue, in Newspeak [Newspeak was the officiallanguage of Oceania]--was
+    startlingly different from any other object in sight. It was an enormous
+    pyramidal structure of glittering white concrete, soaring 300 metres into the air.
 
 
 ### Using a Non-Default Model
 
-To use a [non-default model](../modules/ai_model_modules/summarize_module.md#available-models-in-the-summarize-module) like [`text-summarization`](https://huggingface.co/Falconsai/text_summarization), we must enter it explicitly through the [`modules`](../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method.
+To use a [non-default model](../../modules/ai_model_modules/summarize_module.md#available-models-in-the-summarize-module) like [`text-summarization`](https://huggingface.co/Falconsai/text_summarization), we must enter it explicitly through the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 
 ```python
 # process the file with a non-default model
 
-process_output_nd = pipeline_1.process(local_file_path="../../data/input/1984_short.txt", # the initial local filepath where the input file is stored
-                                       local_save_directory="../../data/output", # the local directory that the output file will be saved to
+process_output_nd = pipeline_1.process(local_file_path="../../../data/input/1984_short.txt", # the initial local filepath where the input file is stored
+                                       local_save_directory="../../../data/output", # the local directory that the output file will be saved to
                                        expire_time=60 * 30, # process data will be deleted from the Krixik system in 30 minutes
                                        wait_for_process=True, # wait for process to complete before returning IDE control to user
                                        verbose=False, # do not display process update printouts upon running code
@@ -251,10 +277,9 @@ with open(process_output_nd["process_output_files"][0], "r") as file:
     
     There was no way of knowing whether you were being watched at
     any given moment . How often, or on what system, the Thought
-    Police plugged in on any individual wire was guesswork . But at
-    any rate they could plug in your wire whenever they wanted to
-    . The Ministry of Truth towered vast and white above the grimy
-    landscape .
+    Police plugged in on any individual wire was guesswork . You had
+    to live, from habit that became instinct--in the assumption that every sound
+    you made was overheard, and, except in darkness, every movement scrutinized .
     
     The Ministry of Truth--Minitrue, in Newspeak, was the official language of Oceania
     . It was an enormous pyramidal structure of glittering white concrete, soaring
@@ -267,9 +292,9 @@ with open(process_output_nd["process_output_files"][0], "r") as file:
 
 If the result of summarizing once is not concise enough for your needs, there's a neat trick you can leverage.
 
-One of the most practical ways to achieve a shorter (perhaps more abstract, but still representative) summary is to apply summarization *recursively*. In other words, you feed the new summary through a [`summarize`](../modules/ai_model_modules/summarize_module.md) module again, thus producing a briefer summary. Let's do it manually.
+One of the most practical ways to achieve a shorter (perhaps more abstract, but still representative) summary is to apply summarization *recursively*. In other words, you feed the new summary through a [`summarize`](../../modules/ai_model_modules/summarize_module.md) module again, thus producing a briefer summary. Let's do it manually.
 
-To feed the <u>first</u> summarization generated above back into the [`summarize`](../modules/ai_model_modules/summarize_module.md) module, we essentially repeat what we did above, but with a slight difference: the file we feed in is the summary output of that first summarization.
+To feed the <u>first</u> summarization generated above back into the [`summarize`](../../modules/ai_model_modules/summarize_module.md) module, we essentially repeat what we did above, but with a slight difference: the file we feed in is the summary output of that first summarization.
 
 
 ```python
@@ -278,13 +303,13 @@ first_summary = process_output_1["process_output_files"][0]
 
 # process this summary through the pipeline
 process_output_2 = pipeline_1.process(local_file_path=first_summary, # feed back into the pipeline the earlier-generated summary
-                                      local_save_directory="../../data/output",
+                                      local_save_directory="../../../data/output",
                                       expire_time=60 * 30,
                                       wait_for_process=True,
                                       verbose=False)
 ```
 
-Once this [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) run finishes we receive our even-shorter summary as an output file.
+Once this [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) run finishes we receive our even-shorter summary as an output file.
 
 Let's examine the new summary file.
 
@@ -302,16 +327,15 @@ with open(process_output_2["process_output_files"][0], "r") as file:
     a metre wide.
     
     Winston kept his back turned to the telescreen. It was safer; though,
-    as he well knew, even a back can be revealing. A kilometre
-    away the Ministry of Truth, his place of work, towered vast and
-    white above the grimy landscape.
+    he well knew, even a back can be revealing. A kilometre away
+    the Ministry of Truth, his place of work, towered vast and white.
 
 
 This is a more concise, if more abstract, summary of the original input text.
 
 Lets recurse one more time, seeking to achieve an even briefer summary of the original.
 
-Once again, almost nothing changes about how we use the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method: we only point `local_file_path` to the output of our second summarization.
+Once again, almost nothing changes about how we use the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method: we only point `local_file_path` to the output of our second summarization.
 
 
 ```python
@@ -320,7 +344,7 @@ second_summary = process_output_2["process_output_files"][0]
 
 # process this summary through the pipeline again
 process_output_3 = pipeline_1.process(local_file_path=second_summary, # feed back into the pipeline the summary of the earlier-generated summary
-                                      local_save_directory="../../data/output",
+                                      local_save_directory="../../../data/output",
                                       expire_time=60 * 30,
                                       wait_for_process=True,
                                       verbose=False)
@@ -337,12 +361,19 @@ with open(process_output_3["process_output_files"][0], "r") as file:
 ```
 
     Winston Smith walked through the glass doors of Victory Mansions. The hallway
-    smelled of boiled cabbage and old rag mats. A kilometre away the
-    Ministry of Truth, his place of work, towered vast.
+    smelled of boiled cabbage and old rag mats. A kilometre away, his
+    place of work, the Ministry of Truth, towered vast and white.
 
 
 As you can see, this is very terse but representative summary of our original text.
 
-You can reproduce this result (of recursively summarizing a document thrice) by building a new pipeline that contains three [`summarize`](../modules/ai_model_modules/summarize_module.md) modules in succession.
+You can reproduce this result (of recursively summarizing a document thrice) by building a new pipeline that contains three [`summarize`](../../modules/ai_model_modules/summarize_module.md) modules in succession.
 
-We explore just such an example in our recursive summarization pipeline [example](../examples/multi_module_non_search_pipeline_examples/multi_recursive_summarization.md).
+We explore just such an example in our recursive summarization pipeline [example](../../examples/multi_module_non_search_pipeline_examples/multi_recursive_summarization.md).
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+
+reset_pipeline(pipeline_1)
+```

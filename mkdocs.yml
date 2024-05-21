@@ -14,6 +14,7 @@ nav:
       - 'json input format': system/parameters_processing_files_through_pipelines/JSON_input_format.md
       - 'the .process_status method': system/parameters_processing_files_through_pipelines/process_status_method.md
       - 'the .fetch_output method': system/parameters_processing_files_through_pipelines/fetch_output_method.md
+      - 'data deletion policy': system/parameters_processing_files_through_pipelines/data_deletion_policy.md
     - file system:
       - 'the .list method': system/file_system/list_method.md
       - 'the .update method': system/file_system/update_method.md

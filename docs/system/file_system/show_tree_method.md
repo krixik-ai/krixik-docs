@@ -4,9 +4,35 @@ The `.show_tree` method allows you to visualize—at your terminal or IDE output
 
 This overview of the `.update` method is divided into the following sections:
 
-- [.show_tree Method Arguments](#.show_tree-method-arguments)
-- [.show_tree Method Example](#.show_tree-method-example)
-- [The Wildcard Operator * and the Global Root](#the-wildcard-operator-*-and-the-global-root)
+- [.show_tree Method Arguments](#show_tree-method-arguments)
+- [.show_tree Method Example](#show_tree-method-example)
+- [The Wildcard Operator and the Global Root](#the-wildcard-operator-and-the-global-root)
+
+
+```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
 
 ### `.show_tree` Method Arguments
 
@@ -27,28 +53,28 @@ pipeline_1 = krixik.create_pipeline(name="show_tree_method_1_parser",
 
 # now process some files through the pipeline
 
-process_output_1 = pipeline_1.process(local_file_path="../../data/input/Frankenstein.txt", # the initial local filepath where the input JSON file is stored
+process_output_1 = pipeline_1.process(local_file_path="../../../data/input/Frankenstein partial.txt", # the initial local filepath where the input JSON file is stored
                                       expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
                                       wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
                                       verbose=False,  # do not display process update printouts upon running code
                                       symbolic_directory_path="/lit/novels/19th-century",
                                       file_name="Frankenstein.txt")
 
-process_output_2 = pipeline_1.process(local_file_path="../../data/input/Pride and Prejudice.txt", # the initial local filepath where the input JSON file is stored
+process_output_2 = pipeline_1.process(local_file_path="../../../data/input/Pride and Prejudice partial.txt", # the initial local filepath where the input JSON file is stored
                                       expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
                                       wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
                                       verbose=False,  # do not display process update printouts upon running code
                                       symbolic_directory_path="/lit/novels/19th-century",
                                       file_name="Pride and Prejudice.txt")
 
-process_output_3 = pipeline_1.process(local_file_path="../../data/input/Moby Dick.txt", # the initial local filepath where the input JSON file is stored
+process_output_3 = pipeline_1.process(local_file_path="../../../data/input/Moby Dick partial.txt", # the initial local filepath where the input JSON file is stored
                                       expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
                                       wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
                                       verbose=False,  # do not display process update printouts upon running code
                                       symbolic_directory_path="/lit/novels/19th-century/adventure",
                                       file_name="Moby Dick.txt")
 
-process_output_4 = pipeline_1.process(local_file_path="../../data/input/Little Women.txt", # the initial local filepath where the input JSON file is stored
+process_output_4 = pipeline_1.process(local_file_path="../../../data/input/Little Women partial.txt", # the initial local filepath where the input JSON file is stored
                                       expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
                                       wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
                                       verbose=False,  # do not display process update printouts upon running code
@@ -68,20 +94,24 @@ show_tree_output_1 = pipeline_1.show_tree(symbolic_directory_path="/*")
 ```
 
     /
-    └── /my
-        └── /custom
-            └── /path
-                ├── file_num_one.txt
-                ├── file_num_two.txt
-                └── /subpath
-                    └── file_num_three.txt
+    └── /lit
+        └── /novels
+            └── /19th-century
+                ├── /adventure
+                │   └── moby dick.txt
+                ├── /bildungsroman
+                │   └── little women.txt
+                ├── frankenstein.txt
+                └── pride and prejudice.txt
 
 
 Note that directory names are preceded by a forward slash (`/`) character and file names are not. This allows you to easily differentiate between them.
 
-### The Wildcard Operator * and the Global Root
+### The Wildcard Operator and the Global Root
 
-As in the [`.list`](../file_system/list_method.md) method, you can use the wildcard operator * in the `symbolic_directory_path` argument for the `.show_tree` method.
+The wildcard operator is the asterisk: *
+
+As in the [`.list`](list_method.md) method, the [`.semantic_search`](../search_methods/semantic_search_method.md) method and the [`.keyword_search`](../search_methods/keyword_search_method.md) method you can use the wildcard operator * in the `symbolic_directory_path` argument for the `.show_tree` method.
 
 The wildcard operator * can be used as a suffix in the `.show_tree` method if you wish to show the tree structure beneath a certain directory. Syntax might look like this:
 
@@ -100,3 +130,10 @@ symbolic_directory_path='/*'
 ```
 
 As seen in the above code output, using the global root with the `.show_tree` method returns a visualization of your entire pipeline's directory structure.
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+
+reset_pipeline(pipeline_1)
+```

@@ -1,6 +1,6 @@
 ## Single-Module Pipeline: `text-embedder`
 
-This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`text-embedder`](../modules/ai_model_modules/text-embedder_module.md) module. It's divided into the following sections:
+This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) module. It's divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)
@@ -8,11 +8,37 @@ This document is a walkthrough of how to assemble and use a single-module pipeli
 - [Examining Process Output Locally](#examining-process-output-locally)
 - [Using a Non-Default Model](#using-a-non-default-model)
 
+
+```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ### Pipeline Setup
 
-Let's first instantiate a single-module [`text-embedder`](../modules/ai_model_modules/text-embedder_module.md) pipeline.
+Let's first instantiate a single-module [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) pipeline.
 
-We use the [`.create_pipeline`](../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`text-embedder`](../modules/ai_model_modules/text-embedder_module.md) module name into `module_chain`.
+We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) module name into `module_chain`.
 
 
 ```python
@@ -24,7 +50,7 @@ pipeline_1 = krixik.create_pipeline(name="single_text-embedder-1",
 
 ### Required Input Format
 
-The [`text-embedder`](../modules/ai_model_modules/text-embedder_module.md) module accepts JSON file input. The input JSON must respect [this format](../system/parameters_processing_files_through_pipelines/JSON_input_format.md).
+The [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) module accepts JSON file input. The input JSON must respect [this format](../../system/parameters_processing_files_through_pipelines/JSON_input_format.md).
 
 The JSON file may optionally also include, along with each snippet, a key-value pair in which the key is the string `"line numbers"` and the value is an integer list of every line number of the original document that the snippet is on. This will make it easier for you to identify what document line each vector is an embedding of.
 
@@ -34,7 +60,7 @@ Let's take a quick look at a valid input file, and then process it.
 ```python
 # examine contents of a valid input file
 
-with open("../../data/input/1984_very_short.json", "r") as file:
+with open("../../../data/input/1984_snippets.json", "r") as file:
     print(json.dumps(json.load(file), indent=2))
 ```
 
@@ -59,9 +85,9 @@ with open("../../data/input/1984_very_short.json", "r") as file:
 
 ### Using the Default Model
 
-Let's process our test input file using the [`text-embedder`](../modules/ai_model_modules/text-embedder_module.md) module's [default model](../modules/ai_model_modules/text-embedder_module.md#available-models-in-the-text-embedder-module): [`all-MiniLM-L6-v2`](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2).
+Let's process our test input file using the [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) module's [default model](../../modules/ai_model_modules/text-embedder_module.md#available-models-in-the-text-embedder-module): [`all-MiniLM-L6-v2`](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2).
 
-Given that this is the default model, we need not specify model selection through the optional [`modules`](../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method.
+Given that this is the default model, we need not specify model selection through the optional [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 In a later section of this document we will process the same file again, but select our model and the quantization thereof explicitly.
 
@@ -69,14 +95,14 @@ In a later section of this document we will process the same file again, but sel
 ```python
 # process the file with the default model
 
-process_output_1 = pipeline_1.process(local_file_path="../../data/input/1984_very_short.json", # the initial local filepath where the input file is stored
-                                      local_save_directory="../../data/output", # the local directory that the output file will be saved to
+process_output_1 = pipeline_1.process(local_file_path="../../../data/input/1984_snippets.json", # the initial local filepath where the input file is stored
+                                      local_save_directory="../../../data/output", # the local directory that the output file will be saved to
                                       expire_time=60 * 30, # process data will be deleted from the Krixik system in 30 minutes
                                       wait_for_process=True, # wait for process to complete before returning IDE control to user
                                       verbose=False) # do not display process update printouts upon running code
 ```
 
-The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method.
+The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 Moreover, the output file itself has been saved to the location noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 
@@ -89,14 +115,14 @@ print(json.dumps(process_output_1, indent=2))
 
     {
       "status_code": 200,
-      "pipeline": "my-text-embedder-pipeline",
-      "request_id": "3517d9da-375e-4824-8212-fc9bebfb7c74",
-      "file_id": "525ee760-86ca-4b96-8bd9-46f905b85590",
-      "message": "SUCCESS - output fetched for file_id 525ee760-86ca-4b96-8bd9-46f905b85590.Output saved to location(s) listed in process_output_files.",
+      "pipeline": "single_text-embedder-1",
+      "request_id": "1f16bcaa-1d08-4286-91c3-6fac2bbf17b3",
+      "file_id": "ebd43e63-0f3a-41ba-9db9-f768d11a048a",
+      "message": "SUCCESS - output fetched for file_id ebd43e63-0f3a-41ba-9db9-f768d11a048a.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../data/output/525ee760-86ca-4b96-8bd9-46f905b85590.npy"
+        "../../../data/output/ebd43e63-0f3a-41ba-9db9-f768d11a048a.npy"
       ]
     }
 
@@ -123,14 +149,14 @@ In the context of the input file, the first row is the vectorized form of our fi
 
 ### Using a Non-Default Model
 
-To use a [non-default model](../modules/ai_model_modules/text-embedder_module.md#available-models-in-the-text-embedder-module) like [`all-mpnet-base-v2`](https://huggingface.co/sentence-transformers/all-mpnet-base-v2), we must enter it explicitly through the [`modules`](../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method. As [module documentation](../modules/ai_model_modules/text-embedder_module.md) indicates, you can also specify whether or not you wish to use the quantized version of the model.
+To use a [non-default model](../../modules/ai_model_modules/text-embedder_module.md#available-models-in-the-text-embedder-module) like [`all-mpnet-base-v2`](https://huggingface.co/sentence-transformers/all-mpnet-base-v2), we must enter it explicitly through the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method. As [module documentation](../../modules/ai_model_modules/text-embedder_module.md) indicates, you can also specify whether or not you wish to use the quantized version of the model.
 
 
 ```python
 # process the file with a non-default model
 
-process_output_2 = pipeline_1.process(local_file_path="../../data/input/1984_very_short.json", # all parameters save 'modules' as above
-                                      local_save_directory="../../data/output",
+process_output_2 = pipeline_1.process(local_file_path="../../../data/input/1984_snippets.json", # all parameters save 'modules' as above
+                                      local_save_directory="../../../data/output",
                                       expire_time=60 * 30,
                                       wait_for_process=True,
                                       verbose=False,
@@ -148,14 +174,21 @@ print(json.dumps(process_output_2, indent=2))
 
     {
       "status_code": 200,
-      "pipeline": "my-text-embedder-pipeline",
-      "request_id": "008e70a1-9b55-4fe0-9b02-55dd4b02798e",
-      "file_id": "a7e7dd02-fd28-4a8e-8fae-eb495db0bd86",
-      "message": "SUCCESS - output fetched for file_id a7e7dd02-fd28-4a8e-8fae-eb495db0bd86.Output saved to location(s) listed in process_output_files.",
+      "pipeline": "single_text-embedder-1",
+      "request_id": "35c58c69-cb16-486b-970d-b1817c3671be",
+      "file_id": "b541407f-134a-4e45-9c2a-360c3cc759e9",
+      "message": "SUCCESS - output fetched for file_id b541407f-134a-4e45-9c2a-360c3cc759e9.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../data/output/a7e7dd02-fd28-4a8e-8fae-eb495db0bd86.npy"
+        "../../../data/output/b541407f-134a-4e45-9c2a-360c3cc759e9.npy"
       ]
     }
 
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+
+reset_pipeline(pipeline_1)
+```

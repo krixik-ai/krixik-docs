@@ -1,6 +1,6 @@
 ## Single-Module Pipeline: `keyword-db`
 
-This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`keyword-db`](../modules/database_modules/keyword-db_module.md) module. It's divided into the following sections:
+This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`keyword-db`](../../modules/database_modules/keyword-db_module.md) module. It's divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)
@@ -8,11 +8,37 @@ This document is a walkthrough of how to assemble and use a single-module pipeli
 - [Using the `.keyword_search` Method](#using-the-keyword_search-method)
 - [Querying Output Databases Locally](#querying-output-databases-locally)
 
+
+```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ### Pipeline Setup
 
-Let's first instantiate a single-module [`keyword-db`](../modules/database_modules/keyword-db_module.md) pipeline.
+Let's first instantiate a single-module [`keyword-db`](../../modules/database_modules/keyword-db_module.md) pipeline.
 
-We use the [`.create_pipeline`](../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`keyword-db`](../modules/database_modules/keyword-db_module.md) module name into `module_chain`.
+We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`keyword-db`](../../modules/database_modules/keyword-db_module.md) module name into `module_chain`.
 
 
 ```python
@@ -24,7 +50,7 @@ pipeline_1 = krixik.create_pipeline(name="single_keyword-db_1",
 
 ### Required Input Format
 
-The [`keyword-db`](../modules/database_modules/keyword-db_module.md) module accepts document inputs. Acceptable file formats are TXT, PDF, DOCX, and PPTX, although the last three formats are automatically converted to TXT before processing.
+The [`keyword-db`](../../modules/database_modules/keyword-db_module.md) module accepts document inputs. Acceptable file formats are TXT, PDF, DOCX, and PPTX, although the last three formats are automatically converted to TXT before processing.
 
 Let's take a quick look at a valid input file, and then process it:
 
@@ -32,7 +58,7 @@ Let's take a quick look at a valid input file, and then process it:
 ```python
 # examine contents of a valid test input file
 
-with open("../../data/input/1984_very_short.txt", "r") as file:
+with open("../../../data/input/1984_very_short.txt", "r") as file:
     print(file.read())
 ```
 
@@ -45,22 +71,22 @@ with open("../../data/input/1984_very_short.txt", "r") as file:
 
 ### Using the Default Model
 
-Let's process our test input file using the [`keyword-db`](../modules/database_modules/keyword-db_module.md) module's default (and currently only) [model](../modules/database_modules/keyword-db_module.md#available-models-in-the-keyword-db-module): `base`.
+Let's process our test input file using the [`keyword-db`](../../modules/database_modules/keyword-db_module.md) module's default (and currently only) [model](../../modules/database_modules/keyword-db_module.md#available-models-in-the-keyword-db-module): `base`.
 
-Given that this is the default model, we need not specify model selection through the optional [`modules`](../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method.
+Given that this is the default model, we need not specify model selection through the optional [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 
 ```python
 # process the file with the default model
 
-process_output_1 = pipeline_1.process(local_file_path="../../data/input/1984_very_short.txt", # the initial local filepath where the input file is stored
-                                      local_save_directory="../../data/output", # the local directory that the output file will be saved to
+process_output_1 = pipeline_1.process(local_file_path="../../../data/input/1984_very_short.txt", # the initial local filepath where the input file is stored
+                                      local_save_directory="../../../data/output", # the local directory that the output file will be saved to
                                       expire_time=60 * 30, # process data will be deleted from the Krixik system in 30 minutes
                                       wait_for_process=True, # wait for process to complete before returning IDE control to user
                                       verbose=False) # do not display process update printouts upon running code
 ```
 
-The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method.
+The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 
 ```python
@@ -71,14 +97,14 @@ print(json.dumps(process_output_1, indent=2))
 
     {
       "status_code": 200,
-      "pipeline": "my-keyword-db-pipeline",
-      "request_id": "5951c05e-5cb0-4c17-8d4d-d87c887c9cd1",
-      "file_id": "36c032ab-ac57-4c3f-a67a-0810fee184bd",
-      "message": "SUCCESS - output fetched for file_id 36c032ab-ac57-4c3f-a67a-0810fee184bd.Output saved to location(s) listed in process_output_files.",
+      "pipeline": "single_keyword-db_1",
+      "request_id": "fdf6ab57-2036-4256-91ea-5967e8ed292e",
+      "file_id": "c89fe2a2-bb17-4172-8858-dfe536948535",
+      "message": "SUCCESS - output fetched for file_id c89fe2a2-bb17-4172-8858-dfe536948535.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../data/output/36c032ab-ac57-4c3f-a67a-0810fee184bd.db"
+        "../../../data/output/c89fe2a2-bb17-4172-8858-dfe536948535.db"
       ]
     }
 
@@ -87,11 +113,11 @@ Because the output of this particular module-model pair is an `SQLlite` database
 
 ### Using the `keyword_search` method
 
-Any pipeline containing a [`keyword-db`](../modules/database_modules/keyword-db_module.md) module has access to the [`.keyword_search`](../system/search_methods/keyword_search_method.md) method. This provides you with the convenient ability to effect keyword queries on the created keyword database(s).
+Any pipeline containing a [`keyword-db`](../../modules/database_modules/keyword-db_module.md) module has access to the [`.keyword_search`](../../system/search_methods/keyword_search_method.md) method. This provides you with the convenient ability to effect keyword queries on the created keyword database(s).
 
 ### Querying Output Databases Locally
 
-In addition to what's provided by the [`.keyword_search`](../system/search_methods/keyword_search_method.md) method, you can **locally** perform queries on the generated keyword database whose location is indicated in `process_output_files`.
+In addition to what's provided by the [`.keyword_search`](../../system/search_methods/keyword_search_method.md) method, you can **locally** perform queries on the generated keyword database whose location is indicated in `process_output_files`.
 
 Below is a simple function for locally performing single keyword queries on the above-outputted database:
 
@@ -138,7 +164,7 @@ We query our small database using a single keyword query with the function above
 # query database
 
 query = "cold"
-query_db(query, process_output["process_output_files"][0])
+query_db(query, process_output_1["process_output_files"][0])
 ```
 
 
@@ -147,3 +173,10 @@ query_db(query, process_output["process_output_files"][0])
     [('cold', 1, 5)]
 
 
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+
+reset_pipeline(pipeline_1)
+```

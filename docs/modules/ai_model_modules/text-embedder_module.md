@@ -8,13 +8,39 @@ This overview of the `text-embedder` module is divided into the following sectio
 
 - [Inputs and Outputs of the `text-embedder` Module](#inputs-and-outputs-of-the-text-embedder-module)
 - [Available Models in the `text-embedder` Module](#available-models-in-the-text-embedder-module)
-- [Model Parameters in the `text-embedder` Module](#model-parameters-in-the-text-embedder-Module)
+- [Model Parameters in the `text-embedder` Module](#model-parameters-in-the-text-embedder-module)
 - [A Single-Module Pipeline for the `text-embedder` Module](#a-single-module-pipeline-for-the-text-embedder-module)
-- [Further Information on `text-embedder` Module I/O and Clickability](#further-information-on-text-embedder-module-i/o-and-clickability)
+- [Further Information on `text-embedder` Module I/O and Clickability](#further-information-on-text-embedder-module-io-and-clickability)
+
+
+```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
 
 ### Inputs and Outputs of the `text-embedder` Module
 
-The `text-embedder` module accepts JSON file input. The input JSON must respect [this format](../system/parameters_processing_files_through_pipelines/JSON_input_format.md).
+The `text-embedder` module accepts JSON file input. The input JSON must respect [this format](../../system/parameters_processing_files_through_pipelines/JSON_input_format.md).
 
 The JSON file may optionally also include, along with each snippet, a key-value pair in which the key is the string `"line numbers"` and the value is an integer list of every line number of the original document that the snippet is on. This will make it easier for you to identify what document line each vector is an embedding of.
 
@@ -26,7 +52,7 @@ As an example of the `text-embedder` module's input format, take a look at the c
 ```python
 # examine the contents of a valid input file
 
-test_file = "../../data/input/1984_very_short.json"
+test_file = "../../../data/input/1984_snippets.json"
 with open(test_file, "r") as file:
     print(json.dumps(json.load(file), indent=2))
 ```
@@ -64,7 +90,7 @@ You can activate any of the following models when using the `text-embedder` modu
 
 - [msmarco-distilbert-dot-v5](https://huggingface.co/sentence-transformers/msmarco-distilbert-dot-v5)
 
-Use the [`modules`](../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method to determine what model you'd like active when you process files through the `text-embedder` module.
+Use the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method to determine what model you'd like active when you process files through the `text-embedder` module.
 
 ### Model Parameters in the `text-embedder` Module
 
@@ -72,7 +98,7 @@ All of the `text-embedder` module models are parameterizable. They all take one 
 
 - `quantize` (boolean) - If `True`, reduces the number of decimal points in vectors for speed and memory while losing a bit of accuracy (this is a very simplified explanation of what vector quantization is). Defaults to `True`.
 
- Consequently, when selecting what model you'll use through the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method's [`modules`](../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument, `params` can include a value for `quantize`. For example:
+ Consequently, when selecting what model you'll use through the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method's [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument, `params` can include a value for `quantize`. For example:
 
 ```python
 # example model selection for text-embedder module in .process
@@ -82,14 +108,14 @@ modules={'text-embedder': {"model": "all-mpnet-base-v2",
 
 ### A Single-Module Pipeline for the `text-embedder` Module
 
-Please click [here](../examples/single_module_pipelines/single_text-embedder.md) to visit the `Pipeline Examples` section of our documentation and review an example of a single-module pipeline for the `text-embedder` module.
+Please click [here](../../examples/single_module_pipelines/single_text-embedder.md) to visit the `Pipeline Examples` section of our documentation and review an example of a single-module pipeline for the `text-embedder` module.
 
 Keep in mind that the output of this pipeline will be an NPY file, which is not human-readable (it's an array of vectors).
 
 ### Further Information on `text-embedder` Module I/O and Clickability
 
-Please click [here](../system/convenience_methods/convenience_methods.md) to visit the `Convenience Methods (and More!)` documentation. There you will find two tools to learn more about the `text-embedder` module:
+Please click [here](../../system/convenience_methods/convenience_methods.md) to visit the `Convenience Methods (and More!)` documentation. There you will find two tools to learn more about the `text-embedder` module:
 
-- [View Module Input and Output Examples](../system/convenience_methods/convenience_methods.md#view-module-input-and-output-examples)
+- [View Module Input and Output Examples](../../system/convenience_methods/convenience_methods.md#view-module-input-and-output-examples)
 
-- [View Module Click Data with the `.click_data` Method](../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-.click_data-method)
+- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-click_data-method)

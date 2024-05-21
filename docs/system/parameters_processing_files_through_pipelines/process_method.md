@@ -10,6 +10,33 @@ This overview of the `.process` method is divided into the following sections:
 - [Optional Metadata Arguments](#optional-metadata-arguments)
 - [Metadata Argument Defaults](#metadata-argument-defaults)
 - [Automatic File Type Conversions](#automatic-file-type-conversions)
+- [Output Size Cap](#output-size-cap)
+
+
+```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
 
 ### Core `.process` Method Arguments
 
@@ -21,7 +48,7 @@ The `.process` method takes five basic arguments (in addition to the `modules` a
 
 - `expire_time`: (optional, int) The amount of time (in seconds) that process output remains on Krixik servers. Defaults to 1800 seconds, which is 30 minutes.
 
-- `wait_for_process`: (optional, bool) Indicates whether or not Krixik should wait for your process to complete before returning control of your IDE or notebook. `True` tells Krixik to wait until the process is complete, so you won't be able to execute anything else in the meantime. `False` tells Krixik that you wish to regain control as soon as file upload to the Krixik system has concluded.  When set to `False`, processing status can be examined via the [`.process_status`](../parameters_processing_files_through_pipelines/process_status_method.md) method. Defaults to `True`.
+- `wait_for_process`: (optional, bool) Indicates whether or not Krixik should wait for your process to complete before returning control of your IDE or notebook. `True` tells Krixik to wait until the process is complete, so you won't be able to execute anything else in the meantime. `False` tells Krixik that you wish to regain control as soon as file upload to the Krixik system has concluded.  When set to `False`, processing status can be examined via the [`.process_status`](process_status_method.md) method. Defaults to `True`.
 
 - `verbose`: (optional, bool) Determines if Krixik should immediately display process update printouts at your terminal/notebook. Defaults to `True`.
 
@@ -45,15 +72,15 @@ We've locally created a JSON file that holds three snippets that simulate online
 
 - I've sat on a lot of recliners in my life. I've forgotten about most of them. I'll forget about this one as well.
 
-Keep in mind that input JSON files _must_ follow a very [specific format](../parameters_processing_files_through_pipelines/JSON_input_format.md). If they don't, they'll be rejected by Krixik.
+Keep in mind that input JSON files _must_ follow a very [specific format](JSON_input_format.md). If they don't, they'll be rejected by Krixik.
 
 
 ```python
 # .process short input file
 
-process_demo_output_1 = pipeline_1.process(local_file_path ="../../data/input/XXXXX.json", # the initial local filepath where the input JSON file is stored
-                                           local_save_directory="../../data/output",  # the local directory that the output file will be saved to
-                                           expire_time=60 * 10,  # process data will be deleted from the Krixik system in 10 minutes
+process_demo_output_1 = pipeline_1.process(local_file_path ="../../../data/input/recliner_reviews.json", # the initial local filepath where the input JSON file is stored
+                                           local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+                                           expire_time=60 * 30,  # process data will be deleted from the Krixik system in 10 minutes
                                            wait_for_process=True,  # wait for process to complete before returning IDE control to user
                                            verbose=False)  # do not display process update printouts upon running code
 ```
@@ -66,35 +93,38 @@ Now let's print the output of the process.  Because the output of this particula
 
 import json
 
-json.dumps(process_demo_output_1, indent=2)
+print(json.dumps(process_demo_output_1, indent=2))
 ```
 
     {
       "status_code": 200,
-      "pipeline": "parser-pipeline-1",
-      "request_id": "e957e17f-ca3c-40bf-afd1-ebca1f27ba51",
-      "file_id": "9d94d011-b445-41fa-ae9e-92322726be96",
-      "message": "SUCCESS - output fetched for file_id 9d94d011-b445-41fa-ae9e-92322726be96.Output saved to location(s) listed in process_output_files.",
+      "pipeline": "process_method_1_sentiment",
+      "request_id": "1df4d8ad-ed49-43ff-8f7d-8737b9acbcb5",
+      "file_id": "d9a84ac2-5142-4b35-8430-953f0dde10fc",
+      "message": "SUCCESS - output fetched for file_id d9a84ac2-5142-4b35-8430-953f0dde10fc.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
-          "snippet": "It was a bright cold day in April, and the clocks were striking thirteen.",
-          "line_numbers": [
-            1
-          ]
+          "snippet": "This recliner is the best damn seat I've ever come across. When I fall asleep on it, which is often, I sleep like a baby.",
+          "positive": 0.871,
+          "negative": 0.129,
+          "neutral": 0.0
         },
         {
-          "snippet": "Winston Smith, his chin nuzzled into his breast in an effort to escape the\nvile wind, slipped quickly through the glass doors of Victory Mansions,\nthough not quickly enough to prevent a swirl of gritty dust from entering\nalong with him.",
-          "line_numbers": [
-            2,
-            3,
-            4,
-            5
-          ]
+          "snippet": "This recliner is terrible. It broke on its way out of the box, and no matter what I try, it doesn't recline. Avoid at all costs.",
+          "positive": 0.001,
+          "negative": 0.999,
+          "neutral": 0.0
+        },
+        {
+          "snippet": "I've sat on a lot of recliners in my life. I've forgotten about most of them. I'll forget about this one as well.",
+          "positive": 0.001,
+          "negative": 0.999,
+          "neutral": 0.0
         }
       ],
       "process_output_files": [
-        "./9d94d011-b445-41fa-ae9e-92322726be96.json"
+        "../../../data/output/d9a84ac2-5142-4b35-8430-953f0dde10fc.json"
       ]
     }
 
@@ -128,25 +158,28 @@ In addition to being printed here, this process output is also stored in the fil
 
 import json
 
-with open(process_output["process_output_files"][0], "r") as file:
-    json.dumps(json.load(file), indent=2)
+with open(process_demo_output_1["process_output_files"][0], "r") as file:
+    print(json.dumps(json.load(file), indent=2))
 ```
 
     [
       {
-        "snippet": "It was a bright cold day in April, and the clocks were striking thirteen.",
-        "line_numbers": [
-          1
-        ]
+        "snippet": "This recliner is the best damn seat I've ever come across. When I fall asleep on it, which is often, I sleep like a baby.",
+        "positive": 0.871,
+        "negative": 0.129,
+        "neutral": 0.0
       },
       {
-        "snippet": "Winston Smith, his chin nuzzled into his breast in an effort to escape the\nvile wind, slipped quickly through the glass doors of Victory Mansions,\nthough not quickly enough to prevent a swirl of gritty dust from entering\nalong with him.",
-        "line_numbers": [
-          2,
-          3,
-          4,
-          5
-        ]
+        "snippet": "This recliner is terrible. It broke on its way out of the box, and no matter what I try, it doesn't recline. Avoid at all costs.",
+        "positive": 0.001,
+        "negative": 0.999,
+        "neutral": 0.0
+      },
+      {
+        "snippet": "I've sat on a lot of recliners in my life. I've forgotten about most of them. I'll forget about this one as well.",
+        "positive": 0.001,
+        "negative": 0.999,
+        "neutral": 0.0
       }
     ]
 
@@ -209,7 +242,7 @@ Optional metadata arguments include:
 
 The first four of these—`symbolic_directory_path`, `file_name`, `symbolic_directory_path`, and `file_tags`—can be used as arguments to the [`.list`](../file_system/list_method.md) method and to the [`.keyword_search`](../search_methods/keyword_search_method.md) and [`.semantic_search`](../search_methods/semantic_search_method.md) methods.
 
-Note that a file you process through one pipeline is only accessible to that pipeline. If you upload a file to a certain `symbolic_directory_path` on a certain pipeline, for instance, you will not be able to [`.list`](../file_system/list_method.md), [search](../examples/search_pipeline_examples/search_pipelines_overview.md), or otherwise access it from any other pipeline, even if you target the same `symbolic_directory_path` from there.
+Note that a file you process through one pipeline is only accessible to that pipeline. If you upload a file to a certain `symbolic_directory_path` on a certain pipeline, for instance, you will not be able to [`.list`](../file_system/list_method.md), [search](../../examples/search_pipeline_examples/search_pipelines_overview.md), or otherwise access it from any other pipeline, even if you target the same `symbolic_directory_path` from there.
 
 Also note that a `symbolic_file_path` cannot be duplicated within a pipeline. In other words, if on a certain pipeline you `.process` a file to a specified `symbolic_directory_path` and `file_name`, Krixik will not allow you to `.process` any other files with that same combination of `symbolic_file_path` and `file_name`.
 
@@ -219,9 +252,9 @@ Let's call the `.process` method once more. We'll use the same product review fi
 ```python
 # .process short input file with optional metadata arguments
 
-process_demo_output_2 = pipeline_1.process(local_file_path ="../../data/input/XXXXX.json",
-                                           local_save_directory="../../data/output",
-                                           expire_time=60 * 10,
+process_demo_output_2 = pipeline_1.process(local_file_path ="../../../data/input/recliner_reviews.json",
+                                           local_save_directory="../../../data/output",
+                                           expire_time=60 * 30,
                                            wait_for_process=True,
                                            verbose=False,
                                            symbolic_directory_path="/my/custom/filepath",
@@ -246,4 +279,14 @@ For certain modules, the `.process` method automatically converts the format of 
 - `pdf` -> `txt`
 - `docx` -> `txt`
 - `pptx` -> `txt`
-- `mp4` -> `mp3`
+
+### Output Size Cap
+
+The current size limit on output generated by the `.process` method is 5MB.
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+
+reset_pipeline(pipeline_1)
+```

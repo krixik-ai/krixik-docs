@@ -1,29 +1,55 @@
 ## Multi-Module Pipeline: Sentiment Analysis on Translated Transcription
 
-This document details a modular pipeline that takes in an audio/video file in a non-English language, [`transcribes`](../modules/ai_model_modules/transcribe_module.md) it, [`translates`](../modules/ai_model_modules/translate_module.md) the transcript into English, and then performs [`sentiment analysis`](../modules/ai_model_modules/sentiment_module.md) on each sentence of the translated transcript.
+This document details a modular pipeline that takes in an audio file in a non-English language, [`transcribes`](../../modules/ai_model_modules/transcribe_module.md) it, [`translates`](../../modules/ai_model_modules/translate_module.md) the transcript into English, and then performs [`sentiment analysis`](../../modules/ai_model_modules/sentiment_module.md) on each sentence of the translated transcript.
 
 The document is divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Processing an Input File](#processing-an-input-file)
 
+
+```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ### Pipeline Setup
 
 To achieve what we've described above, let's set up a pipeline sequentially consisting of the following modules:
 
-- A [`transcribe`](../modules/ai_model_modules/transcribe_module.md) module.
+- A [`transcribe`](../../modules/ai_model_modules/transcribe_module.md) module.
 
-- A [`translate`](../modules/ai_model_modules/translate_module.md) module.
+- A [`translate`](../../modules/ai_model_modules/translate_module.md) module.
 
-- A [`json-to-txt`](../modules/support_function_modules/json-to-txt_module.md) module.
+- A [`json-to-txt`](../../modules/support_function_modules/json-to-txt_module.md) module.
 
-- A [`parser`](../modules/ai_model_modules/parser_module.md) module.
+- A [`parser`](../../modules/ai_model_modules/parser_module.md) module.
 
-- A [`sentiment`](../modules/ai_model_modules/sentiment_module.md) module.
+- A [`sentiment`](../../modules/ai_model_modules/sentiment_module.md) module.
 
-We use the [`json-to-txt`](../modules/support_function_modules/json-to-txt_module.md) and [`parser`](../modules/ai_model_modules/parser_module.md) combination, which combines the transcribed snippets into one document and then splices it again, to make sure that any pauses in speech don't make for partial snippets that can confuse the [`sentiment`](../modules/ai_model_modules/sentiment_module.md) model.
+We use the [`json-to-txt`](../../modules/support_function_modules/json-to-txt_module.md) and [`parser`](../../modules/ai_model_modules/parser_module.md) combination, which combines the transcribed snippets into one document and then splices it again, to make sure that any pauses in speech don't make for partial snippets that can confuse the [`sentiment`](../../modules/ai_model_modules/sentiment_module.md) model.
 
-Pipeline setup is accomplished through the [`.create_pipeline`](../system/pipeline_creation/create_pipeline.md) method, as follows:
+Pipeline setup is accomplished through the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
 
 
 ```python
@@ -39,14 +65,14 @@ pipeline_1 = krixik.create_pipeline(name="multi_sentiment_analysis_on_translated
 
 ### Processing an Input File
 
-Lets take a quick look at a test file before processing. Given that we're [`translating`](../modules/ai_model_modules/translate_module.md) before performing [`sentiment`](../modules/ai_model_modules/sentiment_module.md), we'll start with a Spanish-language video file.
+Lets take a quick look at a test file before processing. Given that we're [`translating`](../../modules/ai_model_modules/translate_module.md) before performing [`sentiment`](../../modules/ai_model_modules/sentiment_module.md), we'll start with a Spanish-language audio file.
 
 
 ```python
 # examine contents of input file
 
 from IPython.display import Video
-Video("../../../data/input/deadlift.mp4")
+Video("../../../data/input/deadlift.mp3")
 ```
 
 
@@ -58,15 +84,15 @@ Video("../../../data/input/deadlift.mp4")
 
 
 
-Since the input video is in Spanish, we'll use the (non-default) [`opus-mt-es-en`](https://huggingface.co/Helsinki-NLP/opus-mt-es-en) model of the [`translate`](../modules/ai_model_modules/translate_module.md) module to translate its transcript into English. We will also leverage a stronger model than the [default](../modules/ai_model_modules/transcribe_module.md#available-models-in-the-transcribe-module) for our [`transcription`](../modules/ai_model_modules/transcribe_module.md).
+Since the input audio is in Spanish, we'll use the (non-default) [`opus-mt-es-en`](https://huggingface.co/Helsinki-NLP/opus-mt-es-en) model of the [`translate`](../../modules/ai_model_modules/translate_module.md) module to translate its transcript into English. We will also leverage a stronger model than the [default](../../modules/ai_model_modules/transcribe_module.md#available-models-in-the-transcribe-module) for our [`transcription`](../../modules/ai_model_modules/transcribe_module.md).
 
-We will use the default models for every other module in the pipeline as well, so they don't have to be specified in the [`modules`](../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method.
+We will use the default models for every other module in the pipeline as well, so they don't have to be specified in the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 
 ```python
 # process the file through the pipeline, as described above
 
-process_output_1 = pipeline_1.process(local_file_path = "../../../data/input/deadlift.mp4", # the initial local filepath where the input file is stored
+process_output_1 = pipeline_1.process(local_file_path = "../../../data/input/deadlift.mp3", # the initial local filepath where the input file is stored
                                       local_save_directory="../../../data/output", # the local directory that the output file will be saved to
                                       expire_time=60*30, # process data will be deleted from the Krixik system in 30 minutes
                                       wait_for_process=True, # wait for process to complete before returning IDE control to user
@@ -74,28 +100,140 @@ process_output_1 = pipeline_1.process(local_file_path = "../../../data/input/dea
                                       modules={"transcribe": {"model": "whisper-base"}, "translate": {"model": "opus-mt-es-en"}}) # specify a non-default model for use in two modules whose type is only present once each in the pipeline (otherwise, would have to refer to them positionally)
 ```
 
-    INFO: Checking that file size falls within acceptable parameters...
-    INFO:...success!
-    converted ../../../data/input/deadlift.mp4 to: /var/folders/k9/0vtmhf0s5h56gt15mkf07b1r0000gn/T/tmpbc1_ib05/krixik_converted_version_deadlift.mp3
-    INFO: hydrated input modules: {'module_1': {'model': 'whisper-medium', 'params': {}}, 'module_2': {'model': 'opus-mt-es-en', 'params': {}}, 'module_3': {'model': 'base', 'params': {}}, 'module_4': {'model': 'sentence', 'params': {}}, 'module_5': {'model': 'distilbert-base-uncased-finetuned-sst-2-english', 'params': {}}}
-    INFO: symbolic_directory_path was not set by user - setting to default of /etc
-    INFO: file_name was not set by user - setting to random file name: krixik_generated_file_name_tihuizzppb.mp3
-    INFO: wait_for_process is set to True.
-    INFO: file will expire and be removed from you account in 600 seconds, at Mon May  6 16:44:53 2024 UTC
-    INFO: examples-transcribe-multilingual-sentiment-docs file process and input processing started...
-    INFO: metadata can be updated using the .update api.
-    INFO: This process's request_id is: df146df8-015c-ed3a-e0d0-d944cea661d9
-    INFO: File process and processing status:
-    SUCCESS: module 1 (of 5) - transcribe processing complete.
-    SUCCESS: module 2 (of 5) - translate processing complete.
-    SUCCESS: module 3 (of 5) - json-to-txt processing complete.
-    SUCCESS: module 4 (of 5) - parser processing complete.
-    SUCCESS: module 5 (of 5) - sentiment processing complete.
-    SUCCESS: pipeline process complete.
-    SUCCESS: process output downloaded
+
+    ---------------------------------------------------------------------------
+
+    PermissionError                           Traceback (most recent call last)
+
+    File ~\AppData\Local\Programs\Python\Python312\Lib\shutil.py:634, in _rmtree_unsafe(path, onexc)
+        633 try:
+    --> 634     os.unlink(fullname)
+        635 except OSError as err:
 
 
-The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method.
+    PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Lucas\\AppData\\Local\\Temp\\tmpw7ghvu4q\\krixik_converted_version_deadlift.mp3'
+
+    
+    During handling of the above exception, another exception occurred:
+
+
+    PermissionError                           Traceback (most recent call last)
+
+    File ~\AppData\Local\Programs\Python\Python312\Lib\tempfile.py:891, in TemporaryDirectory._rmtree.<locals>.onexc(func, path, exc)
+        890 try:
+    --> 891     _os.unlink(path)
+        892 # PermissionError is raised on FreeBSD for directories
+
+
+    PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Lucas\\AppData\\Local\\Temp\\tmpw7ghvu4q\\krixik_converted_version_deadlift.mp3'
+
+    
+    During handling of the above exception, another exception occurred:
+
+
+    NotADirectoryError                        Traceback (most recent call last)
+
+    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\utilities\converters\utilities\decorators.py:28, in datatype_converter_wrapper.<locals>.converter_wrapper(*args, **kwargs)
+         27 if conversion is not None:
+    ---> 28     with tempfile.TemporaryDirectory() as conversion_save_directory:
+         29         og_local_file_path = copy.deepcopy(local_file_path)
+
+
+    File ~\AppData\Local\Programs\Python\Python312\Lib\tempfile.py:919, in TemporaryDirectory.__exit__(self, exc, value, tb)
+        918 if self._delete:
+    --> 919     self.cleanup()
+
+
+    File ~\AppData\Local\Programs\Python\Python312\Lib\tempfile.py:923, in TemporaryDirectory.cleanup(self)
+        922 if self._finalizer.detach() or _os.path.exists(self.name):
+    --> 923     self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+
+
+    File ~\AppData\Local\Programs\Python\Python312\Lib\tempfile.py:903, in TemporaryDirectory._rmtree(cls, name, ignore_errors)
+        901             raise
+    --> 903 _shutil.rmtree(name, onexc=onexc)
+
+
+    File ~\AppData\Local\Programs\Python\Python312\Lib\shutil.py:796, in rmtree(path, ignore_errors, onerror, onexc, dir_fd)
+        795     return
+    --> 796 return _rmtree_unsafe(path, onexc)
+
+
+    File ~\AppData\Local\Programs\Python\Python312\Lib\shutil.py:636, in _rmtree_unsafe(path, onexc)
+        635         except OSError as err:
+    --> 636             onexc(os.unlink, fullname, err)
+        637 try:
+
+
+    File ~\AppData\Local\Programs\Python\Python312\Lib\tempfile.py:894, in TemporaryDirectory._rmtree.<locals>.onexc(func, path, exc)
+        893     except (IsADirectoryError, PermissionError):
+    --> 894         cls._rmtree(path, ignore_errors=ignore_errors)
+        895 except FileNotFoundError:
+
+
+    File ~\AppData\Local\Programs\Python\Python312\Lib\tempfile.py:903, in TemporaryDirectory._rmtree(cls, name, ignore_errors)
+        901             raise
+    --> 903 _shutil.rmtree(name, onexc=onexc)
+
+
+    File ~\AppData\Local\Programs\Python\Python312\Lib\shutil.py:796, in rmtree(path, ignore_errors, onerror, onexc, dir_fd)
+        795     return
+    --> 796 return _rmtree_unsafe(path, onexc)
+
+
+    File ~\AppData\Local\Programs\Python\Python312\Lib\shutil.py:612, in _rmtree_unsafe(path, onexc)
+        611 except OSError as err:
+    --> 612     onexc(os.scandir, path, err)
+        613     entries = []
+
+
+    File ~\AppData\Local\Programs\Python\Python312\Lib\shutil.py:609, in _rmtree_unsafe(path, onexc)
+        608 try:
+    --> 609     with os.scandir(path) as scandir_it:
+        610         entries = list(scandir_it)
+
+
+    NotADirectoryError: [WinError 267] The directory name is invalid: 'C:\\Users\\Lucas\\AppData\\Local\\Temp\\tmpw7ghvu4q\\krixik_converted_version_deadlift.mp3'
+
+    
+    During handling of the above exception, another exception occurred:
+
+
+    Exception                                 Traceback (most recent call last)
+
+    Cell In[4], line 3
+          1 # process the file through the pipeline, as described above
+    ----> 3 process_output_1 = pipeline_1.process(local_file_path = "../../../data/input/deadlift.mp4", # the initial local filepath where the input file is stored
+          4                                       local_save_directory="../../../data/output", # the local directory that the output file will be saved to
+          5                                       expire_time=60*30, # process data will be deleted from the Krixik system in 30 minutes
+          6                                       wait_for_process=True, # wait for process to complete before returning IDE control to user
+          7                                       verbose=False, # do not display process update printouts upon running code
+          8                                       modules={"transcribe": {"model": "whisper-base"}, "translate": {"model": "opus-mt-es-en"}}) # specify a non-default model for use in two modules whose type is only present once each in the pipeline (otherwise, would have to refer to them positionally)
+
+
+    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\system_builder\utilities\decorators.py:97, in kwargs_checker.<locals>.wrapper(*args, **kwargs)
+         95 if unexpected_args:
+         96     raise TypeError(f"unexpected keyword argument(s) for '{func_name}': {', '.join(unexpected_args)}")
+    ---> 97 return func(*args, **kwargs)
+
+
+    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\system_builder\functions\checkin.py:67, in check_init_decorator.<locals>.wrapper(self, *args, **kwargs)
+         64 @functools.wraps(func)
+         65 def wrapper(self, *args, **kwargs):
+         66     check_init(self)
+    ---> 67     return func(self, *args, **kwargs)
+
+
+    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\utilities\converters\utilities\decorators.py:93, in datatype_converter_wrapper.<locals>.converter_wrapper(*args, **kwargs)
+         91     raise PermissionError(e)
+         92 except Exception as e:
+    ---> 93     raise Exception(e)
+
+
+    Exception: [WinError 267] The directory name is invalid: 'C:\\Users\\Lucas\\AppData\\Local\\Temp\\tmpw7ghvu4q\\krixik_converted_version_deadlift.mp3'
+
+
+The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 Because the output of this particular module-model pair is a JSON file, the process output is provided in this object as well (this is only the case for JSON outputs).  Moreover, the output file itself has been saved to the location noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 
@@ -410,3 +548,10 @@ with open(process_output_1["process_output_files"][0]) as f:
       }
     ]
 
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+
+reset_pipeline(pipeline_1)
+```

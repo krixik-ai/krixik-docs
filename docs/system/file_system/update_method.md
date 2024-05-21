@@ -4,9 +4,35 @@ You can update any metadata of any processed file by using the `.update` method.
 
 This overview of the `.update` method is divided into the following sections:
 
-- [.update Method Arguments](#.update-method-arguments)
-- [.update Method Example](#.update-method-example)
-- [Observations on the .update Method](#observations-on-the-.update-Method)
+- [.update Method Arguments](#update-method-arguments)
+- [.update Method Example](#update-method-example)
+- [Observations on the .update Method](#observations-on-the-update-method)
+
+
+```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
 
 ### `.update` Method Arguments
 
@@ -41,16 +67,19 @@ pipeline_1 = krixik.create_pipeline(name="update_method_1_parser",
 
 # process short input file
 
-process_output_1 = pipeline_1.process(local_file_path="../../data/input/Frankenstein.txt", # the initial local filepath where the input JSON file is stored
+process_output_1 = pipeline_1.process(local_file_path="../../../data/input/Frankenstein.txt", # the initial local filepath where the input JSON file is stored
                                       expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
                                       wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
                                       verbose=False,  # do not display process update printouts upon running code
                                       symbolic_directory_path="/novels/gothic",
                                       file_name="The Franken Stein.txt",
-                                      file_tags=[{"author": "Shelley"}, {"category": "gothic"}, {"century": 19}])
+                                      file_tags=[{"author": "Shelley"}, {"category": "gothic"}, {"century": "19"}])
 ```
 
-Let's see what the file's record looks like with the [`.list`](../file_system/list_method.md) method:
+    INFO: output json downloaded but larger than 0.5MB and will not be returned with .process output
+
+
+Let's see what the file's record looks like with the [`.list`](list_method.md) method:
 
 
 ```python
@@ -63,6 +92,57 @@ list_output_1 = pipeline_1.list(symbolic_directory_paths=['/novels/gothic'])
 print(json.dumps(list_output_1, indent=2))
 ```
 
+    {
+      "status_code": 200,
+      "request_id": "abaa977d-e56b-41b9-9c49-f2809f987a2d",
+      "message": "Successfully returned 1 item.  Note: all timestamps in UTC.",
+      "warnings": [],
+      "items": [
+        {
+          "last_updated": "2024-05-20 17:49:30",
+          "process_id": "b107e0e0-74da-a983-d1d2-56cd9bbe33d7",
+          "created_at": "2024-05-20 17:49:30",
+          "file_metadata": {
+            "modules": {
+              "module_1": {
+                "parser": {
+                  "model": "sentence"
+                }
+              }
+            },
+            "modules_data": {
+              "module_1": {
+                "parser": {
+                  "data_files_extensions": [
+                    ".json"
+                  ],
+                  "num_lines": 3199
+                }
+              }
+            }
+          },
+          "file_tags": [
+            {
+              "author": "shelley"
+            },
+            {
+              "category": "gothic"
+            },
+            {
+              "century": "19"
+            }
+          ],
+          "file_description": "",
+          "symbolic_directory_path": "/novels/gothic",
+          "pipeline": "update_method_1_parser",
+          "file_id": "463a697d-a8b5-4674-ace8-79fe53b862a1",
+          "expire_time": "2024-05-20 18:19:30",
+          "file_name": "the franken stein.txt"
+        }
+      ]
+    }
+
+
 We can use the `.update` method to update the file's metadata.
 
 We'll update its `file_name`, since it's erroneous, change the `{"category": "gothic"}` file tag for something different, and add a `file_description`. We'll leave its `symbolic_directory_path` untouched.
@@ -71,9 +151,9 @@ We'll update its `file_name`, since it's erroneous, change the `{"category": "go
 ```python
 # update metadata the metadata for the processed file
 
-update_output_1 = pipeline_1.update(file_id=XXXX,
+update_output_1 = pipeline_1.update(file_id="463a697d-a8b5-4674-ace8-79fe53b862a1",
                                     file_name="Frankenstein.txt",
-                                    file_tags=[{"author": "Shelley"}, {"country": "UK"}, {"century": 19}],
+                                    file_tags=[{"author": "Shelley"}, {"country": "UK"}, {"century": "19"}],
                                     file_description='Is the villain the monster or the doctor?')
 
 # nicely print the output of this .update
@@ -81,16 +161,24 @@ update_output_1 = pipeline_1.update(file_id=XXXX,
 print(json.dumps(process_output_1, indent=2))
 ```
 
+    INFO: lower casing file_name Frankenstein.txt to frankenstein.txt
+    INFO: lower casing file tag {'author': 'Shelley'} to {'author': 'shelley'}
+    INFO: lower casing file tag {'country': 'UK'} to {'country': 'uk'}
     {
       "status_code": 200,
-      "pipeline": "parser-pipeline-1",
-      "request_id": "4201b289-9088-42e3-a0ec-8053b9190ba3",
-      "message": "Successfully updated file metadata",
-      "warnings": []
+      "pipeline": "update_method_1_parser",
+      "request_id": "090cb419-2e92-4dff-b82f-d14d562f45d5",
+      "file_id": "463a697d-a8b5-4674-ace8-79fe53b862a1",
+      "message": "SUCCESS - output fetched for file_id 463a697d-a8b5-4674-ace8-79fe53b862a1.Output saved to location(s) listed in process_output_files.",
+      "warnings": [],
+      "process_output": null,
+      "process_output_files": [
+        "c:\\Users\\Lucas\\Desktop\\krixikdocsnoodle\\docs\\system\\file_system/463a697d-a8b5-4674-ace8-79fe53b862a1.json"
+      ]
     }
 
 
-Now we invoke the [`.list`](../file_system/list_method.md) method to confirm that all metadata has indeed been updated as requested:
+Now we invoke the [`.list`](list_method.md) method to confirm that all metadata has indeed been updated as requested:
 
 
 ```python
@@ -105,42 +193,50 @@ print(json.dumps(list_output_2, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "53c2fc7b-8b84-4128-a34e-1e4de4ceff94",
+      "request_id": "8bbcc518-4204-439e-9173-7f659f1b96e5",
       "message": "Successfully returned 1 item.  Note: all timestamps in UTC.",
       "warnings": [],
       "items": [
         {
-          "last_updated": "2024-04-26 21:06:32",
-          "process_id": "461bfe88-0064-13b1-2728-7f5a371092cf",
-          "created_at": "2024-04-26 21:05:42",
+          "last_updated": "2024-05-20 17:51:00",
+          "process_id": "b107e0e0-74da-a983-d1d2-56cd9bbe33d7",
+          "created_at": "2024-05-20 17:49:30",
           "file_metadata": {
             "modules": {
-              "parser": {
-                "model": "sentence"
+              "module_1": {
+                "parser": {
+                  "model": "sentence"
+                }
               }
             },
             "modules_data": {
-              "parser": {
-                "data_files_extensions": [
-                  ".json"
-                ]
+              "module_1": {
+                "parser": {
+                  "data_files_extensions": [
+                    ".json"
+                  ],
+                  "num_lines": 3199
+                }
               }
             }
           },
           "file_tags": [
             {
-              "author": "orwell"
+              "author": "shelley"
             },
             {
-              "category": "fiction"
+              "country": "uk"
+            },
+            {
+              "century": "19"
             }
           ],
-          "file_description": "the first paragraph of 1984",
-          "symbolic_directory_path": "/my/custom/filepath",
-          "pipeline": "parser-pipeline-1",
-          "file_id": "ca3ca26c-7b76-4fd2-a1f1-3c86d8eb443a",
-          "expire_time": "2024-04-26 21:10:42",
-          "file_name": "a_new_filename.txt"
+          "file_description": "Is the villain the monster or the doctor?",
+          "symbolic_directory_path": "/novels/gothic",
+          "pipeline": "update_method_1_parser",
+          "file_id": "463a697d-a8b5-4674-ace8-79fe53b862a1",
+          "expire_time": "2024-05-20 18:19:30",
+          "file_name": "frankenstein.txt"
         }
       ]
     }
@@ -148,7 +244,7 @@ print(json.dumps(list_output_2, indent=2))
 
 ### Observations on the `.update` Method
 
-We'll close with four observation on the `.update` method:
+Four closing observation on the `.update` method:
 
 - Note that in the example above we updated `file_tags` by including the entire set of file tags: `[{"author": "Shelley"}, {"country": "UK"}, {"century": 19}]`. If we'd only used `[{"country": "UK"}]`, the "author" and "century" ones would have been deleted.
 
@@ -157,3 +253,10 @@ We'll close with four observation on the `.update` method:
 - You can also not update a file's file extension. For instance, a `.txt` file cannot become a `.pdf` file through the `.update` method.
 
 - The `.update` method allows you to extend a file's [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-process-method-arguments) indefinitely. Upon initially uploading a file, its [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-process-method-arguments) cannot be greater than 2,592,000 seconds (30 days). However, if you periodically invoke `.update` on its file and reset its [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-process-method-arguments) to another 2,592,000 seconds (or however many seconds you please), the file will remain on-system for that much more time as of that moment, and so forth.
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+
+reset_pipeline(pipeline_1)
+```

@@ -1,44 +1,48 @@
-# Welcome to krixik!
+# Welcome to Krixik Documentation!
 
-Easily assemble and serverlessly consume modular AI pipelines through secure Python APIs.
+If you're seeking the main Krixik repo on GitHub, please [click here](https://github.com/krixik-ai/krixik-cli).
 
-## Quickstart guide
+## Table of Contents
 
-Get started in three easy steps.
+-  [What can you do with Krixik?](#what-can-you-do-with-krixik?)
+-  [Core Concepts](#core-concepts)
+-  [Documentation Sections](#documentation-sections)
 
-1.  [install the krixik cli](#install-the-krixik-cli)
-2.  [initialize a session](#initialize-a-session)
-3.  [start building](#start-building)
+## What can you do with Krixik?
 
-### Install the krixik cli using pip
+With Krixik, you can...
 
-Install the [krixik Python CLI](https://github.com/krixik-ai/krixik-cli) using `pip` by executing the following at a terminal.
+- ...run semantic search on 540 focus group transcripts and then perform sentiment analysis on each result.
+  - Pipeline: [Parse → Embed → Vector Database → (Vector Search) → Sentiment Analysis]
+- ...transcribe a year's worth of Peruvian political speeches, translate them to English, and then summarize each one.
+  - Pipeline: [Transcribe → Translate → JSON-to-TXT → Summarize]
+- ...easily and serverlessly consume your open-source OCR model of choice.
+  - Pipeline: [OCR]
 
-```python
-# install the krixik cli
-pip install krixik
-```
+## Core Concepts
 
-Note: Python version 3.8 or higher is required to use the cli.
+### Components of a Krixik Pipeline
 
-### Initialize a session
+Krixik **pipelines** are comprised of one or more sequentially connected **modules**. These modules are containers for a range of **parameterizable** AI **models** or support functions.
 
-Initialize a session by executing the following in a notebook or ide.
+Let's examine each of the above-highlighted terms.
 
-```python
-from krixik import krixik
-krixik.init(api_key=MY_API_KEY, 
-            api_url=MY_API_URL)
-```
+A **pipeline** is a self-contained sequence of one or more modules that is consumed via a serverless API.  
 
-Here  `MY_API_KEY` and `MY_API_URL` are your account secrets.
+A **module** is a processing step with a unique input/output data footprint. Each model contains a parameterizable AI model or support function.
 
-Note: [krixik](https://github.com/krixik-ai/krixik-cli) is currently in closed beta.  Please reach out to us directly if you have any issues initializing a session.
+A **model** is a bespoke processing function contained within a module. Many of these are AI models, but some are simpler "support functions" for inter-pipeline data preparation or transformation.
 
-### Start building
+**Parameters** can be set for each module when a pipeline is run and allow for further customization. Each has a default value, so setting them is optional. For instance, one parameterizable item is which specific AI model you want active within a given module.
 
-Start building modular pipelines!
+## Documentation Sections
 
-- Dive in headfirst into building [multi-module examples](examples/overview.md)
-- Learn how to build with [individual modules](modules/overview.md)
-- Learn about [krixik system methods](system/overview.md)
+Krixik Documentation is divided into the following three sections. Dive in!
+
+- [The Krixik System](system/system_overview.md) (including [installation](system/initialization/install_cli.md), [initialization](system/initialization/initialize_and_authenticate.md), [pipeline creation](system/pipeline_creation/create_pipeline.md), [file processing](system/parameters_processing_files_through_pipelines/process_method.md), and more)
+- [The Krixik Module Library](modules/modules_overview.md)
+- [Krixik Pipeline Examples](examples/pipeline_examples_overview.md)
+
+And we close with a brief note on the [Future of Krixik](future/future_of_krixik.md).
+
+Happy building—if you have any questions or comments, please feel free to reach out via GitHub Issues!

@@ -1,6 +1,6 @@
 ## Multi-Module Pipeline: Basic Semantic Search
 
-This document details a modular pipeline that takes in a text document and enables [`semantic search`](../system/search_methods/semantic_search_method.md) on it.
+This document details a modular pipeline that takes in a text document and enables [`semantic search`](../../system/search_methods/semantic_search_method.md) on it.
 
 The document is divided into the following sections:
 
@@ -8,17 +8,43 @@ The document is divided into the following sections:
 - [Processing an Input File](#processing-an-input-file)
 - [Performing Semantic Search](#performing-semantic-search)
 
+
+```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ### Pipeline Setup
 
 To achieve what we've described above, let's set up a pipeline sequentially consisting of the following modules:
 
-- A [`parser`](../modules/ai_model_modules/parser_module.md) module.
+- A [`parser`](../../modules/ai_model_modules/parser_module.md) module.
 
-- A [`text-embedder`](../modules/ai_model_modules/text-embedder_module.md) module.
+- A [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) module.
 
-- A [`vector-db`](../modules/database_modules/vector-db_module.md) module.
+- A [`vector-db`](../../modules/database_modules/vector-db_module.md) module.
 
-We do this by leveraging the [`.create_pipeline`](../system/pipeline_creation/create_pipeline.md) method, as follows:
+We do this by leveraging the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
 
 
 ```python
@@ -134,7 +160,7 @@ with open("../../../data/input/1984_short.txt", "r") as file:
       IGNORANCE IS STRENGTH
 
 
-We will use the default models for every module in the pipeline, so the [`modules`](../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method doesn't need to be leveraged.
+We will use the default models for every module in the pipeline, so the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method doesn't need to be leveraged.
 
 
 ```python
@@ -147,7 +173,7 @@ process_output_1 = pipeline_1.process(local_file_path = "../../../data/input/198
                                       verbose=False) # do not display process update printouts upon running code
 ```
 
-The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method.
+The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 Because the output of this particular module-model pair is a [FAISS](https://github.com/facebookresearch/faiss) database file, `process_output` is "null". However, the output file has been saved to the location noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 
@@ -160,23 +186,23 @@ print(json.dumps(process_output_1, indent=2))
 
     {
       "status_code": 200,
-      "pipeline": "examples-text-search-semantic-pipeline",
-      "request_id": "262563c3-6841-4aa8-8694-01c056fb4ce8",
-      "file_id": "b20fa17b-1df9-4185-94c9-ae17ac187822",
-      "message": "SUCCESS - output fetched for file_id b20fa17b-1df9-4185-94c9-ae17ac187822.Output saved to location(s) listed in process_output_files.",
+      "pipeline": "multi_basic_semantic_search",
+      "request_id": "65bf3e24-5e2f-4195-a826-3b4f62ea1ddc",
+      "file_id": "613f9fd1-8e08-4a27-9c71-126e70257c30",
+      "message": "SUCCESS - output fetched for file_id 613f9fd1-8e08-4a27-9c71-126e70257c30.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../../data/output/b20fa17b-1df9-4185-94c9-ae17ac187822.faiss"
+        "../../../data/output/613f9fd1-8e08-4a27-9c71-126e70257c30.faiss"
       ]
     }
 
 
 ### Performing Semantic Search
 
-Krixik's [`.semantic_search`](../system/search_methods/semantic_search_method.md) method enables semantic search on documents processed through certain pipelines. Given that the [`.semantic_search`](../system/search_methods/semantic_search_method.md) method both [embeds](../modules/ai_model_modules/text-embedder_module.md) the query and performs the search, it can only be used with pipelines containing both a [`text-embedder`](../modules/ai_model_modules/text-embedder_module.md) module and a [`vector-db`](../modules/database_modules/vector-db_module.md) module in immediate succession.
+Krixik's [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method enables semantic search on documents processed through certain pipelines. Given that the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method both [embeds](../../modules/ai_model_modules/text-embedder_module.md) the query and performs the search, it can only be used with pipelines containing both a [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) module and a [`vector-db`](../../modules/database_modules/vector-db_module.md) module in immediate succession.
 
-Since our pipeline satisfies this condition, it has access to the [`.semantic_search`](../system/search_methods/semantic_search_method.md) method. Let's use it to query our text with natural language, as shown below:
+Since our pipeline satisfies this condition, it has access to the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method. Let's use it to query our text with natural language, as shown below:
 
 
 ```python
@@ -192,19 +218,19 @@ print(json.dumps(semantic_output_1, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "57a797f5-bc77-4774-a2b0-b5f13007b356",
+      "request_id": "58090e7a-f386-4f34-8737-4b0051a77a7d",
       "message": "Successfully queried 1 user file.",
       "warnings": [],
       "items": [
         {
-          "file_id": "b20fa17b-1df9-4185-94c9-ae17ac187822",
+          "file_id": "613f9fd1-8e08-4a27-9c71-126e70257c30",
           "file_metadata": {
-            "file_name": "krixik_generated_file_name_toyzuamynf.txt",
+            "file_name": "krixik_generated_file_name_xszxmlwjta.txt",
             "symbolic_directory_path": "/etc",
             "file_tags": [],
             "num_vectors": 50,
-            "created_at": "2024-05-07 18:30:32",
-            "last_updated": "2024-05-07 18:30:32"
+            "created_at": "2024-05-20 06:17:09",
+            "last_updated": "2024-05-20 06:17:09"
           },
           "search_results": [
             {
@@ -255,3 +281,10 @@ print(json.dumps(semantic_output_1, indent=2))
       ]
     }
 
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+
+reset_pipeline(pipeline_1)
+```

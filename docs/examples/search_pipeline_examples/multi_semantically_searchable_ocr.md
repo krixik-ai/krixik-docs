@@ -1,6 +1,6 @@
 ## Multi-Module Pipeline: Semantically-Searchable OCR
 
-This document details a modular pipeline that takes in an image, [`extracts all text`](../modules/ai_model_modules/ocr_module.md) found within it, and makes the extracted text [`semantically searchable`](../system/search_methods/semantic_search_method.md).
+This document details a modular pipeline that takes in an image, [`extracts all text`](../../modules/ai_model_modules/ocr_module.md) found within it, and makes the extracted text [`semantically searchable`](../../system/search_methods/semantic_search_method.md).
 
 The document is divided into the following sections:
 
@@ -8,23 +8,49 @@ The document is divided into the following sections:
 - [Processing an Input File](#processing-an-input-file)
 - [Performing Semantic Search](#performing-semantic-search)
 
+
+```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ### Pipeline Setup
 
 To achieve what we've described above, let's set up a pipeline sequentially consisting of the following modules:
 
-- An [`ocr`](../modules/ai_model_modules/ocr_module.md) module.
+- An [`ocr`](../../modules/ai_model_modules/ocr_module.md) module.
 
-- A [`json-to-txt`](../modules/support_function_modules/json-to-txt_module.md) module.
+- A [`json-to-txt`](../../modules/support_function_modules/json-to-txt_module.md) module.
 
-- A [`parser`](../modules/ai_model_modules/parser_module.md) module.
+- A [`parser`](../../modules/ai_model_modules/parser_module.md) module.
 
-- A [`text-embedder`](../modules/ai_model_modules/text-embedder_module.md) module.
+- A [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) module.
 
-- A [`vector-db`](../modules/database_modules/vector-db_module.md)
+- A [`vector-db`](../../modules/database_modules/vector-db_module.md)
 
-We use the [`json-to-txt`](../modules/support_function_modules/json-to-txt_module.md) and [`parser`](../modules/ai_model_modules/parser_module.md) combination, which combines the transcribed snippets into one document and then splices it again, to make sure that any unsought OCR-generated breaks don't make for partial snippets that can confuse the [`text-embedder`](../modules/ai_model_modules/text-embedder_module.md) model.
+We use the [`json-to-txt`](../../modules/support_function_modules/json-to-txt_module.md) and [`parser`](../../modules/ai_model_modules/parser_module.md) combination, which combines the transcribed snippets into one document and then splices it again, to make sure that any unsought OCR-generated breaks don't make for partial snippets that can confuse the [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) model.
 
-Pipeline setup is accomplished through the [`.create_pipeline`](../system/pipeline_creation/create_pipeline.md) method, as follows:
+Pipeline setup is accomplished through the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
 
 
 ```python
@@ -54,12 +80,12 @@ Image(filename="../../../data/input/seal.png")
 
 
     
-![png](multi_semantically_searchable_ocr_files/multi_semantically_searchable_ocr_4_0.png)
+![png](multi_semantically_searchable_ocr_files/multi_semantically_searchable_ocr_5_0.png)
     
 
 
 
-We will use the default models for every module in the pipeline, so the [`modules`](../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method doesn't need to be leveraged.
+We will use the default models for every module in the pipeline, so the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method doesn't need to be leveraged.
 
 
 ```python
@@ -72,7 +98,7 @@ process_output_1 = pipeline_1.process(local_file_path = "../../../data/input/sea
                                       verbose=False) # do not display process update printouts upon running code
 ```
 
-The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../system/parameters_processing_files_through_pipelines/process_method.md) method.
+The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 Because the output of this particular module-model pair is a [FAISS](https://github.com/facebookresearch/faiss) database file, `process_output` is "null". However, the output file has been saved to the location noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 
@@ -85,23 +111,23 @@ print(json.dumps(process_output_1, indent=2))
 
     {
       "status_code": 200,
-      "pipeline": "examples-caption-semantic-docs",
-      "request_id": "f0bdacfd-c35b-40cb-95b1-7aaac772a5d1",
-      "file_id": "793b02d7-2a33-4b6c-93be-c1e8619cfd4f",
-      "message": "SUCCESS - output fetched for file_id 793b02d7-2a33-4b6c-93be-c1e8619cfd4f.Output saved to location(s) listed in process_output_files.",
+      "pipeline": "multi_semantically_searchable_ocr",
+      "request_id": "f710e55e-5312-4098-8b1a-5591d4ff8e73",
+      "file_id": "f90bd3ab-7f94-448e-8f22-4e6b1a66c8c3",
+      "message": "SUCCESS - output fetched for file_id f90bd3ab-7f94-448e-8f22-4e6b1a66c8c3.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../../data/output/793b02d7-2a33-4b6c-93be-c1e8619cfd4f.faiss"
+        "../../../data/output/f90bd3ab-7f94-448e-8f22-4e6b1a66c8c3.faiss"
       ]
     }
 
 
 ### Performing Semantic Search
 
-Krixik's [`.semantic_search`](../system/search_methods/semantic_search_method.md) method enables semantic search on documents processed through certain pipelines. Given that the [`.semantic_search`](../system/search_methods/semantic_search_method.md) method both [embeds](../modules/ai_model_modules/text-embedder_module.md) the query and performs the search, it can only be used with pipelines containing both a [`text-embedder`](../modules/ai_model_modules/text-embedder_module.md) module and a [`vector-db`](../modules/database_modules/vector-db_module.md) module in immediate succession.
+Krixik's [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method enables semantic search on documents processed through certain pipelines. Given that the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method both [embeds](../../modules/ai_model_modules/text-embedder_module.md) the query and performs the search, it can only be used with pipelines containing both a [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) module and a [`vector-db`](../../modules/database_modules/vector-db_module.md) module in immediate succession.
 
-Since our pipeline satisfies this condition, it has access to the [`.semantic_search`](../system/search_methods/semantic_search_method.md) method. Let's use it to query our text with natural language, as shown below:
+Since our pipeline satisfies this condition, it has access to the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method. Let's use it to query our text with natural language, as shown below:
 
 
 ```python
@@ -115,30 +141,70 @@ print(json.dumps(semantic_output_1, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "a10ce58a-7c7c-4615-9a48-89a63d4fedfd",
+      "request_id": "c5de4a40-fcc4-40f2-9455-5ea9069058f1",
       "message": "Successfully queried 1 user file.",
       "warnings": [],
       "items": [
         {
-          "file_id": "793b02d7-2a33-4b6c-93be-c1e8619cfd4f",
+          "file_id": "f90bd3ab-7f94-448e-8f22-4e6b1a66c8c3",
           "file_metadata": {
-            "file_name": "krixik_generated_file_name_cqdgdvvznx.png",
+            "file_name": "krixik_generated_file_name_lhjamjydki.png",
             "symbolic_directory_path": "/etc",
             "file_tags": [],
-            "num_vectors": 1,
-            "created_at": "2024-05-07 18:50:56",
-            "last_updated": "2024-05-07 18:50:56"
+            "num_vectors": 8,
+            "created_at": "2024-05-20 06:29:47",
+            "last_updated": "2024-05-20 06:29:47"
           },
           "search_results": [
             {
-              "snippet": "a large group of people are in a restaurant",
+              "snippet": "His eyes are\nwide-open and bloodshot from lack of sleep.",
               "line_numbers": [
-                1
+                5,
+                6
               ],
-              "distance": 0.386
+              "distance": 0.284
+            },
+            {
+              "snippet": "His\nopen mouth gapes towards the dawn, and unearthly sounds come from his throat.",
+              "line_numbers": [
+                9,
+                10
+              ],
+              "distance": 0.289
+            },
+            {
+              "snippet": "He has fallen asleep where he\ncollapsed, at the edge of the forest among the wind-gnarled fir trees.",
+              "line_numbers": [
+                8,
+                9
+              ],
+              "distance": 0.302
+            },
+            {
+              "snippet": "Nearby his squire JONS is snoring loudly.",
+              "line_numbers": [
+                7,
+                8
+              ],
+              "distance": 0.331
+            },
+            {
+              "snippet": "At the sudden gust of wind, the horses stir, stretching their parched muzzles\ntowards the sea.",
+              "line_numbers": [
+                11,
+                12
+              ],
+              "distance": 0.429
             }
           ]
         }
       ]
     }
 
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+
+reset_pipeline(pipeline_1)
+```

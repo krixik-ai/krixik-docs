@@ -54,6 +54,7 @@ def check_file_links(filepath: str, toc_files: list) -> list:
     except Exception as e:
         print(f"FAILURE: check_file_links failed for file {filepath} with exception {e}")
 
+    
     dead_links = []
 
     # check intra_links for dead links
@@ -64,7 +65,21 @@ def check_file_links(filepath: str, toc_files: list) -> list:
     # check inter_links for dead links
     toc_files = ["docs/" + v for v in toc_files]
     for link in inter_links:
-        if link not in toc_files:
+        # check if link directs to heading
+        if "#" in link:
+            link_split = link.split('#')
+            if len(link_split) != 2:
+                dead_links.append(link)
+                continue
+            page = link_split[0]
+            specific_heading = link_split[1] 
+            if page not in toc_files:
+                dead_links.append(link)
+                continue
+            headings = extract_headings_from_markdown(f"{base_dir}/" + page)
+            if "#" + specific_heading not in headings:
+                dead_links.append(link)
+        elif link not in toc_files:
             dead_links.append(link)
 
     # check outer_links for dead links
