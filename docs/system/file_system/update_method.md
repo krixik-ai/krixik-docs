@@ -4,35 +4,9 @@ You can update any metadata of any processed file by using the `.update` method.
 
 This overview of the `.update` method is divided into the following sections:
 
-- [.update Method Arguments](#update-method-arguments)
-- [.update Method Example](#update-method-example)
-- [Observations on the .update Method](#observations-on-the-update-method)
-
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
+- [.update Method Arguments](#.update-method-arguments)
+- [.update Method Example](#.update-method-example)
+- [Observations on the .update Method](#observations-on-the-.update-method)
 
 ### `.update` Method Arguments
 
@@ -84,11 +58,9 @@ Let's see what the file's record looks like with the [`.list`](list_method.md) m
 
 ```python
 # see the file's record with .list
-
 list_output_1 = pipeline_1.list(symbolic_directory_paths=['/novels/gothic'])
 
 # nicely print the output of this .list
-
 print(json.dumps(list_output_1, indent=2))
 ```
 
@@ -150,14 +122,12 @@ We'll update its `file_name`, since it's erroneous, change the `{"category": "go
 
 ```python
 # update metadata the metadata for the processed file
-
 update_output_1 = pipeline_1.update(file_id="463a697d-a8b5-4674-ace8-79fe53b862a1",
                                     file_name="Frankenstein.txt",
                                     file_tags=[{"author": "Shelley"}, {"country": "UK"}, {"century": "19"}],
                                     file_description='Is the villain the monster or the doctor?')
 
 # nicely print the output of this .update
-
 print(json.dumps(process_output_1, indent=2))
 ```
 
@@ -183,11 +153,9 @@ Now we invoke the [`.list`](list_method.md) method to confirm that all metadata 
 
 ```python
 # call .list to see the file's newly updated record
-
 list_output_2 = pipeline_1.list(symbolic_file_paths=['/novels/gothic/Frankenstein.txt'])
 
 # nicely print the output of this .list
-
 print(json.dumps(list_output_2, indent=2))
 ```
 
@@ -252,11 +220,4 @@ Four closing observation on the `.update` method:
 
 - You can also not update a file's file extension. For instance, a `.txt` file cannot become a `.pdf` file through the `.update` method.
 
-- The `.update` method allows you to extend a file's [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-process-method-arguments) indefinitely. Upon initially uploading a file, its [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-process-method-arguments) cannot be greater than 2,592,000 seconds (30 days). However, if you periodically invoke `.update` on its file and reset its [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-process-method-arguments) to another 2,592,000 seconds (or however many seconds you please), the file will remain on-system for that much more time as of that moment, and so forth.
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-
-reset_pipeline(pipeline_1)
-```
+- The `.update` method allows you to extend a file's [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-.process-method-arguments) indefinitely. Upon initially uploading a file, its [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-.process-method-arguments) cannot be greater than 2,592,000 seconds (30 days). However, if you periodically invoke `.update` on its file and reset its [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-.process-method-arguments) to another 2,592,000 seconds (or however many seconds you please), the file will remain on-system for that much more time as of that moment, and so forth.

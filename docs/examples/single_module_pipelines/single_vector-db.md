@@ -9,34 +9,8 @@ The document is divided into the following sections:
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)
 - [Using the Default Model](#using-the-default-model)
-- [Using the `.semantic_search` Method](#using-the-semantic_search-method)
+- [Using the `.semantic_search` Method](#using-the-.semantic_search-method)
 - [Querying Output Databases Locally](#querying-output-databases-locally)
-
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
 
 ### Pipeline Setup
 
@@ -174,10 +148,3 @@ print(f"distance from query to this vector: {distances[0][1]}")
     second closest vector from original: [1 1]
     distance from query to this vector: 0.2928932309150696
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-
-reset_pipeline(pipeline_1)
-```

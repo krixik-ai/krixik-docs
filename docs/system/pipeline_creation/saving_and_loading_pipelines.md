@@ -2,35 +2,9 @@
 
 This overview of the saving and loading pipelines is divided into the following sections:
 
-- [The `.save_pipeline` Method](#the-save_pipeline-method)
-- [The `.load_pipeline` Method](#the-load_pipeline-method)
+- [The `.save_pipeline` Method](#the-.save_pipeline-method)
+- [The `.load_pipeline` Method](#the-.load_pipeline-method)
 - [The `reset_pipeline` Function](#the-reset_pipeline-function)
-
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
 
 ### The `.save_pipeline` Method
 
@@ -72,7 +46,7 @@ The `.load_pipeline` method takes a single (required) argument:
 
 - `config_path`: A valid local file path.
 
-For the `.load_pipeline` method to work, the file indicated by `config_path` must (a) exist, (b) have a `.yaml` or `.yml` extension, and (c) hold a properly formatted Krixik pipeline [configuration](pipeline_config.md). If one of these is not true, the method will fail. If you've earlier [saved](#the-save_pipeline-method) a Krixik pipeline to that destination with that file name, it should work just fine. 
+For the `.load_pipeline` method to work, the file indicated by `config_path` must (a) exist, (b) have a `.yaml` or `.yml` extension, and (c) hold a properly formatted Krixik pipeline [configuration](pipeline_config.md). If one of these is not true, the method will fail. If you've earlier [saved](#the-.save_pipeline-method) a Krixik pipeline to that destination with that file name, it should work just fine. 
 
 Using the `.load_pipeline` method looks like this:
 
@@ -105,10 +79,3 @@ reset_pipeline(pipeline_2)
 ```
 
 In other words, the `pipeline` argument to the `reset_pipeline` function is a Python variable that a pipeline object has been assigned to, and `reset_pipeline` will delete any datapoints associated with that pipeline object's `name` on the Krixik system.
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-
-reset_pipeline(pipeline_1)
-```

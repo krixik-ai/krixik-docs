@@ -1,6 +1,6 @@
 # Welcome to Krixik Documentation!
 
-If you're seeking the main Krixik repo on GitHub, please [click here](https://github.com/krixik-ai/krixik-cli).
+If you're seeking the Krixik cli repo on GitHub, please [click here](https://github.com/krixik-ai/krixik-cli).
 
 ## Table of Contents
 

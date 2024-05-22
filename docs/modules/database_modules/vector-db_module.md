@@ -7,35 +7,9 @@ This overview of the `vector-db` module is divided into the following sections:
 - [Inputs and Outputs of the `vector-db` Module](#inputs-and-outputs-of-the-vector-db-module)
 - [Available Models in the `vector-db` Module](#available-models-in-the-vector-db-module)
 - [Model Parameters in the `vector-db` Module](#model-parameters-in-the-vector-db-module)
-- [A Single-Module Pipeline for the `vector-db` Module (and Local Querying)](#a-single-module-pipeline-for-the-vector-db-module-and-local-querying)
-- [The `.semantic_search` Method](#the-semantic_search-method)
-- [Further Information on `vector-db` Module I/O and Clickability](#further-information-on-vector-db-module-io-and-clickability)
-
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
+- [A Single-Module Pipeline for the `vector-db` Module (and Local Querying)](#a-single-module-pipeline-for-the-vector-db-module-(and-local-querying))
+- [The `.semantic_search` Method](#the-.semantic_search-method)
+- [Further Information on `vector-db` Module I/O and Clickability](#further-information-on-vector-db-module-i/o-and-clickability)
 
 ### Inputs and Outputs of the `vector-db` Module
 
@@ -100,4 +74,4 @@ Please click [here](../../system/convenience_methods/convenience_methods.md) to 
 
 - [View Module Input and Output Examples](../../system/convenience_methods/convenience_methods.md#view-module-input-and-output-examples)
 
-- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-click_data-method)
+- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-.click_data-method)

@@ -8,7 +8,7 @@ This overview of the `caption` module is divided into the following sections:
 - [Available Models in the `caption` Module](#available-models-in-the-caption-module)
 - [Model Parameters in the `caption` Module](#model-parameters-in-the-caption-module)
 - [A Single-Module Pipeline for the `caption` Module](#a-single-module-pipeline-for-the-caption-module)
-- [Further Information on `caption` Module I/O and Clickability](#further-information-on-caption-module-io-and-clickability)
+- [Further Information on `caption` Module I/O and Clickability](#further-information-on-caption-module-i/o-and-clickability)
 
 ### Inputs and Outputs of the `caption` Module
 
@@ -56,4 +56,4 @@ Please click [here](../../system/convenience_methods/convenience_methods.md) to 
 
 - [View Module Input and Output Examples](../../system/convenience_methods/convenience_methods.md#view-module-input-and-output-examples)
 
-- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-click_data-method)
+- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-.click_data-method)

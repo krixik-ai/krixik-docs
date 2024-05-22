@@ -8,7 +8,7 @@ This overview of the `translate` module is divided into the following sections:
 - [Available Models in the `translate` Module](#available-models-in-the-translate-module)
 - [Model Parameters in the `translate` Module](#model-parameters-in-the-translate-module)
 - [A Single-Module Pipeline for the `translate` Module](#a-single-module-pipeline-for-the-translate-module)
-- [Further Information on `translate` Module I/O and Clickability](#further-information-on-translate-module-io-and-clickability)
+- [Further Information on `translate` Module I/O and Clickability](#further-information-on-translate-module-i/o-and-clickability)
 
 ### Inputs and Outputs of the `translate` Module
 
@@ -56,4 +56,4 @@ Please click [here](../../system/convenience_methods/convenience_methods.md) to 
 
 - [View Module Input and Output Examples](../../system/convenience_methods/convenience_methods.md#view-module-input-and-output-examples)
 
-- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-click_data-method)
+- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-.click_data-method)

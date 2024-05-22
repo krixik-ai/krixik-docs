@@ -10,33 +10,7 @@ This overview of the `text-embedder` module is divided into the following sectio
 - [Available Models in the `text-embedder` Module](#available-models-in-the-text-embedder-module)
 - [Model Parameters in the `text-embedder` Module](#model-parameters-in-the-text-embedder-module)
 - [A Single-Module Pipeline for the `text-embedder` Module](#a-single-module-pipeline-for-the-text-embedder-module)
-- [Further Information on `text-embedder` Module I/O and Clickability](#further-information-on-text-embedder-module-io-and-clickability)
-
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
+- [Further Information on `text-embedder` Module I/O and Clickability](#further-information-on-text-embedder-module-i/o-and-clickability)
 
 ### Inputs and Outputs of the `text-embedder` Module
 
@@ -118,4 +92,4 @@ Please click [here](../../system/convenience_methods/convenience_methods.md) to 
 
 - [View Module Input and Output Examples](../../system/convenience_methods/convenience_methods.md#view-module-input-and-output-examples)
 
-- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-click_data-method)
+- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-.click_data-method)

@@ -53,7 +53,6 @@ def check_file_links(filepath: str, toc_files: list) -> list:
         print(f"FAILURE: check_file_links failed - file {filepath} does not exist")
     except Exception as e:
         print(f"FAILURE: check_file_links failed for file {filepath} with exception {e}")
-
     
     dead_links = []
 

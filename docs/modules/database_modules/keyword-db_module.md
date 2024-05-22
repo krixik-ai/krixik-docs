@@ -7,9 +7,9 @@ This overview of the `keyword-db` module is divided into the following sections:
 - [Inputs and Outputs of the `keyword-db` Module](#inputs-and-outputs-of-the-keyword-db-module)
 - [Available Models in the `keyword-db` Module](#available-models-in-the-keyword-db-module)
 - [Model Parameters in the `keyword-db` Module](#model-parameters-in-the-keyword-db-module)
-- [A Single-Module Pipeline for the `keyword-db` Module (and Local Querying)](#a-single-module-pipeline-for-the-keyword-db-module-and-local-querying)
-- [The `.keyword_search` Method](#the-keyword_search-method)
-- [Further Information on `keyword-db` Module I/O and Clickability](#further-information-on-keyword-db-module-io-and-clickability)
+- [A Single-Module Pipeline for the `keyword-db` Module (and Local Querying)](#a-single-module-pipeline-for-the-keyword-db-module-(and-local-querying))
+- [The `.keyword_search` Method](#the-.keyword_search-method)
+- [Further Information on `keyword-db` Module I/O and Clickability](#further-information-on-keyword-db-module-i/o-and-clickability)
 
 ### Inputs and Outputs of the `keyword-db` Module
 
@@ -61,4 +61,4 @@ Please click [here](../../system/convenience_methods/convenience_methods.md) to 
 
 - [View Module Input and Output Examples](../../system/convenience_methods/convenience_methods.md#view-module-input-and-output-examples)
 
-- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-click_data-method)
+- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-.click_data-method)

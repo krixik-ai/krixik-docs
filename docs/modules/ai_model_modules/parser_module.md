@@ -8,7 +8,7 @@ This overview of the `parser` module is divided into the following sections:
 - [Available Models in the `parser` Module](#available-models-in-the-parser-module)
 - [Model Parameters in the `parser` Module](#model-parameters-in-the-parser-module)
 - [A Single-Module Pipeline for the `parser` Module](#a-single-module-pipeline-for-the-parser-module)
-- [Further Information on `parser` Module I/O and Clickability](#further-information-on-parser-module-io-and-clickability)
+- [Further Information on `parser` Module I/O and Clickability](#further-information-on-parser-module-i/o-and-clickability)
 
 ### Inputs and Outputs of the `parser` Module
 
@@ -106,4 +106,4 @@ Please click [here](../../system/convenience_methods/convenience_methods.md) to 
 
 - [View Module Input and Output Examples](../../system/convenience_methods/convenience_methods.md#view-module-input-and-output-examples)
 
-- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-click_data-method)
+- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-.click_data-method)

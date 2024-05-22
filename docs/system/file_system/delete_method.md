@@ -1,32 +1,11 @@
 ## The `.delete` Method
 
-You can delete all records of a processed file from the Krixik system with the `.delete` method. This is the manual version of letting the [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-process-method-arguments) run out on a file.
+You can delete all records of a processed file from the Krixik system with the `.delete` method. This is the manual version of letting the [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-.process-method-arguments) run out on a file.
 
+This overview of the `.delete` method is divided into the following sections:
 
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
+- [`.delete` Method Arguments](#.delete-method-arguments)
+- [`.delete` Method Example](#.delete-method-example)
 
 ### `.delete` Method Arguments
 
@@ -261,10 +240,3 @@ print(json.dumps(list_output_2, indent=2))
 
 
 As expected, only one of the two previously [processed](../parameters_processing_files_through_pipelines/process_method.md) files shows up; the other has been deleted.
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-
-reset_pipeline(pipeline_1)
-```

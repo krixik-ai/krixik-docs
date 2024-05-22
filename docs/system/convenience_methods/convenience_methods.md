@@ -4,37 +4,12 @@ This document introduces several useful properties of the main Krixik object and
 
 The document is broken down as follows:
 
-- [View All Available Modules with the `.available_modules` Property](#view-all-available-modules-with-the-available_modules-property)
-- [Examine Configuration of a Module with the `.module_details` method](#examine-configuration-of-a-module-with-the-module_details-method)
-- [View Pipeline Module Chain with the `.module_chain` Property](#view-pipeline-module-chain-with-the-module_chain-property)
-- [Test Pipeline Input with the `.test_input` Method](#test-pipeline-input-with-the-test_input-method)
+- [View All Available Modules with the `.available_modules` Property](#view-all-available-modules-with-the-.available_modules-property)
+- [Examine Configuration of a Module with the `.module_details` method](#examine-configuration-of-a-module-with-the-.module_details-method)
+- [View Pipeline Module Chain with the `.module_chain` Property](#view-pipeline-module-chain-with-the-.module_chain-property)
+- [Test Pipeline Input with the `.test_input` Method](#test-pipeline-input-with-the-.test_input-method)
 - [View Module Input and Output Examples](#view-module-input-and-output-examples)
-- [View Module "Click Data" with the `.click_data` Method](#view-module-click-data-with-the-click_data-method)
-
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
+- [View Module Click Data with the `.click_data` Method](#view-module-click-data-with-the-.click_data-method)
 
 
 ### View All Available Modules with the `.available_modules` Property
@@ -44,7 +19,6 @@ To view all available modules use the `.available_modules` property.  This can b
 
 ```python
 # see all currently available modules
-
 krixik.available_modules
 ```
 
@@ -74,7 +48,6 @@ Any module's [configuration](../pipeline_creation/pipeline_config.md) can be vie
 
 ```python
 # view the configuration of a Krixik module - in this example, transcribe
-
 krixik.view_module_config(module_name="transcribe")
 ```
 
@@ -131,7 +104,6 @@ Suppose we create a [multi-module pipeline](../../examples/pipeline_examples_ove
 
 ```python
 # create a multi-module pipeline
-
 pipeline_1 = krixik.create_pipeline(name="system-transcribe-semantic-multilingual-docs",
                                     module_chain=["transcribe",
                                                   "translate",
@@ -146,7 +118,6 @@ To view the module chain of this (or any pipeline), use the `module_chain` prope
 
 ```python
 # view the module chain of your pipeline using the .module_chain property
-
 pipeline_1.module_chain
 ```
 
@@ -166,7 +137,7 @@ pipeline_1.module_chain
 
 You can test whether inputs to a pipeline will flow properly through it by using the `.test_input` method. 
 
-We illustrate this below for both valid and invalid files using the [pipeline we created above](#view-pipeline-module-chain-with-the-module_chain-property). 
+We illustrate this below for both valid and invalid files using the [pipeline we created above](#view-pipeline-module-chain-with-the-.module_chain-property). 
 
 Note that this test method does **not** execute your pipeline.  Nothing is sent server-side; it simply makes sure that your input file is consumable by the first module of your pipeline. Flow-through across the rest of your pipeline was already confirmed upon [pipeline instantiation](../pipeline_creation/create_pipeline.md).
 
@@ -175,7 +146,6 @@ Let's first test with a file that is valid for this pipeline. Since the first mo
 
 ```python
 # use .test_input on a valid file for this pipeline
-
 pipeline_1.test_input(local_file_path="../../../data/input/Interesting Facts About Colombia.mp3")
 ```
 
@@ -249,7 +219,6 @@ You can get a quick sense of a module's input/output structure by looking at an 
 
 ```python
 # examine the required input/output data structure for the Parser module by printing an input and output examples for it
-
 from krixik.modules.parser import io
 import json
 
@@ -283,7 +252,7 @@ print(json.dumps(io.OutputStructure().data_example, indent=2))
 
 Here `"other"` denotes any other key in your input.  Its value is arbitrary because, as far as any model you connect the [`parser`](../../modules/ai_model_modules/parser_module.md) module into is concerned, it's irrelevant. Only the snippet is passed through.
 
-### View Module "Click Data" with the `.click_data` Method
+### View Module Click Data with the `.click_data` Method
 
 The `.click_data` method displays all the basic data required to know which modules can be "clicked" into which other modules.  This is the data referenced "under the hood" of Krixik when you build a pipeline with the [`.create_pipeline`](../pipeline_creation/create_pipeline.md) method. Let's go through this piece by piece.
 
@@ -300,7 +269,6 @@ Lets take a look at the `click_data` of two modules and discuss what it says abo
 
 ```python
 # examine a module's "clickability" data by using the .click_data method
-
 krixik.view_module_click_data(module_name="text-embedder")
 ```
 
@@ -320,7 +288,6 @@ krixik.view_module_click_data(module_name="text-embedder")
 
 ```python
 # examine a module's "clickability" data by using the .click_data method
-
 krixik.view_module_click_data(module_name="vector-db")
 ```
 
@@ -356,10 +323,3 @@ The latter connection, (`vector-search` → `text-embedder`), will instead not w
 - `vector-search` output_format (`faiss`) != `text-embedder` input_format (`json`)
 
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-
-reset_pipeline(pipeline_1)
-```
