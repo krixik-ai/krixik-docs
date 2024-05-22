@@ -64,9 +64,8 @@ For this document's examples we will use a pipeline consisting of three modules:
 
 ```python
 # create the basic semantic search pipeline
-
-pipeline_1 = krixik.create_pipeline(name="semantic_search_method_1_parser_text-embedder_vector-db",
-                                    module_chain=["parser", "text-embedder", "vector-db"])
+pipeline = krixik.create_pipeline(name="semantic_search_method_1_parser_text-embedder_vector-db",
+                                  module_chain=["parser", "text-embedder", "vector-db"])
 ```
 
 The pipeline ready, we'll [`.process`](../parameters_processing_files_through_pipelines/process_method.md) a few text files through it so we have something to search through. Let's use the same files we used in the [`.list` method documentation](../file_system/list_method.md).
@@ -74,29 +73,28 @@ The pipeline ready, we'll [`.process`](../parameters_processing_files_through_pi
 
 ```python
 # add four files to the pipeline we just created.
-
-output_1 = pipeline_1.process(local_file_path="../../../data/input/Frankenstein partial.txt", # the initial local filepath where the input JSON file is stored
+output_1 = pipeline.process(local_file_path="../../../data/input/Frankenstein partial.txt", # the initial local filepath where the input JSON file is stored
                               expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
                               wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
                               verbose=False,  # do not display process update printouts upon running code
                               symbolic_directory_path="/novels/gothic",
                               file_name="Frankenstein.txt")
 
-output_2 = pipeline_1.process(local_file_path="../../../data/input/Pride and Prejudice partial.txt", # the initial local filepath where the input JSON file is stored
+output_2 = pipeline.process(local_file_path="../../../data/input/Pride and Prejudice partial.txt", # the initial local filepath where the input JSON file is stored
                               expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
                               wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
                               verbose=False,  # do not display process update printouts upon running code
                               symbolic_directory_path="/novels/romance",
                               file_name="Pride and Prejudice.txt")
 
-output_3 = pipeline_1.process(local_file_path="../../../data/input/Moby Dick partial.txt", # the initial local filepath where the input JSON file is stored
+output_3 = pipeline.process(local_file_path="../../../data/input/Moby Dick partial.txt", # the initial local filepath where the input JSON file is stored
                               expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
                               wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
                               verbose=False,  # do not display process update printouts upon running code
                               symbolic_directory_path="/novels/adventure",
                               file_name="Moby Dick.txt")
 
-output_4 = pipeline_1.process(local_file_path="../../../data/input/Little Women partial.txt", # the initial local filepath where the input JSON file is stored
+output_4 = pipeline.process(local_file_path="../../../data/input/Little Women partial.txt", # the initial local filepath where the input JSON file is stored
                               expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
                               wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
                               verbose=False,  # do not display process update printouts upon running code
@@ -109,7 +107,6 @@ Let's take a look at the output for one of these:
 
 ```python
 # nicely print the output of one of the above processes
-
 print(json.dumps(output_2, indent=2))
 ```
 
@@ -138,13 +135,11 @@ Let's try an example in which we query one of the files file:
 
 ```python
 # perform semantic_search over one file
-
-semantic_output_1 = pipeline_1.semantic_search(query="It was cold night.",
+semantic_output = pipeline.semantic_search(query="It was cold night.",
                                                file_names=["Little Women.txt"])
 
 # nicely print the output of this search
-
-print(json.dumps(semantic_output_1, indent=2))
+print(json.dumps(semantic_output, indent=2))
 ```
 
     {
@@ -221,15 +216,13 @@ When `sort_order` is set to 'global', results from all files are combined and th
 
 ```python
 # perform semantic_search over multiple files
-
-semantic_output_2 = pipeline_1.semantic_search(query="It was cold night.",
-                                               symbolic_directory_paths=["/novels*"],
-                                               sort_order='global',
-                                               k=4)
+semantic_output = pipeline.semantic_search(query="It was cold night.",
+                                           symbolic_directory_paths=["/novels*"],
+                                           sort_order='global',
+                                           k=4)
 
 # nicely print the output of this search
-
-print(json.dumps(semantic_output_2, indent=2))
+print(json.dumps(semantic_output, indent=2))
 ```
 
     {
@@ -534,6 +527,5 @@ The current size limit on output generated by the `.semantic_search` method is 5
 
 ```python
 # delete all processed datapoints belonging to this pipeline
-
-reset_pipeline(pipeline_1)
+reset_pipeline(pipeline)
 ```

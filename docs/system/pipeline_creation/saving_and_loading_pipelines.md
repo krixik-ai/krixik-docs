@@ -47,9 +47,8 @@ To demonstrate how it works, first you'll need to create a pipeline with the [`.
 
 ```python
 # first create a pipeline
-
-pipeline_1 = krixik.create_pipeline(name='saving_and_loading_pipelines_1_summarize_summarize_keyword-db',
-                                    module_chain=['summarize', 'summarize', 'keyword-db'])
+pipeline = krixik.create_pipeline(name='saving_and_loading_pipelines_1_summarize_summarize_keyword-db',
+                                  module_chain=['summarize', 'summarize', 'keyword-db'])
 ```
 
 Now that you have a pipeline you can use the `.save_pipeline` method to save that pipeline to disk:
@@ -57,8 +56,7 @@ Now that you have a pipeline you can use the `.save_pipeline` method to save tha
 
 ```python
 # save a pipeline's configuration to disk - example file path provided
-
-pipeline_1.save_pipeline(config_path="../../../data/pipeline_configs/save-pipeline-demo.yaml")
+pipeline.save_pipeline(config_path="../../../data/pipeline_configs/save-pipeline-demo.yaml")
 ```
 
 For your convenience, if a file by the given filename does not exist at the given location, Krixik will locally create the file and then save your pipeline
@@ -79,8 +77,7 @@ Using the `.load_pipeline` method looks like this:
 
 ```python
 # load a pipeline into memory via its valid configuration file
-
-pipeline_2 = krixik.load_pipeline(config_path="../../../data/pipeline_configs/save-pipeline-demo.yaml")
+pipeline = krixik.load_pipeline(config_path="../../../data/pipeline_configs/save-pipeline-demo.yaml")
 ```
 
 Note that you don't need to have previously dealt with the saved pipeline yourself. For instance, a colleague may have shared a pipeline [configuration](pipeline_config.md) file with you, or you may have written the file from scratch. As long as the config is properly formatted, the `.load_pipeline` method will work as it should.
@@ -100,8 +97,7 @@ Note that this is _not_ the `name` of the pipeline. For instance, if you wished 
 
 ```python
 # delete all processed datapoints belonging to this pipeline
-
-reset_pipeline(pipeline_2)
+reset_pipeline(pipeline)
 ```
 
 In other words, the `pipeline` argument to the `reset_pipeline` function is a Python variable that a pipeline object has been assigned to, and `reset_pipeline` will delete any datapoints associated with that pipeline object's `name` on the Krixik system.
@@ -109,6 +105,5 @@ In other words, the `pipeline` argument to the `reset_pipeline` function is a Py
 
 ```python
 # delete all processed datapoints belonging to this pipeline
-
-reset_pipeline(pipeline_1)
+reset_pipeline(pipeline)
 ```

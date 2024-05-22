@@ -49,11 +49,10 @@ We do this by leveraging the [`.create_pipeline`](../../system/pipeline_creation
 
 ```python
 # create a pipeline as detailed above
-
-pipeline_1 = krixik.create_pipeline(name="multi_keyword_searchable_image_captions",
-                                    module_chain=["caption",
-                                                  "json-to-txt",
-                                                  "keyword-db"])
+pipeline = krixik.create_pipeline(name="multi_keyword_searchable_image_captions",
+                                  module_chain=["caption",
+                                                "json-to-txt",
+                                                "keyword-db"])
 ```
 
 ### Processing an Input File
@@ -63,7 +62,6 @@ Lets take a quick look at a test file before processing.
 
 ```python
 # examine contents of input file
-
 from IPython.display import Image
 Image(filename="../../../data/input/restaurant.png")
 ```
@@ -82,12 +80,11 @@ We will use the default models for every module in the pipeline, so the [`module
 
 ```python
 # process the file through the pipeline, as described above
-
-process_output_1 = pipeline_1.process(local_file_path = "../../../data/input/restaurant.png", # the initial local filepath where the input file is stored
-                                      local_save_directory="../../../data/output", # the local directory that the output file will be saved to
-                                      expire_time=60*30, # process data will be deleted from the Krixik system in 30 minutes
-                                      wait_for_process=True, # wait for process to complete before returning IDE control to user
-                                      verbose=False) # do not display process update printouts upon running code
+process_output = pipeline.process(local_file_path = "../../../data/input/restaurant.png", # the initial local filepath where the input file is stored
+                                  local_save_directory="../../../data/output", # the local directory that the output file will be saved to
+                                  expire_time=60*30, # process data will be deleted from the Krixik system in 30 minutes
+                                  wait_for_process=True, # wait for process to complete before returning IDE control to user
+                                  verbose=False) # do not display process update printouts upon running code
 ```
 
 The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
@@ -97,8 +94,7 @@ Because the output of this particular module-model pair is a `SQLlite` database 
 
 ```python
 # nicely print the output of this process
-
-print(json.dumps(process_output_1, indent=2))
+print(json.dumps(process_output, indent=2))
 ```
 
     {
@@ -124,13 +120,11 @@ Since our pipeline satisfies this condition, it has access to the [`.keyword_sea
 
 ```python
 # perform keyword search over the file in the pipeline
-
-keyword_output_1 = pipeline_1.keyword_search(query="people bar sitting tables dinner drinks", 
-                                             file_ids=[process_output_1["file_id"]])
+keyword_output = pipeline.keyword_search(query="people bar sitting tables dinner drinks", 
+                                         file_ids=[process_output["file_id"]])
 
 # nicely print the output of this process
-
-print(json.dumps(keyword_output_1, indent=2))
+print(json.dumps(keyword_output, indent=2))
 ```
 
     {
@@ -164,6 +158,5 @@ print(json.dumps(keyword_output_1, indent=2))
 
 ```python
 # delete all processed datapoints belonging to this pipeline
-
-reset_pipeline(pipeline_1)
+reset_pipeline(pipeline)
 ```

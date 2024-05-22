@@ -24,42 +24,36 @@ The `parser` module accepts document inputs. Acceptable file formats are the fol
 
 The `parser` module returns a JSON file that contains all of the post-parsing text snippets. Each snippet is accompanied by its corresponding line numbers (from the original document) to make it easier for you to later know where in the document any single snippet came from. For example, take a look at the following sample output of a `parser` process:
 
-
 ```python
-# nicely print sample output of a parser process
-
-print(json.dumps(sample_process_output, indent=2))
-```
-
+{
+  "status_code": 200,
+  "pipeline": "modules-parser-docs",
+  "request_id": "5908efbc-b06d-44f3-93c8-a46c29540637",
+  "file_id": "575c69c6-0571-4f56-8e49-6c1e4f4a3f4a",
+  "message": "SUCCESS - output fetched for file_id 575c69c6-0571-4f56-8e49-6c1e4f4a3f4a.Output saved to location(s) listed in process_output_files.",
+  "warnings": [],
+  "process_output": [
     {
-      "status_code": 200,
-      "pipeline": "modules-parser-docs",
-      "request_id": "5908efbc-b06d-44f3-93c8-a46c29540637",
-      "file_id": "575c69c6-0571-4f56-8e49-6c1e4f4a3f4a",
-      "message": "SUCCESS - output fetched for file_id 575c69c6-0571-4f56-8e49-6c1e4f4a3f4a.Output saved to location(s) listed in process_output_files.",
-      "warnings": [],
-      "process_output": [
-        {
-          "snippet": "It was a bright cold day in April, and the clocks were striking thirteen.",
-          "line_numbers": [
-            1
-          ]
-        },
-        {
-          "snippet": "Winston Smith, his chin nuzzled into his breast in an effort to escape the\nvile wind, slipped quickly through the glass doors of Victory Mansions,\nthough not quickly enough to prevent a swirl of gritty dust from entering\nalong with him.",
-          "line_numbers": [
-            2,
-            3,
-            4,
-            5
-          ]
-        }
-      ],
-      "process_output_files": [
-        "../../data/output/575c69c6-0571-4f56-8e49-6c1e4f4a3f4a.json"
+      "snippet": "It was a bright cold day in April, and the clocks were striking thirteen.",
+      "line_numbers": [
+        1
+      ]
+    },
+    {
+      "snippet": "Winston Smith, his chin nuzzled into his breast in an effort to escape the\nvile wind, slipped quickly through the glass doors of Victory Mansions,\nthough not quickly enough to prevent a swirl of gritty dust from entering\nalong with him.",
+      "line_numbers": [
+        2,
+        3,
+        4,
+        5
       ]
     }
-
+  ],
+  "process_output_files": [
+    "../../data/output/575c69c6-0571-4f56-8e49-6c1e4f4a3f4a.json"
+  ]
+}
+```
 
 ### Available Models in the `parser` Module
 

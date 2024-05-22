@@ -9,6 +9,6 @@ Execute the following line of code at your terminal to `pip install` the Krixik 
 pip install krixik
 ```
 
-Note: Python version 3.8 or higher is required to use the Krixik CLI.
+Note: Python version 3.10 or higher is required to use the Krixik CLI.
 
 Once that's done, you can [initialize your session](initialize_and_authenticate.md).

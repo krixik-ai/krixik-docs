@@ -89,16 +89,14 @@ We will need to create a pipeline and [`.process`](../parameters_processing_file
 
 ```python
 # create single-module summarize pipeline
-
-pipeline_1 = krixik.create_pipeline(name='list_method_1_summarize',
-                                    module_chain=['summarize'])
+pipeline = krixik.create_pipeline(name='list_method_1_summarize',
+                                  module_chain=['summarize'])
 ```
 
 
 ```python
 # process four files through the pipeline we just created.
-
-process_output_1 = pipeline_1.process(local_file_path="../../../data/input/Frankenstein partial.txt", # the initial local filepath where the input file is stored
+process_output_1 = pipeline.process(local_file_path="../../../data/input/Frankenstein partial.txt", # the initial local filepath where the input file is stored
                                       expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
                                       wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
                                       verbose=False,  # do not display process update printouts upon running code
@@ -106,7 +104,7 @@ process_output_1 = pipeline_1.process(local_file_path="../../../data/input/Frank
                                       file_name="Frankenstein.txt",
                                       file_tags=[{"author": "Shelley"}, {"category": "gothic"}, {"century": "19"}])
 
-process_output_2 = pipeline_1.process(local_file_path="../../../data/input/Pride and Prejudice partial.txt", # the initial local filepath where the input file is stored
+process_output_2 = pipeline.process(local_file_path="../../../data/input/Pride and Prejudice partial.txt", # the initial local filepath where the input file is stored
                                       expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
                                       wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
                                       verbose=False,  # do not display process update printouts upon running code
@@ -114,7 +112,7 @@ process_output_2 = pipeline_1.process(local_file_path="../../../data/input/Pride
                                       file_name="Pride and Prejudice.txt",
                                       file_tags=[{"author": "Austen"}, {"category": "romance"}, {"century": "19"}])
 
-process_output_3 = pipeline_1.process(local_file_path="../../../data/input/Moby Dick partial.txt", # the initial local filepath where the input file is stored
+process_output_3 = pipeline.process(local_file_path="../../../data/input/Moby Dick partial.txt", # the initial local filepath where the input file is stored
                                       expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
                                       wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
                                       verbose=False,  # do not display process update printouts upon running code
@@ -122,7 +120,7 @@ process_output_3 = pipeline_1.process(local_file_path="../../../data/input/Moby 
                                       file_name="Moby Dick.txt",
                                       file_tags=[{"author": "Melville"}, {"category": "adventure"}, {"century": "19"}])
 
-process_output_4 = pipeline_1.process(local_file_path="../../../data/input/Little Women partial.txt", # the initial local filepath where the input file is stored
+process_output_4 = pipeline.process(local_file_path="../../../data/input/Little Women partial.txt", # the initial local filepath where the input file is stored
                                       expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
                                       wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
                                       verbose=False,  # do not display process update printouts upon running code
@@ -283,7 +281,6 @@ Let's quickly look at what the output for the four of these looks like. The firs
 
 ```python
 # nicely print the output of the first process
-
 print(json.dumps(process_output_1, indent=2))
 ```
 
@@ -337,7 +334,6 @@ The second one:
 
 ```python
 # nicely print the output of the second process
-
 print(json.dumps(process_output_2, indent=2))
 ```
 
@@ -346,7 +342,6 @@ The third one:
 
 ```python
 # nicely print the output of the third process
-
 print(json.dumps(process_output_3, indent=2))
 ```
 
@@ -355,7 +350,6 @@ And the fourth one:
 
 ```python
 # nicely print the output of the fourth process
-
 print(json.dumps(process_output_4, indent=2))
 ```
 
@@ -370,12 +364,10 @@ Listing for the <u>Frankenstein</u> and <u>Moby Dick</u> files is done as follow
 
 ```python
 # .list records for two of the uploaded files via file_ids
-
-list_output_1 = pipeline_1.list(file_ids=["XXXXX", "YYYY"])
+list_output = pipeline.list(file_ids=["XXXXX", "YYYY"])
 
 # nicely print the output of this process
-
-print(json.dumps(list_output_1, indent=2))
+print(json.dumps(list_output, indent=2))
 ```
 
     {
@@ -430,12 +422,10 @@ You can also list via `file_name`s. It works just like listing with `file_id`s a
 
 ```python
 # .list records for one of the uploaded files via file_names
-
-list_output_2 = pipeline_1.list(file_names=["Pride and Prejudice.txt"])
+list_output = pipeline.list(file_names=["Pride and Prejudice.txt"])
 
 # nicely print the output of this .list
-
-print(json.dumps(list_output_2, indent=2))
+print(json.dumps(list_output, indent=2))
 ```
 
 As you can see, a full record for each file was returned. To learn more about each metadata item, visit the documentation for the [`.process`](../parameters_processing_files_through_pipelines/process_method.md) method, where they are gone into detail on.
@@ -447,12 +437,10 @@ You can also list via `symbolic_directory_paths`. It works just like listing wit
 
 ```python
 # .list records for two of the uploaded files via symbolic_directory_paths
-
-list_output_3 = pipeline_1.list(file_names=["/novels/bildungsroman", "/novels/adventure"])
+list_output = pipeline.list(file_names=["/novels/bildungsroman", "/novels/adventure"])
 
 # nicely print the output of this process
-
-print(json.dumps(list_output_3, indent=2))
+print(json.dumps(list_output, indent=2))
 ```
 
     {
@@ -507,12 +495,10 @@ We can also list through `file_tags`.  We'll list for 19th century novels and an
 
 ```python
 # .list records for two of the uploaded files via symbolic_directory_paths
-
-list_output_4 = pipeline_1.list(file_tags=[{"author": "alcott"}, {"century": 19}])
+list_output = pipeline.list(file_tags=[{"author": "alcott"}, {"century": 19}])
 
 # nicely print the output of this process
-
-print(json.dumps(list_output_4, indent=2))
+print(json.dumps(list_output, indent=2))
 ```
 
     {
@@ -567,16 +553,13 @@ To illustrate how to `.list` by timestamp bookends, let's first [`.process`](../
 
 ```python
 # process an additional file into earlier pipeline
-
-process_output_4 = pipeline_1.process(local_file_path="../../../data/input/A Tale of Two Cities.txt", # the initial local filepath where the input JSON file is stored
-                                      expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-                                      wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
-                                      verbose=False,  # do not display process update printouts upon running code
-                                      symbolic_directory_path="/novels/historical",
-                                      file_name="A Tale of Two Cities.txt",
-                                      file_tags=[{"author": "Dickens"}, {"category": "hisorical"}, {"century": 19}])
-
-process_output_4
+process_output = pipeline.process(local_file_path="../../../data/input/A Tale of Two Cities.txt", # the initial local filepath where the input JSON file is stored
+                                  expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
+                                  wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
+                                  verbose=False,  # do not display process update printouts upon running code
+                                  symbolic_directory_path="/novels/historical",
+                                  file_name="A Tale of Two Cities.txt",
+                                  file_tags=[{"author": "Dickens"}, {"category": "hisorical"}, {"century": 19}])
 ```
 
     {
@@ -616,12 +599,10 @@ Based on the output from the file we just processed and the output from the four
 
 ```python
 # .list process records by last_updated timestamp bookend
-
-list_output_5 = pipeline_1.list(created_at_start="XXXX")
+list_output = pipeline.list(created_at_start="XXXX")
 
 # nicely print the output of this .list
-
-print(json.dumps(list_output_5, indent=2))
+print(json.dumps(list_output, indent=2))
 ```
 
     {
@@ -693,12 +674,10 @@ Let's dig into `.list` method examples for each of these. First a prefix wildcar
 
 ```python
 # list process records using a wildcard prefix in file_names
-
-list_output_6 = pipeline_1.list(file_names=["*e.txt"])
+list_output = pipeline.list(file_names=["*e.txt"])
 
 # nicely print the output of this .list
-
-print(json.dumps(list_output_6, indent=2))
+print(json.dumps(list_output, indent=2))
 ```
 
     {
@@ -727,12 +706,10 @@ Now a suffix wildcard in `symbolic_directory_paths`:
 
 ```python
 # list process records using wildcard suffix in symbolic_directory_paths
-
-list_output_7 = pipeline_1.list(symbolic_directory_paths=["/my/*"])
+list_output = pipeline.list(symbolic_directory_paths=["/my/*"])
 
 # nicely print the output of this .list
-
-print(json.dumps(list_output_7, indent=2))
+print(json.dumps(list_output, indent=2))
 ```
 
     {
@@ -761,12 +738,10 @@ Now a wildcard operator in `file_tags`:
 
 ```python
 # list process records using the wildcard operator in file_tags
-
-list_output_8 = pipeline_1.list(file_tags=[{"author": "*"}])
+list_output = pipeline.list(file_tags=[{"author": "*"}])
 
 # nicely print the output of this .list
-
-print(json.dumps(list_output_8, indent=2))
+print(json.dumps(list_output, indent=2))
 ```
 
     {
@@ -812,14 +787,12 @@ As an example, let's combine a timestamp bookend, a `symbolic_file_path`, and `f
 
 ```python
 # list process records using a combination of input args
-
-list_output_9 = pipeline_1.list(created_at_end=XXXX,
+list_output = pipeline.list(created_at_end=XXXX,
                                 symbolic_file_path="/novels/gothic/Pride and Prejudice.txt",
                                 file_tags=[({"author":"Alcott"})])
 
 # nicely print the output of this .list
-
-print(json.dumps(list_output_9, indent=2))
+print(json.dumps(list_output, indent=2))
 ```
 
     {
@@ -855,6 +828,5 @@ The current size limit on output generated by the `.list` method is 5MB.
 
 ```python
 # delete all processed datapoints belonging to this pipeline
-
-reset_pipeline(pipeline_1)
+reset_pipeline(pipeline)
 ```

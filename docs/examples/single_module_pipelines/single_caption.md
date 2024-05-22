@@ -42,9 +42,8 @@ We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.m
 
 ```python
 # create a pipeline with a single caption module
-
-pipeline_1 = krixik.create_pipeline(name="single_caption_1",
-                                    module_chain=["caption"])
+pipeline = krixik.create_pipeline(name="single_caption_1",
+                                  module_chain=["caption"])
 ```
 
 ### Required Input Format
@@ -56,9 +55,7 @@ Let's take a quick look at a valid input file, and then process it.
 
 ```python
 # examine the contents of a valid input file
-
 from IPython.display import Image
-
 Image(filename="../../../data/input/restaurant.png")
 ```
 
@@ -80,12 +77,11 @@ Given that this is the default model, we need not specify model selection throug
 
 ```python
 # process the file with the default model
-
-process_output_1 = pipeline_1.process(local_file_path="../../../data/input/restaurant.png", # the initial local filepath where the input file is stored
-                                      local_save_directory="../../../data/output", # the local directory that the output file will be saved to
-                                      expire_time=60 * 30, # process data will be deleted from the Krixik system in 30 minutes
-                                      wait_for_process=True, # wait for process to complete before returning IDE control to user
-                                      verbose=False) # do not display process update printouts upon running code
+process_output = pipeline.process(local_file_path="../../../data/input/restaurant.png", # the initial local filepath where the input file is stored
+                                  local_save_directory="../../../data/output", # the local directory that the output file will be saved to
+                                  expire_time=60 * 30, # process data will be deleted from the Krixik system in 30 minutes
+                                  wait_for_process=True, # wait for process to complete before returning IDE control to user
+                                  verbose=False) # do not display process update printouts upon running code
 ```
 
 The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
@@ -95,8 +91,7 @@ Because the output of this particular module-model pair is a JSON file, the proc
 
 ```python
 # nicely print the output of this process
-
-print(json.dumps(process_output_1, indent=2))
+print(json.dumps(process_output, indent=2))
 ```
 
     {
@@ -122,8 +117,7 @@ To confirm that everything went as it should have, let's load in the text file o
 
 ```python
 # load in process output from file
-
-with open(process_output_1["process_output_files"][0]) as f:
+with open(process_output["process_output_files"][0]) as f:
     print(json.dumps(json.load(f), indent=2))
 ```
 
@@ -141,13 +135,12 @@ To use a [non-default model](../../modules/ai_model_modules/caption_module.md#av
 
 ```python
 # process the file with a non-default model
-
-process_output_2 = pipeline_1.process(local_file_path="../../../data/input/restaurant.png", # the initial local filepath where the input file is stored
-                                      local_save_directory="../../../data/output", # the local directory that the output file will be saved to
-                                      expire_time=60 * 30, # process data will be deleted from the Krixik system in 30 minutes
-                                      wait_for_process=True, # wait for process to complete before returning IDE control to user
-                                      verbose=False, # do not display process update printouts upon running code
-                                      modules={"caption": {"model": "blip-image-captioning-base"}}) # specify a non-default model for this process
+process_output = pipeline.process(local_file_path="../../../data/input/restaurant.png", # the initial local filepath where the input file is stored
+                                  local_save_directory="../../../data/output", # the local directory that the output file will be saved to
+                                  expire_time=60 * 30, # process data will be deleted from the Krixik system in 30 minutes
+                                  wait_for_process=True, # wait for process to complete before returning IDE control to user
+                                  verbose=False, # do not display process update printouts upon running code
+                                  modules={"caption": {"model": "blip-image-captioning-base"}}) # specify a non-default model for this process
 ```
 
 The output of this process is printed below.
@@ -157,8 +150,7 @@ Because the output of this particular module-model pair is a JSON file, the proc
 
 ```python
 # nicely print the output of this process
-
-print(json.dumps(process_output_2, indent=2))
+print(json.dumps(process_output, indent=2))
 ```
 
     {
@@ -182,6 +174,5 @@ print(json.dumps(process_output_2, indent=2))
 
 ```python
 # delete all processed datapoints belonging to this pipeline
-
-reset_pipeline(pipeline_1)
+reset_pipeline(pipeline)
 ```

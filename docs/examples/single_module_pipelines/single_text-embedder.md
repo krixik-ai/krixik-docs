@@ -43,9 +43,8 @@ We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.m
 
 ```python
 # create a pipeline with a single text-embedder module
-
-pipeline_1 = krixik.create_pipeline(name="single_text-embedder-1",
-                                    module_chain=["text-embedder"])
+pipeline = krixik.create_pipeline(name="single_text-embedder-1",
+                                  module_chain=["text-embedder"])
 ```
 
 ### Required Input Format
@@ -59,7 +58,6 @@ Let's take a quick look at a valid input file, and then process it.
 
 ```python
 # examine contents of a valid input file
-
 with open("../../../data/input/1984_snippets.json", "r") as file:
     print(json.dumps(json.load(file), indent=2))
 ```
@@ -94,12 +92,11 @@ In a later section of this document we will process the same file again, but sel
 
 ```python
 # process the file with the default model
-
-process_output_1 = pipeline_1.process(local_file_path="../../../data/input/1984_snippets.json", # the initial local filepath where the input file is stored
-                                      local_save_directory="../../../data/output", # the local directory that the output file will be saved to
-                                      expire_time=60 * 30, # process data will be deleted from the Krixik system in 30 minutes
-                                      wait_for_process=True, # wait for process to complete before returning IDE control to user
-                                      verbose=False) # do not display process update printouts upon running code
+process_output = pipeline.process(local_file_path="../../../data/input/1984_snippets.json", # the initial local filepath where the input file is stored
+                                  local_save_directory="../../../data/output", # the local directory that the output file will be saved to
+                                  expire_time=60 * 30, # process data will be deleted from the Krixik system in 30 minutes
+                                  wait_for_process=True, # wait for process to complete before returning IDE control to user
+                                  verbose=False) # do not display process update printouts upon running code
 ```
 
 The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
@@ -109,8 +106,7 @@ Moreover, the output file itself has been saved to the location noted in the `pr
 
 ```python
 # nicely print the output of this process
-
-print(json.dumps(process_output_1, indent=2))
+print(json.dumps(process_output, indent=2))
 ```
 
     {
@@ -135,8 +131,7 @@ The outputted NPY file containing embedding vectors of our input data can be exa
 ```python
 # examine vector output
 import numpy as np
-
-vectors = np.load(process_output_1["process_output_files"][0])
+vectors = np.load(process_output["process_output_files"][0])
 print(vectors.shape)
 ```
 
@@ -154,13 +149,12 @@ To use a [non-default model](../../modules/ai_model_modules/text-embedder_module
 
 ```python
 # process the file with a non-default model
-
-process_output_2 = pipeline_1.process(local_file_path="../../../data/input/1984_snippets.json", # all parameters save 'modules' as above
-                                      local_save_directory="../../../data/output",
-                                      expire_time=60 * 30,
-                                      wait_for_process=True,
-                                      verbose=False,
-                                      modules={"text-embedder": {"model": "all-mpnet-base-v2", "params": {"quantize": False}}}) # specify a non-default model for this process
+process_output = pipeline.process(local_file_path="../../../data/input/1984_snippets.json", # all parameters save 'modules' as above
+                                  local_save_directory="../../../data/output",
+                                  expire_time=60 * 30,
+                                  wait_for_process=True,
+                                  verbose=False,
+                                  modules={"text-embedder": {"model": "all-mpnet-base-v2", "params": {"quantize": False}}}) # specify a non-default model for this process
 ```
 
 Now we can examine the output as we did above.
@@ -168,8 +162,7 @@ Now we can examine the output as we did above.
 
 ```python
 # nicely print the output of this process
-
-print(json.dumps(process_output_2, indent=2))
+print(json.dumps(process_output, indent=2))
 ```
 
     {
@@ -189,6 +182,5 @@ print(json.dumps(process_output_2, indent=2))
 
 ```python
 # delete all processed datapoints belonging to this pipeline
-
-reset_pipeline(pipeline_1)
+reset_pipeline(pipeline)
 ```

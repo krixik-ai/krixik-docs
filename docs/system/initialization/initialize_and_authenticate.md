@@ -23,7 +23,6 @@ Then load them with [python-dotenv](https://pypi.org/project/python-dotenv/) as 
 
 ```python
 # load your secrets from aN .env file using python-dotenv
-
 from dotenv import load_dotenv
 import os
 
@@ -39,7 +38,6 @@ These are two separate actions, so we'll do them separately. First import Krixik
 
 ```python
 # import krixik
-
 from krixik import krixik
 ```
 
@@ -48,7 +46,6 @@ Now initialize your session with your secrets:
 
 ```python
 # initialize your session with your secrets
-
 krixik.init(api_key=MY_API_KEY,
             api_url=MY_API_URL)
 ```

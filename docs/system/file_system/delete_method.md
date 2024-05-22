@@ -46,20 +46,19 @@ For this document's example we will use a pipeline consisting of a single [`pars
 
 ```python
 # create an example pipeline with a single module
-
-pipeline_1 = krixik.create_pipeline(name="delete_method_1_parser",
-                                    module_chain=["parser"])
+pipeline = krixik.create_pipeline(name="delete_method_1_parser",
+                                  module_chain=["parser"])
 
 # process short input file
-process_output_1 = pipeline_1.process(local_file_path="../../../data/input/Frankenstein.txt", # the initial local filepath where the input JSON file is stored
-                                      expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-                                      wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
-                                      verbose=False,  # do not display process update printouts upon running code
-                                      symbolic_directory_path="/novels/19th-century",
-                                      file_name="Frankenstein.txt",
-                                      file_tags=[{"author": "Shelley"}, {"category": "gothic"}, {"century": "19"}])
+process_output_1 = pipeline.process(local_file_path="../../../data/input/Frankenstein.txt", # the initial local filepath where the input JSON file is stored
+                                    expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
+                                    wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
+                                    verbose=False,  # do not display process update printouts upon running code
+                                    symbolic_directory_path="/novels/19th-century",
+                                    file_name="Frankenstein.txt",
+                                    file_tags=[{"author": "Shelley"}, {"category": "gothic"}, {"century": "19"}])
 
-process_output_2 = pipeline_1.process(local_file_path="../../../data/input/Moby Dick.txt", # the initial local filepath where the input JSON file is stored
+process_output_2 = pipeline.process(local_file_path="../../../data/input/Moby Dick.txt", # the initial local filepath where the input JSON file is stored
                                       expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
                                       wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
                                       verbose=False,  # do not display process update printouts upon running code
@@ -77,12 +76,10 @@ Let's see what the files' records look like with the [`.list`](list_method.md) m
 
 ```python
 # see both files' records with .list (they're in the same symbolic_directory_path)
-
-list_output_1 = pipeline_1.list(symbolic_directory_paths=["/novels/19th-century"])
+list_output = pipeline.list(symbolic_directory_paths=["/novels/19th-century"])
 
 # nicely print the output of this .list
-
-print(json.dumps(list_output_1, indent=2))
+print(json.dumps(list_output, indent=2))
 ```
 
     {
@@ -184,12 +181,10 @@ Now use the `.delete` method and one of the files' `file_id`s to delete that fil
 
 ```python
 # delete processed file's record and output with its file_id
-
-delete_output_1 = pipeline_1.delete(file_id="e1c9b5c4-132d-4922-a05e-3eeaeda87e47")
+delete_output = pipeline.delete(file_id="e1c9b5c4-132d-4922-a05e-3eeaeda87e47")
 
 # nicely print the output of this deletion
-
-print(json.dumps(delete_output_1, indent=2))
+print(json.dumps(delete_output, indent=2))
 ```
 
     {
@@ -206,12 +201,10 @@ We can check that the file has been deleted by using the [`.list`](list_method.m
 
 ```python
 # .list to confirm that one file has been deleted
-
-list_output_2 = pipeline_1.list(symbolic_directory_paths=["/novels/19th-century"])
+list_output = pipeline.list(symbolic_directory_paths=["/novels/19th-century"])
 
 # nicely print the output of this .list
-
-print(json.dumps(list_output_2, indent=2))
+print(json.dumps(list_output, indent=2))
 ```
 
     {
@@ -270,6 +263,5 @@ As expected, only one of the two previously [processed](../parameters_processing
 
 ```python
 # delete all processed datapoints belonging to this pipeline
-
-reset_pipeline(pipeline_1)
+reset_pipeline(pipeline)
 ```

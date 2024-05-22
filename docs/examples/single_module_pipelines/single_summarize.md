@@ -43,9 +43,8 @@ We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.m
 
 ```python
 # create a pipeline with a single sentiment module
-
-pipeline_1 = krixik.create_pipeline(name="single_summarize_1",
-                                    module_chain=["summarize"])
+pipeline = krixik.create_pipeline(name="single_summarize_1",
+                                  module_chain=["summarize"])
 ```
 
 ### Required Input Format
@@ -57,7 +56,6 @@ Let's take a quick look at a valid input file, and then process it:
 
 ```python
 # examine contents of a valid test input file
-
 with open("../../../data/input/1984_short.txt", "r") as file:
     print(file.read())
 ```
@@ -163,12 +161,11 @@ Given that this is the default model, we need not specify model selection throug
 
 ```python
 # process the file with the default model
-
-process_output_1 = pipeline_1.process(local_file_path="../../../data/input/1984_short.txt", # the initial local filepath where the input file is stored
-                                      local_save_directory="../../../data/output", # the local directory that the output file will be saved to
-                                      expire_time=60 * 30, # process data will be deleted from the Krixik system in 30 minutes
-                                      wait_for_process=True, # wait for process to complete before returning IDE control to user
-                                      verbose=False) # do not display process update printouts upon running code
+process_output = pipeline.process(local_file_path="../../../data/input/1984_short.txt", # the initial local filepath where the input file is stored
+                                  local_save_directory="../../../data/output", # the local directory that the output file will be saved to
+                                  expire_time=60 * 30, # process data will be deleted from the Krixik system in 30 minutes
+                                  wait_for_process=True, # wait for process to complete before returning IDE control to user
+                                  verbose=False) # do not display process update printouts upon running code
 ```
 
 The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
@@ -178,8 +175,7 @@ The output file itself has been saved to the location noted in the `process_outp
 
 ```python
 # nicely print the output of this process
-
-print(json.dumps(process_output_1, indent=2))
+print(json.dumps(process_output, indent=2))
 ```
 
     {
@@ -201,8 +197,7 @@ To confirm that everything went as it should have, let's load in the text file o
 
 ```python
 # load in process output from file
-
-with open(process_output_1["process_output_files"][0], "r") as file:
+with open(process_output["process_output_files"][0], "r") as file:
     print(file.read())
 ```
 
@@ -238,13 +233,12 @@ To use a [non-default model](../../modules/ai_model_modules/summarize_module.md#
 
 ```python
 # process the file with a non-default model
-
-process_output_nd = pipeline_1.process(local_file_path="../../../data/input/1984_short.txt", # the initial local filepath where the input file is stored
-                                       local_save_directory="../../../data/output", # the local directory that the output file will be saved to
-                                       expire_time=60 * 30, # process data will be deleted from the Krixik system in 30 minutes
-                                       wait_for_process=True, # wait for process to complete before returning IDE control to user
-                                       verbose=False, # do not display process update printouts upon running code
-                                       modules={"summarize": {"model": "text-summarization"}}) # specify a non-default model for this process
+process_output_nd = pipeline.process(local_file_path="../../../data/input/1984_short.txt", # the initial local filepath where the input file is stored
+                                     local_save_directory="../../../data/output", # the local directory that the output file will be saved to
+                                     expire_time=60 * 30, # process data will be deleted from the Krixik system in 30 minutes
+                                     wait_for_process=True, # wait for process to complete before returning IDE control to user
+                                     verbose=False, # do not display process update printouts upon running code
+                                     modules={"summarize": {"model": "text-summarization"}}) # specify a non-default model for this process
 ```
 
 We can view the newly generated summary by loading in the output file, as below.
@@ -254,7 +248,6 @@ The offset punctuation seen in this summary is an artifact of the model, as seen
 
 ```python
 # load in process output from file
-
 with open(process_output_nd["process_output_files"][0], "r") as file:
     print(file.read())
 ```
@@ -299,10 +292,10 @@ To feed the <u>first</u> summarization generated above back into the [`summarize
 
 ```python
 # assign the summary generated above to a variable for easy reference
-first_summary = process_output_1["process_output_files"][0]
+first_summary = process_output["process_output_files"][0]
 
 # process this summary through the pipeline
-process_output_2 = pipeline_1.process(local_file_path=first_summary, # feed back into the pipeline the earlier-generated summary
+process_output = pipeline.process(local_file_path=first_summary, # feed back into the pipeline the earlier-generated summary
                                       local_save_directory="../../../data/output",
                                       expire_time=60 * 30,
                                       wait_for_process=True,
@@ -316,7 +309,7 @@ Let's examine the new summary file.
 
 ```python
 # load in process output from file
-with open(process_output_2["process_output_files"][0], "r") as file:
+with open(process_output["process_output_files"][0], "r") as file:
     print(file.read())
 ```
 
@@ -340,14 +333,14 @@ Once again, almost nothing changes about how we use the [`.process`](../../syste
 
 ```python
 # assign the summary of the summary generated above to a variable for easy reference
-second_summary = process_output_2["process_output_files"][0]
+second_summary = process_output["process_output_files"][0]
 
 # process this summary through the pipeline again
-process_output_3 = pipeline_1.process(local_file_path=second_summary, # feed back into the pipeline the summary of the earlier-generated summary
-                                      local_save_directory="../../../data/output",
-                                      expire_time=60 * 30,
-                                      wait_for_process=True,
-                                      verbose=False)
+process_output = pipeline.process(local_file_path=second_summary, # feed back into the pipeline the summary of the earlier-generated summary
+                                  local_save_directory="../../../data/output",
+                                  expire_time=60 * 30,
+                                  wait_for_process=True,
+                                  verbose=False)
 ```
 
 The very short summary result is displayed below:
@@ -355,8 +348,7 @@ The very short summary result is displayed below:
 
 ```python
 # load in the recursed summary from file
-
-with open(process_output_3["process_output_files"][0], "r") as file:
+with open(process_output["process_output_files"][0], "r") as file:
     print(file.read())
 ```
 
@@ -374,6 +366,5 @@ We explore just such an example in our recursive summarization pipeline [example
 
 ```python
 # delete all processed datapoints belonging to this pipeline
-
-reset_pipeline(pipeline_1)
+reset_pipeline(pipeline)
 ```

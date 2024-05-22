@@ -43,9 +43,8 @@ You will first need to create a pipeline on which to run this example. A pipelin
 
 ```python
 # create a single-module pipeline with a parser module for this example
-
-pipeline_1 = krixik.create_pipeline(name="fetch-output-method_1_parser",
-                                    module_chain=["parser"])
+pipeline = krixik.create_pipeline(name="fetch-output-method_1_parser",
+                                  module_chain=["parser"])
 ```
 
 Now we run a file through this pipeline. We'll use a simple TXT file that holds the first paragraph of George Orwell's <u>1984</u>:
@@ -53,11 +52,10 @@ Now we run a file through this pipeline. We'll use a simple TXT file that holds 
 
 ```python
 # process the TXT file through the single-module parser pipeline
-
-process_output_1 = pipeline_1.process(local_file_path="../../../data/input/1984_very_short.txt",
-                                      expire_time=60*60*24*7,  # process data will be deleted from the Krixik system in 7 days
-                                      wait_for_process=True, # do not wait for process to complete before returning IDE control to user
-                                      verbose=False)  # do not display process update printouts upon running code
+process_output = pipeline.process(local_file_path="../../../data/input/1984_very_short.txt",
+                                  expire_time=60*60*24*7,  # process data will be deleted from the Krixik system in 7 days
+                                  wait_for_process=True, # do not wait for process to complete before returning IDE control to user
+                                  verbose=False)  # do not display process update printouts upon running code
 ```
 
 The file has successfully been processed. Let's assume that some days have passed and you need to retrieve this file's output. We'll need its `file_id`, so we can print the `process_output_1` object above to get it:
@@ -65,8 +63,7 @@ The file has successfully been processed. Let's assume that some days have passe
 
 ```python
 # run .list on the above file to see its file_id
-
-print(json.dumps(process_output_1, indent=2))
+print(json.dumps(process_output, indent=2))
 ```
 
     {
@@ -104,9 +101,8 @@ Armed with its `file_id`, you can use the `.fetch_output` method to suit your pu
 
 ```python
 # fetch the output of this process using .fetch_output and its file_id
-
-fetched_output_1 = pipeline_1.fetch_output(file_id="5a478543-c9b4-4280-aeb4-94ac3420717f",
-                                           local_save_directory="../../../data/output")
+fetched_output = pipeline.fetch_output(file_id="5a478543-c9b4-4280-aeb4-94ac3420717f",
+                                       local_save_directory="../../../data/output")
 ```
 
 Printing the fetched output return displays the sought JSON and some additional information. This additional information is very similar to output from the [`.process`](../parameters_processing_files_through_pipelines/process_method.md) method:
@@ -114,8 +110,7 @@ Printing the fetched output return displays the sought JSON and some additional 
 
 ```python
 # nicely print the fetched output
-
-print(json.dumps(fetched_output_1, indent=2))
+print(json.dumps(fetched_output, indent=2))
 ```
 
     {
@@ -153,6 +148,5 @@ At the end of this return the local directory to which the output has been downl
 
 ```python
 # delete all processed datapoints belonging to this pipeline
-
-reset_pipeline(pipeline_1)
+reset_pipeline(pipeline)
 ```

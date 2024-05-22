@@ -51,8 +51,8 @@ First we'll need to create a pipeline. We can use a single-module pipeline with 
 
 ```python
 # create a pipeline with a single parser module
-pipeline_1 = krixik.create_pipeline(name="process_status_method_1_keyword-db",
-                                    module_chain=["keyword-db"])
+pipeline = krixik.create_pipeline(name="process_status_method_1_keyword-db",
+                                  module_chain=["keyword-db"])
 ```
 
 Now we'll process a file through your pipeline. Let's use a text file holding Herman Melville's <u>Moby Dick</u>:
@@ -60,10 +60,10 @@ Now we'll process a file through your pipeline. Let's use a text file holding He
 
 ```python
 # process text file through pipeline with wait_for_process on False
-process_output_1 = pipeline_1.process(local_file_path="../../../data/input/Moby Dick.txt", # the initial local filepath where the input JSON file is stored
-                                      expire_time=60 * 30, # process data will be deleted from the Krixik system in 30 minutes
-                                      wait_for_process=False, # do not wait for process to complete before returning IDE control to user
-                                      verbose=False) # do not display process update printouts upon running code
+process_output = pipeline.process(local_file_path="../../../data/input/Moby Dick.txt", # the initial local filepath where the input JSON file is stored
+                                  expire_time=60 * 30, # process data will be deleted from the Krixik system in 30 minutes
+                                  wait_for_process=False, # do not wait for process to complete before returning IDE control to user
+                                  verbose=False) # do not display process update printouts upon running code
 ```
 
 What does immediate output for this process look like?
@@ -71,8 +71,7 @@ What does immediate output for this process look like?
 
 ```python
 # nicely print the output of this process
-
-print(json.dumps(process_output_1, indent=2))
+print(json.dumps(process_output, indent=2))
 ```
 
     {
@@ -92,7 +91,7 @@ You can check the status of the process by feeding the `request_id` (returned wh
 
 ```python
 # invoke .process_status
-process_1_status = pipeline_1.process_status(request_id="c4bdd067-4bc8-78b7-836b-80729a0d2950")
+process_1_status = pipeline.process_status(request_id="c4bdd067-4bc8-78b7-836b-80729a0d2950")
 
 # nicely print the output our .process_status call
 print(json.dumps(process_1_status, indent=2))
@@ -118,10 +117,10 @@ If we wait a few moments and try again, you will see confirmation that the proce
 
 ```python
 # invoke .process_status again
-process_1_status = pipeline_1.process_status(request_id="c4bdd067-4bc8-78b7-836b-80729a0d2950")
+process_status_output = pipeline.process_status(request_id="c4bdd067-4bc8-78b7-836b-80729a0d2950")
 
 # nicely print the output our .process_status call again
-print(json.dumps(process_1_status, indent=2))
+print(json.dumps(process_status_output, indent=2))
 ```
 
     {
@@ -149,6 +148,6 @@ We take deletion seriously at Krixik—if a file is [deleted](../file_system/del
 ```python
 # delete all processed datapoints belonging to this pipeline
 import time
-time.sleep(10)
-reset_pipeline(pipeline_1)
+time.sleep(30)
+reset_pipeline(pipeline)
 ```

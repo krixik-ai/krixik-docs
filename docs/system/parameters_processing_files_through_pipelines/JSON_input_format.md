@@ -25,7 +25,6 @@ Here's an example of the above in action. The following list is what the content
 
 ```python
 # example JSON content, two separate blocks of text
-
 [
   {
     "snippet": "It was a bright cold day in April, and the clocks were striking thirteen.",
@@ -55,7 +54,6 @@ We recommend using JSON functionality to create your JSON files. Directly creati
 
 ```python
 # creating and locally saving a JSON file
-
 my_data = [
   {
     "snippet": "It was a bright cold day in April, and the clocks were striking thirteen.",

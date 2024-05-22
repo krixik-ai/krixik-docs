@@ -47,34 +47,32 @@ For this document's example we will use a pipeline consisting of a single [`pars
 
 ```python
 # create an example pipeline with a single module
-
-pipeline_1 = krixik.create_pipeline(name="show_tree_method_1_parser",
-                                    module_chain=["parser"])
+pipeline = krixik.create_pipeline(name="show_tree_method_1_parser",
+                                  module_chain=["parser"])
 
 # now process some files through the pipeline
+process_output = pipeline.process(local_file_path="../../../data/input/Frankenstein partial.txt", # the initial local filepath where the input JSON file is stored
+                                  expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
+                                  wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
+                                  verbose=False,  # do not display process update printouts upon running code
+                                  symbolic_directory_path="/lit/novels/19th-century",
+                                  file_name="Frankenstein.txt")
 
-process_output_1 = pipeline_1.process(local_file_path="../../../data/input/Frankenstein partial.txt", # the initial local filepath where the input JSON file is stored
-                                      expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-                                      wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
-                                      verbose=False,  # do not display process update printouts upon running code
-                                      symbolic_directory_path="/lit/novels/19th-century",
-                                      file_name="Frankenstein.txt")
-
-process_output_2 = pipeline_1.process(local_file_path="../../../data/input/Pride and Prejudice partial.txt", # the initial local filepath where the input JSON file is stored
+process_output = pipeline.process(local_file_path="../../../data/input/Pride and Prejudice partial.txt", # the initial local filepath where the input JSON file is stored
                                       expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
                                       wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
                                       verbose=False,  # do not display process update printouts upon running code
                                       symbolic_directory_path="/lit/novels/19th-century",
                                       file_name="Pride and Prejudice.txt")
 
-process_output_3 = pipeline_1.process(local_file_path="../../../data/input/Moby Dick partial.txt", # the initial local filepath where the input JSON file is stored
+process_output_3 = pipeline.process(local_file_path="../../../data/input/Moby Dick partial.txt", # the initial local filepath where the input JSON file is stored
                                       expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
                                       wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
                                       verbose=False,  # do not display process update printouts upon running code
                                       symbolic_directory_path="/lit/novels/19th-century/adventure",
                                       file_name="Moby Dick.txt")
 
-process_output_4 = pipeline_1.process(local_file_path="../../../data/input/Little Women partial.txt", # the initial local filepath where the input JSON file is stored
+process_output_4 = pipeline.process(local_file_path="../../../data/input/Little Women partial.txt", # the initial local filepath where the input JSON file is stored
                                       expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
                                       wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
                                       verbose=False,  # do not display process update printouts upon running code
@@ -89,8 +87,7 @@ This example will leverage the "global root" wildcard `symbolic_directory_path`,
 
 ```python
 # show the directory structure of a pipeline
-
-show_tree_output_1 = pipeline_1.show_tree(symbolic_directory_path="/*")
+show_tree_output = pipeline.show_tree(symbolic_directory_path="/*")
 ```
 
     /
@@ -134,6 +131,5 @@ As seen in the above code output, using the global root with the `.show_tree` me
 
 ```python
 # delete all processed datapoints belonging to this pipeline
-
-reset_pipeline(pipeline_1)
+reset_pipeline(pipeline)
 ```

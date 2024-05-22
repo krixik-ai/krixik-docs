@@ -130,13 +130,13 @@ Suppose we create a [multi-module pipeline](../../examples/pipeline_examples_ove
 
 ```python
 # create a multi-module pipeline
-pipeline_1 = krixik.create_pipeline(name="system-transcribe-semantic-multilingual-docs",
-                                    module_chain=["transcribe",
-                                                  "translate",
-                                                  "json-to-txt",
-                                                  "parser",
-                                                  "text-embedder",
-                                                  "vector-db"])
+pipeline = krixik.create_pipeline(name="system-transcribe-semantic-multilingual-docs",
+                                  module_chain=["transcribe",
+                                                "translate",
+                                                "json-to-txt",
+                                                "parser",
+                                                "text-embedder",
+                                                "vector-db"])
 ```
 
 To view the module chain of this (or any pipeline), use the `module_chain` property. This can be done locally and without [first initializing](../initialization/initialize_and_authenticate.md), as follows:
@@ -144,7 +144,7 @@ To view the module chain of this (or any pipeline), use the `module_chain` prope
 
 ```python
 # view the module chain of your pipeline using the .module_chain property
-pipeline_1.module_chain
+pipeline.module_chain
 ```
 
 
@@ -172,7 +172,7 @@ Let's first test with a file that is valid for this pipeline. Since the first mo
 
 ```python
 # use .test_input on a valid file for this pipeline
-pipeline_1.test_input(local_file_path="../../../data/input/Interesting Facts About Colombia.mp3")
+pipeline.test_input(local_file_path="../../../data/input/Interesting Facts About Colombia.mp3")
 ```
 
     SUCCESS: local file '../../../data/input/Interesting Facts About Colombia.mp3' passed pipeline input test passed
@@ -183,7 +183,7 @@ Now let's test with an input that won't work with this pipeline. The [`transcrib
 
 ```python
 # use .test_input on a file that won't work for this pipeline
-pipeline_1.test_input(local_file_path="../../../data/input/1984_very_short.txt")
+pipeline.test_input(local_file_path="../../../data/input/1984_very_short.txt")
 ```
 
 
@@ -353,6 +353,5 @@ The latter connection, (`vector-search` → `text-embedder`), will instead not w
 
 ```python
 # delete all processed datapoints belonging to this pipeline
-
-reset_pipeline(pipeline_1)
+reset_pipeline(pipeline)
 ```

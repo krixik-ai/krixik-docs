@@ -44,8 +44,7 @@ We do this by leveraging the [`.create_pipeline`](../../system/pipeline_creation
 
 ```python
 # create a pipeline as detailed above
-
-pipeline_1 = krixik.create_pipeline(name="multi_recursive_summarization",
+pipeline = krixik.create_pipeline(name="multi_recursive_summarization",
                                     module_chain=["summarize",
                                                   "summarize",
                                                   "summarize"])
@@ -58,7 +57,6 @@ Let's take a quick look at a short test file before processing.
 
 ```python
 # examine contents of input file
-
 with open("../../../data/input/1984_short.txt", "r") as file:
     print(file.read())
 ```
@@ -160,8 +158,7 @@ With the [`.process`](../../system/parameters_processing_files_through_pipelines
 
 ```python
 # process the file through the pipeline, as described above
-
-process_output_1 = pipeline_1.process(local_file_path = "../../../data/input/1984_short.txt", # the initial local filepath where the input file is stored
+process_output = pipeline.process(local_file_path = "../../../data/input/1984_short.txt", # the initial local filepath where the input file is stored
                                       local_save_directory="../../../data/output", # the local directory that the output file will be saved to
                                       expire_time=60*30, # process data will be deleted from the Krixik system in 30 minutes
                                       wait_for_process=True, # wait for process to complete before returning IDE control to user
@@ -175,8 +172,7 @@ The output text file itself has been saved to the location noted in the `process
 
 ```python
 # nicely print the output of this process
-
-print(json.dumps(process_output_1, indent=2))
+print(json.dumps(process_output, indent=2))
 ```
 
     {
@@ -198,7 +194,6 @@ To confirm that everything went as it should have, let's load in the text file o
 
 ```python
 # load in process output from file
-
 with open(process_output_1['process_output_files'][0], "r") as file:
     print(file.read())  
 ```
@@ -211,6 +206,5 @@ with open(process_output_1['process_output_files'][0], "r") as file:
 
 ```python
 # delete all processed datapoints belonging to this pipeline
-
-reset_pipeline(pipeline_1)
+reset_pipeline(pipeline)
 ```

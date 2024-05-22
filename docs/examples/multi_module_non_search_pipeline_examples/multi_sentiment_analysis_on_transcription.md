@@ -52,8 +52,7 @@ Pipeline setup is accomplished through the [`.create_pipeline`](../../system/pip
 
 ```python
 # create a pipeline as detailed above
-
-pipeline_1 = krixik.create_pipeline(name="multi_sentiment_analysis_on_transcription",
+pipeline = krixik.create_pipeline(name="multi_sentiment_analysis_on_transcription",
                                     module_chain=["transcribe",
                                                   "json-to-txt",
                                                   "parser",
@@ -67,9 +66,8 @@ Lets take a quick look at a short test file before processing.
 
 ```python
 # examine contents of input file
-
-from IPython.display import Video
-Video("../../../data/input/Interesting Facts About Colombia.mp3")
+import IPython
+IPython.display.Audio("../../../data/input/Interesting Facts About Colombia.mp3")
 ```
 
 
@@ -86,12 +84,11 @@ We will use the default models for every module in the pipeline, so the [`module
 
 ```python
 # process the file through the pipeline, as described above
-
-process_output_1 = pipeline_1.process(local_file_path = "../../../data/input/Interesting Facts About Colombia.mp3", # the initial local filepath where the input file is stored
-                                      local_save_directory="../../../data/output", # the local directory that the output file will be saved to
-                                      expire_time=60*30, # process data will be deleted from the Krixik system in 30 minutes
-                                      wait_for_process=True, # wait for process to complete before returning IDE control to user
-                                      verbose=False) # do not display process update printouts upon running code
+process_output = pipeline.process(local_file_path = "../../../data/input/Interesting Facts About Colombia.mp3", # the initial local filepath where the input file is stored
+                                  local_save_directory="../../../data/output", # the local directory that the output file will be saved to
+                                  expire_time=60*30, # process data will be deleted from the Krixik system in 30 minutes
+                                  wait_for_process=True, # wait for process to complete before returning IDE control to user
+                                  verbose=False) # do not display process update printouts upon running code
 ```
 
 
@@ -233,8 +230,7 @@ Because the output of this particular module-model pair is a JSON file, the proc
 
 ```python
 # nicely print the output of this process
-
-print(json.dumps(process_output_1, indent=2))
+print(json.dumps(process_output, indent=2))
 ```
 
     {
@@ -503,8 +499,7 @@ To confirm that everything went as it should have, let's load in the text file o
 
 ```python
 # load in process output from file
-
-with open(process_output_1["process_output_files"][0]) as f:
+with open(process_output["process_output_files"][0]) as f:
   print(json.dumps(json.load(f), indent=2))
 ```
 
@@ -761,6 +756,5 @@ with open(process_output_1["process_output_files"][0]) as f:
 
 ```python
 # delete all processed datapoints belonging to this pipeline
-
-reset_pipeline(pipeline_1)
+reset_pipeline(pipeline)
 ```

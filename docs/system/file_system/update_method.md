@@ -61,13 +61,11 @@ For this document's example we will use a pipeline consisting of a single [`pars
 
 ```python
 # create an example pipeline with a single parser module
-
-pipeline_1 = krixik.create_pipeline(name="update_method_1_parser",
-                                    module_chain=["parser"])
+pipeline = krixik.create_pipeline(name="update_method_1_parser",
+                                  module_chain=["parser"])
 
 # process short input file
-
-process_output_1 = pipeline_1.process(local_file_path="../../../data/input/Frankenstein.txt", # the initial local filepath where the input JSON file is stored
+process_output = pipeline.process(local_file_path="../../../data/input/Frankenstein.txt", # the initial local filepath where the input JSON file is stored
                                       expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
                                       wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
                                       verbose=False,  # do not display process update printouts upon running code
@@ -84,7 +82,7 @@ Let's see what the file's record looks like with the [`.list`](list_method.md) m
 
 ```python
 # see the file's record with .list
-list_output_1 = pipeline_1.list(symbolic_directory_paths=['/novels/gothic'])
+list_output_1 = pipeline.list(symbolic_directory_paths=['/novels/gothic'])
 
 # nicely print the output of this .list
 print(json.dumps(list_output_1, indent=2))
@@ -148,13 +146,13 @@ We'll update its `file_name`, since it's erroneous, change the `{"category": "go
 
 ```python
 # update metadata the metadata for the processed file
-update_output_1 = pipeline_1.update(file_id="463a697d-a8b5-4674-ace8-79fe53b862a1",
+update_output = pipeline.update(file_id="463a697d-a8b5-4674-ace8-79fe53b862a1",
                                     file_name="Frankenstein.txt",
                                     file_tags=[{"author": "Shelley"}, {"country": "UK"}, {"century": "19"}],
                                     file_description='Is the villain the monster or the doctor?')
 
 # nicely print the output of this .update
-print(json.dumps(process_output_1, indent=2))
+print(json.dumps(process_output, indent=2))
 ```
 
     INFO: lower casing file_name Frankenstein.txt to frankenstein.txt
@@ -179,10 +177,10 @@ Now we invoke the [`.list`](list_method.md) method to confirm that all metadata 
 
 ```python
 # call .list to see the file's newly updated record
-list_output_2 = pipeline_1.list(symbolic_file_paths=['/novels/gothic/Frankenstein.txt'])
+list_output = pipeline.list(symbolic_file_paths=['/novels/gothic/Frankenstein.txt'])
 
 # nicely print the output of this .list
-print(json.dumps(list_output_2, indent=2))
+print(json.dumps(list_output, indent=2))
 ```
 
     {
@@ -251,6 +249,5 @@ Four closing observation on the `.update` method:
 
 ```python
 # delete all processed datapoints belonging to this pipeline
-
-reset_pipeline(pipeline_1)
+reset_pipeline(pipeline)
 ```

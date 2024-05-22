@@ -51,7 +51,6 @@ As an example of the `text-embedder` module's input format, take a look at the c
 
 ```python
 # examine the contents of a valid input file
-
 test_file = "../../../data/input/1984_snippets.json"
 with open(test_file, "r") as file:
     print(json.dumps(json.load(file), indent=2))

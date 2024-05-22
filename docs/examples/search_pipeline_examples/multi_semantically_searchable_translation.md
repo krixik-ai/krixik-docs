@@ -51,12 +51,11 @@ We do this by leveraging the [`.create_pipeline`](../../system/pipeline_creation
 
 ```python
 # create a pipeline as detailed above
-
-pipeline_1 = krixik.create_pipeline(name="multi_semantically_searchable_translation",
-                                    module_chain=["parser",
-                                                  "translate",
-                                                  "text-embedder",
-                                                  "vector-db"])
+pipeline = krixik.create_pipeline(name="multi_semantically_searchable_translation",
+                                  module_chain=["parser",
+                                                "translate",
+                                                "text-embedder",
+                                                "vector-db"])
 ```
 
 ### Processing an Input File
@@ -66,7 +65,6 @@ Lets take a quick look at a test file before processing.
 
 ```python
 # examine contents of input file
-
 with open("../../../data/input/don_esp.txt", "r") as file:
     print(file.read())
 ```
@@ -108,13 +106,12 @@ We will use the default models for every other module in the pipeline, so they d
 
 ```python
 # process the file through the pipeline, as described above
-
-process_output_1 = pipeline_1.process(local_file_path = "../../../data/input/don_esp.txt", # the initial local filepath where the input file is stored
-                                      local_save_directory="../../../data/output", # the local directory that the output file will be saved to
-                                      expire_time=60*30, # process data will be deleted from the Krixik system in 30 minutes
-                                      wait_for_process=True, # wait for process to complete before returning IDE control to user
-                                      verbose=False, # do not display process update printouts upon running code
-                                      modules={"translate": {"model": "opus-mt-es-en"}}) # specify a non-default model for use in the translate module
+process_output = pipeline.process(local_file_path = "../../../data/input/don_esp.txt", # the initial local filepath where the input file is stored
+                                  local_save_directory="../../../data/output", # the local directory that the output file will be saved to
+                                  expire_time=60*30, # process data will be deleted from the Krixik system in 30 minutes
+                                  wait_for_process=True, # wait for process to complete before returning IDE control to user
+                                  verbose=False, # do not display process update printouts upon running code
+                                  modules={"translate": {"model": "opus-mt-es-en"}}) # specify a non-default model for use in the translate module
 ```
 
 The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
@@ -124,8 +121,7 @@ Because the output of this particular module-model pair is a [FAISS](https://git
 
 ```python
 # nicely print the output of this process
-
-print(json.dumps(process_output_1, indent=2))
+print(json.dumps(process_output, indent=2))
 ```
 
     {
@@ -151,13 +147,11 @@ Since our pipeline satisfies this condition, it has access to the [`.semantic_se
 
 ```python
 # perform semantic_search over the file in the pipeline
-
-semantic_output_1 = pipeline_1.semantic_search(query="Sterile ideas bring little to man", 
-                                               file_ids=["50f929a9-5b2d-44d8-b6a3-270553b1abd6"])
+semantic_output = pipeline.semantic_search(query="Sterile ideas bring little to man", 
+                                           file_ids=["50f929a9-5b2d-44d8-b6a3-270553b1abd6"])
 
 # nicely print the output of this process
-
-print(json.dumps(semantic_output_1, indent=2))
+print(json.dumps(semantic_output, indent=2))
 ```
 
     {
@@ -221,6 +215,5 @@ print(json.dumps(semantic_output_1, indent=2))
 
 ```python
 # delete all processed datapoints belonging to this pipeline
-
-reset_pipeline(pipeline_1)
+reset_pipeline(pipeline)
 ```
