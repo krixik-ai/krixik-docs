@@ -12,32 +12,6 @@ This overview of the `.process` method is divided into the following sections:
 - [Automatic File Type Conversions](#automatic-file-type-conversions)
 - [Output Size Cap](#output-size-cap)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### Core `.process` Method Arguments
 
 The `.process` method takes five basic arguments (in addition to the `modules` argument and a series of optional metadata arguments, all discussed further below). These five arguments are:
@@ -54,7 +28,7 @@ The `.process` method takes five basic arguments (in addition to the `modules` a
 
 ### Basic Usage and Output Breakdown
 
-Let's first create a single-module pipeline to demonstrate the `.process` method with. We'll use a [`sentiment module`](../../modules/ai_model_modules/sentiment_module.md).
+Let's first create a single-module pipeline to demonstrate the `.process` method with. We'll use a [`sentiment module`](../../modules/ai_modules/sentiment_module.md).
 
 
 ```python
@@ -95,9 +69,9 @@ print(json.dumps(process_demo_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "process_method_1_sentiment",
-      "request_id": "1df4d8ad-ed49-43ff-8f7d-8737b9acbcb5",
-      "file_id": "d9a84ac2-5142-4b35-8430-953f0dde10fc",
-      "message": "SUCCESS - output fetched for file_id d9a84ac2-5142-4b35-8430-953f0dde10fc.Output saved to location(s) listed in process_output_files.",
+      "request_id": "f2c9bdc7-c5b9-4028-8713-5bae77d45e14",
+      "file_id": "4d55541e-12ec-4d93-a303-a42561a6b947",
+      "message": "SUCCESS - output fetched for file_id 4d55541e-12ec-4d93-a303-a42561a6b947.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -120,7 +94,7 @@ print(json.dumps(process_demo_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/d9a84ac2-5142-4b35-8430-953f0dde10fc.json"
+        "../../../data/output/4d55541e-12ec-4d93-a303-a42561a6b947.json"
       ]
     }
 
@@ -144,7 +118,7 @@ Let's break down the output:
 - `process_output_files`: A list of file names and file paths generated as process outputs and saved locally.
 
 
-We can see from `process_output` that our [`sentiment analysis`](../../modules/ai_model_modules/sentiment_module.md) pipeline has worked correctly. Each of the product reviews has been assigned a sentiment value breakdown between positive, negative, and neutral.
+We can see from `process_output` that our [`sentiment analysis`](../../modules/ai_modules/sentiment_module.md) pipeline has worked correctly. Each of the product reviews has been assigned a sentiment value breakdown between positive, negative, and neutral.
 
 In addition to being printed here, this process output is also stored in the file indicated in `process_output_files`. Let's load it in and confirm that it shows the same process output we received above:
 
@@ -190,19 +164,19 @@ modules={'<model name>': {'model':'<model selection>', 'params': <dictionary of 
 
 Bear in mind that model names are case sensitive.
 
-An example for a single-module pipeline that holds a [`caption module`](../../modules/ai_model_modules/caption_module.md) would specifically look like this, `blip-image-captioning-base` being the available model selected:
+An example for a single-module pipeline that holds a [`caption module`](../../modules/ai_modules/caption_module.md) would specifically look like this, `blip-image-captioning-base` being the available model selected:
 
 ```python
 modules={'caption': {'model':'blip-image-captioning-base', 'params': {}}}
 ```
 
-In the above example `params` is an empty dictionary because [`caption`](../../modules/ai_model_modules/caption_module.md) module models don't take any parameters. Other types of models do, such as the [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) module models. This is what the `modules` argument might look like for a single-module [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) pipeline:
+In the above example `params` is an empty dictionary because [`caption`](../../modules/ai_modules/caption_module.md) module models don't take any parameters. Other types of models do, such as the [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module models. This is what the `modules` argument might look like for a single-module [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) pipeline:
 
 modules={'text-embedder': {'model':'multi-qa-MiniLM-L6-cos-v1', 'params': {'quantize': False}}}
 
-`quantize` is a parameter that you can set for [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) module models, and only for [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) module models.
+`quantize` is a parameter that you can set for [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module models, and only for [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module models.
 
-The `modules` argument syntax for multi-module pipelines is similar to the above, but in that case there's one sub-dictionary for every module. For instance, the `modules` argument for a [vector search pipeline](../../examples/search_pipeline_examples/multi_basic_semantic_search.md) that sequentially chains together [`parser`](../../modules/support_function_modules/parser_module.md), [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md), and [`vector-db`](../../modules/database_modules/vector-db_module.md) modules might look like this:
+The `modules` argument syntax for multi-module pipelines is similar to the above, but in that case there's one sub-dictionary for every module. For instance, the `modules` argument for a [vector search pipeline](../../examples/search_pipeline_examples/multi_basic_semantic_search.md) that sequentially chains together [`parser`](../../modules/support_function_modules/parser_module.md), [`text-embedder`](../../modules/ai_modules/text-embedder_module.md), and [`vector-db`](../../modules/database_modules/vector-db_module.md) modules might look like this:
 
 ```python
 modules={'parser': {'model':'fixed', 'params': {"chunk_size": 10, "overlap_size": 5}},
@@ -210,7 +184,7 @@ modules={'parser': {'model':'fixed', 'params': {"chunk_size": 10, "overlap_size"
          'vector-db': {'model':'faiss', 'params': {}}}
 ```
 
-Note that any modules not explicitly called out will take their default values. If you need to specify one module's model or its params, that doesn't mean you need to specify all of them in the pipeline. Consequently, given that in the code immediately above the [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) and [`vector-db`](../../modules/database_modules/vector-db_module.md) modules above are being set to their default values, you could achieve the exact same thing by removing them from the code and only leaving the [`parser`](../../modules/support_function_modules/parser_module.md) module, as follows:
+Note that any modules not explicitly called out will take their default values. If you need to specify one module's model or its params, that doesn't mean you need to specify all of them in the pipeline. Consequently, given that in the code immediately above the [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) and [`vector-db`](../../modules/database_modules/vector-db_module.md) modules above are being set to their default values, you could achieve the exact same thing by removing them from the code and only leaving the [`parser`](../../modules/support_function_modules/parser_module.md) module, as follows:
 
 ```python
 modules={'parser': {'model':'fixed', 'params': {"chunk_size": 10, "overlap_size": 5}}}
@@ -275,9 +249,3 @@ For certain modules, the `.process` method automatically converts the format of 
 ### Output Size Cap
 
 The current size limit on output generated by the `.process` method is 5MB.
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

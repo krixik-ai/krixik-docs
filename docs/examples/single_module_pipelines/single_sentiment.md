@@ -1,43 +1,17 @@
 ## Single-Module Pipeline: `sentiment`
 
-This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`sentiment`](../../modules/ai_model_modules/sentiment_module.md) module. It's divided into the following sections:
+This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`sentiment`](../../modules/ai_modules/sentiment_module.md) module. It's divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)
 - [Using the Default Model](#using-the-default-model)
 - [Using a Non-Default Model](#using-a-non-default-model)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### Pipeline Setup
 
-Let's first instantiate a single-module [`sentiment`](../../modules/ai_model_modules/sentiment_module.md) pipeline.
+Let's first instantiate a single-module [`sentiment`](../../modules/ai_modules/sentiment_module.md) pipeline.
 
-We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`sentiment`](../../modules/ai_model_modules/sentiment_module.md) module name into `module_chain`.
+We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`sentiment`](../../modules/ai_modules/sentiment_module.md) module name into `module_chain`.
 
 
 ```python
@@ -48,7 +22,7 @@ pipeline = krixik.create_pipeline(name="single_sentiment_1",
 
 ### Required Input Format
 
-The [`sentiment`](../../modules/ai_model_modules/sentiment_module.md) module accepts JSON file input. The input JSON must respect [this format](../../system/parameters_processing_files_through_pipelines/JSON_input_format.md).
+The [`sentiment`](../../modules/ai_modules/sentiment_module.md) module accepts JSON file input. The input JSON must respect [this format](../../system/parameters_processing_files_through_pipelines/JSON_input_format.md).
 
 Let's take a quick look at a valid input file, and then process it.
 
@@ -71,7 +45,7 @@ with open("../../../data/input/valid.json") as f:
 
 ### Using the Default Model
 
-Let's process our test input file using the [`sentiment`](../../modules/ai_model_modules/sentiment_module.md) module's [default model](../../modules/ai_model_modules/sentiment_module.md#available-models-in-the-sentiment-module): `base`.
+Let's process our test input file using the [`sentiment`](../../modules/ai_modules/sentiment_module.md) module's [default model](../../modules/ai_modules/sentiment_module.md#available-models-in-the-sentiment-module): `base`.
 
 Given that this is the default model, we need not specify model selection through the optional [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
@@ -98,9 +72,9 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "single_sentiment_1",
-      "request_id": "3720d5d1-492f-4f0c-97a6-3e9dc3d5f95b",
-      "file_id": "27d6d1cb-a64d-4506-bf9e-4b1e31e2d3a3",
-      "message": "SUCCESS - output fetched for file_id 27d6d1cb-a64d-4506-bf9e-4b1e31e2d3a3.Output saved to location(s) listed in process_output_files.",
+      "request_id": "6a5d9ba7-1574-4744-9f2e-681d7423360a",
+      "file_id": "6dc55a61-0e87-4308-b090-1294d8b3ec96",
+      "message": "SUCCESS - output fetched for file_id 6dc55a61-0e87-4308-b090-1294d8b3ec96.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -117,7 +91,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/27d6d1cb-a64d-4506-bf9e-4b1e31e2d3a3.json"
+        "../../../data/output/6dc55a61-0e87-4308-b090-1294d8b3ec96.json"
       ]
     }
 
@@ -149,7 +123,7 @@ with open(process_output["process_output_files"][0]) as f:
 
 ### Using a Non-Default Model
 
-To use a [non-default model](../../modules/ai_model_modules/sentiment_module.md#available-models-in-the-sentiment-module) like [`distilbert-base-multilingual-cased-sentiments-student`](https://huggingface.co/lxyuan/distilbert-base-multilingual-cased-sentiments-student), we must enter it explicitly through the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+To use a [non-default model](../../modules/ai_modules/sentiment_module.md#available-models-in-the-sentiment-module) like [`distilbert-base-multilingual-cased-sentiments-student`](https://huggingface.co/lxyuan/distilbert-base-multilingual-cased-sentiments-student), we must enter it explicitly through the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 
 ```python
@@ -175,9 +149,9 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "single_sentiment_1",
-      "request_id": "739e3fe7-a151-4247-a853-d5f4550ab499",
-      "file_id": "fbc7e1b6-a97a-4123-8feb-221edd866fda",
-      "message": "SUCCESS - output fetched for file_id fbc7e1b6-a97a-4123-8feb-221edd866fda.Output saved to location(s) listed in process_output_files.",
+      "request_id": "ddf8516f-390c-4bcd-93f2-c207f89d3178",
+      "file_id": "011faa77-3eb8-41e1-83ad-99bafe9d5125",
+      "message": "SUCCESS - output fetched for file_id 011faa77-3eb8-41e1-83ad-99bafe9d5125.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -194,13 +168,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/fbc7e1b6-a97a-4123-8feb-221edd866fda.json"
+        "../../../data/output/011faa77-3eb8-41e1-83ad-99bafe9d5125.json"
       ]
     }
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

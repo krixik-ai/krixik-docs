@@ -1,43 +1,17 @@
 ## Single-Module Pipeline: `translate`
 
-This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`translate`](../../modules/ai_model_modules/translate_module.md) module. It's divided into the following sections:
+This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`translate`](../../modules/ai_modules/translate_module.md) module. It's divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)
 - [Using the Default Model](#using-the-default-model)
 - [Using a Non-Default Model](#using-a-non-default-model)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### Pipeline Setup
 
-Let's first instantiate a single-module [`translate`](../../modules/ai_model_modules/translate_module.md) pipeline.
+Let's first instantiate a single-module [`translate`](../../modules/ai_modules/translate_module.md) pipeline.
 
-We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`translate`](../../modules/ai_model_modules/translate_module.md) module name into `module_chain`.
+We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`translate`](../../modules/ai_modules/translate_module.md) module name into `module_chain`.
 
 
 ```python
@@ -48,7 +22,7 @@ pipeline = krixik.create_pipeline(name="single_translate_1",
 
 ### Required Input Format
 
-The [`translate`](../../modules/ai_model_modules/translate_module.md) module accepts JSON file input. The input JSON must respect [this format](../../system/parameters_processing_files_through_pipelines/JSON_input_format.md).
+The [`translate`](../../modules/ai_modules/translate_module.md) module accepts JSON file input. The input JSON must respect [this format](../../system/parameters_processing_files_through_pipelines/JSON_input_format.md).
 
 Let's take a quick look at a valid input file, and then process it.
 
@@ -71,7 +45,7 @@ with open("../../../data/input/valid.json", "r") as file:
 
 ### Using the Default Model
 
-Let's process our test input file using the [`translate`](../../modules/ai_model_modules/translate_module.md) module's [default model](../../modules/ai_model_modules/translate_module.md#available-models-in-the-translate-module), which translates English into Spanish: [`opus-mt-en-es`](https://huggingface.co/Helsinki-NLP/opus-mt-en-es).
+Let's process our test input file using the [`translate`](../../modules/ai_modules/translate_module.md) module's [default model](../../modules/ai_modules/translate_module.md#available-models-in-the-translate-module), which translates English into Spanish: [`opus-mt-en-es`](https://huggingface.co/Helsinki-NLP/opus-mt-en-es).
 
 Given that this is the default model, we need not specify model selection through the optional [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
@@ -98,9 +72,9 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "single_translate_1",
-      "request_id": "be3b3fc9-1811-47a5-abfb-29db2019e134",
-      "file_id": "54d7b537-5e65-48f7-a8e6-f9c7d44da2f7",
-      "message": "SUCCESS - output fetched for file_id 54d7b537-5e65-48f7-a8e6-f9c7d44da2f7.Output saved to location(s) listed in process_output_files.",
+      "request_id": "13808335-7b47-4576-9a81-555788920ba2",
+      "file_id": "51c005db-04a8-48d6-9162-4584b62e1804",
+      "message": "SUCCESS - output fetched for file_id 51c005db-04a8-48d6-9162-4584b62e1804.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -111,7 +85,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/54d7b537-5e65-48f7-a8e6-f9c7d44da2f7.json"
+        "../../../data/output/51c005db-04a8-48d6-9162-4584b62e1804.json"
       ]
     }
 
@@ -137,7 +111,7 @@ with open(process_output["process_output_files"][0]) as f:
 
 ### Using a Non-Default Model
 
-To use a [non-default model](../../modules/ai_model_modules/translate_module.md#available-models-in-the-translate-module) like Spanish-to-English [`opus-mt-es-en`](https://huggingface.co/Helsinki-NLP/opus-mt-es-en) you must enter it explicitly through the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+To use a [non-default model](../../modules/ai_modules/translate_module.md#available-models-in-the-translate-module) like Spanish-to-English [`opus-mt-es-en`](https://huggingface.co/Helsinki-NLP/opus-mt-es-en) you must enter it explicitly through the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 We do so below to process the same input file as above.
 
@@ -163,9 +137,9 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "single_translate_1",
-      "request_id": "ec76e171-5191-4b68-8db4-a6389bf474d7",
-      "file_id": "126cba83-d7d1-4581-8c7c-25ec7e3a29f5",
-      "message": "SUCCESS - output fetched for file_id 126cba83-d7d1-4581-8c7c-25ec7e3a29f5.Output saved to location(s) listed in process_output_files.",
+      "request_id": "6e1dbf45-2e40-4b42-9f3d-0c7cc6980691",
+      "file_id": "c5ae683e-24ff-47af-a4fa-1ce0872980ca",
+      "message": "SUCCESS - output fetched for file_id c5ae683e-24ff-47af-a4fa-1ce0872980ca.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -176,7 +150,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/126cba83-d7d1-4581-8c7c-25ec7e3a29f5.json"
+        "../../../data/output/c5ae683e-24ff-47af-a4fa-1ce0872980ca.json"
       ]
     }
 

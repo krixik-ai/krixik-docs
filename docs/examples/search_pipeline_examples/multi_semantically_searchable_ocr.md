@@ -1,6 +1,6 @@
 ## Multi-Module Pipeline: Semantically-Searchable OCR
 
-This document details a modular pipeline that takes in an image, [`extracts all text`](../../modules/ai_model_modules/ocr_module.md) found within it, and makes the extracted text [`semantically searchable`](../../system/search_methods/semantic_search_method.md).
+This document details a modular pipeline that takes in an image, [`extracts all text`](../../modules/ai_modules/ocr_module.md) found within it, and makes the extracted text [`semantically searchable`](../../system/search_methods/semantic_search_method.md).
 
 The document is divided into the following sections:
 
@@ -8,47 +8,21 @@ The document is divided into the following sections:
 - [Processing an Input File](#processing-an-input-file)
 - [Performing Semantic Search](#performing-semantic-search)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### Pipeline Setup
 
 To achieve what we've described above, let's set up a pipeline sequentially consisting of the following modules:
 
-- An [`ocr`](../../modules/ai_model_modules/ocr_module.md) module.
+- An [`ocr`](../../modules/ai_modules/ocr_module.md) module.
 
 - A [`json-to-txt`](../../modules/support_function_modules/json-to-txt_module.md) module.
 
 - A [`parser`](../../modules/support_function_modules/parser_module.md) module.
 
-- A [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) module.
+- A [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module.
 
 - A [`vector-db`](../../modules/database_modules/vector-db_module.md)
 
-We use the [`json-to-txt`](../../modules/support_function_modules/json-to-txt_module.md) and [`parser`](../../modules/support_function_modules/parser_module.md) combination, which combines the transcribed snippets into one document and then splices it again, to make sure that any unsought OCR-generated breaks don't make for partial snippets that can confuse the [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) model.
+We use the [`json-to-txt`](../../modules/support_function_modules/json-to-txt_module.md) and [`parser`](../../modules/support_function_modules/parser_module.md) combination, which combines the transcribed snippets into one document and then splices it again, to make sure that any unsought OCR-generated breaks don't make for partial snippets that can confuse the [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) model.
 
 Pipeline setup is accomplished through the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
 
@@ -78,7 +52,7 @@ Image(filename="../../../data/input/seal.png")
 
 
     
-![png](multi_semantically_searchable_ocr_files/multi_semantically_searchable_ocr_5_0.png)
+![png](multi_semantically_searchable_ocr_files/multi_semantically_searchable_ocr_4_0.png)
     
 
 
@@ -108,20 +82,20 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "multi_semantically_searchable_ocr",
-      "request_id": "f710e55e-5312-4098-8b1a-5591d4ff8e73",
-      "file_id": "f90bd3ab-7f94-448e-8f22-4e6b1a66c8c3",
-      "message": "SUCCESS - output fetched for file_id f90bd3ab-7f94-448e-8f22-4e6b1a66c8c3.Output saved to location(s) listed in process_output_files.",
+      "request_id": "b6aa630d-1e46-4a1d-9e9d-6d294169823f",
+      "file_id": "1a885a66-e56a-4089-911c-15fd4e9592b8",
+      "message": "SUCCESS - output fetched for file_id 1a885a66-e56a-4089-911c-15fd4e9592b8.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../../data/output/f90bd3ab-7f94-448e-8f22-4e6b1a66c8c3.faiss"
+        "../../../data/output/1a885a66-e56a-4089-911c-15fd4e9592b8.faiss"
       ]
     }
 
 
 ### Performing Semantic Search
 
-Krixik's [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method enables semantic search on documents processed through certain pipelines. Given that the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method both [embeds](../../modules/ai_model_modules/text-embedder_module.md) the query and performs the search, it can only be used with pipelines containing both a [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) module and a [`vector-db`](../../modules/database_modules/vector-db_module.md) module in immediate succession.
+Krixik's [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method enables semantic search on documents processed through certain pipelines. Given that the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method both [embeds](../../modules/ai_modules/text-embedder_module.md) the query and performs the search, it can only be used with pipelines containing both a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module and a [`vector-db`](../../modules/database_modules/vector-db_module.md) module in immediate succession.
 
 Since our pipeline satisfies this condition, it has access to the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method. Let's use it to query our text with natural language, as shown below:
 
@@ -136,19 +110,19 @@ print(json.dumps(semantic_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "c5de4a40-fcc4-40f2-9455-5ea9069058f1",
+      "request_id": "b0198bc8-1e86-417b-8c18-b05cde14e7c6",
       "message": "Successfully queried 1 user file.",
       "warnings": [],
       "items": [
         {
-          "file_id": "f90bd3ab-7f94-448e-8f22-4e6b1a66c8c3",
+          "file_id": "1a885a66-e56a-4089-911c-15fd4e9592b8",
           "file_metadata": {
-            "file_name": "krixik_generated_file_name_lhjamjydki.png",
+            "file_name": "krixik_generated_file_name_zitmnmyebw.png",
             "symbolic_directory_path": "/etc",
             "file_tags": [],
             "num_vectors": 8,
-            "created_at": "2024-05-20 06:29:47",
-            "last_updated": "2024-05-20 06:29:47"
+            "created_at": "2024-05-22 20:17:42",
+            "last_updated": "2024-05-22 20:17:42"
           },
           "search_results": [
             {
@@ -196,9 +170,3 @@ print(json.dumps(semantic_output, indent=2))
       ]
     }
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

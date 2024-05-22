@@ -32,15 +32,15 @@ Then we delve into a few examples of multi-module pipelines, which is where the 
 
 ### Multi-Module Pipelines (non-search)
 
-- [Recursive Summarization](multi_module_non_search_pipeline_examples/multi_recursive_summarization.md): Chains multiple text [`summarize`](../modules/ai_model_modules/summarize_module.md) modules together. The longer the module chain, the greater the degree of summarization.
+- [Recursive Summarization](multi_module_non_search_pipeline_examples/multi_recursive_summarization.md): Chains multiple text [`summarize`](../modules/ai_modules/summarize_module.md) modules together. The longer the module chain, the greater the degree of summarization.
 
-- [Translated Transcription](multi_module_non_search_pipeline_examples/multi_translated_transcription.md): After [`transcribing`](../modules/ai_model_modules/transcribe_module.md) an input audio file, [`translates`](../modules/ai_model_modules/translate_module.md) the transcript into the language of your choice.
+- [Translated Transcription](multi_module_non_search_pipeline_examples/multi_translated_transcription.md): After [`transcribing`](../modules/ai_modules/transcribe_module.md) an input audio file, [`translates`](../modules/ai_modules/translate_module.md) the transcript into the language of your choice.
 
-- [Sentiment Analysis on Transcription](multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_transcription.md): After [`transcribing`](../modules/ai_model_modules/transcribe_module.md) an input audio file, performs [`sentiment analysis`](../modules/ai_model_modules/sentiment_module.md) on each sentence of the transcript.
+- [Sentiment Analysis on Transcription](multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_transcription.md): After [`transcribing`](../modules/ai_modules/transcribe_module.md) an input audio file, performs [`sentiment analysis`](../modules/ai_modules/sentiment_module.md) on each sentence of the transcript.
 
-- [Sentiment Analysis on Translation](multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_translation.md): [`Translates`](../modules/ai_model_modules/translate_module.md) input text into English and then perfoms [`sentiment analysis`](../modules/ai_model_modules/sentiment_module.md) on each sentence of the translation.
+- [Sentiment Analysis on Translation](multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_translation.md): [`Translates`](../modules/ai_modules/translate_module.md) input text into English and then perfoms [`sentiment analysis`](../modules/ai_modules/sentiment_module.md) on each sentence of the translation.
 
-- [Sentiment Analysis on Translated Transcription](multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_translated_transcription.md): After first [`transcribing`](../modules/ai_model_modules/transcribe_module.md) an input audio file and then [`translating`](../modules/ai_model_modules/translate_module.md) the transcript into English, performs [`sentiment analysis`](../modules/ai_model_modules/sentiment_module.md) on each sentence of the translation.
+- [Sentiment Analysis on Translated Transcription](multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_translated_transcription.md): After first [`transcribing`](../modules/ai_modules/transcribe_module.md) an input audio file and then [`translating`](../modules/ai_modules/translate_module.md) the transcript into English, performs [`sentiment analysis`](../modules/ai_modules/sentiment_module.md) on each sentence of the translation.
 
 ### Multi-Module Search Pipelines
 
@@ -52,14 +52,14 @@ Then we delve into a few examples of multi-module pipelines, which is where the 
 
 - [Keyword Search](search_pipeline_examples/multi_basic_keyword-search.md): Enables `keyword search` on an input text file.
 
-- [Semantically-Searchable Transcription](search_pipeline_examples/multi_semantically_searchable_transcription.md): [`Transcribes`](../modules/ai_model_modules/transcribe_module.md) an input audio file and then enables `semantic search` on the transcript.
+- [Semantically-Searchable Transcription](search_pipeline_examples/multi_semantically_searchable_transcription.md): [`Transcribes`](../modules/ai_modules/transcribe_module.md) an input audio file and then enables `semantic search` on the transcript.
 
-- [Keyword-Searchable Transcription](search_pipeline_examples/multi_keyword_searchable_transcription.md): [`Transcribes`](../modules/ai_model_modules/transcribe_module.md) an input audio file and then enables `keyword search` on the transcript.
+- [Keyword-Searchable Transcription](search_pipeline_examples/multi_keyword_searchable_transcription.md): [`Transcribes`](../modules/ai_modules/transcribe_module.md) an input audio file and then enables `keyword search` on the transcript.
 
-- [Semantically-Searchable Translation](search_pipeline_examples/multi_semantically_searchable_translation.md): [`Translates`](../modules/ai_model_modules/translate_module.md) an input text file and then enables `semantic search` on the translation.
+- [Semantically-Searchable Translation](search_pipeline_examples/multi_semantically_searchable_translation.md): [`Translates`](../modules/ai_modules/translate_module.md) an input text file and then enables `semantic search` on the translation.
 
-- [Semantically-Searchable Translated Transcription](search_pipeline_examples/multi_semantically_searchable_translated_transcription.md): [`Transcribes`](../modules/ai_model_modules/transcribe_module.md) an input audio file, [`translates`](../modules/ai_model_modules/translate_module.md) it into English, and then enables `semantic search` on the translation.
+- [Semantically-Searchable Translated Transcription](search_pipeline_examples/multi_semantically_searchable_translated_transcription.md): [`Transcribes`](../modules/ai_modules/transcribe_module.md) an input audio file, [`translates`](../modules/ai_modules/translate_module.md) it into English, and then enables `semantic search` on the translation.
 
-- [Semantically-Searchable OCR](search_pipeline_examples/multi_semantically_searchable_ocr.md): [`Extracts text`](../modules/ai_model_modules/ocr_module.md) from an input image and then enables `semantic search` on the extracted text.
+- [Semantically-Searchable OCR](search_pipeline_examples/multi_semantically_searchable_ocr.md): [`Extracts text`](../modules/ai_modules/ocr_module.md) from an input image and then enables `semantic search` on the extracted text.
 
-- [Keyword-Searchable Image Captions](search_pipeline_examples/multi_keyword_searchable_image_captions.md): Generates a [`textual caption`](../modules/ai_model_modules/caption_module.md) for an input image and then enables `keyword search` on the caption.
+- [Keyword-Searchable Image Captions](search_pipeline_examples/multi_keyword_searchable_image_captions.md): Generates a [`textual caption`](../modules/ai_modules/caption_module.md) for an input image and then enables `keyword search` on the caption.

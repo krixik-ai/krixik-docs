@@ -16,32 +16,6 @@ This overview of the `.list` method is divided into the following sections:
 - [Using Multiple Arguments with the `.list` Method](#using-multiple-arguments-with-the-.list-method)
 - [Output Size Cap](#output-size-cap)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### `.list` Method Arguments
 
 The `.list` method is very versatile. It allows you to list by several different metadata items and by a combination of different metadata items.
@@ -123,7 +97,7 @@ entries = [
 all_process_output = []
 for entry in entries:
     process_output = pipeline.process(local_file_path=entry["local_file_path"], # the initial local filepath where the input file is stored
-                                       local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+                                      local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
                                       expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
                                       wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
                                       verbose=False,  # do not display process update printouts upon running code
@@ -133,153 +107,6 @@ for entry in entries:
     all_process_output.append(process_output)
 
 ```
-
-
-    ---------------------------------------------------------------------------
-
-    ValueError                                Traceback (most recent call last)
-
-    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\utilities\validators\data\utilities\decorators.py:47, in datatype_validator.<locals>.wrapper(*args, **kwargs)
-         46             raise ValueError(f"invalid file extension: '{extension}'")
-    ---> 47     return func(*args, **kwargs)
-         48 except ValueError as e:
-
-
-    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\utilities\validators\system\base\lower_case.py:163, in lower_case_decorator.<locals>.wrapper(*args, **kwargs)
-        161     raise Exception(e)
-    --> 163 return func(*args, **kwargs)
-
-
-    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\system_builder\base.py:548, in KrixikBasePipeline.process(self, file_name, symbolic_directory_path, symbolic_file_path, local_file_path, file_tags, file_description, modules, expire_time, verbose, wait_for_process, local_save_directory, download_output, og_local_file_path)
-        547 # process s3 file via presigned url
-    --> 548 self.__upload_file_to_s3_via_presignedurl(verbose=verbose)
-        550 # reset class variables
-
-
-    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\system_builder\base.py:391, in KrixikBasePipeline.__upload_file_to_s3_via_presignedurl(self, verbose)
-        390 except ValueError as err:
-    --> 391     raise err
-
-
-    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\system_builder\base.py:367, in KrixikBasePipeline.__upload_file_to_s3_via_presignedurl(self, verbose)
-        366 if "failure_module" in list(failure_status.keys()):
-    --> 367     raise ValueError(
-        368         f"processes associated with request_id '{failure_status['process_id']}' failed at module '{failure_status['failure_module']}'"
-        369     )
-        370 else:
-
-
-    ValueError: processes associated with request_id '8594789e-42d3-b069-d0f2-2d5f0d33c3be' failed at module 'summarize'
-
-    
-    During handling of the above exception, another exception occurred:
-
-
-    ValueError                                Traceback (most recent call last)
-
-    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\utilities\validators\utilities\decorators.py:16, in type_check_inputs.<locals>.wrapper(self, *args, **kwargs)
-         15 try:
-    ---> 16     result = system_base_type_check_inputs(system_data_type_check_inputs(datatype_validator(lower_case_decorator(func))))(
-         17         self, *args, **kwargs
-         18     )
-         20     return result
-
-
-    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\utilities\validators\system\base\utilities\decorators.py:143, in type_check_inputs.<locals>.wrapper(*args, **kwargs)
-        141     raise Exception(e)
-    --> 143 return func(*args, **kwargs)
-
-
-    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\utilities\validators\system\data\utilities\decorators.py:137, in type_check_inputs.<locals>.wrapper(*args, **kwargs)
-        135     raise Exception(e)
-    --> 137 return func(self_arg, *args[1:], **kwargs)
-
-
-    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\utilities\validators\data\utilities\decorators.py:49, in datatype_validator.<locals>.wrapper(*args, **kwargs)
-         48 except ValueError as e:
-    ---> 49     raise ValueError(e)
-         50 except Exception as e:
-
-
-    ValueError: processes associated with request_id '8594789e-42d3-b069-d0f2-2d5f0d33c3be' failed at module 'summarize'
-
-    
-    During handling of the above exception, another exception occurred:
-
-
-    ValueError                                Traceback (most recent call last)
-
-    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\utilities\converters\utilities\decorators.py:83, in datatype_converter_wrapper.<locals>.converter_wrapper(*args, **kwargs)
-         82                 return func(*args, **kwargs)
-    ---> 83     return func(*args, **kwargs)
-         84 except ValueError as e:
-
-
-    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\modules\utilities\decorators.py:54, in type_check_inputs.<locals>.wrapper(*args, **kwargs)
-         52     raise e
-    ---> 54 return func(self_arg, *args[1:], **kwargs)
-
-
-    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\utilities\validators\utilities\decorators.py:23, in type_check_inputs.<locals>.wrapper(self, *args, **kwargs)
-         22 except ValueError as e:
-    ---> 23     raise ValueError(e)
-         24 except TypeError as e:
-
-
-    ValueError: processes associated with request_id '8594789e-42d3-b069-d0f2-2d5f0d33c3be' failed at module 'summarize'
-
-    
-    During handling of the above exception, another exception occurred:
-
-
-    ValueError                                Traceback (most recent call last)
-
-    Cell In[4], line 3
-          1 # process four files through the pipeline we just created.
-    ----> 3 process_output_1 = pipeline_1.process(local_file_path="../../../data/input/Frankenstein partial.txt", # the initial local filepath where the input file is stored
-          4                                       expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-          5                                       wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
-          6                                       verbose=False,  # do not display process update printouts upon running code
-          7                                       symbolic_directory_path="/novels/gothic",
-          8                                       file_name="Frankenstein.txt",
-          9                                       file_tags=[{"author": "Shelley"}, {"category": "gothic"}, {"century": "19"}])
-         11 process_output_2 = pipeline_1.process(local_file_path="../../../data/input/Pride and Prejudice partial.txt", # the initial local filepath where the input file is stored
-         12                                       expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-         13                                       wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
-       (...)
-         16                                       file_name="Pride and Prejudice.txt",
-         17                                       file_tags=[{"author": "Austen"}, {"category": "romance"}, {"century": "19"}])
-         19 process_output_3 = pipeline_1.process(local_file_path="../../../data/input/Moby Dick partial.txt", # the initial local filepath where the input file is stored
-         20                                       expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-         21                                       wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
-       (...)
-         24                                       file_name="Moby Dick.txt",
-         25                                       file_tags=[{"author": "Melville"}, {"category": "adventure"}, {"century": "19"}])
-
-
-    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\system_builder\utilities\decorators.py:97, in kwargs_checker.<locals>.wrapper(*args, **kwargs)
-         95 if unexpected_args:
-         96     raise TypeError(f"unexpected keyword argument(s) for '{func_name}': {', '.join(unexpected_args)}")
-    ---> 97 return func(*args, **kwargs)
-
-
-    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\system_builder\functions\checkin.py:67, in check_init_decorator.<locals>.wrapper(self, *args, **kwargs)
-         64 @functools.wraps(func)
-         65 def wrapper(self, *args, **kwargs):
-         66     check_init(self)
-    ---> 67     return func(self, *args, **kwargs)
-
-
-    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\utilities\converters\utilities\decorators.py:85, in datatype_converter_wrapper.<locals>.converter_wrapper(*args, **kwargs)
-         83     return func(*args, **kwargs)
-         84 except ValueError as e:
-    ---> 85     raise ValueError(e)
-         86 except TypeError as e:
-         87     raise TypeError(e)
-
-
-    ValueError: processes associated with request_id '8594789e-42d3-b069-d0f2-2d5f0d33c3be' failed at module 'summarize'
-
 
 Let's quickly look at what the output for the last of these processed files.
 
@@ -291,45 +118,114 @@ print(json.dumps(all_process_output[-1], indent=2))
 
     {
       "status_code": 200,
-      "pipeline": "examples-transcribe-multilingual-sentiment-docs",
-      "request_id": "1119f07f-e4a1-4021-9668-2f19ea367568",
-      "file_id": "efdc2954-9bef-4427-8de1-2bd18a830015",
-      "message": "SUCCESS - output fetched for file_id efdc2954-9bef-4427-8de1-2bd18a830015.Output saved to location(s) listed in process_output_files.",
+      "pipeline": "list_method_1_parser",
+      "request_id": "87b13c6c-75da-4527-be95-d800f0742d5c",
+      "file_id": "7c152c41-059f-4f6d-8097-90b1a42d2116",
+      "message": "SUCCESS - output fetched for file_id 7c152c41-059f-4f6d-8097-90b1a42d2116.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
-          "snippet": "For the starting position, we want to see the feed between the hip and shoulders width, the heels on the floor, a neutral column mediated by abdominal tension, the shoulders are lightly in front of the bar or above, straight arms, symmetrical hands and enough width to not rather the knees and we can have a lightly look forward.",
-          "positive": 0.99,
-          "negative": 0.01,
-          "neutral": 0.0
+          "snippet": "\ufeff  EXTRACTS.",
+          "line_numbers": [
+            1
+          ]
         },
         {
-          "snippet": "To perform the movement, our athlete will push from the heels, he will start to raise the hips and shoulders together, when the bar passes the knees, we extend the hip.",
-          "positive": 0.996,
-          "negative": 0.004,
-          "neutral": 0.0
+          "snippet": "(Supplied by a Sub-Sub-Librarian).",
+          "line_numbers": [
+            1
+          ]
         },
         {
-          "snippet": "For return, we are going to delay the push of the knees and we are going to push the hip back and the chess forward.",
-          "positive": 0.006,
-          "negative": 0.994,
-          "neutral": 0.0
+          "snippet": "It will be seen that this mere painstaking burrower and grub-worm of\n  a poor devil of a Sub-Sub appears to have gone through the long\n  Vaticans and street-stalls of the earth, picking up whatever random\n  allusions to whales he could anyways find in any book whatsoever,\n  sacred or profane.",
+          "line_numbers": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ]
         },
         {
-          "snippet": "When the bar passes the knees, we have the correct angle of our trunk and we already blessed the knees to approximately half the hip for starting position and resting.",
-          "positive": 0.493,
-          "negative": 0.507,
-          "neutral": 0.0
+          "snippet": "Therefore you must not, in every case at least,\n  take the higgledy-piggledy whale statements, however authentic, in\n  these extracts, for veritable gospel cetology.",
+          "line_numbers": [
+            9,
+            10,
+            11
+          ]
         },
         {
-          "snippet": "Throughout the movement, we want to see the bar close to the body when going up and down.",
-          "positive": 0.972,
-          "negative": 0.028,
-          "neutral": 0.0
+          "snippet": "Far from it.",
+          "line_numbers": [
+            11
+          ]
+        },
+        {
+          "snippet": "As\n  touching the ancient authors generally, as well as the poets here\n  appearing, these extracts are solely valuable or entertaining, as\n  affording a glancing bird\u2019s eye view of what has been promiscuously\n  said, thought, fancied, and sung of Leviathan, by many nations and\n  generations, including our own.",
+          "line_numbers": [
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ]
+        },
+        {
+          "snippet": "So fare thee well, poor devil of a Sub-Sub, whose commentator I am.",
+          "line_numbers": [
+            17,
+            18
+          ]
+        },
+        {
+          "snippet": "Thou belongest to that hopeless, sallow tribe which no wine of this\n  world will ever warm; and for whom even Pale Sherry would be too\n  rosy-strong; but with whom one sometimes loves to sit, and feel\n  poor-devilish, too; and grow convivial upon tears; and say to them\n  bluntly, with full eyes and empty glasses, and in not altogether\n  unpleasant sadness\u2014Give it up, Sub-Subs!",
+          "line_numbers": [
+            19,
+            20,
+            21,
+            22,
+            23,
+            24
+          ]
+        },
+        {
+          "snippet": "For by how much the more\n  pains ye take to please the world, by so much the more shall ye for\n  ever go thankless!",
+          "line_numbers": [
+            24,
+            25,
+            26
+          ]
+        },
+        {
+          "snippet": "Would that I could clear out Hampton Court and the\n  Tuileries for ye!",
+          "line_numbers": [
+            26,
+            27
+          ]
+        },
+        {
+          "snippet": "But gulp down your tears and hie aloft to the\n  royal-mast with your hearts; for your friends who have gone before\n  are clearing out the seven-storied heavens, and making refugees of\n  long-pampered Gabriel, Michael, and Raphael, against your coming.",
+          "line_numbers": [
+            27,
+            28,
+            29,
+            30
+          ]
+        },
+        {
+          "snippet": "Here ye strike but splintered hearts together\u2014there, ye shall strike\n  unsplinterable glasses!",
+          "line_numbers": [
+            31,
+            32
+          ]
         }
       ],
       "process_output_files": [
-        "/Users/jeremywatt/Desktop/krixik/code/krixik-docs/docs/examples/transcribe/efdc2954-9bef-4427-8de1-2bd18a830015.json"
+        "../../../data/output/7c152c41-059f-4f6d-8097-90b1a42d2116.json"
       ]
     }
 
@@ -355,42 +251,132 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "11dcf756-702c-421c-a85a-49dabc2cca7f",
-      "message": "Successfully returned 1 item.  Note: all timestamps in UTC.",
+      "request_id": "561b3d3d-4d81-44ee-9d14-cdfa856d6a55",
+      "message": "Successfully returned 3 items.  Note: all timestamps in UTC.",
       "warnings": [],
       "items": [
         {
-          "last_updated": "2024-04-26 21:05:05",
-          "process_id": "578cb0a2-0f19-4d83-4b05-3c543f5e2506",
-          "created_at": "2024-04-26 21:05:05",
+          "last_updated": "2024-05-22 19:55:37",
+          "process_id": "cb6bdac5-696e-b33d-40fc-1f44818c27d3",
+          "created_at": "2024-05-22 19:55:37",
           "file_metadata": {
             "modules": {
-              "parser": {
-                "model": "sentence"
+              "module_1": {
+                "parser": {
+                  "model": "sentence"
+                }
               }
             },
             "modules_data": {
-              "parser": {
-                "data_files_extensions": [
-                  ".json"
-                ]
+              "module_1": {
+                "parser": {
+                  "data_files_extensions": [
+                    ".json"
+                  ],
+                  "num_lines": 12
+                }
               }
             }
           },
           "file_tags": [
             {
-              "author": "orwell"
+              "author": "melville"
             },
             {
-              "category": "fiction"
+              "category": "adventure"
+            },
+            {
+              "century": "19"
             }
           ],
-          "file_description": "the first paragraph of 1984",
-          "symbolic_directory_path": "/my/custom/filepath",
-          "pipeline": "parser-pipeline-1",
-          "file_id": "fb228e8e-eefd-4c52-b966-a49506d63f34",
-          "expire_time": "2024-04-26 21:10:05",
-          "file_name": "some_snippets.txt"
+          "file_description": "",
+          "symbolic_directory_path": "/novels/adventure",
+          "pipeline": "list_method_1_parser",
+          "file_id": "7c152c41-059f-4f6d-8097-90b1a42d2116",
+          "expire_time": "2024-05-22 20:25:36",
+          "file_name": "moby dick.txt"
+        },
+        {
+          "last_updated": "2024-05-22 19:55:25",
+          "process_id": "4002c9a8-dea8-f493-3f50-2066754f6839",
+          "created_at": "2024-05-22 19:55:25",
+          "file_metadata": {
+            "modules": {
+              "module_1": {
+                "parser": {
+                  "model": "sentence"
+                }
+              }
+            },
+            "modules_data": {
+              "module_1": {
+                "parser": {
+                  "data_files_extensions": [
+                    ".json"
+                  ],
+                  "num_lines": 9
+                }
+              }
+            }
+          },
+          "file_tags": [
+            {
+              "author": "austen"
+            },
+            {
+              "category": "romance"
+            },
+            {
+              "century": "19"
+            }
+          ],
+          "file_description": "",
+          "symbolic_directory_path": "/novels/romance",
+          "pipeline": "list_method_1_parser",
+          "file_id": "a64542db-fafb-4572-9624-5781c3f3d564",
+          "expire_time": "2024-05-22 20:25:25",
+          "file_name": "pride and prejudice.txt"
+        },
+        {
+          "last_updated": "2024-05-22 19:55:11",
+          "process_id": "7202fbf4-0c91-6149-91ab-4748eda42cb0",
+          "created_at": "2024-05-22 19:55:11",
+          "file_metadata": {
+            "modules": {
+              "module_1": {
+                "parser": {
+                  "model": "sentence"
+                }
+              }
+            },
+            "modules_data": {
+              "module_1": {
+                "parser": {
+                  "data_files_extensions": [
+                    ".json"
+                  ],
+                  "num_lines": 26
+                }
+              }
+            }
+          },
+          "file_tags": [
+            {
+              "author": "shelley"
+            },
+            {
+              "category": "gothic"
+            },
+            {
+              "century": "19"
+            }
+          ],
+          "file_description": "",
+          "symbolic_directory_path": "/novels/gothic",
+          "pipeline": "list_method_1_parser",
+          "file_id": "a20fe875-ece2-404b-bdbf-20233662d35b",
+          "expire_time": "2024-05-22 20:25:09",
+          "file_name": "frankenstein.txt"
         }
       ]
     }
@@ -411,6 +397,57 @@ list_output = pipeline.list(file_names=["Pride and Prejudice.txt"])
 print(json.dumps(list_output, indent=2))
 ```
 
+    {
+      "status_code": 200,
+      "request_id": "8e8ef0ce-fadf-40f7-9675-47d18254110b",
+      "message": "Successfully returned 1 item.  Note: all timestamps in UTC.",
+      "warnings": [],
+      "items": [
+        {
+          "last_updated": "2024-05-22 19:55:25",
+          "process_id": "4002c9a8-dea8-f493-3f50-2066754f6839",
+          "created_at": "2024-05-22 19:55:25",
+          "file_metadata": {
+            "modules": {
+              "module_1": {
+                "parser": {
+                  "model": "sentence"
+                }
+              }
+            },
+            "modules_data": {
+              "module_1": {
+                "parser": {
+                  "data_files_extensions": [
+                    ".json"
+                  ],
+                  "num_lines": 9
+                }
+              }
+            }
+          },
+          "file_tags": [
+            {
+              "author": "austen"
+            },
+            {
+              "category": "romance"
+            },
+            {
+              "century": "19"
+            }
+          ],
+          "file_description": "",
+          "symbolic_directory_path": "/novels/romance",
+          "pipeline": "list_method_1_parser",
+          "file_id": "a64542db-fafb-4572-9624-5781c3f3d564",
+          "expire_time": "2024-05-22 20:25:25",
+          "file_name": "pride and prejudice.txt"
+        }
+      ]
+    }
+
+
 As you can see, a full record for each file was returned. To learn more about each metadata item, visit the documentation for the [`.process`](../parameters_processing_files_through_pipelines/process_method.md) method, where they are gone into detail on.
 
 ### Listing by `symbolic_directory_paths`
@@ -428,42 +465,91 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "70c71a76-7ce9-43c7-86e7-838b7fa93d8e",
-      "message": "Successfully returned 1 item.  Note: all timestamps in UTC.",
+      "request_id": "03202992-7a49-42c2-b28d-50b55e495415",
+      "message": "Successfully returned 2 items.  Note: all timestamps in UTC.",
       "warnings": [],
       "items": [
         {
-          "last_updated": "2024-04-26 21:05:05",
-          "process_id": "578cb0a2-0f19-4d83-4b05-3c543f5e2506",
-          "created_at": "2024-04-26 21:05:05",
+          "last_updated": "2024-05-22 19:55:37",
+          "process_id": "cb6bdac5-696e-b33d-40fc-1f44818c27d3",
+          "created_at": "2024-05-22 19:55:37",
           "file_metadata": {
             "modules": {
-              "parser": {
-                "model": "sentence"
+              "module_1": {
+                "parser": {
+                  "model": "sentence"
+                }
               }
             },
             "modules_data": {
-              "parser": {
-                "data_files_extensions": [
-                  ".json"
-                ]
+              "module_1": {
+                "parser": {
+                  "data_files_extensions": [
+                    ".json"
+                  ],
+                  "num_lines": 12
+                }
               }
             }
           },
           "file_tags": [
             {
-              "author": "orwell"
+              "author": "melville"
             },
             {
-              "category": "fiction"
+              "category": "adventure"
+            },
+            {
+              "century": "19"
             }
           ],
-          "file_description": "the first paragraph of 1984",
-          "symbolic_directory_path": "/my/custom/filepath",
-          "pipeline": "parser-pipeline-1",
-          "file_id": "fb228e8e-eefd-4c52-b966-a49506d63f34",
-          "expire_time": "2024-04-26 21:10:05",
-          "file_name": "some_snippets.txt"
+          "file_description": "",
+          "symbolic_directory_path": "/novels/adventure",
+          "pipeline": "list_method_1_parser",
+          "file_id": "7c152c41-059f-4f6d-8097-90b1a42d2116",
+          "expire_time": "2024-05-22 20:25:36",
+          "file_name": "moby dick.txt"
+        },
+        {
+          "last_updated": "2024-05-22 19:55:11",
+          "process_id": "7202fbf4-0c91-6149-91ab-4748eda42cb0",
+          "created_at": "2024-05-22 19:55:11",
+          "file_metadata": {
+            "modules": {
+              "module_1": {
+                "parser": {
+                  "model": "sentence"
+                }
+              }
+            },
+            "modules_data": {
+              "module_1": {
+                "parser": {
+                  "data_files_extensions": [
+                    ".json"
+                  ],
+                  "num_lines": 26
+                }
+              }
+            }
+          },
+          "file_tags": [
+            {
+              "author": "shelley"
+            },
+            {
+              "category": "gothic"
+            },
+            {
+              "century": "19"
+            }
+          ],
+          "file_description": "",
+          "symbolic_directory_path": "/novels/gothic",
+          "pipeline": "list_method_1_parser",
+          "file_id": "a20fe875-ece2-404b-bdbf-20233662d35b",
+          "expire_time": "2024-05-22 20:25:09",
+          "file_name": "frankenstein.txt"
         }
       ]
     }
@@ -478,7 +564,7 @@ We can also list through `file_tags`.  We'll list for 19th century novels and an
 
 ```python
 # .list records for two of the uploaded files via symbolic_directory_paths
-list_output = pipeline.list(file_tags=[{"author": "Melville"}, {"century": 19}])
+list_output = pipeline.list(file_tags=[{"author": "Melville"}, {"century": "19"}])
 
 # nicely print the output of this process
 print(json.dumps(list_output, indent=2))
@@ -486,42 +572,132 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "7915929d-47cc-4fb9-82f6-b737ad823458",
-      "message": "Successfully returned 1 item.  Note: all timestamps in UTC.",
+      "request_id": "8efd4e6a-cfa8-492a-bf17-90fc2ef2f37e",
+      "message": "Successfully returned 3 items.  Note: all timestamps in UTC.",
       "warnings": [],
       "items": [
         {
-          "last_updated": "2024-04-26 21:05:05",
-          "process_id": "578cb0a2-0f19-4d83-4b05-3c543f5e2506",
-          "created_at": "2024-04-26 21:05:05",
+          "last_updated": "2024-05-22 19:55:37",
+          "process_id": "cb6bdac5-696e-b33d-40fc-1f44818c27d3",
+          "created_at": "2024-05-22 19:55:37",
           "file_metadata": {
             "modules": {
-              "parser": {
-                "model": "sentence"
+              "module_1": {
+                "parser": {
+                  "model": "sentence"
+                }
               }
             },
             "modules_data": {
-              "parser": {
-                "data_files_extensions": [
-                  ".json"
-                ]
+              "module_1": {
+                "parser": {
+                  "data_files_extensions": [
+                    ".json"
+                  ],
+                  "num_lines": 12
+                }
               }
             }
           },
           "file_tags": [
             {
-              "author": "orwell"
+              "author": "melville"
             },
             {
-              "category": "fiction"
+              "category": "adventure"
+            },
+            {
+              "century": "19"
             }
           ],
-          "file_description": "the first paragraph of 1984",
-          "symbolic_directory_path": "/my/custom/filepath",
-          "pipeline": "parser-pipeline-1",
-          "file_id": "fb228e8e-eefd-4c52-b966-a49506d63f34",
-          "expire_time": "2024-04-26 21:10:05",
-          "file_name": "some_snippets.txt"
+          "file_description": "",
+          "symbolic_directory_path": "/novels/adventure",
+          "pipeline": "list_method_1_parser",
+          "file_id": "7c152c41-059f-4f6d-8097-90b1a42d2116",
+          "expire_time": "2024-05-22 20:25:36",
+          "file_name": "moby dick.txt"
+        },
+        {
+          "last_updated": "2024-05-22 19:55:25",
+          "process_id": "4002c9a8-dea8-f493-3f50-2066754f6839",
+          "created_at": "2024-05-22 19:55:25",
+          "file_metadata": {
+            "modules": {
+              "module_1": {
+                "parser": {
+                  "model": "sentence"
+                }
+              }
+            },
+            "modules_data": {
+              "module_1": {
+                "parser": {
+                  "data_files_extensions": [
+                    ".json"
+                  ],
+                  "num_lines": 9
+                }
+              }
+            }
+          },
+          "file_tags": [
+            {
+              "author": "austen"
+            },
+            {
+              "category": "romance"
+            },
+            {
+              "century": "19"
+            }
+          ],
+          "file_description": "",
+          "symbolic_directory_path": "/novels/romance",
+          "pipeline": "list_method_1_parser",
+          "file_id": "a64542db-fafb-4572-9624-5781c3f3d564",
+          "expire_time": "2024-05-22 20:25:25",
+          "file_name": "pride and prejudice.txt"
+        },
+        {
+          "last_updated": "2024-05-22 19:55:11",
+          "process_id": "7202fbf4-0c91-6149-91ab-4748eda42cb0",
+          "created_at": "2024-05-22 19:55:11",
+          "file_metadata": {
+            "modules": {
+              "module_1": {
+                "parser": {
+                  "model": "sentence"
+                }
+              }
+            },
+            "modules_data": {
+              "module_1": {
+                "parser": {
+                  "data_files_extensions": [
+                    ".json"
+                  ],
+                  "num_lines": 26
+                }
+              }
+            }
+          },
+          "file_tags": [
+            {
+              "author": "shelley"
+            },
+            {
+              "category": "gothic"
+            },
+            {
+              "century": "19"
+            }
+          ],
+          "file_description": "",
+          "symbolic_directory_path": "/novels/gothic",
+          "pipeline": "list_method_1_parser",
+          "file_id": "a20fe875-ece2-404b-bdbf-20233662d35b",
+          "expire_time": "2024-05-22 20:25:09",
+          "file_name": "frankenstein.txt"
         }
       ]
     }
@@ -535,6 +711,10 @@ To illustrate how to `.list` by timestamp bookends, let's first [`.process`](../
 
 
 ```python
+# get current time
+from datetime import datetime, timezone
+time_now = datetime.now(tz=timezone.utc).strftime(format="%Y-%m-%d %H:%M:%S")
+
 # process an additional file into earlier pipeline
 process_output = pipeline.process(local_file_path="../../../data/input/1984_very_short.txt", # the initial local filepath where the input JSON file is stored
                                   local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
@@ -543,38 +723,8 @@ process_output = pipeline.process(local_file_path="../../../data/input/1984_very
                                   verbose=False,  # do not display process update printouts upon running code
                                   symbolic_directory_path="/novels/dystopian",
                                   file_name="1984.txt",
-                                  file_tags=[{"author": "Orwell"}, {"category": "dystopian"}, {"century": 20}])
+                                  file_tags=[{"author": "Orwell"}, {"category": "dystopian"}, {"century": "20"}])
 ```
-
-    {
-      "status_code": 200,
-      "pipeline": "parser-pipeline-1",
-      "request_id": "d3bca30e-d260-4c62-8aa9-91307b21d8b1",
-      "file_id": "3b941b6f-bd05-4fbb-83fd-6fea80c25629",
-      "message": "SUCCESS - output fetched for file_id 3b941b6f-bd05-4fbb-83fd-6fea80c25629.Output saved to location(s) listed in process_output_files.",
-      "warnings": [],
-      "process_output": [
-        {
-          "snippet": "It was a bright cold day in April, and the clocks were striking thirteen.",
-          "line_numbers": [
-            1
-          ]
-        },
-        {
-          "snippet": "Winston Smith, his chin nuzzled into his breast in an effort to escape the\nvile wind, slipped quickly through the glass doors of Victory Mansions,\nthough not quickly enough to prevent a swirl of gritty dust from entering\nalong with him.",
-          "line_numbers": [
-            2,
-            3,
-            4,
-            5
-          ]
-        }
-      ],
-      "process_output_files": [
-        "./3b941b6f-bd05-4fbb-83fd-6fea80c25629.json"
-      ]
-    }
-
 
 Listing by timestamp bookends is as straightforward as doing it by file system metadata. The following example only uses one type of bookend—`last_updated_start`—but all of them work the same way.
 
@@ -583,7 +733,7 @@ Based on the output from the file we just processed and the output from the four
 
 ```python
 # .list process records by last_updated timestamp bookend
-list_output = pipeline.list(created_at_start=process_output["created_at"])
+list_output = pipeline.list(created_at_start=time_now)
 
 # nicely print the output of this .list
 print(json.dumps(list_output, indent=2))
@@ -591,25 +741,30 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "aacbb5e9-4701-454b-be2d-16d0f812a201",
+      "request_id": "8c565add-b803-44ee-a999-b9b90af780b2",
       "message": "Successfully returned 1 item.  Note: all timestamps in UTC.",
       "warnings": [],
       "items": [
         {
-          "last_updated": "2024-04-26 21:05:21",
-          "process_id": "132561f2-336b-c889-ba9e-500df80fdd38",
-          "created_at": "2024-04-26 21:05:21",
+          "last_updated": "2024-05-22 19:55:52",
+          "process_id": "e077ba7b-8082-644c-f230-cf9e21d71b70",
+          "created_at": "2024-05-22 19:55:52",
           "file_metadata": {
             "modules": {
-              "parser": {
-                "model": "sentence"
+              "module_1": {
+                "parser": {
+                  "model": "sentence"
+                }
               }
             },
             "modules_data": {
-              "parser": {
-                "data_files_extensions": [
-                  ".json"
-                ]
+              "module_1": {
+                "parser": {
+                  "data_files_extensions": [
+                    ".json"
+                  ],
+                  "num_lines": 2
+                }
               }
             },
             "pipeline_ordered_modules": [
@@ -619,13 +774,23 @@ print(json.dumps(list_output, indent=2))
               "snippet"
             ]
           },
-          "file_tags": [],
+          "file_tags": [
+            {
+              "author": "orwell"
+            },
+            {
+              "category": "dystopian"
+            },
+            {
+              "century": "20"
+            }
+          ],
           "file_description": "",
-          "symbolic_directory_path": "/etc",
-          "pipeline": "parser-pipeline-1",
-          "file_id": "3b941b6f-bd05-4fbb-83fd-6fea80c25629",
-          "expire_time": "2024-04-26 21:10:21",
-          "file_name": "krixik_generated_file_name_zqdsvltyrw.txt"
+          "symbolic_directory_path": "/novels/dystopian",
+          "pipeline": "list_method_1_parser",
+          "file_id": "5519129c-f249-465f-aadf-85703a93706a",
+          "expire_time": "2024-05-22 20:25:52",
+          "file_name": "1984.txt"
         }
       ]
     }
@@ -666,20 +831,52 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "341c4e07-62a6-47f0-904b-7ff2ee3bbaef",
-      "message": "No files were found for the given query arguments",
-      "warnings": [
+      "request_id": "58be80de-34c0-4b3d-b6f9-42cb5c8465bd",
+      "message": "Successfully returned 1 item.  Note: all timestamps in UTC.",
+      "warnings": [],
+      "items": [
         {
-          "WARNING: the following arguments returned zero results": [
-            {
-              "file_names": [
-                "some*"
-              ]
+          "last_updated": "2024-05-22 19:55:25",
+          "process_id": "4002c9a8-dea8-f493-3f50-2066754f6839",
+          "created_at": "2024-05-22 19:55:25",
+          "file_metadata": {
+            "modules": {
+              "module_1": {
+                "parser": {
+                  "model": "sentence"
+                }
+              }
+            },
+            "modules_data": {
+              "module_1": {
+                "parser": {
+                  "data_files_extensions": [
+                    ".json"
+                  ],
+                  "num_lines": 9
+                }
+              }
             }
-          ]
+          },
+          "file_tags": [
+            {
+              "author": "austen"
+            },
+            {
+              "category": "romance"
+            },
+            {
+              "century": "19"
+            }
+          ],
+          "file_description": "",
+          "symbolic_directory_path": "/novels/romance",
+          "pipeline": "list_method_1_parser",
+          "file_id": "a64542db-fafb-4572-9624-5781c3f3d564",
+          "expire_time": "2024-05-22 20:25:25",
+          "file_name": "pride and prejudice.txt"
         }
-      ],
-      "items": []
+      ]
     }
 
 
@@ -698,7 +895,7 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "b6d53064-2748-4c3a-ac7a-e0325cf8c58f",
+      "request_id": "3904c620-1148-4fb8-8d0c-132b6b89e1bc",
       "message": "No files were found for the given query arguments",
       "warnings": [
         {
@@ -730,20 +927,175 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "de17823f-5601-4143-b2ae-c546c173cdc7",
-      "message": "No files were found for the given query arguments",
-      "warnings": [
+      "request_id": "4370e8f6-0313-4118-87cb-7c97b73c8515",
+      "message": "Successfully returned 4 items.  Note: all timestamps in UTC.",
+      "warnings": [],
+      "items": [
         {
-          "WARNING: the following arguments returned zero results": [
-            {
-              "file_tags_keys": [
-                "author"
-              ]
+          "last_updated": "2024-05-22 19:55:52",
+          "process_id": "e077ba7b-8082-644c-f230-cf9e21d71b70",
+          "created_at": "2024-05-22 19:55:52",
+          "file_metadata": {
+            "modules": {
+              "module_1": {
+                "parser": {
+                  "model": "sentence"
+                }
+              }
+            },
+            "modules_data": {
+              "module_1": {
+                "parser": {
+                  "data_files_extensions": [
+                    ".json"
+                  ],
+                  "num_lines": 2
+                }
+              }
             }
-          ]
+          },
+          "file_tags": [
+            {
+              "author": "orwell"
+            },
+            {
+              "category": "dystopian"
+            },
+            {
+              "century": "20"
+            }
+          ],
+          "file_description": "",
+          "symbolic_directory_path": "/novels/dystopian",
+          "pipeline": "list_method_1_parser",
+          "file_id": "5519129c-f249-465f-aadf-85703a93706a",
+          "expire_time": "2024-05-22 20:25:52",
+          "file_name": "1984.txt"
+        },
+        {
+          "last_updated": "2024-05-22 19:55:37",
+          "process_id": "cb6bdac5-696e-b33d-40fc-1f44818c27d3",
+          "created_at": "2024-05-22 19:55:37",
+          "file_metadata": {
+            "modules": {
+              "module_1": {
+                "parser": {
+                  "model": "sentence"
+                }
+              }
+            },
+            "modules_data": {
+              "module_1": {
+                "parser": {
+                  "data_files_extensions": [
+                    ".json"
+                  ],
+                  "num_lines": 12
+                }
+              }
+            }
+          },
+          "file_tags": [
+            {
+              "author": "melville"
+            },
+            {
+              "category": "adventure"
+            },
+            {
+              "century": "19"
+            }
+          ],
+          "file_description": "",
+          "symbolic_directory_path": "/novels/adventure",
+          "pipeline": "list_method_1_parser",
+          "file_id": "7c152c41-059f-4f6d-8097-90b1a42d2116",
+          "expire_time": "2024-05-22 20:25:36",
+          "file_name": "moby dick.txt"
+        },
+        {
+          "last_updated": "2024-05-22 19:55:25",
+          "process_id": "4002c9a8-dea8-f493-3f50-2066754f6839",
+          "created_at": "2024-05-22 19:55:25",
+          "file_metadata": {
+            "modules": {
+              "module_1": {
+                "parser": {
+                  "model": "sentence"
+                }
+              }
+            },
+            "modules_data": {
+              "module_1": {
+                "parser": {
+                  "data_files_extensions": [
+                    ".json"
+                  ],
+                  "num_lines": 9
+                }
+              }
+            }
+          },
+          "file_tags": [
+            {
+              "author": "austen"
+            },
+            {
+              "category": "romance"
+            },
+            {
+              "century": "19"
+            }
+          ],
+          "file_description": "",
+          "symbolic_directory_path": "/novels/romance",
+          "pipeline": "list_method_1_parser",
+          "file_id": "a64542db-fafb-4572-9624-5781c3f3d564",
+          "expire_time": "2024-05-22 20:25:25",
+          "file_name": "pride and prejudice.txt"
+        },
+        {
+          "last_updated": "2024-05-22 19:55:11",
+          "process_id": "7202fbf4-0c91-6149-91ab-4748eda42cb0",
+          "created_at": "2024-05-22 19:55:11",
+          "file_metadata": {
+            "modules": {
+              "module_1": {
+                "parser": {
+                  "model": "sentence"
+                }
+              }
+            },
+            "modules_data": {
+              "module_1": {
+                "parser": {
+                  "data_files_extensions": [
+                    ".json"
+                  ],
+                  "num_lines": 26
+                }
+              }
+            }
+          },
+          "file_tags": [
+            {
+              "author": "shelley"
+            },
+            {
+              "category": "gothic"
+            },
+            {
+              "century": "19"
+            }
+          ],
+          "file_description": "",
+          "symbolic_directory_path": "/novels/gothic",
+          "pipeline": "list_method_1_parser",
+          "file_id": "a20fe875-ece2-404b-bdbf-20233662d35b",
+          "expire_time": "2024-05-22 20:25:09",
+          "file_name": "frankenstein.txt"
         }
-      ],
-      "items": []
+      ]
     }
 
 
@@ -770,9 +1122,13 @@ As an example, let's combine a timestamp bookend, a `symbolic_file_path`, and `f
 
 
 ```python
+# get current time
+from datetime import datetime, timezone
+time_now = datetime.now(tz=timezone.utc).strftime(format="%Y-%m-%d %H:%M:%S")
+
 # list process records using a combination of input args
-list_output = pipeline.list(created_at_end=process_output["created_at"],
-                            symbolic_file_path="/novels/gothic/Pride and Prejudice.txt",
+list_output = pipeline.list(created_at_end=time_now,
+                            symbolic_file_paths=["/novels/gothic/Pride and Prejudice.txt"],
                             file_tags=[({"author":"Orwell"})])
 
 # nicely print the output of this .list
@@ -781,25 +1137,62 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "091a2b5e-4d2f-44cd-9fcf-65a0c80546b7",
-      "message": "No files were found for the given query arguments",
+      "request_id": "a3ba1763-0bd6-43d2-b359-791a5aa6260d",
+      "message": "Successfully returned 1 item.  Note: all timestamps in UTC.",
       "warnings": [
         {
           "WARNING: the following arguments returned zero results": [
             {
-              "symbolic_directory_paths": [
-                "/my/*"
-              ]
-            },
-            {
-              "file_names": [
-                "some*"
+              "symbolic_file_paths": [
+                "/novels/gothic/pride and prejudice.txt"
               ]
             }
           ]
         }
       ],
-      "items": []
+      "items": [
+        {
+          "last_updated": "2024-05-22 19:55:52",
+          "process_id": "e077ba7b-8082-644c-f230-cf9e21d71b70",
+          "created_at": "2024-05-22 19:55:52",
+          "file_metadata": {
+            "modules": {
+              "module_1": {
+                "parser": {
+                  "model": "sentence"
+                }
+              }
+            },
+            "modules_data": {
+              "module_1": {
+                "parser": {
+                  "data_files_extensions": [
+                    ".json"
+                  ],
+                  "num_lines": 2
+                }
+              }
+            }
+          },
+          "file_tags": [
+            {
+              "author": "orwell"
+            },
+            {
+              "category": "dystopian"
+            },
+            {
+              "century": "20"
+            }
+          ],
+          "file_description": "",
+          "symbolic_directory_path": "/novels/dystopian",
+          "pipeline": "list_method_1_parser",
+          "file_id": "5519129c-f249-465f-aadf-85703a93706a",
+          "expire_time": "2024-05-22 20:25:52",
+          "file_name": "1984.txt"
+        }
+      ]
     }
 
 
@@ -808,9 +1201,3 @@ Although <u>Pride and Prejudice</u> and <u>Little Women</u> are respectively cov
 ### Output Size Cap
 
 The current size limit on output generated by the `.list` method is 5MB.
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

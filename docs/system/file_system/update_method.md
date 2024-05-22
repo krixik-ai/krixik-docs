@@ -8,32 +8,6 @@ This overview of the `.update` method is divided into the following sections:
 - [.update Method Example](#.update-method-example)
 - [Observations on the .update Method](#observations-on-the-.update-method)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### `.update` Method Arguments
 
 The `.update` method takes one required argument and at least one of several optional arguments:
@@ -66,6 +40,7 @@ pipeline = krixik.create_pipeline(name="update_method_1_parser",
 
 # process short input file
 process_output = pipeline.process(local_file_path="../../../data/input/frankenstein_very_short.txt", # the initial local filepath where the input JSON file is stored
+                                  local_save_directory="../../../data/output",  # save output repo data output subdir
                                   expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
                                   wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
                                   verbose=False,  # do not display process update printouts upon running code
@@ -74,30 +49,27 @@ process_output = pipeline.process(local_file_path="../../../data/input/frankenst
                                   file_tags=[{"author": "Shelley"}, {"category": "gothic"}, {"century": "19"}])
 ```
 
-    INFO: output json downloaded but larger than 0.5MB and will not be returned with .process output
-
-
 Let's see what the file's record looks like with the [`.list`](list_method.md) method:
 
 
 ```python
 # see the file's record with .list
-list_output_1 = pipeline.list(symbolic_directory_paths=['/novels/gothic'])
+list_output = pipeline.list(symbolic_directory_paths=['/novels/gothic'])
 
 # nicely print the output of this .list
-print(json.dumps(list_output_1, indent=2))
+print(json.dumps(list_output, indent=2))
 ```
 
     {
       "status_code": 200,
-      "request_id": "abaa977d-e56b-41b9-9c49-f2809f987a2d",
+      "request_id": "06c31cbc-9c03-49a9-b630-fdba823a3867",
       "message": "Successfully returned 1 item.  Note: all timestamps in UTC.",
       "warnings": [],
       "items": [
         {
-          "last_updated": "2024-05-20 17:49:30",
-          "process_id": "b107e0e0-74da-a983-d1d2-56cd9bbe33d7",
-          "created_at": "2024-05-20 17:49:30",
+          "last_updated": "2024-05-22 19:57:07",
+          "process_id": "7113973d-51d3-c256-19b7-26eaf2df21bd",
+          "created_at": "2024-05-22 19:57:07",
           "file_metadata": {
             "modules": {
               "module_1": {
@@ -112,7 +84,7 @@ print(json.dumps(list_output_1, indent=2))
                   "data_files_extensions": [
                     ".json"
                   ],
-                  "num_lines": 3199
+                  "num_lines": 26
                 }
               }
             }
@@ -131,8 +103,8 @@ print(json.dumps(list_output_1, indent=2))
           "file_description": "",
           "symbolic_directory_path": "/novels/gothic",
           "pipeline": "update_method_1_parser",
-          "file_id": "463a697d-a8b5-4674-ace8-79fe53b862a1",
-          "expire_time": "2024-05-20 18:19:30",
+          "file_id": "6a829e0e-e0e3-4f77-b1b3-f58a90bc2e4c",
+          "expire_time": "2024-05-22 20:27:06",
           "file_name": "the franken stein.txt"
         }
       ]
@@ -161,13 +133,233 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "update_method_1_parser",
-      "request_id": "090cb419-2e92-4dff-b82f-d14d562f45d5",
-      "file_id": "463a697d-a8b5-4674-ace8-79fe53b862a1",
-      "message": "SUCCESS - output fetched for file_id 463a697d-a8b5-4674-ace8-79fe53b862a1.Output saved to location(s) listed in process_output_files.",
+      "request_id": "b9c646fc-b623-4801-a48f-6431b6eb3c15",
+      "file_id": "6a829e0e-e0e3-4f77-b1b3-f58a90bc2e4c",
+      "message": "SUCCESS - output fetched for file_id 6a829e0e-e0e3-4f77-b1b3-f58a90bc2e4c.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
-      "process_output": null,
+      "process_output": [
+        {
+          "snippet": "\ufeffLetter 1\n\n_To Mrs. Saville, England._\n\n\nSt. Petersburgh, Dec. 11th, 17\u2014.",
+          "line_numbers": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        {
+          "snippet": "You will rejoice to hear that no disaster has accompanied the\ncommencement of an enterprise which you have regarded with such evil\nforebodings.",
+          "line_numbers": [
+            7,
+            8,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "snippet": "I arrived here yesterday, and my first task is to assure\nmy dear sister of my welfare and increasing confidence in the success\nof my undertaking.",
+          "line_numbers": [
+            11,
+            12,
+            13
+          ]
+        },
+        {
+          "snippet": "I am already far north of London, and as I walk in the streets of\nPetersburgh, I feel a cold northern breeze play upon my cheeks, which\nbraces my nerves and fills me with delight.",
+          "line_numbers": [
+            14,
+            15,
+            16,
+            17
+          ]
+        },
+        {
+          "snippet": "Do you understand this\nfeeling?",
+          "line_numbers": [
+            17,
+            18
+          ]
+        },
+        {
+          "snippet": "This breeze, which has travelled from the regions towards\nwhich I am advancing, gives me a foretaste of those icy climes.",
+          "line_numbers": [
+            18,
+            19
+          ]
+        },
+        {
+          "snippet": "Inspirited by this wind of promise, my daydreams become more fervent\nand vivid.",
+          "line_numbers": [
+            20,
+            21
+          ]
+        },
+        {
+          "snippet": "I try in vain to be persuaded that the pole is the seat of\nfrost and desolation; it ever presents itself to my imagination as the\nregion of beauty and delight.",
+          "line_numbers": [
+            21,
+            22,
+            23
+          ]
+        },
+        {
+          "snippet": "There, Margaret, the sun is for ever\nvisible, its broad disk just skirting the horizon and diffusing a\nperpetual splendour.",
+          "line_numbers": [
+            23,
+            24,
+            25
+          ]
+        },
+        {
+          "snippet": "There\u2014for with your leave, my sister, I will put\nsome trust in preceding navigators\u2014there snow and frost are banished;\nand, sailing over a calm sea, we may be wafted to a land surpassing in\nwonders and in beauty every region hitherto discovered on the habitable\nglobe.",
+          "line_numbers": [
+            25,
+            26,
+            27,
+            28,
+            29
+          ]
+        },
+        {
+          "snippet": "Its productions and features may be without example, as the\nphenomena of the heavenly bodies undoubtedly are in those undiscovered\nsolitudes.",
+          "line_numbers": [
+            29,
+            30,
+            31
+          ]
+        },
+        {
+          "snippet": "What may not be expected in a country of eternal light?",
+          "line_numbers": [
+            31
+          ]
+        },
+        {
+          "snippet": "I\nmay there discover the wondrous power which attracts the needle and may\nregulate a thousand celestial observations that require only this\nvoyage to render their seeming eccentricities consistent for ever.",
+          "line_numbers": [
+            31,
+            32,
+            33,
+            34
+          ]
+        },
+        {
+          "snippet": "I\nshall satiate my ardent curiosity with the sight of a part of the world\nnever before visited, and may tread a land never before imprinted by\nthe foot of man.",
+          "line_numbers": [
+            34,
+            35,
+            36,
+            37
+          ]
+        },
+        {
+          "snippet": "These are my enticements, and they are sufficient to\nconquer all fear of danger or death and to induce me to commence this\nlaborious voyage with the joy a child feels when he embarks in a little\nboat, with his holiday mates, on an expedition of discovery up his\nnative river.",
+          "line_numbers": [
+            37,
+            38,
+            39,
+            40,
+            41
+          ]
+        },
+        {
+          "snippet": "But supposing all these conjectures to be false, you\ncannot contest the inestimable benefit which I shall confer on all\nmankind, to the last generation, by discovering a passage near the pole\nto those countries, to reach which at present so many months are\nrequisite; or by ascertaining the secret of the magnet, which, if at\nall possible, can only be effected by an undertaking such as mine.",
+          "line_numbers": [
+            41,
+            42,
+            43,
+            44,
+            45,
+            46
+          ]
+        },
+        {
+          "snippet": "These reflections have dispelled the agitation with which I began my\nletter, and I feel my heart glow with an enthusiasm which elevates me\nto heaven, for nothing contributes so much to tranquillise the mind as\na steady purpose\u2014a point on which the soul may fix its intellectual\neye.",
+          "line_numbers": [
+            47,
+            48,
+            49,
+            50,
+            51,
+            52
+          ]
+        },
+        {
+          "snippet": "This expedition has been the favourite dream of my early years.",
+          "line_numbers": [
+            52
+          ]
+        },
+        {
+          "snippet": "I\nhave read with ardour the accounts of the various voyages which have\nbeen made in the prospect of arriving at the North Pacific Ocean\nthrough the seas which surround the pole.",
+          "line_numbers": [
+            52,
+            53,
+            54,
+            55
+          ]
+        },
+        {
+          "snippet": "You may remember that a\nhistory of all the voyages made for purposes of discovery composed the\nwhole of our good Uncle Thomas\u2019 library.",
+          "line_numbers": [
+            55,
+            56,
+            57
+          ]
+        },
+        {
+          "snippet": "My education was neglected,\nyet I was passionately fond of reading.",
+          "line_numbers": [
+            57,
+            58
+          ]
+        },
+        {
+          "snippet": "These volumes were my study\nday and night, and my familiarity with them increased that regret which\nI had felt, as a child, on learning that my father\u2019s dying injunction\nhad forbidden my uncle to allow me to embark in a seafaring life.",
+          "line_numbers": [
+            58,
+            59,
+            60,
+            61
+          ]
+        },
+        {
+          "snippet": "These visions faded when I perused, for the first time, those poets\nwhose effusions entranced my soul and lifted it to heaven.",
+          "line_numbers": [
+            62,
+            63,
+            64
+          ]
+        },
+        {
+          "snippet": "I also\nbecame a poet and for one year lived in a paradise of my own creation;\nI imagined that I also might obtain a niche in the temple where the\nnames of Homer and Shakespeare are consecrated.",
+          "line_numbers": [
+            64,
+            65,
+            66,
+            67
+          ]
+        },
+        {
+          "snippet": "You are well\nacquainted with my failure and how heavily I bore the disappointment.",
+          "line_numbers": [
+            67,
+            68
+          ]
+        },
+        {
+          "snippet": "But just at that time I inherited the fortune of my cousin, and my\nthoughts were turned into the channel of their earlier bent.",
+          "line_numbers": [
+            69,
+            70
+          ]
+        }
+      ],
       "process_output_files": [
-        "c:\\Users\\Lucas\\Desktop\\krixikdocsnoodle\\docs\\system\\file_system/463a697d-a8b5-4674-ace8-79fe53b862a1.json"
+        "/Users/jeremywatt/Desktop/krixik/code/krixik-docs/docs/system/file_system/6a829e0e-e0e3-4f77-b1b3-f58a90bc2e4c.json"
       ]
     }
 
@@ -185,14 +377,14 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "8bbcc518-4204-439e-9173-7f659f1b96e5",
+      "request_id": "e2a88987-5d4d-4193-9d47-1c0eb546d587",
       "message": "Successfully returned 1 item.  Note: all timestamps in UTC.",
       "warnings": [],
       "items": [
         {
-          "last_updated": "2024-05-20 17:51:00",
-          "process_id": "b107e0e0-74da-a983-d1d2-56cd9bbe33d7",
-          "created_at": "2024-05-20 17:49:30",
+          "last_updated": "2024-05-22 19:57:20",
+          "process_id": "7113973d-51d3-c256-19b7-26eaf2df21bd",
+          "created_at": "2024-05-22 19:57:07",
           "file_metadata": {
             "modules": {
               "module_1": {
@@ -207,7 +399,7 @@ print(json.dumps(list_output, indent=2))
                   "data_files_extensions": [
                     ".json"
                   ],
-                  "num_lines": 3199
+                  "num_lines": 26
                 }
               }
             }
@@ -226,8 +418,8 @@ print(json.dumps(list_output, indent=2))
           "file_description": "Is the villain the monster or the doctor?",
           "symbolic_directory_path": "/novels/gothic",
           "pipeline": "update_method_1_parser",
-          "file_id": "463a697d-a8b5-4674-ace8-79fe53b862a1",
-          "expire_time": "2024-05-20 18:19:30",
+          "file_id": "6a829e0e-e0e3-4f77-b1b3-f58a90bc2e4c",
+          "expire_time": "2024-05-22 20:27:06",
           "file_name": "frankenstein.txt"
         }
       ]
@@ -245,9 +437,3 @@ Four closing observation on the `.update` method:
 - You can also not update a file's file extension. For instance, a `.txt` file cannot become a `.pdf` file through the `.update` method.
 
 - The `.update` method allows you to extend a file's [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-.process-method-arguments) indefinitely. Upon initially uploading a file, its [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-.process-method-arguments) cannot be greater than 2,592,000 seconds (30 days). However, if you periodically invoke `.update` on its file and reset its [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-.process-method-arguments) to another 2,592,000 seconds (or however many seconds you please), the file will remain on-system for that much more time as of that moment, and so forth.
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

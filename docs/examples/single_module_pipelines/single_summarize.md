@@ -1,6 +1,6 @@
 ## Single-Module Pipeline: `summarize`
 
-This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`summarize`](../../modules/ai_model_modules/summarize_module.md) module. It's divided into the following sections:
+This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`summarize`](../../modules/ai_modules/summarize_module.md) module. It's divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)
@@ -8,37 +8,11 @@ This document is a walkthrough of how to assemble and use a single-module pipeli
 - [Using a Non-Default Model](#using-a-non-default-model)
 - [Recursive Summarization](#recursive-summarization)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### Pipeline Setup
 
-Let's first instantiate a single-module [`summarize`](../../modules/ai_model_modules/summarize_module.md) pipeline.
+Let's first instantiate a single-module [`summarize`](../../modules/ai_modules/summarize_module.md) pipeline.
 
-We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`summarize`](../../modules/ai_model_modules/summarize_module.md) module name into `module_chain`.
+We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`summarize`](../../modules/ai_modules/summarize_module.md) module name into `module_chain`.
 
 
 ```python
@@ -49,7 +23,7 @@ pipeline = krixik.create_pipeline(name="single_summarize_1",
 
 ### Required Input Format
 
-The [`summarize`](../../modules/ai_model_modules/summarize_module.md) module accepts document inputs. Acceptable file formats are TXT, PDF, DOCX, and PPTX, although the last three formats are automatically converted to TXT before processing.
+The [`summarize`](../../modules/ai_modules/summarize_module.md) module accepts document inputs. Acceptable file formats are TXT, PDF, DOCX, and PPTX, although the last three formats are automatically converted to TXT before processing.
 
 Let's take a quick look at a valid input file, and then process it:
 
@@ -154,7 +128,7 @@ with open("../../../data/input/1984_short.txt", "r") as file:
 
 ### Using the Default Model
 
-Let's process our test input file using the [`summarize`](../../modules/ai_model_modules/summarize_module.md) module's [default model](../../modules/ai_model_modules/summarize_module.md#available-models-in-the-summarize-module): [`bart-large-cnn`](https://huggingface.co/facebook/bart-large-cnn).
+Let's process our test input file using the [`summarize`](../../modules/ai_modules/summarize_module.md) module's [default model](../../modules/ai_modules/summarize_module.md#available-models-in-the-summarize-module): [`bart-large-cnn`](https://huggingface.co/facebook/bart-large-cnn).
 
 Given that this is the default model, we need not specify model selection through the optional [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
@@ -181,13 +155,13 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "single_summarize_1",
-      "request_id": "da4802ec-297f-4541-aa19-f6eaf883497f",
-      "file_id": "069d2bbe-3ed2-472c-bf5f-d6e5e13367c5",
-      "message": "SUCCESS - output fetched for file_id 069d2bbe-3ed2-472c-bf5f-d6e5e13367c5.Output saved to location(s) listed in process_output_files.",
+      "request_id": "149222f3-5ebc-49ca-b27c-bce17b4e635b",
+      "file_id": "c3112d43-b0c1-4d81-a98b-c83b5dd69100",
+      "message": "SUCCESS - output fetched for file_id c3112d43-b0c1-4d81-a98b-c83b5dd69100.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../../data/output/069d2bbe-3ed2-472c-bf5f-d6e5e13367c5.txt"
+        "../../../data/output/c3112d43-b0c1-4d81-a98b-c83b5dd69100.txt"
       ]
     }
 
@@ -228,7 +202,7 @@ with open(process_output["process_output_files"][0], "r") as file:
 
 ### Using a Non-Default Model
 
-To use a [non-default model](../../modules/ai_model_modules/summarize_module.md#available-models-in-the-summarize-module) like [`text-summarization`](https://huggingface.co/Falconsai/text_summarization), we must enter it explicitly through the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+To use a [non-default model](../../modules/ai_modules/summarize_module.md#available-models-in-the-summarize-module) like [`text-summarization`](https://huggingface.co/Falconsai/text_summarization), we must enter it explicitly through the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 
 ```python
@@ -285,9 +259,9 @@ with open(process_output_nd["process_output_files"][0], "r") as file:
 
 If the result of summarizing once is not concise enough for your needs, there's a neat trick you can leverage.
 
-One of the most practical ways to achieve a shorter (perhaps more abstract, but still representative) summary is to apply summarization *recursively*. In other words, you feed the new summary through a [`summarize`](../../modules/ai_model_modules/summarize_module.md) module again, thus producing a briefer summary. Let's do it manually.
+One of the most practical ways to achieve a shorter (perhaps more abstract, but still representative) summary is to apply summarization *recursively*. In other words, you feed the new summary through a [`summarize`](../../modules/ai_modules/summarize_module.md) module again, thus producing a briefer summary. Let's do it manually.
 
-To feed the <u>first</u> summarization generated above back into the [`summarize`](../../modules/ai_model_modules/summarize_module.md) module, we essentially repeat what we did above, but with a slight difference: the file we feed in is the summary output of that first summarization.
+To feed the <u>first</u> summarization generated above back into the [`summarize`](../../modules/ai_modules/summarize_module.md) module, we essentially repeat what we did above, but with a slight difference: the file we feed in is the summary output of that first summarization.
 
 
 ```python
@@ -359,12 +333,6 @@ with open(process_output["process_output_files"][0], "r") as file:
 
 As you can see, this is very terse but representative summary of our original text.
 
-You can reproduce this result (of recursively summarizing a document thrice) by building a new pipeline that contains three [`summarize`](../../modules/ai_model_modules/summarize_module.md) modules in succession.
+You can reproduce this result (of recursively summarizing a document thrice) by building a new pipeline that contains three [`summarize`](../../modules/ai_modules/summarize_module.md) modules in succession.
 
 We explore just such an example in our recursive summarization pipeline [example](../../examples/multi_module_non_search_pipeline_examples/multi_recursive_summarization.md).
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

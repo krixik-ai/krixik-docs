@@ -1,51 +1,25 @@
 ## Multi-Module Pipeline: Sentiment Analysis on Transcription
 
-This document details a modular pipeline that takes in an audio file in English, [`transcribes`](../../modules/ai_model_modules/transcribe_module.md) it, and then performs [`sentiment analysis`](../../modules/ai_model_modules/sentiment_module.md) on each sentence of the transcript.
+This document details a modular pipeline that takes in an audio file in English, [`transcribes`](../../modules/ai_modules/transcribe_module.md) it, and then performs [`sentiment analysis`](../../modules/ai_modules/sentiment_module.md) on each sentence of the transcript.
 
 The document is divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Processing an Input File](#processing-an-input-file)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### Pipeline Setup
 
 To achieve what we've described above, let's set up a pipeline sequentially consisting of the following modules:
 
-- A [`transcribe`](../../modules/ai_model_modules/transcribe_module.md) module.
+- A [`transcribe`](../../modules/ai_modules/transcribe_module.md) module.
 
 - A [`json-to-txt`](../../modules/support_function_modules/json-to-txt_module.md) module.
 
 - A [`parser`](../../modules/support_function_modules/parser_module.md) module.
 
-- A [`sentiment`](../../modules/ai_model_modules/sentiment_module.md) module.
+- A [`sentiment`](../../modules/ai_modules/sentiment_module.md) module.
 
-We use the [`json-to-txt`](../../modules/support_function_modules/json-to-txt_module.md) and [`parser`](../../modules/support_function_modules/parser_module.md) combination, which combines the transcribed snippets into one document and then splices it again, to make sure that any pauses in speech don't make for partial snippets that can confuse the [`sentiment`](../../modules/ai_model_modules/sentiment_module.md) model.
+We use the [`json-to-txt`](../../modules/support_function_modules/json-to-txt_module.md) and [`parser`](../../modules/support_function_modules/parser_module.md) combination, which combines the transcribed snippets into one document and then splices it again, to make sure that any pauses in speech don't make for partial snippets that can confuse the [`sentiment`](../../modules/ai_modules/sentiment_module.md) model.
 
 Pipeline setup is accomplished through the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
 
@@ -107,9 +81,9 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "multi_sentiment_analysis_on_transcription",
-      "request_id": "e2c8c4ca-673b-41b7-bd35-7d9b27fcc702",
-      "file_id": "cd4ce32a-ab10-4bbd-8ae8-fa839dde0596",
-      "message": "SUCCESS - output fetched for file_id cd4ce32a-ab10-4bbd-8ae8-fa839dde0596.Output saved to location(s) listed in process_output_files.",
+      "request_id": "54a8f094-ef67-403c-8fbb-5497bd72480a",
+      "file_id": "39b7b21d-d65d-474e-8ddc-14f6dff9b060",
+      "message": "SUCCESS - output fetched for file_id 39b7b21d-d65d-474e-8ddc-14f6dff9b060.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -192,7 +166,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/cd4ce32a-ab10-4bbd-8ae8-fa839dde0596.json"
+        "../../../data/output/39b7b21d-d65d-474e-8ddc-14f6dff9b060.json"
       ]
     }
 
@@ -287,9 +261,3 @@ with open(process_output["process_output_files"][0]) as f:
       }
     ]
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

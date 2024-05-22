@@ -7,32 +7,6 @@ This overview of the `.delete` method is divided into the following sections:
 - [`.delete` Method Arguments](#.delete-method-arguments)
 - [`.delete` Method Example](#.delete-method-example)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### `.delete` Method Arguments
 
 The `.delete` method takes a single (required) argument:
@@ -60,10 +34,6 @@ process_output = pipeline.process(local_file_path="../../../data/input/1984_very
                                   file_tags=[{"author": "Orwell"}, {"category": "dystopian"}, {"century": "20"}])
 ```
 
-    INFO: output json downloaded but larger than 0.5MB and will not be returned with .process output
-    INFO: output json downloaded but larger than 0.5MB and will not be returned with .process output
-
-
 Let's see what the files' records look like with the [`.list`](list_method.md) method:
 
 
@@ -77,14 +47,14 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "1496a1a2-1bd6-4ae0-a54d-743fcefc846d",
-      "message": "Successfully returned 2 items.  Note: all timestamps in UTC.",
+      "request_id": "258e552d-1cee-4eed-915d-79687f58673c",
+      "message": "Successfully returned 1 item.  Note: all timestamps in UTC.",
       "warnings": [],
       "items": [
         {
-          "last_updated": "2024-05-20 02:56:41",
-          "process_id": "602f1b2a-2267-0af0-e278-3d5ae10e571d",
-          "created_at": "2024-05-20 02:56:41",
+          "last_updated": "2024-05-22 19:40:11",
+          "process_id": "b277c633-06c1-c66b-f450-22387f503375",
+          "created_at": "2024-05-22 19:40:11",
           "file_metadata": {
             "modules": {
               "module_1": {
@@ -99,69 +69,28 @@ print(json.dumps(list_output, indent=2))
                   "data_files_extensions": [
                     ".json"
                   ],
-                  "num_lines": 9184
+                  "num_lines": 2
                 }
               }
             }
           },
           "file_tags": [
             {
-              "author": "melville"
+              "author": "orwell"
             },
             {
-              "category": "adventure"
+              "category": "dystopian"
             },
             {
-              "century": "19"
+              "century": "20"
             }
           ],
           "file_description": "",
-          "symbolic_directory_path": "/novels/19th-century",
+          "symbolic_directory_path": "/novels/20th-century",
           "pipeline": "delete_method_1_parser",
-          "file_id": "adf1d212-eb1c-460c-b526-4eeb09450962",
-          "expire_time": "2024-05-20 03:26:40",
-          "file_name": "moby dick.txt"
-        },
-        {
-          "last_updated": "2024-05-20 02:56:26",
-          "process_id": "aa4a086a-0839-63d9-dc9b-75e4f30fe911",
-          "created_at": "2024-05-20 02:56:26",
-          "file_metadata": {
-            "modules": {
-              "module_1": {
-                "parser": {
-                  "model": "sentence"
-                }
-              }
-            },
-            "modules_data": {
-              "module_1": {
-                "parser": {
-                  "data_files_extensions": [
-                    ".json"
-                  ],
-                  "num_lines": 3199
-                }
-              }
-            }
-          },
-          "file_tags": [
-            {
-              "author": "shelley"
-            },
-            {
-              "category": "gothic"
-            },
-            {
-              "century": "19"
-            }
-          ],
-          "file_description": "",
-          "symbolic_directory_path": "/novels/19th-century",
-          "pipeline": "delete_method_1_parser",
-          "file_id": "e1c9b5c4-132d-4922-a05e-3eeaeda87e47",
-          "expire_time": "2024-05-20 03:26:25",
-          "file_name": "frankenstein.txt"
+          "file_id": "c0664f56-41f7-41d8-81a3-e4150f0df100",
+          "expire_time": "2024-05-22 20:10:10",
+          "file_name": "1984_sample.txt"
         }
       ]
     }
@@ -183,8 +112,8 @@ print(json.dumps(delete_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "delete_method_1_parser",
-      "request_id": "341c883f-6433-4674-ab22-c0361cf7eb63",
-      "message": "Successfully deleted file_id: e1c9b5c4-132d-4922-a05e-3eeaeda87e47",
+      "request_id": "8c670f7f-91f0-46f8-9c40-b34b9d917662",
+      "message": "Successfully deleted file_id: c0664f56-41f7-41d8-81a3-e4150f0df100",
       "warnings": []
     }
 
@@ -202,59 +131,21 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "3216abaa-5262-450b-920b-7d23624eddcb",
-      "message": "Successfully returned 1 item.  Note: all timestamps in UTC.",
-      "warnings": [],
-      "items": [
+      "request_id": "97c9a982-3df2-44af-9fd8-bf2b79e7f535",
+      "message": "No files were found for the given query arguments",
+      "warnings": [
         {
-          "last_updated": "2024-05-20 02:56:41",
-          "process_id": "602f1b2a-2267-0af0-e278-3d5ae10e571d",
-          "created_at": "2024-05-20 02:56:41",
-          "file_metadata": {
-            "modules": {
-              "module_1": {
-                "parser": {
-                  "model": "sentence"
-                }
-              }
-            },
-            "modules_data": {
-              "module_1": {
-                "parser": {
-                  "data_files_extensions": [
-                    ".json"
-                  ],
-                  "num_lines": 9184
-                }
-              }
+          "WARNING: the following arguments returned zero results": [
+            {
+              "symbolic_directory_paths": [
+                "/novels/20th-century"
+              ]
             }
-          },
-          "file_tags": [
-            {
-              "author": "melville"
-            },
-            {
-              "category": "adventure"
-            },
-            {
-              "century": "19"
-            }
-          ],
-          "file_description": "",
-          "symbolic_directory_path": "/novels/19th-century",
-          "pipeline": "delete_method_1_parser",
-          "file_id": "adf1d212-eb1c-460c-b526-4eeb09450962",
-          "expire_time": "2024-05-20 03:26:40",
-          "file_name": "moby dick.txt"
+          ]
         }
-      ]
+      ],
+      "items": []
     }
 
 
 As expected, only one of the two previously [processed](../parameters_processing_files_through_pipelines/process_method.md) files shows up; the other has been deleted.
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

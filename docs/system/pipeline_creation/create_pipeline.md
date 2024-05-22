@@ -6,32 +6,6 @@ This overview on creating pipelines is divided into the following sections:
 - [A Single-Module Pipeline](#a-single-module-pipeline)
 - [A Multi-Module Pipeline](#a-multi-module-pipeline)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### The `.create_pipeline` Method
 
 The `.create_pipeline` method instantiates new pipelines. It's a very simple method that takes two arguments, both required:
@@ -58,7 +32,7 @@ Note that the `name` argument can be whatever string you want it to be. However,
 
 ### A Multi-Module Pipeline
 
-Now let's set up a pipeline sequentially consisting of three modules: a [`parser module`](../../modules/support_function_modules/parser_module.md), a [`text-embedder module`](../../modules/ai_model_modules/text-embedder_module.md), and a [`vector-db module`](../../modules/database_modules/vector-db_module.md).  This popular `module_chain` arises often: it's the basic document-based semantic (a.k.a. vector) search [pipeline](../../examples/search_pipeline_examples/multi_basic_semantic_search.md).
+Now let's set up a pipeline sequentially consisting of three modules: a [`parser module`](../../modules/support_function_modules/parser_module.md), a [`text-embedder module`](../../modules/ai_modules/text-embedder_module.md), and a [`vector-db module`](../../modules/database_modules/vector-db_module.md).  This popular `module_chain` arises often: it's the basic document-based semantic (a.k.a. vector) search [pipeline](../../examples/search_pipeline_examples/multi_basic_semantic_search.md).
 
 As you can see, pipeline setup syntax is the same as above. The order of the modules in `module_chain` is the the order they'll process pipeline input in:
 
@@ -75,7 +49,7 @@ An array of multi-module pipeline examples can be [found here](../../examples/pi
 
 Upon `.create_pipeline` execution the Krixik CLI confirms that the modules indicated will run properly in the provided sequence. If they cannot—which is generally a consequence of one module's output not matching the next module's input—an explanatory local exception is thrown.
 
-For example, attempting to build a two-module pipeline that sequentially consists of a [`parser module`](../../modules/support_function_modules/parser_module.md) and a [`caption module`](../../modules/ai_model_modules/caption_module.md) modules will rightly fail and produce a local exception.  This is because the [`parser module`](../../modules/support_function_modules/parser_module.md) outputs a JSON file, while the [`caption module`](../../modules/ai_model_modules/caption_module.md) accepts only image input, as the error message below indicates:
+For example, attempting to build a two-module pipeline that sequentially consists of a [`parser module`](../../modules/support_function_modules/parser_module.md) and a [`caption module`](../../modules/ai_modules/caption_module.md) modules will rightly fail and produce a local exception.  This is because the [`parser module`](../../modules/support_function_modules/parser_module.md) outputs a JSON file, while the [`caption module`](../../modules/ai_modules/caption_module.md) accepts only image input, as the error message below indicates:
 
 
 ```python
@@ -133,9 +107,3 @@ pipeline = krixik.create_pipeline(name="create_pipeline_3_parser_caption",
 Krixik will not allow you to create a pipeline with the `name` of a pipeline you have already created. The only exception is if the new pipeline has a module chain identical to the old one.
 
 If you attempt to create a new pipeline with the `name` of a previous pipeline and with a different `module_chain`, initial pipeline instantiation will not fail; in other words, you will be able to run the `.create_pipeline` method without issue. However, when two pipelines with the same name and different `module_chain`s exist and you've already [`processed`](../parameters_processing_files_through_pipelines/process_method.md) one file through one of them, you will **not** be allowed to process a file through the other because of pipeline `name` duplication.
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

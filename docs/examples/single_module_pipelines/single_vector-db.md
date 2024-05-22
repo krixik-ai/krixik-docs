@@ -12,32 +12,6 @@ The document is divided into the following sections:
 - [Using the `.semantic_search` Method](#using-the-.semantic_search-method)
 - [Querying Output Databases Locally](#querying-output-databases-locally)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### Pipeline Setup
 
 Let's first instantiate a single-module [`vector-db`](../../modules/database_modules/vector-db_module.md) pipeline.
@@ -69,7 +43,7 @@ np.load("../../../data/input/vectors.npy")
 
     array([[0, 1],
            [1, 0],
-           [1, 1]], dtype=int64)
+           [1, 1]])
 
 
 
@@ -102,22 +76,22 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "modules-vector-db-docs",
-      "request_id": "6e62cbd1-2b41-4da5-8610-1e717635b31f",
-      "file_id": "d258cee1-7008-40fa-94af-7100ef952d62",
-      "message": "SUCCESS - output fetched for file_id d258cee1-7008-40fa-94af-7100ef952d62.Output saved to location(s) listed in process_output_files.",
+      "request_id": "c310dead-4e2b-4f65-a10f-9485da4d0bb1",
+      "file_id": "1df1ac2b-ec64-44d5-b98d-517786e454a4",
+      "message": "SUCCESS - output fetched for file_id 1df1ac2b-ec64-44d5-b98d-517786e454a4.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../../data/output/d258cee1-7008-40fa-94af-7100ef952d62.faiss"
+        "../../../data/output/1df1ac2b-ec64-44d5-b98d-517786e454a4.faiss"
       ]
     }
 
 
 ### Using the `.semantic_search` method
 
-Any pipeline containing a [`vector-db`](../../modules/database_modules/vector-db_module.md) module preceded by a [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) module has access to the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method. This provides you with the convenient ability to effect semantic queries on the created vector database(s).
+Any pipeline containing a [`vector-db`](../../modules/database_modules/vector-db_module.md) module preceded by a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module has access to the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method. This provides you with the convenient ability to effect semantic queries on the created vector database(s).
 
-As the single-module pipeline created above lacks the [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) module, the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method will not work on it. Review documentation for this [pipeline example](../../examples/search_pipeline_examples/multi_basic_semantic_search.md) or this [pipeline example](../../examples/search_pipeline_examples/multi_snippet_semantic_search.md), both of which meet the requirements for the method: the former ingests TXT files, and the latter JSON files.
+As the single-module pipeline created above lacks the [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module, the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method will not work on it. Review documentation for this [pipeline example](../../examples/search_pipeline_examples/multi_basic_semantic_search.md) or this [pipeline example](../../examples/search_pipeline_examples/multi_snippet_semantic_search.md), both of which meet the requirements for the method: the former ingests TXT files, and the latter JSON files.
 
 ### Querying Output Databases Locally
 
@@ -130,6 +104,7 @@ Note: In order to execute this code you will need to install the `FAISS` library
 
 ```python
 # make sure that you've installed faiss (faiss-cpu or faiss-gpu)
+!pip install faiss-cpu
 import faiss
 import numpy as np
 from typing import Tuple
@@ -144,6 +119,17 @@ def query_vector_db(query_vector: np.ndarray, k: int, db_file_path: str) -> Tupl
     distances = 1 - similarities
     return distances, indices
 ```
+
+    Collecting faiss-cpu
+      Using cached faiss_cpu-1.8.0-cp310-cp310-macosx_11_0_arm64.whl.metadata (3.6 kB)
+    Requirement already satisfied: numpy in /Users/jeremywatt/Desktop/krixik/code/krixik-docs/docs_venv/lib/python3.10/site-packages (from faiss-cpu) (1.26.4)
+    Using cached faiss_cpu-1.8.0-cp310-cp310-macosx_11_0_arm64.whl (3.1 MB)
+    Installing collected packages: faiss-cpu
+    Successfully installed faiss-cpu-1.8.0
+    
+    [1m[[0m[34;49mnotice[0m[1;39;49m][0m[39;49m A new release of pip is available: [0m[31;49m23.3.1[0m[39;49m -> [0m[32;49m24.0[0m
+    [1m[[0m[34;49mnotice[0m[1;39;49m][0m[39;49m To update, run: [0m[32;49mpip install --upgrade pip[0m
+
 
 Now query your database using a small sample array with the function above. The results are printed below:
 
@@ -166,9 +152,3 @@ print(f"distance from query to this vector: {distances[0][1]}")
     second closest vector from original: [1 1]
     distance from query to this vector: 0.2928932309150696
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

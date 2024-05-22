@@ -1,43 +1,17 @@
 ## Single-Module Pipeline: `caption`
 
-This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`caption`](../../modules/ai_model_modules/caption_module.md) module. It's divided into the following sections:
+This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`caption`](../../modules/ai_modules/caption_module.md) module. It's divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)
 - [Using the Default Model](#using-the-default-model)
 - [Using a Non-Default Model](#using-a-non-default-model)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### Pipeline Setup
 
-Let's first instantiate a single-module [`caption`](../../modules/ai_model_modules/caption_module.md) pipeline.
+Let's first instantiate a single-module [`caption`](../../modules/ai_modules/caption_module.md) pipeline.
 
-We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`caption`](../../modules/ai_model_modules/caption_module.md) module name into `module_chain`.
+We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`caption`](../../modules/ai_modules/caption_module.md) module name into `module_chain`.
 
 
 ```python
@@ -48,7 +22,7 @@ pipeline = krixik.create_pipeline(name="single_caption_1",
 
 ### Required Input Format
 
-The [`caption`](../../modules/ai_model_modules/caption_module.md) module accepts `.png`, `.jpg`, and `.jpeg` images as [input](../../modules/ai_model_modules/caption_module.md#inputs-and-outputs-of-the-caption-module).
+The [`caption`](../../modules/ai_modules/caption_module.md) module accepts `.png`, `.jpg`, and `.jpeg` images as [input](../../modules/ai_modules/caption_module.md#inputs-and-outputs-of-the-caption-module).
 
 Let's take a quick look at a valid input file, and then process it.
 
@@ -63,14 +37,14 @@ Image(filename="../../../data/input/restaurant.png")
 
 
     
-![png](single_caption_files/single_caption_6_0.png)
+![png](single_caption_files/single_caption_5_0.png)
     
 
 
 
 ### Using the Default Model
 
-Let's process our test input file using the [`caption`](../../modules/ai_model_modules/caption_module.md) module's [default model](../../modules/ai_model_modules/caption_module.md#available-models-in-the-caption-module): [`vit-gpt2-image-captioning`](https://huggingface.co/nlpconnect/vit-gpt2-image-captioning).
+Let's process our test input file using the [`caption`](../../modules/ai_modules/caption_module.md) module's [default model](../../modules/ai_modules/caption_module.md#available-models-in-the-caption-module): [`vit-gpt2-image-captioning`](https://huggingface.co/nlpconnect/vit-gpt2-image-captioning).
 
 Given that this is the default model, we need not specify model selection through the optional [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
@@ -97,9 +71,9 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "single_caption_1",
-      "request_id": "85fbeaac-6d02-4e1e-9f28-45f334c3a046",
-      "file_id": "92b84400-05d6-43ca-b41d-c0f96943da51",
-      "message": "SUCCESS - output fetched for file_id 92b84400-05d6-43ca-b41d-c0f96943da51.Output saved to location(s) listed in process_output_files.",
+      "request_id": "68dc3d6f-0761-46db-923c-92c5fff12170",
+      "file_id": "843d9ded-89de-4b25-b275-f463cf966fdd",
+      "message": "SUCCESS - output fetched for file_id 843d9ded-89de-4b25-b275-f463cf966fdd.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -107,7 +81,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/92b84400-05d6-43ca-b41d-c0f96943da51.json"
+        "../../../data/output/843d9ded-89de-4b25-b275-f463cf966fdd.json"
       ]
     }
 
@@ -130,7 +104,7 @@ with open(process_output["process_output_files"][0]) as f:
 
 ### Using a Non-Default Model
 
-To use a [non-default model](../../modules/ai_model_modules/caption_module.md#available-models-in-the-caption-module) like [`blip-image-captioning-base`](https://huggingface.co/Salesforce/blip-image-captioning-base), we must enter it explicitly through the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+To use a [non-default model](../../modules/ai_modules/caption_module.md#available-models-in-the-caption-module) like [`blip-image-captioning-base`](https://huggingface.co/Salesforce/blip-image-captioning-base), we must enter it explicitly through the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 
 ```python
@@ -156,9 +130,9 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "single_caption_1",
-      "request_id": "f2a40ff7-4f94-4b22-955c-9f8f1cd5455c",
-      "file_id": "899c0b00-44d0-4e6c-bdb9-9574cdae0967",
-      "message": "SUCCESS - output fetched for file_id 899c0b00-44d0-4e6c-bdb9-9574cdae0967.Output saved to location(s) listed in process_output_files.",
+      "request_id": "2c1ce8fd-77b4-4b83-91f9-0b2794b28272",
+      "file_id": "aeecf5c5-54fd-425c-ab52-5e80dc584cff",
+      "message": "SUCCESS - output fetched for file_id aeecf5c5-54fd-425c-ab52-5e80dc584cff.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -166,13 +140,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/899c0b00-44d0-4e6c-bdb9-9574cdae0967.json"
+        "../../../data/output/aeecf5c5-54fd-425c-ab52-5e80dc584cff.json"
       ]
     }
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

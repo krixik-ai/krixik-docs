@@ -12,32 +12,6 @@ The document is broken down as follows:
 - [View Module Click Data with the `.click_data` Method](#view-module-click-data-with-the-.click_data-method)
 
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### View All Available Modules with the `.available_modules` Property
 
 To view all available modules use the `.available_modules` property.  This can be done locally and without [first initializing](../initialization/initialize_and_authenticate.md), as follows:
@@ -167,7 +141,7 @@ We illustrate this below for both valid and invalid files using the [pipeline we
 
 Note that this test method does **not** execute your pipeline.  Nothing is sent server-side; it simply makes sure that your input file is consumable by the first module of your pipeline. Flow-through across the rest of your pipeline was already confirmed upon [pipeline instantiation](../pipeline_creation/create_pipeline.md).
 
-Let's first test with a file that is valid for this pipeline. Since the first module is a [`transcribe`](../../modules/ai_model_modules/transcribe_module.md) module, an MP3 with clear spoken English in it will do the trick. This can be done locally and without [first initializing](../initialization/initialize_and_authenticate.md), as follows:
+Let's first test with a file that is valid for this pipeline. Since the first module is a [`transcribe`](../../modules/ai_modules/transcribe_module.md) module, an MP3 with clear spoken English in it will do the trick. This can be done locally and without [first initializing](../initialization/initialize_and_authenticate.md), as follows:
 
 
 ```python
@@ -178,7 +152,7 @@ pipeline.test_input(local_file_path="../../../data/input/Interesting Facts About
     SUCCESS: local file '../../../data/input/Interesting Facts About Colombia.mp3' passed pipeline input test passed
 
 
-Now let's test with an input that won't work with this pipeline. The [`transcribe`](../../modules/ai_model_modules/transcribe_module.md) module that the pipeline begins with will **not** accept a TXT file, so the result of this test looks thus:
+Now let's test with an input that won't work with this pipeline. The [`transcribe`](../../modules/ai_modules/transcribe_module.md) module that the pipeline begins with will **not** accept a TXT file, so the result of this test looks thus:
 
 
 ```python
@@ -282,7 +256,7 @@ Here `"other"` denotes any other key in your input.  Its value is arbitrary beca
 
 The `.click_data` method displays all the basic data required to know which modules can be "clicked" into which other modules.  This is the data referenced "under the hood" of Krixik when you build a pipeline with the [`.create_pipeline`](../pipeline_creation/create_pipeline.md) method. Let's go through this piece by piece.
 
-First there's the module's input/output data format. A module like [`transcribe`](../../modules/ai_model_modules/transcribe_module.md) takes in `audio/video` and outputs `JSON`, while the [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) module takes in `JSON` and outputs `NPY`.  
+First there's the module's input/output data format. A module like [`transcribe`](../../modules/ai_modules/transcribe_module.md) takes in `audio/video` and outputs `JSON`, while the [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module takes in `JSON` and outputs `NPY`.  
 
 Checking that the *output* format of a module matches the *input* format of another module is the *first* of two steps in determining if two modules can sequentially be clicked together. If the output format of "Module A"  matches the input format of "Module B", you'll likely be able to connect "Module A" → "Module B" in a pipeline. It's not a sure thing yet, though.
 
@@ -349,9 +323,3 @@ The latter connection, (`vector-search` → `text-embedder`), will instead not w
 - `vector-search` output_format (`faiss`) != `text-embedder` input_format (`json`)
 
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

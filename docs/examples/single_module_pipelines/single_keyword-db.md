@@ -8,32 +8,6 @@ This document is a walkthrough of how to assemble and use a single-module pipeli
 - [Using the `.keyword_search` Method](#using-the-keyword_search-method)
 - [Querying Output Databases Locally](#querying-output-databases-locally)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### Pipeline Setup
 
 Let's first instantiate a single-module [`keyword-db`](../../modules/database_modules/keyword-db_module.md) pipeline.
@@ -94,13 +68,13 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "single_keyword-db_1",
-      "request_id": "fdf6ab57-2036-4256-91ea-5967e8ed292e",
-      "file_id": "c89fe2a2-bb17-4172-8858-dfe536948535",
-      "message": "SUCCESS - output fetched for file_id c89fe2a2-bb17-4172-8858-dfe536948535.Output saved to location(s) listed in process_output_files.",
+      "request_id": "80384c0e-1826-4b69-a02e-181b8f99e900",
+      "file_id": "b57b4003-5ab5-484c-9a8e-e84b87af4308",
+      "message": "SUCCESS - output fetched for file_id b57b4003-5ab5-484c-9a8e-e84b87af4308.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../../data/output/c89fe2a2-bb17-4172-8858-dfe536948535.db"
+        "../../../data/output/b57b4003-5ab5-484c-9a8e-e84b87af4308.db"
       ]
     }
 
@@ -166,9 +140,3 @@ query_db(query, process_output["process_output_files"][0])
     [('cold', 1, 5)]
 
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

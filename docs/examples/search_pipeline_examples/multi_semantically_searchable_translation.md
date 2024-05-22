@@ -1,6 +1,6 @@
 ## Multi-Module Pipeline: Semantically-Searchable Translation
 
-This document details a modular pipeline that takes in text, [`translates`](../../modules/ai_model_modules/translate_module.md) it into a desired language, and makes the result [`semantically searchable`](../../system/search_methods/semantic_search_method.md).
+This document details a modular pipeline that takes in text, [`translates`](../../modules/ai_modules/translate_module.md) it into a desired language, and makes the result [`semantically searchable`](../../system/search_methods/semantic_search_method.md).
 
 The document is divided into the following sections:
 
@@ -8,41 +8,15 @@ The document is divided into the following sections:
 - [Processing an Input File](#processing-an-input-file)
 - [Performing Semantic Search](#performing-semantic-search)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### Pipeline Setup
 
 To achieve what we've described above, let's set up a pipeline sequentially consisting of the following modules:
 
 - A [`parser`](../../modules/support_function_modules/parser_module.md) module.
 
-- A [`translate`](../../modules/ai_model_modules/translate_module.md) module.
+- A [`translate`](../../modules/ai_modules/translate_module.md) module.
 
-- A [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) module.
+- A [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module.
 
 - A [`vector-db`](../../modules/database_modules/vector-db_module.md) module.
 
@@ -99,7 +73,7 @@ with open("../../../data/input/don_esp.txt", "r") as file:
     que dijeres della.
 
 
-Since the input text is in Spanish, we'll use the (non-default) [`opus-mt-es-en`](https://huggingface.co/Helsinki-NLP/opus-mt-es-en) model of the [`translate`](../../modules/ai_model_modules/translate_module.md) module to translate it into English.
+Since the input text is in Spanish, we'll use the (non-default) [`opus-mt-es-en`](https://huggingface.co/Helsinki-NLP/opus-mt-es-en) model of the [`translate`](../../modules/ai_modules/translate_module.md) module to translate it into English.
 
 We will use the default models for every other module in the pipeline, so they don't have to be specified in the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
@@ -126,21 +100,21 @@ print(json.dumps(process_output, indent=2))
 
     {
       "status_code": 200,
-      "pipeline": "multi_keyword_searchable_transcription",
-      "request_id": "73ff0f28-089e-427c-af46-e60188fbea7b",
-      "file_id": "50f929a9-5b2d-44d8-b6a3-270553b1abd6",
-      "message": "SUCCESS - output fetched for file_id 50f929a9-5b2d-44d8-b6a3-270553b1abd6.Output saved to location(s) listed in process_output_files.",
+      "pipeline": "multi_semantically_searchable_translation",
+      "request_id": "ce0e62bb-7931-4c95-9ff0-d049ef72d7a7",
+      "file_id": "40dfca33-274c-4d37-aa94-b6aacfcefe49",
+      "message": "SUCCESS - output fetched for file_id 40dfca33-274c-4d37-aa94-b6aacfcefe49.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../../data/output/50f929a9-5b2d-44d8-b6a3-270553b1abd6.faiss"
+        "../../../data/output/40dfca33-274c-4d37-aa94-b6aacfcefe49.faiss"
       ]
     }
 
 
 ### Performing Semantic Search
 
-Krixik's [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method enables semantic search on documents processed through certain pipelines. Given that the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method both [embeds](../../modules/ai_model_modules/text-embedder_module.md) the query and performs the search, it can only be used with pipelines containing both a [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) module and a [`vector-db`](../../modules/database_modules/vector-db_module.md) module in immediate succession.
+Krixik's [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method enables semantic search on documents processed through certain pipelines. Given that the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method both [embeds](../../modules/ai_modules/text-embedder_module.md) the query and performs the search, it can only be used with pipelines containing both a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module and a [`vector-db`](../../modules/database_modules/vector-db_module.md) module in immediate succession.
 
 Since our pipeline satisfies this condition, it has access to the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method. Let's use it to query our text with natural language, as shown below:
 
@@ -156,19 +130,19 @@ print(json.dumps(semantic_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "9b24b166-e2cb-4a48-bddc-a0937fe01902",
+      "request_id": "57cdd02e-79a4-4e7d-880d-184f3192fd6f",
       "message": "Successfully queried 1 user file.",
       "warnings": [],
       "items": [
         {
-          "file_id": "50f929a9-5b2d-44d8-b6a3-270553b1abd6",
+          "file_id": "40dfca33-274c-4d37-aa94-b6aacfcefe49",
           "file_metadata": {
-            "file_name": "krixik_generated_file_name_ooezcrxdjg.txt",
+            "file_name": "krixik_generated_file_name_iazkcqmatx.txt",
             "symbolic_directory_path": "/etc",
             "file_tags": [],
             "num_vectors": 7,
-            "created_at": "2024-05-20 20:59:28",
-            "last_updated": "2024-05-20 20:59:28"
+            "created_at": "2024-05-22 20:19:43",
+            "last_updated": "2024-05-22 20:19:43"
           },
           "search_results": [
             {
@@ -211,9 +185,3 @@ print(json.dumps(semantic_output, indent=2))
       ]
     }
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

@@ -1,6 +1,6 @@
 ## Multi-Module Pipeline: Keyword-Searchable Image Captions
 
-This document details a modular pipeline that takes in an image, generates a [`textual caption`](../../modules/ai_model_modules/caption_module.md) of it, and makes the caption [`keyword searchable`](../../system/search_methods/keyword_search_method.md).
+This document details a modular pipeline that takes in an image, generates a [`textual caption`](../../modules/ai_modules/caption_module.md) of it, and makes the caption [`keyword searchable`](../../system/search_methods/keyword_search_method.md).
 
 The document is divided into the following sections:
 
@@ -8,37 +8,11 @@ The document is divided into the following sections:
 - [Processing an Input File](#processing-an-input-file)
 - [Performing Keyword Search](#performing-keyword-search)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### Pipeline Setup
 
 To achieve what we've described above, let's set up a pipeline sequentially consisting of the following modules:
 
-- A [`caption`](../../modules/ai_model_modules/caption_module.md) module.
+- A [`caption`](../../modules/ai_modules/caption_module.md) module.
 
 - A [`json-to-txt`](../../modules/support_function_modules/json-to-txt_module.md) module.
 
@@ -70,7 +44,7 @@ Image(filename="../../../data/input/restaurant.png")
 
 
     
-![png](multi_keyword_searchable_image_captions_files/multi_keyword_searchable_image_captions_5_0.png)
+![png](multi_keyword_searchable_image_captions_files/multi_keyword_searchable_image_captions_4_0.png)
     
 
 
@@ -100,13 +74,13 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "multi_keyword_searchable_image_captions",
-      "request_id": "b2d0f27b-4209-47cd-a86c-d6310f1c126a",
-      "file_id": "e8e703c1-0c15-4041-a98a-bbd3cdc24d2b",
-      "message": "SUCCESS - output fetched for file_id e8e703c1-0c15-4041-a98a-bbd3cdc24d2b.Output saved to location(s) listed in process_output_files.",
+      "request_id": "b1fce375-9801-4e16-8cbc-98d5f4123bde",
+      "file_id": "e9f19151-8b81-4929-803e-846dac0cbc4c",
+      "message": "SUCCESS - output fetched for file_id e9f19151-8b81-4929-803e-846dac0cbc4c.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../../data/output/e8e703c1-0c15-4041-a98a-bbd3cdc24d2b.db"
+        "../../../data/output/e9f19151-8b81-4929-803e-846dac0cbc4c.db"
       ]
     }
 
@@ -129,19 +103,19 @@ print(json.dumps(keyword_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "82c1c7d6-13f6-493c-925e-9df279eb0398",
+      "request_id": "c1e7ab7e-f2e3-4cfc-bbc7-484bc7a304c7",
       "message": "Successfully queried 1 user file.",
       "warnings": [],
       "items": [
         {
-          "file_id": "e8e703c1-0c15-4041-a98a-bbd3cdc24d2b",
+          "file_id": "e9f19151-8b81-4929-803e-846dac0cbc4c",
           "file_metadata": {
-            "file_name": "krixik_generated_file_name_bpdfzmbows.png",
+            "file_name": "krixik_generated_file_name_zrhxmayoad.png",
             "symbolic_directory_path": "/etc",
             "file_tags": [],
             "num_lines": 1,
-            "created_at": "2024-05-20 06:24:25",
-            "last_updated": "2024-05-20 06:24:25"
+            "created_at": "2024-05-22 20:17:31",
+            "last_updated": "2024-05-22 20:17:31"
           },
           "search_results": [
             {
@@ -154,9 +128,3 @@ print(json.dumps(keyword_output, indent=2))
       ]
     }
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

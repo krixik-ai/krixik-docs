@@ -2,7 +2,7 @@
 
 ### JSON Format Details
 
-JSON input files into pipelines that begin with JSON-input modules (e.g. the [`translate module`](../../modules/ai_model_modules/translate_module.md)) must be in a very specific format for the [`.process`](../parameters_processing_files_through_pipelines/process_method.md) method to work. If the file doesn't follow this format, the [`.process`](../parameters_processing_files_through_pipelines/process_method.md) attempt will fail.
+JSON input files into pipelines that begin with JSON-input modules (e.g. the [`translate module`](../../modules/ai_modules/translate_module.md)) must be in a very specific format for the [`.process`](../parameters_processing_files_through_pipelines/process_method.md) method to work. If the file doesn't follow this format, the [`.process`](../parameters_processing_files_through_pipelines/process_method.md) attempt will fail.
 
 A description of the format follows:
 
@@ -36,16 +36,6 @@ Here's an example of the above in action. The following list is what the content
   }
 ]
 ```
-
-
-
-
-    [{'snippet': 'It was a bright cold day in April, and the clocks were striking thirteen.',
-      'line_numbers': [1]},
-     {'snippet': 'Winston Smith, his chin nuzzled into his breast in an effort to escape the vile wind, slipped quickly through the glass doors of Victory Mansions, though not quickly enough to prevent a swirl of gritty dust from entering along with him.',
-      'line_numbers': [2, 3, 4, 5]}]
-
-
 
 ### Creating the JSON File
 

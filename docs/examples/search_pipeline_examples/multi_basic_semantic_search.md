@@ -8,39 +8,13 @@ The document is divided into the following sections:
 - [Processing an Input File](#processing-an-input-file)
 - [Performing Semantic Search](#performing-semantic-search)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### Pipeline Setup
 
 To achieve what we've described above, let's set up a pipeline sequentially consisting of the following modules:
 
 - A [`parser`](../../modules/support_function_modules/parser_module.md) module.
 
-- A [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) module.
+- A [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module.
 
 - A [`vector-db`](../../modules/database_modules/vector-db_module.md) module.
 
@@ -183,20 +157,20 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "multi_basic_semantic_search",
-      "request_id": "65bf3e24-5e2f-4195-a826-3b4f62ea1ddc",
-      "file_id": "613f9fd1-8e08-4a27-9c71-126e70257c30",
-      "message": "SUCCESS - output fetched for file_id 613f9fd1-8e08-4a27-9c71-126e70257c30.Output saved to location(s) listed in process_output_files.",
+      "request_id": "c3ed4c53-2008-4041-8716-fab8251e217d",
+      "file_id": "dd34defb-b97a-4c79-b8af-c5b512292fce",
+      "message": "SUCCESS - output fetched for file_id dd34defb-b97a-4c79-b8af-c5b512292fce.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../../data/output/613f9fd1-8e08-4a27-9c71-126e70257c30.faiss"
+        "../../../data/output/dd34defb-b97a-4c79-b8af-c5b512292fce.faiss"
       ]
     }
 
 
 ### Performing Semantic Search
 
-Krixik's [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method enables semantic search on documents processed through certain pipelines. Given that the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method both [embeds](../../modules/ai_model_modules/text-embedder_module.md) the query and performs the search, it can only be used with pipelines containing both a [`text-embedder`](../../modules/ai_model_modules/text-embedder_module.md) module and a [`vector-db`](../../modules/database_modules/vector-db_module.md) module in immediate succession.
+Krixik's [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method enables semantic search on documents processed through certain pipelines. Given that the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method both [embeds](../../modules/ai_modules/text-embedder_module.md) the query and performs the search, it can only be used with pipelines containing both a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module and a [`vector-db`](../../modules/database_modules/vector-db_module.md) module in immediate succession.
 
 Since our pipeline satisfies this condition, it has access to the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method. Let's use it to query our text with natural language, as shown below:
 
@@ -212,19 +186,19 @@ print(json.dumps(semantic_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "58090e7a-f386-4f34-8737-4b0051a77a7d",
+      "request_id": "5b119f58-3539-4c06-9dcc-89c7d55b2b89",
       "message": "Successfully queried 1 user file.",
       "warnings": [],
       "items": [
         {
-          "file_id": "613f9fd1-8e08-4a27-9c71-126e70257c30",
+          "file_id": "dd34defb-b97a-4c79-b8af-c5b512292fce",
           "file_metadata": {
-            "file_name": "krixik_generated_file_name_xszxmlwjta.txt",
+            "file_name": "krixik_generated_file_name_gubstkyxew.txt",
             "symbolic_directory_path": "/etc",
             "file_tags": [],
             "num_vectors": 50,
-            "created_at": "2024-05-20 06:17:09",
-            "last_updated": "2024-05-20 06:17:09"
+            "created_at": "2024-05-22 20:17:25",
+            "last_updated": "2024-05-22 20:17:25"
           },
           "search_results": [
             {
@@ -275,9 +249,3 @@ print(json.dumps(semantic_output, indent=2))
       ]
     }
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

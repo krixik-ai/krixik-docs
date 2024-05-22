@@ -1,37 +1,11 @@
 ## Multi-Module Pipeline: Sentiment Analysis on Translation
 
-This document details a modular pipeline that takes in an a text file in a non-English language, [`translates`](../../modules/ai_model_modules/translate_module.md) it into English, and then performs [`sentiment analysis`](../../modules/ai_model_modules/sentiment_module.md) on each sentence of the translation.
+This document details a modular pipeline that takes in an a text file in a non-English language, [`translates`](../../modules/ai_modules/translate_module.md) it into English, and then performs [`sentiment analysis`](../../modules/ai_modules/sentiment_module.md) on each sentence of the translation.
 
 The document is divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Processing an Input File](#processing-an-input-file)
-
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
 
 ### Pipeline Setup
 
@@ -39,9 +13,9 @@ To achieve what we've described above, let's set up a pipeline sequentially cons
 
 - A [`parser`](../../modules/support_function_modules/parser_module.md) module.
 
-- A [`translate`](../../modules/ai_model_modules/translate_module.md) module.
+- A [`translate`](../../modules/ai_modules/translate_module.md) module.
 
-- A [`sentiment`](../../modules/ai_model_modules/sentiment_module.md) module.
+- A [`sentiment`](../../modules/ai_modules/sentiment_module.md) module.
 
 We do this by leveraging the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
 
@@ -56,7 +30,7 @@ pipeline = krixik.create_pipeline(name="multi_sentiment_analysis_on_translation"
 
 ### Processing an Input File
 
-Given that we're [`translating`](../../modules/ai_model_modules/translate_module.md) and then performing [`sentiment analysis`](../../modules/ai_model_modules/sentiment_module.md), we'll start with a file in Spanish. Since the input text is in Spanish, we'll use the (non-default) [`opus-mt-es-en`](https://huggingface.co/Helsinki-NLP/opus-mt-es-en) model of the [`translate`](../../modules/ai_model_modules/translate_module.md) module to translate it into English.
+Given that we're [`translating`](../../modules/ai_modules/translate_module.md) and then performing [`sentiment analysis`](../../modules/ai_modules/sentiment_module.md), we'll start with a file in Spanish. Since the input text is in Spanish, we'll use the (non-default) [`opus-mt-es-en`](https://huggingface.co/Helsinki-NLP/opus-mt-es-en) model of the [`translate`](../../modules/ai_modules/translate_module.md) module to translate it into English.
 
 We will use the default models for every other module in the pipeline, so they don't have to be specified in the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
@@ -84,44 +58,44 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "multi_sentiment_analysis_on_translation",
-      "request_id": "e7a6ec00-4d6d-4d14-a23e-60f13e3617f4",
-      "file_id": "7d415313-4f8c-4000-855b-4332284a0bbd",
-      "message": "SUCCESS - output fetched for file_id 7d415313-4f8c-4000-855b-4332284a0bbd.Output saved to location(s) listed in process_output_files.",
+      "request_id": "d096b362-d630-41a9-93c8-0c754663bc5f",
+      "file_id": "f3ef7479-c4c2-4362-be86-746563889ada",
+      "message": "SUCCESS - output fetched for file_id f3ef7479-c4c2-4362-be86-746563889ada.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
-          "snippet": "This silln is fantastic.",
+          "snippet": "For the jobs I'm doing I turned out very good.",
           "positive": 1.0,
           "negative": 0.0,
           "neutral": 0.0
         },
         {
-          "snippet": "Besides being supremely comfortable, he feels very firm.",
+          "snippet": "In one hour load the battery and last more than 3 hours of continuous work.",
+          "positive": 0.008,
+          "negative": 0.992,
+          "neutral": 0.0
+        },
+        {
+          "snippet": "A golasse to have a second batter.",
+          "positive": 0.023,
+          "negative": 0.977,
+          "neutral": 0.0
+        },
+        {
+          "snippet": "Cmodo and with good torque.",
           "positive": 1.0,
           "negative": 0.0,
           "neutral": 0.0
         },
         {
-          "snippet": "It is made of good strong and durable materials, and cushions are tremendous as well.",
-          "positive": 1.0,
-          "negative": 0.0,
-          "neutral": 0.0
-        },
-        {
-          "snippet": "What a plush!",
-          "positive": 0.987,
-          "negative": 0.013,
-          "neutral": 0.0
-        },
-        {
-          "snippet": "Very recommended.",
+          "snippet": "I agree.",
           "positive": 1.0,
           "negative": 0.0,
           "neutral": 0.0
         }
       ],
       "process_output_files": [
-        "../../../data/output/7d415313-4f8c-4000-855b-4332284a0bbd.json"
+        "../../../data/output/f3ef7479-c4c2-4362-be86-746563889ada.json"
       ]
     }
 
@@ -137,31 +111,31 @@ with open(process_output["process_output_files"][0]) as f:
 
     [
       {
-        "snippet": "This silln is fantastic.",
+        "snippet": "For the jobs I'm doing I turned out very good.",
         "positive": 1.0,
         "negative": 0.0,
         "neutral": 0.0
       },
       {
-        "snippet": "Besides being supremely comfortable, he feels very firm.",
+        "snippet": "In one hour load the battery and last more than 3 hours of continuous work.",
+        "positive": 0.008,
+        "negative": 0.992,
+        "neutral": 0.0
+      },
+      {
+        "snippet": "A golasse to have a second batter.",
+        "positive": 0.023,
+        "negative": 0.977,
+        "neutral": 0.0
+      },
+      {
+        "snippet": "Cmodo and with good torque.",
         "positive": 1.0,
         "negative": 0.0,
         "neutral": 0.0
       },
       {
-        "snippet": "It is made of good strong and durable materials, and cushions are tremendous as well.",
-        "positive": 1.0,
-        "negative": 0.0,
-        "neutral": 0.0
-      },
-      {
-        "snippet": "What a plush!",
-        "positive": 0.987,
-        "negative": 0.013,
-        "neutral": 0.0
-      },
-      {
-        "snippet": "Very recommended.",
+        "snippet": "I agree.",
         "positive": 1.0,
         "negative": 0.0,
         "neutral": 0.0
@@ -169,10 +143,4 @@ with open(process_output["process_output_files"][0]) as f:
     ]
 
 
-You may note that, in the first returned snippet, the word "sillón" is missing its second vowel and is printed as "silln". This is a model issue: the [`translate`](../../modules/ai_model_modules/translate_module.md#available-models-in-the-translate-module) model with which we processed the file may have trouble with accented characters and/or outright remove them. It's important that you familiarize yourself with the peculiarities of AI models you intend to leverage often.
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```
+You may note that, in the first returned snippet, the word "sillón" is missing its second vowel and is printed as "silln". This is a model issue: the [`translate`](../../modules/ai_modules/translate_module.md#available-models-in-the-translate-module) model with which we processed the file may have trouble with accented characters and/or outright remove them. It's important that you familiarize yourself with the peculiarities of AI models you intend to leverage often.

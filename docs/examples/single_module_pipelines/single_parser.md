@@ -7,32 +7,6 @@ This document is a walkthrough of how to assemble and use a single-module pipeli
 - [Using the Default Model](#using-the-default-model)
 - [Using a Non-Default Model](#using-a-non-default-model)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### Pipeline Setup
 
 Let's first instantiate a single-module [`parser`](../../modules/support_function_modules/parser_module.md) pipeline.
@@ -95,9 +69,9 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "single_parser_1",
-      "request_id": "8449ba09-6db3-4bdd-a6e0-a4b04818e646",
-      "file_id": "d948bdad-270e-4851-81de-04dbc03a7061",
-      "message": "SUCCESS - output fetched for file_id d948bdad-270e-4851-81de-04dbc03a7061.Output saved to location(s) listed in process_output_files.",
+      "request_id": "f1455fad-287b-4033-b473-8423e84ee6c0",
+      "file_id": "5c4ed28b-5a12-41e3-b50e-fc9656aeae79",
+      "message": "SUCCESS - output fetched for file_id 5c4ed28b-5a12-41e3-b50e-fc9656aeae79.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -117,7 +91,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/d948bdad-270e-4851-81de-04dbc03a7061.json"
+        "../../../data/output/5c4ed28b-5a12-41e3-b50e-fc9656aeae79.json"
       ]
     }
 
@@ -240,9 +214,3 @@ with open(process_output["process_output_files"][0]) as f:
       }
     ]
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

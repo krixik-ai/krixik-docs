@@ -1,43 +1,17 @@
 ## Single-Module Pipeline: `ocr`
 
-This document is a walkthrough of how to assemble and use a single-module pipeline that only includes an [`ocr`](../../modules/ai_model_modules/ocr_module.md) module. It's divided into the following sections:
+This document is a walkthrough of how to assemble and use a single-module pipeline that only includes an [`ocr`](../../modules/ai_modules/ocr_module.md) module. It's divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)
 - [Using the Default Model](#using-the-default-model)
 - [Using a Non-Default Model](#using-a-non-default-model)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### Pipeline Setup
 
-Let's first instantiate a single-module [`ocr`](../../modules/ai_model_modules/ocr_module.md) pipeline.
+Let's first instantiate a single-module [`ocr`](../../modules/ai_modules/ocr_module.md) pipeline.
 
-We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`ocr`](../../modules/ai_model_modules/ocr_module.md) module name into `module_chain`.
+We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`ocr`](../../modules/ai_modules/ocr_module.md) module name into `module_chain`.
 
 
 ```python
@@ -48,7 +22,7 @@ pipeline = krixik.create_pipeline(name="single_ocr_1",
 
 ### Required Input Format
 
-The [`ocr`](../../modules/ai_model_modules/ocr_module.md) module accepts `.png`, `.jpg`, and `.jpeg` images as [input](../../modules/ai_model_modules/ocr_module.md#inputs-and-outputs-of-the-ocr-module).
+The [`ocr`](../../modules/ai_modules/ocr_module.md) module accepts `.png`, `.jpg`, and `.jpeg` images as [input](../../modules/ai_modules/ocr_module.md#inputs-and-outputs-of-the-ocr-module).
 
 Let's take a quick look at a valid input file, and then process it.
 
@@ -63,14 +37,14 @@ Image(filename="../../../data/input/seal.png")
 
 
     
-![png](single_ocr_files/single_ocr_6_0.png)
+![png](single_ocr_files/single_ocr_5_0.png)
     
 
 
 
 ### Using the Default Model
 
-Let's process our test input file using the [`ocr`](../../modules/ai_model_modules/ocr_module.md) module's [`default model`](../../modules/ai_model_modules/ocr_module.md#available-models-in-the-ocr-module): [`tesseract-en`](https://github.com/tesseract-ocr/tesseract).
+Let's process our test input file using the [`ocr`](../../modules/ai_modules/ocr_module.md) module's [`default model`](../../modules/ai_modules/ocr_module.md#available-models-in-the-ocr-module): [`tesseract-en`](https://github.com/tesseract-ocr/tesseract).
 
 Given that this is the default model, we need not specify model selection through the optional [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
@@ -97,9 +71,9 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "single_ocr_1",
-      "request_id": "8f4c27f4-3e5f-4167-8f95-cbce342a1c8f",
-      "file_id": "dc993b00-69a9-4882-b12a-40f02ffe2181",
-      "message": "SUCCESS - output fetched for file_id dc993b00-69a9-4882-b12a-40f02ffe2181.Output saved to location(s) listed in process_output_files.",
+      "request_id": "0a32d9ed-fcf6-440b-b126-8416301ce11b",
+      "file_id": "0eb1b33b-22aa-42a1-baf0-73b64a011346",
+      "message": "SUCCESS - output fetched for file_id 0eb1b33b-22aa-42a1-baf0-73b64a011346.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -1021,7 +995,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/dc993b00-69a9-4882-b12a-40f02ffe2181.json"
+        "../../../data/output/0eb1b33b-22aa-42a1-baf0-73b64a011346.json"
       ]
     }
 
@@ -1958,7 +1932,7 @@ with open(process_output["process_output_files"][0]) as f:
 
 ### Using a Non-Default Model
 
-To use a [non-default model](../../modules/ai_model_modules/ocr_module.md#available-models-in-the-ocr-module) like [`tesseract-es`](https://github.com/tesseract-ocr/tesseract), we must enter it explicitly through the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+To use a [non-default model](../../modules/ai_modules/ocr_module.md#available-models-in-the-ocr-module) like [`tesseract-es`](https://github.com/tesseract-ocr/tesseract), we must enter it explicitly through the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 
 ```python
@@ -1984,9 +1958,9 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "single_ocr_1",
-      "request_id": "a2ba186f-6b37-4177-81bb-cfa651c2d378",
-      "file_id": "71202c83-0903-4bea-bb88-444d1d760069",
-      "message": "SUCCESS - output fetched for file_id 71202c83-0903-4bea-bb88-444d1d760069.Output saved to location(s) listed in process_output_files.",
+      "request_id": "1743f51b-d01e-45a7-bd15-5d2e7b06f5cf",
+      "file_id": "2771b0c4-fba4-417a-96bf-4c28e4e1496a",
+      "message": "SUCCESS - output fetched for file_id 2771b0c4-fba4-417a-96bf-4c28e4e1496a.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -2908,13 +2882,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/71202c83-0903-4bea-bb88-444d1d760069.json"
+        "../../../data/output/2771b0c4-fba4-417a-96bf-4c28e4e1496a.json"
       ]
     }
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

@@ -8,32 +8,6 @@ This overview of the `.show_tree` method is divided into the following sections:
 - [.show_tree Method Example](#.show_tree-method-example)
 - [The Wildcard Operator and the Global Root](#the-wildcard-operator-and-the-global-root)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### `.show_tree` Method Arguments
 
 The `.show_tree` method takes a single (required) argument:
@@ -96,15 +70,13 @@ show_tree_output = pipeline.show_tree(symbolic_directory_path="/*")
 ```
 
     /
-    └── /lit
-        └── /novels
-            └── /19th-century
-                ├── /adventure
-                │   └── moby dick.txt
-                ├── /bildungsroman
-                │   └── little women.txt
-                ├── frankenstein.txt
-                └── pride and prejudice.txt
+    └── /my
+        └── /custom
+            └── /path
+                ├── file_num_one.txt
+                ├── file_num_two.txt
+                └── /subpath
+                    └── file_num_three.txt
 
 
 Note that directory names are preceded by a forward slash (`/`) character and file names are not. This allows you to easily differentiate between them.
@@ -132,9 +104,3 @@ symbolic_directory_path='/*'
 ```
 
 As seen in the above code output, using the global root with the `.show_tree` method returns a visualization of your entire pipeline's directory structure.
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

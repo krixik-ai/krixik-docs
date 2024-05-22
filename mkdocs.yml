@@ -27,14 +27,14 @@ nav:
       - 'convenience methods': system/convenience_methods/convenience_methods.md
   - Modules:
     - 'overview': modules/modules_overview.md
-    - ai model modules:
-      - 'image caption': modules/ai_model_modules/caption_module.md
-      - 'ocr (optical character recognition)': modules/ai_model_modules/ocr_module.md
-      - 'sentiment analysis': modules/ai_model_modules/sentiment_module.md
-      - 'summarization': modules/ai_model_modules/summarize_module.md
-      - 'text embedder': modules/ai_model_modules/text-embedder_module.md
-      - 'transcription': modules/ai_model_modules/transcribe_module.md
-      - 'translation': modules/ai_model_modules/translate_module.md
+    - ai modules:
+      - 'image caption': modules/ai_modules/caption_module.md
+      - 'ocr (optical character recognition)': modules/ai_modules/ocr_module.md
+      - 'sentiment analysis': modules/ai_modules/sentiment_module.md
+      - 'summarization': modules/ai_modules/summarize_module.md
+      - 'text embedder': modules/ai_modules/text-embedder_module.md
+      - 'transcription': modules/ai_modules/transcribe_module.md
+      - 'translation': modules/ai_modules/translate_module.md
     - database modules:
       - 'vector database': modules/database_modules/vector-db_module.md
       - 'keyword database': modules/database_modules/keyword-db_module.md

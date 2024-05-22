@@ -20,14 +20,14 @@ Search pipelines are more complex than other pipelines because they require an a
 
 - [Keyword Search](multi_basic_keyword-search.md): Enables [`keyword search`](../../system/search_methods/keyword_search_method.md) on an input text file.
 
-- [Semantically-Searchable Transcription](multi_semantically_searchable_transcription.md): [`Transcribes`](../../modules/ai_model_modules/transcribe_module.md) an input audio file and then enables [`semantic search`](../../system/search_methods/semantic_search_method.md) on the transcript.
+- [Semantically-Searchable Transcription](multi_semantically_searchable_transcription.md): [`Transcribes`](../../modules/ai_modules/transcribe_module.md) an input audio file and then enables [`semantic search`](../../system/search_methods/semantic_search_method.md) on the transcript.
 
-- [Keyword-Searchable Transcription](multi_keyword_searchable_transcription.md): [`Transcribes`](../../modules/ai_model_modules/transcribe_module.md) an input audio file and then enables [`keyword search`](../../system/search_methods/keyword_search_method.md) on the transcript.
+- [Keyword-Searchable Transcription](multi_keyword_searchable_transcription.md): [`Transcribes`](../../modules/ai_modules/transcribe_module.md) an input audio file and then enables [`keyword search`](../../system/search_methods/keyword_search_method.md) on the transcript.
 
-- [Semantically-Searchable Translation](multi_semantically_searchable_translation.md): [`Translates`](../../modules/ai_model_modules/translate_module.md) an input text file and then enables [`semantic search`](../../system/search_methods/semantic_search_method.md) on the translation.
+- [Semantically-Searchable Translation](multi_semantically_searchable_translation.md): [`Translates`](../../modules/ai_modules/translate_module.md) an input text file and then enables [`semantic search`](../../system/search_methods/semantic_search_method.md) on the translation.
 
-- [Semantically-Searchable Translated Transcription](multi_semantically_searchable_translated_transcription.md): [`Transcribes`](../../modules/ai_model_modules/transcribe_module.md) an input audio file, [`translates`](../../modules/ai_model_modules/translate_module.md) it into English, and then enables [`semantic search`](../../system/search_methods/semantic_search_method.md) on the translation.
+- [Semantically-Searchable Translated Transcription](multi_semantically_searchable_translated_transcription.md): [`Transcribes`](../../modules/ai_modules/transcribe_module.md) an input audio file, [`translates`](../../modules/ai_modules/translate_module.md) it into English, and then enables [`semantic search`](../../system/search_methods/semantic_search_method.md) on the translation.
 
-- [Semantically-Searchable OCR](multi_semantically_searchable_ocr.md): [`Extracts text`](../../modules/ai_model_modules/ocr_module.md) from an input image and then enables [`semantic search`](../../system/search_methods/semantic_search_method.md) on the extracted text.
+- [Semantically-Searchable OCR](multi_semantically_searchable_ocr.md): [`Extracts text`](../../modules/ai_modules/ocr_module.md) from an input image and then enables [`semantic search`](../../system/search_methods/semantic_search_method.md) on the extracted text.
 
-- [Keyword-Searchable Image Captions](multi_keyword_searchable_image_captions.md): Generates a [`textual caption`](../../modules/ai_model_modules/caption_module.md) for an input image and then enables [`keyword search`](../../system/search_methods/keyword_search_method.md) on the caption.
+- [Keyword-Searchable Image Captions](multi_keyword_searchable_image_captions.md): Generates a [`textual caption`](../../modules/ai_modules/caption_module.md) for an input image and then enables [`keyword search`](../../system/search_methods/keyword_search_method.md) on the caption.

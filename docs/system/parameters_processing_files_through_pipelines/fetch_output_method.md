@@ -2,32 +2,6 @@
 
 The `.fetch_output` method is used to download the output of a pipeline process.  This is particularly useful when using the [`.process`](../parameters_processing_files_through_pipelines/process_method.md) method with `wait_for_process` set to `False`, as your output is in that case not immediately yielded by the [`.process`](../parameters_processing_files_through_pipelines/process_method.md) method.
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### `.fetch_output` Method Arguments
 
 The `.fetch_output` method takes two arguments:
@@ -70,9 +44,9 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "fetch-output-method_1_parser",
-      "request_id": "655f3433-d48d-4141-a1ae-286a1d586921",
-      "file_id": "5a478543-c9b4-4280-aeb4-94ac3420717f",
-      "message": "SUCCESS - output fetched for file_id 5a478543-c9b4-4280-aeb4-94ac3420717f.Output saved to location(s) listed in process_output_files.",
+      "request_id": "a439e85f-43b7-4af0-ab82-fbb164b8cfc1",
+      "file_id": "7ed55e00-20fd-45c2-a122-a4e6148ebdea",
+      "message": "SUCCESS - output fetched for file_id 7ed55e00-20fd-45c2-a122-a4e6148ebdea.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -92,7 +66,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "c:\\Users\\Lucas\\Desktop\\krixikdocsnoodle\\docs\\system\\parameters_processing_files_through_pipelines/5a478543-c9b4-4280-aeb4-94ac3420717f.json"
+        "../../../data/output/7ed55e00-20fd-45c2-a122-a4e6148ebdea.json"
       ]
     }
 
@@ -117,9 +91,9 @@ print(json.dumps(fetched_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "fetch-output-method_1_parser",
-      "request_id": "7820bcdf-bc58-431e-b843-0e8d8744a827",
-      "file_id": "5a478543-c9b4-4280-aeb4-94ac3420717f",
-      "message": "SUCCESS - output fetched for file_id 5a478543-c9b4-4280-aeb4-94ac3420717f.Output saved to location(s) listed in process_output_files.",
+      "request_id": "e01fbe62-0f13-4740-8539-86034a26fa54",
+      "file_id": "7ed55e00-20fd-45c2-a122-a4e6148ebdea",
+      "message": "SUCCESS - output fetched for file_id 7ed55e00-20fd-45c2-a122-a4e6148ebdea.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -139,15 +113,9 @@ print(json.dumps(fetched_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/5a478543-c9b4-4280-aeb4-94ac3420717f.json"
+        "../../../data/output/7ed55e00-20fd-45c2-a122-a4e6148ebdea.json"
       ]
     }
 
 
 At the end of this return the local directory to which the output has been downloaded is displayed.
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

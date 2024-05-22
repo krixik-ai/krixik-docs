@@ -1,43 +1,17 @@
 ## Multi-Module Pipeline: Recursive Summarization
 
-A practical way to achieve short and abstract (but representative) summaries of long or medium-length documents is to apply summarization *recursively*.  This concept was discussed in our overview of the single-module [`summarize` pipeline](../single_module_pipelines/single_summarize.md), where we applied a single [`summarize`](../../modules/ai_model_modules/summarize_module.md) module pipeline several times to create terser and terser summary representations of an input text.
+A practical way to achieve short and abstract (but representative) summaries of long or medium-length documents is to apply summarization *recursively*.  This concept was discussed in our overview of the single-module [`summarize` pipeline](../single_module_pipelines/single_summarize.md), where we applied a single [`summarize`](../../modules/ai_modules/summarize_module.md) module pipeline several times to create terser and terser summary representations of an input text.
 
-In this document we reproduce the same result via a pipeline consisting of multiple [`summarize`](../../modules/ai_model_modules/summarize_module.md) modules in immediate succession. Processing files through this pipeline recursively summarizes with a single pipeline invocation. If you require further summarization, you can build a similar pipeline with more [`summarize`](../../modules/ai_model_modules/summarize_module.md) models in it.
+In this document we reproduce the same result via a pipeline consisting of multiple [`summarize`](../../modules/ai_modules/summarize_module.md) modules in immediate succession. Processing files through this pipeline recursively summarizes with a single pipeline invocation. If you require further summarization, you can build a similar pipeline with more [`summarize`](../../modules/ai_modules/summarize_module.md) models in it.
 
 The document is divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Processing an Input File](#processing-an-input-file)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### Pipeline Setup
 
-To achieve what we've described above, let's set up a pipeline consisting of three sequential [`summarize`](../../modules/ai_model_modules/summarize_module.md) modules.
+To achieve what we've described above, let's set up a pipeline consisting of three sequential [`summarize`](../../modules/ai_modules/summarize_module.md) modules.
 
 We do this by leveraging the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
 
@@ -153,7 +127,7 @@ with open("../../../data/input/1984_short.txt", "r") as file:
       IGNORANCE IS STRENGTH
 
 
-With the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method we run this input through the pipeline. We use the default model for the [`summarize`](../../modules/ai_model_modules/summarize_module.md) module each time, so the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument doesn't have to be leveraged.
+With the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method we run this input through the pipeline. We use the default model for the [`summarize`](../../modules/ai_modules/summarize_module.md) module each time, so the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument doesn't have to be leveraged.
 
 
 ```python
@@ -178,13 +152,13 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "multi_recursive_summarization",
-      "request_id": "e4c27728-313e-4315-b166-21238faba8aa",
-      "file_id": "d360a6f5-918f-47df-86b2-45a83ca232ae",
-      "message": "SUCCESS - output fetched for file_id d360a6f5-918f-47df-86b2-45a83ca232ae.Output saved to location(s) listed in process_output_files.",
+      "request_id": "2620bf8e-3479-4761-86dd-e45602463ae1",
+      "file_id": "072dee9a-d72e-4a36-9d04-c1a97fd34f14",
+      "message": "SUCCESS - output fetched for file_id 072dee9a-d72e-4a36-9d04-c1a97fd34f14.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../../data/output/d360a6f5-918f-47df-86b2-45a83ca232ae.txt"
+        "../../../data/output/072dee9a-d72e-4a36-9d04-c1a97fd34f14.txt"
       ]
     }
 
@@ -202,9 +176,3 @@ with open(process_output['process_output_files'][0], "r") as file:
     smelled of boiled cabbage and old rag mats. A kilometre away, his
     place of work, the Ministry of Truth, towered vast and white.
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```
