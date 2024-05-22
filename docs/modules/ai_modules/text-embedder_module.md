@@ -10,7 +10,7 @@ This overview of the `text-embedder` module is divided into the following sectio
 - [Available Models in the `text-embedder` Module](#available-models-in-the-text-embedder-module)
 - [Model Parameters in the `text-embedder` Module](#model-parameters-in-the-text-embedder-module)
 - [A Single-Module Pipeline for the `text-embedder` Module](#a-single-module-pipeline-for-the-text-embedder-module)
-- [Further Information on `text-embedder` Module I/O and Clickability](#further-information-on-text-embedder-module-i/o-and-clickability)
+- [Further Information on `text-embedder` Module IO and Clickability](#further-information-on-text-embedder-module-io-and-clickability)
 
 ### Inputs and Outputs of the `text-embedder` Module
 
@@ -63,7 +63,7 @@ You can activate any of the following models when using the `text-embedder` modu
 
 - [msmarco-distilbert-dot-v5](https://huggingface.co/sentence-transformers/msmarco-distilbert-dot-v5)
 
-Use the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method to determine what model you'd like active when you process files through the `text-embedder` module.
+Use the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method to determine what model you'd like active when you process files through the `text-embedder` module.
 
 ### Model Parameters in the `text-embedder` Module
 
@@ -71,10 +71,10 @@ All of the `text-embedder` module models are parameterizable. They all take one 
 
 - `quantize` (boolean) - If `True`, reduces the number of decimal points in vectors for speed and memory while losing a bit of accuracy (this is a very simplified explanation of what vector quantization is). Defaults to `True`.
 
- Consequently, when selecting what model you'll use through the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method's [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument, `params` can include a value for `quantize`. For example:
+ Consequently, when selecting what model you'll use through the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method's [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument, `params` can include a value for `quantize`. For example:
 
 ```python
-# example model selection for text-embedder module in .process
+# example model selection for text-embedder module in process
 modules={'text-embedder': {"model": "all-mpnet-base-v2",
                            "params": {"quantize": False}}}
 ```
@@ -85,10 +85,10 @@ Please click [here](../../examples/single_module_pipelines/single_text-embedder.
 
 Keep in mind that the output of this pipeline will be an NPY file, which is not human-readable (it's an array of vectors).
 
-### Further Information on `text-embedder` Module I/O and Clickability
+### Further Information on `text-embedder` Module IO and Clickability
 
 Please click [here](../../system/convenience_methods/convenience_methods.md) to visit the `Convenience Methods (and More!)` documentation. There you will find two tools to learn more about the `text-embedder` module:
 
 - [View Module Input and Output Examples](../../system/convenience_methods/convenience_methods.md#view-module-input-and-output-examples)
 
-- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-.click_data-method)
+- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-click_data-method)

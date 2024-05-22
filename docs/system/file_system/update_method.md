@@ -1,20 +1,20 @@
-## The `.update` Method
+## The `update` Method
 
-You can update any metadata of any processed file by using the `.update` method.
+You can update any metadata of any processed file by using the `update` method.
 
-This overview of the `.update` method is divided into the following sections:
+This overview of the `update` method is divided into the following sections:
 
-- [.update Method Arguments](#.update-method-arguments)
-- [.update Method Example](#.update-method-example)
-- [Observations on the .update Method](#observations-on-the-.update-method)
+- [update Method Arguments](#update-method-arguments)
+- [update Method Example](#update-method-example)
+- [Observations on the update Method](#observations-on-the-update-method)
 
-### `.update` Method Arguments
+### `update` Method Arguments
 
-The `.update` method takes one required argument and at least one of several optional arguments:
+The `update` method takes one required argument and at least one of several optional arguments:
 
 - `file_id` (required, str) - The `file_id` of the file whose metadata you wish to update.
 
-- `expire_time` (optional, int) - The amount of time (in seconds) that file data will remain on Krixik servers, counting as of when the `.update` method is run.
+- `expire_time` (optional, int) - The amount of time (in seconds) that file data will remain on Krixik servers, counting as of when the `update` method is run.
 
 - `symbolic_directory_path` (optional, str) - A UNIX-formatted directory path under your account in the Krixik system.
 
@@ -22,15 +22,15 @@ The `.update` method takes one required argument and at least one of several opt
 
 - `symbolic_file_path` (optional, str) - A combination of `symbolic_directory_path` and `file_name` in a single argument.
 
-- `file_tags` (optional, list) - A list of custom file tags (each a key-value pair). Note that you must update the whole set, so if a file has three file tags and you update one of them, entirely excluding the other two from the `.update` method `file_tags` argument, both of those will be deleted.
+- `file_tags` (optional, list) - A list of custom file tags (each a key-value pair). Note that you must update the whole set, so if a file has three file tags and you update one of them, entirely excluding the other two from the `update` method `file_tags` argument, both of those will be deleted.
 
 - `file_description` (optional, str) - A custom file description.
 
-If none of the optional arguments are present, the `.update` method will not work because there will be nothing to update.
+If none of the optional arguments are present, the `update` method will not work because there will be nothing to update.
 
-### `.update` Method Example
+### `update` Method Example
 
-For this document's example we will use a pipeline consisting of a single [`parser`](../../modules/support_function_modules/parser_module.md) module.  We use the [`.create_pipeline`](../pipeline_creation/create_pipeline.md) method to instantiate the pipeline, and then process a file through it:
+For this document's example we will use a pipeline consisting of a single [`parser`](../../modules/support_function_modules/parser_module.md) module.  We use the [`create_pipeline`](../pipeline_creation/create_pipeline.md) method to instantiate the pipeline, and then process a file through it:
 
 
 ```python
@@ -49,14 +49,14 @@ process_output = pipeline.process(local_file_path="../../../data/input/frankenst
                                   file_tags=[{"author": "Shelley"}, {"category": "gothic"}, {"century": "19"}])
 ```
 
-Let's see what the file's record looks like with the [`.list`](list_method.md) method:
+Let's see what the file's record looks like with the [`list`](list_method.md) method:
 
 
 ```python
-# see the file's record with .list
+# see the file's record with 
 list_output = pipeline.list(symbolic_directory_paths=['/novels/gothic'])
 
-# nicely print the output of this .list
+# nicely print the output of this 
 print(json.dumps(list_output, indent=2))
 ```
 
@@ -111,7 +111,7 @@ print(json.dumps(list_output, indent=2))
     }
 
 
-We can use the `.update` method to update the file's metadata.
+We can use the `update` method to update the file's metadata.
 
 We'll update its `file_name`, since it's erroneous, change the `{"category": "gothic"}` file tag for something different, and add a `file_description`. We'll leave its `symbolic_directory_path` untouched.
 
@@ -123,7 +123,7 @@ update_output = pipeline.update(file_id=process_output["file_id"],
                                 file_tags=[{"author": "Shelley"}, {"country": "UK"}, {"century": "19"}],
                                 file_description='Is the villain the monster or the doctor?')
 
-# nicely print the output of this .update
+# nicely print the output of this update
 print(json.dumps(process_output, indent=2))
 ```
 
@@ -364,14 +364,14 @@ print(json.dumps(process_output, indent=2))
     }
 
 
-Now we invoke the [`.list`](list_method.md) method to confirm that all metadata has indeed been updated as requested:
+Now we invoke the [`list`](list_method.md) method to confirm that all metadata has indeed been updated as requested:
 
 
 ```python
-# call .list to see the file's newly updated record
+# call  to see the file's newly updated record
 list_output = pipeline.list(symbolic_file_paths=['/novels/gothic/Frankenstein.txt'])
 
-# nicely print the output of this .list
+# nicely print the output of this 
 print(json.dumps(list_output, indent=2))
 ```
 
@@ -426,14 +426,14 @@ print(json.dumps(list_output, indent=2))
     }
 
 
-### Observations on the `.update` Method
+### Observations on the `update` Method
 
-Four closing observation on the `.update` method:
+Four closing observation on the `update` method:
 
 - Note that in the example above we updated `file_tags` by including the entire set of file tags: `[{"author": "Shelley"}, {"country": "UK"}, {"century": 19}]`. If we'd only used `[{"country": "UK"}]`, the "author" and "century" ones would have been deleted.
 
 - You cannot update a `symbolic_directory_path`/`file_name` combination (a.k.a. a `symbolic_file_path`) so it's identical to that of another file. Krixik will not allow it.
 
-- You can also not update a file's file extension. For instance, a `.txt` file cannot become a `.pdf` file through the `.update` method.
+- You can also not update a file's file extension. For instance, a `.txt` file cannot become a `.pdf` file through the `update` method.
 
-- The `.update` method allows you to extend a file's [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-.process-method-arguments) indefinitely. Upon initially uploading a file, its [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-.process-method-arguments) cannot be greater than 2,592,000 seconds (30 days). However, if you periodically invoke `.update` on its file and reset its [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-.process-method-arguments) to another 2,592,000 seconds (or however many seconds you please), the file will remain on-system for that much more time as of that moment, and so forth.
+- The `update` method allows you to extend a file's [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-process-method-arguments) indefinitely. Upon initially uploading a file, its [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-process-method-arguments) cannot be greater than 2,592,000 seconds (30 days). However, if you periodically invoke `update` on its file and reset its [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-process-method-arguments) to another 2,592,000 seconds (or however many seconds you please), the file will remain on-system for that much more time as of that moment, and so forth.

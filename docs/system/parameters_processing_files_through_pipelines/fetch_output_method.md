@@ -37,7 +37,7 @@ The file has successfully been processed. Let's assume that some days have passe
 
 
 ```python
-# run .list on the above file to see its file_id
+# run o see its file_id
 print(json.dumps(process_output, indent=2))
 ```
 

@@ -1,24 +1,24 @@
-## The `.process_status` Method
+## The `process_status` Method
 
-The `.process_status` method is available on every Krixik pipeline. It is invoked whenever you want to check the status of files being processed through a pipeline.
+The `process_status` method is available on every Krixik pipeline. It is invoked whenever you want to check the status of files being processed through a pipeline.
 
-This method is especially useful when using the [`.process`](process_method.md) method with `wait_for_process` set to `False`, for it gives you visibility into processes that have continued server-side after you regain control of your IDE.
+This method is especially useful when using the [`process`](process_method.md) method with `wait_for_process` set to `False`, for it gives you visibility into processes that have continued server-side after you regain control of your IDE.
 
-This overview of the `.process_status` method is divided into the following sections:
+This overview of the `process_status` method is divided into the following sections:
 
-- [.process_status Method Arguments](#.process_status-method-arguments)
-- [.process_status Example](#.process_status-example)
-- [.process_status Example with Deleted File](#.process_status-example-with-deleted-file)
+- [process_status Method Arguments](#process_status-method-arguments)
+- [process_status Example](#process_status-example)
+- [process_status Example with Deleted File](#process_status-example-with-deleted-file)
 
-### `.process_status` Method Arguments
+### `process_status` Method Arguments
 
-The `.process_status` method takes a single argument:
+The `process_status` method takes a single argument:
 
-- `request_id`: (required, str) The unique ID associated with the relevant execution instance of the [`.process`](process_method.md) method.
+- `request_id`: (required, str) The unique ID associated with the relevant execution instance of the [`process`](process_method.md) method.
 
-### `.process_status` Example
+### `process_status` Example
 
-Let's examine how the `.process_status` method works when the [`.process`](process_method.md) method succeeds. `wait_for_process` will be set to `False`.
+Let's examine how the `process_status` method works when the [`process`](process_method.md) method succeeds. `wait_for_process` will be set to `False`.
 
 First we'll need to create a pipeline. We can use a single-module pipeline with a [`keyword-db`](../../modules/database_modules/keyword-db_module.md) module for this example:
 
@@ -61,14 +61,14 @@ print(json.dumps(process_output, indent=2))
 
 That's all you see because you retook control of the IDE as soon as the upload to Krixik was completed; the `process_output_1` variable doesn't know how the rest of the process went.
 
-You can check the status of the process by feeding the `request_id` (returned when you called the [`.process`](process_method.md) method) to the `.process_status` method, as follows:
+You can check the status of the process by feeding the `request_id` (returned when you called the [`process`](process_method.md) method) to the `process_status` method, as follows:
 
 
 ```python
-# invoke .process_status
+# invoke process_status
 process_1_status = pipeline.process_status(request_id=process_output["request_id"])
 
-# nicely print the output our .process_status call
+# nicely print the output our process_status call
 print(json.dumps(process_1_status, indent=2))
 ```
 
@@ -91,10 +91,10 @@ If we wait a few moments and try again, you will see confirmation that the proce
 
 
 ```python
-# invoke .process_status again
+# invoke process_status again
 process_status_output = pipeline.process_status(request_id=process_output["request_id"])
 
-# nicely print the output our .process_status call again
+# nicely print the output our process_status call again
 print(json.dumps(process_status_output, indent=2))
 ```
 
@@ -111,10 +111,10 @@ print(json.dumps(process_status_output, indent=2))
     }
 
 
-### `.process_status` Example with Deleted File
+### `process_status` Example with Deleted File
 
-As you have just observed, `.process_status` on a failed [`.process`](process_method.md) attempt shows us that the process failed.
+As you have just observed, `process_status` on a failed [`process`](process_method.md) attempt shows us that the process failed.
 
-What happens when the file `.process_status` is run on [expires](process_method.md#core-.process-method-arguments) or is manually [deleted](../file_system/delete_method.md) from the Krixik system?
+What happens when the file `process_status` is run on [expires](process_method.md#core-process-method-arguments) or is manually [deleted](../file_system/delete_method.md) from the Krixik system?
 
-We take deletion seriously at Krixik—if a file is [deleted](../file_system/delete_method.md), it's entirely wiped from the system. Consequently, calling the `.process_status` method on an [expired](process_method.md#core-.process-method-arguments) or manually [deleted](../file_system/delete_method.md) file will tell you that the `request_id` you used as an argument was not found. The file is gone, as is any record of its having been processed in the first place.
+We take deletion seriously at Krixik—if a file is [deleted](../file_system/delete_method.md), it's entirely wiped from the system. Consequently, calling the `process_status` method on an [expired](process_method.md#core-process-method-arguments) or manually [deleted](../file_system/delete_method.md) file will tell you that the `request_id` you used as an argument was not found. The file is gone, as is any record of its having been processed in the first place.

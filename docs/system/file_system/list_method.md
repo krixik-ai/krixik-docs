@@ -1,10 +1,10 @@
-## The `.list` Method
+## The `list` Method
 
-After using the [`.process`](../parameters_processing_files_through_pipelines/process_method.md) method to process one or several files through your chosen pipeline, you can retrieve the record of any file(s) with the `.list` method. You can `.list` by `file_id` or by any other metadata you included when initially processing the file.  
+After using the [`process`](../parameters_processing_files_through_pipelines/process_method.md) method to process one or several files through your chosen pipeline, you can retrieve the record of any file(s) with the `list` method. You can `list` by `file_id` or by any other metadata you included when initially processing the file.  
 
-This overview of the `.list` method is divided into the following sections:
+This overview of the `list` method is divided into the following sections:
 
-- [.list Method Arguments](#.list-method-arguments)
+- [list Method Arguments](#list-method-arguments)
 - [Example Pipeline Setup and File Processing](#example-pipeline-setup-and-file-processing)
 - [Listing by `file_ids`](#listing-by-file_ids)
 - [Listing by `file_names`](#listing-by-file_names)
@@ -13,16 +13,16 @@ This overview of the `.list` method is divided into the following sections:
 - [Listing by `created_at` and `updated_at` Bookend Times](#listing-by-created_at-and-updated_at-bookend-times)
 - [Wildcard Operator Arguments](#wildcard-operator-arguments)
 - [The Global Root](#the-global-root)
-- [Using Multiple Arguments with the `.list` Method](#using-multiple-arguments-with-the-.list-method)
+- [Using Multiple Arguments with the `list` Method](#using-multiple-arguments-with-the-list-method)
 - [Output Size Cap](#output-size-cap)
 
-### `.list` Method Arguments
+### `list` Method Arguments
 
-The `.list` method is very versatile. It allows you to list by several different metadata items and by a combination of different metadata items.
+The `list` method is very versatile. It allows you to list by several different metadata items and by a combination of different metadata items.
 
-All of the following arguments are optional. However, you must use at least one argument for the `.list` method to function.
+All of the following arguments are optional. However, you must use at least one argument for the `list` method to function.
 
-For a refresher on file system metadata arguments please visit the [`.process` method overview](../parameters_processing_files_through_pipelines/process_method.md). The metadata arguments you can use for `.list` are:
+For a refresher on file system metadata arguments please visit the [`process` method overview](../parameters_processing_files_through_pipelines/process_method.md). The metadata arguments you can use for `list` are:
 
 - `file_ids`: A list of one or several `file_id`s to return records for.
 
@@ -32,11 +32,11 @@ For a refresher on file system metadata arguments please visit the [`.process` m
 
 - `symbolic_file_paths`: A list of one or several `symbolic_file_path`s to return records for.
 
-- `file_tags`: A list of one or several `file_tag`s to return records for. Note that individual file_tags suffice; if a file has several file tags and you include at least one of them as a `.list` argument, that file's record will be returned.
+- `file_tags`: A list of one or several `file_tag`s to return records for. Note that individual file_tags suffice; if a file has several file tags and you include at least one of them as a `list` argument, that file's record will be returned.
 
 You may use wildcard operators with `file_names`, `symbolic_directory_paths`,`symbolic_file_paths`, and `file_tags` to retrieve records whose exact metadata you don't remember—or if you wish to retrieve records for a group of files that share similar metadata. More on wildcards operators [later](#wildcard-operator-arguments) in this document.
 
-You may also list by timestamp bookends. The `.list` method accepts timestamps based on both the creation and latest-update times of your records. These are strings in the `"YYYY-MM-DD HH:MM:SS"` format, or alternatively just in the `"YYYY-MM-DD"` format.
+You may also list by timestamp bookends. The `list` method accepts timestamps based on both the creation and latest-update times of your records. These are strings in the `"YYYY-MM-DD HH:MM:SS"` format, or alternatively just in the `"YYYY-MM-DD"` format.
 
 - `created_at_start`: Filters out all files whose `created_at` time is earlier than what you've specified.
 
@@ -46,19 +46,19 @@ You may also list by timestamp bookends. The `.list` method accepts timestamps b
 
 - `last_updated_end`: Filters out all files whose `last_updated` time is after what you've specified.
 
-Examples on how to use metadata and timestamps in the `.list` method are included below.
+Examples on how to use metadata and timestamps in the `list` method are included below.
 
-Note that file system metadata arguments operate on **OR** logic: for instance, if you `.list` by `file_names`, `file_ids`, and `file_tags`, any file that is a match for any of these will be returned. However, timestamp arguments operate on **AND** logic; all files returned must respect the given timestamp bookends. If two timestamp bookends are given and there is no overlap between them, the `.list` method will return nothing.
+Note that file system metadata arguments operate on **OR** logic: for instance, if you `list` by `file_names`, `file_ids`, and `file_tags`, any file that is a match for any of these will be returned. However, timestamp arguments operate on **AND** logic; all files returned must respect the given timestamp bookends. If two timestamp bookends are given and there is no overlap between them, the `list` method will return nothing.
 
-Finally, the `.list` method takes two additional optional arguments to help you organize your output:
+Finally, the `list` method takes two additional optional arguments to help you organize your output:
 
-- `max_files` (int): Determines the maximum number of file records `.list` should return. Defaults to none.
+- `max_files` (int): Determines the maximum number of file records `list` should return. Defaults to none.
 
 - `sort_order` (str): Specifies how results should be sorted. The two valid values for this argument are 'ascending' and 'descending' (in reference to creation timestamp). Defaults to 'descending'.
 
 ### Example Pipeline Setup and File Processing
 
-We will need to create a pipeline and [`.process`](../parameters_processing_files_through_pipelines/process_method.md) a couple of files through it to illustrate usage of `.list`. We'll create a single-module pipeline with a [`parser`](../../modules/support_function_modules/parser_module.md) module and [`.process`](../parameters_processing_files_through_pipelines/process_method.md) some TXT files that hold the text of some English-language classics.  We define optional metadata like file_name, file_tags, and symbolic_directory_path for each process to illustrate how each can be used with `.list` below.
+We will need to create a pipeline and [`process`](../parameters_processing_files_through_pipelines/process_method.md) a couple of files through it to illustrate usage of `list`. We'll create a single-module pipeline with a [`parser`](../../modules/support_function_modules/parser_module.md) module and [`process`](../parameters_processing_files_through_pipelines/process_method.md) some TXT files that hold the text of some English-language classics.  We define optional metadata like file_name, file_tags, and symbolic_directory_path for each process to illustrate how each can be used with `list` below.
 
 
 ```python
@@ -242,7 +242,7 @@ For example, to see metadata associated with each file processed above simply pl
 
 
 ```python
-# .list records for two of the uploaded files via file_ids
+# list records for two of the uploaded files via file_ids
 list_output = pipeline.list(file_ids=[v["file_id"] for v in all_process_output])
 
 # nicely print the output of this process
@@ -382,7 +382,7 @@ print(json.dumps(list_output, indent=2))
     }
 
 
-As you can see, a full record for each file was returned. To learn more about each metadata item, visit the documentation for the [`.process`](../parameters_processing_files_through_pipelines/process_method.md) method, where they are gone into detail on.
+As you can see, a full record for each file was returned. To learn more about each metadata item, visit the documentation for the [`process`](../parameters_processing_files_through_pipelines/process_method.md) method, where they are gone into detail on.
 
 ### Listing by `file_names`
 
@@ -390,10 +390,10 @@ You can also list via `file_name`s. It works just like listing with `file_id`s a
 
 
 ```python
-# .list records for one of the uploaded files via file_names
+# list records for one of the uploaded files via file_names
 list_output = pipeline.list(file_names=["Pride and Prejudice.txt"])
 
-# nicely print the output of this .list
+# nicely print the output of this list
 print(json.dumps(list_output, indent=2))
 ```
 
@@ -448,7 +448,7 @@ print(json.dumps(list_output, indent=2))
     }
 
 
-As you can see, a full record for each file was returned. To learn more about each metadata item, visit the documentation for the [`.process`](../parameters_processing_files_through_pipelines/process_method.md) method, where they are gone into detail on.
+As you can see, a full record for each file was returned. To learn more about each metadata item, visit the documentation for the [`process`](../parameters_processing_files_through_pipelines/process_method.md) method, where they are gone into detail on.
 
 ### Listing by `symbolic_directory_paths`
 
@@ -456,7 +456,7 @@ You can also list via `symbolic_directory_paths`. It works just like listing wit
 
 
 ```python
-# .list records for two of the uploaded files via symbolic_directory_paths
+# list records for two of the uploaded files via symbolic_directory_paths
 list_output = pipeline.list(symbolic_directory_paths=["/novels/gothic", "/novels/adventure"])
 
 # nicely print the output of this process
@@ -555,7 +555,7 @@ print(json.dumps(list_output, indent=2))
     }
 
 
-As you can see, a full record for each file was returned. To learn more about each metadata item, visit the documentation for the [`.process`](../parameters_processing_files_through_pipelines/process_method.md) method, where they are gone into detail on.
+As you can see, a full record for each file was returned. To learn more about each metadata item, visit the documentation for the [`process`](../parameters_processing_files_through_pipelines/process_method.md) method, where they are gone into detail on.
 
 ## Listing by `file_tags`
 
@@ -563,7 +563,7 @@ We can also list through `file_tags`.  We'll list for 19th century novels and an
 
 
 ```python
-# .list records for two of the uploaded files via symbolic_directory_paths
+# list records for two of the uploaded files via symbolic_directory_paths
 list_output = pipeline.list(file_tags=[{"author": "Melville"}, {"century": "19"}])
 
 # nicely print the output of this process
@@ -707,7 +707,7 @@ Given that every file included the file tag `{"century": 19}` when initially pro
 
 ### Listing by `created_at` and `updated_at` Bookend Times
 
-To illustrate how to `.list` by timestamp bookends, let's first [`.process`](../parameters_processing_files_through_pipelines/process_method.md) one additional file through our pipeline:
+To illustrate how to `list` by timestamp bookends, let's first [`process`](../parameters_processing_files_through_pipelines/process_method.md) one additional file through our pipeline:
 
 
 ```python
@@ -732,10 +732,10 @@ Based on the output from the file we just processed and the output from the four
 
 
 ```python
-# .list process records by last_updated timestamp bookend
+# list process records by last_updated timestamp bookend
 list_output = pipeline.list(created_at_start=time_now)
 
-# nicely print the output of this .list
+# nicely print the output of this list
 print(json.dumps(list_output, indent=2))
 ```
 
@@ -796,13 +796,13 @@ print(json.dumps(list_output, indent=2))
     }
 
 
-Keep in mind that timestamp bookend arguments operate with **AND** logic: to be listed, a file _must_ fall within the specified timestamp window. This also means that if two timestamp arguments are provided and there is no overlap between them, the `.list` method will return nothing.
+Keep in mind that timestamp bookend arguments operate with **AND** logic: to be listed, a file _must_ fall within the specified timestamp window. This also means that if two timestamp arguments are provided and there is no overlap between them, the `list` method will return nothing.
 
 ### Wildcard Operator Arguments
 
 The wildcard operator is the asterisk: *
 
-You can use the wildcard operator * to `.list` records whose exact metadata you don't remember—or if you wish to `.list` records for a group of files that share similar metadata.
+You can use the wildcard operator * to `list` records whose exact metadata you don't remember—or if you wish to `list` records for a group of files that share similar metadata.
 
 For `file_names` and `symbolic_directory_paths` a wildcard may be used as either prefix or suffix:
 
@@ -818,14 +818,14 @@ For `file_tags` a wildcard may be used for as the value in a key-value pair dict
 
 - Example * in file_tags: `{"invoice_type": "*"}`
 
-Let's dig into `.list` method examples for each of these. First a prefix wildcard in `file_names`:
+Let's dig into `list` method examples for each of these. First a prefix wildcard in `file_names`:
 
 
 ```python
 # list process records using a wildcard prefix in file_names
 list_output = pipeline.list(file_names=["*e.txt"])
 
-# nicely print the output of this .list
+# nicely print the output of this list
 print(json.dumps(list_output, indent=2))
 ```
 
@@ -889,7 +889,7 @@ Now a suffix wildcard in `symbolic_directory_paths`:
 # list process records using wildcard suffix in symbolic_directory_paths
 list_output = pipeline.list(symbolic_directory_paths=["/my/*"])
 
-# nicely print the output of this .list
+# nicely print the output of this list
 print(json.dumps(list_output, indent=2))
 ```
 
@@ -921,7 +921,7 @@ Now a wildcard operator in `file_tags`:
 # list process records using the wildcard operator in file_tags
 list_output = pipeline.list(file_tags=[{"author": "*"}])
 
-# nicely print the output of this .list
+# nicely print the output of this list
 print(json.dumps(list_output, indent=2))
 ```
 
@@ -1114,11 +1114,11 @@ symbolic_directory_paths=['/*']
 
 Listing the global root returns records for every single file in your pipeline.
 
-### Using Multiple Arguments with the `.list` method
+### Using Multiple Arguments with the `list` method
 
-As earlier mentioned, you can jointly use multiple input arguments with the `.list` method. Multiple inputs are combined in a logical **OR** (if they are metadata arguments) or **AND** (if they are timestamp bookends) to retrieve records satisfying what's been requested.
+As earlier mentioned, you can jointly use multiple input arguments with the `list` method. Multiple inputs are combined in a logical **OR** (if they are metadata arguments) or **AND** (if they are timestamp bookends) to retrieve records satisfying what's been requested.
 
-As an example, let's combine a timestamp bookend, a `symbolic_file_path`, and `file_tags` in one `.list` method invocation:
+As an example, let's combine a timestamp bookend, a `symbolic_file_path`, and `file_tags` in one `list` method invocation:
 
 
 ```python
@@ -1131,7 +1131,7 @@ list_output = pipeline.list(created_at_end=time_now,
                             symbolic_file_paths=["/novels/gothic/Pride and Prejudice.txt"],
                             file_tags=[({"author":"Orwell"})])
 
-# nicely print the output of this .list
+# nicely print the output of this list
 print(json.dumps(list_output, indent=2))
 ```
 
@@ -1200,4 +1200,4 @@ Although <u>Pride and Prejudice</u> and <u>Little Women</u> are respectively cov
 
 ### Output Size Cap
 
-The current size limit on output generated by the `.list` method is 5MB.
+The current size limit on output generated by the `list` method is 5MB.

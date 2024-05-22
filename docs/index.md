@@ -4,11 +4,11 @@ If you're seeking the Krixik cli repo on GitHub, please [click here](https://git
 
 ## Table of Contents
 
--  [What can you do with Krixik?](#what-can-you-do-with-krixik?)
+-  [What you can do with Krixik](#what-you-can-do-with-krixik)
 -  [Core Concepts](#core-concepts)
 -  [Documentation Sections](#documentation-sections)
 
-## What can you do with Krixik?
+## What you can do with Krixik
 
 With Krixik, you can...
 

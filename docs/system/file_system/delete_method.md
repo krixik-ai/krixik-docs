@@ -1,21 +1,21 @@
-## The `.delete` Method
+## The `delete` Method
 
-You can delete all records of a processed file from the Krixik system with the `.delete` method. This is the manual version of letting the [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-.process-method-arguments) run out on a file.
+You can delete all records of a processed file from the Krixik system with the `delete` method. This is the manual version of letting the [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-process-method-arguments) run out on a file.
 
-This overview of the `.delete` method is divided into the following sections:
+This overview of the `delete` method is divided into the following sections:
 
-- [`.delete` Method Arguments](#.delete-method-arguments)
-- [`.delete` Method Example](#.delete-method-example)
+- [`delete` Method Arguments](#delete-method-arguments)
+- [`delete` Method Example](#delete-method-example)
 
-### `.delete` Method Arguments
+### `delete` Method Arguments
 
-The `.delete` method takes a single (required) argument:
+The `delete` method takes a single (required) argument:
 
 - `file_id` (str) - The `file_id` of the processed file whose record you wish to entirely delete from Krixik servers.
 
-### `.delete` Method Example
+### `delete` Method Example
 
-For this document's example we will use a pipeline consisting of a single [`parser`](../../modules/support_function_modules/parser_module.md) module.  We use the [`.create_pipeline`](../pipeline_creation/create_pipeline.md) method to instantiate the pipeline, and then [`.process`](../parameters_processing_files_through_pipelines/process_method.md) a file through it.
+For this document's example we will use a pipeline consisting of a single [`parser`](../../modules/support_function_modules/parser_module.md) module.  We use the [`create_pipeline`](../pipeline_creation/create_pipeline.md) method to instantiate the pipeline, and then [`process`](../parameters_processing_files_through_pipelines/process_method.md) a file through it.
 
 
 ```python
@@ -34,14 +34,14 @@ process_output = pipeline.process(local_file_path="../../../data/input/1984_very
                                   file_tags=[{"author": "Orwell"}, {"category": "dystopian"}, {"century": "20"}])
 ```
 
-Let's see what the files' records look like with the [`.list`](list_method.md) method:
+Let's see what the files' records look like with the [`list`](list_method.md) method:
 
 
 ```python
-# see both files' records with .list (they're in the same symbolic_directory_path)
+# see both files' records with list (they're in the same symbolic_directory_path)
 list_output = pipeline.list(symbolic_directory_paths=["/novels/20th-century"])
 
-# nicely print the output of this .list
+# nicely print the output of this list
 print(json.dumps(list_output, indent=2))
 ```
 
@@ -98,7 +98,7 @@ print(json.dumps(list_output, indent=2))
 
 Both files' records are properly showing up.
 
-Now use the `.delete` method and one of the files' `file_id`s to delete that file:
+Now use the `delete` method and one of the files' `file_id`s to delete that file:
 
 
 ```python
@@ -118,14 +118,14 @@ print(json.dumps(delete_output, indent=2))
     }
 
 
-We can check that the file has been deleted by using the [`.list`](list_method.md) method on the same `symbolic_directory_path`:
+We can check that the file has been deleted by using the [`list`](list_method.md) method on the same `symbolic_directory_path`:
 
 
 ```python
-# .list to confirm that one file has been deleted
+#  to confirm that one file has been deleted
 list_output = pipeline.list(symbolic_directory_paths=["/novels/20th-century"])
 
-# nicely print the output of this .list
+# nicely print the output of this 
 print(json.dumps(list_output, indent=2))
 ```
 

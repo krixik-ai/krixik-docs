@@ -127,7 +127,7 @@ with open("../../../data/input/1984_short.txt", "r") as file:
       IGNORANCE IS STRENGTH
 
 
-With the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method we run this input through the pipeline. We use the default model for the [`summarize`](../../modules/ai_modules/summarize_module.md) module each time, so the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument doesn't have to be leveraged.
+With the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method we run this input through the pipeline. We use the default model for the [`summarize`](../../modules/ai_modules/summarize_module.md) module each time, so the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument doesn't have to be leveraged.
 
 
 ```python
@@ -139,7 +139,7 @@ process_output = pipeline.process(local_file_path = "../../../data/input/1984_sh
                                   verbose=False) # do not display process update printouts upon running code
 ```
 
-The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+The output of this process is printed below. To learn more about each component of the output, review documentation for the [``](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 The output text file itself has been saved to the location noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 

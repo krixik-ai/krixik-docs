@@ -2,7 +2,7 @@
 
 ### JSON Format Details
 
-JSON input files into pipelines that begin with JSON-input modules (e.g. the [`translate module`](../../modules/ai_modules/translate_module.md)) must be in a very specific format for the [`.process`](../parameters_processing_files_through_pipelines/process_method.md) method to work. If the file doesn't follow this format, the [`.process`](../parameters_processing_files_through_pipelines/process_method.md) attempt will fail.
+JSON input files into pipelines that begin with JSON-input modules (e.g. the [`translate module`](../../modules/ai_modules/translate_module.md)) must be in a very specific format for the [`process`](../parameters_processing_files_through_pipelines/process_method.md) method to work. If the file doesn't follow this format, the [`process`](../parameters_processing_files_through_pipelines/process_method.md) attempt will fail.
 
 A description of the format follows:
 

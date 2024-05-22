@@ -3,6 +3,7 @@ import os
 import markdown
 import requests
 from utilities import base_dir
+from utilities.utilities import extract_headings_from_markdown, nono_chars
 
 
 def extract_links_from_markdown(markdown_file: str) -> tuple:
@@ -29,18 +30,6 @@ def extract_links_from_markdown(markdown_file: str) -> tuple:
     return intra_links, inter_links, outer_links
 
 
-def extract_headings_from_markdown(markdown_file) -> list:
-    with open(markdown_file, "r", encoding="utf-8") as file:
-        markdown_content = file.read()
-    headings = re.findall(r"^#+\s+(.+)$", markdown_content, flags=re.MULTILINE)
-    del headings[0]
-    toc_headings = []
-    for h in headings:
-        ht = "#" + "-".join(h.lower().replace("`", "").split(" "))
-        toc_headings.append(ht)
-    return toc_headings
-
-
 def check_file_links(filepath: str, toc_files: list) -> list:
     intra_links = []
     inter_links = []
@@ -55,15 +44,24 @@ def check_file_links(filepath: str, toc_files: list) -> list:
         print(f"FAILURE: check_file_links failed for file {filepath} with exception {e}")
     
     dead_links = []
-
+    
     # check intra_links for dead links
     for link in intra_links:
+        for no in nono_chars:
+            if no in link:
+                dead_links.append(link)
+                continue
         if link not in headings:
             dead_links.append(link)
 
     # check inter_links for dead links
     toc_files = ["docs/" + v for v in toc_files]
     for link in inter_links:
+        for no in nono_chars:
+            if no in link:
+                dead_links.append(link)
+                continue    
+
         # check if link directs to heading
         if "#" in link:
             link_split = link.split('#')

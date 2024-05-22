@@ -9,7 +9,7 @@ The document is divided into the following sections:
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)
 - [Using the Default Model](#using-the-default-model)
-- [Using the `.semantic_search` Method](#using-the-.semantic_search-method)
+- [Using the `semantic_search` Method](#using-the-semantic_search-method)
 - [Querying Output Databases Locally](#querying-output-databases-locally)
 
 ### Pipeline Setup
@@ -87,7 +87,7 @@ print(json.dumps(process_output, indent=2))
     }
 
 
-### Using the `.semantic_search` method
+### Using the `semantic_search` method
 
 Any pipeline containing a [`vector-db`](../../modules/database_modules/vector-db_module.md) module preceded by a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module has access to the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method. This provides you with the convenient ability to effect semantic queries on the created vector database(s).
 

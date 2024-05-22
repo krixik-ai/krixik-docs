@@ -8,7 +8,7 @@ This overview of the `transcribe` module is divided into the following sections:
 - [Available Models in the `transcribe` Module](#available-models-in-the-transcribe-module)
 - [Model Parameters in the `transcribe` Module](#model-parameters-in-the-transcribe-module)
 - [A Single-Module Pipeline for the `transcribe` Module](#a-single-module-pipeline-for-the-transcribe-module)
-- [Further Information on `transcribe` Module I/O and Clickability](#further-information-on-transcribe-module-i/o-and-clickability)
+- [Further Information on `transcribe` Module IO and Clickability](#further-information-on-transcribe-module-io-and-clickability)
 
 ### Inputs and Outputs of the `transcribe` Module
 
@@ -32,14 +32,14 @@ You can activate any of the following models when using the `text-embedder` modu
 
 - [whisper-large-v3](https://huggingface.co/openai/whisper-large-v3) - Most accurate but most expensive to run of the Whisper models
 
-Use the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method to determine what model you'd like active when you process files through the `transcribe` module.
+Use the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method to determine what model you'd like active when you process files through the `transcribe` module.
 
 ### Model Parameters in the `transcribe` Module
 
-None of the `transcribe` module models are parameterizable. Consequently, when selecting what model you'll use through the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method's [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument, `params` will always be set to an empty dictionary. For example:
+None of the `transcribe` module models are parameterizable. Consequently, when selecting what model you'll use through the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method's [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument, `params` will always be set to an empty dictionary. For example:
 
 ```python
-# example model selection for transcribe module in .process
+# example model selection for transcribe module in process
 modules={'transcribe': {'model':'whisper-small',
                        'params': {}}}
 ```
@@ -48,10 +48,10 @@ modules={'transcribe': {'model':'whisper-small',
 
 Please click [here](../../examples/single_module_pipelines/single_transcribe.md) to visit the `Pipeline Examples` section of our documentation and review an example of a single-module pipeline for the `transcribe` module.
 
-### Further Information on `transcribe` Module I/O and Clickability
+### Further Information on `transcribe` Module IO and Clickability
 
 Please click [here](../../system/convenience_methods/convenience_methods.md) to visit the `Convenience Methods (and More!)` documentation. There you will find two tools to learn more about the `transcribe` module:
 
 - [View Module Input and Output Examples](../../system/convenience_methods/convenience_methods.md#view-module-input-and-output-examples)
 
-- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-.click_data-method)
+- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-click_data-method)

@@ -2,13 +2,13 @@
 
 This overview on creating pipelines is divided into the following sections:
 
-- [The `.create_pipeline` Method](#the-.create_pipeline-method)
+- [The `create_pipeline` Method](#the-create_pipeline-method)
 - [A Single-Module Pipeline](#a-single-module-pipeline)
 - [A Multi-Module Pipeline](#a-multi-module-pipeline)
 
-### The `.create_pipeline` Method
+### The `create_pipeline` Method
 
-The `.create_pipeline` method instantiates new pipelines. It's a very simple method that takes two arguments, both required:
+The `create_pipeline` method instantiates new pipelines. It's a very simple method that takes two arguments, both required:
 
 - `name` (str): The name of your new pipeline. Set it wisely: pipeline names are their key identifiers, and no two pipelines can share the same name.
 - `module_chain` (list): The sequential list of modules that your new pipeline is comprised of.
@@ -17,7 +17,7 @@ The `.create_pipeline` method instantiates new pipelines. It's a very simple met
 
 ### A Single-Module Pipeline
 
-Let's use the `.create_pipeline` method to create a single-module pipeline. We'll use the [`parser`](../../modules/support_function_modules/parser_module.md) module, which divides input text files into shorter snippets.
+Let's use the `create_pipeline` method to create a single-module pipeline. We'll use the [`parser`](../../modules/support_function_modules/parser_module.md) module, which divides input text files into shorter snippets.
 
 
 ```python
@@ -28,7 +28,7 @@ pipeline = krixik.create_pipeline(name="create_pipeline_1_parser",
 
 Make sure that you have [initialized your session](../initialization/initialize_and_authenticate.md) before executing this code.
 
-Note that the `name` argument can be whatever string you want it to be. However, the `module_chain` list can only be comprised of established [module identifiers](../convenience_methods/convenience_methods.md#view-all-available-modules-with-the-.available_modules-property).
+Note that the `name` argument can be whatever string you want it to be. However, the `module_chain` list can only be comprised of established [module identifiers](../convenience_methods/convenience_methods.md#view-all-available-modules-with-the-available_modules-property).
 
 ### A Multi-Module Pipeline
 
@@ -47,7 +47,7 @@ An array of multi-module pipeline examples can be [found here](../../examples/pi
 
 ### Module Sequence Validation
 
-Upon `.create_pipeline` execution the Krixik CLI confirms that the modules indicated will run properly in the provided sequence. If they cannot—which is generally a consequence of one module's output not matching the next module's input—an explanatory local exception is thrown.
+Upon `create_pipeline` execution the Krixik CLI confirms that the modules indicated will run properly in the provided sequence. If they cannot—which is generally a consequence of one module's output not matching the next module's input—an explanatory local exception is thrown.
 
 For example, attempting to build a two-module pipeline that sequentially consists of a [`parser module`](../../modules/support_function_modules/parser_module.md) and a [`caption module`](../../modules/ai_modules/caption_module.md) modules will rightly fail and produce a local exception.  This is because the [`parser module`](../../modules/support_function_modules/parser_module.md) outputs a JSON file, while the [`caption module`](../../modules/ai_modules/caption_module.md) accepts only image input, as the error message below indicates:
 
@@ -106,4 +106,4 @@ pipeline = krixik.create_pipeline(name="create_pipeline_3_parser_caption",
 
 Krixik will not allow you to create a pipeline with the `name` of a pipeline you have already created. The only exception is if the new pipeline has a module chain identical to the old one.
 
-If you attempt to create a new pipeline with the `name` of a previous pipeline and with a different `module_chain`, initial pipeline instantiation will not fail; in other words, you will be able to run the `.create_pipeline` method without issue. However, when two pipelines with the same name and different `module_chain`s exist and you've already [`processed`](../parameters_processing_files_through_pipelines/process_method.md) one file through one of them, you will **not** be allowed to process a file through the other because of pipeline `name` duplication.
+If you attempt to create a new pipeline with the `name` of a previous pipeline and with a different `module_chain`, initial pipeline instantiation will not fail; in other words, you will be able to run the `create_pipeline` method without issue. However, when two pipelines with the same name and different `module_chain`s exist and you've already [`processed`](../parameters_processing_files_through_pipelines/process_method.md) one file through one of them, you will **not** be allowed to process a file through the other because of pipeline `name` duplication.

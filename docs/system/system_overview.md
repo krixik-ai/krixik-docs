@@ -18,11 +18,11 @@ In this section we take a deeper look at the methods and underlying concepts of 
 
 ### Parameters + Processing Files Through Pipelines
 
-- [Process Files with the Parameterizable `.process` Method](parameters_processing_files_through_pipelines/process_method.md)
+- [Process Files with the Parameterizable `process` Method](parameters_processing_files_through_pipelines/process_method.md)
 
 - [JSON Input Format](parameters_processing_files_through_pipelines/JSON_input_format.md)
 
-- [The `.process_status` Method](parameters_processing_files_through_pipelines/process_status_method.md)
+- [The `process_status` Method](parameters_processing_files_through_pipelines/process_status_method.md)
 
 - [The `.fetch_output` Method](parameters_processing_files_through_pipelines/fetch_output_method.md)
 
@@ -30,13 +30,13 @@ In this section we take a deeper look at the methods and underlying concepts of 
 
 ### The File System
 
-- [The `.list` Method](file_system/list_method.md)
+- [The `process` Method](file_system/list_method.md)
 
-- [The `.update` Method](file_system/update_method.md)
+- [The `update` Method](file_system/update_method.md)
 
-- [The `.delete` Method](file_system/delete_method.md)
+- [The `delete` Method](file_system/delete_method.md)
 
-- [The `.show_tree` Method](file_system/show_tree_method.md)
+- [The `show_tree` Method](file_system/show_tree_method.md)
 
 ### Search Methods
 

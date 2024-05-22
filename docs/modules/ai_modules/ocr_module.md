@@ -8,7 +8,7 @@ This overview of the `ocr` module is divided into the following sections:
 - [Available Models in the `ocr` Module](#available-models-in-the-ocr-module)
 - [Model Parameters in the `ocr` Module](#model-parameters-in-the-ocr-module)
 - [A Single-Module Pipeline for the `ocr` Module](#a-single-module-pipeline-for-the-ocr-module)
-- [Further Information on `ocr` Module I/O and Clickability](#further-information-on-ocr-module-i/o-and-clickability)
+- [Further Information on `ocr` Module IO and Clickability](#further-information-on-ocr-module-io-and-clickability)
 
 ### Inputs and Outputs of the `ocr` Module
 
@@ -46,10 +46,10 @@ modules={'ocr': {'model':'tesseract-es',
 
 Please click [here](../../examples/single_module_pipelines/single_ocr.md) to visit the `Pipeline Examples` section of our documentation and review an example of a single-module pipeline for the `ocr` module.
 
-### Further Information on `ocr` Module I/O and Clickability
+### Further Information on `ocr` Module IO and Clickability
 
 Please click [here](../../system/convenience_methods/convenience_methods.md) to visit the `Convenience Methods (and More!)` documentation. There you will find two tools to learn more about the `ocr` module:
 
 - [View Module Input and Output Examples](../../system/convenience_methods/convenience_methods.md#view-module-input-and-output-examples)
 
-- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-.click_data-method)
+- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-click_data-method)

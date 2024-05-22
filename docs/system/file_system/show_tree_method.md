@@ -1,22 +1,22 @@
-## The `.show_tree` Method
+## The `show_tree` Method
 
-The `.show_tree` method allows you to visualize—at your terminal or IDE output—all files currently in your pipeline.  It is designed as a simple analog to the standard UNIX [tree command](https://www.tecmint.com/linux-tree-command-examples/).
+The `show_tree` method allows you to visualize—at your terminal or IDE output—all files currently in your pipeline.  It is designed as a simple analog to the standard UNIX [tree command](https://www.tecmint.com/linux-tree-command-examples/).
 
-This overview of the `.show_tree` method is divided into the following sections:
+This overview of the `show_tree` method is divided into the following sections:
 
-- [.show_tree Method Arguments](#.show_tree-method-arguments)
-- [.show_tree Method Example](#.show_tree-method-example)
+- [show_tree Method Arguments](#show_tree-method-arguments)
+- [show_tree Method Example](#show_tree-method-example)
 - [The Wildcard Operator and the Global Root](#the-wildcard-operator-and-the-global-root)
 
-### `.show_tree` Method Arguments
+### `show_tree` Method Arguments
 
-The `.show_tree` method takes a single (required) argument:
+The `show_tree` method takes a single (required) argument:
 
 - `symbolic_directory_path` (str) - The `file_id` of the processed file whose record you wish to entirely delete from the Krixik system.
 
-### `.show_tree` Method Example
+### `show_tree` Method Example
 
-For this document's example we will use a pipeline consisting of a single [`parser`](../../modules/support_function_modules/parser_module.md) module.  We use the [`.create_pipeline`](../pipeline_creation/create_pipeline.md) method to instantiate the pipeline, and then [`.process`](../parameters_processing_files_through_pipelines/process_method.md) a few files through it. Note the `symbolic_directory_path` structure we create:
+For this document's example we will use a pipeline consisting of a single [`parser`](../../modules/support_function_modules/parser_module.md) module.  We use the [`.create_pipeline`](../pipeline_creation/create_pipeline.md) method to instantiate the pipeline, and then [`process`](../parameters_processing_files_through_pipelines/process_method.md) a few files through it. Note the `symbolic_directory_path` structure we create:
 
 
 ```python
@@ -85,16 +85,16 @@ Note that directory names are preceded by a forward slash (`/`) character and fi
 
 The wildcard operator is the asterisk: *
 
-As in the [`.list`](list_method.md) method, the [`.semantic_search`](../search_methods/semantic_search_method.md) method and the [`.keyword_search`](../search_methods/keyword_search_method.md) method you can use the wildcard operator * in the `symbolic_directory_path` argument for the `.show_tree` method.
+As in the [`list`](list_method.md) method, the [`semantic_search`](../search_methods/semantic_search_method.md) method and the [`keyword_search`](../search_methods/keyword_search_method.md) method you can use the wildcard operator * in the `symbolic_directory_path` argument for the `show_tree` method.
 
-The wildcard operator * can be used as a suffix in the `.show_tree` method if you wish to show the tree structure beneath a certain directory. Syntax might look like this:
+The wildcard operator * can be used as a suffix in the `show_tree` method if you wish to show the tree structure beneath a certain directory. Syntax might look like this:
 
 ```python
 # symbolic_directory_path use of wildcard operator *
 symbolic_directory_path='/home/files/studies'
 ```
 
-Using this `symbolic_directory_path` in `.show_tree` would generate a visualization of the directory structure under `/home/files/studies`.
+Using this `symbolic_directory_path` in `show_tree` would generate a visualization of the directory structure under `/home/files/studies`.
 
 The maxium expression of using the wildcard operator in a `symbolic_directory_path` is what we call "the global root". It's simply a forward slash and a wildcard operator *, includes every single file in your pipeline, and looks like this:
 
@@ -103,4 +103,4 @@ The maxium expression of using the wildcard operator in a `symbolic_directory_pa
 symbolic_directory_path='/*'
 ```
 
-As seen in the above code output, using the global root with the `.show_tree` method returns a visualization of your entire pipeline's directory structure.
+As seen in the above code output, using the global root with the `show_tree` method returns a visualization of your entire pipeline's directory structure.

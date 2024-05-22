@@ -1,10 +1,10 @@
-## The Parameterizable `.process` Method
+## The Parameterizable `process` Method
 
-The `.process` method, available on every Krixik pipeline, is invoked whenever you wish to process files through a pipeline.
+The `process` method, available on every Krixik pipeline, is invoked whenever you wish to process files through a pipeline.
 
-This overview of the `.process` method is divided into the following sections:
+This overview of the `process` method is divided into the following sections:
 
-- [Core .process Method Arguments](#core-.process-method-arguments)
+- [Core process Method Arguments](#core-process-method-arguments)
 - [Basic Usage and Output Breakdown](#basic-usage-and-output-breakdown)
 - [Selecting Models Via the modules Argument](#selecting-models-via-the-modules-argument)
 - [Optional Metadata Arguments](#optional-metadata-arguments)
@@ -12,9 +12,9 @@ This overview of the `.process` method is divided into the following sections:
 - [Automatic File Type Conversions](#automatic-file-type-conversions)
 - [Output Size Cap](#output-size-cap)
 
-### Core `.process` Method Arguments
+### Core `process` Method Arguments
 
-The `.process` method takes five basic arguments (in addition to the `modules` argument and a series of optional metadata arguments, all discussed further below). These five arguments are:
+The `process` method takes five basic arguments (in addition to the `modules` argument and a series of optional metadata arguments, all discussed further below). These five arguments are:
 
 - `local_file_path`: (required, str) The local file path of the file you wish to process through the pipeline.
 
@@ -22,17 +22,17 @@ The `.process` method takes five basic arguments (in addition to the `modules` a
 
 - `expire_time`: (optional, int) The amount of time (in seconds) that process output remains on Krixik servers. Defaults to 1800 seconds, which is 30 minutes.
 
-- `wait_for_process`: (optional, bool) Indicates whether or not Krixik should wait for your process to complete before returning control of your IDE or notebook. `True` tells Krixik to wait until the process is complete, so you won't be able to execute anything else in the meantime. `False` tells Krixik that you wish to regain control as soon as file upload to the Krixik system has concluded.  When set to `False`, processing status can be examined via the [`.process_status`](process_status_method.md) method. Defaults to `True`.
+- `wait_for_process`: (optional, bool) Indicates whether or not Krixik should wait for your process to complete before returning control of your IDE or notebook. `True` tells Krixik to wait until the process is complete, so you won't be able to execute anything else in the meantime. `False` tells Krixik that you wish to regain control as soon as file upload to the Krixik system has concluded.  When set to `False`, processing status can be examined via the [`process_status`](process_status_method.md) method. Defaults to `True`.
 
 - `verbose`: (optional, bool) Determines if Krixik should immediately display process update printouts at your terminal/notebook. Defaults to `True`.
 
 ### Basic Usage and Output Breakdown
 
-Let's first create a single-module pipeline to demonstrate the `.process` method with. We'll use a [`sentiment module`](../../modules/ai_modules/sentiment_module.md).
+Let's first create a single-module pipeline to demonstrate the `process` method with. We'll use a [`sentiment module`](../../modules/ai_modules/sentiment_module.md).
 
 
 ```python
-# create single-module pipeline for .process demo
+# create single-module pipeline for process demo
 pipeline = krixik.create_pipeline(name='process_method_1_sentiment',
                                   module_chain=['sentiment'])
 ```
@@ -49,7 +49,7 @@ Keep in mind that input JSON files _must_ follow a very [specific format](JSON_i
 
 
 ```python
-# .process short input file
+# process short input file
 process_demo_output = pipeline.process(local_file_path ="../../../data/input/recliner_reviews.json", # the initial local filepath where the input JSON file is stored
                                        local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
                                        expire_time=60 * 30,  # process data will be deleted from the Krixik system in 10 minutes
@@ -103,9 +103,9 @@ Let's break down the output:
 
 - `status_code`: The HTTP status code for this process (e.g. "200", "500")
 
-- `pipeline`: The `name` of the pipeline we just ran `.process` on.
+- `pipeline`: The `name` of the pipeline we just ran `process` on.
 
-- `request_id`: The unique ID associated with this execution of `.process`.
+- `request_id`: The unique ID associated with this execution of `process`.
 
 - `file_id`: The unique server-side ID for the now-processed file (and thus its associated output).
 
@@ -154,7 +154,7 @@ with open(process_demo_output["process_output_files"][0], "r") as file:
 
 ### Selecting Models Via the `modules` Argument
 
-The `modules` argument to the `.process` method is optional, but through it you can access a wealth of parameterization options. This argument allows you to parameterize how each module operates, **INCLUDING** the determination of (when applicable) what AI model is active within it.
+The `modules` argument to the `process` method is optional, but through it you can access a wealth of parameterization options. This argument allows you to parameterize how each module operates, **INCLUDING** the determination of (when applicable) what AI model is active within it.
 
 The `modules` argument takes the form of a dictionary with dictionaries within it. On a single-module pipeline it looks like this:
 
@@ -194,7 +194,7 @@ Find detail on each of our current modules, including available models for each,
 
 ### Optional Metadata Arguments
 
-The `.process` method also takes a variety of optional metadata arguments. These do not change how `.process` runs or treats data. Instead, they make your processed files easier to retrieve and organize. You can think of it as a file system for files you've processed through your pipelines.
+The `process` method also takes a variety of optional metadata arguments. These do not change how `process` runs or treats data. Instead, they make your processed files easier to retrieve and organize. You can think of it as a file system for files you've processed through your pipelines.
 
 Optional metadata arguments include:
 
@@ -208,17 +208,17 @@ Optional metadata arguments include:
 
 - `file_description` (str) - A custom file description. Default is an empty string.
 
-The first four of these—`symbolic_directory_path`, `file_name`, `symbolic_directory_path`, and `file_tags`—can be used as arguments to the [`.list`](../file_system/list_method.md) method and to the [`.keyword_search`](../search_methods/keyword_search_method.md) and [`.semantic_search`](../search_methods/semantic_search_method.md) methods.
+The first four of these—`symbolic_directory_path`, `file_name`, `symbolic_directory_path`, and `file_tags`—can be used as arguments to the [`list`](../file_system/list_method.md) method and to the [`keyword_search`](../search_methods/keyword_search_method.md) and [`semantic_search`](../search_methods/semantic_search_method.md) methods.
 
-Note that a file you process through one pipeline is only accessible to that pipeline. If you upload a file to a certain `symbolic_directory_path` on a certain pipeline, for instance, you will not be able to [`.list`](../file_system/list_method.md), [search](../../examples/search_pipeline_examples/search_pipelines_overview.md), or otherwise access it from any other pipeline, even if you target the same `symbolic_directory_path` from there.
+Note that a file you process through one pipeline is only accessible to that pipeline. If you upload a file to a certain `symbolic_directory_path` on a certain pipeline, for instance, you will not be able to [`list`](../file_system/list_method.md), [search](../../examples/search_pipeline_examples/search_pipelines_overview.md), or otherwise access it from any other pipeline, even if you target the same `symbolic_directory_path` from there.
 
-Also note that a `symbolic_file_path` cannot be duplicated within a pipeline. In other words, if on a certain pipeline you `.process` a file to a specified `symbolic_directory_path` and `file_name`, Krixik will not allow you to `.process` any other files with that same combination of `symbolic_file_path` and `file_name`.
+Also note that a `symbolic_file_path` cannot be duplicated within a pipeline. In other words, if on a certain pipeline you `process` a file to a specified `symbolic_directory_path` and `file_name`, Krixik will not allow you to `process` any other files with that same combination of `symbolic_file_path` and `file_name`.
 
-Let's call the `.process` method once more. We'll use the same product review file as before, but expand our line of code with some of these optional metadata arguments:
+Let's call the `process` method once more. We'll use the same product review file as before, but expand our line of code with some of these optional metadata arguments:
 
 
 ```python
-# .process short input file with optional metadata arguments
+# process short input file with optional metadata arguments
 process_demo_output = pipeline.process(local_file_path ="../../../data/input/recliner_reviews.json",
                                        local_save_directory="../../../data/output",
                                        expire_time=60 * 30,
@@ -240,7 +240,7 @@ process_demo_output = pipeline.process(local_file_path ="../../../data/input/rec
 
 ### Automatic File Type Conversions
 
-For certain modules, the `.process` method automatically converts the format of some `local_file_path` input files. Conversions currently done by Krixik are:
+For certain modules, the `process` method automatically converts the format of some `local_file_path` input files. Conversions currently done by Krixik are:
 
 - `pdf` -> `txt`
 - `docx` -> `txt`
@@ -248,4 +248,4 @@ For certain modules, the `.process` method automatically converts the format of 
 
 ### Output Size Cap
 
-The current size limit on output generated by the `.process` method is 5MB.
+The current size limit on output generated by the `process` method is 5MB.

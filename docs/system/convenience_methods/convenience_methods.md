@@ -4,17 +4,17 @@ This document introduces several useful properties of the main Krixik object and
 
 The document is broken down as follows:
 
-- [View All Available Modules with the `.available_modules` Property](#view-all-available-modules-with-the-.available_modules-property)
-- [Examine Configuration of a Module with the `.module_details` method](#examine-configuration-of-a-module-with-the-.module_details-method)
-- [View Pipeline Module Chain with the `.module_chain` Property](#view-pipeline-module-chain-with-the-.module_chain-property)
-- [Test Pipeline Input with the `.test_input` Method](#test-pipeline-input-with-the-.test_input-method)
+- [View All Available Modules with the `available_modules` Property](#view-all-available-modules-with-the-available_modules-property)
+- [Examine Configuration of a Module with the `module_details` method](#examine-configuration-of-a-module-with-the-module_details-method)
+- [View Pipeline Module Chain with the `module_chain` Property](#view-pipeline-module-chain-with-the-module_chain-property)
+- [Test Pipeline Input with the `test_input` Method](#test-pipeline-input-with-the-test_input-method)
 - [View Module Input and Output Examples](#view-module-input-and-output-examples)
-- [View Module Click Data with the `.click_data` Method](#view-module-click-data-with-the-.click_data-method)
+- [View Module Click Data with the `click_data` Method](#view-module-click-data-with-the-click_data-method)
 
 
-### View All Available Modules with the `.available_modules` Property
+### View All Available Modules with the `available_modules` Property
 
-To view all available modules use the `.available_modules` property.  This can be done locally and without [first initializing](../initialization/initialize_and_authenticate.md), as follows:
+To view all available modules use the `available_modules` property.  This can be done locally and without [first initializing](../initialization/initialize_and_authenticate.md), as follows:
 
 
 ```python
@@ -41,9 +41,9 @@ krixik.available_modules
 
 The above is a list of the exact module names you would use when setting up a [new pipeline's](../pipeline_creation/create_pipeline.md) `module_chain`.
 
-### Examine Configuration of a Module with the `.module_details` Method
+### Examine Configuration of a Module with the `module_details` Method
 
-Any module's [configuration](../pipeline_creation/pipeline_config.md) can be viewed using the Krixik `.module_details` method. This can be done locally and without [first initializing](../initialization/initialize_and_authenticate.md), as follows:
+Any module's [configuration](../pipeline_creation/pipeline_config.md) can be viewed using the Krixik `module_details` method. This can be done locally and without [first initializing](../initialization/initialize_and_authenticate.md), as follows:
 
 
 ```python
@@ -95,9 +95,9 @@ krixik.view_module_config(module_name="transcribe")
 
 
 
-### View Pipeline Module Chain with the .`module_chain` Property
+### View Pipeline Module Chain with the `module_chain` Property
 
-Sometimes you want to quickly view a pipeline's `module_chain` without having to resort to examining a [config](../pipeline_creation/pipeline_config.md) file. This is where the `.module_chain` property comes in handy.
+Sometimes you want to quickly view a pipeline's `module_chain` without having to resort to examining a [config](../pipeline_creation/pipeline_config.md) file. This is where the `module_chain` property comes in handy.
 
 Suppose we create a [multi-module pipeline](../../examples/pipeline_examples_overview.md) like the one below (discussed in further detail in examples like [this one](../../examples/search_pipeline_examples/multi_semantically_searchable_translation.md)):
 
@@ -117,7 +117,7 @@ To view the module chain of this (or any pipeline), use the `module_chain` prope
 
 
 ```python
-# view the module chain of your pipeline using the .module_chain property
+# view the module chain of your pipeline using the module_chain property
 pipeline.module_chain
 ```
 
@@ -133,11 +133,11 @@ pipeline.module_chain
 
 
 
-### Test Pipeline Input with the `.test_input` Method
+### Test Pipeline Input with the `test_input` Method
 
-You can test whether inputs to a pipeline will flow properly through it by using the `.test_input` method. 
+You can test whether inputs to a pipeline will flow properly through it by using the `test_input` method. 
 
-We illustrate this below for both valid and invalid files using the [pipeline we created above](#view-pipeline-module-chain-with-the-.module_chain-property). 
+We illustrate this below for both valid and invalid files using the [pipeline we created above](#view-pipeline-module-chain-with-the-module_chain-property). 
 
 Note that this test method does **not** execute your pipeline.  Nothing is sent server-side; it simply makes sure that your input file is consumable by the first module of your pipeline. Flow-through across the rest of your pipeline was already confirmed upon [pipeline instantiation](../pipeline_creation/create_pipeline.md).
 
@@ -145,7 +145,7 @@ Let's first test with a file that is valid for this pipeline. Since the first mo
 
 
 ```python
-# use .test_input on a valid file for this pipeline
+# use test_input on a valid file for this pipeline
 pipeline.test_input(local_file_path="../../../data/input/Interesting Facts About Colombia.mp3")
 ```
 
@@ -156,7 +156,7 @@ Now let's test with an input that won't work with this pipeline. The [`transcrib
 
 
 ```python
-# use .test_input on a file that won't work for this pipeline
+# use test_input on a file that won't work for this pipeline
 pipeline.test_input(local_file_path="../../../data/input/1984_very_short.txt")
 ```
 
@@ -252,7 +252,7 @@ print(json.dumps(io.OutputStructure().data_example, indent=2))
 
 Here `"other"` denotes any other key in your input.  Its value is arbitrary because, as far as any model you connect the [`parser`](../../modules/support_function_modules/parser_module.md) module into is concerned, it's irrelevant. Only the snippet is passed through.
 
-### View Module Click Data with the `.click_data` Method
+### View Module Click Data with the `click_data` Method
 
 The `.click_data` method displays all the basic data required to know which modules can be "clicked" into which other modules.  This is the data referenced "under the hood" of Krixik when you build a pipeline with the [`.create_pipeline`](../pipeline_creation/create_pipeline.md) method. Let's go through this piece by piece.
 

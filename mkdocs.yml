@@ -7,19 +7,19 @@ nav:
       - 'initialize and authenticate': system/initialization/initialize_and_authenticate.md  
     - pipeline creation:
       - 'create a pipeline': system/pipeline_creation/create_pipeline.md
-      - 'pipeline .config': system/pipeline_creation/pipeline_config.md
+      - 'pipeline config': system/pipeline_creation/pipeline_config.md
       - 'save and load a pipeline': system/pipeline_creation/saving_and_loading_pipelines.md
     - parameters + processing files through pipelines:
-      - 'the parameterizable .process method': system/parameters_processing_files_through_pipelines/process_method.md
+      - 'the parameterizable  method': system/parameters_processing_files_through_pipelines/process_method.md
       - 'json input format': system/parameters_processing_files_through_pipelines/JSON_input_format.md
-      - 'the .process_status method': system/parameters_processing_files_through_pipelines/process_status_method.md
-      - 'the .fetch_output method': system/parameters_processing_files_through_pipelines/fetch_output_method.md
+      - 'the process_status method': system/parameters_processing_files_through_pipelines/process_status_method.md
+      - 'the fetch_output method': system/parameters_processing_files_through_pipelines/fetch_output_method.md
       - 'data deletion policy': system/parameters_processing_files_through_pipelines/data_deletion_policy.md
     - file system:
-      - 'the .list method': system/file_system/list_method.md
-      - 'the .update method': system/file_system/update_method.md
-      - 'the .delete method': system/file_system/delete_method.md
-      - 'the .show_tree method': system/file_system/show_tree_method.md
+      - 'the list method': system/file_system/list_method.md
+      - 'the update method': system/file_system/update_method.md
+      - 'the delete method': system/file_system/delete_method.md
+      - 'the show_tree method': system/file_system/show_tree_method.md
     - search methods:
       - 'semantic (vector) search': system/search_methods/semantic_search_method.md
       - 'keyword search': system/search_methods/keyword_search_method.md
