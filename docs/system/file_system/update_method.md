@@ -8,32 +8,6 @@ This overview of the `.update` method is divided into the following sections:
 - [.update Method Example](#.update-method-example)
 - [Observations on the .update Method](#observations-on-the-.update-method)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### `.update` Method Arguments
 
 The `.update` method takes one required argument and at least one of several optional arguments:
@@ -65,13 +39,13 @@ pipeline = krixik.create_pipeline(name="update_method_1_parser",
                                   module_chain=["parser"])
 
 # process short input file
-process_output = pipeline.process(local_file_path="../../../data/input/Frankenstein.txt", # the initial local filepath where the input JSON file is stored
-                                      expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-                                      wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
-                                      verbose=False,  # do not display process update printouts upon running code
-                                      symbolic_directory_path="/novels/gothic",
-                                      file_name="The Franken Stein.txt",
-                                      file_tags=[{"author": "Shelley"}, {"category": "gothic"}, {"century": "19"}])
+process_output = pipeline.process(local_file_path="../../../data/input/frankenstein_very_short.txt", # the initial local filepath where the input JSON file is stored
+                                  expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
+                                  wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
+                                  verbose=False,  # do not display process update printouts upon running code
+                                  symbolic_directory_path="/novels/gothic",
+                                  file_name="The Franken Stein.txt",
+                                  file_tags=[{"author": "Shelley"}, {"category": "gothic"}, {"century": "19"}])
 ```
 
     INFO: output json downloaded but larger than 0.5MB and will not be returned with .process output
@@ -146,10 +120,10 @@ We'll update its `file_name`, since it's erroneous, change the `{"category": "go
 
 ```python
 # update metadata the metadata for the processed file
-update_output = pipeline.update(file_id="463a697d-a8b5-4674-ace8-79fe53b862a1",
-                                    file_name="Frankenstein.txt",
-                                    file_tags=[{"author": "Shelley"}, {"country": "UK"}, {"century": "19"}],
-                                    file_description='Is the villain the monster or the doctor?')
+update_output = pipeline.update(file_id=process_output["file_id"],
+                                file_name="Frankenstein.txt",
+                                file_tags=[{"author": "Shelley"}, {"country": "UK"}, {"century": "19"}],
+                                file_description='Is the villain the monster or the doctor?')
 
 # nicely print the output of this .update
 print(json.dumps(process_output, indent=2))
@@ -245,9 +219,3 @@ Four closing observation on the `.update` method:
 - You can also not update a file's file extension. For instance, a `.txt` file cannot become a `.pdf` file through the `.update` method.
 
 - The `.update` method allows you to extend a file's [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-.process-method-arguments) indefinitely. Upon initially uploading a file, its [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-.process-method-arguments) cannot be greater than 2,592,000 seconds (30 days). However, if you periodically invoke `.update` on its file and reset its [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-.process-method-arguments) to another 2,592,000 seconds (or however many seconds you please), the file will remain on-system for that much more time as of that moment, and so forth.
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

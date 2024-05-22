@@ -7,32 +7,6 @@ This overview of the `.delete` method is divided into the following sections:
 - [`.delete` Method Arguments](#.delete-method-arguments)
 - [`.delete` Method Example](#.delete-method-example)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### `.delete` Method Arguments
 
 The `.delete` method takes a single (required) argument:
@@ -41,7 +15,7 @@ The `.delete` method takes a single (required) argument:
 
 ### `.delete` Method Example
 
-For this document's example we will use a pipeline consisting of a single [`parser`](../../modules/ai_model_modules/parser_module.md) module.  We use the [`.create_pipeline`](../pipeline_creation/create_pipeline.md) method to instantiate the pipeline, and then [`.process`](../parameters_processing_files_through_pipelines/process_method.md) two files through it into the same `symbolic_directory_path` (to make the demonstration clearer):
+For this document's example we will use a pipeline consisting of a single [`parser`](../../modules/ai_model_modules/parser_module.md) module.  We use the [`.create_pipeline`](../pipeline_creation/create_pipeline.md) method to instantiate the pipeline, and then [`.process`](../parameters_processing_files_through_pipelines/process_method.md) a file through it.
 
 
 ```python
@@ -50,21 +24,13 @@ pipeline = krixik.create_pipeline(name="delete_method_1_parser",
                                   module_chain=["parser"])
 
 # process short input file
-process_output_1 = pipeline.process(local_file_path="../../../data/input/Frankenstein.txt", # the initial local filepath where the input JSON file is stored
-                                    expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-                                    wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
-                                    verbose=False,  # do not display process update printouts upon running code
-                                    symbolic_directory_path="/novels/19th-century",
-                                    file_name="Frankenstein.txt",
-                                    file_tags=[{"author": "Shelley"}, {"category": "gothic"}, {"century": "19"}])
-
-process_output_2 = pipeline.process(local_file_path="../../../data/input/Moby Dick.txt", # the initial local filepath where the input JSON file is stored
-                                      expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-                                      wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
-                                      verbose=False,  # do not display process update printouts upon running code
-                                      symbolic_directory_path="/novels/19th-century",
-                                      file_name="Moby Dick.txt",
-                                      file_tags=[{"author": "Melville"}, {"category": "adventure"}, {"century": "19"}])
+process_output = pipeline.process(local_file_path="../../../data/input/1984_very_short.txt", # the initial local filepath where the input JSON file is stored
+                                  expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
+                                  wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
+                                  verbose=False,  # do not display process update printouts upon running code
+                                  symbolic_directory_path="/novels/20th-century",
+                                  file_name="1984_sample.txt",
+                                  file_tags=[{"author": "Orwell"}, {"category": "dystopian"}, {"century": "20"}])
 ```
 
     INFO: output json downloaded but larger than 0.5MB and will not be returned with .process output
@@ -76,7 +42,7 @@ Let's see what the files' records look like with the [`.list`](list_method.md) m
 
 ```python
 # see both files' records with .list (they're in the same symbolic_directory_path)
-list_output = pipeline.list(symbolic_directory_paths=["/novels/19th-century"])
+list_output = pipeline.list(symbolic_directory_paths=["/novels/20th-century"])
 
 # nicely print the output of this .list
 print(json.dumps(list_output, indent=2))
@@ -181,7 +147,7 @@ Now use the `.delete` method and one of the files' `file_id`s to delete that fil
 
 ```python
 # delete processed file's record and output with its file_id
-delete_output = pipeline.delete(file_id="e1c9b5c4-132d-4922-a05e-3eeaeda87e47")
+delete_output = pipeline.delete(file_id=process_output["file_id"])
 
 # nicely print the output of this deletion
 print(json.dumps(delete_output, indent=2))
@@ -201,7 +167,7 @@ We can check that the file has been deleted by using the [`.list`](list_method.m
 
 ```python
 # .list to confirm that one file has been deleted
-list_output = pipeline.list(symbolic_directory_paths=["/novels/19th-century"])
+list_output = pipeline.list(symbolic_directory_paths=["/novels/20th-century"])
 
 # nicely print the output of this .list
 print(json.dumps(list_output, indent=2))
@@ -259,9 +225,3 @@ print(json.dumps(list_output, indent=2))
 
 
 As expected, only one of the two previously [processed](../parameters_processing_files_through_pipelines/process_method.md) files shows up; the other has been deleted.
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

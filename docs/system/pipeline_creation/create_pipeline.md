@@ -6,32 +6,6 @@ This overview on creating pipelines is divided into the following sections:
 - [A Single-Module Pipeline](#a-single-module-pipeline)
 - [A Multi-Module Pipeline](#a-multi-module-pipeline)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### The `.create_pipeline` Method
 
 The `.create_pipeline` method instantiates new pipelines. It's a very simple method that takes two arguments, both required:
@@ -133,9 +107,3 @@ pipeline = krixik.create_pipeline(name="create_pipeline_3_parser_caption",
 Krixik will not allow you to create a pipeline with the `name` of a pipeline you have already created. The only exception is if the new pipeline has a module chain identical to the old one.
 
 If you attempt to create a new pipeline with the `name` of a previous pipeline and with a different `module_chain`, initial pipeline instantiation will not fail; in other words, you will be able to run the `.create_pipeline` method without issue. However, when two pipelines with the same name and different `module_chain`s exist and you've already [`processed`](../parameters_processing_files_through_pipelines/process_method.md) one file through one of them, you will **not** be allowed to process a file through the other because of pipeline `name` duplication.
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

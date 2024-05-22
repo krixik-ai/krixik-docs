@@ -12,32 +12,6 @@ The document is broken down as follows:
 - [View Module Click Data with the `.click_data` Method](#view-module-click-data-with-the-.click_data-method)
 
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### View All Available Modules with the `.available_modules` Property
 
 To view all available modules use the `.available_modules` property.  This can be done locally and without [first initializing](../initialization/initialize_and_authenticate.md), as follows:
@@ -349,9 +323,3 @@ The latter connection, (`vector-search` → `text-embedder`), will instead not w
 - `vector-search` output_format (`faiss`) != `text-embedder` input_format (`json`)
 
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

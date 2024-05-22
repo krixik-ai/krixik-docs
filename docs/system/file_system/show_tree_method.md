@@ -8,32 +8,6 @@ This overview of the `.show_tree` method is divided into the following sections:
 - [.show_tree Method Example](#.show_tree-method-example)
 - [The Wildcard Operator and the Global Root](#the-wildcard-operator-and-the-global-root)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### `.show_tree` Method Arguments
 
 The `.show_tree` method takes a single (required) argument:
@@ -50,34 +24,39 @@ For this document's example we will use a pipeline consisting of a single [`pars
 pipeline = krixik.create_pipeline(name="show_tree_method_1_parser",
                                   module_chain=["parser"])
 
-# now process some files through the pipeline
-process_output = pipeline.process(local_file_path="../../../data/input/Frankenstein partial.txt", # the initial local filepath where the input JSON file is stored
-                                  expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-                                  wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
-                                  verbose=False,  # do not display process update printouts upon running code
-                                  symbolic_directory_path="/lit/novels/19th-century",
-                                  file_name="Frankenstein.txt")
+# define path to an input file from examples directory
+test_file = "../../../data/input/1984_very_short.txt"
 
-process_output = pipeline.process(local_file_path="../../../data/input/Pride and Prejudice partial.txt", # the initial local filepath where the input JSON file is stored
-                                      expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-                                      wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
-                                      verbose=False,  # do not display process update printouts upon running code
-                                      symbolic_directory_path="/lit/novels/19th-century",
-                                      file_name="Pride and Prejudice.txt")
+# process short input file with various metdata
+process_output = pipeline.process(
+    local_file_path=test_file,
+    local_save_directory="../../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    wait_for_process=True,  # wait for process to complete before regaining ide
+    verbose=False,
+    symbolic_directory_path="/my/custom/path",
+    file_name="file_num_one.txt",
+)
 
-process_output_3 = pipeline.process(local_file_path="../../../data/input/Moby Dick partial.txt", # the initial local filepath where the input JSON file is stored
-                                      expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-                                      wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
-                                      verbose=False,  # do not display process update printouts upon running code
-                                      symbolic_directory_path="/lit/novels/19th-century/adventure",
-                                      file_name="Moby Dick.txt")
+process_output = pipeline.process(
+    local_file_path=test_file,
+    local_save_directory="../../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    wait_for_process=True,  # wait for process to complete before regaining ide
+    verbose=False,
+    symbolic_directory_path="/my/custom/path",
+    file_name="file_num_two.txt",
+)
 
-process_output_4 = pipeline.process(local_file_path="../../../data/input/Little Women partial.txt", # the initial local filepath where the input JSON file is stored
-                                      expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-                                      wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
-                                      verbose=False,  # do not display process update printouts upon running code
-                                      symbolic_directory_path="/lit/novels/19th-century/bildungsroman",
-                                      file_name="Little Women.txt")
+process_output = pipeline.process(
+    local_file_path=test_file,
+    local_save_directory="../../../data/output",  # save output repo data output subdir
+    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    wait_for_process=True,  # wait for process to complete before regaining ide
+    verbose=False,
+    symbolic_directory_path="/my/custom/path/subpath",
+    file_name="file_num_three.txt",
+)
 ```
 
 Now you can visualize your pipeline's symbolic directory structure by using `show_tree`.
@@ -127,9 +106,3 @@ symbolic_directory_path='/*'
 ```
 
 As seen in the above code output, using the global root with the `.show_tree` method returns a visualization of your entire pipeline's directory structure.
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

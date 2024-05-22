@@ -2,32 +2,6 @@
 
 The `.fetch_output` method is used to download the output of a pipeline process.  This is particularly useful when using the [`.process`](../parameters_processing_files_through_pipelines/process_method.md) method with `wait_for_process` set to `False`, as your output is in that case not immediately yielded by the [`.process`](../parameters_processing_files_through_pipelines/process_method.md) method.
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### `.fetch_output` Method Arguments
 
 The `.fetch_output` method takes two arguments:
@@ -101,7 +75,7 @@ Armed with its `file_id`, you can use the `.fetch_output` method to suit your pu
 
 ```python
 # fetch the output of this process using .fetch_output and its file_id
-fetched_output = pipeline.fetch_output(file_id="5a478543-c9b4-4280-aeb4-94ac3420717f",
+fetched_output = pipeline.fetch_output(file_id=process_output["file_id"],
                                        local_save_directory="../../../data/output")
 ```
 
@@ -144,9 +118,3 @@ print(json.dumps(fetched_output, indent=2))
 
 
 At the end of this return the local directory to which the output has been downloaded is displayed.
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

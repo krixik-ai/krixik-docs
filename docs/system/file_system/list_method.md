@@ -16,32 +16,6 @@ This overview of the `.list` method is divided into the following sections:
 - [Using Multiple Arguments with the `.list` Method](#using-multiple-arguments-with-the-.list-method)
 - [Output Size Cap](#output-size-cap)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### `.list` Method Arguments
 
 The `.list` method is very versatile. It allows you to list by several different metadata items and by a combination of different metadata items.
@@ -84,49 +58,53 @@ Finally, the `.list` method takes two additional optional arguments to help you 
 
 ### Example Pipeline Setup and File Processing
 
-We will need to create a pipeline and [`.process`](../parameters_processing_files_through_pipelines/process_method.md) a couple of files through it to illustrate usage of `.list`. We'll create a single-module pipeline with a [`summarize`](../../modules/ai_model_modules/summarize_module.md) module and [`.process`](../parameters_processing_files_through_pipelines/process_method.md) some TXT files that hold the text of some English-language classics.
+We will need to create a pipeline and [`.process`](../parameters_processing_files_through_pipelines/process_method.md) a couple of files through it to illustrate usage of `.list`. We'll create a single-module pipeline with a [`parser`](../../modules/support_function_modules/parser_module.md) module and [`.process`](../parameters_processing_files_through_pipelines/process_method.md) some TXT files that hold the text of some English-language classics.  We define optional metadata like file_name, file_tags, and symbolic_directory_path for each process to illustrate how each can be used with `.list` below.
 
 
 ```python
-# create single-module summarize pipeline
-pipeline = krixik.create_pipeline(name='list_method_1_summarize',
-                                  module_chain=['summarize'])
+# create single-module parser pipeline
+pipeline = krixik.create_pipeline(name='list_method_1_parser',
+                                  module_chain=['parser'])
 ```
 
 
 ```python
-# process four files through the pipeline we just created.
-process_output_1 = pipeline.process(local_file_path="../../../data/input/Frankenstein partial.txt", # the initial local filepath where the input file is stored
+# process files through the pipeline we just created.
+# we define optional metadata like file_name, file_tags, and symbolic_directory_path for each
+# to illustrate the ability to list by each.
+entries = [
+    {
+        "local_file_path" : "../../../data/input/frankenstein_very_short.txt",
+        "file_name": "Frankenstein.txt",
+        "file_tags": [{"author": "Shelley"}, {"category": "gothic"}, {"century": "19"}],
+        "symbolic_directory_path": "/novels/gothic",
+    },
+    {
+        "local_file_path": "../../../data/input/pride_and_prejudice_very_short.txt",,
+        "file_name": "Pride and Prejudice.txt",
+        "symbolic_directory_path": "/novels/romance",
+        "file_tags": [{"author": "Austen"}, {"category": "romance"}, {"century": "19"}],
+    },
+    {
+        "local_file_path":  "../../../data/input/moby_dick_very_short.txt",
+        "file_name": "Moby Dick.txt",
+        "symbolic_directory_path": "/novels/adventure",
+        "file_tags": [{"author": "Melville"}, {"category": "adventure"}, {"century": "19"}]
+    }
+]
+        
+# process each file
+all_process_output = []
+for entry in entries:
+    process_output = pipeline.process(local_file_path=entry["local_file_path"], # the initial local filepath where the input file is stored
                                       expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
                                       wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
                                       verbose=False,  # do not display process update printouts upon running code
-                                      symbolic_directory_path="/novels/gothic",
-                                      file_name="Frankenstein.txt",
-                                      file_tags=[{"author": "Shelley"}, {"category": "gothic"}, {"century": "19"}])
+                                      file_name=entry["file_name"],
+                                      symbolic_directory_path=entry["symbolic_directory_path"],
+                                      file_tags=entry["file_tags"])
+    all_process_output.append(process_output)
 
-process_output_2 = pipeline.process(local_file_path="../../../data/input/Pride and Prejudice partial.txt", # the initial local filepath where the input file is stored
-                                      expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-                                      wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
-                                      verbose=False,  # do not display process update printouts upon running code
-                                      symbolic_directory_path="/novels/romance",
-                                      file_name="Pride and Prejudice.txt",
-                                      file_tags=[{"author": "Austen"}, {"category": "romance"}, {"century": "19"}])
-
-process_output_3 = pipeline.process(local_file_path="../../../data/input/Moby Dick partial.txt", # the initial local filepath where the input file is stored
-                                      expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-                                      wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
-                                      verbose=False,  # do not display process update printouts upon running code
-                                      symbolic_directory_path="/novels/adventure",
-                                      file_name="Moby Dick.txt",
-                                      file_tags=[{"author": "Melville"}, {"category": "adventure"}, {"century": "19"}])
-
-process_output_4 = pipeline.process(local_file_path="../../../data/input/Little Women partial.txt", # the initial local filepath where the input file is stored
-                                      expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-                                      wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
-                                      verbose=False,  # do not display process update printouts upon running code
-                                      symbolic_directory_path="/novels/bildungsroman",
-                                      file_name="Little Women.txt",
-                                      file_tags=[{"author": "Alcott"}, {"category": "bildungsroman"}, {"century": "19"}])
 ```
 
 
@@ -276,12 +254,12 @@ process_output_4 = pipeline.process(local_file_path="../../../data/input/Little 
     ValueError: processes associated with request_id '8594789e-42d3-b069-d0f2-2d5f0d33c3be' failed at module 'summarize'
 
 
-Let's quickly look at what the output for the four of these looks like. The first one:
+Let's quickly look at what the output for the last of these processed files.
 
 
 ```python
-# nicely print the output of the first process
-print(json.dumps(process_output_1, indent=2))
+# nicely print the output of the last process
+print(json.dumps(all_process_output[-1], indent=2))
 ```
 
     {
@@ -329,42 +307,20 @@ print(json.dumps(process_output_1, indent=2))
     }
 
 
-The second one:
-
-
-```python
-# nicely print the output of the second process
-print(json.dumps(process_output_2, indent=2))
-```
-
-The third one:
-
-
-```python
-# nicely print the output of the third process
-print(json.dumps(process_output_3, indent=2))
-```
-
-And the fourth one:
-
-
-```python
-# nicely print the output of the fourth process
-print(json.dumps(process_output_4, indent=2))
-```
-
 ### Listing by `file_ids`
 
 Let's try listing by `file_ids`.
 
-You have the `file_id` of each of the four files you processed; each was returned after processing finalized. Remember that you can list by multiple `file_id`s if you so choose, and it's easy to do so because `file_ids` is submitted in list format.
+You have the `file_id` of each of the four files you processed; each was returned after processing finalized.  
 
-Listing for the <u>Frankenstein</u> and <u>Moby Dick</u> files is done as follows:
+You can list by multiple `file_id`s if you so choose by providing a list of desired `file_ids`.
+
+For example, to see metadata associated with each file processed above simply pluck out the `file_id` from each processed return.
 
 
 ```python
 # .list records for two of the uploaded files via file_ids
-list_output = pipeline.list(file_ids=["XXXXX", "YYYY"])
+list_output = pipeline.list(file_ids=[v["file_id"] for v in all_process_output])
 
 # nicely print the output of this process
 print(json.dumps(list_output, indent=2))
@@ -417,7 +373,7 @@ As you can see, a full record for each file was returned. To learn more about ea
 
 ### Listing by `file_names`
 
-You can also list via `file_name`s. It works just like listing with `file_id`s above, but with `file_name` instead of `file_id`. We'll list <u>Pride and Prejudice</u> via `file_names`, as follows:
+You can also list via `file_name`s. It works just like listing with `file_id`s above, but with `file_name` instead of `file_id`.  We'll list <u>Pride and Prejudice</u> via `file_names`, as follows:
 
 
 ```python
@@ -437,7 +393,7 @@ You can also list via `symbolic_directory_paths`. It works just like listing wit
 
 ```python
 # .list records for two of the uploaded files via symbolic_directory_paths
-list_output = pipeline.list(file_names=["/novels/bildungsroman", "/novels/adventure"])
+list_output = pipeline.list(symbolic_directory_paths=["/novels/gothic", "/novels/adventure"])
 
 # nicely print the output of this process
 print(json.dumps(list_output, indent=2))
@@ -490,12 +446,12 @@ As you can see, a full record for each file was returned. To learn more about ea
 
 ## Listing by `file_tags`
 
-We can also list through `file_tags`.  We'll list for 19th century novels and any novels by 'Alcott', as follows:
+We can also list through `file_tags`.  We'll list for 19th century novels and any novels by 'Melville', as follows:
 
 
 ```python
 # .list records for two of the uploaded files via symbolic_directory_paths
-list_output = pipeline.list(file_tags=[{"author": "alcott"}, {"century": 19}])
+list_output = pipeline.list(file_tags=[{"author": "Melville"}, {"century": 19}])
 
 # nicely print the output of this process
 print(json.dumps(list_output, indent=2))
@@ -544,7 +500,7 @@ print(json.dumps(list_output, indent=2))
     }
 
 
-Given that every file included the file tag `{"century": 19}` when initially processed, all four files were listed. <u>Little Women</u> also included the file tag `{"author": "alcott"}`, but there's no duplication of results, so that file's record is only listed once.
+Given that every file included the file tag `{"century": 19}` when initially processed, all four files were listed. <u>Little Women</u> also included the file tag `{"author": "Melville"}`, but there's no duplication of results, so that file's record is only listed once.
 
 ### Listing by `created_at` and `updated_at` Bookend Times
 
@@ -553,13 +509,13 @@ To illustrate how to `.list` by timestamp bookends, let's first [`.process`](../
 
 ```python
 # process an additional file into earlier pipeline
-process_output = pipeline.process(local_file_path="../../../data/input/A Tale of Two Cities.txt", # the initial local filepath where the input JSON file is stored
+process_output = pipeline.process(local_file_path="../../../data/input/1984_very_short.txt", # the initial local filepath where the input JSON file is stored
                                   expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
                                   wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
                                   verbose=False,  # do not display process update printouts upon running code
-                                  symbolic_directory_path="/novels/historical",
-                                  file_name="A Tale of Two Cities.txt",
-                                  file_tags=[{"author": "Dickens"}, {"category": "hisorical"}, {"century": 19}])
+                                  symbolic_directory_path="/novels/dystopian",
+                                  file_name="1984.txt",
+                                  file_tags=[{"author": "Orwell"}, {"category": "dystopian"}, {"century": 20}])
 ```
 
     {
@@ -599,7 +555,7 @@ Based on the output from the file we just processed and the output from the four
 
 ```python
 # .list process records by last_updated timestamp bookend
-list_output = pipeline.list(created_at_start="XXXX")
+list_output = pipeline.list(created_at_start=process_output["created_at"])
 
 # nicely print the output of this .list
 print(json.dumps(list_output, indent=2))
@@ -787,9 +743,9 @@ As an example, let's combine a timestamp bookend, a `symbolic_file_path`, and `f
 
 ```python
 # list process records using a combination of input args
-list_output = pipeline.list(created_at_end=XXXX,
-                                symbolic_file_path="/novels/gothic/Pride and Prejudice.txt",
-                                file_tags=[({"author":"Alcott"})])
+list_output = pipeline.list(created_at_end=process_output["created_at"],
+                            symbolic_file_path="/novels/gothic/Pride and Prejudice.txt",
+                            file_tags=[({"author":"Orwell"})])
 
 # nicely print the output of this .list
 print(json.dumps(list_output, indent=2))
@@ -824,9 +780,3 @@ Although <u>Pride and Prejudice</u> and <u>Little Women</u> are respectively cov
 ### Output Size Cap
 
 The current size limit on output generated by the `.list` method is 5MB.
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```
