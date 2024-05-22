@@ -16,7 +16,7 @@ Given that the list of Krixik modules—and of the models within them—will con
 
 - [Text Embedder](ai_model_modules/text-embedder_module.md): Converts input text into numerical vectors. These can then be stored in a Vector database to enable [`.semantic_search`](../system/search_methods/semantic_search_method.md).
 
-- [Parser](ai_model_modules/parser_module.md): Divides input text files into (potentially overlapping) snippets in a JSON file.
+- [Parser](support_function_modules/parser_module.md): Divides input text files into (potentially overlapping) snippets in a JSON file.
 
 - [Transcribe](ai_model_modules/transcribe_module.md): Transcribes an audio file's contents into text.
 

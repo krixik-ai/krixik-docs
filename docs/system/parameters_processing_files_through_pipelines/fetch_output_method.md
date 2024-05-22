@@ -2,6 +2,32 @@
 
 The `.fetch_output` method is used to download the output of a pipeline process.  This is particularly useful when using the [`.process`](../parameters_processing_files_through_pipelines/process_method.md) method with `wait_for_process` set to `False`, as your output is in that case not immediately yielded by the [`.process`](../parameters_processing_files_through_pipelines/process_method.md) method.
 
+
+```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ### `.fetch_output` Method Arguments
 
 The `.fetch_output` method takes two arguments:
@@ -12,7 +38,7 @@ The `.fetch_output` method takes two arguments:
 
 ### `.fetch_output` Example
 
-You will first need to create a pipeline on which to run this example. A pipeline consisting of a single [`parser`](../../modules/ai_model_modules/parser_module.md) module will do nicely:
+You will first need to create a pipeline on which to run this example. A pipeline consisting of a single [`parser`](../../modules/support_function_modules/parser_module.md) module will do nicely:
 
 
 ```python
@@ -27,6 +53,7 @@ Now we run a file through this pipeline. We'll use a simple TXT file that holds 
 ```python
 # process the TXT file through the single-module parser pipeline
 process_output = pipeline.process(local_file_path="../../../data/input/1984_very_short.txt",
+                                  local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
                                   expire_time=60*60*24*7,  # process data will be deleted from the Krixik system in 7 days
                                   wait_for_process=True, # do not wait for process to complete before returning IDE control to user
                                   verbose=False)  # do not display process update printouts upon running code
@@ -118,3 +145,9 @@ print(json.dumps(fetched_output, indent=2))
 
 
 At the end of this return the local directory to which the output has been downloaded is displayed.
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+reset_pipeline(pipeline)
+```

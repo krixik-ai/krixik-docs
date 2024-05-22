@@ -8,6 +8,32 @@ This overview of the `.show_tree` method is divided into the following sections:
 - [.show_tree Method Example](#.show_tree-method-example)
 - [The Wildcard Operator and the Global Root](#the-wildcard-operator-and-the-global-root)
 
+
+```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ### `.show_tree` Method Arguments
 
 The `.show_tree` method takes a single (required) argument:
@@ -16,7 +42,7 @@ The `.show_tree` method takes a single (required) argument:
 
 ### `.show_tree` Method Example
 
-For this document's example we will use a pipeline consisting of a single [`parser`](../../modules/ai_model_modules/parser_module.md) module.  We use the [`.create_pipeline`](../pipeline_creation/create_pipeline.md) method to instantiate the pipeline, and then [`.process`](../parameters_processing_files_through_pipelines/process_method.md) a few files through it. Note the `symbolic_directory_path` structure we create:
+For this document's example we will use a pipeline consisting of a single [`parser`](../../modules/support_function_modules/parser_module.md) module.  We use the [`.create_pipeline`](../pipeline_creation/create_pipeline.md) method to instantiate the pipeline, and then [`.process`](../parameters_processing_files_through_pipelines/process_method.md) a few files through it. Note the `symbolic_directory_path` structure we create:
 
 
 ```python
@@ -31,7 +57,7 @@ test_file = "../../../data/input/1984_very_short.txt"
 process_output = pipeline.process(
     local_file_path=test_file,
     local_save_directory="../../../data/output",  # save output repo data output subdir
-    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    expire_time=60 * 30,  # set all process data to expire in 30 minutes
     wait_for_process=True,  # wait for process to complete before regaining ide
     verbose=False,
     symbolic_directory_path="/my/custom/path",
@@ -41,7 +67,7 @@ process_output = pipeline.process(
 process_output = pipeline.process(
     local_file_path=test_file,
     local_save_directory="../../../data/output",  # save output repo data output subdir
-    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    expire_time=60 * 30,  # set all process data to expire in 30 minutes
     wait_for_process=True,  # wait for process to complete before regaining ide
     verbose=False,
     symbolic_directory_path="/my/custom/path",
@@ -51,7 +77,7 @@ process_output = pipeline.process(
 process_output = pipeline.process(
     local_file_path=test_file,
     local_save_directory="../../../data/output",  # save output repo data output subdir
-    expire_time=60 * 10,  # set all process data to expire in 10 minutes
+    expire_time=60 * 30,  # set all process data to expire in 30 minutes
     wait_for_process=True,  # wait for process to complete before regaining ide
     verbose=False,
     symbolic_directory_path="/my/custom/path/subpath",
@@ -106,3 +132,9 @@ symbolic_directory_path='/*'
 ```
 
 As seen in the above code output, using the global root with the `.show_tree` method returns a visualization of your entire pipeline's directory structure.
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+reset_pipeline(pipeline)
+```

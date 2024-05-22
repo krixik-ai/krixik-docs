@@ -11,6 +11,32 @@ This overview of the `vector-db` module is divided into the following sections:
 - [The `.semantic_search` Method](#the-.semantic_search-method)
 - [Further Information on `vector-db` Module I/O and Clickability](#further-information-on-vector-db-module-i/o-and-clickability)
 
+
+```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ### Inputs and Outputs of the `vector-db` Module
 
 The `vector-db` module accepts as input NPY files that consist of a single NumPy array. Each row is a vector to be indexed for vector search.

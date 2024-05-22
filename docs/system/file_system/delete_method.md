@@ -7,6 +7,32 @@ This overview of the `.delete` method is divided into the following sections:
 - [`.delete` Method Arguments](#.delete-method-arguments)
 - [`.delete` Method Example](#.delete-method-example)
 
+
+```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ### `.delete` Method Arguments
 
 The `.delete` method takes a single (required) argument:
@@ -15,7 +41,7 @@ The `.delete` method takes a single (required) argument:
 
 ### `.delete` Method Example
 
-For this document's example we will use a pipeline consisting of a single [`parser`](../../modules/ai_model_modules/parser_module.md) module.  We use the [`.create_pipeline`](../pipeline_creation/create_pipeline.md) method to instantiate the pipeline, and then [`.process`](../parameters_processing_files_through_pipelines/process_method.md) a file through it.
+For this document's example we will use a pipeline consisting of a single [`parser`](../../modules/support_function_modules/parser_module.md) module.  We use the [`.create_pipeline`](../pipeline_creation/create_pipeline.md) method to instantiate the pipeline, and then [`.process`](../parameters_processing_files_through_pipelines/process_method.md) a file through it.
 
 
 ```python
@@ -25,6 +51,7 @@ pipeline = krixik.create_pipeline(name="delete_method_1_parser",
 
 # process short input file
 process_output = pipeline.process(local_file_path="../../../data/input/1984_very_short.txt", # the initial local filepath where the input JSON file is stored
+                                  local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
                                   expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
                                   wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
                                   verbose=False,  # do not display process update printouts upon running code
@@ -225,3 +252,9 @@ print(json.dumps(list_output, indent=2))
 
 
 As expected, only one of the two previously [processed](../parameters_processing_files_through_pipelines/process_method.md) files shows up; the other has been deleted.
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+reset_pipeline(pipeline)
+```

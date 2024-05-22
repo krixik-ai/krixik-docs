@@ -1,17 +1,43 @@
 ## Single-Module Pipeline: `parser`
 
-This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`parser`](../../modules/ai_model_modules/parser_module.md) module. It's divided into the following sections:
+This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`parser`](../../modules/support_function_modules/parser_module.md) module. It's divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)
 - [Using the Default Model](#using-the-default-model)
 - [Using a Non-Default Model](#using-a-non-default-model)
 
+
+```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ### Pipeline Setup
 
-Let's first instantiate a single-module [`parser`](../../modules/ai_model_modules/parser_module.md) pipeline.
+Let's first instantiate a single-module [`parser`](../../modules/support_function_modules/parser_module.md) pipeline.
 
-We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`parser`](../../modules/ai_model_modules/parser_module.md) module name into `module_chain`.
+We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`parser`](../../modules/support_function_modules/parser_module.md) module name into `module_chain`.
 
 
 ```python
@@ -22,7 +48,7 @@ pipeline = krixik.create_pipeline(name="single_parser_1",
 
 ### Required Input Format
 
-The [`parser`](../../modules/ai_model_modules/parser_module.md) module accepts document inputs. Acceptable file formats are TXT, PDF, DOCX, and PPTX, although the last three formats are automatically converted to TXT before processing.
+The [`parser`](../../modules/support_function_modules/parser_module.md) module accepts document inputs. Acceptable file formats are TXT, PDF, DOCX, and PPTX, although the last three formats are automatically converted to TXT before processing.
 
 Let's take a quick look at a valid input file, and then process it:
 
@@ -42,7 +68,7 @@ with open("../../../data/input/1984_very_short.txt", "r") as file:
 
 ### Using the Default Model
 
-Let's process our test input file using the [`parser`](../../modules/ai_model_modules/parser_module.md) module's [default model](../../modules/ai_model_modules/parser_module.md#available-models-in-the-parser-module): [`sentence`](https://www.nltk.org/api/nltk.tokenize.html).
+Let's process our test input file using the [`parser`](../../modules/support_function_modules/parser_module.md) module's [default model](../../modules/support_function_modules/parser_module.md#available-models-in-the-parser-module): [`sentence`](https://www.nltk.org/api/nltk.tokenize.html).
 
 Given that this is the default model, we need not specify model selection through the optional [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
@@ -128,7 +154,7 @@ with open(process_output["process_output_files"][0]) as f:
 
 ### Using a Non-Default Model
 
-To use a [non-default model](../../modules/ai_model_modules/parser_module.md#available-models-in-the-parser-module) like `fixed`, we must enter it explicitly through the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method. Note that if you don't explicitly define parameters for the `fixed` model (for it is parameterizable) default values will be used instead.
+To use a [non-default model](../../modules/support_function_modules/parser_module.md#available-models-in-the-parser-module) like `fixed`, we must enter it explicitly through the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method. Note that if you don't explicitly define parameters for the `fixed` model (for it is parameterizable) default values will be used instead.
 
 
 ```python
@@ -214,3 +240,9 @@ with open(process_output["process_output_files"][0]) as f:
       }
     ]
 
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+reset_pipeline(pipeline)
+```

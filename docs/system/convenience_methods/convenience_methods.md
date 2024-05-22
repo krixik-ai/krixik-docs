@@ -12,6 +12,32 @@ The document is broken down as follows:
 - [View Module Click Data with the `.click_data` Method](#view-module-click-data-with-the-.click_data-method)
 
 
+
+```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ### View All Available Modules with the `.available_modules` Property
 
 To view all available modules use the `.available_modules` property.  This can be done locally and without [first initializing](../initialization/initialize_and_authenticate.md), as follows:
@@ -214,7 +240,7 @@ pipeline.test_input(local_file_path="../../../data/input/1984_very_short.txt")
 
 Examine the applicable data class of your starting module to ensure that your potential input satisfies required input structure requirements.
 
-You can get a quick sense of a module's input/output structure by looking at an example datapoint, like the one printed below the following code. This can be done for any [currently available module](../../modules/modules_overview.md), so we'll illustrate using the [`parser`](../../modules/ai_model_modules/parser_module.md) module. This can be done locally and without [first initializing](../initialization/initialize_and_authenticate.md), as follows:
+You can get a quick sense of a module's input/output structure by looking at an example datapoint, like the one printed below the following code. This can be done for any [currently available module](../../modules/modules_overview.md), so we'll illustrate using the [`parser`](../../modules/support_function_modules/parser_module.md) module. This can be done locally and without [first initializing](../initialization/initialize_and_authenticate.md), as follows:
 
 
 ```python
@@ -250,7 +276,7 @@ print(json.dumps(io.OutputStructure().data_example, indent=2))
     }
 
 
-Here `"other"` denotes any other key in your input.  Its value is arbitrary because, as far as any model you connect the [`parser`](../../modules/ai_model_modules/parser_module.md) module into is concerned, it's irrelevant. Only the snippet is passed through.
+Here `"other"` denotes any other key in your input.  Its value is arbitrary because, as far as any model you connect the [`parser`](../../modules/support_function_modules/parser_module.md) module into is concerned, it's irrelevant. Only the snippet is passed through.
 
 ### View Module Click Data with the `.click_data` Method
 
@@ -323,3 +349,9 @@ The latter connection, (`vector-search` → `text-embedder`), will instead not w
 - `vector-search` output_format (`faiss`) != `text-embedder` input_format (`json`)
 
 
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+reset_pipeline(pipeline)
+```

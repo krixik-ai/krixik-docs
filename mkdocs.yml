@@ -33,7 +33,6 @@ nav:
       - 'sentiment analysis': modules/ai_model_modules/sentiment_module.md
       - 'summarization': modules/ai_model_modules/summarize_module.md
       - 'text embedder': modules/ai_model_modules/text-embedder_module.md
-      - 'text parser': modules/ai_model_modules/parser_module.md
       - 'transcription': modules/ai_model_modules/transcribe_module.md
       - 'translation': modules/ai_model_modules/translate_module.md
     - database modules:
@@ -41,6 +40,7 @@ nav:
       - 'keyword database': modules/database_modules/keyword-db_module.md
     - support function models:
       - 'json to txt': modules/support_function_modules/json-to-txt_module.md
+      - 'text parser': modules/support_function_modules/parser_module.md
   - Pipeline examples:
     - 'overview': examples/pipeline_examples_overview.md
     - single-module pipelines:
