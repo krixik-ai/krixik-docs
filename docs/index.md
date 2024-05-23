@@ -85,7 +85,6 @@ Locally creating and testing this sequence of steps would be time consuming—or
 With **Krixik**, however, you can rapidly incorporate this functionality to your earlier pipeline by just adding a few modules. Syntax remains as above, so [making](https://krixik-docs.readthedocs.io/en/latest/system/pipeline_creation/create_pipeline/) the new pipeline still takes one line:
 
 ```python
-
 # create pipeline with the above-alluded-to modules
 pipeline = krixik.create_pipeline(name='transcribe_vsearch', 
                                   module_chain=["transcribe",
