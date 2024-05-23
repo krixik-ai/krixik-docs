@@ -83,4 +83,6 @@ def check_file_links(filepath: str, toc_files: list) -> list:
         response = requests.get(link, timeout=30)
         if response.status_code not in range(200, 404):
             dead_links.append(link)
+        else:
+            print(f"link {link} failed with response {response}")
     return dead_links
