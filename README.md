@@ -1,3 +1,6 @@
+[![Python application](https://github.com/krixik-ai/krixik-docs/blob/actions/workflows/python-app.yml/badge.svg)](https://github.com/krixik-ai/krixik-docs/actions/workflows/python-app.yml/python-app.yml)
+
+
 # Welcome to Krixik!
 
 Sequentially assembling multiple AI models into a single pipeline can be painful and expensive. Consuming even a single model can often be draining.
