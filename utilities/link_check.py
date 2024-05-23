@@ -82,6 +82,6 @@ def check_file_links(filepath: str, toc_files: list) -> list:
     for link in outer_links:
         response = requests.get(link, timeout=30)
         if response.status_code not in range(200, 404):
-            print(f"link {link} failed with response {response}")
+            print(f"link {link} failed with response {response}")  # very strange - this line seems necessary for tests to pass on github
             dead_links.append(link)
     return dead_links
