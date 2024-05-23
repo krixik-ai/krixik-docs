@@ -62,14 +62,14 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "06c31cbc-9c03-49a9-b630-fdba823a3867",
+      "request_id": "82eb3b87-b6eb-408c-ad4f-45eeeb43b92f",
       "message": "Successfully returned 1 item.  Note: all timestamps in UTC.",
       "warnings": [],
       "items": [
         {
-          "last_updated": "2024-05-22 19:57:07",
-          "process_id": "7113973d-51d3-c256-19b7-26eaf2df21bd",
-          "created_at": "2024-05-22 19:57:07",
+          "last_updated": "2024-05-22 23:10:05",
+          "process_id": "f325b79c-3ec6-673b-66fc-17b0f30a9c00",
+          "created_at": "2024-05-22 23:10:05",
           "file_metadata": {
             "modules": {
               "module_1": {
@@ -103,9 +103,9 @@ print(json.dumps(list_output, indent=2))
           "file_description": "",
           "symbolic_directory_path": "/novels/gothic",
           "pipeline": "update_method_1_parser",
-          "file_id": "6a829e0e-e0e3-4f77-b1b3-f58a90bc2e4c",
-          "expire_time": "2024-05-22 20:27:06",
-          "file_name": "the franken stein.txt"
+          "file_id": "4544e186-e719-4979-bf9d-9e93bb1106ff",
+          "expire_time": "2024-05-22 23:40:05",
+          "file_name": "frankenstein.txt"
         }
       ]
     }
@@ -133,9 +133,9 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "update_method_1_parser",
-      "request_id": "b9c646fc-b623-4801-a48f-6431b6eb3c15",
-      "file_id": "6a829e0e-e0e3-4f77-b1b3-f58a90bc2e4c",
-      "message": "SUCCESS - output fetched for file_id 6a829e0e-e0e3-4f77-b1b3-f58a90bc2e4c.Output saved to location(s) listed in process_output_files.",
+      "request_id": "5361e385-69a7-44b8-b577-bfa27f20dbf8",
+      "file_id": "4544e186-e719-4979-bf9d-9e93bb1106ff",
+      "message": "SUCCESS - output fetched for file_id 4544e186-e719-4979-bf9d-9e93bb1106ff.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -359,7 +359,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "/Users/jeremywatt/Desktop/krixik/code/krixik-docs/docs/system/file_system/6a829e0e-e0e3-4f77-b1b3-f58a90bc2e4c.json"
+        "../../../data/output/4544e186-e719-4979-bf9d-9e93bb1106ff.json"
       ]
     }
 
@@ -377,14 +377,14 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "e2a88987-5d4d-4193-9d47-1c0eb546d587",
+      "request_id": "66a19d7c-fcea-4d96-b3dc-217352956a51",
       "message": "Successfully returned 1 item.  Note: all timestamps in UTC.",
       "warnings": [],
       "items": [
         {
-          "last_updated": "2024-05-22 19:57:20",
-          "process_id": "7113973d-51d3-c256-19b7-26eaf2df21bd",
-          "created_at": "2024-05-22 19:57:07",
+          "last_updated": "2024-05-22 23:11:15",
+          "process_id": "f325b79c-3ec6-673b-66fc-17b0f30a9c00",
+          "created_at": "2024-05-22 23:10:05",
           "file_metadata": {
             "modules": {
               "module_1": {
@@ -418,8 +418,8 @@ print(json.dumps(list_output, indent=2))
           "file_description": "Is the villain the monster or the doctor?",
           "symbolic_directory_path": "/novels/gothic",
           "pipeline": "update_method_1_parser",
-          "file_id": "6a829e0e-e0e3-4f77-b1b3-f58a90bc2e4c",
-          "expire_time": "2024-05-22 20:27:06",
+          "file_id": "4544e186-e719-4979-bf9d-9e93bb1106ff",
+          "expire_time": "2024-05-22 23:40:05",
           "file_name": "frankenstein.txt"
         }
       ]

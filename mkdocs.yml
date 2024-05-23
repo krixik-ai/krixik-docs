@@ -10,7 +10,7 @@ nav:
       - 'pipeline config': system/pipeline_creation/pipeline_config.md
       - 'save and load a pipeline': system/pipeline_creation/saving_and_loading_pipelines.md
     - parameters + processing files through pipelines:
-      - 'the parameterizable  method': system/parameters_processing_files_through_pipelines/process_method.md
+      - 'the parameterizable process method': system/parameters_processing_files_through_pipelines/process_method.md
       - 'json input format': system/parameters_processing_files_through_pipelines/JSON_input_format.md
       - 'the process_status method': system/parameters_processing_files_through_pipelines/process_status_method.md
       - 'the fetch_output method': system/parameters_processing_files_through_pipelines/fetch_output_method.md

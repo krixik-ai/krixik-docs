@@ -9,3 +9,4 @@ mkdocs - material
 nbconvert
 nbmake
 markdown
+requests
