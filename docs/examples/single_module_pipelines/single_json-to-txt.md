@@ -1,7 +1,3 @@
-<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/dev/docs/examples/single_module_pipelines/single_json-to-txt.ipynb">
-  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
-
 ## Single-Module Pipeline: `json-to-txt`
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`json-to-txt`](../../modules/support_function_modules/json-to-txt_module.md) module. It's divided into the following sections:
