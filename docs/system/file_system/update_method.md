@@ -45,7 +45,7 @@ process_output = pipeline.process(local_file_path="../../../data/input/frankenst
                                   wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
                                   verbose=False,  # do not display process update printouts upon running code
                                   symbolic_directory_path="/novels/gothic",
-                                  file_name="The Franken Stein.txt",
+                                  file_name="Frankenstein.txt",
                                   file_tags=[{"author": "Shelley"}, {"category": "gothic"}, {"century": "19"}])
 ```
 
