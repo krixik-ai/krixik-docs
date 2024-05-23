@@ -33,6 +33,8 @@ Note: Python version 3.10 or higher is required.
 
 To [initialize](system/initialization/initialize_and_authenticate.md) your Krixik CLI session you will need your unique `api_key` and `api_url` secrets.  Beta testers will receive their secrets from Krixik admin.
 
+Instead of handling your secrets directly, we strongly recommend storing them in an `.env` file and loading them via [python-dotenv](https://pypi.org/project/python-dotenv/).
+
 Once you have your secrets, [initialize](https://krixik-docs.readthedocs.io/en/latest/system/initialization/initialize_and_authenticate/) your session as follows:
 
 
@@ -45,7 +47,6 @@ krixik.init(api_key=MY_API_KEY,
 ...where  `MY_API_KEY` and `MY_API_URL` are your account secrets.
 
 If you've misplaced your secrets, please reach out to us directly.
-
 
 ### Building your First Pipeline
 
@@ -109,9 +110,15 @@ pipeline.semantic_search(query="The text you wish to semantically search for goe
 
 That's it! You have now transcribed a file, processed the transcript, performed vector search on it, and can reuse [the pipeline](https://krixik-docs.readthedocs.io/en/latest/examples/search_pipeline_examples/multi_semantically_searchable_transcription/) for as many files and queries as you like... all of it in a couple of minutes and with a few lines of code.
 
+### Optional: Pull the [Krixik Docs Repo](https://github.com/krixik-ai/krixik-docs)
+
+If you wish to follow along with the above example, or with any other of the score of examples we lay out in the documentation, then simply pull the entire [Krixik Docs repo](https://github.com/krixik-ai/krixik-docs).
+
+Doing so will provide you with every file you need, and code will already be configured to run in that directory structure.
+
 ## What can you build with Krixik?
 
-We've documented [a range of examples](https://krixik-docs.readthedocs.io/en/latest/examples/pipeline_examples_overview/) for you, such as:
+The [range of examples](https://krixik-docs.readthedocs.io/en/latest/examples/pipeline_examples_overview/) we've documented for you include pipelines to:
 
 - ...generate an image caption for a set of images and then perform keyword search on the caption set.
   - [Pipeline: [Caption → JSON-to-TXT → Keyword Database]](https://krixik-docs.readthedocs.io/en/latest/examples/search_pipeline_examples/multi_keyword_searchable_image_captions/)
@@ -120,7 +127,7 @@ We've documented [a range of examples](https://krixik-docs.readthedocs.io/en/lat
 - ...easily and serverlessly consume your open-source OCR model of choice.
   - [Pipeline: [OCR]](https://krixik-docs.readthedocs.io/en/latest/examples/single_module_pipelines/single_ocr/)
 
-This is only the tip of the iceberg - many more pipelines are currently possible ([see here for more examples](https://krixik-docs.readthedocs.io/en/latest/examples/pipeline_examples_overview/)) — and the Krixik module/model library will constantly be expanding.
+This is only the tip of the iceberg—many more pipelines are currently possible ([see here for more examples](https://krixik-docs.readthedocs.io/en/latest/examples/pipeline_examples_overview/))—and the Krixik module/model library will constantly be expanding.
 
 ## Further Detail - Documentation
 
