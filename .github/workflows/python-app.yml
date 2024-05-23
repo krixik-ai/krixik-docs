@@ -39,7 +39,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.in
+        pip install -r requirements.test
     - name: Run pytest
       run: |
         PYTHONPATH=. python3.10 -m pytest tests/test_2_toc_file_check.py -s
