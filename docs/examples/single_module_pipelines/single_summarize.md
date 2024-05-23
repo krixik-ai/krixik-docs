@@ -8,6 +8,32 @@ This document is a walkthrough of how to assemble and use a single-module pipeli
 - [Using a Non-Default Model](#using-a-non-default-model)
 - [Recursive Summarization](#recursive-summarization)
 
+
+```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ### Pipeline Setup
 
 Let's first instantiate a single-module [`summarize`](../../modules/ai_modules/summarize_module.md) pipeline.
@@ -336,3 +362,9 @@ As you can see, this is very terse but representative summary of our original te
 You can reproduce this result (of recursively summarizing a document thrice) by building a new pipeline that contains three [`summarize`](../../modules/ai_modules/summarize_module.md) modules in succession.
 
 We explore just such an example in our recursive summarization pipeline [example](../../examples/multi_module_non_search_pipeline_examples/multi_recursive_summarization.md).
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+reset_pipeline(pipeline)
+```

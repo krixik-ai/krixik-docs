@@ -8,6 +8,32 @@ The document is divided into the following sections:
 - [Processing an Input File](#processing-an-input-file)
 - [Performing Semantic Search](#performing-semantic-search)
 
+
+```python
+# import utilities
+import sys 
+import json
+import importlib
+sys.path.append('../../../')
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+# load secrets from a .env file using python-dotenv
+from dotenv import load_dotenv
+import os
+load_dotenv("../../../.env")
+MY_API_KEY = os.getenv('MY_API_KEY')
+MY_API_URL = os.getenv('MY_API_URL')
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+krixik.init(api_key = MY_API_KEY, 
+            api_url = MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ### Pipeline Setup
 
 To achieve what we've described above, let's set up a pipeline sequentially consisting of the following modules:
@@ -168,3 +194,9 @@ print(json.dumps(semantic_output, indent=2))
       ]
     }
 
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+reset_pipeline(pipeline)
+```

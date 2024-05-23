@@ -37,6 +37,16 @@ Here's an example of the above in action. The following list is what the content
 ]
 ```
 
+
+
+
+    [{'snippet': 'It was a bright cold day in April, and the clocks were striking thirteen.',
+      'line_numbers': [1]},
+     {'snippet': 'Winston Smith, his chin nuzzled into his breast in an effort to escape the vile wind, slipped quickly through the glass doors of Victory Mansions, though not quickly enough to prevent a swirl of gritty dust from entering along with him.',
+      'line_numbers': [2, 3, 4, 5]}]
+
+
+
 ### Creating the JSON File
 
 We recommend using JSON functionality to create your JSON files. Directly creating your JSON files may lead to error. The following code is an example of how to do this (note the Python variable we introduced at the top):
