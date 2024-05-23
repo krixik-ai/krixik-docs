@@ -42,4 +42,6 @@ jobs:
         pip install -r requirements.test
     - name: Run pytest
       run: |
-        PYTHONPATH=. python3.10 -m pytest tests/test_2_toc_file_check.py -s
+        PYTHONPATH=. python3.10 -m pytest tests/test_2_toc_file_check.py &&
+        PYTHONPATH=. python3.10 -m pytest tests/test_4_links.py -s -x
+
