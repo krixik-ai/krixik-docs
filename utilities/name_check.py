@@ -57,7 +57,7 @@ def duplicate_name_check():
                     if d in docs_names:
                         duplicates_dict[d].append(all_docs[i])
 
-            print(f"FAILURE: the following pipeline names are found in multiple markdown docs: {duplicate_dicts}")
+            print(f"FAILURE: the following pipeline names are found in multiple markdown docs: {duplicates_dict}")
             return False
         return True
     except Exception as e:

@@ -38,7 +38,7 @@ Follow best practices in your notebook layout by abiding by the following conten
     - `raises-exception`: add to any code cell that should fail in testing notebook
 2.  Clean up your pipelines at the end of each notebook
     - Make sure your notebook ends with a python cell invoking `reset_pipeline` on any pipeline(s) created (this will be tested and if you do not do this your tests will  fail)
-3.  Direct `local_save_directory` for `.process` or `.fetch_output` return files to `data/output`.  This output should be pushed along with new pages - this is so any user who views your page can also examine the corresponding output
+3.  Direct `local_save_directory` for `process` or `.fetch_output` return files to `data/output`.  This output should be pushed along with new pages - this is so any user who views your page can also examine the corresponding output
 
 
 ## Before pushing checklist

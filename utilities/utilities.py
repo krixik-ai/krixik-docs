@@ -1,6 +1,20 @@
 import re
 from pathlib import Path
 
+nono_chars = ["[","]","{","}"]
+
+
+def extract_headings_from_markdown(markdown_file) -> list:
+    with open(markdown_file, "r", encoding="utf-8") as file:
+        markdown_content = file.read()
+    headings = re.findall(r"^#+\s+(.+)$", markdown_content, flags=re.MULTILINE)
+    del headings[0]
+    toc_headings = []
+    for h in headings:
+        ht = "#" + "-".join(h.lower().replace("`", "").split(" "))
+        toc_headings.append(ht)
+    return toc_headings
+
 
 def list_files_in_directory(directory: str) -> list:
     path = Path(directory)

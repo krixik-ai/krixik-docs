@@ -4,7 +4,7 @@ from utilities.converter import collect_mkdocks_toc
 from utilities import base_dir
 from utilities.utilities import get_code_from_markdown, load_md_doc, list_files_in_directory
 
-acceptable_extensions = ["txt", "docx", "pptx", "png", "jpg", "jpeg", "mp3", "mp4"]
+acceptable_extensions = ["txt", "docx", "pptx", "png", "jpg", "jpeg", "mp3", "npy", "json"]
 all_input_data_links = list_files_in_directory(base_dir + "/data/input/")
 
 

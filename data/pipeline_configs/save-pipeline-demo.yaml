@@ -1,0 +1,47 @@
+pipeline:
+  name: saving_and_loading_pipelines_1_summarize_summarize_keyword-db
+  modules:
+  - name: summarize
+    models:
+    - name: bart-large-cnn
+    - name: text-summarization
+    defaults:
+      model: bart-large-cnn
+    input:
+      type: text
+      permitted_extensions:
+      - .txt
+      - .pdf
+      - .docx
+      - .pptx
+    output:
+      type: text
+  - name: summarize
+    models:
+    - name: bart-large-cnn
+    - name: text-summarization
+    defaults:
+      model: bart-large-cnn
+    input:
+      type: text
+      permitted_extensions:
+      - .txt
+      - .pdf
+      - .docx
+      - .pptx
+    output:
+      type: text
+  - name: keyword-db
+    models:
+    - name: sqlite
+    defaults:
+      model: sqlite
+    input:
+      type: text
+      permitted_extensions:
+      - .txt
+      - .pdf
+      - .docx
+      - .pptx
+    output:
+      type: db
