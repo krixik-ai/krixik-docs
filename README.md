@@ -12,7 +12,7 @@ That's why we're here. **Welcome to Krixik**, where you can easily assemble and 
 ### Table of Contents
 
 - [Quickstart Guide](#quickstart-guide)
-- [What else can you build with Krixik?](#what-else-can-you-build-with-krixik)
+- [What can you build with Krixik?](#what-can-you-build-with-krixik)
 - [Further Detail - Documentation](#further-detail---documentation)
 
 ## Quickstart Guide
@@ -114,9 +114,9 @@ pipeline.semantic_search(query="The text you wish to semantically search for goe
 
 That's it! You have now transcribed a file, processed the transcript, performed vector search on it, and can reuse [the pipeline](https://krixik-docs.readthedocs.io/en/latest/examples/search_pipeline_examples/multi_semantically_searchable_transcription/) for as many files and queries as you like... all of it in a couple of minutes and with a few lines of code.
 
-## What else can you build with Krixik?
+## What can you build with Krixik?
 
-We've documented a few examples for you, such as:
+We've documented [a range of examples](https://krixik-docs.readthedocs.io/en/latest/examples/pipeline_examples_overview/) for you, such as:
 
 - ...generate an image caption for a set of images and then perform keyword search on the caption set.
   - [Pipeline: [Caption → JSON-to-TXT → Keyword Database]](https://krixik-docs.readthedocs.io/en/latest/examples/search_pipeline_examples/multi_keyword_searchable_image_captions/)
@@ -125,7 +125,7 @@ We've documented a few examples for you, such as:
 - ...easily and serverlessly consume your open-source OCR model of choice.
   - [Pipeline: [OCR]](https://krixik-docs.readthedocs.io/en/latest/examples/single_module_pipelines/single_ocr/)
 
-This is only the tip of the iceberg—many more pipelines are currently possible—and the Krixik module/model library will constantly be expanding.
+This is only the tip of the iceberg - many more pipelines are currently possible ([see here for more examples](https://krixik-docs.readthedocs.io/en/latest/examples/pipeline_examples_overview/)) — and the Krixik module/model library will constantly be expanding.
 
 ## Further Detail - Documentation
 
