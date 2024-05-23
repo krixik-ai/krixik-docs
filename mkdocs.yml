@@ -6,6 +6,7 @@ nav:
       - 'install your cli': system/initialization/install_cli.md
       - 'initialize and authenticate': system/initialization/initialize_and_authenticate.md  
     - pipeline creation:
+      - 'components of a krixik pipeline': system/pipeline_creation/components_of_a_krixik_pipeline.md
       - 'create a pipeline': system/pipeline_creation/create_pipeline.md
       - 'pipeline config': system/pipeline_creation/pipeline_config.md
       - 'save and load a pipeline': system/pipeline_creation/saving_and_loading_pipelines.md

@@ -85,3 +85,37 @@ def check_file_links(filepath: str, toc_files: list) -> list:
             print(f"link {link} failed with response {response}")  # very strange - this line seems necessary for tests to pass on github
             dead_links.append(link)
     return dead_links
+
+
+def check_readme_links() -> list:
+    intra_links = []
+    inter_links = []
+    outer_links = []
+    headings = []
+    filepath = ""
+    try:
+        filepath = f"{base_dir}/" + "README.md"
+        intra_links, inter_links, outer_links = extract_links_from_markdown(filepath)
+        headings = extract_headings_from_markdown(filepath)
+    except FileNotFoundError:
+        print(f"FAILURE: check_file_links failed - file {filepath} does not exist")
+    except Exception as e:
+        print(f"FAILURE: check_file_links failed for file {filepath} with exception {e}")
+
+    dead_links = inter_links
+
+    # check intra_links for dead links
+    for link in intra_links:
+        for no in nono_chars:
+            if no in link:
+                dead_links.append(link)
+                continue
+        if link not in headings:
+            dead_links.append(link)
+
+    for link in outer_links:
+        response = requests.get(link, timeout=30)
+        if response.status_code not in range(200, 430):
+            print(f"link {link} failed with response {response}")  # very strange - this line seems necessary for tests to pass on github
+            dead_links.append(link)
+    return dead_links
