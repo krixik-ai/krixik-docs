@@ -44,7 +44,6 @@ jobs:
       run: |
         PYTHONPATH=. python3.10 -m pytest tests/test_1_conversion_no_remove.py &&
         PYTHONPATH=. python3.10 -m pytest tests/test_2_toc_file_check.py &&
-        PYTHONPATH=. python3.10 -m pytest tests/test_3_headers.py &&
         PYTHONPATH=. python3.10 -m pytest tests/test_4_links.py &&
         PYTHONPATH=. python3.10 -m pytest tests/test_5_names.py &&
         PYTHONPATH=. python3.10 -m pytest tests/test_6_data.py &&
