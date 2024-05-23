@@ -43,4 +43,3 @@ jobs:
     - name: Run pytest
       run: |
         PYTHONPATH=. python3.10 -m pytest tests/test_2_toc_file_check.py
-
