@@ -82,11 +82,11 @@ def check_file_links(filepath: str, toc_files: list) -> list:
     # check outer_links for dead links
     print(f"outer_links: {outer_links}")
     for link in outer_links:
-        response = requests.get(link)
-        print(f"response from link {link} is {response}")
-        print("\n")
+        response = requests.get(link, timeout=30)
+        # print(f"response from link {link} is {response}")
+        # print("\n")
         if response.status_code not in range(200, 404):
             dead_links.append(link)
-    print(f"dead links after outer links: {dead_links}")
-    print("\n")
+    # print(f"dead links after outer links: {dead_links}")
+    # print("\n")
     return dead_links
