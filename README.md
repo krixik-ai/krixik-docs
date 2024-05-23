@@ -1,4 +1,6 @@
-[![Python application](https://github.com/krixik-ai/krixik-docs/blob/actions/workflows/python-app.yml/badge.svg)](https://github.com/krixik-ai/krixik-docs/actions/workflows/python-app.yml/python-app.yml)
+[![Python application](https://github.com/krixik-ai/krixik-docs/actions/workflows/python-app.yml/badge.svg)](https://github.com/krixik-ai/krixik-docs/actions/workflows/python-app.yml/python-app.yml)
+[![python](https://img.shields.io/badge/Python-3.10-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
+
 
 
 # Welcome to Krixik!
