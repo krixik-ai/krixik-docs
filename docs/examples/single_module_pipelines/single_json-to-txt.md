@@ -1,29 +1,6 @@
-<a href="https://colab.research.google.com/github.com/krixik-ai/krixik-docs/blob/main/docs/examples/single_module_pipelines/single_json-to-txt.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-
-
-```python
-# if on collab pull required subdirectories
-import os
-
-if os.getenv("COLAB_RELEASE_TAG"):
-    # install krixik cli
-    !pip install krixik
-
-    # install github clone - allows for easy cloning of subdirectories
-    !pip install github-clone
-    from pathlib import Path
-
-    # clone datasets
-    if not Path("data").is_dir():
-        !ghclone https://github.com/krixik-ai/krixik-docs/tree/main/data
-    else:
-        print("docs datasets already cloned!")
-
-    # append path for data import
-    import sys
-
-    sys.path.append("./data")
-```
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/dev/docs/examples/single_module_pipelines/single_json-to-txt.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
 
 ## Single-Module Pipeline: `json-to-txt`
 
@@ -32,32 +9,6 @@ This document is a walkthrough of how to assemble and use a single-module pipeli
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)
 - [Using the Default Model](#using-the-default-model)
-
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
 
 ### Pipeline Setup
 
@@ -163,9 +114,3 @@ with open(process_output["process_output_files"][0], "r") as file:
 
 
 You can confirm that the module has merged the two snippet values from the input dictionaries into a single string.
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

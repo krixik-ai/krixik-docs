@@ -139,16 +139,3 @@ Excited about Krixik graduating from beta? So are we! We're confident that this 
 If you wish to be in the loop about launch and other matters (we promise not to spam), please subscribe to occasional correspondence from us [HERE](https://forms.gle/Lp38U1UDpkppqoCD9).
 
 Thanks for reading, and welcome to Krixik!
-
-
-```python
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

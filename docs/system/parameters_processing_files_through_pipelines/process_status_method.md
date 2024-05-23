@@ -10,32 +10,6 @@ This overview of the `process_status` method is divided into the following secti
 - [process_status Example](#process_status-example)
 - [process_status Example with Deleted File](#process_status-example-with-deleted-file)
 
-
-```python
-# import utilities
-import sys 
-import json
-import importlib
-sys.path.append('../../../')
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-# load secrets from a .env file using python-dotenv
-from dotenv import load_dotenv
-import os
-load_dotenv("../../../.env")
-MY_API_KEY = os.getenv('MY_API_KEY')
-MY_API_URL = os.getenv('MY_API_URL')
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-krixik.init(api_key = MY_API_KEY, 
-            api_url = MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ### `process_status` Method Arguments
 
 The `process_status` method takes a single argument:
@@ -117,12 +91,6 @@ If we wait a few moments and try again, you will see confirmation that the proce
 
 
 ```python
-import time
-time.sleep(30)
-```
-
-
-```python
 # invoke process_status again
 process_status_output = pipeline.process_status(request_id=process_output["request_id"])
 
@@ -150,11 +118,3 @@ As you have just observed, `process_status` on a failed [`process`](process_meth
 What happens when the file `process_status` is run on [expires](process_method.md#core-process-method-arguments) or is manually [deleted](../file_system/delete_method.md) from the Krixik system?
 
 We take deletion seriously at Krixik—if a file is [deleted](../file_system/delete_method.md), it's entirely wiped from the system. Consequently, calling the `process_status` method on an [expired](process_method.md#core-process-method-arguments) or manually [deleted](../file_system/delete_method.md) file will tell you that the `request_id` you used as an argument was not found. The file is gone, as is any record of its having been processed in the first place.
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-import time
-time.sleep(30)
-reset_pipeline(pipeline)
-```
