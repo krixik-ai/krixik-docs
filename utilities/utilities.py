@@ -1,7 +1,7 @@
 import re
 from pathlib import Path
 
-nono_chars = ["[","]","{","}"]
+nono_chars = ["[", "]", "{", "}"]
 
 
 def extract_headings_from_markdown(markdown_file) -> list:

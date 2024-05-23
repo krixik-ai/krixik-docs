@@ -5,7 +5,7 @@ from utilities import base_dir
 
 def get_all_values(nested_dict: dict) -> list:
     values = []
-    
+
     def extract_values(d):
         if isinstance(d, dict):
             for key, value in d.items():
