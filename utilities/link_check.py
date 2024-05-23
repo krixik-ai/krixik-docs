@@ -42,9 +42,9 @@ def check_file_links(filepath: str, toc_files: list) -> list:
         print(f"FAILURE: check_file_links failed - file {filepath} does not exist")
     except Exception as e:
         print(f"FAILURE: check_file_links failed for file {filepath} with exception {e}")
-    
+
     dead_links = []
-    
+
     # check intra_links for dead links
     for link in intra_links:
         for no in nono_chars:
@@ -60,16 +60,16 @@ def check_file_links(filepath: str, toc_files: list) -> list:
         for no in nono_chars:
             if no in link:
                 dead_links.append(link)
-                continue    
+                continue
 
         # check if link directs to heading
         if "#" in link:
-            link_split = link.split('#')
+            link_split = link.split("#")
             if len(link_split) != 2:
                 dead_links.append(link)
                 continue
             page = link_split[0]
-            specific_heading = link_split[1] 
+            specific_heading = link_split[1]
             if page not in toc_files:
                 dead_links.append(link)
                 continue
