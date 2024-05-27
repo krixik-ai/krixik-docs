@@ -84,7 +84,7 @@ def check_file_links(filepath: str, toc_files: list) -> list:
         if response.status_code not in [200, 403]:
             print(f"link {link} failed with response {response}")  # very strange - this line seems necessary for tests to pass on github
             dead_links.append(link)
-            
+
     dead_links = [v for v in dead_links if "info@krixik.com" not in v]
 
     return dead_links
