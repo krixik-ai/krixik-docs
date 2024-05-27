@@ -80,10 +80,13 @@ def check_file_links(filepath: str, toc_files: list) -> list:
             dead_links.append(link)
 
     for link in outer_links:
-        response = requests.get(link, timeout=30)
-        if response.status_code not in range(200, 430):
+        response = requests.get(link, timeout=10)
+        if response.status_code not in [200, 403]:
             print(f"link {link} failed with response {response}")  # very strange - this line seems necessary for tests to pass on github
             dead_links.append(link)
+            
+    dead_links = [v for v in dead_links if "info@krixik.com" not in v]
+
     return dead_links
 
 
@@ -102,7 +105,7 @@ def check_readme_links() -> list:
     except Exception as e:
         print(f"FAILURE: check_file_links failed for file {filepath} with exception {e}")
 
-    dead_links = inter_links
+    dead_links = intra_links
 
     # check intra_links for dead links
     for link in intra_links:
@@ -114,8 +117,11 @@ def check_readme_links() -> list:
             dead_links.append(link)
 
     for link in outer_links:
-        response = requests.get(link, timeout=30)
+        response = requests.get(link, timeout=10)
         if response.status_code not in range(200, 430):
             print(f"link {link} failed with response {response}")  # very strange - this line seems necessary for tests to pass on github
             dead_links.append(link)
+
+    dead_links = [v for v in dead_links if "info@krixik.com" not in v]
+
     return dead_links

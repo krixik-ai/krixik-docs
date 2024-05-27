@@ -42,6 +42,7 @@ nav:
     - support function models:
       - 'json to txt': modules/support_function_modules/json-to-txt_module.md
       - 'text parser': modules/support_function_modules/parser_module.md
+    - 'adding your own modules or models': modules/adding_your_own_modules_or_models.md
   - Pipeline examples:
     - 'overview': examples/pipeline_examples_overview.md
     - single-module pipelines:
