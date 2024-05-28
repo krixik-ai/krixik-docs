@@ -12,7 +12,7 @@ That's why we're here. **Welcome to Krixik**, where you can easily assemble and 
 ### Table of Contents
 
 - [Quickstart Guide](#quickstart-guide)
-- [What can you build with Krixik?](#what-can-you-build-with-krixik)
+- [What can you build with Krixik?](#what-can-you-build-with-krixik?)
 - [Further Detail - Documentation](#further-detail---documentation)
 
 ## Quickstart Guide
@@ -36,7 +36,7 @@ Note: Python version 3.10 or higher is required.
 
 ### Initialize your Session
 
-To [initialize](https://krixik-docs.readthedocs.io/en/latest/system/initialization/initialize_and_authenticate.md) your Krixik CLI session you will need your unique `api_key` and `api_url` secrets.  Beta testers will receive their secrets from Krixik admin.
+To [initialize](https://krixik-docs.readthedocs.io/en/latest/system/initialization/initialize_and_authenticate/) your Krixik CLI session you will need your unique `api_key` and `api_url` secrets.  Beta testers will receive their secrets from Krixik admin.
 
 Instead of handling your secrets directly, we strongly recommend storing them in an `.env` file and loading them via [python-dotenv](https://pypi.org/project/python-dotenv/).
 

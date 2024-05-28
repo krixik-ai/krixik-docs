@@ -15,4 +15,5 @@ def test_1(docfile):
 
 def test_2():
     """ test README links """
-    check_readme_links()
+    dead_links = check_readme_links()
+    assert len(dead_links) == 0, f"README has deadlines: {dead_links}"
