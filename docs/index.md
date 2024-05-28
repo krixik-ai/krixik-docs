@@ -126,7 +126,7 @@ The [range of examples](https://krixik-docs.readthedocs.io/en/latest/examples/pi
 - ...easily and serverlessly consume your open-source OCR model of choice.
   - [Pipeline: [OCR]](https://krixik-docs.readthedocs.io/en/latest/examples/single_module_pipelines/single_ocr/)
 
-This is only the tip of the iceberg. Many more pipelines are currently possible ([see here for more examples](https://krixik-docs.readthedocs.io/en/latest/examples/pipeline_examples_overview/)), and the Krixik module/model library will constantly be expanding—perhaps even to include modules/models .
+This is only the tip of the iceberg. Many more pipelines are currently possible ([see here for more examples](https://krixik-docs.readthedocs.io/en/latest/examples/pipeline_examples_overview/)), and the Krixik module/model library will constantly be expanding—perhaps even to include modules/models [of your own submission](https://krixik-docs.readthedocs.io/en/latest/modules/adding_your_own_modules_or_models/).
 
 ## Further Detail - Documentation
 
