@@ -21,8 +21,7 @@ For this document's example we will use a pipeline consisting of a single [`pars
 
 ```python
 # create an example pipeline with a single module
-pipeline = krixik.create_pipeline(name="show_tree_method_1_parser",
-                                  module_chain=["parser"])
+pipeline = krixik.create_pipeline(name="show_tree_method_1_parser", module_chain=["parser"])
 
 # define path to an input file from examples directory
 test_file = "../../../data/input/1984_very_short.txt"

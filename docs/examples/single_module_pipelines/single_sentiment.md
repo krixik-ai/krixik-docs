@@ -16,8 +16,7 @@ We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.m
 
 ```python
 # create a pipeline with a single sentiment module
-pipeline = krixik.create_pipeline(name="single_sentiment_1",
-                                  module_chain=["sentiment"])
+pipeline = krixik.create_pipeline(name="single_sentiment_1", module_chain=["sentiment"])
 ```
 
 ### Required Input Format
@@ -52,11 +51,13 @@ Given that this is the default model, we need not specify model selection throug
 
 ```python
 # process the file with the default model
-process_output = pipeline.process(local_file_path="../../../data/input/valid.json", # the initial local filepath where the input file is stored
-                                  local_save_directory="../../../data/output", # the local directory that the output file will be saved to
-                                  expire_time=60 * 30, # process data will be deleted from the Krixik system in 30 minutes
-                                  wait_for_process=True, # wait for process to complete before returning IDE control to user
-                                  verbose=False) # do not display process update printouts upon running code
+process_output = pipeline.process(
+    local_file_path="../../../data/input/valid.json",  # the initial local filepath where the input file is stored
+    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
+    wait_for_process=True,  # wait for process to complete before returning IDE control to user
+    verbose=False,
+)  # do not display process update printouts upon running code
 ```
 
 The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
@@ -128,12 +129,14 @@ To use a [non-default model](../../modules/ai_modules/sentiment_module.md#availa
 
 ```python
 # process the file with a non-default model
-process_output = pipeline.process(local_file_path="../../../data/input/valid.json", # all arguments save for modules are as above
-                                  local_save_directory="../../../data/output",
-                                  expire_time=60 * 30,
-                                  wait_for_process=True,
-                                  verbose=False,
-                                  modules={"sentiment": {"model": "distilbert-base-multilingual-cased-sentiments-student"}}) # specify a non-default model for this process
+process_output = pipeline.process(
+    local_file_path="../../../data/input/valid.json",  # all arguments save for modules are as above
+    local_save_directory="../../../data/output",
+    expire_time=60 * 30,
+    wait_for_process=True,
+    verbose=False,
+    modules={"sentiment": {"model": "distilbert-base-multilingual-cased-sentiments-student"}},
+)  # specify a non-default model for this process
 ```
 
 The output of this process is printed below.

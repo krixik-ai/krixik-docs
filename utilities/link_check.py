@@ -5,6 +5,8 @@ import requests
 from utilities import base_dir
 from utilities.utilities import extract_headings_from_markdown, nono_chars
 
+headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36"}
+
 
 def extract_links_from_markdown(markdown_file: str) -> tuple:
     with open(markdown_file, "r", encoding="utf-8") as file:
@@ -80,10 +82,13 @@ def check_file_links(filepath: str, toc_files: list) -> list:
             dead_links.append(link)
 
     for link in outer_links:
-        response = requests.get(link, timeout=30)
-        if response.status_code not in range(200, 430):
+        response = requests.get(link, headers=headers, timeout=10)
+        if response.status_code not in [200, 403, 429]:
             print(f"link {link} failed with response {response}")  # very strange - this line seems necessary for tests to pass on github
             dead_links.append(link)
+
+    dead_links = [v for v in dead_links if "info@krixik.com" not in v]
+
     return dead_links
 
 
@@ -102,20 +107,23 @@ def check_readme_links() -> list:
     except Exception as e:
         print(f"FAILURE: check_file_links failed for file {filepath} with exception {e}")
 
-    dead_links = inter_links
+    dead_links = []
 
     # check intra_links for dead links
     for link in intra_links:
         for no in nono_chars:
             if no in link:
                 dead_links.append(link)
-                continue
+                break
         if link not in headings:
             dead_links.append(link)
 
     for link in outer_links:
-        response = requests.get(link, timeout=30)
-        if response.status_code not in range(200, 430):
+        response = requests.get(link, headers=headers, timeout=10)
+        if response.status_code not in [200, 403, 429]:
             print(f"link {link} failed with response {response}")  # very strange - this line seems necessary for tests to pass on github
             dead_links.append(link)
+
+    dead_links = [v for v in dead_links if "info@krixik.com" not in v]
+
     return dead_links

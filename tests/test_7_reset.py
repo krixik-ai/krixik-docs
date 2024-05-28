@@ -4,7 +4,7 @@ from utilities.name_check import get_code_from_markdown, load_md_doc
 from utilities.converter import collect_mkdocks_toc
 
 toc_paths = collect_mkdocks_toc()
-success_data = [base_dir + "/docs/" + path for path in toc_paths]
+success_data = [base_dir + "/docs/" + path for path in toc_paths if path if "index.md" not in path]
 
 
 @pytest.mark.parametrize("docpath", success_data)

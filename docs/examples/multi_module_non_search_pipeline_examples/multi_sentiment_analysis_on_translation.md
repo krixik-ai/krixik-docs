@@ -22,10 +22,7 @@ We do this by leveraging the [`.create_pipeline`](../../system/pipeline_creation
 
 ```python
 # create a pipeline as detailed above
-pipeline = krixik.create_pipeline(name="multi_sentiment_analysis_on_translation",
-                                  module_chain=["parser",
-                                                "translate",
-                                                "sentiment"])
+pipeline = krixik.create_pipeline(name="multi_sentiment_analysis_on_translation", module_chain=["parser", "translate", "sentiment"])
 ```
 
 ### Processing an Input File
@@ -37,12 +34,14 @@ We will use the default models for every other module in the pipeline, so they d
 
 ```python
 # process the file through the pipeline, as described above
-process_output = pipeline.process(local_file_path = "../../../data/input/spanish_review.txt", # the initial local filepath where the input file is stored
-                                  local_save_directory="../../../data/output", # the local directory that the output file will be saved to
-                                  expire_time=60*30, # process data will be deleted from the Krixik system in 30 minutes
-                                  wait_for_process=True, # wait for process to complete before returning IDE control to user
-                                  verbose=False, # do not display process update printouts upon running code
-                                  modules={"module_2": {"model": "opus-mt-es-en"}}) # specify a non-default model for use in the second module
+process_output = pipeline.process(
+    local_file_path="../../../data/input/spanish_review.txt",  # the initial local filepath where the input file is stored
+    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
+    wait_for_process=True,  # wait for process to complete before returning IDE control to user
+    verbose=False,  # do not display process update printouts upon running code
+    modules={"module_2": {"model": "opus-mt-es-en"}},
+)  # specify a non-default model for use in the second module
 ```
 
 The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
@@ -106,7 +105,7 @@ To confirm that everything went as it should have, let's load in the text file o
 ```python
 # load in process output from file
 with open(process_output["process_output_files"][0]) as f:
-  print(json.dumps(json.load(f), indent=2))
+    print(json.dumps(json.load(f), indent=2))
 ```
 
     [

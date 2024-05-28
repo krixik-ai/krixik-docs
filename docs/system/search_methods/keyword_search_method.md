@@ -35,8 +35,7 @@ For this document's examples we will use a pipeline consisting of a single [`key
 
 ```python
 # create the basic keyword search pipeline
-pipeline = krixik.create_pipeline(name="keyword_search_method_1_keyword-db",
-                                  module_chain=["keyword-db"])
+pipeline = krixik.create_pipeline(name="keyword_search_method_1_keyword-db", module_chain=["keyword-db"])
 ```
 
 The pipeline ready, we'll [`process`](../parameters_processing_files_through_pipelines/process_method.md) a few text files through it so we have something to search across. Let's use the same files we used in the [`list` method documentation](../file_system/list_method.md).
@@ -44,37 +43,45 @@ The pipeline ready, we'll [`process`](../parameters_processing_files_through_pip
 
 ```python
 # add four files to the pipeline we just created.
-output_1 = pipeline.process(local_file_path="../../../data/input/frankenstein_very_short.txt", # the initial local filepath where the input JSON file is stored
-                            local_save_directory = "../../../data/output",
-                            expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-                            wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
-                            verbose=False,  # do not display process update printouts upon running code
-                            symbolic_directory_path="/novels/gothic",
-                            file_name="Frankenstein.txt")
+output_1 = pipeline.process(
+    local_file_path="../../../data/input/frankenstein_very_short.txt",  # the initial local filepath where the input JSON file is stored
+    local_save_directory="../../../data/output",
+    expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
+    wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
+    verbose=False,  # do not display process update printouts upon running code
+    symbolic_directory_path="/novels/gothic",
+    file_name="Frankenstein.txt",
+)
 
-output_2 = pipeline.process(local_file_path="../../../data/input/pride_and_prejudice_very_short.txt", # the initial local filepath where the input JSON file is stored
-                            local_save_directory = "../../../data/output",
-                            expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-                            wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
-                            verbose=False,  # do not display process update printouts upon running code
-                            symbolic_directory_path="/novels/romance",
-                            file_name="Pride and Prejudice.txt")
+output_2 = pipeline.process(
+    local_file_path="../../../data/input/pride_and_prejudice_very_short.txt",  # the initial local filepath where the input JSON file is stored
+    local_save_directory="../../../data/output",
+    expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
+    wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
+    verbose=False,  # do not display process update printouts upon running code
+    symbolic_directory_path="/novels/romance",
+    file_name="Pride and Prejudice.txt",
+)
 
-output_3 = pipeline.process(local_file_path="../../../data/input/moby_dick_very_short.txt", # the initial local filepath where the input JSON file is stored
-                            local_save_directory = "../../../data/output",
-                            expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-                            wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
-                            verbose=False,  # do not display process update printouts upon running code
-                            symbolic_directory_path="/novels/adventure",
-                            file_name="Moby Dick.txt")
+output_3 = pipeline.process(
+    local_file_path="../../../data/input/moby_dick_very_short.txt",  # the initial local filepath where the input JSON file is stored
+    local_save_directory="../../../data/output",
+    expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
+    wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
+    verbose=False,  # do not display process update printouts upon running code
+    symbolic_directory_path="/novels/adventure",
+    file_name="Moby Dick.txt",
+)
 
-output_4 = pipeline.process(local_file_path="../../../data/input/little_women_very_short.txt", # the initial local filepath where the input JSON file is stored
-                            local_save_directory = "../../../data/output",
-                            expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-                            wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
-                            verbose=False,  # do not display process update printouts upon running code
-                            symbolic_directory_path="/novels/bildungsroman",
-                            file_name="Little Women.txt")
+output_4 = pipeline.process(
+    local_file_path="../../../data/input/little_women_very_short.txt",  # the initial local filepath where the input JSON file is stored
+    local_save_directory="../../../data/output",
+    expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
+    wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
+    verbose=False,  # do not display process update printouts upon running code
+    symbolic_directory_path="/novels/bildungsroman",
+    file_name="Little Women.txt",
+)
 ```
 
 Let's take a look at the output for one of these:
@@ -110,8 +117,7 @@ Let's try an example in which we search through one file:
 
 ```python
 # perform keyword_search over one file
-keyword_output = pipeline.keyword_search(query="mansion adolescence party enemy romance",
-                                             file_names=["Little Women.txt"])
+keyword_output = pipeline.keyword_search(query="mansion adolescence party enemy romance", file_names=["Little Women.txt"])
 
 # nicely print the output of this search
 print(json.dumps(keyword_output, indent=2))
@@ -342,8 +348,7 @@ It works just as well when searching through several files by using the [wildcar
 
 ```python
 # perform keyword_search over multiple files
-keyword_output = pipeline.keyword_search(query="mansion adolescence party enemy romance",
-                                         symbolic_directory_paths=["/novels*"])
+keyword_output = pipeline.keyword_search(query="mansion adolescence party enemy romance", symbolic_directory_paths=["/novels*"])
 
 # nicely print the output of this search
 print(json.dumps(keyword_output, indent=2))

@@ -63,8 +63,7 @@ We will need to create a pipeline and [`process`](../parameters_processing_files
 
 ```python
 # create single-module parser pipeline
-pipeline = krixik.create_pipeline(name='list_method_1_parser',
-                                  module_chain=['parser'])
+pipeline = krixik.create_pipeline(name="list_method_1_parser", module_chain=["parser"])
 ```
 
 
@@ -74,7 +73,7 @@ pipeline = krixik.create_pipeline(name='list_method_1_parser',
 # to illustrate the ability to list by each.
 entries = [
     {
-        "local_file_path" : "../../../data/input/frankenstein_very_short.txt",
+        "local_file_path": "../../../data/input/frankenstein_very_short.txt",
         "file_name": "Frankenstein.txt",
         "file_tags": [{"author": "Shelley"}, {"category": "gothic"}, {"century": "19"}],
         "symbolic_directory_path": "/novels/gothic",
@@ -86,26 +85,27 @@ entries = [
         "file_tags": [{"author": "Austen"}, {"category": "romance"}, {"century": "19"}],
     },
     {
-        "local_file_path":  "../../../data/input/moby_dick_very_short.txt",
+        "local_file_path": "../../../data/input/moby_dick_very_short.txt",
         "file_name": "Moby Dick.txt",
         "symbolic_directory_path": "/novels/adventure",
-        "file_tags": [{"author": "Melville"}, {"category": "adventure"}, {"century": "19"}]
-    }
+        "file_tags": [{"author": "Melville"}, {"category": "adventure"}, {"century": "19"}],
+    },
 ]
-        
+
 # process each file
 all_process_output = []
 for entry in entries:
-    process_output = pipeline.process(local_file_path=entry["local_file_path"], # the initial local filepath where the input file is stored
-                                      local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
-                                      expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-                                      wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
-                                      verbose=False,  # do not display process update printouts upon running code
-                                      file_name=entry["file_name"],
-                                      symbolic_directory_path=entry["symbolic_directory_path"],
-                                      file_tags=entry["file_tags"])
+    process_output = pipeline.process(
+        local_file_path=entry["local_file_path"],  # the initial local filepath where the input file is stored
+        local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+        expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
+        wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
+        verbose=False,  # do not display process update printouts upon running code
+        file_name=entry["file_name"],
+        symbolic_directory_path=entry["symbolic_directory_path"],
+        file_tags=entry["file_tags"],
+    )
     all_process_output.append(process_output)
-
 ```
 
 Let's quickly look at what the output for the last of these processed files.
@@ -713,17 +713,20 @@ To illustrate how to `list` by timestamp bookends, let's first [`process`](../pa
 ```python
 # get current time
 from datetime import datetime, timezone
+
 time_now = datetime.now(tz=timezone.utc).strftime(format="%Y-%m-%d %H:%M:%S")
 
 # process an additional file into earlier pipeline
-process_output = pipeline.process(local_file_path="../../../data/input/1984_very_short.txt", # the initial local filepath where the input JSON file is stored
-                                  local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
-                                  expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-                                  wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
-                                  verbose=False,  # do not display process update printouts upon running code
-                                  symbolic_directory_path="/novels/dystopian",
-                                  file_name="1984.txt",
-                                  file_tags=[{"author": "Orwell"}, {"category": "dystopian"}, {"century": "20"}])
+process_output = pipeline.process(
+    local_file_path="../../../data/input/1984_very_short.txt",  # the initial local filepath where the input JSON file is stored
+    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
+    wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
+    verbose=False,  # do not display process update printouts upon running code
+    symbolic_directory_path="/novels/dystopian",
+    file_name="1984.txt",
+    file_tags=[{"author": "Orwell"}, {"category": "dystopian"}, {"century": "20"}],
+)
 ```
 
 Listing by timestamp bookends is as straightforward as doing it by file system metadata. The following example only uses one type of bookend—`last_updated_start`—but all of them work the same way.
@@ -1124,12 +1127,13 @@ As an example, let's combine a timestamp bookend, a `symbolic_file_path`, and `f
 ```python
 # get current time
 from datetime import datetime, timezone
+
 time_now = datetime.now(tz=timezone.utc).strftime(format="%Y-%m-%d %H:%M:%S")
 
 # list process records using a combination of input args
-list_output = pipeline.list(created_at_end=time_now,
-                            symbolic_file_paths=["/novels/gothic/Pride and Prejudice.txt"],
-                            file_tags=[({"author":"Orwell"})])
+list_output = pipeline.list(
+    created_at_end=time_now, symbolic_file_paths=["/novels/gothic/Pride and Prejudice.txt"], file_tags=[({"author": "Orwell"})]
+)
 
 # nicely print the output of this list
 print(json.dumps(list_output, indent=2))

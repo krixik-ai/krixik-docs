@@ -23,6 +23,7 @@ For an example of what a small sample input file might look like, see the output
 ```python
 # examine contents of a small sample input file
 import numpy as np
+
 test_file = "../../../data/input/vectors.npy"
 np.load(test_file)
 ```

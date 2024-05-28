@@ -7,8 +7,7 @@ Using the `.config` method is very simple. First let's create a pipeline to try 
 
 ```python
 # first create a valid pipeline
-pipeline = krixik.create_pipeline(name="pipeline_config_1_parser_translate_sentiment",
-                                  module_chain=["translate", "sentiment"])
+pipeline = krixik.create_pipeline(name="pipeline_config_1_parser_translate_sentiment", module_chain=["translate", "sentiment"])
 ```
 
 Now let's view this pipeline's configuration with the `.config` method:

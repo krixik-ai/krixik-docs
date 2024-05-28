@@ -104,13 +104,10 @@ Suppose we create a [multi-module pipeline](../../examples/pipeline_examples_ove
 
 ```python
 # create a multi-module pipeline
-pipeline = krixik.create_pipeline(name="system-transcribe-semantic-multilingual-docs",
-                                  module_chain=["transcribe",
-                                                "translate",
-                                                "json-to-txt",
-                                                "parser",
-                                                "text-embedder",
-                                                "vector-db"])
+pipeline = krixik.create_pipeline(
+    name="system-transcribe-semantic-multilingual-docs",
+    module_chain=["transcribe", "translate", "json-to-txt", "parser", "text-embedder", "vector-db"],
+)
 ```
 
 To view the module chain of this (or any pipeline), use the `module_chain` property. This can be done locally and without [first initializing](../initialization/initialize_and_authenticate.md), as follows:

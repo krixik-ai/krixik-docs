@@ -7,6 +7,7 @@ This overview of the `process` method is divided into the following sections:
 - [Core process Method Arguments](#core-process-method-arguments)
 - [Basic Usage and Output Breakdown](#basic-usage-and-output-breakdown)
 - [Selecting Models Via the modules Argument](#selecting-models-via-the-modules-argument)
+- [Using your own Models](#using-your-own-models)
 - [Optional Metadata Arguments](#optional-metadata-arguments)
 - [Metadata Argument Defaults](#metadata-argument-defaults)
 - [Automatic File Type Conversions](#automatic-file-type-conversions)
@@ -33,8 +34,7 @@ Let's first create a single-module pipeline to demonstrate the `process` method 
 
 ```python
 # create single-module pipeline for process demo
-pipeline = krixik.create_pipeline(name='process_method_1_sentiment',
-                                  module_chain=['sentiment'])
+pipeline = krixik.create_pipeline(name="process_method_1_sentiment", module_chain=["sentiment"])
 ```
 
 We've locally created a JSON file that holds three snippets that simulate online product reviews. The snippets read as follows:
@@ -50,11 +50,13 @@ Keep in mind that input JSON files _must_ follow a very [specific format](JSON_i
 
 ```python
 # process short input file
-process_demo_output = pipeline.process(local_file_path ="../../../data/input/recliner_reviews.json", # the initial local filepath where the input JSON file is stored
-                                       local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
-                                       expire_time=60 * 30,  # process data will be deleted from the Krixik system in 10 minutes
-                                       wait_for_process=True,  # wait for process to complete before returning IDE control to user
-                                       verbose=False)  # do not display process update printouts upon running code
+process_demo_output = pipeline.process(
+    local_file_path="../../../data/input/recliner_reviews.json",  # the initial local filepath where the input JSON file is stored
+    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    expire_time=60 * 30,  # process data will be deleted from the Krixik system in 10 minutes
+    wait_for_process=True,  # wait for process to complete before returning IDE control to user
+    verbose=False,
+)  # do not display process update printouts upon running code
 ```
 
 Now let's print the output of the process.  Because the output of this particular module-model pair is in JSON format, we can print it nicely with the following code:
@@ -63,6 +65,7 @@ Now let's print the output of the process.  Because the output of this particula
 ```python
 # nicely print the output of the above process
 import json
+
 print(json.dumps(process_demo_output, indent=2))
 ```
 
@@ -126,6 +129,7 @@ In addition to being printed here, this process output is also stored in the fil
 ```python
 # load in process output from file
 import json
+
 with open(process_demo_output["process_output_files"][0], "r") as file:
     print(json.dumps(json.load(file), indent=2))
 ```
@@ -192,6 +196,12 @@ modules={'parser': {'model':'fixed', 'params': {"chunk_size": 10, "overlap_size"
 
 Find detail on each of our current modules, including available models for each, [here](../../modules/modules_overview.md).
 
+### Using your own Models
+
+Do you have a model—either one you've developed or one you've fine-tuned—that you'd like to use on Krixik?
+
+Please [click here](../../modules/adding_your_own_modules_or_models.md) to learn how to do so!
+
 ### Optional Metadata Arguments
 
 The `process` method also takes a variety of optional metadata arguments. These do not change how `process` runs or treats data. Instead, they make your processed files easier to retrieve and organize. You can think of it as a file system for files you've processed through your pipelines.
@@ -219,15 +229,17 @@ Let's call the `process` method once more. We'll use the same product review fil
 
 ```python
 # process short input file with optional metadata arguments
-process_demo_output = pipeline.process(local_file_path ="../../../data/input/recliner_reviews.json",
-                                       local_save_directory="../../../data/output",
-                                       expire_time=60 * 30,
-                                       wait_for_process=True,
-                                       verbose=False,
-                                       symbolic_directory_path="/my/custom/filepath",
-                                       file_name="product_reviews.json",
-                                       file_tags=[{"category": "furniture"}, {"product code": "recliner-47b-u11"}],
-                                       file_description="Three product reviews for the Orwell Cloq recliner.")
+process_demo_output = pipeline.process(
+    local_file_path="../../../data/input/recliner_reviews.json",
+    local_save_directory="../../../data/output",
+    expire_time=60 * 30,
+    wait_for_process=True,
+    verbose=False,
+    symbolic_directory_path="/my/custom/filepath",
+    file_name="product_reviews.json",
+    file_tags=[{"category": "furniture"}, {"product code": "recliner-47b-u11"}],
+    file_description="Three product reviews for the Orwell Cloq recliner.",
+)
 ```
 
 ### Metadata Argument Defaults

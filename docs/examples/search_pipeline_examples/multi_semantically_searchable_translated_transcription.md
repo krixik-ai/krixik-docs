@@ -31,13 +31,10 @@ Pipeline setup is accomplished through the [`.create_pipeline`](../../system/pip
 
 ```python
 # create a pipeline as detailed above
-pipeline = krixik.create_pipeline(name="multi_semantically_searchable_translated_transcription",
-                                  module_chain=["transcribe",
-                                                "translate",
-                                                "json-to-txt",
-                                                "parser",
-                                                "text-embedder",
-                                                "vector-db"])
+pipeline = krixik.create_pipeline(
+    name="multi_semantically_searchable_translated_transcription",
+    module_chain=["transcribe", "translate", "json-to-txt", "parser", "text-embedder", "vector-db"],
+)
 ```
 
 ### Processing an Input File
@@ -48,6 +45,7 @@ Lets take a quick look at a test file before processing.
 ```python
 # examine contents of input file
 import IPython
+
 IPython.display.Audio("../../../data/input/deadlift.mp3")
 ```
 
@@ -70,12 +68,14 @@ We will use the default models for every other module in the pipeline, so they d
 
 ```python
 # process the file through the pipeline, as described above
-process_output = pipeline.process(local_file_path = "../../../data/input/deadlift.mp3", # the initial local filepath where the input file is stored
-                                  local_save_directory="../../../data/output", # the local directory that the output file will be saved to
-                                  expire_time=60*30, # process data will be deleted from the Krixik system in 30 minutes
-                                  wait_for_process=True, # wait for process to complete before returning IDE control to user
-                                  verbose=False, # do not display process update printouts upon running code
-                                  modules={"translate": {"model": "opus-mt-es-en"}}) # specify a non-default model for use in the translate module
+process_output = pipeline.process(
+    local_file_path="../../../data/input/deadlift.mp3",  # the initial local filepath where the input file is stored
+    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
+    wait_for_process=True,  # wait for process to complete before returning IDE control to user
+    verbose=False,  # do not display process update printouts upon running code
+    modules={"translate": {"model": "opus-mt-es-en"}},
+)  # specify a non-default model for use in the translate module
 ```
 
 The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
@@ -111,8 +111,7 @@ Since our pipeline satisfies this condition, it has access to the [`.semantic_se
 
 ```python
 # perform semantic_search over the file in the pipeline
-semantic_output = pipeline.semantic_search(query="be sure to hold the weights very firmly", 
-                                           file_ids=[process_output["file_id"]])
+semantic_output = pipeline.semantic_search(query="be sure to hold the weights very firmly", file_ids=[process_output["file_id"]])
 
 # nicely print the output of this process
 print(json.dumps(semantic_output, indent=2))

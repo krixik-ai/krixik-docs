@@ -20,18 +20,19 @@ For this document's example we will use a pipeline consisting of a single [`pars
 
 ```python
 # create an example pipeline with a single module
-pipeline = krixik.create_pipeline(name="delete_method_1_parser",
-                                  module_chain=["parser"])
+pipeline = krixik.create_pipeline(name="delete_method_1_parser", module_chain=["parser"])
 
 # process short input file
-process_output = pipeline.process(local_file_path="../../../data/input/1984_very_short.txt", # the initial local filepath where the input JSON file is stored
-                                  local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
-                                  expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-                                  wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
-                                  verbose=False,  # do not display process update printouts upon running code
-                                  symbolic_directory_path="/novels/20th-century",
-                                  file_name="1984_sample.txt",
-                                  file_tags=[{"author": "Orwell"}, {"category": "dystopian"}, {"century": "20"}])
+process_output = pipeline.process(
+    local_file_path="../../../data/input/1984_very_short.txt",  # the initial local filepath where the input JSON file is stored
+    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
+    wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
+    verbose=False,  # do not display process update printouts upon running code
+    symbolic_directory_path="/novels/20th-century",
+    file_name="1984_sample.txt",
+    file_tags=[{"author": "Orwell"}, {"category": "dystopian"}, {"century": "20"}],
+)
 ```
 
 Let's see what the files' records look like with the [`list`](list_method.md) method:
@@ -125,7 +126,7 @@ We can check that the file has been deleted by using the [`list`](list_method.md
 #  to confirm that one file has been deleted
 list_output = pipeline.list(symbolic_directory_paths=["/novels/20th-century"])
 
-# nicely print the output of this 
+# nicely print the output of this
 print(json.dumps(list_output, indent=2))
 ```
 

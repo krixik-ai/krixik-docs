@@ -18,10 +18,7 @@ We do this by leveraging the [`.create_pipeline`](../../system/pipeline_creation
 
 ```python
 # create a pipeline as detailed above
-pipeline = krixik.create_pipeline(name="multi_recursive_summarization",
-                                  module_chain=["summarize",
-                                                "summarize",
-                                                "summarize"])
+pipeline = krixik.create_pipeline(name="multi_recursive_summarization", module_chain=["summarize", "summarize", "summarize"])
 ```
 
 ### Processing an Input File
@@ -132,11 +129,13 @@ With the [`process`](../../system/parameters_processing_files_through_pipelines/
 
 ```python
 # process the file through the pipeline, as described above
-process_output = pipeline.process(local_file_path = "../../../data/input/1984_short.txt", # the initial local filepath where the input file is stored
-                                  local_save_directory="../../../data/output", # the local directory that the output file will be saved to
-                                  expire_time=60*30, # process data will be deleted from the Krixik system in 30 minutes
-                                  wait_for_process=True, # wait for process to complete before returning IDE control to user
-                                  verbose=False) # do not display process update printouts upon running code
+process_output = pipeline.process(
+    local_file_path="../../../data/input/1984_short.txt",  # the initial local filepath where the input file is stored
+    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
+    wait_for_process=True,  # wait for process to complete before returning IDE control to user
+    verbose=False,
+)  # do not display process update printouts upon running code
 ```
 
 The output of this process is printed below. To learn more about each component of the output, review documentation for the [``](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
@@ -168,8 +167,8 @@ To confirm that everything went as it should have, let's load in the text file o
 
 ```python
 # load in process output from file
-with open(process_output['process_output_files'][0], "r") as file:
-    print(file.read())  
+with open(process_output["process_output_files"][0], "r") as file:
+    print(file.read())
 ```
 
     Winston Smith walked through the glass doors of Victory Mansions. The hallway

@@ -22,8 +22,7 @@ Let's use the `create_pipeline` method to create a single-module pipeline. We'll
 
 ```python
 # create a pipeline with a single parser module
-pipeline = krixik.create_pipeline(name="create_pipeline_1_parser",
-                                  module_chain=["parser"])
+pipeline = krixik.create_pipeline(name="create_pipeline_1_parser", module_chain=["parser"])
 ```
 
 Make sure that you have [initialized your session](../initialization/initialize_and_authenticate.md) before executing this code.
@@ -39,8 +38,7 @@ As you can see, pipeline setup syntax is the same as above. The order of the mod
 
 ```python
 # create a basic semantic search multi-module pipeline
-pipeline = krixik.create_pipeline(name="create_pipeline_2_parser_embedder_vector",
-                                  module_chain=["parser", "text-embedder", "vector-db"])
+pipeline = krixik.create_pipeline(name="create_pipeline_2_parser_embedder_vector", module_chain=["parser", "text-embedder", "vector-db"])
 ```
 
 An array of multi-module pipeline examples can be [found here](../../examples/pipeline_examples_overview.md).
@@ -54,8 +52,7 @@ For example, attempting to build a two-module pipeline that sequentially consist
 
 ```python
 # attempt to create a pipeline sequentially comprised of a parser and a caption module
-pipeline = krixik.create_pipeline(name="create_pipeline_3_parser_caption",
-                                  module_chain=["parser", "caption"])
+pipeline = krixik.create_pipeline(name="create_pipeline_3_parser_caption", module_chain=["parser", "caption"])
 ```
 
 

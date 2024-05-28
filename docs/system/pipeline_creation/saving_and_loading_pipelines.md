@@ -21,8 +21,9 @@ To demonstrate how it works, first you'll need to create a pipeline with the [`c
 
 ```python
 # first create a pipeline
-pipeline = krixik.create_pipeline(name='saving_and_loading_pipelines_1_summarize_summarize_keyword-db',
-                                  module_chain=['summarize', 'summarize', 'keyword-db'])
+pipeline = krixik.create_pipeline(
+    name="saving_and_loading_pipelines_1_summarize_summarize_keyword-db", module_chain=["summarize", "summarize", "keyword-db"]
+)
 ```
 
 Now that you have a pipeline you can use the `save_pipeline` method to save that pipeline to disk:

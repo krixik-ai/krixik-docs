@@ -1,6 +1,6 @@
 ## Currently Available Modules
 
-What follows is a list of all modules currently available to [build](../system/pipeline_creation/create_pipeline.md) Krixik pipelines with. As you review the list and begin to ideate pipeline possibilities, keep in mind that (as long as outputs and inputs [match](../system/convenience_methods/convenience_methods.md)) there are no restrictions on how you can put these together. Repetition, even serial repetition, is permitted.
+What follows is a list of all [modules](../system/pipeline_creation/components_of_a_krixik_pipeline.md) currently available to [build](../system/pipeline_creation/create_pipeline.md) Krixik pipelines with. As you review the list and begin to ideate pipeline possibilities, keep in mind that (as long as outputs and inputs [match](../system/convenience_methods/convenience_methods.md)) there are no restrictions on how you can put these together. Repetition, even serial repetition, is permitted. Also keep in mind that it's possible for you to incorporate your own modules and models into Krixik.
 
 Given that the list of Krixik modules—and of the models within them—will constantly grow, we suggest that you bookmark this page.
 
@@ -31,3 +31,7 @@ Given that the list of Krixik modules—and of the models within them—will con
 ### Support Function Modules
 
 - [JSON-to-TXT](support_function_modules/json-to-txt_module.md): Converts an input JSON file to a TXT file.
+
+### Adding your own Modules
+
+- [Adding your own Modules or Models](adding_your_own_modules_or_models.md): On how to incorporate your own models or module ideas into Krixik.
