@@ -2,7 +2,7 @@ line-length = 150
 target-version = "py38"
 lint.select = ["E", "W"]
 lint.fixable = ["ALL"]
-lint.ignore = ["E501", "E999"]
+lint.ignore = ["E501", "E999", "E402"]
 exclude = [
     ".bzr",
     ".direnv",
@@ -36,3 +36,4 @@ exclude = [
     "notebook_tests",
     "demos"
 ]
+extend-include = ["*.ipynb"]

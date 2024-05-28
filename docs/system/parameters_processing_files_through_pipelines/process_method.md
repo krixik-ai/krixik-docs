@@ -34,8 +34,7 @@ Let's first create a single-module pipeline to demonstrate the `process` method 
 
 ```python
 # create single-module pipeline for process demo
-pipeline = krixik.create_pipeline(name='process_method_1_sentiment',
-                                  module_chain=['sentiment'])
+pipeline = krixik.create_pipeline(name="process_method_1_sentiment", module_chain=["sentiment"])
 ```
 
 We've locally created a JSON file that holds three snippets that simulate online product reviews. The snippets read as follows:
@@ -51,11 +50,13 @@ Keep in mind that input JSON files _must_ follow a very [specific format](JSON_i
 
 ```python
 # process short input file
-process_demo_output = pipeline.process(local_file_path ="../../../data/input/recliner_reviews.json", # the initial local filepath where the input JSON file is stored
-                                       local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
-                                       expire_time=60 * 30,  # process data will be deleted from the Krixik system in 10 minutes
-                                       wait_for_process=True,  # wait for process to complete before returning IDE control to user
-                                       verbose=False)  # do not display process update printouts upon running code
+process_demo_output = pipeline.process(
+    local_file_path="../../../data/input/recliner_reviews.json",  # the initial local filepath where the input JSON file is stored
+    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    expire_time=60 * 30,  # process data will be deleted from the Krixik system in 10 minutes
+    wait_for_process=True,  # wait for process to complete before returning IDE control to user
+    verbose=False,
+)  # do not display process update printouts upon running code
 ```
 
 Now let's print the output of the process.  Because the output of this particular module-model pair is in JSON format, we can print it nicely with the following code:
@@ -64,6 +65,7 @@ Now let's print the output of the process.  Because the output of this particula
 ```python
 # nicely print the output of the above process
 import json
+
 print(json.dumps(process_demo_output, indent=2))
 ```
 
@@ -127,6 +129,7 @@ In addition to being printed here, this process output is also stored in the fil
 ```python
 # load in process output from file
 import json
+
 with open(process_demo_output["process_output_files"][0], "r") as file:
     print(json.dumps(json.load(file), indent=2))
 ```
@@ -226,15 +229,17 @@ Let's call the `process` method once more. We'll use the same product review fil
 
 ```python
 # process short input file with optional metadata arguments
-process_demo_output = pipeline.process(local_file_path ="../../../data/input/recliner_reviews.json",
-                                       local_save_directory="../../../data/output",
-                                       expire_time=60 * 30,
-                                       wait_for_process=True,
-                                       verbose=False,
-                                       symbolic_directory_path="/my/custom/filepath",
-                                       file_name="product_reviews.json",
-                                       file_tags=[{"category": "furniture"}, {"product code": "recliner-47b-u11"}],
-                                       file_description="Three product reviews for the Orwell Cloq recliner.")
+process_demo_output = pipeline.process(
+    local_file_path="../../../data/input/recliner_reviews.json",
+    local_save_directory="../../../data/output",
+    expire_time=60 * 30,
+    wait_for_process=True,
+    verbose=False,
+    symbolic_directory_path="/my/custom/filepath",
+    file_name="product_reviews.json",
+    file_tags=[{"category": "furniture"}, {"product code": "recliner-47b-u11"}],
+    file_description="Three product reviews for the Orwell Cloq recliner.",
+)
 ```
 
 ### Metadata Argument Defaults

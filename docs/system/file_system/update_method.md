@@ -35,28 +35,29 @@ For this document's example we will use a pipeline consisting of a single [`pars
 
 ```python
 # create an example pipeline with a single parser module
-pipeline = krixik.create_pipeline(name="update_method_1_parser",
-                                  module_chain=["parser"])
+pipeline = krixik.create_pipeline(name="update_method_1_parser", module_chain=["parser"])
 
 # process short input file
-process_output = pipeline.process(local_file_path="../../../data/input/frankenstein_very_short.txt", # the initial local filepath where the input JSON file is stored
-                                  local_save_directory="../../../data/output",  # save output repo data output subdir
-                                  expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-                                  wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
-                                  verbose=False,  # do not display process update printouts upon running code
-                                  symbolic_directory_path="/novels/gothic",
-                                  file_name="Frankenstein.txt",
-                                  file_tags=[{"author": "Shelley"}, {"category": "gothic"}, {"century": "19"}])
+process_output = pipeline.process(
+    local_file_path="../../../data/input/frankenstein_very_short.txt",  # the initial local filepath where the input JSON file is stored
+    local_save_directory="../../../data/output",  # save output repo data output subdir
+    expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
+    wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
+    verbose=False,  # do not display process update printouts upon running code
+    symbolic_directory_path="/novels/gothic",
+    file_name="Frankenstein.txt",
+    file_tags=[{"author": "Shelley"}, {"category": "gothic"}, {"century": "19"}],
+)
 ```
 
 Let's see what the file's record looks like with the [`list`](list_method.md) method:
 
 
 ```python
-# see the file's record with 
-list_output = pipeline.list(symbolic_directory_paths=['/novels/gothic'])
+# see the file's record with
+list_output = pipeline.list(symbolic_directory_paths=["/novels/gothic"])
 
-# nicely print the output of this 
+# nicely print the output of this
 print(json.dumps(list_output, indent=2))
 ```
 
@@ -118,10 +119,12 @@ We'll update its `file_name`, since it's erroneous, change the `{"category": "go
 
 ```python
 # update metadata the metadata for the processed file
-update_output = pipeline.update(file_id=process_output["file_id"],
-                                file_name="Frankenstein.txt",
-                                file_tags=[{"author": "Shelley"}, {"country": "UK"}, {"century": "19"}],
-                                file_description='Is the villain the monster or the doctor?')
+update_output = pipeline.update(
+    file_id=process_output["file_id"],
+    file_name="Frankenstein.txt",
+    file_tags=[{"author": "Shelley"}, {"country": "UK"}, {"century": "19"}],
+    file_description="Is the villain the monster or the doctor?",
+)
 
 # nicely print the output of this update
 print(json.dumps(process_output, indent=2))
@@ -369,9 +372,9 @@ Now we invoke the [`list`](list_method.md) method to confirm that all metadata h
 
 ```python
 # call  to see the file's newly updated record
-list_output = pipeline.list(symbolic_file_paths=['/novels/gothic/Frankenstein.txt'])
+list_output = pipeline.list(symbolic_file_paths=["/novels/gothic/Frankenstein.txt"])
 
-# nicely print the output of this 
+# nicely print the output of this
 print(json.dumps(list_output, indent=2))
 ```
 

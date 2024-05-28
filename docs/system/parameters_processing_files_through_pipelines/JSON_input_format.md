@@ -26,14 +26,11 @@ Here's an example of the above in action. The following list is what the content
 ```python
 # example JSON content, two separate blocks of text
 [
-  {
-    "snippet": "It was a bright cold day in April, and the clocks were striking thirteen.",
-    "line_numbers": [1]
-  },
-  {
-    "snippet": "Winston Smith, his chin nuzzled into his breast in an effort to escape the vile wind, slipped quickly through the glass doors of Victory Mansions, though not quickly enough to prevent a swirl of gritty dust from entering along with him.",
-    "line_numbers": [2,3,4,5]
-  }
+    {"snippet": "It was a bright cold day in April, and the clocks were striking thirteen.", "line_numbers": [1]},
+    {
+        "snippet": "Winston Smith, his chin nuzzled into his breast in an effort to escape the vile wind, slipped quickly through the glass doors of Victory Mansions, though not quickly enough to prevent a swirl of gritty dust from entering along with him.",
+        "line_numbers": [2, 3, 4, 5],
+    },
 ]
 ```
 
@@ -45,18 +42,16 @@ We recommend using JSON functionality to create your JSON files. Directly creati
 ```python
 # creating and locally saving a JSON file
 my_data = [
-  {
-    "snippet": "It was a bright cold day in April, and the clocks were striking thirteen.",
-    "line_numbers": [1]
-  },
-  {
-    "snippet": "Winston Smith, his chin nuzzled into his breast in an effort to escape the vile wind, slipped quickly through the glass doors of Victory Mansions, though not quickly enough to prevent a swirl of gritty dust from entering along with him.",
-    "line_numbers": [2,3,4,5]
-  }
+    {"snippet": "It was a bright cold day in April, and the clocks were striking thirteen.", "line_numbers": [1]},
+    {
+        "snippet": "Winston Smith, his chin nuzzled into his breast in an effort to escape the vile wind, slipped quickly through the glass doors of Victory Mansions, though not quickly enough to prevent a swirl of gritty dust from entering along with him.",
+        "line_numbers": [2, 3, 4, 5],
+    },
 ]
 
 import json
-with open('demo_file_1.json', 'w') as f:
+
+with open("demo_file_1.json", "w") as f:
     json.dump(my_data, f)
 ```
 
