@@ -2,10 +2,9 @@
 All notable changes to this project will be documented in this file.
  
 
-## [Unreleased] - 2024-05-28
+## [1.1.17] - 2024-05-28
 
-New page added for supply side.  Link check test updated to accept certain 400 errors.
-
+New page  - adding_your_own_modules_or_models - added for supply side.  Link check test updated to accept certain 400 errors.
 
 ### Added
 
@@ -22,9 +21,12 @@ New page added for supply side.  Link check test updated to accept certain 400 e
 - Link check intra link failure on README check test.
 
 
-## [Unreleased] - 2024-05-23
+## [1.1.17] - 2024-05-23
 
 Subset of local tests mapped to github actions.
+
+Release number matching current cli.
+
 
 ### Added
 
