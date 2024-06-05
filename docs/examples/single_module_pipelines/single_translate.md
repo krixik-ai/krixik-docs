@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/single_module_pipelines/single_translate.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## Single-Module Pipeline: `translate`
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`translate`](../../modules/ai_modules/translate_module.md) module. It's divided into the following sections:
@@ -28,7 +30,7 @@ Let's take a quick look at a valid input file, and then process it.
 
 ```python
 # examine contents of a valid input file
-with open("../../../data/input/valid.json", "r") as file:
+with open(data_dir + "input/valid.json", "r") as file:
     print(json.dumps(json.load(file), indent=2))
 ```
 
@@ -52,8 +54,8 @@ Given that this is the default model, we need not specify model selection throug
 ```python
 # process the file with the default model
 process_output = pipeline.process(
-    local_file_path="../../../data/input/valid.json",  # the initial local filepath where the input file is stored
-    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    local_file_path=data_dir + "input/valid.json",  # the initial local filepath where the input file is stored
+    local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,
@@ -73,9 +75,9 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "single_translate_1",
-      "request_id": "13808335-7b47-4576-9a81-555788920ba2",
-      "file_id": "51c005db-04a8-48d6-9162-4584b62e1804",
-      "message": "SUCCESS - output fetched for file_id 51c005db-04a8-48d6-9162-4584b62e1804.Output saved to location(s) listed in process_output_files.",
+      "request_id": "6e87fa96-3fea-49f9-9ef3-897cc226f94c",
+      "file_id": "a2439789-e57d-4cd1-a91e-ab1907edd2a5",
+      "message": "SUCCESS - output fetched for file_id a2439789-e57d-4cd1-a91e-ab1907edd2a5.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -86,7 +88,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/51c005db-04a8-48d6-9162-4584b62e1804.json"
+        "../../../data/output/a2439789-e57d-4cd1-a91e-ab1907edd2a5.json"
       ]
     }
 
@@ -120,8 +122,8 @@ We do so below to process the same input file as above.
 ```python
 # process the file with a non-default model
 process_output = pipeline.process(
-    local_file_path="../../../data/input/valid_spanish.json",  # all parameters save 'modules' as above
-    local_save_directory="../../../data/output",
+    local_file_path=data_dir + "input/valid_spanish.json",  # all parameters save 'modules' as above
+    local_save_directory=data_dir + "output",
     expire_time=60 * 30,
     wait_for_process=True,
     verbose=False,
@@ -140,9 +142,9 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "single_translate_1",
-      "request_id": "6e1dbf45-2e40-4b42-9f3d-0c7cc6980691",
-      "file_id": "c5ae683e-24ff-47af-a4fa-1ce0872980ca",
-      "message": "SUCCESS - output fetched for file_id c5ae683e-24ff-47af-a4fa-1ce0872980ca.Output saved to location(s) listed in process_output_files.",
+      "request_id": "b65ab7cf-7aee-4c95-95da-d2d0f9c78679",
+      "file_id": "cd6a91a1-a82d-4e16-be6c-18ce71fdd3f0",
+      "message": "SUCCESS - output fetched for file_id cd6a91a1-a82d-4e16-be6c-18ce71fdd3f0.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -153,7 +155,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/c5ae683e-24ff-47af-a4fa-1ce0872980ca.json"
+        "../../../data/output/cd6a91a1-a82d-4e16-be6c-18ce71fdd3f0.json"
       ]
     }
 

@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/search_pipeline_examples/multi_basic_semantic_search.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## Multi-Module Pipeline: Basic Semantic Search
 
 This document details a modular pipeline that takes in a text document and enables [`semantic search`](../../system/search_methods/semantic_search_method.md) on it.
@@ -33,7 +35,7 @@ Lets take a quick look at a test file before processing.
 
 ```python
 # examine contents of input file
-with open("../../../data/input/1984_short.txt", "r") as file:
+with open(data_dir + "input/1984_short.txt", "r") as file:
     print(file.read())
 ```
 
@@ -135,8 +137,8 @@ We will use the default models for every module in the pipeline, so the [`module
 ```python
 # process the file through the pipeline, as described above
 process_output = pipeline.process(
-    local_file_path="../../../data/input/1984_short.txt",  # the initial local filepath where the input file is stored
-    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    local_file_path=data_dir + "input/1984_short.txt",  # the initial local filepath where the input file is stored
+    local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,
@@ -156,13 +158,13 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "multi_basic_semantic_search",
-      "request_id": "c3ed4c53-2008-4041-8716-fab8251e217d",
-      "file_id": "dd34defb-b97a-4c79-b8af-c5b512292fce",
-      "message": "SUCCESS - output fetched for file_id dd34defb-b97a-4c79-b8af-c5b512292fce.Output saved to location(s) listed in process_output_files.",
+      "request_id": "46c2fed2-ed7b-4046-8fa9-3f6143391699",
+      "file_id": "3c9f01fe-1a93-43f4-b87c-5270225a0575",
+      "message": "SUCCESS - output fetched for file_id 3c9f01fe-1a93-43f4-b87c-5270225a0575.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../../data/output/dd34defb-b97a-4c79-b8af-c5b512292fce.faiss"
+        "../../../data/output/3c9f01fe-1a93-43f4-b87c-5270225a0575.faiss"
       ]
     }
 
@@ -184,19 +186,19 @@ print(json.dumps(semantic_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "5b119f58-3539-4c06-9dcc-89c7d55b2b89",
+      "request_id": "a6ee5fb9-f652-4ffa-a1bd-a824eb3f9079",
       "message": "Successfully queried 1 user file.",
       "warnings": [],
       "items": [
         {
-          "file_id": "dd34defb-b97a-4c79-b8af-c5b512292fce",
+          "file_id": "3c9f01fe-1a93-43f4-b87c-5270225a0575",
           "file_metadata": {
-            "file_name": "krixik_generated_file_name_gubstkyxew.txt",
+            "file_name": "krixik_generated_file_name_rnhqfhzbgh.txt",
             "symbolic_directory_path": "/etc",
             "file_tags": [],
             "num_vectors": 50,
-            "created_at": "2024-05-22 20:17:25",
-            "last_updated": "2024-05-22 20:17:25"
+            "created_at": "2024-06-05 14:51:02",
+            "last_updated": "2024-06-05 14:51:02"
           },
           "search_results": [
             {

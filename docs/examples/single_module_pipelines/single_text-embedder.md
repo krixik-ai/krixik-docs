@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/single_module_pipelines/single_text-embedder.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## Single-Module Pipeline: `text-embedder`
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module. It's divided into the following sections:
@@ -31,7 +33,7 @@ Let's take a quick look at a valid input file, and then process it.
 
 ```python
 # examine contents of a valid input file
-with open("../../../data/input/1984_snippets.json", "r") as file:
+with open(data_dir + "input/1984_snippets.json", "r") as file:
     print(json.dumps(json.load(file), indent=2))
 ```
 
@@ -66,8 +68,8 @@ In a later section of this document we will process the same file again, but sel
 ```python
 # process the file with the default model
 process_output = pipeline.process(
-    local_file_path="../../../data/input/1984_snippets.json",  # the initial local filepath where the input file is stored
-    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    local_file_path=data_dir + "input/1984_snippets.json",  # the initial local filepath where the input file is stored
+    local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,
@@ -87,13 +89,13 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "single_text-embedder-1",
-      "request_id": "92ee8a21-af3e-4825-a934-b857fccfa10b",
-      "file_id": "5307d146-17e7-47dd-8b5e-609a2cce90cd",
-      "message": "SUCCESS - output fetched for file_id 5307d146-17e7-47dd-8b5e-609a2cce90cd.Output saved to location(s) listed in process_output_files.",
+      "request_id": "ce2e57ce-c2be-49ac-8d43-59e6db2bcf25",
+      "file_id": "ce4ddfa5-12c6-4dcb-86af-4f6d30ed6188",
+      "message": "SUCCESS - output fetched for file_id ce4ddfa5-12c6-4dcb-86af-4f6d30ed6188.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../../data/output/5307d146-17e7-47dd-8b5e-609a2cce90cd.npy"
+        "../../../data/output/ce4ddfa5-12c6-4dcb-86af-4f6d30ed6188.npy"
       ]
     }
 
@@ -126,8 +128,8 @@ To use a [non-default model](../../modules/ai_modules/text-embedder_module.md#av
 ```python
 # process the file with a non-default model
 process_output = pipeline.process(
-    local_file_path="../../../data/input/1984_snippets.json",  # all parameters save 'modules' as above
-    local_save_directory="../../../data/output",
+    local_file_path=data_dir + "input/1984_snippets.json",  # all parameters save 'modules' as above
+    local_save_directory=data_dir + "output",
     expire_time=60 * 30,
     wait_for_process=True,
     verbose=False,
@@ -146,13 +148,13 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "single_text-embedder-1",
-      "request_id": "f810bbe4-4bfb-43d7-9f5d-dab8954fd6bf",
-      "file_id": "e5cc4b9f-3b48-4b7b-a9cf-5e1d171a327b",
-      "message": "SUCCESS - output fetched for file_id e5cc4b9f-3b48-4b7b-a9cf-5e1d171a327b.Output saved to location(s) listed in process_output_files.",
+      "request_id": "f53c93da-cf1b-41e0-a578-16dc62736ed4",
+      "file_id": "1dcbde04-d4f2-414f-acaf-577c355bbb88",
+      "message": "SUCCESS - output fetched for file_id 1dcbde04-d4f2-414f-acaf-577c355bbb88.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../../data/output/e5cc4b9f-3b48-4b7b-a9cf-5e1d171a327b.npy"
+        "../../../data/output/1dcbde04-d4f2-414f-acaf-577c355bbb88.npy"
       ]
     }
 

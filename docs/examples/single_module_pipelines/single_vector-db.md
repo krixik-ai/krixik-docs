@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/single_module_pipelines/single_vector-db.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## Single-Module Pipeline: `vector-db`
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`vector-db`](../../modules/database_modules/vector-db_module.md) module.
@@ -35,7 +37,7 @@ Let's take a quick look at a valid input file, and then process it:
 # examine contents of input file
 import numpy as np
 
-np.load("../../../data/input/vectors.npy")
+np.load(data_dir + "input/vectors.npy")
 ```
 
 
@@ -57,8 +59,8 @@ Given that this is the default model, we need not specify model selection throug
 ```python
 # process the file with the default model
 process_output = pipeline.process(
-    local_file_path="../../../data/input/vectors.npy",  # the initial local filepath where the input file is stored
-    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    local_file_path=data_dir + "input/vectors.npy",  # the initial local filepath where the input file is stored
+    local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,
@@ -78,13 +80,13 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "modules-vector-db-docs",
-      "request_id": "c310dead-4e2b-4f65-a10f-9485da4d0bb1",
-      "file_id": "1df1ac2b-ec64-44d5-b98d-517786e454a4",
-      "message": "SUCCESS - output fetched for file_id 1df1ac2b-ec64-44d5-b98d-517786e454a4.Output saved to location(s) listed in process_output_files.",
+      "request_id": "536c9e0b-41ed-4c41-99dc-11cdabf32ecc",
+      "file_id": "63c88fdc-8b62-4f74-af20-c4816ee0bb88",
+      "message": "SUCCESS - output fetched for file_id 63c88fdc-8b62-4f74-af20-c4816ee0bb88.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../../data/output/1df1ac2b-ec64-44d5-b98d-517786e454a4.faiss"
+        "../../../data/output/63c88fdc-8b62-4f74-af20-c4816ee0bb88.faiss"
       ]
     }
 
@@ -122,12 +124,8 @@ def query_vector_db(query_vector: np.ndarray, k: int, db_file_path: str) -> Tupl
     return distances, indices
 ```
 
-    Collecting faiss-cpu
-      Using cached faiss_cpu-1.8.0-cp310-cp310-macosx_11_0_arm64.whl.metadata (3.6 kB)
+    Requirement already satisfied: faiss-cpu in /Users/jeremywatt/Desktop/krixik/code/krixik-docs/docs_venv/lib/python3.10/site-packages (1.8.0)
     Requirement already satisfied: numpy in /Users/jeremywatt/Desktop/krixik/code/krixik-docs/docs_venv/lib/python3.10/site-packages (from faiss-cpu) (1.26.4)
-    Using cached faiss_cpu-1.8.0-cp310-cp310-macosx_11_0_arm64.whl (3.1 MB)
-    Installing collected packages: faiss-cpu
-    Successfully installed faiss-cpu-1.8.0
     
     [1m[[0m[34;49mnotice[0m[1;39;49m][0m[39;49m A new release of pip is available: [0m[31;49m23.3.1[0m[39;49m -> [0m[32;49m24.0[0m
     [1m[[0m[34;49mnotice[0m[1;39;49m][0m[39;49m To update, run: [0m[32;49mpip install --upgrade pip[0m
@@ -138,7 +136,7 @@ Now query your database using a small sample array with the function above. The 
 
 ```python
 # perform test query using the above query function
-original_vectors = np.load("../../../data/input/vectors.npy")
+original_vectors = np.load(data_dir + "input/vectors.npy")
 query_vector = np.array([[0, 1]])
 distances, indices = query_vector_db(query_vector, 2, process_output["process_output_files"][0])
 print(f"input query vector: {query_vector[0]}")

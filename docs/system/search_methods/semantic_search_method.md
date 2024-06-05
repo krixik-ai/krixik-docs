@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/search_methods/semantic_search_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## The `semantic_search` Method
 
 Krixik's `semantic_search` method enables semantic search on documents processed through certain pipelines. Much has been written about semantic search, but in a nutshell, instead of searching a document for specific keywords, it searches for text similar in _meaning_ to the string that's been queried for. Contrast this to [keyword search](keyword_search_method.md).
@@ -49,8 +51,8 @@ The pipeline ready, we'll [`process`](../parameters_processing_files_through_pip
 ```python
 # add four files to the pipeline we just created.
 output_1 = pipeline.process(
-    local_file_path="../../../data/input/frankenstein_very_short.txt",  # the initial local filepath where the input JSON file is stored
-    local_save_directory="../../../data/output",
+    local_file_path=data_dir + "input/frankenstein_very_short.txt",  # the initial local filepath where the input JSON file is stored
+    local_save_directory=data_dir + "output",
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
     verbose=False,  # do not display process update printouts upon running code
@@ -59,8 +61,8 @@ output_1 = pipeline.process(
 )
 
 output_2 = pipeline.process(
-    local_file_path="../../../data/input/pride_and_prejudice_very_short.txt",  # the initial local filepath where the input JSON file is stored
-    local_save_directory="../../../data/output",
+    local_file_path=data_dir + "input/pride_and_prejudice_very_short.txt",  # the initial local filepath where the input JSON file is stored
+    local_save_directory=data_dir + "output",
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
     verbose=False,  # do not display process update printouts upon running code
@@ -69,8 +71,8 @@ output_2 = pipeline.process(
 )
 
 output_3 = pipeline.process(
-    local_file_path="../../../data/input/moby_dick_very_short.txt",  # the initial local filepath where the input JSON file is stored
-    local_save_directory="../../../data/output",
+    local_file_path=data_dir + "input/moby_dick_very_short.txt",  # the initial local filepath where the input JSON file is stored
+    local_save_directory=data_dir + "output",
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
     verbose=False,  # do not display process update printouts upon running code
@@ -79,8 +81,8 @@ output_3 = pipeline.process(
 )
 
 output_4 = pipeline.process(
-    local_file_path="../../../data/input/little_women_very_short.txt",  # the initial local filepath where the input JSON file is stored
-    local_save_directory="../../../data/output",
+    local_file_path=data_dir + "input/little_women_very_short.txt",  # the initial local filepath where the input JSON file is stored
+    local_save_directory=data_dir + "output",
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
     verbose=False,  # do not display process update printouts upon running code
@@ -100,13 +102,13 @@ print(json.dumps(output_2, indent=2))
     {
       "status_code": 200,
       "pipeline": "semantic_search_method_1_parser_text-embedder_vector-db",
-      "request_id": "2615ca13-adf7-4951-9ab9-bf3465ea47ce",
-      "file_id": "c9ac7eae-81ac-451f-b15e-ead72ee234c9",
-      "message": "SUCCESS - output fetched for file_id c9ac7eae-81ac-451f-b15e-ead72ee234c9.Output saved to location(s) listed in process_output_files.",
+      "request_id": "4197e750-0560-43b9-b7e3-0ea5c8f15151",
+      "file_id": "a94765c2-0250-4b3d-98af-20fc167640e8",
+      "message": "SUCCESS - output fetched for file_id a94765c2-0250-4b3d-98af-20fc167640e8.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "c:\\Users\\Lucas\\Desktop\\krixikdocsnoodle\\docs\\system\\search_methods/c9ac7eae-81ac-451f-b15e-ead72ee234c9.faiss"
+        "../../../data/output/a94765c2-0250-4b3d-98af-20fc167640e8.faiss"
       ]
     }
 
@@ -130,64 +132,69 @@ print(json.dumps(semantic_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "85192b31-b872-4d40-b4bb-2cbcf926fead",
+      "request_id": "c1b9116f-0eaa-489d-a8f4-86ca7238e744",
       "message": "Successfully queried 1 user file.",
       "warnings": [],
       "items": [
         {
-          "file_id": "7c352bfe-3487-4ccd-acc6-144f8b7cdfbf",
+          "file_id": "853f498f-4b1c-439b-bbd4-ccc47c44d254",
           "file_metadata": {
             "file_name": "little women.txt",
             "symbolic_directory_path": "/novels/bildungsroman",
             "file_tags": [],
-            "num_vectors": 2068,
-            "created_at": "2024-05-20 19:11:26",
-            "last_updated": "2024-05-20 19:11:26"
+            "num_vectors": 43,
+            "created_at": "2024-06-05 16:19:43",
+            "last_updated": "2024-06-05 16:19:43"
           },
           "search_results": [
             {
-              "snippet": "How is your cold, Meg?",
+              "snippet": "The four young faces on which the firelight shone brightened at the\ncheerful words, but darkened again as Jo said sadly,--\n\n\"We haven't got father, and shall not have him for a long time.\"",
               "line_numbers": [
-                940
+                19,
+                20,
+                21,
+                22,
+                23
               ],
-              "distance": 0.27
+              "distance": 0.351
             },
             {
-              "snippet": "Shivering, dripping, and crying, they got Amy home; and, after an\nexciting time of it, she fell asleep, rolled in blankets, before a hot\nfire.",
+              "snippet": "Nobody spoke for a minute; then Meg said in an altered tone,--\n\n\"You know the reason mother proposed not having any presents this\nChristmas was because it is going to be a hard winter for every one; and\nshe thinks we ought not to spend money for pleasure, when our men are\nsuffering so in the army.",
               "line_numbers": [
-                4016,
-                4017,
-                4018,
-                4019
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32
               ],
-              "distance": 0.274
+              "distance": 0.363
             },
             {
-              "snippet": "Jo saw her coming, and turned her back; Laurie did not see, for he\nwas carefully skating along the shore, sounding the ice, for a warm\nspell had preceded the cold snap.",
+              "snippet": "said Meg, who could remember better times.",
               "line_numbers": [
-                3966,
-                3967,
-                3968
+                82
               ],
-              "distance": 0.274
+              "distance": 0.402
             },
             {
-              "snippet": "Jo was the first to wake in the gray dawn of Christmas morning.",
+              "snippet": "\"It's so dreadful to be poor!\"",
               "line_numbers": [
-                1134,
-                1135,
-                1136
+                9,
+                10
               ],
-              "distance": 0.287
+              "distance": 0.402
             },
             {
-              "snippet": "Everybody dawdled\nthat morning, and it was noon before the girls found energy enough even\nto take up their worsted work.",
+              "snippet": "\"How would you\nlike to be shut up for hours with a nervous, fussy old lady, who keeps\nyou trotting, is never satisfied, and worries you till you're ready to\nfly out of the window or cry?\"",
               "line_numbers": [
-                4432,
-                4433,
-                4434
+                58,
+                59,
+                60,
+                61
               ],
-              "distance": 0.288
+              "distance": 0.403
             }
           ]
         }
@@ -210,291 +217,320 @@ print(json.dumps(semantic_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "76b5d209-8bb4-467d-b454-4e784bf32ad4",
+      "request_id": "ba1b7b85-8e36-49e5-8734-68c80d19e433",
       "message": "Successfully queried 4 user files.",
       "warnings": [],
       "items": [
         {
-          "snippet": "It was a Saturday night\nin December.",
-          "distance": 0.189,
+          "snippet": "I am already far north of London, and as I walk in the streets of\nPetersburgh, I feel a cold northern breeze play upon my cheeks, which\nbraces my nerves and fills me with delight.",
+          "distance": 0.33,
           "line_numbers": [
-            1048,
-            1049
+            14,
+            15,
+            16,
+            17
           ],
           "file_metadata": {
-            "file_id": "23f62ad0-daf6-448d-a44b-47a447b2f6d7",
-            "file_name": "moby dick.txt",
-            "symbolic_directory_path": "/novels/adventure",
-            "file_tags": [],
-            "num_lines": 0,
-            "created_at": "2024-05-20 19:10:46",
-            "last_updated": "2024-05-20 19:10:46"
-          }
-        },
-        {
-          "snippet": "It was a\nvery dubious-looking, nay, a very dark and dismal night, bitingly cold\nand cheerless.",
-          "distance": 0.203,
-          "line_numbers": [
-            1072,
-            1073,
-            1074
-          ],
-          "file_metadata": {
-            "file_id": "23f62ad0-daf6-448d-a44b-47a447b2f6d7",
-            "file_name": "moby dick.txt",
-            "symbolic_directory_path": "/novels/adventure",
-            "file_tags": [],
-            "num_lines": 0,
-            "created_at": "2024-05-20 19:10:46",
-            "last_updated": "2024-05-20 19:10:46"
-          }
-        },
-        {
-          "snippet": "A great fall of snow had taken\nplace the night before, and the fields were of one uniform white; the\nappearance was disconsolate, and I found my feet chilled by the cold\ndamp substance that covered the ground.",
-          "distance": 0.242,
-          "line_numbers": [
-            3236,
-            3237,
-            3238,
-            3239
-          ],
-          "file_metadata": {
-            "file_id": "4830bdad-7b1b-46ad-9e70-2a60c077849f",
+            "file_id": "f4720361-f94f-4f48-a4bf-0177dd91ba18",
             "file_name": "frankenstein.txt",
             "symbolic_directory_path": "/novels/gothic",
             "file_tags": [],
             "num_lines": 0,
-            "created_at": "2024-05-20 19:09:33",
-            "last_updated": "2024-05-20 19:09:33"
+            "created_at": "2024-06-05 16:17:58",
+            "last_updated": "2024-06-05 16:17:58"
           }
         },
         {
-          "snippet": "By degrees, after the morning\u2019s dawn,\nsleep came.",
-          "distance": 0.247,
+          "snippet": "This breeze, which has travelled from the regions towards\nwhich I am advancing, gives me a foretaste of those icy climes.",
+          "distance": 0.336,
           "line_numbers": [
-            1233,
-            1234
+            18,
+            19
           ],
           "file_metadata": {
-            "file_id": "4830bdad-7b1b-46ad-9e70-2a60c077849f",
+            "file_id": "f4720361-f94f-4f48-a4bf-0177dd91ba18",
             "file_name": "frankenstein.txt",
             "symbolic_directory_path": "/novels/gothic",
             "file_tags": [],
             "num_lines": 0,
-            "created_at": "2024-05-20 19:09:33",
-            "last_updated": "2024-05-20 19:09:33"
+            "created_at": "2024-06-05 16:17:58",
+            "last_updated": "2024-06-05 16:17:58"
           }
         },
         {
-          "snippet": "I was still cold when under one of the trees I found a huge cloak, with\nwhich I covered myself, and sat down upon the ground.",
-          "distance": 0.25,
+          "snippet": "The four young faces on which the firelight shone brightened at the\ncheerful words, but darkened again as Jo said sadly,--\n\n\"We haven't got father, and shall not have him for a long time.\"",
+          "distance": 0.351,
           "line_numbers": [
-            3165,
-            3166
+            19,
+            20,
+            21,
+            22,
+            23
           ],
           "file_metadata": {
-            "file_id": "4830bdad-7b1b-46ad-9e70-2a60c077849f",
+            "file_id": "853f498f-4b1c-439b-bbd4-ccc47c44d254",
+            "file_name": "little women.txt",
+            "symbolic_directory_path": "/novels/bildungsroman",
+            "file_tags": [],
+            "num_lines": 0,
+            "created_at": "2024-06-05 16:19:43",
+            "last_updated": "2024-06-05 16:19:43"
+          }
+        },
+        {
+          "snippet": "There\u2014for with your leave, my sister, I will put\nsome trust in preceding navigators\u2014there snow and frost are banished;\nand, sailing over a calm sea, we may be wafted to a land surpassing in\nwonders and in beauty every region hitherto discovered on the habitable\nglobe.",
+          "distance": 0.362,
+          "line_numbers": [
+            25,
+            26,
+            27,
+            28,
+            29
+          ],
+          "file_metadata": {
+            "file_id": "f4720361-f94f-4f48-a4bf-0177dd91ba18",
             "file_name": "frankenstein.txt",
             "symbolic_directory_path": "/novels/gothic",
             "file_tags": [],
             "num_lines": 0,
-            "created_at": "2024-05-20 19:09:33",
-            "last_updated": "2024-05-20 19:09:33"
+            "created_at": "2024-06-05 16:17:58",
+            "last_updated": "2024-06-05 16:17:58"
           }
         },
         {
-          "snippet": "I then paused, and a\ncold shivering came over me.",
-          "distance": 0.252,
+          "snippet": "Nobody spoke for a minute; then Meg said in an altered tone,--\n\n\"You know the reason mother proposed not having any presents this\nChristmas was because it is going to be a hard winter for every one; and\nshe thinks we ought not to spend money for pleasure, when our men are\nsuffering so in the army.",
+          "distance": 0.363,
           "line_numbers": [
-            1665,
-            1666
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32
           ],
           "file_metadata": {
-            "file_id": "4830bdad-7b1b-46ad-9e70-2a60c077849f",
+            "file_id": "853f498f-4b1c-439b-bbd4-ccc47c44d254",
+            "file_name": "little women.txt",
+            "symbolic_directory_path": "/novels/bildungsroman",
+            "file_tags": [],
+            "num_lines": 0,
+            "created_at": "2024-06-05 16:19:43",
+            "last_updated": "2024-06-05 16:19:43"
+          }
+        },
+        {
+          "snippet": "There, Margaret, the sun is for ever\nvisible, its broad disk just skirting the horizon and diffusing a\nperpetual splendour.",
+          "distance": 0.377,
+          "line_numbers": [
+            23,
+            24,
+            25
+          ],
+          "file_metadata": {
+            "file_id": "f4720361-f94f-4f48-a4bf-0177dd91ba18",
             "file_name": "frankenstein.txt",
             "symbolic_directory_path": "/novels/gothic",
             "file_tags": [],
             "num_lines": 0,
-            "created_at": "2024-05-20 19:09:33",
-            "last_updated": "2024-05-20 19:09:33"
+            "created_at": "2024-06-05 16:17:58",
+            "last_updated": "2024-06-05 16:17:58"
           }
         },
         {
-          "snippet": "The sky had changed from clear, sunny cold, to driving\nsleet and mist.",
-          "distance": 0.26,
+          "snippet": "Far from it.",
+          "distance": 0.389,
           "line_numbers": [
-            2062,
-            2063
+            11
           ],
           "file_metadata": {
-            "file_id": "23f62ad0-daf6-448d-a44b-47a447b2f6d7",
+            "file_id": "d9e477d5-9b2c-4bf3-aa25-b6c739b83b86",
             "file_name": "moby dick.txt",
             "symbolic_directory_path": "/novels/adventure",
             "file_tags": [],
             "num_lines": 0,
-            "created_at": "2024-05-20 19:10:46",
-            "last_updated": "2024-05-20 19:10:46"
+            "created_at": "2024-06-05 16:19:31",
+            "last_updated": "2024-06-05 16:19:31"
           }
         },
         {
-          "snippet": "We felt\nvery nice and snug, the more so since it was so chilly out of doors;\nindeed out of bed-clothes too, seeing that there was no fire in the\nroom.",
-          "distance": 0.264,
+          "snippet": "said Meg, who could remember better times.",
+          "distance": 0.402,
           "line_numbers": [
-            2727,
-            2728,
-            2729,
-            2730
+            82
           ],
           "file_metadata": {
-            "file_id": "23f62ad0-daf6-448d-a44b-47a447b2f6d7",
+            "file_id": "853f498f-4b1c-439b-bbd4-ccc47c44d254",
+            "file_name": "little women.txt",
+            "symbolic_directory_path": "/novels/bildungsroman",
+            "file_tags": [],
+            "num_lines": 0,
+            "created_at": "2024-06-05 16:19:43",
+            "last_updated": "2024-06-05 16:19:43"
+          }
+        },
+        {
+          "snippet": "\"It's so dreadful to be poor!\"",
+          "distance": 0.402,
+          "line_numbers": [
+            9,
+            10
+          ],
+          "file_metadata": {
+            "file_id": "853f498f-4b1c-439b-bbd4-ccc47c44d254",
+            "file_name": "little women.txt",
+            "symbolic_directory_path": "/novels/bildungsroman",
+            "file_tags": [],
+            "num_lines": 0,
+            "created_at": "2024-06-05 16:19:43",
+            "last_updated": "2024-06-05 16:19:43"
+          }
+        },
+        {
+          "snippet": "But gulp down your tears and hie aloft to the\n  royal-mast with your hearts; for your friends who have gone before\n  are clearing out the seven-storied heavens, and making refugees of\n  long-pampered Gabriel, Michael, and Raphael, against your coming.",
+          "distance": 0.41,
+          "line_numbers": [
+            27,
+            28,
+            29,
+            30
+          ],
+          "file_metadata": {
+            "file_id": "d9e477d5-9b2c-4bf3-aa25-b6c739b83b86",
             "file_name": "moby dick.txt",
             "symbolic_directory_path": "/novels/adventure",
             "file_tags": [],
             "num_lines": 0,
-            "created_at": "2024-05-20 19:10:46",
-            "last_updated": "2024-05-20 19:10:46"
+            "created_at": "2024-06-05 16:19:31",
+            "last_updated": "2024-06-05 16:19:31"
           }
         },
         {
-          "snippet": "How is your cold, Meg?",
-          "distance": 0.27,
+          "snippet": "It will be seen that this mere painstaking burrower and grub-worm of\n  a poor devil of a Sub-Sub appears to have gone through the long\n  Vaticans and street-stalls of the earth, picking up whatever random\n  allusions to whales he could anyways find in any book whatsoever,\n  sacred or profane.",
+          "distance": 0.433,
           "line_numbers": [
-            940
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
           ],
           "file_metadata": {
-            "file_id": "7c352bfe-3487-4ccd-acc6-144f8b7cdfbf",
-            "file_name": "little women.txt",
-            "symbolic_directory_path": "/novels/bildungsroman",
+            "file_id": "d9e477d5-9b2c-4bf3-aa25-b6c739b83b86",
+            "file_name": "moby dick.txt",
+            "symbolic_directory_path": "/novels/adventure",
             "file_tags": [],
             "num_lines": 0,
-            "created_at": "2024-05-20 19:11:26",
-            "last_updated": "2024-05-20 19:11:26"
+            "created_at": "2024-06-05 16:19:31",
+            "last_updated": "2024-06-05 16:19:31"
           }
         },
         {
-          "snippet": "Shivering, dripping, and crying, they got Amy home; and, after an\nexciting time of it, she fell asleep, rolled in blankets, before a hot\nfire.",
-          "distance": 0.274,
+          "snippet": "Would that I could clear out Hampton Court and the\n  Tuileries for ye!",
+          "distance": 0.438,
           "line_numbers": [
-            4016,
-            4017,
-            4018,
-            4019
+            26,
+            27
           ],
           "file_metadata": {
-            "file_id": "7c352bfe-3487-4ccd-acc6-144f8b7cdfbf",
-            "file_name": "little women.txt",
-            "symbolic_directory_path": "/novels/bildungsroman",
+            "file_id": "d9e477d5-9b2c-4bf3-aa25-b6c739b83b86",
+            "file_name": "moby dick.txt",
+            "symbolic_directory_path": "/novels/adventure",
             "file_tags": [],
             "num_lines": 0,
-            "created_at": "2024-05-20 19:11:26",
-            "last_updated": "2024-05-20 19:11:26"
+            "created_at": "2024-06-05 16:19:31",
+            "last_updated": "2024-06-05 16:19:31"
           }
         },
         {
-          "snippet": "Jo saw her coming, and turned her back; Laurie did not see, for he\nwas carefully skating along the shore, sounding the ice, for a warm\nspell had preceded the cold snap.",
-          "distance": 0.274,
+          "snippet": "On the other hand,\nI, for my part, declare for_ Pride and Prejudice _unhesitatingly.",
+          "distance": 0.438,
           "line_numbers": [
-            3966,
-            3967,
-            3968
+            35,
+            36
           ],
           "file_metadata": {
-            "file_id": "7c352bfe-3487-4ccd-acc6-144f8b7cdfbf",
-            "file_name": "little women.txt",
-            "symbolic_directory_path": "/novels/bildungsroman",
-            "file_tags": [],
-            "num_lines": 0,
-            "created_at": "2024-05-20 19:11:26",
-            "last_updated": "2024-05-20 19:11:26"
-          }
-        },
-        {
-          "snippet": "Jo was the first to wake in the gray dawn of Christmas morning.",
-          "distance": 0.287,
-          "line_numbers": [
-            1134,
-            1135,
-            1136
-          ],
-          "file_metadata": {
-            "file_id": "7c352bfe-3487-4ccd-acc6-144f8b7cdfbf",
-            "file_name": "little women.txt",
-            "symbolic_directory_path": "/novels/bildungsroman",
-            "file_tags": [],
-            "num_lines": 0,
-            "created_at": "2024-05-20 19:11:26",
-            "last_updated": "2024-05-20 19:11:26"
-          }
-        },
-        {
-          "snippet": "Miss\nBennet had slept ill, and though up, was very feverish, and not well\nenough to leave her room.",
-          "distance": 0.29,
-          "line_numbers": [
-            1792,
-            1793,
-            1794
-          ],
-          "file_metadata": {
-            "file_id": "c9ac7eae-81ac-451f-b15e-ead72ee234c9",
+            "file_id": "a94765c2-0250-4b3d-98af-20fc167640e8",
             "file_name": "pride and prejudice.txt",
             "symbolic_directory_path": "/novels/romance",
             "file_tags": [],
             "num_lines": 0,
-            "created_at": "2024-05-20 19:10:16",
-            "last_updated": "2024-05-20 19:10:16"
+            "created_at": "2024-06-05 16:19:18",
+            "last_updated": "2024-06-05 16:19:18"
           }
         },
         {
-          "snippet": "The apothecary came; and having\nexamined his patient, said, as might be supposed, that she had caught a\nviolent cold, and that they must endeavour to get the better of it;\nadvised her to return to bed, and promised her some draughts.",
-          "distance": 0.304,
+          "snippet": "The catastrophe of_ Mansfield Park _is admittedly\ntheatrical, the hero and heroine are insipid, and the author has almost\nwickedly destroyed all romantic interest by expressly admitting that\nEdmund only took Fanny because Mary shocked him, and that Fanny might\nvery likely have taken Crawford if he had been a little more assiduous;\nyet the matchless rehearsal-scenes and the characters of Mrs. Norris and\nothers have secured, I believe, a considerable party for it._ Sense and\nSensibility _has perhaps the fewest out-and-out admirers; but it dos\nnot want them._\n\n_I suppose, however, that the majority of at least competent votes\nwould, all things considered, be divided between_ Emma _and the present\nbook; and perhaps the vulgar verdict (if indeed a fondness for Miss\nAusten be not of itself a patent of exemption from any possible charge\nof vulgarity) would go for_ Emma.",
+          "distance": 0.465,
           "line_numbers": [
-            1805,
-            1806,
-            1807,
-            1808
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31
           ],
           "file_metadata": {
-            "file_id": "c9ac7eae-81ac-451f-b15e-ead72ee234c9",
+            "file_id": "a94765c2-0250-4b3d-98af-20fc167640e8",
             "file_name": "pride and prejudice.txt",
             "symbolic_directory_path": "/novels/romance",
             "file_tags": [],
             "num_lines": 0,
-            "created_at": "2024-05-20 19:10:16",
-            "last_updated": "2024-05-20 19:10:16"
+            "created_at": "2024-06-05 16:19:18",
+            "last_updated": "2024-06-05 16:19:18"
           }
         },
         {
-          "snippet": "Why must _she_ be scampering about the\ncountry, because her sister had a cold?",
-          "distance": 0.309,
+          "snippet": "To some the delightful freshness and humour of_ Northanger\nAbbey, _its completeness, finish, and_ entrain, _obscure the undoubted\ncritical facts that its scale is small, and its scheme, after all, that\nof burlesque or parody, a kind in which the first rank is reached with\ndifficulty._ Persuasion, _relatively faint in tone, and not enthralling\nin interest, has devotees who exalt above all the others its exquisite\ndelicacy and keeping.",
+          "distance": 0.468,
           "line_numbers": [
-            1876,
-            1877
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17
           ],
           "file_metadata": {
-            "file_id": "c9ac7eae-81ac-451f-b15e-ead72ee234c9",
+            "file_id": "a94765c2-0250-4b3d-98af-20fc167640e8",
             "file_name": "pride and prejudice.txt",
             "symbolic_directory_path": "/novels/romance",
             "file_tags": [],
             "num_lines": 0,
-            "created_at": "2024-05-20 19:10:16",
-            "last_updated": "2024-05-20 19:10:16"
+            "created_at": "2024-06-05 16:19:18",
+            "last_updated": "2024-06-05 16:19:18"
           }
         },
         {
-          "snippet": "People do not die of little\ntrifling colds.",
-          "distance": 0.321,
+          "snippet": "And in the sect--fairly large and yet\nunusually choice--of Austenians or Janites, there would probably be\nfound partisans of the claim to primacy of almost every one of the\nnovels.",
+          "distance": 0.479,
           "line_numbers": [
-            1740,
-            1741
+            8,
+            9,
+            10,
+            11
           ],
           "file_metadata": {
-            "file_id": "c9ac7eae-81ac-451f-b15e-ead72ee234c9",
+            "file_id": "a94765c2-0250-4b3d-98af-20fc167640e8",
             "file_name": "pride and prejudice.txt",
             "symbolic_directory_path": "/novels/romance",
             "file_tags": [],
             "num_lines": 0,
-            "created_at": "2024-05-20 19:10:16",
-            "last_updated": "2024-05-20 19:10:16"
+            "created_at": "2024-06-05 16:19:18",
+            "last_updated": "2024-06-05 16:19:18"
           }
         }
       ]

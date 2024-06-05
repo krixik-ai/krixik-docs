@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/search_pipeline_examples/multi_semantically_searchable_transcription.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## Multi-Module Pipeline: Semantically-Searchable Transcription
 
 This document details a modular pipeline that takes in an audio file, [`transcribes`](../../modules/ai_modules/transcribe_module.md) it, and makes the result [`semantically searchable`](../../system/search_methods/semantic_search_method.md).
@@ -43,7 +45,7 @@ Lets take a quick look at a test file before processing.
 # examine contents of input file
 import IPython
 
-IPython.display.Audio("../../../data/input/Interesting Facts About Colombia.mp3")
+IPython.display.Audio(data_dir + "input/Interesting Facts About Colombia.mp3")
 ```
 
 
@@ -64,8 +66,8 @@ We will use the default models for every module in the pipeline, so the [`module
 ```python
 # process the file through the pipeline, as described above
 process_output = pipeline.process(
-    local_file_path="../../../data/input/Interesting Facts About Colombia.mp3",  # the initial local filepath where the input file is stored
-    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    local_file_path=data_dir + "input/Interesting Facts About Colombia.mp3",  # the initial local filepath where the input file is stored
+    local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,
@@ -85,13 +87,13 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "multi_semantically_searchable_transcription",
-      "request_id": "69d30ef4-d468-43b3-9962-0bbe2e36fc06",
-      "file_id": "f206f1ab-a3cc-456d-9b4b-a92e9332a272",
-      "message": "SUCCESS - output fetched for file_id f206f1ab-a3cc-456d-9b4b-a92e9332a272.Output saved to location(s) listed in process_output_files.",
+      "request_id": "0efa11da-ef8c-4b94-9595-05960d937f96",
+      "file_id": "9177ce5e-1662-4b5d-bf67-7b538a0d2837",
+      "message": "SUCCESS - output fetched for file_id 9177ce5e-1662-4b5d-bf67-7b538a0d2837.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../../data/output/f206f1ab-a3cc-456d-9b4b-a92e9332a272.faiss"
+        "../../../data/output/9177ce5e-1662-4b5d-bf67-7b538a0d2837.faiss"
       ]
     }
 
@@ -113,19 +115,19 @@ print(json.dumps(semantic_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "658618a0-ed9f-4813-98c6-6cad84a20193",
+      "request_id": "c6c1a446-0bfb-459f-82a2-8051257b3eb1",
       "message": "Successfully queried 1 user file.",
       "warnings": [],
       "items": [
         {
-          "file_id": "f206f1ab-a3cc-456d-9b4b-a92e9332a272",
+          "file_id": "9177ce5e-1662-4b5d-bf67-7b538a0d2837",
           "file_metadata": {
-            "file_name": "krixik_generated_file_name_bskynrnbro.mp3",
+            "file_name": "krixik_generated_file_name_lvwjnpbsbh.mp3",
             "symbolic_directory_path": "/etc",
             "file_tags": [],
             "num_vectors": 13,
-            "created_at": "2024-05-22 20:19:36",
-            "last_updated": "2024-05-22 20:19:36"
+            "created_at": "2024-06-05 14:50:47",
+            "last_updated": "2024-06-05 14:50:47"
           },
           "search_results": [
             {

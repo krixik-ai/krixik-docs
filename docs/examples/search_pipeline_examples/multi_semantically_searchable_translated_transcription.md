@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/search_pipeline_examples/multi_semantically_searchable_translated_transcription.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## Multi-Module Pipeline: Semantically-Searchable Translated Transcription
 
 This document details a modular pipeline that takes in an audio file, [`transcribes`](../../modules/ai_modules/transcribe_module.md) it, [`translates`](../../modules/ai_modules/translate_module.md) the transcription into a desired language, and makes the result [`semantically searchable`](../../system/search_methods/semantic_search_method.md).
@@ -46,7 +48,7 @@ Lets take a quick look at a test file before processing.
 # examine contents of input file
 import IPython
 
-IPython.display.Audio("../../../data/input/deadlift.mp3")
+IPython.display.Audio(data_dir + "input/deadlift.mp3")
 ```
 
 
@@ -69,8 +71,8 @@ We will use the default models for every other module in the pipeline, so they d
 ```python
 # process the file through the pipeline, as described above
 process_output = pipeline.process(
-    local_file_path="../../../data/input/deadlift.mp3",  # the initial local filepath where the input file is stored
-    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    local_file_path=data_dir + "input/deadlift.mp3",  # the initial local filepath where the input file is stored
+    local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,  # do not display process update printouts upon running code
@@ -91,13 +93,13 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "multi_semantically_searchable_translated_transcription",
-      "request_id": "d38b1116-9924-4120-a767-8487dd6b1d67",
-      "file_id": "3e98da34-c92a-4426-aea6-a3f191a317d7",
-      "message": "SUCCESS - output fetched for file_id 3e98da34-c92a-4426-aea6-a3f191a317d7.Output saved to location(s) listed in process_output_files.",
+      "request_id": "80906843-ff56-49a0-9e1f-e6175837d80b",
+      "file_id": "afafa5e7-33e7-4584-8b1e-9477f0f4c8ab",
+      "message": "SUCCESS - output fetched for file_id afafa5e7-33e7-4584-8b1e-9477f0f4c8ab.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../../data/output/3e98da34-c92a-4426-aea6-a3f191a317d7.faiss"
+        "../../../data/output/afafa5e7-33e7-4584-8b1e-9477f0f4c8ab.faiss"
       ]
     }
 
@@ -119,19 +121,19 @@ print(json.dumps(semantic_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "16ef1dd2-71ec-4216-ba35-d1e0433c6cf0",
+      "request_id": "b63645fd-d5f0-4f4e-ab96-8ff017365341",
       "message": "Successfully queried 1 user file.",
       "warnings": [],
       "items": [
         {
-          "file_id": "3e98da34-c92a-4426-aea6-a3f191a317d7",
+          "file_id": "afafa5e7-33e7-4584-8b1e-9477f0f4c8ab",
           "file_metadata": {
-            "file_name": "krixik_generated_file_name_tzirvgbzmr.mp3",
+            "file_name": "krixik_generated_file_name_xdbqgopkac.mp3",
             "symbolic_directory_path": "/etc",
             "file_tags": [],
             "num_vectors": 4,
-            "created_at": "2024-05-22 20:19:40",
-            "last_updated": "2024-05-22 20:19:40"
+            "created_at": "2024-06-05 14:55:05",
+            "last_updated": "2024-06-05 14:55:05"
           },
           "search_results": [
             {

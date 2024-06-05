@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_transcription.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## Multi-Module Pipeline: Sentiment Analysis on Transcription
 
 This document details a modular pipeline that takes in an audio file in English, [`transcribes`](../../modules/ai_modules/transcribe_module.md) it, and then performs [`sentiment analysis`](../../modules/ai_modules/sentiment_module.md) on each sentence of the transcript.
@@ -38,7 +40,7 @@ Lets take a quick look at a short test file before processing.
 # examine contents of input file
 import IPython
 
-IPython.display.Audio("../../../data/input/Interesting Facts About Colombia.mp3")
+IPython.display.Audio(data_dir + "input/Interesting Facts About Colombia.mp3")
 ```
 
 
@@ -59,8 +61,8 @@ We will use the default models for every module in the pipeline, so the [`module
 ```python
 # process the file through the pipeline, as described above
 process_output = pipeline.process(
-    local_file_path="../../../data/input/Interesting Facts About Colombia.mp3",  # the initial local filepath where the input file is stored
-    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    local_file_path=data_dir + "input/Interesting Facts About Colombia.mp3",  # the initial local filepath where the input file is stored
+    local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,
@@ -80,9 +82,9 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "multi_sentiment_analysis_on_transcription",
-      "request_id": "54a8f094-ef67-403c-8fbb-5497bd72480a",
-      "file_id": "39b7b21d-d65d-474e-8ddc-14f6dff9b060",
-      "message": "SUCCESS - output fetched for file_id 39b7b21d-d65d-474e-8ddc-14f6dff9b060.Output saved to location(s) listed in process_output_files.",
+      "request_id": "25128c62-4bbc-4929-b5af-cb19e579d809",
+      "file_id": "8dacac08-f079-4a83-996f-02eefd748776",
+      "message": "SUCCESS - output fetched for file_id 8dacac08-f079-4a83-996f-02eefd748776.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -165,7 +167,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/39b7b21d-d65d-474e-8ddc-14f6dff9b060.json"
+        "../../../data/output/8dacac08-f079-4a83-996f-02eefd748776.json"
       ]
     }
 

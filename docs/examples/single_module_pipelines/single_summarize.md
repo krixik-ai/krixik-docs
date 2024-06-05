@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/single_module_pipelines/single_summarize.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## Single-Module Pipeline: `summarize`
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`summarize`](../../modules/ai_modules/summarize_module.md) module. It's divided into the following sections:
@@ -29,7 +31,7 @@ Let's take a quick look at a valid input file, and then process it:
 
 ```python
 # examine contents of a valid test input file
-with open("../../../data/input/1984_short.txt", "r") as file:
+with open(data_dir + "input/1984_short.txt", "r") as file:
     print(file.read())
 ```
 
@@ -135,8 +137,8 @@ Given that this is the default model, we need not specify model selection throug
 ```python
 # process the file with the default model
 process_output = pipeline.process(
-    local_file_path="../../../data/input/1984_short.txt",  # the initial local filepath where the input file is stored
-    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    local_file_path=data_dir + "input/1984_short.txt",  # the initial local filepath where the input file is stored
+    local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,
@@ -156,13 +158,13 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "single_summarize_1",
-      "request_id": "149222f3-5ebc-49ca-b27c-bce17b4e635b",
-      "file_id": "c3112d43-b0c1-4d81-a98b-c83b5dd69100",
-      "message": "SUCCESS - output fetched for file_id c3112d43-b0c1-4d81-a98b-c83b5dd69100.Output saved to location(s) listed in process_output_files.",
+      "request_id": "21af82dc-c558-4d7d-b819-b97b91308994",
+      "file_id": "718948f7-685a-4e8e-b610-254b454897ce",
+      "message": "SUCCESS - output fetched for file_id 718948f7-685a-4e8e-b610-254b454897ce.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../../data/output/c3112d43-b0c1-4d81-a98b-c83b5dd69100.txt"
+        "../../../data/output/718948f7-685a-4e8e-b610-254b454897ce.txt"
       ]
     }
 
@@ -209,8 +211,8 @@ To use a [non-default model](../../modules/ai_modules/summarize_module.md#availa
 ```python
 # process the file with a non-default model
 process_output_nd = pipeline.process(
-    local_file_path="../../../data/input/1984_short.txt",  # the initial local filepath where the input file is stored
-    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    local_file_path=data_dir + "input/1984_short.txt",  # the initial local filepath where the input file is stored
+    local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,  # do not display process update printouts upon running code
@@ -274,7 +276,7 @@ first_summary = process_output["process_output_files"][0]
 # process this summary through the pipeline
 process_output = pipeline.process(
     local_file_path=first_summary,  # feed back into the pipeline the earlier-generated summary
-    local_save_directory="../../../data/output",
+    local_save_directory=data_dir + "output",
     expire_time=60 * 30,
     wait_for_process=True,
     verbose=False,
@@ -317,7 +319,7 @@ second_summary = process_output["process_output_files"][0]
 # process this summary through the pipeline again
 process_output = pipeline.process(
     local_file_path=second_summary,  # feed back into the pipeline the summary of the earlier-generated summary
-    local_save_directory="../../../data/output",
+    local_save_directory=data_dir + "output",
     expire_time=60 * 30,
     wait_for_process=True,
     verbose=False,

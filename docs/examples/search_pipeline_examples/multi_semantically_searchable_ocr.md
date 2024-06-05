@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/search_pipeline_examples/multi_semantically_searchable_ocr.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## Multi-Module Pipeline: Semantically-Searchable OCR
 
 This document details a modular pipeline that takes in an image, [`extracts all text`](../../modules/ai_modules/ocr_module.md) found within it, and makes the extracted text [`semantically searchable`](../../system/search_methods/semantic_search_method.md).
@@ -43,14 +45,14 @@ Lets take a quick look at a test file before processing.
 # examine contents of a valid input file
 from IPython.display import Image
 
-Image(filename="../../../data/input/seal.png")
+Image(filename=data_dir + "input/seal.png")
 ```
 
 
 
 
     
-![png](multi_semantically_searchable_ocr_files/multi_semantically_searchable_ocr_4_0.png)
+![png](multi_semantically_searchable_ocr_files/multi_semantically_searchable_ocr_5_0.png)
     
 
 
@@ -61,8 +63,8 @@ We will use the default models for every module in the pipeline, so the [`module
 ```python
 # process the file through the pipeline, as described above
 process_output = pipeline.process(
-    local_file_path="../../../data/input/seal.png",  # the initial local filepath where the input file is stored
-    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    local_file_path=data_dir + "input/seal.png",  # the initial local filepath where the input file is stored
+    local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,
@@ -82,13 +84,13 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "multi_semantically_searchable_ocr",
-      "request_id": "b6aa630d-1e46-4a1d-9e9d-6d294169823f",
-      "file_id": "1a885a66-e56a-4089-911c-15fd4e9592b8",
-      "message": "SUCCESS - output fetched for file_id 1a885a66-e56a-4089-911c-15fd4e9592b8.Output saved to location(s) listed in process_output_files.",
+      "request_id": "93ad346b-344a-431f-9893-ffd1b55340a7",
+      "file_id": "7360a295-435b-4beb-8174-d27aec08aa04",
+      "message": "SUCCESS - output fetched for file_id 7360a295-435b-4beb-8174-d27aec08aa04.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../../data/output/1a885a66-e56a-4089-911c-15fd4e9592b8.faiss"
+        "../../../data/output/7360a295-435b-4beb-8174-d27aec08aa04.faiss"
       ]
     }
 
@@ -109,19 +111,19 @@ print(json.dumps(semantic_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "b0198bc8-1e86-417b-8c18-b05cde14e7c6",
+      "request_id": "b354328b-2588-49bb-b034-d81c0eb5fd68",
       "message": "Successfully queried 1 user file.",
       "warnings": [],
       "items": [
         {
-          "file_id": "1a885a66-e56a-4089-911c-15fd4e9592b8",
+          "file_id": "7360a295-435b-4beb-8174-d27aec08aa04",
           "file_metadata": {
-            "file_name": "krixik_generated_file_name_zitmnmyebw.png",
+            "file_name": "krixik_generated_file_name_lhmyxspuwj.png",
             "symbolic_directory_path": "/etc",
             "file_tags": [],
             "num_vectors": 8,
-            "created_at": "2024-05-22 20:17:42",
-            "last_updated": "2024-05-22 20:17:42"
+            "created_at": "2024-06-05 14:50:50",
+            "last_updated": "2024-06-05 14:50:50"
           },
           "search_results": [
             {

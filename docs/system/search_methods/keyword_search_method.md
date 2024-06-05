@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/search_methods/keyword_search_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## The `keyword_search` Method
 
 Krixik's `keyword_search` method enables keyword search on documents processed through certain pipelines. Keyword search is something internet users are long familiar with: a string of words is submitted as a query, and the search returns any and every instance of any of those words. Contrast this to [semantic search](semantic_search_method.md).
@@ -44,8 +46,8 @@ The pipeline ready, we'll [`process`](../parameters_processing_files_through_pip
 ```python
 # add four files to the pipeline we just created.
 output_1 = pipeline.process(
-    local_file_path="../../../data/input/frankenstein_very_short.txt",  # the initial local filepath where the input JSON file is stored
-    local_save_directory="../../../data/output",
+    local_file_path=data_dir + "input/frankenstein_very_short.txt",  # the initial local filepath where the input JSON file is stored
+    local_save_directory=data_dir + "output",
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
     verbose=False,  # do not display process update printouts upon running code
@@ -54,8 +56,8 @@ output_1 = pipeline.process(
 )
 
 output_2 = pipeline.process(
-    local_file_path="../../../data/input/pride_and_prejudice_very_short.txt",  # the initial local filepath where the input JSON file is stored
-    local_save_directory="../../../data/output",
+    local_file_path=data_dir + "input/pride_and_prejudice_very_short.txt",  # the initial local filepath where the input JSON file is stored
+    local_save_directory=data_dir + "output",
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
     verbose=False,  # do not display process update printouts upon running code
@@ -64,8 +66,8 @@ output_2 = pipeline.process(
 )
 
 output_3 = pipeline.process(
-    local_file_path="../../../data/input/moby_dick_very_short.txt",  # the initial local filepath where the input JSON file is stored
-    local_save_directory="../../../data/output",
+    local_file_path=data_dir + "input/moby_dick_very_short.txt",  # the initial local filepath where the input JSON file is stored
+    local_save_directory=data_dir + "output",
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
     verbose=False,  # do not display process update printouts upon running code
@@ -74,8 +76,8 @@ output_3 = pipeline.process(
 )
 
 output_4 = pipeline.process(
-    local_file_path="../../../data/input/little_women_very_short.txt",  # the initial local filepath where the input JSON file is stored
-    local_save_directory="../../../data/output",
+    local_file_path=data_dir + "input/little_women_very_short.txt",  # the initial local filepath where the input JSON file is stored
+    local_save_directory=data_dir + "output",
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
     verbose=False,  # do not display process update printouts upon running code
@@ -95,13 +97,13 @@ print(json.dumps(output_3, indent=2))
     {
       "status_code": 200,
       "pipeline": "keyword_search_method_1_keyword-db",
-      "request_id": "3146ca1a-95db-43a3-9378-425939a8cfc6",
-      "file_id": "850e00f2-58d6-4d04-a1ae-b8770bfef2a6",
-      "message": "SUCCESS - output fetched for file_id 850e00f2-58d6-4d04-a1ae-b8770bfef2a6.Output saved to location(s) listed in process_output_files.",
+      "request_id": "4763d881-46e0-4d34-857b-bdd4cdf43aab",
+      "file_id": "ae071414-7192-4f78-a431-1a13c0f0bc4a",
+      "message": "SUCCESS - output fetched for file_id ae071414-7192-4f78-a431-1a13c0f0bc4a.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "c:\\Users\\Lucas\\Desktop\\krixikdocsnoodle\\docs\\system\\search_methods/850e00f2-58d6-4d04-a1ae-b8770bfef2a6.db"
+        "../../../data/output/ae071414-7192-4f78-a431-1a13c0f0bc4a.db"
       ]
     }
 
@@ -125,219 +127,16 @@ print(json.dumps(keyword_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "bf66a03f-e9be-4e27-afb3-322fb142972d",
-      "message": "Successfully queried 1 user file.",
-      "warnings": [],
-      "items": [
+      "request_id": "5b252162-6ee5-4a48-ae62-f9954f4107f5",
+      "message": "",
+      "warnings": [
         {
-          "file_id": "77a68f9d-d447-4972-9e19-2e2a8045b655",
-          "file_metadata": {
-            "file_name": "little women.txt",
-            "symbolic_directory_path": "/novels/bildungsroman",
-            "file_tags": [],
-            "num_lines": 5285,
-            "created_at": "2024-05-20 18:56:31",
-            "last_updated": "2024-05-20 18:56:31"
-          },
-          "search_results": [
-            {
-              "keyword": "party",
-              "line_number": 281,
-              "keyword_number": 4
-            },
-            {
-              "keyword": "enemies",
-              "line_number": 1010,
-              "keyword_number": 4
-            },
-            {
-              "keyword": "romance",
-              "line_number": 1089,
-              "keyword_number": 7
-            },
-            {
-              "keyword": "party",
-              "line_number": 1271,
-              "keyword_number": 7
-            },
-            {
-              "keyword": "party",
-              "line_number": 1491,
-              "keyword_number": 4
-            },
-            {
-              "keyword": "party",
-              "line_number": 1535,
-              "keyword_number": 10
-            },
-            {
-              "keyword": "party",
-              "line_number": 1553,
-              "keyword_number": 11
-            },
-            {
-              "keyword": "party",
-              "line_number": 1669,
-              "keyword_number": 8
-            },
-            {
-              "keyword": "parties",
-              "line_number": 1755,
-              "keyword_number": 13
-            },
-            {
-              "keyword": "party",
-              "line_number": 2037,
-              "keyword_number": 12
-            },
-            {
-              "keyword": "party",
-              "line_number": 2041,
-              "keyword_number": 5
-            },
-            {
-              "keyword": "party",
-              "line_number": 2069,
-              "keyword_number": 4
-            },
-            {
-              "keyword": "party",
-              "line_number": 2069,
-              "keyword_number": 8
-            },
-            {
-              "keyword": "party",
-              "line_number": 2076,
-              "keyword_number": 3
-            },
-            {
-              "keyword": "party",
-              "line_number": 2085,
-              "keyword_number": 5
-            },
-            {
-              "keyword": "party",
-              "line_number": 2098,
-              "keyword_number": 6
-            },
-            {
-              "keyword": "parties",
-              "line_number": 2106,
-              "keyword_number": 13
-            },
-            {
-              "keyword": "parties",
-              "line_number": 2226,
-              "keyword_number": 7
-            },
-            {
-              "keyword": "romance",
-              "line_number": 2264,
-              "keyword_number": 8
-            },
-            {
-              "keyword": "romance",
-              "line_number": 2551,
-              "keyword_number": 11
-            },
-            {
-              "keyword": "mansion",
-              "line_number": 2603,
-              "keyword_number": 11
-            },
-            {
-              "keyword": "party",
-              "line_number": 2615,
-              "keyword_number": 4
-            },
-            {
-              "keyword": "party",
-              "line_number": 2623,
-              "keyword_number": 5
-            },
-            {
-              "keyword": "party",
-              "line_number": 3078,
-              "keyword_number": 6
-            },
-            {
-              "keyword": "parties",
-              "line_number": 3159,
-              "keyword_number": 9
-            },
-            {
-              "keyword": "mansion",
-              "line_number": 3167,
-              "keyword_number": 6
-            },
-            {
-              "keyword": "party",
-              "line_number": 3480,
-              "keyword_number": 10
-            },
-            {
-              "keyword": "enemies",
-              "line_number": 3600,
-              "keyword_number": 1
-            },
-            {
-              "keyword": "party",
-              "line_number": 3792,
-              "keyword_number": 13
-            },
-            {
-              "keyword": "enemy",
-              "line_number": 3814,
-              "keyword_number": 5
-            },
-            {
-              "keyword": "enemy",
-              "line_number": 4122,
-              "keyword_number": 4
-            },
-            {
-              "keyword": "party",
-              "line_number": 4243,
-              "keyword_number": 10
-            },
-            {
-              "keyword": "party",
-              "line_number": 4247,
-              "keyword_number": 10
-            },
-            {
-              "keyword": "party",
-              "line_number": 4328,
-              "keyword_number": 7
-            },
-            {
-              "keyword": "party",
-              "line_number": 4557,
-              "keyword_number": 3
-            },
-            {
-              "keyword": "party",
-              "line_number": 4583,
-              "keyword_number": 10
-            },
-            {
-              "keyword": "party",
-              "line_number": 4586,
-              "keyword_number": 5
-            },
-            {
-              "keyword": "party",
-              "line_number": 4720,
-              "keyword_number": 5
-            },
-            {
-              "keyword": "party",
-              "line_number": 5077,
-              "keyword_number": 7
-            }
+          "WARNING: the following file_ids returned no results for the given query": [
+            "001dd7c5-87f6-4ffa-a647-060291d9679d"
           ]
         }
-      ]
+      ],
+      "items": []
     }
 
 
@@ -356,439 +155,33 @@ print(json.dumps(keyword_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "d6c04489-81ca-46e2-9b76-092193938d4e",
-      "message": "Successfully queried 4 user files.",
-      "warnings": [],
+      "request_id": "5e53f349-ed65-4735-a288-d2effbb447a5",
+      "message": "Successfully queried the first 1 user file out of 4 defined by input query arguments.",
+      "warnings": [
+        {
+          "WARNING: the following file_ids returned no results for the given query": [
+            "ae071414-7192-4f78-a431-1a13c0f0bc4a",
+            "f59be5e9-2bd3-4a07-8a7e-1a52064c6ee1",
+            "001dd7c5-87f6-4ffa-a647-060291d9679d"
+          ]
+        }
+      ],
       "items": [
         {
-          "file_id": "77a68f9d-d447-4972-9e19-2e2a8045b655",
-          "file_metadata": {
-            "file_name": "little women.txt",
-            "symbolic_directory_path": "/novels/bildungsroman",
-            "file_tags": [],
-            "num_lines": 5285,
-            "created_at": "2024-05-20 18:56:31",
-            "last_updated": "2024-05-20 18:56:31"
-          },
-          "search_results": [
-            {
-              "keyword": "party",
-              "line_number": 281,
-              "keyword_number": 4
-            },
-            {
-              "keyword": "enemies",
-              "line_number": 1010,
-              "keyword_number": 4
-            },
-            {
-              "keyword": "romance",
-              "line_number": 1089,
-              "keyword_number": 7
-            },
-            {
-              "keyword": "party",
-              "line_number": 1271,
-              "keyword_number": 7
-            },
-            {
-              "keyword": "party",
-              "line_number": 1491,
-              "keyword_number": 4
-            },
-            {
-              "keyword": "party",
-              "line_number": 1535,
-              "keyword_number": 10
-            },
-            {
-              "keyword": "party",
-              "line_number": 1553,
-              "keyword_number": 11
-            },
-            {
-              "keyword": "party",
-              "line_number": 1669,
-              "keyword_number": 8
-            },
-            {
-              "keyword": "parties",
-              "line_number": 1755,
-              "keyword_number": 13
-            },
-            {
-              "keyword": "party",
-              "line_number": 2037,
-              "keyword_number": 12
-            },
-            {
-              "keyword": "party",
-              "line_number": 2041,
-              "keyword_number": 5
-            },
-            {
-              "keyword": "party",
-              "line_number": 2069,
-              "keyword_number": 4
-            },
-            {
-              "keyword": "party",
-              "line_number": 2069,
-              "keyword_number": 8
-            },
-            {
-              "keyword": "party",
-              "line_number": 2076,
-              "keyword_number": 3
-            },
-            {
-              "keyword": "party",
-              "line_number": 2085,
-              "keyword_number": 5
-            },
-            {
-              "keyword": "party",
-              "line_number": 2098,
-              "keyword_number": 6
-            },
-            {
-              "keyword": "parties",
-              "line_number": 2106,
-              "keyword_number": 13
-            },
-            {
-              "keyword": "parties",
-              "line_number": 2226,
-              "keyword_number": 7
-            },
-            {
-              "keyword": "romance",
-              "line_number": 2264,
-              "keyword_number": 8
-            },
-            {
-              "keyword": "romance",
-              "line_number": 2551,
-              "keyword_number": 11
-            },
-            {
-              "keyword": "mansion",
-              "line_number": 2603,
-              "keyword_number": 11
-            },
-            {
-              "keyword": "party",
-              "line_number": 2615,
-              "keyword_number": 4
-            },
-            {
-              "keyword": "party",
-              "line_number": 2623,
-              "keyword_number": 5
-            },
-            {
-              "keyword": "party",
-              "line_number": 3078,
-              "keyword_number": 6
-            },
-            {
-              "keyword": "parties",
-              "line_number": 3159,
-              "keyword_number": 9
-            },
-            {
-              "keyword": "mansion",
-              "line_number": 3167,
-              "keyword_number": 6
-            },
-            {
-              "keyword": "party",
-              "line_number": 3480,
-              "keyword_number": 10
-            },
-            {
-              "keyword": "enemies",
-              "line_number": 3600,
-              "keyword_number": 1
-            },
-            {
-              "keyword": "party",
-              "line_number": 3792,
-              "keyword_number": 13
-            },
-            {
-              "keyword": "enemy",
-              "line_number": 3814,
-              "keyword_number": 5
-            },
-            {
-              "keyword": "enemy",
-              "line_number": 4122,
-              "keyword_number": 4
-            },
-            {
-              "keyword": "party",
-              "line_number": 4243,
-              "keyword_number": 10
-            },
-            {
-              "keyword": "party",
-              "line_number": 4247,
-              "keyword_number": 10
-            },
-            {
-              "keyword": "party",
-              "line_number": 4328,
-              "keyword_number": 7
-            },
-            {
-              "keyword": "party",
-              "line_number": 4557,
-              "keyword_number": 3
-            },
-            {
-              "keyword": "party",
-              "line_number": 4583,
-              "keyword_number": 10
-            },
-            {
-              "keyword": "party",
-              "line_number": 4586,
-              "keyword_number": 5
-            },
-            {
-              "keyword": "party",
-              "line_number": 4720,
-              "keyword_number": 5
-            },
-            {
-              "keyword": "party",
-              "line_number": 5077,
-              "keyword_number": 7
-            }
-          ]
-        },
-        {
-          "file_id": "850e00f2-58d6-4d04-a1ae-b8770bfef2a6",
-          "file_metadata": {
-            "file_name": "moby dick.txt",
-            "symbolic_directory_path": "/novels/adventure",
-            "file_tags": [],
-            "num_lines": 4412,
-            "created_at": "2024-05-20 18:56:20",
-            "last_updated": "2024-05-20 18:56:20"
-          },
-          "search_results": [
-            {
-              "keyword": "enemies",
-              "line_number": 661,
-              "keyword_number": 2
-            },
-            {
-              "keyword": "mansion",
-              "line_number": 2027,
-              "keyword_number": 1
-            },
-            {
-              "keyword": "enemies",
-              "line_number": 3290,
-              "keyword_number": 4
-            },
-            {
-              "keyword": "party",
-              "line_number": 3611,
-              "keyword_number": 5
-            },
-            {
-              "keyword": "enemy",
-              "line_number": 3980,
-              "keyword_number": 5
-            }
-          ]
-        },
-        {
-          "file_id": "3072ed65-1ec8-44a8-b691-2f1cf2c3a693",
+          "file_id": "786baed5-66ff-4bf4-941f-0baa562e9666",
           "file_metadata": {
             "file_name": "pride and prejudice.txt",
             "symbolic_directory_path": "/novels/romance",
             "file_tags": [],
-            "num_lines": 2812,
-            "created_at": "2024-05-20 18:56:08",
-            "last_updated": "2024-05-20 18:56:08"
+            "num_lines": 40,
+            "created_at": "2024-06-05 16:18:15",
+            "last_updated": "2024-06-05 16:18:15"
           },
           "search_results": [
             {
               "keyword": "party",
               "line_number": 23,
               "keyword_number": 8
-            },
-            {
-              "keyword": "party",
-              "line_number": 414,
-              "keyword_number": 3
-            },
-            {
-              "keyword": "party",
-              "line_number": 665,
-              "keyword_number": 1
-            },
-            {
-              "keyword": "party",
-              "line_number": 874,
-              "keyword_number": 4
-            },
-            {
-              "keyword": "party",
-              "line_number": 902,
-              "keyword_number": 3
-            },
-            {
-              "keyword": "party",
-              "line_number": 906,
-              "keyword_number": 10
-            },
-            {
-              "keyword": "party",
-              "line_number": 911,
-              "keyword_number": 10
-            },
-            {
-              "keyword": "party",
-              "line_number": 938,
-              "keyword_number": 12
-            },
-            {
-              "keyword": "party",
-              "line_number": 993,
-              "keyword_number": 1
-            },
-            {
-              "keyword": "parties",
-              "line_number": 1349,
-              "keyword_number": 8
-            },
-            {
-              "keyword": "parties",
-              "line_number": 1378,
-              "keyword_number": 5
-            },
-            {
-              "keyword": "party",
-              "line_number": 1407,
-              "keyword_number": 13
-            },
-            {
-              "keyword": "party",
-              "line_number": 1855,
-              "keyword_number": 10
-            },
-            {
-              "keyword": "party",
-              "line_number": 1937,
-              "keyword_number": 1
-            },
-            {
-              "keyword": "party",
-              "line_number": 2309,
-              "keyword_number": 2
-            },
-            {
-              "keyword": "parties",
-              "line_number": 2454,
-              "keyword_number": 3
-            },
-            {
-              "keyword": "party",
-              "line_number": 2572,
-              "keyword_number": 9
-            },
-            {
-              "keyword": "party",
-              "line_number": 2629,
-              "keyword_number": 5
-            },
-            {
-              "keyword": "party",
-              "line_number": 2655,
-              "keyword_number": 6
-            },
-            {
-              "keyword": "party",
-              "line_number": 2687,
-              "keyword_number": 6
-            }
-          ]
-        },
-        {
-          "file_id": "e855e0df-d8ca-40d4-8dd2-e302c9ed494d",
-          "file_metadata": {
-            "file_name": "frankenstein.txt",
-            "symbolic_directory_path": "/novels/gothic",
-            "file_tags": [],
-            "num_lines": 4245,
-            "created_at": "2024-05-20 18:55:44",
-            "last_updated": "2024-05-20 18:55:44"
-          },
-          "search_results": [
-            {
-              "keyword": "romance",
-              "line_number": 850,
-              "keyword_number": 13
-            },
-            {
-              "keyword": "party",
-              "line_number": 908,
-              "keyword_number": 3
-            },
-            {
-              "keyword": "enemy",
-              "line_number": 1223,
-              "keyword_number": 6
-            },
-            {
-              "keyword": "enemy",
-              "line_number": 1671,
-              "keyword_number": 13
-            },
-            {
-              "keyword": "enemy",
-              "line_number": 1966,
-              "keyword_number": 4
-            },
-            {
-              "keyword": "enemies",
-              "line_number": 2094,
-              "keyword_number": 5
-            },
-            {
-              "keyword": "enemy",
-              "line_number": 2480,
-              "keyword_number": 1
-            },
-            {
-              "keyword": "enemies",
-              "line_number": 2586,
-              "keyword_number": 4
-            },
-            {
-              "keyword": "enemies",
-              "line_number": 2590,
-              "keyword_number": 11
-            },
-            {
-              "keyword": "enemies",
-              "line_number": 2618,
-              "keyword_number": 4
-            },
-            {
-              "keyword": "enemies",
-              "line_number": 3060,
-              "keyword_number": 5
-            },
-            {
-              "keyword": "enemies",
-              "line_number": 3075,
-              "keyword_number": 5
             }
           ]
         }
@@ -806,7 +199,7 @@ The current size limit on output generated by the `keyword_search` method is 5MB
 
 
 ```python
-with open("../../../data/other/stop_words.txt", "r") as file:
+with open(data_dir + "other/stop_words.txt", "r") as file:
     print(file.read())
 ```
 

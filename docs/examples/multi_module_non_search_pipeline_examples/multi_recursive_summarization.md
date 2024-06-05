@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/multi_module_non_search_pipeline_examples/multi_recursive_summarization.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## Multi-Module Pipeline: Recursive Summarization
 
 A practical way to achieve short and abstract (but representative) summaries of long or medium-length documents is to apply summarization *recursively*.  This concept was discussed in our overview of the single-module [`summarize` pipeline](../single_module_pipelines/single_summarize.md), where we applied a single [`summarize`](../../modules/ai_modules/summarize_module.md) module pipeline several times to create terser and terser summary representations of an input text.
@@ -28,7 +30,7 @@ Let's take a quick look at a short test file before processing.
 
 ```python
 # examine contents of input file
-with open("../../../data/input/1984_short.txt", "r") as file:
+with open(data_dir + "input/1984_short.txt", "r") as file:
     print(file.read())
 ```
 
@@ -130,8 +132,8 @@ With the [`process`](../../system/parameters_processing_files_through_pipelines/
 ```python
 # process the file through the pipeline, as described above
 process_output = pipeline.process(
-    local_file_path="../../../data/input/1984_short.txt",  # the initial local filepath where the input file is stored
-    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    local_file_path=data_dir + "input/1984_short.txt",  # the initial local filepath where the input file is stored
+    local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,
@@ -151,13 +153,13 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "multi_recursive_summarization",
-      "request_id": "2620bf8e-3479-4761-86dd-e45602463ae1",
-      "file_id": "072dee9a-d72e-4a36-9d04-c1a97fd34f14",
-      "message": "SUCCESS - output fetched for file_id 072dee9a-d72e-4a36-9d04-c1a97fd34f14.Output saved to location(s) listed in process_output_files.",
+      "request_id": "166d7e3a-ce29-4c82-9f06-17ca2016906e",
+      "file_id": "33d00458-6d3d-4a43-92c4-e7027c908c38",
+      "message": "SUCCESS - output fetched for file_id 33d00458-6d3d-4a43-92c4-e7027c908c38.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../../data/output/072dee9a-d72e-4a36-9d04-c1a97fd34f14.txt"
+        "../../../data/output/33d00458-6d3d-4a43-92c4-e7027c908c38.txt"
       ]
     }
 

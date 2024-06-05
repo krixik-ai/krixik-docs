@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/search_pipeline_examples/multi_semantically_searchable_translation.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## Multi-Module Pipeline: Semantically-Searchable Translation
 
 This document details a modular pipeline that takes in text, [`translates`](../../modules/ai_modules/translate_module.md) it into a desired language, and makes the result [`semantically searchable`](../../system/search_methods/semantic_search_method.md).
@@ -37,7 +39,7 @@ Lets take a quick look at a test file before processing.
 
 ```python
 # examine contents of input file
-with open("../../../data/input/don_esp.txt", "r") as file:
+with open(data_dir + "input/don_esp.txt", "r") as file:
     print(file.read())
 ```
 
@@ -79,8 +81,8 @@ We will use the default models for every other module in the pipeline, so they d
 ```python
 # process the file through the pipeline, as described above
 process_output = pipeline.process(
-    local_file_path="../../../data/input/don_esp.txt",  # the initial local filepath where the input file is stored
-    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    local_file_path=data_dir + "input/don_esp.txt",  # the initial local filepath where the input file is stored
+    local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,  # do not display process update printouts upon running code
@@ -101,13 +103,13 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "multi_semantically_searchable_translation",
-      "request_id": "ce0e62bb-7931-4c95-9ff0-d049ef72d7a7",
-      "file_id": "40dfca33-274c-4d37-aa94-b6aacfcefe49",
-      "message": "SUCCESS - output fetched for file_id 40dfca33-274c-4d37-aa94-b6aacfcefe49.Output saved to location(s) listed in process_output_files.",
+      "request_id": "68b21796-7c9a-4834-8848-d4aeb95b8a57",
+      "file_id": "d51f32f5-09d1-4656-a0d5-5da9bdb0a69c",
+      "message": "SUCCESS - output fetched for file_id d51f32f5-09d1-4656-a0d5-5da9bdb0a69c.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../../data/output/40dfca33-274c-4d37-aa94-b6aacfcefe49.faiss"
+        "../../../data/output/d51f32f5-09d1-4656-a0d5-5da9bdb0a69c.faiss"
       ]
     }
 
@@ -129,19 +131,19 @@ print(json.dumps(semantic_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "57cdd02e-79a4-4e7d-880d-184f3192fd6f",
+      "request_id": "0442dfa7-1069-407a-9e44-0357f48fdf32",
       "message": "Successfully queried 1 user file.",
       "warnings": [],
       "items": [
         {
-          "file_id": "40dfca33-274c-4d37-aa94-b6aacfcefe49",
+          "file_id": "d51f32f5-09d1-4656-a0d5-5da9bdb0a69c",
           "file_metadata": {
-            "file_name": "krixik_generated_file_name_iazkcqmatx.txt",
+            "file_name": "krixik_generated_file_name_zvwkdkrayg.txt",
             "symbolic_directory_path": "/etc",
             "file_tags": [],
             "num_vectors": 7,
-            "created_at": "2024-05-22 20:19:43",
-            "last_updated": "2024-05-22 20:19:43"
+            "created_at": "2024-06-05 14:57:07",
+            "last_updated": "2024-06-05 14:57:07"
           },
           "search_results": [
             {

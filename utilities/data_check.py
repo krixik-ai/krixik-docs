@@ -14,12 +14,12 @@ def is_attempted_data_path(input_string: str) -> bool:
 
 
 def is_data_input_path(input_string: str) -> bool:
-    pattern = r".*/data/input/.*"
+    pattern = r'.*input/.*'
     return bool(re.match(pattern, input_string))
 
 
 def is_data_output_path(input_string: str) -> bool:
-    pattern = r".*/data/output/.*"
+    pattern = r'.*output/.*'
     return bool(re.match(pattern, input_string))
 
 
@@ -58,11 +58,11 @@ def check_all_page_data_links() -> tuple:
             for line in lines:
                 extraction = extract_quoted_portion(line)
                 if len(extraction) > 0:
-                    for element in extraction:
+                    for element in extraction:                    
                         if is_data_input_path(element):
                             for ext in acceptable_extensions:
                                 if element.endswith(ext):
-                                    absolute_link = os.path.abspath(os.path.join(os.path.dirname(md_filepath), element))
+                                    absolute_link = os.path.abspath(os.path.join(os.path.dirname(md_filepath), "../../../data", element))
                                     page_data_links.append(absolute_link)
 
         page_data_links = list(set(page_data_links))

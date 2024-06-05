@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/pipeline_creation/pipeline_config.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## Pipeline `.config`
 
 The `.config` method allows you to view a pipeline's configuration. For each module in the pipeline it displays acceptable input formats, output formats, models available, and any parameters of the available models.  In other words, a pipeline's configuration is its complete "under the hood" description.
