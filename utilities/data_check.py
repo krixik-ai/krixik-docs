@@ -58,7 +58,7 @@ def check_all_page_data_links() -> tuple:
             for line in lines:
                 extraction = extract_quoted_portion(line)
                 if len(extraction) > 0:
-                    for element in extraction:                    
+                    for element in extraction:
                         if is_data_input_path(element):
                             for ext in acceptable_extensions:
                                 if element.endswith(ext):
