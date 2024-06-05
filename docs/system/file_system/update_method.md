@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/file_system/update_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## The `update` Method
 
 You can update any metadata of any processed file by using the `update` method.
@@ -39,8 +41,8 @@ pipeline = krixik.create_pipeline(name="update_method_1_parser", module_chain=["
 
 # process short input file
 process_output = pipeline.process(
-    local_file_path="../../../data/input/frankenstein_very_short.txt",  # the initial local filepath where the input JSON file is stored
-    local_save_directory="../../../data/output",  # save output repo data output subdir
+    local_file_path=data_dir + "input/frankenstein_very_short.txt",  # the initial local filepath where the input JSON file is stored
+    local_save_directory=data_dir + "output",  # save output repo data output subdir
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
     verbose=False,  # do not display process update printouts upon running code
@@ -63,14 +65,14 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "82eb3b87-b6eb-408c-ad4f-45eeeb43b92f",
+      "request_id": "6ccb47ec-574d-4d48-9dcb-7d0fe91f23b8",
       "message": "Successfully returned 1 item.  Note: all timestamps in UTC.",
       "warnings": [],
       "items": [
         {
-          "last_updated": "2024-05-22 23:10:05",
-          "process_id": "f325b79c-3ec6-673b-66fc-17b0f30a9c00",
-          "created_at": "2024-05-22 23:10:05",
+          "last_updated": "2024-06-05 15:20:51",
+          "process_id": "d99653b8-d16a-981a-41ab-1a2a86e99e9f",
+          "created_at": "2024-06-05 15:20:51",
           "file_metadata": {
             "modules": {
               "module_1": {
@@ -104,8 +106,8 @@ print(json.dumps(list_output, indent=2))
           "file_description": "",
           "symbolic_directory_path": "/novels/gothic",
           "pipeline": "update_method_1_parser",
-          "file_id": "4544e186-e719-4979-bf9d-9e93bb1106ff",
-          "expire_time": "2024-05-22 23:40:05",
+          "file_id": "e53d3c35-6f4c-466f-ab7c-6971a6312a09",
+          "expire_time": "2024-06-05 15:50:50",
           "file_name": "frankenstein.txt"
         }
       ]
@@ -136,9 +138,9 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "update_method_1_parser",
-      "request_id": "5361e385-69a7-44b8-b577-bfa27f20dbf8",
-      "file_id": "4544e186-e719-4979-bf9d-9e93bb1106ff",
-      "message": "SUCCESS - output fetched for file_id 4544e186-e719-4979-bf9d-9e93bb1106ff.Output saved to location(s) listed in process_output_files.",
+      "request_id": "3c82cde3-dc63-431f-bf68-1a33b998c272",
+      "file_id": "e53d3c35-6f4c-466f-ab7c-6971a6312a09",
+      "message": "SUCCESS - output fetched for file_id e53d3c35-6f4c-466f-ab7c-6971a6312a09.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -362,7 +364,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/4544e186-e719-4979-bf9d-9e93bb1106ff.json"
+        "../../../data/output/e53d3c35-6f4c-466f-ab7c-6971a6312a09.json"
       ]
     }
 
@@ -380,14 +382,14 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "66a19d7c-fcea-4d96-b3dc-217352956a51",
+      "request_id": "396b969f-2aeb-4952-bd6a-67e1ccca14f1",
       "message": "Successfully returned 1 item.  Note: all timestamps in UTC.",
       "warnings": [],
       "items": [
         {
-          "last_updated": "2024-05-22 23:11:15",
-          "process_id": "f325b79c-3ec6-673b-66fc-17b0f30a9c00",
-          "created_at": "2024-05-22 23:10:05",
+          "last_updated": "2024-06-05 15:21:10",
+          "process_id": "d99653b8-d16a-981a-41ab-1a2a86e99e9f",
+          "created_at": "2024-06-05 15:20:51",
           "file_metadata": {
             "modules": {
               "module_1": {
@@ -421,8 +423,8 @@ print(json.dumps(list_output, indent=2))
           "file_description": "Is the villain the monster or the doctor?",
           "symbolic_directory_path": "/novels/gothic",
           "pipeline": "update_method_1_parser",
-          "file_id": "4544e186-e719-4979-bf9d-9e93bb1106ff",
-          "expire_time": "2024-05-22 23:40:05",
+          "file_id": "e53d3c35-6f4c-466f-ab7c-6971a6312a09",
+          "expire_time": "2024-06-05 15:50:50",
           "file_name": "frankenstein.txt"
         }
       ]

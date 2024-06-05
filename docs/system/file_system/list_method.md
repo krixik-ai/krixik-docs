@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/file_system/list_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## The `list` Method
 
 After using the [`process`](../parameters_processing_files_through_pipelines/process_method.md) method to process one or several files through your chosen pipeline, you can retrieve the record of any file(s) with the `list` method. You can `list` by `file_id` or by any other metadata you included when initially processing the file.  
@@ -73,19 +75,19 @@ pipeline = krixik.create_pipeline(name="list_method_1_parser", module_chain=["pa
 # to illustrate the ability to list by each.
 entries = [
     {
-        "local_file_path": "../../../data/input/frankenstein_very_short.txt",
+        "local_file_path": data_dir + "input/frankenstein_very_short.txt",
         "file_name": "Frankenstein.txt",
         "file_tags": [{"author": "Shelley"}, {"category": "gothic"}, {"century": "19"}],
         "symbolic_directory_path": "/novels/gothic",
     },
     {
-        "local_file_path": "../../../data/input/pride_and_prejudice_very_short.txt",
+        "local_file_path": data_dir + "input/pride_and_prejudice_very_short.txt",
         "file_name": "Pride and Prejudice.txt",
         "symbolic_directory_path": "/novels/romance",
         "file_tags": [{"author": "Austen"}, {"category": "romance"}, {"century": "19"}],
     },
     {
-        "local_file_path": "../../../data/input/moby_dick_very_short.txt",
+        "local_file_path": data_dir + "input/moby_dick_very_short.txt",
         "file_name": "Moby Dick.txt",
         "symbolic_directory_path": "/novels/adventure",
         "file_tags": [{"author": "Melville"}, {"category": "adventure"}, {"century": "19"}],
@@ -97,7 +99,7 @@ all_process_output = []
 for entry in entries:
     process_output = pipeline.process(
         local_file_path=entry["local_file_path"],  # the initial local filepath where the input file is stored
-        local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+        local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
         expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
         wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
         verbose=False,  # do not display process update printouts upon running code
@@ -119,9 +121,9 @@ print(json.dumps(all_process_output[-1], indent=2))
     {
       "status_code": 200,
       "pipeline": "list_method_1_parser",
-      "request_id": "87b13c6c-75da-4527-be95-d800f0742d5c",
-      "file_id": "7c152c41-059f-4f6d-8097-90b1a42d2116",
-      "message": "SUCCESS - output fetched for file_id 7c152c41-059f-4f6d-8097-90b1a42d2116.Output saved to location(s) listed in process_output_files.",
+      "request_id": "96c60151-9e74-40c1-a904-af10e03b2f3c",
+      "file_id": "60d6e243-91bd-4561-a17d-291539cd651a",
+      "message": "SUCCESS - output fetched for file_id 60d6e243-91bd-4561-a17d-291539cd651a.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -225,7 +227,7 @@ print(json.dumps(all_process_output[-1], indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/7c152c41-059f-4f6d-8097-90b1a42d2116.json"
+        "../../../data/output/60d6e243-91bd-4561-a17d-291539cd651a.json"
       ]
     }
 
@@ -251,14 +253,14 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "561b3d3d-4d81-44ee-9d14-cdfa856d6a55",
+      "request_id": "06a926de-267a-48df-90fe-3e0b8e6f3e29",
       "message": "Successfully returned 3 items.  Note: all timestamps in UTC.",
       "warnings": [],
       "items": [
         {
-          "last_updated": "2024-05-22 19:55:37",
-          "process_id": "cb6bdac5-696e-b33d-40fc-1f44818c27d3",
-          "created_at": "2024-05-22 19:55:37",
+          "last_updated": "2024-06-05 15:28:06",
+          "process_id": "0131ae96-424f-350e-eede-b9b9f6e60a7c",
+          "created_at": "2024-06-05 15:28:06",
           "file_metadata": {
             "modules": {
               "module_1": {
@@ -292,14 +294,14 @@ print(json.dumps(list_output, indent=2))
           "file_description": "",
           "symbolic_directory_path": "/novels/adventure",
           "pipeline": "list_method_1_parser",
-          "file_id": "7c152c41-059f-4f6d-8097-90b1a42d2116",
-          "expire_time": "2024-05-22 20:25:36",
+          "file_id": "60d6e243-91bd-4561-a17d-291539cd651a",
+          "expire_time": "2024-06-05 15:58:05",
           "file_name": "moby dick.txt"
         },
         {
-          "last_updated": "2024-05-22 19:55:25",
-          "process_id": "4002c9a8-dea8-f493-3f50-2066754f6839",
-          "created_at": "2024-05-22 19:55:25",
+          "last_updated": "2024-06-05 15:27:58",
+          "process_id": "f6ae9e98-bec4-2314-3d20-9116ec2a4baf",
+          "created_at": "2024-06-05 15:27:58",
           "file_metadata": {
             "modules": {
               "module_1": {
@@ -333,14 +335,14 @@ print(json.dumps(list_output, indent=2))
           "file_description": "",
           "symbolic_directory_path": "/novels/romance",
           "pipeline": "list_method_1_parser",
-          "file_id": "a64542db-fafb-4572-9624-5781c3f3d564",
-          "expire_time": "2024-05-22 20:25:25",
+          "file_id": "5b90a7c0-ccf8-4abf-b8ff-9eb7b755c2d2",
+          "expire_time": "2024-06-05 15:57:58",
           "file_name": "pride and prejudice.txt"
         },
         {
-          "last_updated": "2024-05-22 19:55:11",
-          "process_id": "7202fbf4-0c91-6149-91ab-4748eda42cb0",
-          "created_at": "2024-05-22 19:55:11",
+          "last_updated": "2024-06-05 15:27:43",
+          "process_id": "06cd2d57-22df-5d94-36e4-3133c4d757f7",
+          "created_at": "2024-06-05 15:27:43",
           "file_metadata": {
             "modules": {
               "module_1": {
@@ -374,8 +376,8 @@ print(json.dumps(list_output, indent=2))
           "file_description": "",
           "symbolic_directory_path": "/novels/gothic",
           "pipeline": "list_method_1_parser",
-          "file_id": "a20fe875-ece2-404b-bdbf-20233662d35b",
-          "expire_time": "2024-05-22 20:25:09",
+          "file_id": "8abc402e-57ed-459d-af9c-918ae9dad038",
+          "expire_time": "2024-06-05 15:57:41",
           "file_name": "frankenstein.txt"
         }
       ]
@@ -399,14 +401,14 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "8e8ef0ce-fadf-40f7-9675-47d18254110b",
+      "request_id": "a5b399fe-a0e9-4a78-a4eb-2bbc3a7311b7",
       "message": "Successfully returned 1 item.  Note: all timestamps in UTC.",
       "warnings": [],
       "items": [
         {
-          "last_updated": "2024-05-22 19:55:25",
-          "process_id": "4002c9a8-dea8-f493-3f50-2066754f6839",
-          "created_at": "2024-05-22 19:55:25",
+          "last_updated": "2024-06-05 15:27:58",
+          "process_id": "f6ae9e98-bec4-2314-3d20-9116ec2a4baf",
+          "created_at": "2024-06-05 15:27:58",
           "file_metadata": {
             "modules": {
               "module_1": {
@@ -440,8 +442,8 @@ print(json.dumps(list_output, indent=2))
           "file_description": "",
           "symbolic_directory_path": "/novels/romance",
           "pipeline": "list_method_1_parser",
-          "file_id": "a64542db-fafb-4572-9624-5781c3f3d564",
-          "expire_time": "2024-05-22 20:25:25",
+          "file_id": "5b90a7c0-ccf8-4abf-b8ff-9eb7b755c2d2",
+          "expire_time": "2024-06-05 15:57:58",
           "file_name": "pride and prejudice.txt"
         }
       ]
@@ -465,14 +467,14 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "03202992-7a49-42c2-b28d-50b55e495415",
+      "request_id": "300cf157-a441-47e7-b36e-a3f63856533d",
       "message": "Successfully returned 2 items.  Note: all timestamps in UTC.",
       "warnings": [],
       "items": [
         {
-          "last_updated": "2024-05-22 19:55:37",
-          "process_id": "cb6bdac5-696e-b33d-40fc-1f44818c27d3",
-          "created_at": "2024-05-22 19:55:37",
+          "last_updated": "2024-06-05 15:28:06",
+          "process_id": "0131ae96-424f-350e-eede-b9b9f6e60a7c",
+          "created_at": "2024-06-05 15:28:06",
           "file_metadata": {
             "modules": {
               "module_1": {
@@ -506,14 +508,14 @@ print(json.dumps(list_output, indent=2))
           "file_description": "",
           "symbolic_directory_path": "/novels/adventure",
           "pipeline": "list_method_1_parser",
-          "file_id": "7c152c41-059f-4f6d-8097-90b1a42d2116",
-          "expire_time": "2024-05-22 20:25:36",
+          "file_id": "60d6e243-91bd-4561-a17d-291539cd651a",
+          "expire_time": "2024-06-05 15:58:05",
           "file_name": "moby dick.txt"
         },
         {
-          "last_updated": "2024-05-22 19:55:11",
-          "process_id": "7202fbf4-0c91-6149-91ab-4748eda42cb0",
-          "created_at": "2024-05-22 19:55:11",
+          "last_updated": "2024-06-05 15:27:43",
+          "process_id": "06cd2d57-22df-5d94-36e4-3133c4d757f7",
+          "created_at": "2024-06-05 15:27:43",
           "file_metadata": {
             "modules": {
               "module_1": {
@@ -547,8 +549,8 @@ print(json.dumps(list_output, indent=2))
           "file_description": "",
           "symbolic_directory_path": "/novels/gothic",
           "pipeline": "list_method_1_parser",
-          "file_id": "a20fe875-ece2-404b-bdbf-20233662d35b",
-          "expire_time": "2024-05-22 20:25:09",
+          "file_id": "8abc402e-57ed-459d-af9c-918ae9dad038",
+          "expire_time": "2024-06-05 15:57:41",
           "file_name": "frankenstein.txt"
         }
       ]
@@ -572,14 +574,14 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "8efd4e6a-cfa8-492a-bf17-90fc2ef2f37e",
+      "request_id": "11bcf2d1-6c09-403d-8138-9c642fb3f4c2",
       "message": "Successfully returned 3 items.  Note: all timestamps in UTC.",
       "warnings": [],
       "items": [
         {
-          "last_updated": "2024-05-22 19:55:37",
-          "process_id": "cb6bdac5-696e-b33d-40fc-1f44818c27d3",
-          "created_at": "2024-05-22 19:55:37",
+          "last_updated": "2024-06-05 15:28:06",
+          "process_id": "0131ae96-424f-350e-eede-b9b9f6e60a7c",
+          "created_at": "2024-06-05 15:28:06",
           "file_metadata": {
             "modules": {
               "module_1": {
@@ -613,14 +615,14 @@ print(json.dumps(list_output, indent=2))
           "file_description": "",
           "symbolic_directory_path": "/novels/adventure",
           "pipeline": "list_method_1_parser",
-          "file_id": "7c152c41-059f-4f6d-8097-90b1a42d2116",
-          "expire_time": "2024-05-22 20:25:36",
+          "file_id": "60d6e243-91bd-4561-a17d-291539cd651a",
+          "expire_time": "2024-06-05 15:58:05",
           "file_name": "moby dick.txt"
         },
         {
-          "last_updated": "2024-05-22 19:55:25",
-          "process_id": "4002c9a8-dea8-f493-3f50-2066754f6839",
-          "created_at": "2024-05-22 19:55:25",
+          "last_updated": "2024-06-05 15:27:58",
+          "process_id": "f6ae9e98-bec4-2314-3d20-9116ec2a4baf",
+          "created_at": "2024-06-05 15:27:58",
           "file_metadata": {
             "modules": {
               "module_1": {
@@ -654,14 +656,14 @@ print(json.dumps(list_output, indent=2))
           "file_description": "",
           "symbolic_directory_path": "/novels/romance",
           "pipeline": "list_method_1_parser",
-          "file_id": "a64542db-fafb-4572-9624-5781c3f3d564",
-          "expire_time": "2024-05-22 20:25:25",
+          "file_id": "5b90a7c0-ccf8-4abf-b8ff-9eb7b755c2d2",
+          "expire_time": "2024-06-05 15:57:58",
           "file_name": "pride and prejudice.txt"
         },
         {
-          "last_updated": "2024-05-22 19:55:11",
-          "process_id": "7202fbf4-0c91-6149-91ab-4748eda42cb0",
-          "created_at": "2024-05-22 19:55:11",
+          "last_updated": "2024-06-05 15:27:43",
+          "process_id": "06cd2d57-22df-5d94-36e4-3133c4d757f7",
+          "created_at": "2024-06-05 15:27:43",
           "file_metadata": {
             "modules": {
               "module_1": {
@@ -695,8 +697,8 @@ print(json.dumps(list_output, indent=2))
           "file_description": "",
           "symbolic_directory_path": "/novels/gothic",
           "pipeline": "list_method_1_parser",
-          "file_id": "a20fe875-ece2-404b-bdbf-20233662d35b",
-          "expire_time": "2024-05-22 20:25:09",
+          "file_id": "8abc402e-57ed-459d-af9c-918ae9dad038",
+          "expire_time": "2024-06-05 15:57:41",
           "file_name": "frankenstein.txt"
         }
       ]
@@ -718,8 +720,8 @@ time_now = datetime.now(tz=timezone.utc).strftime(format="%Y-%m-%d %H:%M:%S")
 
 # process an additional file into earlier pipeline
 process_output = pipeline.process(
-    local_file_path="../../../data/input/1984_very_short.txt",  # the initial local filepath where the input JSON file is stored
-    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    local_file_path=data_dir + "input/1984_very_short.txt",  # the initial local filepath where the input JSON file is stored
+    local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
     verbose=False,  # do not display process update printouts upon running code
@@ -744,14 +746,14 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "8c565add-b803-44ee-a999-b9b90af780b2",
+      "request_id": "f090a0e5-cfe6-42fb-b8ed-3272cda048c6",
       "message": "Successfully returned 1 item.  Note: all timestamps in UTC.",
       "warnings": [],
       "items": [
         {
-          "last_updated": "2024-05-22 19:55:52",
-          "process_id": "e077ba7b-8082-644c-f230-cf9e21d71b70",
-          "created_at": "2024-05-22 19:55:52",
+          "last_updated": "2024-06-05 15:28:19",
+          "process_id": "c3968a8c-c9de-f5dd-ea16-d81e80b3ef3f",
+          "created_at": "2024-06-05 15:28:19",
           "file_metadata": {
             "modules": {
               "module_1": {
@@ -791,8 +793,8 @@ print(json.dumps(list_output, indent=2))
           "file_description": "",
           "symbolic_directory_path": "/novels/dystopian",
           "pipeline": "list_method_1_parser",
-          "file_id": "5519129c-f249-465f-aadf-85703a93706a",
-          "expire_time": "2024-05-22 20:25:52",
+          "file_id": "c3b610f7-1c22-4a7d-b2a1-4cb4ee7d5a6e",
+          "expire_time": "2024-06-05 15:58:19",
           "file_name": "1984.txt"
         }
       ]
@@ -834,14 +836,14 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "58be80de-34c0-4b3d-b6f9-42cb5c8465bd",
+      "request_id": "0d5eff98-3c4a-4419-b306-c57638549f4a",
       "message": "Successfully returned 1 item.  Note: all timestamps in UTC.",
       "warnings": [],
       "items": [
         {
-          "last_updated": "2024-05-22 19:55:25",
-          "process_id": "4002c9a8-dea8-f493-3f50-2066754f6839",
-          "created_at": "2024-05-22 19:55:25",
+          "last_updated": "2024-06-05 15:27:58",
+          "process_id": "f6ae9e98-bec4-2314-3d20-9116ec2a4baf",
+          "created_at": "2024-06-05 15:27:58",
           "file_metadata": {
             "modules": {
               "module_1": {
@@ -875,8 +877,8 @@ print(json.dumps(list_output, indent=2))
           "file_description": "",
           "symbolic_directory_path": "/novels/romance",
           "pipeline": "list_method_1_parser",
-          "file_id": "a64542db-fafb-4572-9624-5781c3f3d564",
-          "expire_time": "2024-05-22 20:25:25",
+          "file_id": "5b90a7c0-ccf8-4abf-b8ff-9eb7b755c2d2",
+          "expire_time": "2024-06-05 15:57:58",
           "file_name": "pride and prejudice.txt"
         }
       ]
@@ -898,7 +900,7 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "3904c620-1148-4fb8-8d0c-132b6b89e1bc",
+      "request_id": "b6485d2e-5c54-4843-a454-8b2e363a96cc",
       "message": "No files were found for the given query arguments",
       "warnings": [
         {
@@ -930,14 +932,14 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "4370e8f6-0313-4118-87cb-7c97b73c8515",
+      "request_id": "820bedaa-dba3-44d4-9677-433dfa902395",
       "message": "Successfully returned 4 items.  Note: all timestamps in UTC.",
       "warnings": [],
       "items": [
         {
-          "last_updated": "2024-05-22 19:55:52",
-          "process_id": "e077ba7b-8082-644c-f230-cf9e21d71b70",
-          "created_at": "2024-05-22 19:55:52",
+          "last_updated": "2024-06-05 15:28:19",
+          "process_id": "c3968a8c-c9de-f5dd-ea16-d81e80b3ef3f",
+          "created_at": "2024-06-05 15:28:19",
           "file_metadata": {
             "modules": {
               "module_1": {
@@ -971,14 +973,14 @@ print(json.dumps(list_output, indent=2))
           "file_description": "",
           "symbolic_directory_path": "/novels/dystopian",
           "pipeline": "list_method_1_parser",
-          "file_id": "5519129c-f249-465f-aadf-85703a93706a",
-          "expire_time": "2024-05-22 20:25:52",
+          "file_id": "c3b610f7-1c22-4a7d-b2a1-4cb4ee7d5a6e",
+          "expire_time": "2024-06-05 15:58:19",
           "file_name": "1984.txt"
         },
         {
-          "last_updated": "2024-05-22 19:55:37",
-          "process_id": "cb6bdac5-696e-b33d-40fc-1f44818c27d3",
-          "created_at": "2024-05-22 19:55:37",
+          "last_updated": "2024-06-05 15:28:06",
+          "process_id": "0131ae96-424f-350e-eede-b9b9f6e60a7c",
+          "created_at": "2024-06-05 15:28:06",
           "file_metadata": {
             "modules": {
               "module_1": {
@@ -1012,14 +1014,14 @@ print(json.dumps(list_output, indent=2))
           "file_description": "",
           "symbolic_directory_path": "/novels/adventure",
           "pipeline": "list_method_1_parser",
-          "file_id": "7c152c41-059f-4f6d-8097-90b1a42d2116",
-          "expire_time": "2024-05-22 20:25:36",
+          "file_id": "60d6e243-91bd-4561-a17d-291539cd651a",
+          "expire_time": "2024-06-05 15:58:05",
           "file_name": "moby dick.txt"
         },
         {
-          "last_updated": "2024-05-22 19:55:25",
-          "process_id": "4002c9a8-dea8-f493-3f50-2066754f6839",
-          "created_at": "2024-05-22 19:55:25",
+          "last_updated": "2024-06-05 15:27:58",
+          "process_id": "f6ae9e98-bec4-2314-3d20-9116ec2a4baf",
+          "created_at": "2024-06-05 15:27:58",
           "file_metadata": {
             "modules": {
               "module_1": {
@@ -1053,14 +1055,14 @@ print(json.dumps(list_output, indent=2))
           "file_description": "",
           "symbolic_directory_path": "/novels/romance",
           "pipeline": "list_method_1_parser",
-          "file_id": "a64542db-fafb-4572-9624-5781c3f3d564",
-          "expire_time": "2024-05-22 20:25:25",
+          "file_id": "5b90a7c0-ccf8-4abf-b8ff-9eb7b755c2d2",
+          "expire_time": "2024-06-05 15:57:58",
           "file_name": "pride and prejudice.txt"
         },
         {
-          "last_updated": "2024-05-22 19:55:11",
-          "process_id": "7202fbf4-0c91-6149-91ab-4748eda42cb0",
-          "created_at": "2024-05-22 19:55:11",
+          "last_updated": "2024-06-05 15:27:43",
+          "process_id": "06cd2d57-22df-5d94-36e4-3133c4d757f7",
+          "created_at": "2024-06-05 15:27:43",
           "file_metadata": {
             "modules": {
               "module_1": {
@@ -1094,8 +1096,8 @@ print(json.dumps(list_output, indent=2))
           "file_description": "",
           "symbolic_directory_path": "/novels/gothic",
           "pipeline": "list_method_1_parser",
-          "file_id": "a20fe875-ece2-404b-bdbf-20233662d35b",
-          "expire_time": "2024-05-22 20:25:09",
+          "file_id": "8abc402e-57ed-459d-af9c-918ae9dad038",
+          "expire_time": "2024-06-05 15:57:41",
           "file_name": "frankenstein.txt"
         }
       ]
@@ -1141,7 +1143,7 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "a3ba1763-0bd6-43d2-b359-791a5aa6260d",
+      "request_id": "cf82edeb-51a1-4c77-8f1e-53a647660b9f",
       "message": "Successfully returned 1 item.  Note: all timestamps in UTC.",
       "warnings": [
         {
@@ -1156,9 +1158,9 @@ print(json.dumps(list_output, indent=2))
       ],
       "items": [
         {
-          "last_updated": "2024-05-22 19:55:52",
-          "process_id": "e077ba7b-8082-644c-f230-cf9e21d71b70",
-          "created_at": "2024-05-22 19:55:52",
+          "last_updated": "2024-06-05 15:28:19",
+          "process_id": "c3968a8c-c9de-f5dd-ea16-d81e80b3ef3f",
+          "created_at": "2024-06-05 15:28:19",
           "file_metadata": {
             "modules": {
               "module_1": {
@@ -1192,8 +1194,8 @@ print(json.dumps(list_output, indent=2))
           "file_description": "",
           "symbolic_directory_path": "/novels/dystopian",
           "pipeline": "list_method_1_parser",
-          "file_id": "5519129c-f249-465f-aadf-85703a93706a",
-          "expire_time": "2024-05-22 20:25:52",
+          "file_id": "c3b610f7-1c22-4a7d-b2a1-4cb4ee7d5a6e",
+          "expire_time": "2024-06-05 15:58:19",
           "file_name": "1984.txt"
         }
       ]

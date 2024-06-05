@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/parameters_processing_files_through_pipelines/process_status_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## The `process_status` Method
 
 The `process_status` method is available on every Krixik pipeline. It is invoked whenever you want to check the status of files being processed through a pipeline.
@@ -34,8 +36,8 @@ Now we'll process a file through your pipeline. Let's use a text file holding He
 ```python
 # process text file through pipeline with wait_for_process on False
 process_output = pipeline.process(
-    local_file_path="../../../data/input/moby_dick_very_short.txt",  # the initial local filepath where the input JSON file is stored
-    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    local_file_path=data_dir + "input/moby_dick_very_short.txt",  # the initial local filepath where the input JSON file is stored
+    local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=False,  # do not wait for process to complete before returning IDE control to user
     verbose=False,
@@ -51,9 +53,9 @@ print(json.dumps(process_output, indent=2))
 ```
 
     {
-      "file_id": "4a92698f-4e2e-4b88-9493-5080348e0153",
-      "request_id": "25a281ed-0d04-909b-6b53-5148a298b3d1",
-      "file_name": "krixik_generated_file_name_davuvkkxcu.txt",
+      "file_id": "596bf30e-c13d-41df-8cc8-b7e26709a468",
+      "request_id": "f948a6ad-0343-e743-2b3f-0df6bc732a3a",
+      "file_name": "krixik_generated_file_name_gewgneptrz.txt",
       "symbolic_directory_path": "/etc",
       "file_tags": null,
       "file_description": null
@@ -75,8 +77,8 @@ print(json.dumps(process_1_status, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "7cdc9db9-5d5f-4bc6-b17e-73e0bd22440c",
-      "file_id": "4a92698f-4e2e-4b88-9493-5080348e0153",
+      "request_id": "8863f851-fa57-4ffa-98fd-31d9df31fcdc",
+      "file_id": "596bf30e-c13d-41df-8cc8-b7e26709a468",
       "message": "SUCCESS: process_status found",
       "pipeline": "process_status_method_1_keyword-db",
       "process_status": {
@@ -101,8 +103,8 @@ print(json.dumps(process_status_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "05dd56e6-729c-4c9d-ba35-565543c8e1f5",
-      "file_id": "4a92698f-4e2e-4b88-9493-5080348e0153",
+      "request_id": "4cf89f97-b82e-4104-929f-df49d928e345",
+      "file_id": "596bf30e-c13d-41df-8cc8-b7e26709a468",
       "message": "SUCCESS: process_status found",
       "pipeline": "process_status_method_1_keyword-db",
       "process_status": {

@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/single_module_pipelines/single_parser.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## Single-Module Pipeline: `parser`
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`parser`](../../modules/support_function_modules/parser_module.md) module. It's divided into the following sections:
@@ -28,7 +30,7 @@ Let's take a quick look at a valid input file, and then process it:
 
 ```python
 # examine contents of a valid test input file
-with open("../../../data/input/1984_very_short.txt", "r") as file:
+with open(data_dir + "input/1984_very_short.txt", "r") as file:
     print(file.read())
 ```
 
@@ -49,8 +51,8 @@ Given that this is the default model, we need not specify model selection throug
 ```python
 # process the file with the default model
 process_output = pipeline.process(
-    local_file_path="../../../data/input/1984_very_short.txt",  # the initial local filepath where the input file is stored
-    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    local_file_path=data_dir + "input/1984_very_short.txt",  # the initial local filepath where the input file is stored
+    local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,
@@ -70,9 +72,9 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "single_parser_1",
-      "request_id": "f1455fad-287b-4033-b473-8423e84ee6c0",
-      "file_id": "5c4ed28b-5a12-41e3-b50e-fc9656aeae79",
-      "message": "SUCCESS - output fetched for file_id 5c4ed28b-5a12-41e3-b50e-fc9656aeae79.Output saved to location(s) listed in process_output_files.",
+      "request_id": "07569a36-93d8-47bb-b487-bba25ccc1348",
+      "file_id": "60542629-7470-476f-b94e-40e2c53608bf",
+      "message": "SUCCESS - output fetched for file_id 60542629-7470-476f-b94e-40e2c53608bf.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -92,7 +94,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/5c4ed28b-5a12-41e3-b50e-fc9656aeae79.json"
+        "../../../data/output/60542629-7470-476f-b94e-40e2c53608bf.json"
       ]
     }
 
@@ -135,8 +137,8 @@ To use a [non-default model](../../modules/support_function_modules/parser_modul
 ```python
 # process the file with a non-default model
 process_output = pipeline.process(
-    local_file_path="../../../data/input/1984_very_short.txt",  # all parameters save 'modules' as above
-    local_save_directory="../../../data/output",
+    local_file_path=data_dir + "input/1984_very_short.txt",  # all parameters save 'modules' as above
+    local_save_directory=data_dir + "output",
     expire_time=60 * 30,
     wait_for_process=True,
     verbose=False,

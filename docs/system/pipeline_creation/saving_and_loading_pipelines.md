@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/pipeline_creation/saving_and_loading_pipelines.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## Saving and Loading Pipelines
 
 This overview of the saving and loading pipelines is divided into the following sections:
@@ -31,7 +33,7 @@ Now that you have a pipeline you can use the `save_pipeline` method to save that
 
 ```python
 # save a pipeline's configuration to disk - example file path provided
-pipeline.save_pipeline(config_path="../../../data/pipeline_configs/save-pipeline-demo.yaml")
+pipeline.save_pipeline(config_path=data_dir + "pipeline_configs/save-pipeline-demo.yaml")
 ```
 
 For your convenience, if a file by the given filename does not exist at the given location, Krixik will locally create the file and then save your pipeline
@@ -52,7 +54,7 @@ Using the `load_pipeline` method looks like this:
 
 ```python
 # load a pipeline into memory via its valid configuration file
-pipeline = krixik.load_pipeline(config_path="../../../data/pipeline_configs/save-pipeline-demo.yaml")
+pipeline = krixik.load_pipeline(config_path=data_dir + "pipeline_configs/save-pipeline-demo.yaml")
 ```
 
 Note that you don't need to have previously dealt with the saved pipeline yourself. For instance, a colleague may have shared a pipeline [configuration](pipeline_config.md) file with you, or you may have written the file from scratch. As long as the config is properly formatted, the `load_pipeline` method will work as it should.

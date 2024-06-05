@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/single_module_pipelines/single_caption.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## Single-Module Pipeline: `caption`
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`caption`](../../modules/ai_modules/caption_module.md) module. It's divided into the following sections:
@@ -30,14 +32,14 @@ Let's take a quick look at a valid input file, and then process it.
 # examine the contents of a valid input file
 from IPython.display import Image
 
-Image(filename="../../../data/input/restaurant.png")
+Image(filename=data_dir + "input/restaurant.png")
 ```
 
 
 
 
     
-![png](single_caption_files/single_caption_5_0.png)
+![png](single_caption_files/single_caption_6_0.png)
     
 
 
@@ -52,8 +54,8 @@ Given that this is the default model, we need not specify model selection throug
 ```python
 # process the file with the default model
 process_output = pipeline.process(
-    local_file_path="../../../data/input/restaurant.png",  # the initial local filepath where the input file is stored
-    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    local_file_path=data_dir + "input/restaurant.png",  # the initial local filepath where the input file is stored
+    local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,
@@ -73,9 +75,9 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "single_caption_1",
-      "request_id": "68dc3d6f-0761-46db-923c-92c5fff12170",
-      "file_id": "843d9ded-89de-4b25-b275-f463cf966fdd",
-      "message": "SUCCESS - output fetched for file_id 843d9ded-89de-4b25-b275-f463cf966fdd.Output saved to location(s) listed in process_output_files.",
+      "request_id": "db5e8352-fc0f-42f3-88e4-1b6388a42309",
+      "file_id": "ab32fe99-5bf8-4712-aa39-b7af9fac27f6",
+      "message": "SUCCESS - output fetched for file_id ab32fe99-5bf8-4712-aa39-b7af9fac27f6.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -83,7 +85,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/843d9ded-89de-4b25-b275-f463cf966fdd.json"
+        "../../../data/output/ab32fe99-5bf8-4712-aa39-b7af9fac27f6.json"
       ]
     }
 
@@ -112,8 +114,8 @@ To use a [non-default model](../../modules/ai_modules/caption_module.md#availabl
 ```python
 # process the file with a non-default model
 process_output = pipeline.process(
-    local_file_path="../../../data/input/restaurant.png",  # the initial local filepath where the input file is stored
-    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    local_file_path=data_dir + "input/restaurant.png",  # the initial local filepath where the input file is stored
+    local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,  # do not display process update printouts upon running code
@@ -134,9 +136,9 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "single_caption_1",
-      "request_id": "2c1ce8fd-77b4-4b83-91f9-0b2794b28272",
-      "file_id": "aeecf5c5-54fd-425c-ab52-5e80dc584cff",
-      "message": "SUCCESS - output fetched for file_id aeecf5c5-54fd-425c-ab52-5e80dc584cff.Output saved to location(s) listed in process_output_files.",
+      "request_id": "c64ba8a0-4c19-4513-bf32-509b3be0319a",
+      "file_id": "c290b26b-d02b-40f3-8112-06a595f3b924",
+      "message": "SUCCESS - output fetched for file_id c290b26b-d02b-40f3-8112-06a595f3b924.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -144,7 +146,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/aeecf5c5-54fd-425c-ab52-5e80dc584cff.json"
+        "../../../data/output/c290b26b-d02b-40f3-8112-06a595f3b924.json"
       ]
     }
 

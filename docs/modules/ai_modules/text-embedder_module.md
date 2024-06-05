@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/modules/ai_modules/text-embedder_module.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## The `text-embedder` Module
 
 The `text-embedder` module takes one or more text snippets, transforms each into a vector (a mathematical representation of the snippet that retains its meaning), and returns an array containing every generated vector. Vector arrays can then be fed into a vector database to enable semantic (a.k.a. vector) search.
@@ -25,7 +27,7 @@ As an example of the `text-embedder` module's input format, take a look at the c
 
 ```python
 # examine the contents of a valid input file
-test_file = "../../../data/input/1984_snippets.json"
+test_file = data_dir + "input/1984_snippets.json"
 with open(test_file, "r") as file:
     print(json.dumps(json.load(file), indent=2))
 ```

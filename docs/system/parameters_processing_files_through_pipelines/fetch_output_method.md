@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/parameters_processing_files_through_pipelines/fetch_output_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## The `.fetch_output` Method
 
 The `.fetch_output` method is used to download the output of a pipeline process.  This is particularly useful when using the [`.process`](../parameters_processing_files_through_pipelines/process_method.md) method with `wait_for_process` set to `False`, as your output is in that case not immediately yielded by the [`.process`](../parameters_processing_files_through_pipelines/process_method.md) method.
@@ -26,8 +28,8 @@ Now we run a file through this pipeline. We'll use a simple TXT file that holds 
 ```python
 # process the TXT file through the single-module parser pipeline
 process_output = pipeline.process(
-    local_file_path="../../../data/input/1984_very_short.txt",
-    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    local_file_path=data_dir + "input/1984_very_short.txt",
+    local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 60 * 24 * 7,  # process data will be deleted from the Krixik system in 7 days
     wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
     verbose=False,
@@ -45,9 +47,9 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "fetch-output-method_1_parser",
-      "request_id": "a439e85f-43b7-4af0-ab82-fbb164b8cfc1",
-      "file_id": "7ed55e00-20fd-45c2-a122-a4e6148ebdea",
-      "message": "SUCCESS - output fetched for file_id 7ed55e00-20fd-45c2-a122-a4e6148ebdea.Output saved to location(s) listed in process_output_files.",
+      "request_id": "ff3a5841-f250-49d2-94ca-f142b57129a1",
+      "file_id": "83f7bc97-bf47-4b3d-8268-b1a147be8950",
+      "message": "SUCCESS - output fetched for file_id 83f7bc97-bf47-4b3d-8268-b1a147be8950.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -67,7 +69,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/7ed55e00-20fd-45c2-a122-a4e6148ebdea.json"
+        "../../../data/output/83f7bc97-bf47-4b3d-8268-b1a147be8950.json"
       ]
     }
 
@@ -91,9 +93,9 @@ print(json.dumps(fetched_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "fetch-output-method_1_parser",
-      "request_id": "e01fbe62-0f13-4740-8539-86034a26fa54",
-      "file_id": "7ed55e00-20fd-45c2-a122-a4e6148ebdea",
-      "message": "SUCCESS - output fetched for file_id 7ed55e00-20fd-45c2-a122-a4e6148ebdea.Output saved to location(s) listed in process_output_files.",
+      "request_id": "607cfa28-1c7e-4ea7-aba0-9e4de42a0c41",
+      "file_id": "83f7bc97-bf47-4b3d-8268-b1a147be8950",
+      "message": "SUCCESS - output fetched for file_id 83f7bc97-bf47-4b3d-8268-b1a147be8950.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -113,7 +115,7 @@ print(json.dumps(fetched_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/7ed55e00-20fd-45c2-a122-a4e6148ebdea.json"
+        "../../../data/output/83f7bc97-bf47-4b3d-8268-b1a147be8950.json"
       ]
     }
 

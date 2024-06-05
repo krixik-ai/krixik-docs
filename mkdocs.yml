@@ -3,7 +3,7 @@ nav:
   - System:
     - 'overview': system/system_overview.md
     - initialization:
-      - 'install your cli': system/initialization/install_cli.md
+      - 'install your client': system/initialization/install_client.md
       - 'initialize and authenticate': system/initialization/initialize_and_authenticate.md  
     - pipeline creation:
       - 'components of a krixik pipeline': system/pipeline_creation/components_of_a_krixik_pipeline.md

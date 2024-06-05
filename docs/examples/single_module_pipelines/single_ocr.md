@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/single_module_pipelines/single_ocr.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## Single-Module Pipeline: `ocr`
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes an [`ocr`](../../modules/ai_modules/ocr_module.md) module. It's divided into the following sections:
@@ -30,14 +32,14 @@ Let's take a quick look at a valid input file, and then process it.
 # examine the contents of a valid input file
 from IPython.display import Image
 
-Image(filename="../../../data/input/seal.png")
+Image(filename=data_dir + "input/seal.png")
 ```
 
 
 
 
     
-![png](single_ocr_files/single_ocr_5_0.png)
+![png](single_ocr_files/single_ocr_6_0.png)
     
 
 
@@ -52,8 +54,8 @@ Given that this is the default model, we need not specify model selection throug
 ```python
 # process the file with the default model
 process_output = pipeline.process(
-    local_file_path="../../../data/input/seal.png",  # the initial local filepath where the input file is stored
-    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    local_file_path=data_dir + "input/seal.png",  # the initial local filepath where the input file is stored
+    local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,
@@ -73,9 +75,9 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "single_ocr_1",
-      "request_id": "0a32d9ed-fcf6-440b-b126-8416301ce11b",
-      "file_id": "0eb1b33b-22aa-42a1-baf0-73b64a011346",
-      "message": "SUCCESS - output fetched for file_id 0eb1b33b-22aa-42a1-baf0-73b64a011346.Output saved to location(s) listed in process_output_files.",
+      "request_id": "dbdc2a06-bdf4-42d4-982c-56ad350479b5",
+      "file_id": "10108ae4-8bcf-4b5f-b109-4e4eff94f343",
+      "message": "SUCCESS - output fetched for file_id 10108ae4-8bcf-4b5f-b109-4e4eff94f343.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -997,7 +999,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/0eb1b33b-22aa-42a1-baf0-73b64a011346.json"
+        "../../../data/output/10108ae4-8bcf-4b5f-b109-4e4eff94f343.json"
       ]
     }
 
@@ -1940,8 +1942,8 @@ To use a [non-default model](../../modules/ai_modules/ocr_module.md#available-mo
 ```python
 # process the file with a non-default model
 process_output = pipeline.process(
-    local_file_path="../../../data/input/seal.png",  # all arguments but modules are the same as above
-    local_save_directory="../../../data/output",
+    local_file_path=data_dir + "input/seal.png",  # all arguments but modules are the same as above
+    local_save_directory=data_dir + "output",
     expire_time=60 * 30,
     wait_for_process=True,
     verbose=False,
@@ -1962,9 +1964,9 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "single_ocr_1",
-      "request_id": "1743f51b-d01e-45a7-bd15-5d2e7b06f5cf",
-      "file_id": "2771b0c4-fba4-417a-96bf-4c28e4e1496a",
-      "message": "SUCCESS - output fetched for file_id 2771b0c4-fba4-417a-96bf-4c28e4e1496a.Output saved to location(s) listed in process_output_files.",
+      "request_id": "fec47c22-5f6d-4d69-9c5b-167762d29a71",
+      "file_id": "649882ac-0e8a-4fdb-85fb-21afe388b453",
+      "message": "SUCCESS - output fetched for file_id 649882ac-0e8a-4fdb-85fb-21afe388b453.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -2886,7 +2888,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/2771b0c4-fba4-417a-96bf-4c28e4e1496a.json"
+        "../../../data/output/649882ac-0e8a-4fdb-85fb-21afe388b453.json"
       ]
     }
 

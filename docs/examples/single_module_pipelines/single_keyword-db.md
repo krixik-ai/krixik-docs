@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/single_module_pipelines/single_keyword-db.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## Single-Module Pipeline: `keyword-db`
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`keyword-db`](../../modules/database_modules/keyword-db_module.md) module. It's divided into the following sections:
@@ -29,7 +31,7 @@ Let's take a quick look at a valid input file, and then process it:
 
 ```python
 # examine contents of a valid test input file
-with open("../../../data/input/1984_very_short.txt", "r") as file:
+with open(data_dir + "input/1984_very_short.txt", "r") as file:
     print(file.read())
 ```
 
@@ -50,8 +52,8 @@ Given that this is the default model, we need not specify model selection throug
 ```python
 # process the file with the default model
 process_output = pipeline.process(
-    local_file_path="../../../data/input/1984_very_short.txt",  # the initial local filepath where the input file is stored
-    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    local_file_path=data_dir + "input/1984_very_short.txt",  # the initial local filepath where the input file is stored
+    local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,
@@ -69,13 +71,13 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "single_keyword-db_1",
-      "request_id": "80384c0e-1826-4b69-a02e-181b8f99e900",
-      "file_id": "b57b4003-5ab5-484c-9a8e-e84b87af4308",
-      "message": "SUCCESS - output fetched for file_id b57b4003-5ab5-484c-9a8e-e84b87af4308.Output saved to location(s) listed in process_output_files.",
+      "request_id": "f9055422-6212-454e-bd9e-e863ca37e853",
+      "file_id": "530270a9-0430-4c7d-98d0-a858efa7c879",
+      "message": "SUCCESS - output fetched for file_id 530270a9-0430-4c7d-98d0-a858efa7c879.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../../data/output/b57b4003-5ab5-484c-9a8e-e84b87af4308.db"
+        "../../../data/output/530270a9-0430-4c7d-98d0-a858efa7c879.db"
       ]
     }
 

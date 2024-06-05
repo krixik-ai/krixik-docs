@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/single_module_pipelines/single_json-to-txt.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## Single-Module Pipeline: `json-to-txt`
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`json-to-txt`](../../modules/support_function_modules/json-to-txt_module.md) module. It's divided into the following sections:
@@ -27,7 +29,7 @@ Let's take a quick look at a valid input file, and then process it.
 
 ```python
 # examine the contents of a valid input file
-test_file = "../../../data/input/1984_snippets.json"
+test_file = data_dir + "input/1984_snippets.json"
 with open(test_file, "r") as file:
     print(json.dumps(json.load(file), indent=2))
 ```
@@ -61,8 +63,8 @@ Given that this is the default model, we need not specify model selection throug
 ```python
 # process the file with the default model
 process_output = pipeline.process(
-    local_file_path="../../../data/input/1984_snippets.json",  # the initial local filepath where the input file is stored
-    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    local_file_path=data_dir + "input/1984_snippets.json",  # the initial local filepath where the input file is stored
+    local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,
@@ -82,13 +84,13 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "single_json-to-txt_1",
-      "request_id": "07263601-3792-4862-b38d-232c2347e9f3",
-      "file_id": "c6b81cfd-29be-47e5-875c-60fdf7abd862",
-      "message": "SUCCESS - output fetched for file_id c6b81cfd-29be-47e5-875c-60fdf7abd862.Output saved to location(s) listed in process_output_files.",
+      "request_id": "1a1bec21-0b49-40fc-b548-87c354d8c478",
+      "file_id": "67b7c6cf-829b-4afa-99ff-3c1387b3db02",
+      "message": "SUCCESS - output fetched for file_id 67b7c6cf-829b-4afa-99ff-3c1387b3db02.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../../data/output/c6b81cfd-29be-47e5-875c-60fdf7abd862.txt"
+        "../../../data//output/67b7c6cf-829b-4afa-99ff-3c1387b3db02.txt"
       ]
     }
 

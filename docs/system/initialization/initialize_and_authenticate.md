@@ -1,6 +1,6 @@
 ## Initialize and Authenticate To Get Started
 
-Once you've [installed the CLI](install_cli.md), import Krixik and initialize your session (performing the necessary authentication) to get started.
+Once you've [installed the Python Client](install_client.md), import Krixik and initialize your session (performing the necessary authentication) to get started.
 
 You'll need two secrets for this:
 

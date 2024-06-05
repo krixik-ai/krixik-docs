@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/file_system/show_tree_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## The `show_tree` Method
 
 The `show_tree` method allows you to visualize—at your terminal or IDE output—all files currently in your pipeline.  It is designed as a simple analog to the standard UNIX [tree command](https://www.tecmint.com/linux-tree-command-examples/).
@@ -24,12 +26,12 @@ For this document's example we will use a pipeline consisting of a single [`pars
 pipeline = krixik.create_pipeline(name="show_tree_method_1_parser", module_chain=["parser"])
 
 # define path to an input file from examples directory
-test_file = "../../../data/input/1984_very_short.txt"
+test_file = data_dir + "input/1984_very_short.txt"
 
 # process short input file with various metdata
 process_output = pipeline.process(
     local_file_path=test_file,
-    local_save_directory="../../../data/output",  # save output repo data output subdir
+    local_save_directory=data_dir + "output",  # save output repo data output subdir
     expire_time=60 * 30,  # set all process data to expire in 30 minutes
     wait_for_process=True,  # wait for process to complete before regaining ide
     verbose=False,
@@ -39,7 +41,7 @@ process_output = pipeline.process(
 
 process_output = pipeline.process(
     local_file_path=test_file,
-    local_save_directory="../../../data/output",  # save output repo data output subdir
+    local_save_directory=data_dir + "output",  # save output repo data output subdir
     expire_time=60 * 30,  # set all process data to expire in 30 minutes
     wait_for_process=True,  # wait for process to complete before regaining ide
     verbose=False,
@@ -49,7 +51,7 @@ process_output = pipeline.process(
 
 process_output = pipeline.process(
     local_file_path=test_file,
-    local_save_directory="../../../data/output",  # save output repo data output subdir
+    local_save_directory=data_dir + "output",  # save output repo data output subdir
     expire_time=60 * 30,  # set all process data to expire in 30 minutes
     wait_for_process=True,  # wait for process to complete before regaining ide
     verbose=False,

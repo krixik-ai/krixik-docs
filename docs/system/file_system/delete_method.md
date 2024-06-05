@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/file_system/delete_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## The `delete` Method
 
 You can delete all records of a processed file from the Krixik system with the `delete` method. This is the manual version of letting the [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-process-method-arguments) run out on a file.
@@ -24,8 +26,8 @@ pipeline = krixik.create_pipeline(name="delete_method_1_parser", module_chain=["
 
 # process short input file
 process_output = pipeline.process(
-    local_file_path="../../../data/input/1984_very_short.txt",  # the initial local filepath where the input JSON file is stored
-    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    local_file_path=data_dir + "input/1984_very_short.txt",  # the initial local filepath where the input JSON file is stored
+    local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
     verbose=False,  # do not display process update printouts upon running code
@@ -48,14 +50,14 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "258e552d-1cee-4eed-915d-79687f58673c",
+      "request_id": "46faf749-b758-42d7-8b82-f1f8e8dcb54d",
       "message": "Successfully returned 1 item.  Note: all timestamps in UTC.",
       "warnings": [],
       "items": [
         {
-          "last_updated": "2024-05-22 19:40:11",
-          "process_id": "b277c633-06c1-c66b-f450-22387f503375",
-          "created_at": "2024-05-22 19:40:11",
+          "last_updated": "2024-06-05 15:31:35",
+          "process_id": "0db7cc1d-06c9-13e3-483d-82255c145dd2",
+          "created_at": "2024-06-05 15:31:35",
           "file_metadata": {
             "modules": {
               "module_1": {
@@ -89,8 +91,8 @@ print(json.dumps(list_output, indent=2))
           "file_description": "",
           "symbolic_directory_path": "/novels/20th-century",
           "pipeline": "delete_method_1_parser",
-          "file_id": "c0664f56-41f7-41d8-81a3-e4150f0df100",
-          "expire_time": "2024-05-22 20:10:10",
+          "file_id": "ad927578-a8f1-4ace-acbc-3dee2391075c",
+          "expire_time": "2024-06-05 16:01:35",
           "file_name": "1984_sample.txt"
         }
       ]
@@ -113,8 +115,8 @@ print(json.dumps(delete_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "delete_method_1_parser",
-      "request_id": "8c670f7f-91f0-46f8-9c40-b34b9d917662",
-      "message": "Successfully deleted file_id: c0664f56-41f7-41d8-81a3-e4150f0df100",
+      "request_id": "6e59e916-4233-4088-b85c-2dbe96425383",
+      "message": "Successfully deleted file_id: ad927578-a8f1-4ace-acbc-3dee2391075c",
       "warnings": []
     }
 
@@ -132,7 +134,7 @@ print(json.dumps(list_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "97c9a982-3df2-44af-9fd8-bf2b79e7f535",
+      "request_id": "542fe670-ce77-4d33-b1ab-a6024c7360be",
       "message": "No files were found for the given query arguments",
       "warnings": [
         {

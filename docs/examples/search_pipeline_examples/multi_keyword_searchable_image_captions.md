@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/search_pipeline_examples/multi_keyword_searchable_image_captions.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## Multi-Module Pipeline: Keyword-Searchable Image Captions
 
 This document details a modular pipeline that takes in an image, generates a [`textual caption`](../../modules/ai_modules/caption_module.md) of it, and makes the caption [`keyword searchable`](../../system/search_methods/keyword_search_method.md).
@@ -35,14 +37,14 @@ Lets take a quick look at a test file before processing.
 # examine contents of input file
 from IPython.display import Image
 
-Image(filename="../../../data/input/restaurant.png")
+Image(filename=data_dir + "input/restaurant.png")
 ```
 
 
 
 
     
-![png](multi_keyword_searchable_image_captions_files/multi_keyword_searchable_image_captions_4_0.png)
+![png](multi_keyword_searchable_image_captions_files/multi_keyword_searchable_image_captions_5_0.png)
     
 
 
@@ -53,8 +55,8 @@ We will use the default models for every module in the pipeline, so the [`module
 ```python
 # process the file through the pipeline, as described above
 process_output = pipeline.process(
-    local_file_path="../../../data/input/restaurant.png",  # the initial local filepath where the input file is stored
-    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    local_file_path=data_dir + "input/restaurant.png",  # the initial local filepath where the input file is stored
+    local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,
@@ -74,13 +76,13 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "multi_keyword_searchable_image_captions",
-      "request_id": "b1fce375-9801-4e16-8cbc-98d5f4123bde",
-      "file_id": "e9f19151-8b81-4929-803e-846dac0cbc4c",
-      "message": "SUCCESS - output fetched for file_id e9f19151-8b81-4929-803e-846dac0cbc4c.Output saved to location(s) listed in process_output_files.",
+      "request_id": "a5d38d01-9ff0-492e-abeb-6e1e14ec9ee6",
+      "file_id": "913dce6e-2fbe-4d5a-bbd2-84c6a0a73932",
+      "message": "SUCCESS - output fetched for file_id 913dce6e-2fbe-4d5a-bbd2-84c6a0a73932.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../../data/output/e9f19151-8b81-4929-803e-846dac0cbc4c.db"
+        "../../../data/output/913dce6e-2fbe-4d5a-bbd2-84c6a0a73932.db"
       ]
     }
 
@@ -102,19 +104,19 @@ print(json.dumps(keyword_output, indent=2))
 
     {
       "status_code": 200,
-      "request_id": "c1e7ab7e-f2e3-4cfc-bbc7-484bc7a304c7",
+      "request_id": "1804483a-1551-47f4-b1f1-193afa1e8796",
       "message": "Successfully queried 1 user file.",
       "warnings": [],
       "items": [
         {
-          "file_id": "e9f19151-8b81-4929-803e-846dac0cbc4c",
+          "file_id": "913dce6e-2fbe-4d5a-bbd2-84c6a0a73932",
           "file_metadata": {
-            "file_name": "krixik_generated_file_name_zrhxmayoad.png",
+            "file_name": "krixik_generated_file_name_kbcievmqlb.png",
             "symbolic_directory_path": "/etc",
             "file_tags": [],
             "num_lines": 1,
-            "created_at": "2024-05-22 20:17:31",
-            "last_updated": "2024-05-22 20:17:31"
+            "created_at": "2024-06-05 14:50:59",
+            "last_updated": "2024-06-05 14:50:59"
           },
           "search_results": [
             {

@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/parameters_processing_files_through_pipelines/process_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## The Parameterizable `process` Method
 
 The `process` method, available on every Krixik pipeline, is invoked whenever you wish to process files through a pipeline.
@@ -51,8 +53,8 @@ Keep in mind that input JSON files _must_ follow a very [specific format](JSON_i
 ```python
 # process short input file
 process_demo_output = pipeline.process(
-    local_file_path="../../../data/input/recliner_reviews.json",  # the initial local filepath where the input JSON file is stored
-    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    local_file_path=data_dir + "input/recliner_reviews.json",  # the initial local filepath where the input JSON file is stored
+    local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 10 minutes
     wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,
@@ -72,9 +74,9 @@ print(json.dumps(process_demo_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "process_method_1_sentiment",
-      "request_id": "f2c9bdc7-c5b9-4028-8713-5bae77d45e14",
-      "file_id": "4d55541e-12ec-4d93-a303-a42561a6b947",
-      "message": "SUCCESS - output fetched for file_id 4d55541e-12ec-4d93-a303-a42561a6b947.Output saved to location(s) listed in process_output_files.",
+      "request_id": "339ef4dd-5c97-4822-b450-aea700bc6021",
+      "file_id": "6a314cdb-6938-4663-aef5-a0258341c120",
+      "message": "SUCCESS - output fetched for file_id 6a314cdb-6938-4663-aef5-a0258341c120.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -97,7 +99,7 @@ print(json.dumps(process_demo_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/4d55541e-12ec-4d93-a303-a42561a6b947.json"
+        "../../../data/output/6a314cdb-6938-4663-aef5-a0258341c120.json"
       ]
     }
 
@@ -230,8 +232,8 @@ Let's call the `process` method once more. We'll use the same product review fil
 ```python
 # process short input file with optional metadata arguments
 process_demo_output = pipeline.process(
-    local_file_path="../../../data/input/recliner_reviews.json",
-    local_save_directory="../../../data/output",
+    local_file_path=data_dir + "input/recliner_reviews.json",
+    local_save_directory=data_dir + "output",
     expire_time=60 * 30,
     wait_for_process=True,
     verbose=False,

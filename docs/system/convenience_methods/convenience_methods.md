@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/convenience_methods/convenience_methods.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## Convenience Methods (and More!)
 
 This document introduces several useful properties of the main Krixik object and of Krixik pipelines that range from useful (advanced) metadata to convenience functions designed to facilitate input testing. All of these properties can be leveraged *without* necessarily having [initialized a session](../initialization/initialize_and_authenticate.md).
@@ -143,7 +145,7 @@ Let's first test with a file that is valid for this pipeline. Since the first mo
 
 ```python
 # use test_input on a valid file for this pipeline
-pipeline.test_input(local_file_path="../../../data/input/Interesting Facts About Colombia.mp3")
+pipeline.test_input(local_file_path=data_dir + "input/Interesting Facts About Colombia.mp3")
 ```
 
     SUCCESS: local file '../../../data/input/Interesting Facts About Colombia.mp3' passed pipeline input test passed
@@ -154,7 +156,7 @@ Now let's test with an input that won't work with this pipeline. The [`transcrib
 
 ```python
 # use test_input on a file that won't work for this pipeline
-pipeline.test_input(local_file_path="../../../data/input/1984_very_short.txt")
+pipeline.test_input(local_file_path=data_dir + "input/1984_very_short.txt")
 ```
 
 
@@ -162,13 +164,13 @@ pipeline.test_input(local_file_path="../../../data/input/1984_very_short.txt")
 
     TypeError                                 Traceback (most recent call last)
 
-    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\utilities\validators\data\utilities\decorators.py:47, in datatype_validator.<locals>.wrapper(*args, **kwargs)
+    File ~/Desktop/krixik/code/krixik-docs/docs_venv/lib/python3.10/site-packages/krixik/utilities/validators/data/utilities/decorators.py:47, in datatype_validator.<locals>.wrapper(*args, **kwargs)
          46             raise ValueError(f"invalid file extension: '{extension}'")
     ---> 47     return func(*args, **kwargs)
          48 except ValueError as e:
 
 
-    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\pipeline_builder\pipeline.py:130, in BuildPipeline.test_input(self, local_file_path)
+    File ~/Desktop/krixik/code/krixik-docs/docs_venv/lib/python3.10/site-packages/krixik/pipeline_builder/pipeline.py:130, in BuildPipeline.test_input(self, local_file_path)
         123 """test input file will flow through pipeline correctly via simulation (currently in beta)
         124 
         125 Parameters
@@ -179,7 +181,7 @@ pipeline.test_input(local_file_path="../../../data/input/1984_very_short.txt")
         131 print(f"SUCCESS: local file '{local_file_path}' passed pipeline input test passed")
 
 
-    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\pipeline_builder\utilities\input_checker.py:20, in input_check(local_file_path, module_chain)
+    File ~/Desktop/krixik/code/krixik-docs/docs_venv/lib/python3.10/site-packages/krixik/pipeline_builder/utilities/input_checker.py:20, in input_check(local_file_path, module_chain)
          19 if file_ext_format != first_module_input_format:
     ---> 20     raise TypeError(f"file extension '{file_ext}' does not match the expected input format {first_module_input_format}")
          21 is_valid(first_module.name, local_file_path)
@@ -193,12 +195,12 @@ pipeline.test_input(local_file_path="../../../data/input/1984_very_short.txt")
 
     Exception                                 Traceback (most recent call last)
 
-    Cell In[8], line 2
-          1 # use .test_input on a file that won't work for this pipeline
-    ----> 2 pipeline_1.test_input(local_file_path="../../../data/input/1984_very_short.txt")
+    Cell In[7], line 2
+          1 # use test_input on a file that won't work for this pipeline
+    ----> 2 pipeline.test_input(local_file_path=data_dir + "input/1984_very_short.txt")
 
 
-    File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\utilities\validators\data\utilities\decorators.py:51, in datatype_validator.<locals>.wrapper(*args, **kwargs)
+    File ~/Desktop/krixik/code/krixik-docs/docs_venv/lib/python3.10/site-packages/krixik/utilities/validators/data/utilities/decorators.py:51, in datatype_validator.<locals>.wrapper(*args, **kwargs)
          49     raise ValueError(e)
          50 except Exception as e:
     ---> 51     raise Exception(e)

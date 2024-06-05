@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # format notebooks
-ruff format *.ipynb
+ruff check docs/ --fix
 
 # run first tests
 python3.10 -m pytest tests/test_0_cleanup.py -x

@@ -4,7 +4,7 @@ In this section we take a deeper look at the methods and underlying concepts of 
 
 ### Initialization
 
-- [Installing the CLI](initialization/install_cli.md)
+- [Installing the Python Client](initialization/install_client.md)
 
 - [Initializing and Authenticating](initialization/initialize_and_authenticate.md)
 

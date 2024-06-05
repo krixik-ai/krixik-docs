@@ -1,3 +1,5 @@
+<a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_translation.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## Multi-Module Pipeline: Sentiment Analysis on Translation
 
 This document details a modular pipeline that takes in an a text file in a non-English language, [`translates`](../../modules/ai_modules/translate_module.md) it into English, and then performs [`sentiment analysis`](../../modules/ai_modules/sentiment_module.md) on each sentence of the translation.
@@ -35,8 +37,8 @@ We will use the default models for every other module in the pipeline, so they d
 ```python
 # process the file through the pipeline, as described above
 process_output = pipeline.process(
-    local_file_path="../../../data/input/spanish_review.txt",  # the initial local filepath where the input file is stored
-    local_save_directory="../../../data/output",  # the local directory that the output file will be saved to
+    local_file_path=data_dir + "input/spanish_review.txt",  # the initial local filepath where the input file is stored
+    local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,  # do not display process update printouts upon running code
@@ -57,9 +59,9 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "multi_sentiment_analysis_on_translation",
-      "request_id": "d096b362-d630-41a9-93c8-0c754663bc5f",
-      "file_id": "f3ef7479-c4c2-4362-be86-746563889ada",
-      "message": "SUCCESS - output fetched for file_id f3ef7479-c4c2-4362-be86-746563889ada.Output saved to location(s) listed in process_output_files.",
+      "request_id": "0719e2d3-24cc-4a12-9f84-d90d1a9e964e",
+      "file_id": "ed5b8fa4-3f4b-4e10-b61d-05536db5e929",
+      "message": "SUCCESS - output fetched for file_id ed5b8fa4-3f4b-4e10-b61d-05536db5e929.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
@@ -94,7 +96,7 @@ print(json.dumps(process_output, indent=2))
         }
       ],
       "process_output_files": [
-        "../../../data/output/f3ef7479-c4c2-4362-be86-746563889ada.json"
+        "../../../data/output/ed5b8fa4-3f4b-4e10-b61d-05536db5e929.json"
       ]
     }
 
