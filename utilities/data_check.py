@@ -14,12 +14,12 @@ def is_attempted_data_path(input_string: str) -> bool:
 
 
 def is_data_input_path(input_string: str) -> bool:
-    pattern = r'.*input/.*'
+    pattern = r".*input/.*"
     return bool(re.match(pattern, input_string))
 
 
 def is_data_output_path(input_string: str) -> bool:
-    pattern = r'.*output/.*'
+    pattern = r".*output/.*"
     return bool(re.match(pattern, input_string))
 
 
