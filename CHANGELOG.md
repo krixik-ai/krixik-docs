@@ -2,7 +2,27 @@
 All notable changes to this project will be documented in this file.
  
 
-## [1.1.17] - 2024-05-28
+## Collab tabs - 2024-06-05
+
+Collab tabs added, general cleanup of index and readme.
+
+### Added
+
+- Collab tabs have been added to all notebooks that have data-driven running code blocks
+
+- a new variable `data_dir` replaces all relative paths in said notebooks
+
+
+### Changed
+
+- References to "cli" updated to "client" in readme and index of docs
+
+- docs/system/initialization/install_cli.ipynb --> docs/system/initialization/install_client.ipynb 
+
+- readme verbage update ("secure python apis" --> "secure apis")
+
+
+## Version update [1.1.17] - 2024-05-28
 
 New page  - adding_your_own_modules_or_models - added for supply side.  Link check test updated to accept certain 400 errors.
 
