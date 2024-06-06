@@ -21,6 +21,7 @@ Collab tabs added, general cleanup of index and readme.
 
 - readme verbage update ("secure python apis" --> "secure apis")
 
+- process_output in docs/examples/single_module_examples/single_transcribe.ipynb shortened
 
 ## Version update [1.1.17] - 2024-05-28
 
