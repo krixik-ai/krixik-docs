@@ -1,5 +1,76 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/single_module_pipelines/single_summarize.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
+
+```python
+import os
+import sys
+import json
+import importlib
+from pathlib import Path
+
+# preparación de demo - incuye instanciación de secretos, instalación de requerimientos, y definición de rutas
+if os.getenv("COLAB_RELEASE_TAG"):
+    # si estás usando este notebook en Google Colab, ingresa tus secretos acá
+    MY_API_KEY = "TU_API_KEY_VA_AQUI"
+    MY_API_URL = "TU_API_URL_VA_AQUI"
+
+    # si estás usando este notebook en Google Colab, instala requerimientos y descarga los subdirectorios requeridos
+    # instala el cliente Python de Krixik
+    !pip install krixik
+
+    # instala github-clone, que permite clonación fácil de los subdirectorios del repositorio de documentación XXX
+    !pip install github-clone
+
+    # clona los conjuntos de datos
+    if not Path("data").is_dir():
+        !ghclone XXXX #(in english it's https://github.com/krixik-ai/krixik-docs/tree/main/data)
+    else:
+        print("ya se clonaron los conjuntos de datos de documentación!")
+
+    # define la variable 'data_dir' para tus rutas
+    data_dir = "./data/"
+
+    # crea directorio de salidas
+    from pathlib import Path
+
+    Path(data_dir + "/salidas").mkdir(parents=True, exist_ok=True)
+
+    # descarga utilidades
+    if not Path("utilities").is_dir():
+        !ghclone XXXX # (in english it's https://github.com/krixik-ai/krixik-docs/tree/main/utilities)
+    else:
+        print("ya has clonado las utilidades de documentación!")
+else:
+    # si estás usando una descarga local de la documentación, define las rutas relativas a la estructura local de la documentación
+    # importa utilidades
+    sys.path.append("../../../")
+
+    # define la variable 'data_dir' para tus rutas
+    data_dir = "../../../data/"
+
+    # si estás usando este notebook localmente desde el repositorio de documentación Krixik, carga tus secretos de un archivo .env ubicado en la base del repositorio de documentación
+    from dotenv import load_dotenv
+
+    load_dotenv("../../../.env")
+
+    MY_API_KEY = os.getenv("MY_API_KEY")
+    MY_API_URL = os.getenv("MY_API_URL")
+
+
+# carga 'reset'
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+
+# importa Krixik e inicializa sesión con tus secretos personales
+from krixik import krixik
+
+krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ## *Pipeline* de Módulo Único: `summarize` (Resumen)
 
 Este documento presenta una guía de cómo ensamblar y consumir un *pipeline* de módulo único que solo incluye un módulo [`summarize` (resumen)](../../modulos/modulos_ia/modulo_summarize_resumen.md). Se divide en las siguientes secciones:
@@ -126,7 +197,7 @@ with open(data_dir + "input/1984_corto.txt", "r") as file:
       WAR IS PEACE
       FREEDOM IS SLAVERY
       IGNORANCE IS STRENGTH
-    
+
 
 ### Como Usar el Modelo Predeterminado
 
@@ -168,7 +239,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/718948f7-685a-4e8e-b610-254b454897ce.txt"
       ]
     }
-    
+
 
 Para confirmar que todo salió como esperabas, carga el archivo de texto de `process_output_files`:
 
@@ -202,7 +273,7 @@ with open(process_output["process_output_files"][0], "r") as file:
     The Ministry of Truth--Minitrue, in Newspeak [Newspeak was the officiallanguage of Oceania]--was
     startlingly different from any other object in sight. It was an enormous
     pyramidal structure of glittering white concrete, soaring 300 metres into the air.
-    
+
 
 ### Como Usar un Modelo No-Predeterminado
 
@@ -259,7 +330,7 @@ with open(process_output_nd["process_output_files"][0], "r") as file:
     up, terrace after terrace, 300 metres into the air . From where
     Winston stood it was just possible to read, picked out on its
     white face in elegant lettering .
-    
+
 
 ### Resumen Recursivo
 
@@ -304,7 +375,7 @@ with open(process_output["process_output_files"][0], "r") as file:
     Winston kept his back turned to the telescreen. It was safer; though,
     he well knew, even a back can be revealing. A kilometre away
     the Ministry of Truth, his place of work, towered vast and white.
-    
+
 
 Este es un resumen más conciso, y por ende un poco más abstracto, del texto original.
 
@@ -339,8 +410,14 @@ with open(process_output["process_output_files"][0], "r") as file:
     Winston Smith walked through the glass doors of Victory Mansions. The hallway
     smelled of boiled cabbage and old rag mats. A kilometre away, his
     place of work, the Ministry of Truth, towered vast and white.
-    
+
 
 Puedes ver que este es un resumen muy reducido del texto original—reducido pero aún representativo.
 
 Puedes obtener el mismo resultado (de resumir recursivamente tres veces) con un pipeline que contiene tres módulos [`summarize`](../../modulos/modulos_ia/modulo_summarize_resumen.md) consecutivos. Haz [clic aquí](../../ejemplos/ejemplos_pipelines_multi_modulo_sin_busqueda/multi_resumen_recursivo.md) para detallar un ejemplo de un *pipeline* de resumen recursivo en el que hacemos justamente esto.
+
+
+```python
+# elimina todos los datos procesados pertenecientes a este pipeline
+reset_pipeline(pipeline)
+```

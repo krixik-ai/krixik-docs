@@ -1,5 +1,76 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/multi_module_non_search_pipeline_examples/multi_translated_transcription.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
+
+```python
+import os
+import sys
+import json
+import importlib
+from pathlib import Path
+
+# preparación de demo - incuye instanciación de secretos, instalación de requerimientos, y definición de rutas
+if os.getenv("COLAB_RELEASE_TAG"):
+    # si estás usando este notebook en Google Colab, ingresa tus secretos acá
+    MY_API_KEY = "TU_API_KEY_VA_AQUI"
+    MY_API_URL = "TU_API_URL_VA_AQUI"
+
+    # si estás usando este notebook en Google Colab, instala requerimientos y descarga los subdirectorios requeridos
+    # instala el cliente Python de Krixik
+    !pip install krixik
+
+    # instala github-clone, que permite clonación fácil de los subdirectorios del repositorio de documentación XXX
+    !pip install github-clone
+
+    # clona los conjuntos de datos
+    if not Path("data").is_dir():
+        !ghclone XXXX #(in english it's https://github.com/krixik-ai/krixik-docs/tree/main/data)
+    else:
+        print("ya se clonaron los conjuntos de datos de documentación!")
+
+    # define la variable 'data_dir' para tus rutas
+    data_dir = "./data/"
+
+    # crea directorio de salidas
+    from pathlib import Path
+
+    Path(data_dir + "/salidas").mkdir(parents=True, exist_ok=True)
+
+    # descarga utilidades
+    if not Path("utilities").is_dir():
+        !ghclone XXXX # (in english it's https://github.com/krixik-ai/krixik-docs/tree/main/utilities)
+    else:
+        print("ya has clonado las utilidades de documentación!")
+else:
+    # si estás usando una descarga local de la documentación, define las rutas relativas a la estructura local de la documentación
+    # importa utilidades
+    sys.path.append("../../../")
+
+    # define la variable 'data_dir' para tus rutas
+    data_dir = "../../../data/"
+
+    # si estás usando este notebook localmente desde el repositorio de documentación Krixik, carga tus secretos de un archivo .env ubicado en la base del repositorio de documentación
+    from dotenv import load_dotenv
+
+    load_dotenv("../../../.env")
+
+    MY_API_KEY = os.getenv("MY_API_KEY")
+    MY_API_URL = os.getenv("MY_API_URL")
+
+
+# carga 'reset'
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+
+# importa Krixik e inicializa sesión con tus secretos personales
+from krixik import krixik
+
+krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ## *Pipeline* Multimodular: Transcripción Traducida
 
 Este documento detalla un *pipeline* multimodular que recibe un archivo de audio, lo [`transcribe`](../../modulos/modulos_ia/modulo_transcribe_transcripcion.md) y [`traduce`](../../modulos/modulos_ia/modulo_translate_traduccion.md) la transcripción al idioma indicado.
@@ -92,7 +163,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/b3b7d81b-2e81-4f53-806a-87e637e01b59.json"
       ]
     }
-    
+
 
 Para confirmar que todo salió como esperabas, carga el archivo de `process_output_files`:
 
@@ -104,4 +175,10 @@ with open(process_output["process_output_files"][0], "r") as file:
 ```
 
     [{"snippet": "Ese es un episodio mirando el gran pas de Columbia. Miramos algunos hechos realmente bsicos. Es el nombre, un poco de su historia, el tipo de gente que vive all, el tamao de la tierra y todo ese jazz. Pero en este video, vamos a entrar en un poco ms de una mirada detallada. Yo, qu est pasando chicos? Bienvenidos de nuevo a los hechos F2D. El canal donde miro las culturas y lugares de la gente, mi nombre es Dave Wouple. Y hoy vamos a mirar ms a Columbia en nuestro video de la Parte 2 de Columbia. Lo que me recuerda chicos, esto es parte de nuestra lista de Columbia. Lo pondr en el cuadro de descripcin de abajo y hablar ms sobre eso al final del video. Pero si eres nuevo aqu, nete a m todos los lunes para aprender sobre nuevos pases de todo el mundo. Usted puede hacer eso pulsando que suscribirse y ese botn de notificacin de cinturn. Pero eso es lo que pasa."}]
-    
+
+
+
+```python
+# elimina todos los datos procesados pertenecientes a este pipeline
+reset_pipeline(pipeline)
+```

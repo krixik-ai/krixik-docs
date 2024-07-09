@@ -1,5 +1,76 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/single_module_pipelines/single_transcribe.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
+
+```python
+import os
+import sys
+import json
+import importlib
+from pathlib import Path
+
+# preparación de demo - incuye instanciación de secretos, instalación de requerimientos, y definición de rutas
+if os.getenv("COLAB_RELEASE_TAG"):
+    # si estás usando este notebook en Google Colab, ingresa tus secretos acá
+    MY_API_KEY = "TU_API_KEY_VA_AQUI"
+    MY_API_URL = "TU_API_URL_VA_AQUI"
+
+    # si estás usando este notebook en Google Colab, instala requerimientos y descarga los subdirectorios requeridos
+    # instala el cliente Python de Krixik
+    !pip install krixik
+
+    # instala github-clone, que permite clonación fácil de los subdirectorios del repositorio de documentación XXX
+    !pip install github-clone
+
+    # clona los conjuntos de datos
+    if not Path("data").is_dir():
+        !ghclone XXXX #(in english it's https://github.com/krixik-ai/krixik-docs/tree/main/data)
+    else:
+        print("ya se clonaron los conjuntos de datos de documentación!")
+
+    # define la variable 'data_dir' para tus rutas
+    data_dir = "./data/"
+
+    # crea directorio de salidas
+    from pathlib import Path
+
+    Path(data_dir + "/salidas").mkdir(parents=True, exist_ok=True)
+
+    # descarga utilidades
+    if not Path("utilities").is_dir():
+        !ghclone XXXX # (in english it's https://github.com/krixik-ai/krixik-docs/tree/main/utilities)
+    else:
+        print("ya has clonado las utilidades de documentación!")
+else:
+    # si estás usando una descarga local de la documentación, define las rutas relativas a la estructura local de la documentación
+    # importa utilidades
+    sys.path.append("../../../")
+
+    # define la variable 'data_dir' para tus rutas
+    data_dir = "../../../data/"
+
+    # si estás usando este notebook localmente desde el repositorio de documentación Krixik, carga tus secretos de un archivo .env ubicado en la base del repositorio de documentación
+    from dotenv import load_dotenv
+
+    load_dotenv("../../../.env")
+
+    MY_API_KEY = os.getenv("MY_API_KEY")
+    MY_API_URL = os.getenv("MY_API_URL")
+
+
+# carga 'reset'
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+
+# importa Krixik e inicializa sesión con tus secretos personales
+from krixik import krixik
+
+krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ## *Pipeline* de Módulo Único: `transcribe` (Transcripción)
 
 Este documento presenta una guía de cómo ensamblar y consumir un *pipeline* de módulo único que solo incluye un módulo [`transcribe` (transcripción)](../../modulos/modulos_ia/modulo_transcribe_transcripcion.md). Se divide en las siguientes secciones:
@@ -78,7 +149,7 @@ with open(process_output["process_output_files"][0]) as f:
 ```
 
     "That's episode looking at the great country of Columbia. We looked at some really basic facts. It's name, a bit of its history, the type of people that live there, land size and all that jazz. But in this video, we're gonna go into a little bit more of a detailed look. Yo, what is going on guys? Welcome back to F2D facts. The channel where I look at people cultures and places, my name is Dave Wouple. And today we are gonna be looking more at Columbia in our Columbia Part 2 video. Which just reminds me guys, this is part of our Columbia playlist. I'll put it down in the description box below and I'll talk about that more at the end of the video. But if you're new here, join me every single Monday to learn about new countries from around the world. You can do that by hitting that subscribe and that belt notification button. But that skits."
-    
+
 
 El archivo JSON devuelto contiene, además de los fragmentos de texto transcrito, marcas de tiempo para cada uno y un valor que indica el nivel de confianza en la precisión de cada transcripción fragmentaria.
 
@@ -104,4 +175,10 @@ process_output = pipeline.process(
 # carga la salida del proceso de un archivo—acá solo se imprime la transcripción, y no la versión completa con marcas de tiempo, dado que la salida entera es bastante larga
 with open(process_output["process_output_files"][0]) as f:
     print(json.dumps(json.load(f)[0]["transcript"].strip(), indent=2))
+```
+
+
+```python
+# elimina todos los datos procesados pertenecientes a este pipeline
+reset_pipeline(pipeline)
 ```

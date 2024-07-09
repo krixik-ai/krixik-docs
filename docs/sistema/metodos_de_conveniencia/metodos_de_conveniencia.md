@@ -1,5 +1,76 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/convenience_methods/convenience_methods.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
+
+```python
+import os
+import sys
+import json
+import importlib
+from pathlib import Path
+
+# preparación de demo - incuye instanciación de secretos, instalación de requerimientos, y definición de rutas
+if os.getenv("COLAB_RELEASE_TAG"):
+    # si estás usando este notebook en Google Colab, ingresa tus secretos acá
+    MY_API_KEY = "TU_API_KEY_VA_AQUI"
+    MY_API_URL = "TU_API_URL_VA_AQUI"
+
+    # si estás usando este notebook en Google Colab, instala requerimientos y descarga los subdirectorios requeridos
+    # instala el cliente Python de Krixik
+    !pip install krixik
+
+    # instala github-clone, que permite clonación fácil de los subdirectorios del repositorio de documentación XXX
+    !pip install github-clone
+
+    # clona los conjuntos de datos
+    if not Path("data").is_dir():
+        !ghclone XXXX #(in english it's https://github.com/krixik-ai/krixik-docs/tree/main/data)
+    else:
+        print("ya se clonaron los conjuntos de datos de documentación!")
+
+    # define la variable 'data_dir' para tus rutas
+    data_dir = "./data/"
+
+    # crea directorio de salidas
+    from pathlib import Path
+
+    Path(data_dir + "/salidas").mkdir(parents=True, exist_ok=True)
+
+    # descarga utilidades
+    if not Path("utilities").is_dir():
+        !ghclone XXXX # (in english it's https://github.com/krixik-ai/krixik-docs/tree/main/utilities)
+    else:
+        print("ya has clonado las utilidades de documentación!")
+else:
+    # si estás usando una descarga local de la documentación, define las rutas relativas a la estructura local de la documentación
+    # importa utilidades
+    sys.path.append("../../../")
+
+    # define la variable 'data_dir' para tus rutas
+    data_dir = "../../../data/"
+
+    # si estás usando este notebook localmente desde el repositorio de documentación Krixik, carga tus secretos de un archivo .env ubicado en la base del repositorio de documentación
+    from dotenv import load_dotenv
+
+    load_dotenv("../../../.env")
+
+    MY_API_KEY = os.getenv("MY_API_KEY")
+    MY_API_URL = os.getenv("MY_API_URL")
+
+
+# carga 'reset'
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+
+# importa Krixik e inicializa sesión con tus secretos personales
+from krixik import krixik
+
+krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ## Métodos de Conveniencia (¡y Más!)
 
 Este documento introduce una variedad de propiedades útiles del objeto principal Krixik y de *pipelines* Krixik que van desde metadata avanzada hasta funciones de conveniencia diseñadas para facilitar pruebas sobre entradas. Todas estas propiedades pueden ser usadas *sin* necesariamente haber antes [inicializado una sesión](../inicializacion/inicializacion_y_autenticacion.md).
@@ -148,7 +219,7 @@ pipeline.test_input(local_file_path=data_dir + "input/video_Colombia.mp3")
 ```
 
     SUCCESS: local file '../../../data/input/Interesting Facts About Colombia.mp3' passed pipeline input test passed
-    
+
 
 Ahora hagamos esta prueba con una entrada que no funcionará con este *pipeline*. El módulo [`transcribe`](../../modulos/modulos_ia/modulo_transcribe_transcripcion.md) con el que empieza el *pipeline* **no** recibirá un archivo TXT, por lo cual el resultado de esta prueba se ve así:
 
@@ -167,7 +238,7 @@ pipeline.test_input(local_file_path=data_dir + "input/1984_muy_corto.txt")
          46             raise ValueError(f"invalid file extension: '{extension}'")
     ---> 47     return func(*args, **kwargs)
          48 except ValueError as e:
-    
+
 
     File ~/Desktop/krixik/code/krixik-docs/docs_venv/lib/python3.10/site-packages/krixik/pipeline_builder/pipeline.py:130, in BuildPipeline.test_input(self, local_file_path)
         123 """test input file will flow through pipeline correctly via simulation (currently in beta)
@@ -178,32 +249,32 @@ pipeline.test_input(local_file_path=data_dir + "input/1984_muy_corto.txt")
         129 """
     --> 130 input_check(local_file_path, self.__module_chain)
         131 print(f"SUCCESS: local file '{local_file_path}' passed pipeline input test passed")
-    
+
 
     File ~/Desktop/krixik/code/krixik-docs/docs_venv/lib/python3.10/site-packages/krixik/pipeline_builder/utilities/input_checker.py:20, in input_check(local_file_path, module_chain)
          19 if file_ext_format != first_module_input_format:
     ---> 20     raise TypeError(f"file extension '{file_ext}' does not match the expected input format {first_module_input_format}")
          21 is_valid(first_module.name, local_file_path)
-    
+
 
     TypeError: file extension '.txt' does not match the expected input format audio
 
     
     During handling of the above exception, another exception occurred:
-    
+
 
     Exception                                 Traceback (most recent call last)
 
     Cell In[7], line 2
           1 # use test_input on a file that won't work for this pipeline
     ----> 2 pipeline.test_input(local_file_path=data_dir + "input/1984_very_short.txt")
-    
+
 
     File ~/Desktop/krixik/code/krixik-docs/docs_venv/lib/python3.10/site-packages/krixik/utilities/validators/data/utilities/decorators.py:51, in datatype_validator.<locals>.wrapper(*args, **kwargs)
          49     raise ValueError(e)
          50 except Exception as e:
     ---> 51     raise Exception(e)
-    
+
 
     Exception: file extension '.txt' does not match the expected input format audio
 
@@ -246,7 +317,7 @@ print(json.dumps(io.OutputStructure().data_example, indent=2))
       ],
       "other": null
     }
-    
+
 
 `"other"` acá indica toda otra clave en tu archivo de entrada. Su valor no importa porque, en lo que concierne a cualquier módulo que conectes al módulo [`parser`](../../modulos/modulos_de_funciones_de_apoyo/modulo_parser_fragmentacion.md), es irrelevante: en el *pipeline*, lo único que pasa al siguiente módulo son los fragmentos de texto.
 
@@ -318,3 +389,9 @@ La primera secuencia de módulos, (`text-embedder` → `vector-db`), funciona po
 La segunda conexión, (`vector-db` → `text-embedder`), no funciona. Se ve que:
 
 - output_format (formato de salida) `vector-db` (`faiss`) != input_format (formato de entrada) `text-embedder` (`json`)
+
+
+```python
+# elimina todos los datos procesados pertenecientes a este pipeline
+reset_pipeline(pipeline)
+```

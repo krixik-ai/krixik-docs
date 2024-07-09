@@ -23,7 +23,7 @@ El módulo `keyword-db` (base de datos de palabras clave) recibe entradas de doc
 
 - PPTX (se convierte automáticamente en TXT antes de procesar)
 
-El módulo `keyword-db` devuelve un archivo de base de datos `SQLite` que contiene todas las palabras clave (no "[stop words](../../sistema/metodos_de_busqueda/metodo_keyword_search_busqueda_por_palabras_clave.md#stop-words-palabras-ignoradas)") del documento y el truncamiento lematizado de cada una.
+El módulo `keyword-db` devuelve un archivo de base de datos `SQLite` que contiene todas las palabras clave (es decir, excluyendo "[stop words](../../sistema/metodos_de_busqueda/metodo_keyword_search_busqueda_por_palabras_clave.md#stop-words-palabras-ignoradas)") del documento y el truncamiento lematizado de cada una.
 
 ### Modelos Disponibles en el Modulo `keyword-db`
 

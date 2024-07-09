@@ -1,5 +1,76 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/search_methods/semantic_search_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
+
+```python
+import os
+import sys
+import json
+import importlib
+from pathlib import Path
+
+# preparación de demo - incuye instanciación de secretos, instalación de requerimientos, y definición de rutas
+if os.getenv("COLAB_RELEASE_TAG"):
+    # si estás usando este notebook en Google Colab, ingresa tus secretos acá
+    MY_API_KEY = "TU_API_KEY_VA_AQUI"
+    MY_API_URL = "TU_API_URL_VA_AQUI"
+
+    # si estás usando este notebook en Google Colab, instala requerimientos y descarga los subdirectorios requeridos
+    # instala el cliente Python de Krixik
+    !pip install krixik
+
+    # instala github-clone, que permite clonación fácil de los subdirectorios del repositorio de documentación XXX
+    !pip install github-clone
+
+    # clona los conjuntos de datos
+    if not Path("data").is_dir():
+        !ghclone XXXX #(in english it's https://github.com/krixik-ai/krixik-docs/tree/main/data)
+    else:
+        print("ya se clonaron los conjuntos de datos de documentación!")
+
+    # define la variable 'data_dir' para tus rutas
+    data_dir = "./data/"
+
+    # crea directorio de salidas
+    from pathlib import Path
+
+    Path(data_dir + "/salidas").mkdir(parents=True, exist_ok=True)
+
+    # descarga utilidades
+    if not Path("utilities").is_dir():
+        !ghclone XXXX # (in english it's https://github.com/krixik-ai/krixik-docs/tree/main/utilities)
+    else:
+        print("ya has clonado las utilidades de documentación!")
+else:
+    # si estás usando una descarga local de la documentación, define las rutas relativas a la estructura local de la documentación
+    # importa utilidades
+    sys.path.append("../../../")
+
+    # define la variable 'data_dir' para tus rutas
+    data_dir = "../../../data/"
+
+    # si estás usando este notebook localmente desde el repositorio de documentación Krixik, carga tus secretos de un archivo .env ubicado en la base del repositorio de documentación
+    from dotenv import load_dotenv
+
+    load_dotenv("../../../.env")
+
+    MY_API_KEY = os.getenv("MY_API_KEY")
+    MY_API_URL = os.getenv("MY_API_URL")
+
+
+# carga 'reset'
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+
+# importa Krixik e inicializa sesión con tus secretos personales
+from krixik import krixik
+
+krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ## El Método `semantic_search` (Búsqueda Semántica)
 
 El método `semantic_search` de Krixik habilita búsqueda semántica sobre documentos procesados a través de ciertos *pipelines*. Mucho se ha escrito sobre la búsqueda semántica, pero en breve, en vez de buscar palabras clave en un documento, este método busca texto que es similar en _significado_ al *string* que se ha enviado. Esto es diferente a lo que ofrece el [`keyword_search`](metodo_keyword_search_busqueda_por_palabras_clave.md).
@@ -112,7 +183,7 @@ print(json.dumps(salida_2, indent=2))
         "../../../data/output/a94765c2-0250-4b3d-98af-20fc167640e8.faiss"
       ]
     }
-    
+
 
 El valor de `process_output` es `null` porque el objeto devuelto es una base de datos, así que no se puede reproducir aquí. Puedes encontrar ese archivo de base de datos en la ubicación local indicada en `process_output_files`.
 
@@ -202,7 +273,7 @@ print(json.dumps(semantic_output, indent=2))
         }
       ]
     }
-    
+
 
 Además de devolver los fragmentos cuyo significado más se acercan al string enviado (*the query*), el método `semantic_search` también devuelve la distancia calculada entre vectores (que puede entenderse como la "distancia entre significados") de resultado y *query*. Mientras más corta es esta distancia, más se acerca el significado de este fragmento al del *query*. El método `semantic_search` devuelve los fragmentos con la distancia de vector más corta al *query*, ordenado de manera ascendiente dentro de cada archivo.
 
@@ -540,10 +611,16 @@ print(json.dumps(semantic_output_2, indent=2))
         }
       ]
     }
-    
+
 
 Puedes ver que los resultados de todos los archivos se han combinado, y que el fragmento en el primer lugar tiene la distancia más corta entre *query* y fragmento de todos los archivos incluidos.
 
 ### Limite de Tamano de Salidas
 
 El límite actual sobre salidas generadas por el método `semantic_search` es 5MB.
+
+
+```python
+# elimina todos los datos procesados pertenecientes a este pipeline
+reset_pipeline(pipeline)
+```

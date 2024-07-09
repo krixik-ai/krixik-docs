@@ -34,6 +34,16 @@ Detalla el siguiente ejemplo de lo arriba explicado. Esta lista indica cómo se 
 ]
 ```
 
+
+
+
+    [{'snippet': 'It was a bright cold day in April, and the clocks were striking thirteen.',
+      'line_numbers': [1]},
+     {'snippet': 'Winston Smith, his chin nuzzled into his breast in an effort to escape the vile wind, slipped quickly through the glass doors of Victory Mansions, though not quickly enough to prevent a swirl of gritty dust from entering along with him.',
+      'line_numbers': [2, 3, 4, 5]}]
+
+
+
 ### Creación de Archivos JSON
 
 Recomendamos usar funcionalidad JSON para crear tus archivos JSON. Crearlos directamente puede generar errores. El siguiente código es un ejemplo de cómo hacerlo en Python (ten en cuenta la variable Python 'my_data' que introducimos al principio):
