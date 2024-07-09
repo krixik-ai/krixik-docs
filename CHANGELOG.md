@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## 2024-07-09
 
-New docs urls, spanish draft added, collab tabs updated to include gen intro user
+New docs urls, spanish draft added.
 
 ### Added
 
@@ -19,7 +19,6 @@ Docs url for en changed:
 
 - en: https://krixik-docs.readthedocs.io/latest/
 
-Collab tabs for all examples adjusted for general keyless testing.
 
 
 
