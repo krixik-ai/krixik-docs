@@ -18,4 +18,3 @@ def list_files(dir_path: str) -> list:
         if os.path.isfile(item_path):
             file_paths.append(item_path)
     return file_paths
-
