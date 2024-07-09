@@ -1,81 +1,81 @@
 nav:
   - Home: index.md
-  - System:
-    - 'overview': system/system_overview.md
-    - initialization:
-      - 'install your client': system/initialization/install_client.md
-      - 'initialize and authenticate': system/initialization/initialize_and_authenticate.md  
-    - pipeline creation:
-      - 'components of a krixik pipeline': system/pipeline_creation/components_of_a_krixik_pipeline.md
-      - 'create a pipeline': system/pipeline_creation/create_pipeline.md
-      - 'pipeline config': system/pipeline_creation/pipeline_config.md
-      - 'save and load a pipeline': system/pipeline_creation/saving_and_loading_pipelines.md
-    - parameters + processing files through pipelines:
-      - 'the parameterizable process method': system/parameters_processing_files_through_pipelines/process_method.md
-      - 'json input format': system/parameters_processing_files_through_pipelines/JSON_input_format.md
-      - 'the process_status method': system/parameters_processing_files_through_pipelines/process_status_method.md
-      - 'the fetch_output method': system/parameters_processing_files_through_pipelines/fetch_output_method.md
-      - 'data deletion policy': system/parameters_processing_files_through_pipelines/data_deletion_policy.md
-    - file system:
-      - 'the list method': system/file_system/list_method.md
-      - 'the update method': system/file_system/update_method.md
-      - 'the delete method': system/file_system/delete_method.md
-      - 'the show_tree method': system/file_system/show_tree_method.md
-    - search methods:
-      - 'semantic (vector) search': system/search_methods/semantic_search_method.md
-      - 'keyword search': system/search_methods/keyword_search_method.md
-    - convenience methods:
-      - 'convenience methods': system/convenience_methods/convenience_methods.md
-  - Modules:
-    - 'overview': modules/modules_overview.md
-    - ai modules:
-      - 'image caption': modules/ai_modules/caption_module.md
-      - 'ocr (optical character recognition)': modules/ai_modules/ocr_module.md
-      - 'sentiment analysis': modules/ai_modules/sentiment_module.md
-      - 'summarization': modules/ai_modules/summarize_module.md
-      - 'text embedder': modules/ai_modules/text-embedder_module.md
-      - 'transcription': modules/ai_modules/transcribe_module.md
-      - 'translation': modules/ai_modules/translate_module.md
-    - database modules:
-      - 'vector database': modules/database_modules/vector-db_module.md
-      - 'keyword database': modules/database_modules/keyword-db_module.md
-    - support function models:
-      - 'json to txt': modules/support_function_modules/json-to-txt_module.md
-      - 'text parser': modules/support_function_modules/parser_module.md
-    - 'adding your own modules or models': modules/adding_your_own_modules_or_models.md
-  - Pipeline examples:
-    - 'overview': examples/pipeline_examples_overview.md
-    - single-module pipelines:
-      - 'image caption': examples/single_module_pipelines/single_caption.md
-      - 'ocr (optical character recognition)': examples/single_module_pipelines/single_ocr.md
-      - 'sentiment analysis': examples/single_module_pipelines/single_sentiment.md
-      - 'summarization': examples/single_module_pipelines/single_summarize.md
-      - 'text embedder': examples/single_module_pipelines/single_text-embedder.md
-      - 'text parser': examples/single_module_pipelines/single_parser.md
-      - 'transcription': examples/single_module_pipelines/single_transcribe.md
-      - 'translation': examples/single_module_pipelines/single_translate.md
-      - 'keyword database': examples/single_module_pipelines/single_keyword-db.md
-      - 'vector database': examples/single_module_pipelines/single_vector-db.md
-      - 'json to txt': examples/single_module_pipelines/single_json-to-txt.md
-    - multi-module (non-search) pipeline examples:
-      - 'recursive summarization': examples/multi_module_non_search_pipeline_examples/multi_recursive_summarization.md
-      - 'translated transcription': examples/multi_module_non_search_pipeline_examples/multi_translated_transcription.md
-      - 'sentiment analysis on transcription': examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_transcription.md
-      - 'sentiment analysis on translation': examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_translation.md
-      - 'sentiment analysis on translated transcription': examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_translated_transcription.md
-    - search pipeline examples:
-      - 'overview': examples/search_pipeline_examples/search_pipelines_overview.md
-      - 'semantic search': examples/search_pipeline_examples/multi_basic_semantic_search.md
-      - 'semantic search on snippets': examples/search_pipeline_examples/multi_snippet_semantic_search.md
-      - 'keyword search': examples/search_pipeline_examples/multi_basic_keyword-search.md
-      - 'semantically-searchable transcription': examples/search_pipeline_examples/multi_semantically_searchable_transcription.md
-      - 'keyword-searchable transcription': examples/search_pipeline_examples/multi_keyword_searchable_transcription.md
-      - 'semantically-searchable translation': examples/search_pipeline_examples/multi_semantically_searchable_translation.md
-      - 'semantically-searchable translated transcription': examples/search_pipeline_examples/multi_semantically_searchable_translated_transcription.md
-      - 'semantically-searchable ocr': examples/search_pipeline_examples/multi_semantically_searchable_ocr.md
-      - 'keyword-searchable image captions': examples/search_pipeline_examples/multi_keyword_searchable_image_captions.md
-  - The future of Krixik:
-    - 'the future of krixik': future/future_of_krixik.md
+  - Sistema:
+    - 'introducción': sistema/introduccion_al_sistema.md
+    - inicialización:
+      - 'instalación del cliente': sistema/inicializacion/instalacion_del_cliente.md
+      - 'inicialización y autenticación': sistema/inicializacion/inicializacion_y_autenticacion.md  
+    - creación de pipelines:
+      - 'componentes de un pipeline de krixik': sistema/creacion_de_pipelines/componentes_de_un_pipeline_de_krixik.md
+      - 'creación de pipelines': sistema/creacion_de_pipelines/creacion_de_pipelines.md
+      - 'configuración de pipelines': sistema/creacion_de_pipelines/configuracion_de_pipelines.md
+      - 'guardar y cargar pipelines': sistema/creacion_de_pipelines/guardar_y_cargar_pipelines.md
+    - parámetros + procesar archivos a través de pipelines:
+      - 'el método .process (procesar) y sus parámetros': sistema/parametros_y_procesar_archivos_a_traves_de_pipelines/metodo_process_procesar.md
+      - 'formato json para entradas': sistema/parametros_y_procesar_archivos_a_traves_de_pipelines/formato_JSON_entrada.md
+      - 'el método .process_status (estado de proceso)': sistema/parametros_y_procesar_archivos_a_traves_de_pipelines/metodo_process_status_estado_de_proceso.md
+      - 'el método .fetch_output (obtener salida)': sistema/parametros_y_procesar_archivos_a_traves_de_pipelines/metodo_fetch_output_obtener_salida.md
+      - 'política de eliminación de datos': sistema/parametros_y_procesar_archivos_a_traves_de_pipelines/politica_de_eliminacion_de_datos.md
+    - sistema de archivos:
+      - 'el método .list (lista)': sistema/sistema_de_archivos/metodo_list_lista.md
+      - 'el método .update (actualizar)': sistema/sistema_de_archivos/metodo_update_actualizar.md
+      - 'el método .delete (eliminar)': sistema/sistema_de_archivos/metodo_delete_eliminar.md
+      - 'el método .show_tree (mostrar árbol)': sistema/sistema_de_archivos/metodo_show_tree_mostrar_arbol.md
+    - metodos de busqueda:
+      - 'búsqueda semántica (vectorial)': sistema/metodos_de_busqueda/metodo_semantic_search_busqueda_semantica.md
+      - 'búsqueda por palabras clave': sistema/metodos_de_busqueda/metodo_keyword_search_busqueda_por_palabras_clave.md
+    - metodos de conveniencia:
+      - 'métodos de conveniencia': sistema/metodos_de_conveniencia/metodos_de_conveniencia.md
+  - Módulos:
+    - 'introduccion': modulos/introduccion_modulos.md
+    - módulos ia:
+      - 'caption (leyenda de imagen)': modulos/modulos_ia/modulo_caption_leyenda_de_imagen.md
+      - 'ocr (roc - reconocimiento optico de caracteres)': modulos/modulos_ia/modulo_ocr_roc.md
+      - 'sentiment analysis (análisis de sentimiento)': modulos/modulos_ia/modulo_sentiment_analisis_de_sentimiento.md
+      - 'summarization (resumen)': modulos/modulos_ia/modulo_summarize_resumen.md
+      - 'text embedder (encaje léxico)': modulos/modulos_ia/modulo_text-embedder_encaje_lexico.md
+      - 'transcription (transcripción)': modulos/modulos_ia/modulo_transcribe_transcripcion.md
+      - 'translation (traducción)': modulos/modulos_ia/modulo_translate_traduccion.md
+    - módulos de bases de datos:
+      - 'vector database (base de datos vectorial)': modulos/modulos_de_bases_de_datos/modulo_vector-db_base_de_datos_vectorial.md
+      - 'keyword database (base de datos de palabras clave)': modulos/modulos_de_bases_de_datos/modulo_keyword-db_base_de_datos_de_palabras_clave.md
+    - módulos de funciones de apoyo:
+      - 'json to txt': modulos/modulos_de_funciones_de_apoyo/modulo_json-to-txt.md
+      - 'text parser (fragmentación de texto)': modulos/modulos_de_funciones_de_apoyo/modulo_parser_fragmentacion.md
+    - 'agrega tus propios módulos o modelos': modulos/agrega_tus_propios_modulos_o_modelos.md
+  - Ejemplos de pipelines:
+    - 'introducción': ejemplos/introduccion_ejemplos_de_pipelines.md
+    - ejemplos de módulo único:
+      - 'image caption (leyenda de imagen)': ejemplos/ejemplos_pipelines_modulo_unico/unico_caption_leyenda_de_imagen.md
+      - 'ocr (roc - reconocimiento óptico de caracteres)': ejemplos/ejemplos_pipelines_modulo_unico/unico_ocr_roc.md
+      - 'sentiment analysis (análisis de sentimiento)': ejemplos/ejemplos_pipelines_modulo_unico/unico_sentiment_analisis_de_sentimiento.md
+      - 'summarization (resumen)': ejemplos/ejemplos_pipelines_modulo_unico/unico_summarize_resumen.md
+      - 'text embedder (encaje léxico)': ejemplos/ejemplos_pipelines_modulo_unico/unico_text-embedder_encaje_lexico.md
+      - 'text parser (fragmentación de texto)': ejemplos/ejemplos_pipelines_modulo_unico/unico_parser_fragmentacion.md
+      - 'transcription (transcripción)': ejemplos/ejemplos_pipelines_modulo_unico/unico_transcribe_transcripcion.md
+      - 'translation (traducción)': ejemplos/ejemplos_pipelines_modulo_unico/unico_translate_traduccion.md
+      - 'keyword database (base de datos de palabras clave)': ejemplos/ejemplos_pipelines_modulo_unico/unico_keyword-db_base_de_datos_de_palabras_clave.md
+      - 'vector database (base de datos vectorial)': ejemplos/ejemplos_pipelines_modulo_unico/unico_vector-db_base_de_datos_vectorial.md
+      - 'json to txt': ejemplos/ejemplos_pipelines_modulo_unico/unico_json-to-txt.md
+    - ejemplos multi-módulo (sin búsqueda):
+      - 'resumen recursivo': ejemplos/ejemplos_pipelines_multi_modulo_sin_busqueda/multi_resumen_recursivo.md
+      - 'transcripción traducida': ejemplos/ejemplos_pipelines_multi_modulo_sin_busqueda/multi_transcripcion_traducida.md
+      - 'análisis de sentimiento sobre transcripción': ejemplos/ejemplos_pipelines_multi_modulo_sin_busqueda/multi_analisis_de_sentimiento_sobre_transcripcion.md
+      - 'análisis de sentimiento sobre traducción': ejemplos/ejemplos_pipelines_multi_modulo_sin_busqueda/multi_analisis_de_sentimiento_sobre_traduccion.md
+      - 'análisis de sentimiento sobre transcripción traducida': ejemplos/ejemplos_pipelines_multi_modulo_sin_busqueda/multi_analisis_de_sentimiento_sobre_transcripcion_traducida.md
+    - ejemplos de pipelines de búsqueda:
+      - 'introducción': ejemplos/ejemplos_pipelines_de_busqueda/introduccion_pipelines_de_busqueda.md
+      - 'búsqueda semántica básica': ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_semantica_basica.md
+      - 'búsqueda semántica sobre fragmentos': ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_semantica_sobre_fragmentos.md
+      - 'búsqueda por palabras clave básica': ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_por_palabras_clave_basica.md
+      - 'búsqueda semántica sobre transcripción': ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_semantica_sobre_transcripcion.md
+      - 'búsqueda por palabras clave sobre transcripción': ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_por_palabras_clave_sobre_transcripcion.md
+      - 'búsqueda semántica sobre traducción': ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_semantica_sobre_traduccion.md
+      - 'búsqueda semántica sobre transcripción traducida': ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_semantica_sobre_transcripcion_traducida.md
+      - 'búsqueda semántica sobre roc': ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_semantica_sobre_roc.md
+      - 'búsqueda por palabras clave sobre leyendas de imagen': ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_por_palabras_clave_sobre_leyendas_de_imagen.md
+  - El futuro de Krixik:
+    - 'el futuro de krixik': futuro/el_futuro_de_krixik.md
 theme: 
   name: readthedocs
 plugins:
@@ -86,5 +86,5 @@ site_name: krixik docs
 repo_name: krixik-docs
 repo_url: https://github.com/krixik-ai/krixik-docs
 edit_uri: blob/main/docs/
-copyright: © Krixik 2024 All Rights Reserved
+copyright: © Krixik 2024 Todos los derechos reservados
   # - section-index

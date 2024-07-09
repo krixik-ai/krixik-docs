@@ -3,44 +3,44 @@
 
 
 
-# Welcome to Krixik!
+# ¡Bienvenidos a Krixik!
 
-Sequentially assembling multiple AI models into a single pipeline can be painful and expensive. Consuming even a single model can often be draining.
+Ensamblar un *pipeline* secuencialmente compuesto de varios modelos de IA puede ser difícil y costoso. Incluso consumir un solo modelo es a menudo una tarea desgastante.
 
-That's why we're here. **Welcome to Krixik**, where you can easily assemble and serverlessly consume modular AI pipelines through secure APIs.
+Por eso estamos acá. **Bienvenidos a Krixik**, donde puedes fácilmente ensamblar y consumir sin servidor pipelines modulares de IA a través de APIs seguros.
 
 ### Table of Contents
 
-- [Quickstart Guide](#quickstart-guide)
-- [What can you build with Krixik?](#what-can-you-build-with-krixik?)
-- [Further Detail - Documentation](#further-detail---documentation)
+- [Guía de Inicio Rápido](#guía-de-inicio-rápido)
+- [¿Qué Puedes Construir con Krixik?](#qué-puedes-construir-con-krixik)
+- [Más Detalles - Documentación](#más-detalles---documentación)
 
-## Quickstart Guide
+## Guía de Inicio Rápido
 
-### Account Registration
+### Registra tu Cuenta
 
-Krixik is currently in beta, so access to the Krixik CLI is by request only.
+Krixik está en beta, por lo cual acceso al cliente de Krixik actualmente solo se puede obtener a través de solicitud directa.
 
-If you'd like to participate as a beta tester, please complete [this brief Google form](https://forms.gle/RyBAvjN1HEWPScb67).
+Si te gustaría participar en nuestras pruebas beta por favor llena [este breve Google Form](https://forms.gle/RyBAvjN1HEWPScb67).
 
-### Install Krixik
+### Instalación de Krixik
 
-Run the following command to install the Krixik Python Client:
+Ejecuta el siguiente comando para [instalar](https://krixik-docs.readthedocs.io/es/latest/sistema/inicializacion/instalacion_del_cliente/) el cliente Python de Krixik:
 
 ```pip
 pip install krixik
 ```
 
-Note: Python version 3.10 or higher is required.
+Nota: Se requiere la versión 3.10 (o mayor) de Python.
 
 
-### Initialize your Session
+### Inicializa tu Sesión
 
-To [initialize](https://krixik-docs.readthedocs.io/en/latest/system/initialization/initialize_and_authenticate/) your Krixik client session you will need your unique `api_key` and `api_url` secrets.  Beta testers will receive their secrets from Krixik admin.
+Para [inicializar](https://krixik-docs.readthedocs.io/es/latest/sistema/inicializacion/inicializacion_y_autenticacion/) tu sesión en el cliente de Krixik necesitarás tus secretos únicos `api_key` y `api_url`. Los administradores de Krixik enviarán secretos individuales a cada participante en nuestras pruebas beta.
 
-Instead of handling your secrets directly, we strongly recommend storing them in an `.env` file and loading them via [python-dotenv](https://pypi.org/project/python-dotenv/).
+En vez de manejar tus secretos directamente, enfáticamente recomendamos guardarlos en un archivo `.env` y cargarlos a través de [python-dotenv](https://pypi.org/project/python-dotenv/).
 
-Once you have your secrets, [initialize](https://krixik-docs.readthedocs.io/en/latest/system/initialization/initialize_and_authenticate/) your session as follows:
+Una vez tengas tus secretos, [inicializa](https://krixik-docs.readthedocs.io/es/latest/sistema/inicializacion/inicializacion_y_autenticacion/) tu sesión de la siguiente manera:
 
 
 ```python
@@ -49,104 +49,104 @@ krixik.init(api_key=MY_API_KEY,
             api_url=MY_API_URL)
 ```
 
-...where  `MY_API_KEY` and `MY_API_URL` are your account secrets.
+...donde  `MY_API_KEY` y `MY_API_URL` son los secretos de tu cuenta.
 
-If you've misplaced your secrets, please reach out to us directly.
+Si has perdido tus secretos, por favor escríbenos directamente.
 
-### Building your First Pipeline
+### Construye tu Primer *Pipeline*
 
-[Let's build a simple transcription pipeline consisting of a single `transcribe` module.](https://krixik-docs.readthedocs.io/en/latest/examples/single_module_pipelines/single_transcribe/) We can [create](https://krixik-docs.readthedocs.io/en/latest/system/pipeline_creation/create_pipeline/) the pipeline with a single line of code:
+[Construyamos un simple *pipeline* de transcripción que consiste de un solo módulo `transcribe` (transcripción).](https://krixik-docs.readthedocs.io/es/latest/ejemplos/ejemplos_pipelines_modulo_unico/unico_transcribe_transcripcion/) Podemos [crear](https://krixik-docs.readthedocs.io/es/latest/sistema/creacion_de_pipelines/creacion_de_pipelines/) el *pipeline* con una sola línea de código:
 
 ```python
-# create a simple transcription pipeline
-pipeline = krixik.create_pipeline(name='my_transcribe-pipeline-1', 
+# crear un simple pipeline de transcripción
+pipeline = krixik.create_pipeline(name='mi-pipeline-de-transcripcion-1', 
                                   module_chain=["transcribe"])
 ```
 
-The pipeline is ready! Now you can [process](https://krixik-docs.readthedocs.io/en/latest/system/parameters_processing_files_through_pipelines/process_method/) audio and video files through it to generate transcripts of them.
+¡El pipeline está listo! Ahora puedes [procesar](https://krixik-docs.readthedocs.io/es/latest/sistema/parametros_y_procesar_archivos_a_traves_de_pipelines/metodo_process_procesar/) archivos de audio a través de él para generar transcripciones de ellos.
 
 ```python
-pipeline.process(local_file_path='./path/to/my/mp3/or/mp4')
+pipeline.process(local_file_path='./camino/a/mi/archivo/mp3')
 ```
 
-The outputs of [this pipeline](https://krixik-docs.readthedocs.io/en/latest/examples/single_module_pipelines/single_transcribe/) will be a timestamped transcript of your input audio/video file, a `file_id` for the processed file, and a `request_id` for the process itself.
+Las salidas de [este pipeline](https://krixik-docs.readthedocs.io/es/latest/ejemplos/ejemplos_pipelines_modulo_unico/unico_transcribe_transcripcion/) serán una transcripción de tu audio con anotaciones de fecha/hora, un `file_id` que sirve de identificación única para el archivo procesado, y un `request_id` que sirve de identificación única para el proceso mismo.
 
 
-### Extending your Pipeline
+### Extiende tu *Pipeline*
 
-[Suppose you wanted to immediately perform vector search on `transcribe` module output.](https://krixik-docs.readthedocs.io/en/latest/examples/search_pipeline_examples/multi_semantically_searchable_transcription/)
+[Supongamos que quieres hacer búsqueda semántica sobre toda salida de un módulo `transcribe` (transcripción).](https://krixik-docs.readthedocs.io/es/latest/ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_semantica_sobre_transcripcion/)
 
-You would need to do the following after transcription:
+Tendrías que hacer lo siguiente después de la transcripción:
 
-1.  *Transform* the transcript into a text file
-2.  *Parse* the text using a sliding window, chunking it into (possibly overlapping) snippets
-3.  *Embed* each snippet using an appropriate text embedder
-4.  *Store* the resulting vectors in a vector database
-5.  *Index* said database
-6.  *Enable* vector search on the database
+1. *Convertir* la transcripción en un archivo de texto
+2. *Fragmentar* el texto usando una ventana movible, segmentándolo en fragmentos que posiblemente se traslapan entre sí
+3. *Encaje léxico* para convertir cada fragmento en un vector
+4. *Guardar* los vectores resultantes en una base de datos vectorial
+5. *Indexar* esta base de datos
+6. *Habilitar* búsqueda semántica sobre la base de datos
 
-Locally creating and testing this sequence of steps would be time consuming—orchestrating them in a secure production service even more so. And that's without trying to make the entire process serverless.
+Localmente crear y hacerle pruebas a esta secuencia de pasos sería demorado, y hacerlo en producción de manera segura aún más. Eso dejando de lado la intención de hacerlo con arquitectura sin servidor.
 
-With **Krixik**, however, you can rapidly incorporate this functionality to your earlier pipeline by just adding a few modules. Syntax remains as above, so [making](https://krixik-docs.readthedocs.io/en/latest/system/pipeline_creation/create_pipeline/) the new pipeline still takes one line:
+Con **Krixik**, por fortuna, puedes rápidamente incorporar esta funcionalidad a tu *pipeline* anterior con solo agregar un par de módulos. La sintaxis se mantiene igual que antes, así que [crear](https://krixik-docs.readthedocs.io/es/latest/sistema/creacion_de_pipelines/creacion_de_pipelines/) el nuevo pipeline se sigue haciendo con una sola línea de código:
 
 ```python
-# create pipeline with the above-alluded-to modules
-pipeline = krixik.create_pipeline(name='transcribe_vsearch', 
-                                  module_chain=["transcribe",
+# crear pipeline con los módulos arriba insinuados
+pipeline_2 = krixik.create_pipeline(name='transcripcion-y-busqueda-semantica', 
+                                    module_chain=["transcribe",
                                                 "json-to-txt",
                                                 "parser", 
                                                 "text-embedder", 
                                                 "vector-db"])
 ```
 
-Let's [process](https://krixik-docs.readthedocs.io/en/latest/system/parameters_processing_files_through_pipelines/process_method/) a file through your new pipeline.
+[Procesemos](https://krixik-docs.readthedocs.io/es/latest/sistema/parametros_y_procesar_archivos_a_traves_de_pipelines/metodo_process_procesar/) un archivo a través de tu nuevo *pipeline*.
 
 ```python
-pipeline.process(local_file_path='./path/to/my/mp3/or/mp4')
+pipeline_2.process(local_file_path='./camino/a/mi/archivo/mp3')
 ```
 
-Now that there is at least one file in [the pipeline](https://krixik-docs.readthedocs.io/en/latest/examples/search_pipeline_examples/multi_semantically_searchable_transcription/), you can use the file's `file_id`—which was returned at the end of the above process—to perform semantic search on the associated transcript with [`.semantic_search`](https://krixik-docs.readthedocs.io/en/latest/system/search_methods/semantic_search_method/):
+Ahora que hay al menos un archivo en [el pipeline](https://krixik-docs.readthedocs.io/es/latest/ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_semantica_sobre_transcripcion/), puedes usar el `file_id` del archivo—que te fue devuelto al finalizar el proceso anterior—para hacer búsqueda semántica sobre su transcripción con el método [`.semantic_search`](https://krixik-docs.readthedocs.io/es/latest/sistema/metodos_de_busqueda/metodo_semantic_search_busqueda_semantica/):
 
 ```python
-pipeline.semantic_search(query="The text you wish to semantically search for goes here",
-                         file_ids=['the_file_id_from_above'])
+pipeline_2.semantic_search(query="El texto que quieres semánticamente buscar va acá",
+                           file_ids=['el_file_id_de_arriba'])
 ```
 
-That's it! You have now transcribed a file, processed the transcript, performed vector search on it, and can reuse [the pipeline](https://krixik-docs.readthedocs.io/en/latest/examples/search_pipeline_examples/multi_semantically_searchable_transcription/) for as many files and queries as you like... all of it in a couple of minutes and with a few lines of code.
+¡Eso es todo! Has transcrito el archivo, procesado la transcripción, hecho búsqueda semántica sobre ella, y puedes reutilizar [el pipeline](https://krixik-docs.readthedocs.io/es/latest/ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_semantica_sobre_transcripcion/) para cuantos archivos y búsquedas desees... todo en un par de minutos y con pocas líneas de código.
 
-### Optional: Pull the [Krixik Docs Repo](https://github.com/krixik-ai/krixik-docs)
+### Opcional: Haz *pull* al repositorio de Krixik Docs en Español
 
-If you wish to follow along with the above example, or with any other of the score of examples we lay out in the documentation, then simply pull the entire [Krixik Docs repo](https://github.com/krixik-ai/krixik-docs).
+Si deseas hacerle seguimiento al ejemplo anterior, o a cualquier ejemplo de las docenas que compartimos en esta documentación, simplemente hazle *pull* a todo el [repositorio de Krixik Docs en Español](XXXLINKXXX).
 
-Doing so will provide you with every file you need, and code will already be configured to run in that directory structure.
+Hacer esto te proporcionará todos los archivos necesarios, y el código ya está configurado para correr en esa estructura de directorios.
 
-## What can you build with Krixik?
+## ¿Qué Puedes Construir con Krixik?
 
-The [range of examples](https://krixik-docs.readthedocs.io/en/latest/examples/pipeline_examples_overview/) we've documented for you include pipelines to:
+La [gama de ejemplos](https://krixik-docs.readthedocs.io/es/latest/ejemplos/introduccion_ejemplos_de_pipelines/) que hemos documentado incluye *pipelines* para:
 
-- ...generate an image caption for a set of images and then perform keyword search on the caption set.
-  - [Pipeline: [Caption → JSON-to-TXT → Keyword Database]](https://krixik-docs.readthedocs.io/en/latest/examples/search_pipeline_examples/multi_keyword_searchable_image_captions/)
-- ...transcribe a trove of documents, translate them to English, and then run sentiment analysis on each one.
-  - [Pipeline: [Transcribe → Translate → JSON-to-TXT → Parser → Sentiment Analysis]](https://krixik-docs.readthedocs.io/en/latest/examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_translated_transcription/)
-- ...easily and serverlessly consume your open-source OCR model of choice.
-  - [Pipeline: [OCR]](https://krixik-docs.readthedocs.io/en/latest/examples/single_module_pipelines/single_ocr/)
+- ...generarle leyendas a una serie de imágenes y luego hacer búsqueda de palabras clave sobre todas las leyendas.
+  - [Pipeline: [Caption (leyenda de imagen) → JSON-to-TXT → Keyword Database (base de datos de palabras clave)]](https://krixik-docs.readthedocs.io/es/latest/ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_por_palabras_clave_sobre_leyendas_de_imagen.md/)
+- ...transcribir un conjunto de grabaciones, traducirlas al inglés, y luego hacer análisis de sentimiento sobre cada una.
+  - [Pipeline: [Transcribe (transcripción) → Translate (traducción) → JSON-to-TXT → Parser (fragmentación de texto) → Sentiment Analysis (análisis de sentimiento)]](https://krixik-docs.readthedocs.io/es/latest/ejemplos/ejemplos_pipelines_multi_modulo_sin_busqueda/multi_analisis_de_sentimiento_sobre_transcripcion_traducida/)
+- ...fácilmente y sin servidor consumir tu modelo predilecto ROC de fuente abierta.
+  - [Pipeline: [OCR (ROC)]](https://krixik-docs.readthedocs.io/es/latest/ejemplos/ejemplos_pipelines_modulo_unico/unico_ocr_roc/)
 
-This is only the tip of the iceberg. Many more pipelines are currently possible ([see here for more examples](https://krixik-docs.readthedocs.io/en/latest/examples/pipeline_examples_overview/)), and the Krixik module/model library will constantly be expanding—perhaps even to include modules/models [of your own submission](https://krixik-docs.readthedocs.io/en/latest/modules/adding_your_own_modules_or_models/).
+Esto es apenas la punta del iceberg. Muchos más *pipelines* son posibles hoy ([ve más ejemplos acá](https://krixik-docs.readthedocs.io/es/latest/ejemplos/introduccion_ejemplos_de_pipelines/)), y la librería Krixik de módulos y modelos siempre estará en expansión—tal vez incluso pronto incluya módulos/modelos que [tú contribuyas](https://krixik-docs.readthedocs.io/es/latest/modulos/agrega_tus_propios_modulos_o_modelos/).
 
-## Further Detail - Documentation
+## Más Detalles - Documentación
 
-The above is just a peek at the power of Krixik. In addition to all possible parameterization (which we didn't even touch on), the Krixik toolbox is an ever-growing collection of modules and models for you to build with.
+Lo anterior no es más que una pequeña idea del verdadero poder de Krixik. Además de todos los parámetros que puedes ajustar (tema que ni tocamos en este README), la caja de herramientas Krixik es una colección siempre creciente de modelos y módulos con los que puedes construir.
 
-If you'd like to learn more, please visit [Krixik Documentation](https://krixik-docs.readthedocs.io/en/latest/), where we go into detail on:
+Si te gustaría aprender más, por favor visita la [Documentación de Krixik](https://krixik-docs.readthedocs.io/es/latest/), donde entramos en detalle sobre:
 
-- [Getting Started and Beyond: The Krixik System](https://krixik-docs.readthedocs.io/en/latest/system/system_overview/)
-- [The Krixik Module Library](https://krixik-docs.readthedocs.io/en/latest/modules/modules_overview/)
-- [Krixik Pipeline Examples](https://krixik-docs.readthedocs.io/en/latest/examples/pipeline_examples_overview/)
+- [Cómo Arrancar y Más: El Sistema Krixik](https://krixik-docs.readthedocs.io/es/latest/sistema/introduccion_al_sistema/)
+- [La Librería de Módulos Krixik](https://krixik-docs.readthedocs.io/es/latest/modulos/introduccion_modulos/)
+- [Ejemplos de *Pipelines* Krixik](https://krixik-docs.readthedocs.io/es/latest/ejemplos/introduccion_ejemplos_de_pipelines/)
 
-## Krixik Launch Date and Newsletter
+## Fecha de Lanzamiento de Krixik y *Newsletter* (Boletín Informativo)
 
-Excited about Krixik graduating from beta? So are we! We're confident that this product is going to kick a monumental amount of ass, and we'd love to have you on board when it does.
+¿Te emociona que Krixik se gradúe de beta? ¡A nosotros también! Estamos seguros de que este producto va a ser algo realmente fantástico, y nos encantaría tenerte a bordo durante ese viaje.
 
-If you wish to be in the loop about launch and other matters (we promise not to spam), please subscribe to occasional correspondence from us [HERE](https://forms.gle/Lp38U1UDpkppqoCD9).
+Si quieres que te mantengamos al tanto sobre el lanzamiento y otros temas (prometemos no enviarte *spam*), por favor suscríbete a correspondencia ocasional de nosotros [acá](https://forms.gle/Lp38U1UDpkppqoCD9).
 
-Thanks for reading, and welcome to Krixik!
+Gracias por tu tiempo, y ¡bienvenidos a Krixik!
