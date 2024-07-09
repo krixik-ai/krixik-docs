@@ -1,5 +1,76 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/file_system/update_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
+
+```python
+import os
+import sys
+import json
+import importlib
+from pathlib import Path
+
+# demo setup - including secrets instantiation, requirements installation, and path setting
+if os.getenv("COLAB_RELEASE_TAG"):
+    # if running this notebook in collab - make sure to enter your secrets
+    MY_API_KEY = "YOUR_API_KEY_HERE"
+    MY_API_URL = "YOUR_API_URL_HERE"
+
+    # if running this notebook on collab - install requirements and pull required subdirectories
+    # install krixik python client
+    !pip install krixik
+
+    # install github clone - allows for easy cloning of subdirectories from docs repo: https://github.com/krixik-ai/krixik-docs
+    !pip install github-clone
+
+    # clone datasets
+    if not Path("data").is_dir():
+        !ghclone https://github.com/krixik-ai/krixik-docs/tree/main/data
+    else:
+        print("docs datasets already cloned!")
+
+    # define data dir
+    data_dir = "./data/"
+
+    # create output dir
+    from pathlib import Path
+
+    Path(data_dir + "/output").mkdir(parents=True, exist_ok=True)
+
+    # pull utilities
+    if not Path("utilities").is_dir():
+        !ghclone https://github.com/krixik-ai/krixik-docs/tree/main/utilities
+    else:
+        print("docs utilities already cloned!")
+else:
+    # if running local pull of docs - set paths relative to local docs structure
+    # import utilities
+    sys.path.append("../../../")
+
+    # define data_dir
+    data_dir = "../../../data/"
+
+    # if running this notebook locally from krixik docs repo - load secrets from a .env placed at the base of the docs repo
+    from dotenv import load_dotenv
+
+    load_dotenv("../../../.env")
+
+    MY_API_KEY = os.getenv("MY_API_KEY")
+    MY_API_URL = os.getenv("MY_API_URL")
+
+
+# load in reset
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+
+krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ## The `update` Method
 
 You can update any metadata of any processed file by using the `update` method.
@@ -442,3 +513,9 @@ Four closing observation on the `update` method:
 - You can also not update a file's file extension. For instance, a `.txt` file cannot become a `.pdf` file through the `update` method.
 
 - The `update` method allows you to extend a file's [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-process-method-arguments) indefinitely. Upon initially uploading a file, its [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-process-method-arguments) cannot be greater than 2,592,000 seconds (30 days). However, if you periodically invoke `update` on its file and reset its [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-process-method-arguments) to another 2,592,000 seconds (or however many seconds you please), the file will remain on-system for that much more time as of that moment, and so forth.
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+reset_pipeline(pipeline)
+```

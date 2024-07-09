@@ -1,5 +1,76 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/parameters_processing_files_through_pipelines/process_status_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
+
+```python
+import os
+import sys
+import json
+import importlib
+from pathlib import Path
+
+# demo setup - including secrets instantiation, requirements installation, and path setting
+if os.getenv("COLAB_RELEASE_TAG"):
+    # if running this notebook in collab - make sure to enter your secrets
+    MY_API_KEY = "YOUR_API_KEY_HERE"
+    MY_API_URL = "YOUR_API_URL_HERE"
+
+    # if running this notebook on collab - install requirements and pull required subdirectories
+    # install krixik python client
+    !pip install krixik
+
+    # install github clone - allows for easy cloning of subdirectories from docs repo: https://github.com/krixik-ai/krixik-docs
+    !pip install github-clone
+
+    # clone datasets
+    if not Path("data").is_dir():
+        !ghclone https://github.com/krixik-ai/krixik-docs/tree/main/data
+    else:
+        print("docs datasets already cloned!")
+
+    # define data dir
+    data_dir = "./data/"
+
+    # create output dir
+    from pathlib import Path
+
+    Path(data_dir + "/output").mkdir(parents=True, exist_ok=True)
+
+    # pull utilities
+    if not Path("utilities").is_dir():
+        !ghclone https://github.com/krixik-ai/krixik-docs/tree/main/utilities
+    else:
+        print("docs utilities already cloned!")
+else:
+    # if running local pull of docs - set paths relative to local docs structure
+    # import utilities
+    sys.path.append("../../../")
+
+    # define data_dir
+    data_dir = "../../../data/"
+
+    # if running this notebook locally from krixik docs repo - load secrets from a .env placed at the base of the docs repo
+    from dotenv import load_dotenv
+
+    load_dotenv("../../../.env")
+
+    MY_API_KEY = os.getenv("MY_API_KEY")
+    MY_API_URL = os.getenv("MY_API_URL")
+
+
+# load in reset
+reset = importlib.import_module("utilities.reset")
+reset_pipeline = reset.reset_pipeline
+
+
+# import krixik and initialize it with your personal secrets
+from krixik import krixik
+
+krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
+```
+
+    SUCCESS: You are now authenticated.
+
+
 ## The `process_status` Method
 
 The `process_status` method is available on every Krixik pipeline. It is invoked whenever you want to check the status of files being processed through a pipeline.
@@ -94,6 +165,13 @@ If we wait a few moments and try again, you will see confirmation that the proce
 
 
 ```python
+import time
+
+time.sleep(30)
+```
+
+
+```python
 # invoke process_status again
 process_status_output = pipeline.process_status(request_id=process_output["request_id"])
 
@@ -121,3 +199,12 @@ As you have just observed, `process_status` on a failed [`process`](process_meth
 What happens when the file `process_status` is run on [expires](process_method.md#core-process-method-arguments) or is manually [deleted](../file_system/delete_method.md) from the Krixik system?
 
 We take deletion seriously at Krixik—if a file is [deleted](../file_system/delete_method.md), it's entirely wiped from the system. Consequently, calling the `process_status` method on an [expired](process_method.md#core-process-method-arguments) or manually [deleted](../file_system/delete_method.md) file will tell you that the `request_id` you used as an argument was not found. The file is gone, as is any record of its having been processed in the first place.
+
+
+```python
+# delete all processed datapoints belonging to this pipeline
+import time
+
+time.sleep(30)
+reset_pipeline(pipeline)
+```
