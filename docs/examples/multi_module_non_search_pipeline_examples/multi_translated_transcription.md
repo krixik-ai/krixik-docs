@@ -1,76 +1,5 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/multi_module_non_search_pipeline_examples/multi_translated_transcription.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
-
-```python
-import os
-import sys
-import json
-import importlib
-from pathlib import Path
-
-# demo setup - including secrets instantiation, requirements installation, and path setting
-if os.getenv("COLAB_RELEASE_TAG"):
-    # if running this notebook in collab - make sure to enter your secrets
-    MY_API_KEY = "YOUR_API_KEY_HERE"
-    MY_API_URL = "YOUR_API_URL_HERE"
-
-    # if running this notebook on collab - install requirements and pull required subdirectories
-    # install krixik python client
-    !pip install krixik
-
-    # install github clone - allows for easy cloning of subdirectories from docs repo: https://github.com/krixik-ai/krixik-docs
-    !pip install github-clone
-
-    # clone datasets
-    if not Path("data").is_dir():
-        !ghclone https://github.com/krixik-ai/krixik-docs/tree/main/data
-    else:
-        print("docs datasets already cloned!")
-
-    # define data dir
-    data_dir = "./data/"
-
-    # create output dir
-    from pathlib import Path
-
-    Path(data_dir + "/output").mkdir(parents=True, exist_ok=True)
-
-    # pull utilities
-    if not Path("utilities").is_dir():
-        !ghclone https://github.com/krixik-ai/krixik-docs/tree/main/utilities
-    else:
-        print("docs utilities already cloned!")
-else:
-    # if running local pull of docs - set paths relative to local docs structure
-    # import utilities
-    sys.path.append("../../../")
-
-    # define data_dir
-    data_dir = "../../../data/"
-
-    # if running this notebook locally from krixik docs repo - load secrets from a .env placed at the base of the docs repo
-    from dotenv import load_dotenv
-
-    load_dotenv("../../../.env")
-
-    MY_API_KEY = os.getenv("MY_API_KEY")
-    MY_API_URL = os.getenv("MY_API_URL")
-
-
-# load in reset
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-
-krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ## Multi-Module Pipeline: Translated Transcription
 
 This document details a modular pipeline that takes in an audio file, [`transcribes`](../../modules/ai_modules/transcribe_module.md) it, and [`translates`](../../modules/ai_modules/translate_module.md) the transcription into a desired language.
@@ -175,9 +104,3 @@ with open(process_output["process_output_files"][0], "r") as file:
 
     [{"snippet": "Ese es un episodio mirando el gran pas de Columbia. Miramos algunos hechos realmente bsicos. Es el nombre, un poco de su historia, el tipo de gente que vive all, el tamao de la tierra y todo ese jazz. Pero en este video, vamos a entrar en un poco ms de una mirada detallada. Yo, qu est pasando chicos? Bienvenidos de nuevo a los hechos F2D. El canal donde miro las culturas y lugares de la gente, mi nombre es Dave Wouple. Y hoy vamos a mirar ms a Columbia en nuestro video de la Parte 2 de Columbia. Lo que me recuerda chicos, esto es parte de nuestra lista de Columbia. Lo pondr en el cuadro de descripcin de abajo y hablar ms sobre eso al final del video. Pero si eres nuevo aqu, nete a m todos los lunes para aprender sobre nuevos pases de todo el mundo. Usted puede hacer eso pulsando que suscribirse y ese botn de notificacin de cinturn. Pero eso es lo que pasa."}]
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

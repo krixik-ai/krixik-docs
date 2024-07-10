@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file.
  
 
+## 2024-07-10
+
+OCR example output length snipped, collab cells hidden from example markdown files.
+
+### Changed
+
+- single module OCR output snipped
+- collab cells hidden in module example docs
+
+
 ## 2024-07-09
 
 New docs urls, spanish draft added, collab tabs updated to include gen intro user
