@@ -6,6 +6,8 @@ Table of contents
 - [Before pushing checklist](#before-pushing-checklist)
 - [Testing overview](#testing-overview)
 
+Python 3.10 or later is required to build and run documentation tests.
+
 
 ## Adding a new page to documentation
 

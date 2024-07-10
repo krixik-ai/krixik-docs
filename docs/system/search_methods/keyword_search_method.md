@@ -1,76 +1,5 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/search_methods/keyword_search_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
-
-```python
-import os
-import sys
-import json
-import importlib
-from pathlib import Path
-
-# demo setup - including secrets instantiation, requirements installation, and path setting
-if os.getenv("COLAB_RELEASE_TAG"):
-    # if running this notebook in collab - make sure to enter your secrets
-    MY_API_KEY = "YOUR_API_KEY_HERE"
-    MY_API_URL = "YOUR_API_URL_HERE"
-
-    # if running this notebook on collab - install requirements and pull required subdirectories
-    # install krixik python client
-    !pip install krixik
-
-    # install github clone - allows for easy cloning of subdirectories from docs repo: https://github.com/krixik-ai/krixik-docs
-    !pip install github-clone
-
-    # clone datasets
-    if not Path("data").is_dir():
-        !ghclone https://github.com/krixik-ai/krixik-docs/tree/main/data
-    else:
-        print("docs datasets already cloned!")
-
-    # define data dir
-    data_dir = "./data/"
-
-    # create output dir
-    from pathlib import Path
-
-    Path(data_dir + "/output").mkdir(parents=True, exist_ok=True)
-
-    # pull utilities
-    if not Path("utilities").is_dir():
-        !ghclone https://github.com/krixik-ai/krixik-docs/tree/main/utilities
-    else:
-        print("docs utilities already cloned!")
-else:
-    # if running local pull of docs - set paths relative to local docs structure
-    # import utilities
-    sys.path.append("../../../")
-
-    # define data_dir
-    data_dir = "../../../data/"
-
-    # if running this notebook locally from krixik docs repo - load secrets from a .env placed at the base of the docs repo
-    from dotenv import load_dotenv
-
-    load_dotenv("../../../.env")
-
-    MY_API_KEY = os.getenv("MY_API_KEY")
-    MY_API_URL = os.getenv("MY_API_URL")
-
-
-# load in reset
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-
-# import krixik and initialize it with your personal secrets
-from krixik import krixik
-
-krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ## The `keyword_search` Method
 
 Krixik's `keyword_search` method enables keyword search on documents processed through certain pipelines. Keyword search is something internet users are long familiar with: a string of words is submitted as a query, and the search returns any and every instance of any of those words. Contrast this to [semantic search](semantic_search_method.md).
@@ -276,9 +205,3 @@ with open(data_dir + "other/stop_words.txt", "r") as file:
 
     stop_words = ['i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you', "you're", "you've", "you'll", "you'd", 'your', 'yours', 'yourself', 'yourselves', 'he', 'him', 'his', 'himself', 'she', "she's", 'her', 'hers', 'herself', 'it', "it's", 'its', 'itself', 'they', 'them', 'their', 'theirs', 'themselves', 'what', 'which', 'who', 'whom', 'this', 'that', "that'll", 'these', 'those', 'am', 'is', 'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'having', 'do', 'does', 'did', 'doing', 'a', 'an', 'the', 'and', 'but', 'if', 'or', 'because', 'as', 'until', 'while', 'of', 'at', 'by', 'for', 'with', 'about', 'against', 'between', 'into', 'through', 'during', 'before', 'after', 'above', 'below', 'to', 'from', 'up', 'down', 'in', 'out', 'on', 'off', 'over', 'under', 'again', 'further', 'then', 'once', 'here', 'there', 'when', 'where', 'why', 'how', 'all', 'any', 'both', 'each', 'few', 'more', 'most', 'other', 'some', 'such', 'no', 'nor', 'not', 'only', 'own', 'same', 'so', 'than', 'too', 'very', 's', 't', 'can', 'will', 'just', 'don', "don't", 'should', "should've", 'now', 'd', 'll', 'm', 'o', 're', 've', 'y', 'ain', 'aren', "aren't", 'couldn', "couldn't", 'didn', "didn't", 'doesn', "doesn't", 'hadn', "hadn't", 'hasn', "hasn't", 'haven', "haven't", 'isn', "isn't", 'ma', 'mightn', "mightn't", 'mustn', "mustn't", 'needn', "needn't", 'shan', "shan't", 'shouldn', "shouldn't", 'wasn', "wasn't", 'weren', "weren't", 'won', "won't", 'wouldn', "wouldn't"]
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```
