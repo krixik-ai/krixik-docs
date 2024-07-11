@@ -48,6 +48,7 @@ def check_file_links(filepath: str, toc_files: list) -> list:
     dead_links = []
 
     # check intra_links for dead links
+    headings = [v.replace("?", "") for v in headings]
     for link in intra_links:
         for no in nono_chars:
             if no in link:
@@ -110,6 +111,7 @@ def check_readme_links() -> list:
     dead_links = []
 
     # check intra_links for dead links
+    headings = [v.replace("?", "") for v in headings]
     for link in intra_links:
         for no in nono_chars:
             if no in link:

@@ -12,7 +12,7 @@ That's why we're here. **Welcome to Krixik**, where you can easily assemble and 
 ### Table of Contents
 
 - [Quickstart Guide](#quickstart-guide)
-- [What can you build with Krixik?](#what-can-you-build-with-krixik?)
+- [What can you build with Krixik?](#what-can-you-build-with-krixik)
 - [Further Detail - Documentation](#further-detail---documentation)
 
 ## Quickstart Guide
