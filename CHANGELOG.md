@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
  
+## 2024-07-11
+
+Link check test updated to deal with "?" symbols in intra doc links.
+
 
 ## 2024-07-10
 
