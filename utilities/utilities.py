@@ -1,7 +1,7 @@
 import re
 from pathlib import Path
 
-nono_chars = ["{", "}", "?"]
+nono_chars = ["{", "}"]
 
 
 def extract_headings_from_markdown(markdown_file) -> list:
@@ -12,6 +12,7 @@ def extract_headings_from_markdown(markdown_file) -> list:
     toc_headings = []
     for h in headings:
         ht = "#" + "-".join(h.lower().replace("`", "").split(" "))
+        ht = ht.replace("?", "")
         toc_headings.append(ht)
     return toc_headings
 
