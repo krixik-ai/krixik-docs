@@ -19,7 +19,7 @@ Por eso estamos acá. **Bienvenidos a Krixik**, donde puedes fácilmente ensambl
 
 ### Registra tu Cuenta
 
-Krixik está en beta, y por ello acceso al cliente de Krixik actualmente solo se puede obtener a través de solicitud directa.
+Krixik está en beta, por lo cual acceso al cliente de Krixik actualmente solo se puede obtener a través de solicitud directa.
 
 Si te gustaría participar en nuestras pruebas beta por favor llena [este breve Google Form](https://forms.gle/RyBAvjN1HEWPScb67).
 
