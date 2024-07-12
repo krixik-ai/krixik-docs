@@ -38,7 +38,7 @@ Nota: Se requiere la versión 3.10 (o mayor) de Python.
 
 Para [inicializar](https://krixik-docs.readthedocs.io/es/latest/sistema/inicializacion/inicializacion_y_autenticacion/) tu sesión en el cliente de Krixik necesitarás tus secretos únicos `api_key` y `api_url`. Los administradores de Krixik enviarán secretos individuales a cada participante en nuestras pruebas beta.
 
-En vez de manejar tus secretos directamente, enfáticamente recomendamos guardarlos en un archivo `.env` y cargarlos a través de [python-dotenv](https://pypi.org/project/python-dotenv/).
+En vez de manejar tus secretos directamente, enfáticamente recomendamos guardarlos en un archivo `.env` y luego cargarlos a través de [python-dotenv](https://pypi.org/project/python-dotenv/).
 
 Una vez tengas tus secretos, [inicializa](https://krixik-docs.readthedocs.io/es/latest/sistema/inicializacion/inicializacion_y_autenticacion/) tu sesión de la siguiente manera:
 
