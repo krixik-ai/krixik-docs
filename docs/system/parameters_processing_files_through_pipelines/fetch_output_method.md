@@ -1,18 +1,18 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/parameters_processing_files_through_pipelines/fetch_output_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
-## The `.fetch_output` Method
+## The `fetch_output` Method
 
-The `.fetch_output` method is used to download the output of a pipeline process.  This is particularly useful when using the [`.process`](../parameters_processing_files_through_pipelines/process_method.md) method with `wait_for_process` set to `False`, as your output is in that case not immediately yielded by the [`.process`](../parameters_processing_files_through_pipelines/process_method.md) method.
+The `fetch_output` method is used to download the output of a pipeline process.  This is particularly useful when using the [`process`](../parameters_processing_files_through_pipelines/process_method.md) method with `wait_for_process` set to `False`, as your output is in that case not immediately yielded by the [`process`](../parameters_processing_files_through_pipelines/process_method.md) method.
 
-### `.fetch_output` Method Arguments
+### `fetch_output` Method Arguments
 
-The `.fetch_output` method takes two arguments:
+The `fetch_output` method takes two arguments:
 
-- `file_id`: (required, str) The `file_id` of the file whose [`.process`](../parameters_processing_files_through_pipelines/process_method.md) method output you wish to fetch.
+- `file_id`: (required, str) The `file_id` of the file whose [`process`](../parameters_processing_files_through_pipelines/process_method.md) method output you wish to fetch.
 - `local_save_directory`: (required, str) The local directory where you would like the fetched output to be saved to. Defaults to current working directory.
 
 
-### `.fetch_output` Example
+### `fetch_output` Example
 
 You will first need to create a pipeline on which to run this example. A pipeline consisting of a single [`parser`](../../modules/support_function_modules/parser_module.md) module will do nicely:
 
@@ -31,7 +31,7 @@ process_output = pipeline.process(
     local_file_path=data_dir + "input/1984_very_short.txt",
     local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 60 * 24 * 7,  # process data will be deleted from the Krixik system in 7 days
-    wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
+    wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,
 )  # do not display process update printouts upon running code
 ```
@@ -74,15 +74,15 @@ print(json.dumps(process_output, indent=2))
     }
 
 
-Armed with its `file_id`, you can use the `.fetch_output` method to suit your purpose:
+Armed with its `file_id`, you can use the `fetch_output` method to suit your purpose:
 
 
 ```python
-# fetch the output of this process using .fetch_output and its file_id
+# fetch the output of this process using the fetch_output method and its file_id
 fetched_output = pipeline.fetch_output(file_id=process_output["file_id"], local_save_directory="../../../data/output")
 ```
 
-Printing the fetched output return displays the sought JSON and some additional information. This additional information is very similar to output from the [`.process`](../parameters_processing_files_through_pipelines/process_method.md) method:
+Printing the fetched output return displays the sought JSON and some additional information. This additional information is very similar to output from the [`process`](../parameters_processing_files_through_pipelines/process_method.md) method:
 
 
 ```python

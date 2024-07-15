@@ -6,9 +6,9 @@ You can update any metadata of any processed file by using the `update` method.
 
 This overview of the `update` method is divided into the following sections:
 
-- [update Method Arguments](#update-method-arguments)
-- [update Method Example](#update-method-example)
-- [Observations on the update Method](#observations-on-the-update-method)
+- [`update` Method Arguments](#update-method-arguments)
+- [`update` Method Example](#update-method-example)
+- [Observations on the `update` Method](#observations-on-the-update-method)
 
 ### `update` Method Arguments
 
@@ -44,10 +44,10 @@ process_output = pipeline.process(
     local_file_path=data_dir + "input/frankenstein_very_short.txt",  # the initial local filepath where the input JSON file is stored
     local_save_directory=data_dir + "output",  # save output repo data output subdir
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-    wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
+    wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,  # do not display process update printouts upon running code
     symbolic_directory_path="/novels/gothic",
-    file_name="Frankenstein.txt",
+    file_name="Draculas.txt",
     file_tags=[{"author": "Shelley"}, {"category": "gothic"}, {"century": "19"}],
 )
 ```
@@ -441,4 +441,4 @@ Four closing observation on the `update` method:
 
 - You can also not update a file's file extension. For instance, a `.txt` file cannot become a `.pdf` file through the `update` method.
 
-- The `update` method allows you to extend a file's [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-process-method-arguments) indefinitely. Upon initially uploading a file, its [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-process-method-arguments) cannot be greater than 2,592,000 seconds (30 days). However, if you periodically invoke `update` on its file and reset its [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-process-method-arguments) to another 2,592,000 seconds (or however many seconds you please), the file will remain on-system for that much more time as of that moment, and so forth.
+- The `update` method allows you to extend a file's [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-process-method-arguments) indefinitely. Upon initially uploading a file, its [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-process-method-arguments) cannot be greater than 2,592,000 seconds (30 days). However, if you periodically invoke `update` on the file and reset its [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-process-method-arguments) to another 2,592,000 seconds (or however many seconds you please), the file will remain on-system for that much more time as of that moment, and so forth.

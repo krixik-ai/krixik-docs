@@ -69,7 +69,7 @@ The `reset_pipeline` function takes one argument (required):
 
 - `pipeline`: The Python variable that the pipeline object is currently saved to.
 
-Note that this is _not_ the `name` of the pipeline. For instance, if you wished to reset the pipeline in the `.load_pipeline` method example code immediately above, the `pipeline` argument for the `reset_pipeline` function would be set to `my_pipeline_2`, as follows:
+Note that this is _not_ the `name` of the pipeline. For instance, if you wished to reset the pipeline in the `load_pipeline` method example code immediately above, the `pipeline` argument for the `reset_pipeline` function would be set to `my_pipeline_2`, as follows:
 
 
 ```python

@@ -2,7 +2,9 @@
 
 ## Multi-Module Pipeline: Translated Transcription
 
-This document details a modular pipeline that takes in an audio file, [`transcribes`](../../modules/ai_modules/transcribe_module.md) it, and [`translates`](../../modules/ai_modules/translate_module.md) the transcription into a desired language.
+This document details a multi-modular pipeline that takes in an audio file, [`transcribes`](../../modules/ai_modules/transcribe_module.md) it, and [`translates`](../../modules/ai_modules/translate_module.md) the transcription into a desired language.
+
+A pipeline that can transcribe and translate transcriptions could enable real-time language communication by converting spoken or recorded speech into written text and then translating it into different languages, facilitating multilingual interactions and accessibility to information across language barriers.   Applications of such a pipeline could include international business meetings, educational purposes, travel assistance, and improving communication between individuals who speak different languages.
 
 The document is divided into the following sections:
 
@@ -17,7 +19,7 @@ To achieve what we've described above, let's set up a pipeline sequentially cons
 
 - A [`translate`](../../modules/ai_modules/translate_module.md) module.
 
-We do this by leveraging the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
+We do this by leveraging the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
 
 
 ```python
@@ -51,7 +53,7 @@ IPython.display.Audio(data_dir + "input/Interesting Facts About Colombia.mp3")
 
 Since the input audio is in English,  we'll use the default [`opus-mt-en-es`](https://huggingface.co/Helsinki-NLP/opus-mt-en-es) model of the [`translate`](../../modules/ai_modules/translate_module.md) module to translate the content into Spanish.
 
-We will use the default models for every other module in the pipeline as well, so the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method doesn't need to be leveraged.
+We will use the default models for every other module in the pipeline as well, so the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method doesn't need to be leveraged.
 
 
 ```python
@@ -65,7 +67,7 @@ process_output = pipeline.process(
 )  # do not display process update printouts upon running code
 ```
 
-The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+The output of this process is printed below. To learn more about each component of the output, review documentation for the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 Because the output of this particular module-model pair is a JSON file, the process output is provided in this object as well (this is only the case for JSON outputs).  Moreover, the output file itself has been saved to the location noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 

@@ -2,15 +2,17 @@
 
 ### Search Pipeline Overview
 
-Search pipelines are those that enable document search  on input text files.
+Search pipelines are those that enable document search on textual documents. These documents may be the initial pipeline input or they may be generated mid-pipeline, as is the case with transcription (where audio is converted to text) and image captioning (image to text).   
+
+Today such search capabilities are popularly employed in RAG (Retrieval-Augmented Generation) systems, but the pipelines described in this section also have general use with other applications including recommendation systems, image and video retrieval based on content similarity, and personalized content delivery.
 
 Two types of document search can be enabled: [semantic search](../../system/search_methods/semantic_search_method.md) and [keyword search](../../system/search_methods/keyword_search_method.md). Depending on which of these is sought, the final module of the pipeline must respectively be [`vector-db`](../../modules/database_modules/vector-db_module.md) or [`keyword-db`](../../modules/database_modules/keyword-db_module.md).
 
 Search pipelines are more complex than other pipelines because they require an additional step.
 
-- Files must first be "loaded" into the the pipeline with the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+- Files must first be "loaded" into the the pipeline with the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
-- The [`.keyword_search`](../../system/search_methods/keyword_search_method.md) or [`.semantic_search`](../../system/search_methods/semantic_search_method.md) methods can be invoked on a search pipeline once at least one file has been [processed](../../system/parameters_processing_files_through_pipelines/process_method.md) through it. Keep in mind that the [`.keyword_search`](../../system/search_methods/keyword_search_method.md) method can only be invoked on a pipeline that ends with [`keyword-db`](../../modules/database_modules/keyword-db_module.md), and the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method can only be invoked on a pipeline that ends with [`vector-db`](../../modules/database_modules/vector-db_module.md).
+- The [`keyword_search`](../../system/search_methods/keyword_search_method.md) method or the [`semantic_search`](../../system/search_methods/semantic_search_method.md) method can be invoked on a search pipeline once at least one file has been [processed](../../system/parameters_processing_files_through_pipelines/process_method.md) through it. Keep in mind that the [`keyword_search`](../../system/search_methods/keyword_search_method.md) method can only be invoked on a pipeline that ends with [`keyword-db`](../../modules/database_modules/keyword-db_module.md), and the [`semantic_search`](../../system/search_methods/semantic_search_method.md) method can only be invoked on a pipeline that ends with [`vector-db`](../../modules/database_modules/vector-db_module.md).
 
 ### Search Pipeline Examples
 

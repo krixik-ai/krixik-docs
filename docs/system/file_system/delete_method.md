@@ -29,7 +29,7 @@ process_output = pipeline.process(
     local_file_path=data_dir + "input/1984_very_short.txt",  # the initial local filepath where the input JSON file is stored
     local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-    wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
+    wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,  # do not display process update printouts upon running code
     symbolic_directory_path="/novels/20th-century",
     file_name="1984_sample.txt",
@@ -37,11 +37,11 @@ process_output = pipeline.process(
 )
 ```
 
-Let's see what the files' records look like with the [`list`](list_method.md) method:
+Let's see what the file's records look like with the [`list`](list_method.md) method:
 
 
 ```python
-# see both files' records with list (they're in the same symbolic_directory_path)
+# see the file's records with list
 list_output = pipeline.list(symbolic_directory_paths=["/novels/20th-century"])
 
 # nicely print the output of this list
@@ -99,9 +99,9 @@ print(json.dumps(list_output, indent=2))
     }
 
 
-Both files' records are properly showing up.
+The file's records are properly showing up.
 
-Now use the `delete` method and one of the files' `file_id`s to delete that file:
+Now use the `delete` method and the file's `file_id` to delete that file:
 
 
 ```python
@@ -125,7 +125,7 @@ We can check that the file has been deleted by using the [`list`](list_method.md
 
 
 ```python
-#  to confirm that one file has been deleted
+#  to confirm that the file has been deleted
 list_output = pipeline.list(symbolic_directory_paths=["/novels/20th-century"])
 
 # nicely print the output of this

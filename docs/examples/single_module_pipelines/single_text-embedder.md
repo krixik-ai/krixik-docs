@@ -2,7 +2,11 @@
 
 ## Single-Module Pipeline: `text-embedder`
 
-This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module. It's divided into the following sections:
+This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module. 
+
+Text embedding involves converting words or sentences into numerical vectors in a high-dimensional space, preserving semantic relationships and contextual meanings. Its applications include improving natural language processing tasks such as sentiment analysis, machine translation, information retrieval, and recommendation systems by capturing nuanced semantic similarities between words and texts.
+
+The remainder of this document divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)
@@ -14,7 +18,7 @@ This document is a walkthrough of how to assemble and use a single-module pipeli
 
 Let's first instantiate a single-module [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) pipeline.
 
-We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module name into `module_chain`.
+We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module name into `module_chain`.
 
 
 ```python
@@ -60,7 +64,7 @@ with open(data_dir + "input/1984_snippets.json", "r") as file:
 
 Let's process our test input file using the [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module's [default model](../../modules/ai_modules/text-embedder_module.md#available-models-in-the-text-embedder-module): [`all-MiniLM-L6-v2`](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2).
 
-Given that this is the default model, we need not specify model selection through the optional [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+Given that this is the default model, we need not specify model selection through the optional [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 In a later section of this document we will process the same file again, but select our model and the quantization thereof explicitly.
 
@@ -76,7 +80,7 @@ process_output = pipeline.process(
 )  # do not display process update printouts upon running code
 ```
 
-The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+The output of this process is printed below. To learn more about each component of the output, review documentation for the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 Moreover, the output file itself has been saved to the location noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 
@@ -122,7 +126,7 @@ In the context of the input file, the first row is the vectorized form of our fi
 
 ### Using a Non-Default Model
 
-To use a [non-default model](../../modules/ai_modules/text-embedder_module.md#available-models-in-the-text-embedder-module) like [`all-mpnet-base-v2`](https://huggingface.co/sentence-transformers/all-mpnet-base-v2), we must enter it explicitly through the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method. As [module documentation](../../modules/ai_modules/text-embedder_module.md) indicates, you can also specify whether or not you wish to use the quantized version of the model.
+To use a [non-default model](../../modules/ai_modules/text-embedder_module.md#available-models-in-the-text-embedder-module) like [`all-mpnet-base-v2`](https://huggingface.co/sentence-transformers/all-mpnet-base-v2), we must enter it explicitly through the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method. As [module documentation](../../modules/ai_modules/text-embedder_module.md) indicates, you can also specify whether or not you wish to use the quantized version of the model.
 
 
 ```python

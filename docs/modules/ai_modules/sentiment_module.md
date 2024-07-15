@@ -7,6 +7,7 @@ This overview of the `sentiment` module is divided into the following sections:
 - [Inputs and Outputs of the `sentiment` Module](#inputs-and-outputs-of-the-sentiment-module)
 - [Available Models in the `sentiment` Module](#available-models-in-the-sentiment-module)
 - [Model Parameters in the `sentiment` Module](#model-parameters-in-the-sentiment-module)
+- [Input File Size Limit](#input-file-size-limit)
 - [A Single-Module Pipeline for the `sentiment` Module](#a-single-module-pipeline-for-the-sentiment-module)
 - [Further Information on `sentiment` Module IO and Clickability](#further-information-on-sentiment-module-io-and-clickability)
 
@@ -20,13 +21,13 @@ The `sentiment` module returns a JSON file. The returned JSON file has all input
 
 You can activate any of the following models when using the `sentiment` module:
 
-- [distilbert-base-uncased-finetuned-sst-2-english](https://huggingface.co/distilbert/distilbert-base-uncased-finetuned-sst-2-english) (default)
+- [distilbert-base-uncased-finetuned-sst-2-english](https://huggingface.co/distilbert/distilbert-base-uncased-finetuned-sst-2-english) (default) [English]
 
-- [bert-base-multilingual-uncased-sentiment](https://huggingface.co/nlptown/bert-base-multilingual-uncased-sentiment)
+- [bert-base-multilingual-uncased-sentiment](https://huggingface.co/nlptown/bert-base-multilingual-uncased-sentiment) [English, Dutch, German, French, Italian, Spanish]
 
-- [distilbert-base-multilingual-cased-sentiments-student](https://huggingface.co/lxyuan/distilbert-base-multilingual-cased-sentiments-student)
+- [distilbert-base-multilingual-cased-sentiments-student](https://huggingface.co/lxyuan/distilbert-base-multilingual-cased-sentiments-student) [English, Arabic, German, Spanish, French, Japanese, Chinese, Indonesian, Hindi, Italian, Malay, Portuguese]
 
-- [distilroberta-finetuned-financial-news-sentiment-analysis](https://huggingface.co/mrm8488/distilroberta-finetuned-financial-news-sentiment-analysis)
+- [distilroberta-finetuned-financial-news-sentiment-analysis](https://huggingface.co/mrm8488/distilroberta-finetuned-financial-news-sentiment-analysis) [English]
 
 Use the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method to determine what model you'd like active when you process files through the `sentiment` module.
 
@@ -40,6 +41,10 @@ modules={'sentiment': {'model':'distilroberta-finetuned-financial-news-sentiment
                        'params': {}}}
 ```
 
+### Input File Size Limit
+
+`sentiment` module input JSON files can currently be no larger than 3MB.
+
 ### A Single-Module Pipeline for the `sentiment` Module
 
 Please click [here](../../examples/single_module_pipelines/single_sentiment.md) to visit the `Pipeline Examples` section of our documentation and review an example of a single-module pipeline for the `sentiment` module.
@@ -50,4 +55,4 @@ Please click [here](../../system/convenience_methods/convenience_methods.md) to 
 
 - [View Module Input and Output Examples](../../system/convenience_methods/convenience_methods.md#view-module-input-and-output-examples)
 
-- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-click_data-method)
+- [View Module Click Data with the `click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-click_data-method)

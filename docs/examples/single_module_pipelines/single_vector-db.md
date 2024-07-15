@@ -4,6 +4,8 @@
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`vector-db`](../../modules/database_modules/vector-db_module.md) module.
 
+Vector databases store and manage data points represented as vectors in multidimensional space, enabling efficient similarity searches and analytics based on vector distances.  Applications include RAG (Retrieval-Augmented Generation), recommendation systems, image and video retrieval based on content similarity, personalized content delivery, and anomaly detection in large datasets.
+
 Note that this module by itself will not generate a particularly easy-to-use pipeline, since you must already have NPY files ready to process. We suggest also taking a look at this [example pipeline](../../examples/search_pipeline_examples/multi_basic_semantic_search.md) or this [example pipeline](../../examples/search_pipeline_examples/multi_snippet_semantic_search.md), which respectively take TXT files and JSON files and enable vector (a.k.a. semantic) search on them.
 
 The document is divided into the following sections:
@@ -18,7 +20,7 @@ The document is divided into the following sections:
 
 Let's first instantiate a single-module [`vector-db`](../../modules/database_modules/vector-db_module.md) pipeline.
 
-We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`vector-db`](../../modules/database_modules/vector-db_module.md) module name into `module_chain`.
+We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`vector-db`](../../modules/database_modules/vector-db_module.md) module name into `module_chain`.
 
 
 ```python
@@ -53,7 +55,7 @@ np.load(data_dir + "input/vectors.npy")
 
 Let's process our test input file using the [`vector-db`](../../modules/database_modules/vector-db_module.md) module's default (and currently only) [model](../../modules/database_modules/vector-db_module.md#available-models-in-the-vector-db-module): [`faiss`](https://github.com/facebookresearch/faiss).
 
-Given that this is the default model, we need not specify model selection through the optional [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+Given that this is the default model, we need not specify model selection through the optional [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 
 ```python
@@ -67,7 +69,7 @@ process_output = pipeline.process(
 )  # do not display process update printouts upon running code
 ```
 
-The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+The output of this process is printed below. To learn more about each component of the output, review documentation for the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 Because the output of this particular module-model pair is a [FAISS](https://github.com/facebookresearch/faiss) database file, `process_output` is "null". However, the output file has been saved to the location noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 
@@ -93,13 +95,13 @@ print(json.dumps(process_output, indent=2))
 
 ### Using the `semantic_search` method
 
-Any pipeline containing a [`vector-db`](../../modules/database_modules/vector-db_module.md) module preceded by a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module has access to the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method. This provides you with the convenient ability to effect semantic queries on the created vector database(s).
+Any pipeline containing a [`vector-db`](../../modules/database_modules/vector-db_module.md) module preceded by a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module has access to the [`semantic_search`](../../system/search_methods/semantic_search_method.md) method. This provides you with the convenient ability to effect semantic queries on the created vector database(s).
 
-As the single-module pipeline created above lacks the [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module, the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method will not work on it. Review documentation for this [pipeline example](../../examples/search_pipeline_examples/multi_basic_semantic_search.md) or this [pipeline example](../../examples/search_pipeline_examples/multi_snippet_semantic_search.md), both of which meet the requirements for the method: the former ingests TXT files, and the latter JSON files.
+As the single-module pipeline created above lacks the [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module, the [`semantic_search`](../../system/search_methods/semantic_search_method.md) method will not work on it. Review documentation for this [pipeline example](../../examples/search_pipeline_examples/multi_basic_semantic_search.md) or this [pipeline example](../../examples/search_pipeline_examples/multi_snippet_semantic_search.md), both of which meet the requirements for the method: the former ingests TXT files, and the latter JSON files.
 
 ### Querying Output Databases Locally
 
-In addition to what's provided by the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method, you can **locally** perform queries on the generated vector database whose location is indicated in `process_output_files`.
+In addition to what's provided by the [`semantic_search`](../../system/search_methods/semantic_search_method.md) method, you can **locally** perform queries on the generated vector database whose location is indicated in `process_output_files`.
 
 Below is a simple function for locally performing vector searches on the above-outputted database.
 

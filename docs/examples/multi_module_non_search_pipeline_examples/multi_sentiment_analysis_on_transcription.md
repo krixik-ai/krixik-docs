@@ -2,7 +2,9 @@
 
 ## Multi-Module Pipeline: Sentiment Analysis on Transcription
 
-This document details a modular pipeline that takes in an audio file in English, [`transcribes`](../../modules/ai_modules/transcribe_module.md) it, and then performs [`sentiment analysis`](../../modules/ai_modules/sentiment_module.md) on each sentence of the transcript.
+This document details a multi-modular pipeline that takes in an audio file in English, [`transcribes`](../../modules/ai_modules/transcribe_module.md) it, and then performs [`sentiment analysis`](../../modules/ai_modules/sentiment_module.md) on each sentence of the transcript.
+
+Performing sentiment analysis on transcriptions from audio can uncover emotional cues and attitudes expressed verbally, providing deeper insights into speaker sentiment, customer feedback, or public opinion in contexts where spoken communication is prevalent. This analysis is valuable for improving customer service, refining marketing strategies, and understanding sentiment trends in spoken interactions that may not be captured through text alone.
 
 The document is divided into the following sections:
 
@@ -23,7 +25,7 @@ To achieve what we've described above, let's set up a pipeline sequentially cons
 
 We use the [`json-to-txt`](../../modules/support_function_modules/json-to-txt_module.md) and [`parser`](../../modules/support_function_modules/parser_module.md) combination, which combines the transcribed snippets into one document and then splices it again, to make sure that any pauses in speech don't make for partial snippets that can confuse the [`sentiment`](../../modules/ai_modules/sentiment_module.md) model.
 
-Pipeline setup is accomplished through the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
+Pipeline setup is accomplished through the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
 
 
 ```python
@@ -55,7 +57,7 @@ IPython.display.Audio(data_dir + "input/Interesting Facts About Colombia.mp3")
 
 
 
-We will use the default models for every module in the pipeline, so the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method doesn't need to be leveraged.
+We will use the default models for every module in the pipeline, so the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method doesn't need to be leveraged.
 
 
 ```python
@@ -69,7 +71,7 @@ process_output = pipeline.process(
 )  # do not display process update printouts upon running code
 ```
 
-The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+The output of this process is printed below. To learn more about each component of the output, review documentation for the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 Because the output of this particular module-model pair is a JSON file, the process output is provided in this object as well (this is only the case for JSON outputs).  Moreover, the output file itself has been saved to the location noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 

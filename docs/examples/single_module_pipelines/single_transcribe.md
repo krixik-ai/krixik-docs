@@ -2,7 +2,11 @@
 
 ## Single-Module Pipeline: `transcribe`
 
-This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`transcribe`](../../modules/ai_modules/transcribe_module.md) module. It is divided into the following sections:
+This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`transcribe`](../../modules/ai_modules/transcribe_module.md) module. 
+
+Transcription is the process of converting spoken language into written text. Its applications include creating accurate subtitles for videos, facilitating accessible content for the hearing-impaired, automating meeting minutes, and generating searchable archives of spoken information for easy reference.
+
+The remainder of this document divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)
@@ -13,7 +17,7 @@ This document is a walkthrough of how to assemble and use a single-module pipeli
 
 Let's first instantiate a single-module [`transcribe`](../../modules/ai_modules/transcribe_module.md)  pipeline.
 
-We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`transcribe`](../../modules/ai_modules/transcribe_module.md)  module name into `module_chain`.
+We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`transcribe`](../../modules/ai_modules/transcribe_module.md)  module name into `module_chain`.
 
 
 ```python
@@ -51,7 +55,7 @@ IPython.display.Audio(data_dir + "input/Interesting Facts About Colombia.mp3")
 
 Let's process our test input file using the [`transcribe`](../../modules/ai_modules/transcribe_module.md)  module's [default model](../../modules/ai_modules/transcribe_module.md#available-models-in-the-transcribe-module) : [`whisper-tiny`](https://huggingface.co/openai/whisper-tiny).
 
-Given that this is the default model, we need not specify model selection through the optional [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+Given that this is the default model, we need not specify model selection through the optional [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 
 ```python
@@ -65,7 +69,7 @@ process_output = pipeline.process(
 )  # do not display process update printouts upon running code
 ```
 
-The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+The output of this process is printed below. To learn more about each component of the output, review documentation for the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 Because the output of this particular module-model pair is a JSON file, the process output is provided in this object as well (this is only the case for JSON outputs).  Moreover, the output file itself has been saved to the location noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 
@@ -85,7 +89,7 @@ As anticipated, the returned JSON file has not only the snippets of transcribed 
 
 ### Using a Non-Default Model
 
-To use a [non-default model](../../modules/ai_modules/transcribe_module.md#available-models-in-the-transcribe-module) like [`whisper-large-v3`](https://huggingface.co/openai/whisper-large-v3), we must enter it explicitly through the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+To use a [non-default model](../../modules/ai_modules/transcribe_module.md#available-models-in-the-transcribe-module) like [`whisper-large-v3`](https://huggingface.co/openai/whisper-large-v3), we must enter it explicitly through the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 We do so below to process the same input file shown above.
 

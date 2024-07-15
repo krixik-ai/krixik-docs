@@ -29,13 +29,13 @@ Like the [`list`](../file_system/list_method.md) method, the `semantic_search` m
 
 - `sort_order` - Here takes three possible values: 'ascending', descending', and now 'global'. The first two sort results by the file they're in (the files are sorted by the creation timestamp of the file), and 'global' combines all files and returns the very best results across all files. Default is 'descending'.
 
-Finally, the `semantic_search` method accepts one optional method that is unique to it:
+Finally, the `semantic_search` method accepts one optional argument that is unique to it:
 
 - `k` (int) - Specifies up to how many results will be returned per queried file. Default is 5.
 
 ### Example Pipeline Setup and File Processing
 
-For this document's examples we will use a pipeline consisting of three modules: a [`parser module`](../../modules/support_function_modules/parser_module.md), a [`text-embedder module`](../../modules/ai_modules/text-embedder_module.md), and a [`vector-db module`](../../modules/database_modules/vector-db_module.md). This is the basic semantic search [pipeline](../../examples/search_pipeline_examples/multi_basic_semantic_search.md). We use the [`create_pipeline`](../pipeline_creation/create_pipeline.md) method to instantiate the pipeline.
+For this document's examples we will use a pipeline consisting of three modules: a [`parser`](../../modules/support_function_modules/parser_module.md) module, a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module, and a [`vector-db`](../../modules/database_modules/vector-db_module.md) module. This is the basic semantic search [pipeline](../../examples/search_pipeline_examples/multi_basic_semantic_search.md). We use the [`create_pipeline`](../pipeline_creation/create_pipeline.md) method to instantiate the pipeline.
 
 
 ```python
@@ -54,7 +54,7 @@ output_1 = pipeline.process(
     local_file_path=data_dir + "input/frankenstein_very_short.txt",  # the initial local filepath where the input JSON file is stored
     local_save_directory=data_dir + "output",
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-    wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
+    wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,  # do not display process update printouts upon running code
     symbolic_directory_path="/novels/gothic",
     file_name="Frankenstein.txt",
@@ -64,7 +64,7 @@ output_2 = pipeline.process(
     local_file_path=data_dir + "input/pride_and_prejudice_very_short.txt",  # the initial local filepath where the input JSON file is stored
     local_save_directory=data_dir + "output",
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-    wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
+    wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,  # do not display process update printouts upon running code
     symbolic_directory_path="/novels/romance",
     file_name="Pride and Prejudice.txt",
@@ -74,7 +74,7 @@ output_3 = pipeline.process(
     local_file_path=data_dir + "input/moby_dick_very_short.txt",  # the initial local filepath where the input JSON file is stored
     local_save_directory=data_dir + "output",
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-    wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
+    wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,  # do not display process update printouts upon running code
     symbolic_directory_path="/novels/adventure",
     file_name="Moby Dick.txt",
@@ -84,7 +84,7 @@ output_4 = pipeline.process(
     local_file_path=data_dir + "input/little_women_very_short.txt",  # the initial local filepath where the input JSON file is stored
     local_save_directory=data_dir + "output",
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-    wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
+    wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,  # do not display process update printouts upon running code
     symbolic_directory_path="/novels/bildungsroman",
     file_name="Little Women.txt",
@@ -119,7 +119,7 @@ The value of `process_output` is `null` because the return object is a database,
 
 With files now processed through the pipeline we can run the `semantic_search` method on it.
 
-Let's try an example in which we query one of the files file:
+Let's try an example in which we query one of the files:
 
 
 ```python
@@ -202,9 +202,9 @@ print(json.dumps(semantic_output, indent=2))
     }
 
 
-In addition to returning the snippets that are closest in meaning to our query, we also see the calculated vector distance (in a way, the distance in meaning) between each result and the query. The shorter this distance is, the closer in meaning the result to the query. The `semantic_search` method returns the snippets with the shortest vector distance to query, ranked in ascending order within each file.
+In addition to seeing the returned snippets that are closest in meaning to your query, you also see the calculated vector distance (in a way, the distance in meaning) between each result and the query. The shorter this distance is, the closer in meaning the result to the query. The `semantic_search` method returns the snippets with the shortest vector distance to query, ranked in ascending order within each file.
 
-When `sort_order` is set to 'global', results from all files are combined and the method returns the snippets with the shortest distance to query, ranked in ascending order, regardless of what file each result may be in. Let's give this a shot by searching through multiple files with the [wildcard operator](../file_system/list_method.md#wildcard-operator-arguments):
+When `sort_order` is set to 'global', results from all files are combined and the method returns the snippets with the shortest distance to query, ranked in ascending order, regardless of what file each result may be in. Give this a shot by searching through multiple files with the [wildcard operator](../file_system/list_method.md#wildcard-operator-arguments):
 
 
 ```python

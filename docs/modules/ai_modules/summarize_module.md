@@ -7,6 +7,7 @@ This overview of the `summarize` module is divided into the following sections:
 - [Inputs and Outputs of the `summarize` Module](#inputs-and-outputs-of-the-summarize-module)
 - [Available Models in the `summarize` Module](#available-models-in-the-summarize-module)
 - [Model Parameters in the `summarize` Module](#model-parameters-in-the-summarize-module)
+- [Input File Size Limit](#input-file-size-limit)
 - [A Single-Module Pipeline for the `summarize` Module](#a-single-module-pipeline-for-the-summarize-module)
 - [Recursive Summarization](#recursive-summarization)
 - [Further Information on `summarize` Module IO and Clickability](#further-information-on-summarize-module-io-and-clickability)
@@ -29,9 +30,9 @@ The `summarize` module returns a TXT file containing the requested summary of th
 
 You can activate any of the following models when using the `summarize` module:
 
-- [bart-large-cnn](https://huggingface.co/facebook/bart-large-cnn) (default)
+- [bart-large-cnn](https://huggingface.co/facebook/bart-large-cnn) (default) [English]
 
-- [text-summarization](https://huggingface.co/Falconsai/text_summarization)
+- [text-summarization](https://huggingface.co/Falconsai/text_summarization) [English]
 
 Use the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method to determine what model you'd like active when you process files through the `summarize` module.
 
@@ -44,6 +45,12 @@ None of the `summarize` module models are parameterizable. Consequently, when se
 modules={'summarize': {'model':'bart-large-cnn',
                        'params': {}}}
 ```
+
+### Input File Size Limit
+
+`summarize` module input document files can currently be no larger than 0.25MB.
+
+This size limitation will apply directly to input TXT files. For input PDF, PPTX, and DOCX files, the file size check will take place after conversion to TXT format.
 
 ### A Single-Module Pipeline for the `summarize` Module
 

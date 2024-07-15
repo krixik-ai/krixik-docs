@@ -2,7 +2,11 @@
 
 ## Single-Module Pipeline: `parser`
 
-This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`parser`](../../modules/support_function_modules/parser_module.md) module. It's divided into the following sections:
+This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`parser`](../../modules/support_function_modules/parser_module.md) module. 
+
+Text parsing involves breaking text into its constituent parts, such as words, phrases, or data elements, to analyze and extract meaningful information. Its applications include natural language processing, data extraction from documents, code analysis, and enhancing search engine capabilities by understanding the structure and context of the text.
+
+The remainder of this document divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)
@@ -13,7 +17,7 @@ This document is a walkthrough of how to assemble and use a single-module pipeli
 
 Let's first instantiate a single-module [`parser`](../../modules/support_function_modules/parser_module.md) pipeline.
 
-We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`parser`](../../modules/support_function_modules/parser_module.md) module name into `module_chain`.
+We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`parser`](../../modules/support_function_modules/parser_module.md) module name into `module_chain`.
 
 
 ```python
@@ -45,7 +49,7 @@ with open(data_dir + "input/1984_very_short.txt", "r") as file:
 
 Let's process our test input file using the [`parser`](../../modules/support_function_modules/parser_module.md) module's [default model](../../modules/support_function_modules/parser_module.md#available-models-in-the-parser-module): [`sentence`](https://www.nltk.org/api/nltk.tokenize.html).
 
-Given that this is the default model, we need not specify model selection through the optional [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+Given that this is the default model, we need not specify model selection through the optional [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 
 ```python
@@ -59,7 +63,7 @@ process_output = pipeline.process(
 )  # do not display process update printouts upon running code
 ```
 
-The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+The output of this process is printed below. To learn more about each component of the output, review documentation for the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 Because the output of this particular module-model pair is a JSON file, the process output is provided in this object as well (this is only the case for JSON outputs).  Moreover, the output file itself has been saved to the location noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 
@@ -131,7 +135,7 @@ with open(process_output["process_output_files"][0]) as f:
 
 ### Using a Non-Default Model
 
-To use a [non-default model](../../modules/support_function_modules/parser_module.md#available-models-in-the-parser-module) like `fixed`, we must enter it explicitly through the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method. Note that if you don't explicitly define parameters for the `fixed` model (for it is parameterizable) default values will be used instead.
+To use a [non-default model](../../modules/support_function_modules/parser_module.md#available-models-in-the-parser-module) like `fixed`, we must enter it explicitly through the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method. Note that if you don't explicitly define parameters for the `fixed` model (for it is parameterizable) default values will be used instead.
 
 
 ```python

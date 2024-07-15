@@ -26,7 +26,7 @@ First we'll need to create a pipeline. We can use a single-module pipeline with 
 
 
 ```python
-# create a pipeline with a single parser module
+# create a pipeline with a single keyword-db module
 pipeline = krixik.create_pipeline(name="process_status_method_1_keyword-db", module_chain=["keyword-db"])
 ```
 
@@ -62,7 +62,7 @@ print(json.dumps(process_output, indent=2))
     }
 
 
-That's all you see because you retook control of the IDE as soon as the upload to Krixik was completed; the `process_output_1` variable doesn't know how the rest of the process went.
+That's all you see because you retook control of the IDE as soon as the upload to Krixik was completed; the `process_output` variable doesn't know how the rest of the process went.
 
 You can check the status of the process by feeding the `request_id` (returned when you called the [`process`](process_method.md) method) to the `process_status` method, as follows:
 

@@ -22,13 +22,13 @@ Then load them with [python-dotenv](https://pypi.org/project/python-dotenv/) as 
 
 
 ```python
-# load your secrets from aN .env file using python-dotenv
+# load your secrets from an .env file using python-dotenv
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
-MY_API_KEY = os.getenv("MY_API_KEY")
-MY_API_URL = os.getenv("MY_API_URL")
+MY_API_KEY = os.getenv("DEMO_API_KEY")
+MY_API_URL = os.getenv("DEMO_API_URL")
 ```
 
 Your secrets loaded, you can now import Krixik and initialize/authenticate to begin your session.

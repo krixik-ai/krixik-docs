@@ -2,7 +2,9 @@
 
 ## Multi-Module Pipeline: Keyword-Searchable Image Captions
 
-This document details a modular pipeline that takes in an image, generates a [`textual caption`](../../modules/ai_modules/caption_module.md) of it, and makes the caption [`keyword searchable`](../../system/search_methods/keyword_search_method.md).
+This document details a multi-modular pipeline that takes in an image, generates a [`textual caption`](../../modules/ai_modules/caption_module.md) of it, and makes the caption [`keyword searchable`](../../system/search_methods/keyword_search_method.md).
+
+A pipeline that can caption images and create keyword searches based on these captions enables efficient image categorization, retrieval, and content organization, enhancing accessibility and searchability of visual information.  Applications of such pipelines could include image libraries, e-commerce platforms, and educational resources, facilitating quicker access to relevant images and improving user navigation and discovery experiences.
 
 The document is divided into the following sections:
 
@@ -20,7 +22,7 @@ To achieve what we've described above, let's set up a pipeline sequentially cons
 
 - A [`keyword-db`](../../modules/database_modules/keyword-db_module.md) module.
 
-We do this by leveraging the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
+We do this by leveraging the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
 
 
 ```python
@@ -49,7 +51,7 @@ Image(filename=data_dir + "input/restaurant.png")
 
 
 
-We will use the default models for every module in the pipeline, so the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method doesn't need to be leveraged.
+We will use the default models for every module in the pipeline, so the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method doesn't need to be leveraged.
 
 
 ```python
@@ -63,7 +65,7 @@ process_output = pipeline.process(
 )  # do not display process update printouts upon running code
 ```
 
-The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+The output of this process is printed below. To learn more about each component of the output, review documentation for the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 Because the output of this particular module-model pair is a `SQLlite` database file, `process_output` is "null". However, the output file has been saved to the location noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 
@@ -89,9 +91,9 @@ print(json.dumps(process_output, indent=2))
 
 ### Performing Keyword Search
 
-Krixik's [`.keyword_search`](../../system/search_methods/keyword_search_method.md) method enables keyword search on documents processed through pipelines that end with the [`keyword-db`](../../modules/database_modules/keyword-db_module.md) module.
+Krixik's [`keyword_search`](../../system/search_methods/keyword_search_method.md) method enables keyword search on documents processed through pipelines that end with the [`keyword-db`](../../modules/database_modules/keyword-db_module.md) module.
 
-Since our pipeline satisfies this condition, it has access to the [`.keyword_search`](../../system/search_methods/keyword_search_method.md) method. Let's use it to query our text for a few keywords, as below:
+Since our pipeline satisfies this condition, it has access to the [`keyword_search`](../../system/search_methods/keyword_search_method.md) method. Let's use it to query our text for a few keywords, as below:
 
 
 ```python

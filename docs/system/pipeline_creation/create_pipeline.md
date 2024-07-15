@@ -33,7 +33,7 @@ Note that the `name` argument can be whatever string you want it to be. However,
 
 ### A Multi-Module Pipeline
 
-Now let's set up a pipeline sequentially consisting of three modules: a [`parser module`](../../modules/support_function_modules/parser_module.md), a [`text-embedder module`](../../modules/ai_modules/text-embedder_module.md), and a [`vector-db module`](../../modules/database_modules/vector-db_module.md).  This popular `module_chain` arises often: it's the basic document-based semantic (a.k.a. vector) search [pipeline](../../examples/search_pipeline_examples/multi_basic_semantic_search.md).
+Now let's set up a pipeline sequentially consisting of three modules: a [`parser`](../../modules/support_function_modules/parser_module.md) module, a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module, and a [`vector-db`](../../modules/database_modules/vector-db_module.md) module.  This popular `module_chain` arises often: it's the basic document-based semantic (a.k.a. vector) search [pipeline](../../examples/search_pipeline_examples/multi_basic_semantic_search.md).
 
 As you can see, pipeline setup syntax is the same as above. The order of the modules in `module_chain` is the the order they'll process pipeline input in:
 
@@ -49,7 +49,7 @@ An array of multi-module pipeline examples can be [found here](../../examples/pi
 
 Upon `create_pipeline` execution the Krixik CLI confirms that the modules indicated will run properly in the provided sequence. If they cannot—which is generally a consequence of one module's output not matching the next module's input—an explanatory local exception is thrown.
 
-For example, attempting to build a two-module pipeline that sequentially consists of a [`parser module`](../../modules/support_function_modules/parser_module.md) and a [`caption module`](../../modules/ai_modules/caption_module.md) modules will rightly fail and produce a local exception.  This is because the [`parser module`](../../modules/support_function_modules/parser_module.md) outputs a JSON file, while the [`caption module`](../../modules/ai_modules/caption_module.md) accepts only image input, as the error message below indicates:
+For example, attempting to build a two-module pipeline that sequentially consists of a [`parser`](../../modules/support_function_modules/parser_module.md) module and a [`caption`](../../modules/ai_modules/caption_module.md) module will rightly fail and produce a local exception.  This is because the [`parser`](../../modules/support_function_modules/parser_module.md) module outputs a JSON file, while the [`caption`](../../modules/ai_modules/caption_module.md) module accepts only image input, as the error message below indicates:
 
 
 ```python

@@ -10,6 +10,8 @@ In this section we take a deeper look at the methods and underlying concepts of 
 
 ### Pipeline Creation
 
+- [Components of a Krixik Pipeline](pipeline_creation/components_of_a_krixik_pipeline.md)
+
 - [Creating a Pipeline](pipeline_creation/create_pipeline.md)
 
 - [Pipeline `.config`](pipeline_creation/pipeline_config.md)
@@ -24,13 +26,13 @@ In this section we take a deeper look at the methods and underlying concepts of 
 
 - [The `process_status` Method](parameters_processing_files_through_pipelines/process_status_method.md)
 
-- [The `.fetch_output` Method](parameters_processing_files_through_pipelines/fetch_output_method.md)
+- [The `fetch_output` Method](parameters_processing_files_through_pipelines/fetch_output_method.md)
 
 - [Data Deletion Policy](parameters_processing_files_through_pipelines/data_deletion_policy.md)
 
 ### The File System
 
-- [The `process` Method](file_system/list_method.md)
+- [The `list` Method](file_system/list_method.md)
 
 - [The `update` Method](file_system/update_method.md)
 
@@ -40,9 +42,9 @@ In this section we take a deeper look at the methods and underlying concepts of 
 
 ### Search Methods
 
-- [The `.semantic_search` Method](search_methods/semantic_search_method.md)
+- [The `semantic_search` Method](search_methods/semantic_search_method.md)
 
-- [The `.keyword_search` Method](search_methods/keyword_search_method.md)
+- [The `keyword_search` Method](search_methods/keyword_search_method.md)
 
 ### Convenience Methods and More
 

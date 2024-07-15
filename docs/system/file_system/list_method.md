@@ -34,7 +34,7 @@ For a refresher on file system metadata arguments please visit the [`process` me
 
 - `symbolic_file_paths`: A list of one or several `symbolic_file_path`s to return records for.
 
-- `file_tags`: A list of one or several `file_tag`s to return records for. Note that individual file_tags suffice; if a file has several file tags and you include at least one of them as a `list` argument, that file's record will be returned.
+- `file_tags`: A list of one or several `file_tags` to return records for. Note that individual `file_tags` suffice; if a file has several file tags and you include at least one of them as a `list` argument, that file's record will be returned.
 
 You may use wildcard operators with `file_names`, `symbolic_directory_paths`,`symbolic_file_paths`, and `file_tags` to retrieve records whose exact metadata you don't remember—or if you wish to retrieve records for a group of files that share similar metadata. More on wildcards operators [later](#wildcard-operator-arguments) in this document.
 
@@ -60,7 +60,7 @@ Finally, the `list` method takes two additional optional arguments to help you o
 
 ### Example Pipeline Setup and File Processing
 
-We will need to create a pipeline and [`process`](../parameters_processing_files_through_pipelines/process_method.md) a couple of files through it to illustrate usage of `list`. We'll create a single-module pipeline with a [`parser`](../../modules/support_function_modules/parser_module.md) module and [`process`](../parameters_processing_files_through_pipelines/process_method.md) some TXT files that hold the text of some English-language classics.  We define optional metadata like file_name, file_tags, and symbolic_directory_path for each process to illustrate how each can be used with `list` below.
+We will need to create a pipeline and [`process`](../parameters_processing_files_through_pipelines/process_method.md) a couple of files through it to illustrate usage of `list`. We'll create a single-module pipeline with a [`parser`](../../modules/support_function_modules/parser_module.md) module and [`process`](../parameters_processing_files_through_pipelines/process_method.md) some TXT files that hold the text of some English-language classics.  We define optional metadata like `file_name`, `file_tags`, and `symbolic_directory_path` for each process to illustrate how each can be used with `list` below.
 
 
 ```python
@@ -101,7 +101,7 @@ for entry in entries:
         local_file_path=entry["local_file_path"],  # the initial local filepath where the input file is stored
         local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
         expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-        wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
+        wait_for_process=True,  # wait for process to complete before returning IDE control to user
         verbose=False,  # do not display process update printouts upon running code
         file_name=entry["file_name"],
         symbolic_directory_path=entry["symbolic_directory_path"],
@@ -236,7 +236,7 @@ print(json.dumps(all_process_output[-1], indent=2))
 
 Let's try listing by `file_ids`.
 
-You have the `file_id` of each of the four files you processed; each was returned after processing finalized.  
+You have the `file_id` of each of the three files you processed; each was returned after processing finalized.  
 
 You can list by multiple `file_id`s if you so choose by providing a list of desired `file_ids`.
 
@@ -244,7 +244,7 @@ For example, to see metadata associated with each file processed above simply pl
 
 
 ```python
-# list records for two of the uploaded files via file_ids
+# list records for three of the uploaded files via file_ids
 list_output = pipeline.list(file_ids=[v["file_id"] for v in all_process_output])
 
 # nicely print the output of this process
@@ -565,7 +565,7 @@ We can also list through `file_tags`.  We'll list for 19th century novels and an
 
 
 ```python
-# list records for two of the uploaded files via symbolic_directory_paths
+# list records for three of the uploaded files via symbolic_directory_paths
 list_output = pipeline.list(file_tags=[{"author": "Melville"}, {"century": "19"}])
 
 # nicely print the output of this process
@@ -705,7 +705,7 @@ print(json.dumps(list_output, indent=2))
     }
 
 
-Given that every file included the file tag `{"century": 19}` when initially processed, all four files were listed. <u>Little Women</u> also included the file tag `{"author": "Melville"}`, but there's no duplication of results, so that file's record is only listed once.
+Given that every file included the file tag `{"century": 19}` when initially processed, all three files were listed. <u>Little Women</u> also included the file tag `{"author": "Melville"}`, but there's no duplication of results, so that file's record is only listed once.
 
 ### Listing by `created_at` and `updated_at` Bookend Times
 
@@ -723,7 +723,7 @@ process_output = pipeline.process(
     local_file_path=data_dir + "input/1984_very_short.txt",  # the initial local filepath where the input JSON file is stored
     local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
-    wait_for_process=True,  # do not wait for process to complete before returning IDE control to user
+    wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,  # do not display process update printouts upon running code
     symbolic_directory_path="/novels/dystopian",
     file_name="1984.txt",
@@ -733,7 +733,7 @@ process_output = pipeline.process(
 
 Listing by timestamp bookends is as straightforward as doing it by file system metadata. The following example only uses one type of bookend—`last_updated_start`—but all of them work the same way.
 
-Based on the output from the file we just processed and the output from the four earlier files, we'll choose a time/date that falls in the middle of all five `last_updated` timestamps:
+Based on the output from the file we just processed and the output from the three earlier files, we'll choose a time/date that falls in the middle of all five `last_updated` timestamps:
 
 
 ```python
@@ -821,7 +821,7 @@ Note that you don't necessarily have to attach full words to the wildcard operat
 
 For `file_tags` a wildcard may be used for as the value in a key-value pair dictionary. This will return all records with the corresponding key.
 
-- Example * in file_tags: `{"invoice_type": "*"}`
+- Example * in `file_tags`: `{"invoice_type": "*"}`
 
 Let's dig into `list` method examples for each of these. First a prefix wildcard in `file_names`:
 
@@ -1104,13 +1104,13 @@ print(json.dumps(list_output, indent=2))
     }
 
 
-The above will return records for every file that has a file_tag whose key is "author", regardless of the value.
+The above will return records for every file that has a `file_tag` whose key is "author", regardless of the value.
 
-You can also use the wildcard operator with the [`.show_tree`](show_tree_method.md) method, the [`.semantic_search`](../search_methods/semantic_search_method.md) method, and the [`.keyword_search`](../search_methods/keyword_search_method.md) method.
+You can also use the wildcard operator with the [`show_tree`](show_tree_method.md) method, the [`semantic_search`](../search_methods/semantic_search_method.md) method, and the [`keyword_search`](../search_methods/keyword_search_method.md) method.
 
 ### The Global Root
 
-As you might have surmised, there is one very special use of the wildcard operator on `symbolic_directory_path`s: we call it "the global root". It's leveraged by placing a wildcard operator * right after the root slash, and having nothing else, as follows:
+As you might have surmised, there is one very special use of the wildcard operator on `symbolic_directory_paths`: we call it "the global root". It's leveraged by placing a wildcard operator * right after the root slash, and having nothing else, as follows:
 
 ```python
 # example line of code with the global root

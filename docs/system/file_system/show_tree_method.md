@@ -14,11 +14,11 @@ This overview of the `show_tree` method is divided into the following sections:
 
 The `show_tree` method takes a single (required) argument:
 
-- `symbolic_directory_path` (str) - The `file_id` of the processed file whose record you wish to entirely delete from the Krixik system.
+- `symbolic_directory_path` (str) - The `symbolic_directory_path` whose contents you wish to display. If the [wildcard operator](#the-wildcard-operator-and-the-global-root) is leveraged, this `symbolic_directory_path` will become the root(s) of the outputted tree, and all files at the root(s) or beneath will be displayed.
 
 ### `show_tree` Method Example
 
-For this document's example we will use a pipeline consisting of a single [`parser`](../../modules/support_function_modules/parser_module.md) module.  We use the [`.create_pipeline`](../pipeline_creation/create_pipeline.md) method to instantiate the pipeline, and then [`process`](../parameters_processing_files_through_pipelines/process_method.md) a few files through it. Note the `symbolic_directory_path` structure we create:
+For this document's example we will use a pipeline consisting of a single [`parser`](../../modules/support_function_modules/parser_module.md) module.  We use the [`create_pipeline`](../pipeline_creation/create_pipeline.md) method to instantiate the pipeline, and then [`process`](../parameters_processing_files_through_pipelines/process_method.md) a few files through it. Note the `symbolic_directory_path` structure we create:
 
 
 ```python
@@ -92,12 +92,12 @@ The wildcard operator * can be used as a suffix in the `show_tree` method if you
 
 ```python
 # symbolic_directory_path use of wildcard operator *
-symbolic_directory_path='/home/files/studies'
+symbolic_directory_path='/home/files/studies*'
 ```
 
 Using this `symbolic_directory_path` in `show_tree` would generate a visualization of the directory structure under `/home/files/studies`.
 
-The maxium expression of using the wildcard operator in a `symbolic_directory_path` is what we call "the global root". It's simply a forward slash and a wildcard operator *, includes every single file in your pipeline, and looks like this:
+The maximum expression of using the wildcard operator in a `symbolic_directory_path` is what we call "the global root". It's simply a forward slash and a wildcard operator *, includes every single file in your pipeline, and looks like this:
 
 ```python
 # example of the global root

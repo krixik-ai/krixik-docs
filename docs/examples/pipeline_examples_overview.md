@@ -30,7 +30,7 @@ Then we delve into a few examples of multi-module pipelines, which is where the 
 
 - [JSON to TXT](single_module_pipelines/single_json-to-txt.md)
 
-### Multi-Module Pipelines (non-search)
+###  Multi-step conversion pipeline examples
 
 - [Recursive Summarization](multi_module_non_search_pipeline_examples/multi_recursive_summarization.md): Chains multiple text [`summarize`](../modules/ai_modules/summarize_module.md) modules together. The longer the module chain, the greater the degree of summarization.
 
@@ -42,7 +42,7 @@ Then we delve into a few examples of multi-module pipelines, which is where the 
 
 - [Sentiment Analysis on Translated Transcription](multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_translated_transcription.md): After first [`transcribing`](../modules/ai_modules/transcribe_module.md) an input audio file and then [`translating`](../modules/ai_modules/translate_module.md) the transcript into English, performs [`sentiment analysis`](../modules/ai_modules/sentiment_module.md) on each sentence of the translation.
 
-### Multi-Module Search Pipelines
+### multi-step search and RAG pipeline examples
 
 - [Search Pipeline Overview](search_pipeline_examples/search_pipelines_overview.md): Search pipelines call for the use of one of two additional methods. Read about it here.
 

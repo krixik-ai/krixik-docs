@@ -1,10 +1,10 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/pipeline_creation/pipeline_config.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
-## Pipeline `.config`
+## Pipeline `config`
 
-The `.config` method allows you to view a pipeline's configuration. For each module in the pipeline it displays acceptable input formats, output formats, models available, and any parameters of the available models.  In other words, a pipeline's configuration is its complete "under the hood" description.
+The `config` method allows you to view a pipeline's configuration. For each module in the pipeline it displays acceptable input formats, output formats, models available, and any parameters of the available models.  In other words, a pipeline's configuration is its complete "under the hood" description.
 
-Using the `.config` method is very simple. First let's create a pipeline to try it on:
+Using the `config` method is very simple. First let's create a pipeline to try it on:
 
 
 ```python
@@ -12,7 +12,7 @@ Using the `.config` method is very simple. First let's create a pipeline to try 
 pipeline = krixik.create_pipeline(name="pipeline_config_1_parser_translate_sentiment", module_chain=["translate", "sentiment"])
 ```
 
-Now let's view this pipeline's configuration with the `.config` method:
+Now let's view this pipeline's configuration with the `config` method:
 
 
 ```python
@@ -46,4 +46,4 @@ pipeline.config
 
 
 
-As you can see, the `.config` method has provided all relevant details for this pipeline's modules, which are a [`translate module`](../../modules/ai_modules/translate_module.md) and a [`sentiment module`](../../modules/ai_modules/sentiment_module.md). A blueprint of sorts has been displayed.
+As you can see, the `config` method has provided all relevant details for this pipeline's modules, which are a [`translate`](../../modules/ai_modules/translate_module.md) module and a [`sentiment`](../../modules/ai_modules/sentiment_module.md) module. A blueprint of sorts has been displayed.

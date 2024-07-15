@@ -31,7 +31,7 @@ The `process` method takes five basic arguments (in addition to the `modules` ar
 
 ### Basic Usage and Output Breakdown
 
-Let's first create a single-module pipeline to demonstrate the `process` method with. We'll use a [`sentiment module`](../../modules/ai_modules/sentiment_module.md).
+Let's first create a single-module pipeline to demonstrate the `process` method with. We'll use a [`sentiment`](../../modules/ai_modules/sentiment_module.md) module.
 
 
 ```python
@@ -170,7 +170,7 @@ modules={'<model name>': {'model':'<model selection>', 'params': <dictionary of 
 
 Bear in mind that model names are case sensitive.
 
-An example for a single-module pipeline that holds a [`caption module`](../../modules/ai_modules/caption_module.md) would specifically look like this, `blip-image-captioning-base` being the available model selected:
+An example for a single-module pipeline that holds a [`caption`](../../modules/ai_modules/caption_module.md) module would specifically look like this, `blip-image-captioning-base` being the available model selected:
 
 ```python
 modules={'caption': {'model':'blip-image-captioning-base', 'params': {}}}

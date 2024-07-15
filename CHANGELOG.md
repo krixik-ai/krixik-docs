@@ -11,8 +11,6 @@ TOC rearrangement, subsection re-naming, context added to example tops.
 - ToC re-organized making examples primary
 - Example naming conventions updated to reflect more common jargon
 - OCR single example data input updated
-- 
-
 
 
 

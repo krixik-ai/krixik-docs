@@ -7,6 +7,7 @@ This overview of the `ocr` module is divided into the following sections:
 - [Inputs and Outputs of the `ocr` Module](#inputs-and-outputs-of-the-ocr-module)
 - [Available Models in the `ocr` Module](#available-models-in-the-ocr-module)
 - [Model Parameters in the `ocr` Module](#model-parameters-in-the-ocr-module)
+- [Input File Size Limit](#input-file-size-limit)
 - [A Single-Module Pipeline for the `ocr` Module](#a-single-module-pipeline-for-the-ocr-module)
 - [Further Information on `ocr` Module IO and Clickability](#further-information-on-ocr-module-io-and-clickability)
 
@@ -26,21 +27,25 @@ The `ocr` module returns a JSON file. The JSON file holds all identified text an
 
 You can activate any of the following models when using the `ocr` module:
 
-- [tesseract-en](https://github.com/tesseract-ocr/tesseract) - (default) English
+- [tesseract-en](https://github.com/tesseract-ocr/tesseract) - (default) [English]
 
-- [tesseract-es](https://github.com/tesseract-ocr/tesseract) - Spanish
+- [tesseract-es](https://github.com/tesseract-ocr/tesseract) - [Spanish]
 
-Use the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method to determine what model you'd like active when you process files through the `ocr` module.
+Use the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method to determine what model you'd like active when you process files through the `ocr` module.
 
 ### Model Parameters in the `ocr` Module
 
-None of the `ocr` module models are parameterizable. Consequently, when selecting what model you'll use through the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method's [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument, `params` will always be set to an empty dictionary. For example:
+None of the `ocr` module models are parameterizable. Consequently, when selecting what model you'll use through the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method's [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument, `params` will always be set to an empty dictionary. For example:
 
 ```python
 # example model selection for ocr module in .process
 modules={'ocr': {'model':'tesseract-es',
                  'params': {}}}
 ```
+
+### Input File Size Limit
+
+`ocr` module input image files can currently be no larger than 5MB.
 
 ### A Single-Module Pipeline for the `ocr` Module
 
@@ -52,4 +57,4 @@ Please click [here](../../system/convenience_methods/convenience_methods.md) to 
 
 - [View Module Input and Output Examples](../../system/convenience_methods/convenience_methods.md#view-module-input-and-output-examples)
 
-- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-click_data-method)
+- [View Module Click Data with the `click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-click_data-method)
