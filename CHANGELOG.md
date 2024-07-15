@@ -1,6 +1,24 @@
 # Change Log
 All notable changes to this project will be documented in this file.
  
+
+## 2024-07-13
+
+TOC rearrangement, subsection re-naming, context added to example tops.
+
+### Changed
+
+- ToC re-organized making examples primary
+- Example naming conventions updated to reflect more common jargon
+- OCR single example data input updated
+
+
+
+## 2024-07-13
+
+???
+
+
 ## 2024-07-11
 
 Link check test updated to deal with "?" symbols in intra doc links.

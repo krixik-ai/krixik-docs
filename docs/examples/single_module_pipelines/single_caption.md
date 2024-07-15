@@ -2,7 +2,11 @@
 
 ## Single-Module Pipeline: `caption`
 
-This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`caption`](../../modules/ai_modules/caption_module.md) module. It's divided into the following sections:
+This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`caption`](../../modules/ai_modules/caption_module.md) module. 
+
+Image captioning is a machine learning process that automatically generates natural language descriptions of images, allowing users to understand the content of an image in a textual format.  Image captioning has various applications in enhancing accessibility for visually impaired individuals, improving image search engines, and aiding in automated content creation and social media management.
+
+This document is divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)
@@ -13,7 +17,7 @@ This document is a walkthrough of how to assemble and use a single-module pipeli
 
 Let's first instantiate a single-module [`caption`](../../modules/ai_modules/caption_module.md) pipeline.
 
-We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`caption`](../../modules/ai_modules/caption_module.md) module name into `module_chain`.
+We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`caption`](../../modules/ai_modules/caption_module.md) module name into `module_chain`.
 
 
 ```python

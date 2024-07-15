@@ -11,6 +11,7 @@ This overview of the `text-embedder` module is divided into the following sectio
 - [Inputs and Outputs of the `text-embedder` Module](#inputs-and-outputs-of-the-text-embedder-module)
 - [Available Models in the `text-embedder` Module](#available-models-in-the-text-embedder-module)
 - [Model Parameters in the `text-embedder` Module](#model-parameters-in-the-text-embedder-module)
+- [Input File Size Limit](#input-file-size-limit)
 - [A Single-Module Pipeline for the `text-embedder` Module](#a-single-module-pipeline-for-the-text-embedder-module)
 - [Further Information on `text-embedder` Module IO and Clickability](#further-information-on-text-embedder-module-io-and-clickability)
 
@@ -55,15 +56,15 @@ with open(test_file, "r") as file:
 
 You can activate any of the following models when using the `text-embedder` module:
 
-- [all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) (default)
+- [all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) (default) [English]
 
-- [all-mpnet-base-v2](https://huggingface.co/sentence-transformers/all-mpnet-base-v2)
+- [all-mpnet-base-v2](https://huggingface.co/sentence-transformers/all-mpnet-base-v2) [English]
 
-- [all-MiniLM-L12-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2)
+- [all-MiniLM-L12-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2) [English]
 
-- [multi-qa-MiniLM-L6-cos-v1](https://huggingface.co/sentence-transformers/multi-qa-MiniLM-L6-cos-v1)
+- [multi-qa-MiniLM-L6-cos-v1](https://huggingface.co/sentence-transformers/multi-qa-MiniLM-L6-cos-v1) [English]
 
-- [msmarco-distilbert-dot-v5](https://huggingface.co/sentence-transformers/msmarco-distilbert-dot-v5)
+- [msmarco-distilbert-dot-v5](https://huggingface.co/sentence-transformers/msmarco-distilbert-dot-v5) [English]
 
 Use the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method to determine what model you'd like active when you process files through the `text-embedder` module.
 
@@ -81,6 +82,10 @@ modules={'text-embedder': {"model": "all-mpnet-base-v2",
                            "params": {"quantize": False}}}
 ```
 
+### Input File Size Limit
+
+`text-embedder` module input JSON files can currently be no larger than 3MB.
+
 ### A Single-Module Pipeline for the `text-embedder` Module
 
 Please click [here](../../examples/single_module_pipelines/single_text-embedder.md) to visit the `Pipeline Examples` section of our documentation and review an example of a single-module pipeline for the `text-embedder` module.
@@ -93,4 +98,4 @@ Please click [here](../../system/convenience_methods/convenience_methods.md) to 
 
 - [View Module Input and Output Examples](../../system/convenience_methods/convenience_methods.md#view-module-input-and-output-examples)
 
-- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-click_data-method)
+- [View Module Click Data with the `click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-click_data-method)

@@ -63,18 +63,18 @@ pipeline = krixik.create_pipeline(name='my_transcribe-pipeline-1',
                                   module_chain=["transcribe"])
 ```
 
-The pipeline is ready! Now you can [process](https://krixik-docs.readthedocs.io/latest/system/parameters_processing_files_through_pipelines/process_method/) audio and video files through it to generate transcripts of them.
+The pipeline is ready! Now you can [process](https://krixik-docs.readthedocs.io/latest/system/parameters_processing_files_through_pipelines/process_method/) audio files through it to generate transcripts of them.
 
 ```python
-pipeline.process(local_file_path='./path/to/my/mp3/or/mp4')
+pipeline.process(local_file_path='./path/to/my/mp3')
 ```
 
-The outputs of [this pipeline](https://krixik-docs.readthedocs.io/latest/examples/single_module_pipelines/single_transcribe/) will be a timestamped transcript of your input audio/video file, a `file_id` for the processed file, and a `request_id` for the process itself.
+The outputs of [this pipeline](https://krixik-docs.readthedocs.io/latest/examples/single_module_pipelines/single_transcribe/) will be a timestamped transcript of your input audio file, a `file_id` for the processed file, and a `request_id` for the process itself.
 
 
 ### Extending your Pipeline
 
-[Suppose you wanted to immediately perform vector search on `transcribe` module output.](https://krixik-docs.readthedocs.io/latest/examples/search_pipeline_examples/multi_semantically_searchable_transcription/)
+[Suppose you wanted to perform vector search on `transcribe` module output.](https://krixik-docs.readthedocs.io/latest/examples/search_pipeline_examples/multi_semantically_searchable_transcription/)
 
 You would need to do the following after transcription:
 
@@ -102,10 +102,10 @@ pipeline = krixik.create_pipeline(name='transcribe_vsearch',
 Let's [process](https://krixik-docs.readthedocs.io/latest/system/parameters_processing_files_through_pipelines/process_method/) a file through your new pipeline.
 
 ```python
-pipeline.process(local_file_path='./path/to/my/mp3/or/mp4')
+pipeline.process(local_file_path='./path/to/my/mp3')
 ```
 
-Now that there is at least one file in [the pipeline](https://krixik-docs.readthedocs.io/latest/examples/search_pipeline_examples/multi_semantically_searchable_transcription/), you can use the file's `file_id`—which was returned at the end of the above process—to perform semantic search on the associated transcript with [`.semantic_search`](https://krixik-docs.readthedocs.io/latest/system/search_methods/semantic_search_method/):
+Now that there is at least one file in [the pipeline](https://krixik-docs.readthedocs.io/latest/examples/search_pipeline_examples/multi_semantically_searchable_transcription/), you can use the file's `file_id`—which was returned at the end of the above process—to perform semantic search on the associated transcript with the [`semantic_search`](https://krixik-docs.readthedocs.io/latest/system/search_methods/semantic_search_method/) method:
 
 ```python
 pipeline.semantic_search(query="The text you wish to semantically search for goes here",
@@ -126,12 +126,12 @@ The [range of examples](https://krixik-docs.readthedocs.io/latest/examples/pipel
 
 - ...generate an image caption for a set of images and then perform keyword search on the caption set.
   - [Pipeline: [Caption → JSON-to-TXT → Keyword Database]](https://krixik-docs.readthedocs.io/latest/examples/search_pipeline_examples/multi_keyword_searchable_image_captions/)
-- ...transcribe a trove of documents, translate them to English, and then run sentiment analysis on each one.
+- ...transcribe a trove of audio files, translate them to English, and then run sentiment analysis on each one.
   - [Pipeline: [Transcribe → Translate → JSON-to-TXT → Parser → Sentiment Analysis]](https://krixik-docs.readthedocs.io/latest/examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_translated_transcription/)
 - ...easily and serverlessly consume your open-source OCR model of choice.
   - [Pipeline: [OCR]](https://krixik-docs.readthedocs.io/latest/examples/single_module_pipelines/single_ocr/)
 
-This is only the tip of the iceberg. Many more pipelines are currently possible ([see here for more examples](https://krixik-docs.readthedocs.io/latest/examples/pipeline_examples_overview/)), and the Krixik module/model library will constantly be expanding—perhaps even to include modules/models [of your own submission](https://krixik-docs.readthedocs.io/latest/modules/adding_your_own_modules_or_models/).
+This is only the tip of the iceberg. Many more pipelines are currently possible ([see here for more examples](https://krixik-docs.readthedocs.io/latest/examples/pipeline_examples_overview/)), and the Krixik module/model library will constantly be expanding—perhaps even to include modules and models [of your own submission](https://krixik-docs.readthedocs.io/latest/modules/adding_your_own_modules_or_models/).
 
 ## Further Detail - Documentation
 

@@ -7,7 +7,7 @@ This document introduces several useful properties of the main Krixik object and
 The document is broken down as follows:
 
 - [View All Available Modules with the `available_modules` Property](#view-all-available-modules-with-the-available_modules-property)
-- [Examine Configuration of a Module with the `module_details` method](#examine-configuration-of-a-module-with-the-module_details-method)
+- [Examine Configuration of a Module with the `module_details` Method](#examine-configuration-of-a-module-with-the-module_details-method)
 - [View Pipeline Module Chain with the `module_chain` Property](#view-pipeline-module-chain-with-the-module_chain-property)
 - [Test Pipeline Input with the `test_input` Method](#test-pipeline-input-with-the-test_input-method)
 - [View Module Input and Output Examples](#view-module-input-and-output-examples)
@@ -253,9 +253,9 @@ Here `"other"` denotes any other key in your input.  Its value is arbitrary beca
 
 ### View Module Click Data with the `click_data` Method
 
-The `.click_data` method displays all the basic data required to know which modules can be "clicked" into which other modules.  This is the data referenced "under the hood" of Krixik when you build a pipeline with the [`.create_pipeline`](../pipeline_creation/create_pipeline.md) method. Let's go through this piece by piece.
+The `click_data` method displays all the basic data required to know which modules can be "clicked" into which other modules.  This is the data referenced "under the hood" of Krixik when you build a pipeline with the [`create_pipeline`](../pipeline_creation/create_pipeline.md) method. Let's go through this piece by piece.
 
-First there's the module's input/output data format. A module like [`transcribe`](../../modules/ai_modules/transcribe_module.md) takes in `audio/video` and outputs `JSON`, while the [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module takes in `JSON` and outputs `NPY`.  
+First there's the module's input/output data format. A module like [`transcribe`](../../modules/ai_modules/transcribe_module.md) takes in audio and outputs `JSON`, while the [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module takes in `JSON` and outputs `NPY`.  
 
 Checking that the *output* format of a module matches the *input* format of another module is the *first* of two steps in determining if two modules can sequentially be clicked together. If the output format of "Module A"  matches the input format of "Module B", you'll likely be able to connect "Module A" → "Module B" in a pipeline. It's not a sure thing yet, though.
 

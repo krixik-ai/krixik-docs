@@ -12,7 +12,7 @@ This document is a walkthrough of how to assemble and use a single-module pipeli
 
 Let's first instantiate a single-module [`json-to-txt`](../../modules/support_function_modules/json-to-txt_module.md) pipeline.
 
-We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`json-to-txt`](../../modules/support_function_modules/json-to-txt_module.md) module name into `module_chain`.
+We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`json-to-txt`](../../modules/support_function_modules/json-to-txt_module.md) module name into `module_chain`.
 
 
 ```python

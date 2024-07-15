@@ -2,7 +2,11 @@
 
 ## Single-Module Pipeline: `ocr`
 
-This document is a walkthrough of how to assemble and use a single-module pipeline that only includes an [`ocr`](../../modules/ai_modules/ocr_module.md) module. It's divided into the following sections:
+This document is a walkthrough of how to assemble and use a single-module pipeline that only includes an [`ocr`](../../modules/ai_modules/ocr_module.md) module. 
+
+Optical Character Recognition (OCR) is a technology that converts different types of documents, such as scanned paper documents, PDFs, or images captured by a digital camera, into editable and searchable data. OCR applications include digitizing printed texts for archival, automating data entry processes, enabling text-to-speech for accessibility, and extracting information for machine learning and data analytics.
+
+The remainder of this document divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)
@@ -29,10 +33,10 @@ Let's take a quick look at a valid input file, and then process it.
 
 
 ```python
-# examine the contents of a valid input file
+# examine the contents of a valid input file, this example taken from --> https://venngage.com/templates/menus/yellow-burger-takeout-menu-70bd168b-7813-44d4-9581-c7b6ab1c0f67
 from IPython.display import Image
 
-Image(filename=data_dir + "input/seal.png")
+Image(filename=data_dir + "input/menu_1.png")
 ```
 
 
@@ -54,7 +58,7 @@ Given that this is the default model, we need not specify model selection throug
 ```python
 # process the file with the default model
 process_output = pipeline.process(
-    local_file_path=data_dir + "input/seal.png",  # the initial local filepath where the input file is stored
+    local_file_path=data_dir + "input/menu_1.png",  # the initial local filepath where the input file is stored
     local_save_directory=data_dir + "output",  # the local directory that the output file will be saved to
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # wait for process to complete before returning IDE control to user
@@ -68,22 +72,36 @@ Because the output of this particular module-model pair is a JSON file, the proc
 
 
 ```python
-# load in process output from file - here we only print the text detected, and not the detection boxes, since that output is quite long
 print(process_output["process_output"][0]["text"])
 ```
 
-    The Seventh Seal
+    culines
     
-    The night had brought little relief from the heat, and at dawn a hot gust of
-    wind blows across the colorless sea. The KNIGHT, Antonius Block, lies
-    prostrate on some spruce branches spread over the fine sand. His eyes are
-    wide-open and bloodshot from lack of sleep.
+    GOURMET VEGAN CUISINE
     
-    Nearby his squire JONS is snoring loudly. He has fallen asleep where he
-    collapsed, at the edge of the forest among the wind-gnarled fir trees. His
-    open mouth gapes towards the dawn, and unearthly sounds come from his throat.
-    At the sudden gust of wind, the horses stir, stretching their parched muzzles
-    towards the sea. They are as thin and worn as their masters.
+    TAKEOUT MENU
+    
+    BURGERS
+    
+    Classic American Burger, $10.99
+    Hamburger, $9.99
+    Cheesy Burger, $8.50
+    Hawaiian Burger, $11
+    
+    HOTDOGS
+    
+    Classic HotDog, $6
+    Cheesy HotDog, $8.50
+    XL HotDog, $10.99
+    
+    DRINKS
+    
+    Coke, $2.99
+    Juice, $3.50
+    Coffee, $4.50
+    
+    Order here: www.culines.com e 218-237-5684
+    
     
 
 
@@ -96,18 +114,33 @@ with open(process_output["process_output_files"][0]) as f:
     print(json.load(f)[0]["text"])
 ```
 
-    The Seventh Seal
+    culines
     
-    The night had brought little relief from the heat, and at dawn a hot gust of
-    wind blows across the colorless sea. The KNIGHT, Antonius Block, lies
-    prostrate on some spruce branches spread over the fine sand. His eyes are
-    wide-open and bloodshot from lack of sleep.
+    GOURMET VEGAN CUISINE
     
-    Nearby his squire JONS is snoring loudly. He has fallen asleep where he
-    collapsed, at the edge of the forest among the wind-gnarled fir trees. His
-    open mouth gapes towards the dawn, and unearthly sounds come from his throat.
-    At the sudden gust of wind, the horses stir, stretching their parched muzzles
-    towards the sea. They are as thin and worn as their masters.
+    TAKEOUT MENU
+    
+    BURGERS
+    
+    Classic American Burger, $10.99
+    Hamburger, $9.99
+    Cheesy Burger, $8.50
+    Hawaiian Burger, $11
+    
+    HOTDOGS
+    
+    Classic HotDog, $6
+    Cheesy HotDog, $8.50
+    XL HotDog, $10.99
+    
+    DRINKS
+    
+    Coke, $2.99
+    Juice, $3.50
+    Coffee, $4.50
+    
+    Order here: www.culines.com e 218-237-5684
+    
     
 
 
@@ -119,7 +152,7 @@ To use a [non-default model](../../modules/ai_modules/ocr_module.md#available-mo
 ```python
 # process the file with a non-default model
 process_output = pipeline.process(
-    local_file_path=data_dir + "input/seal.png",  # all arguments but modules are the same as above
+    local_file_path=data_dir + "input/menu_1.png",  # all arguments but modules are the same as above
     local_save_directory=data_dir + "output",
     expire_time=60 * 30,
     wait_for_process=True,
@@ -138,17 +171,32 @@ Because the output of this particular module-model pair is a JSON file, the proc
 print(process_output["process_output"][0]["text"])
 ```
 
-    The Seventh Seal
+    culines
     
-    The night had brought little relief from the heat, and at dawn a hot gust of
-    wind blows across the colorless sea. The KNIGHT, Antonius Block, lies
-    prostrate on some spruce branches spread over the fine sand. His eyes are
-    wide-open and bloodshot from lack of sleep.
+    GOURMET VEGAN CUISINE
     
-    Nearby his squire JONS is snoring loudly. He has fallen asleep where he
-    collapsed, at the edge of the forest among the wind-gnarled fir trees. His
-    open mouth gapes towards the dawn, and unearthly sounds come from his throat.
-    At the sudden gust of wind, the horses stir, stretching their parched muzzles
-    towards the sea. They are as thin and worn as their masters.
+    TAKEOUT MENU
+    
+    BURGERS
+    
+    Classic American Burger, $10.99
+    Hamburger, $9.99
+    Cheesy Burger, $8.50
+    Hawaiian Burger, $11
+    
+    HOTDOGS
+    
+    Classic HotDog, $6
+    Cheesy HotDog, $8.50
+    XL HotDog, $10.99
+    
+    DRINKS
+    
+    Coke, $2.99
+    Juice, $3.50
+    Coffee, $4.50
+    
+    Order here: www.culines.com e 218-237-5684
+    
     
 

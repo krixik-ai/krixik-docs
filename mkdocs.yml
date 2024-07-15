@@ -1,5 +1,53 @@
 nav:
   - Home: index.md
+  - Pipeline examples:
+    - 'overview': examples/pipeline_examples_overview.md
+    - single-module pipelines:
+      - 'image caption': examples/single_module_pipelines/single_caption.md
+      - 'ocr (optical character recognition)': examples/single_module_pipelines/single_ocr.md
+      - 'sentiment analysis': examples/single_module_pipelines/single_sentiment.md
+      - 'summarization': examples/single_module_pipelines/single_summarize.md
+      - 'text embedder': examples/single_module_pipelines/single_text-embedder.md
+      - 'text parser': examples/single_module_pipelines/single_parser.md
+      - 'transcription': examples/single_module_pipelines/single_transcribe.md
+      - 'translation': examples/single_module_pipelines/single_translate.md
+      - 'keyword database': examples/single_module_pipelines/single_keyword-db.md
+      - 'vector database': examples/single_module_pipelines/single_vector-db.md
+      - 'json to txt': examples/single_module_pipelines/single_json-to-txt.md
+    - multi-step conversion pipeline examples:
+      - 'recursive summarization': examples/multi_module_non_search_pipeline_examples/multi_recursive_summarization.md
+      - 'translated transcription': examples/multi_module_non_search_pipeline_examples/multi_translated_transcription.md
+      - 'sentiment analysis on transcription': examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_transcription.md
+      - 'sentiment analysis on translation': examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_translation.md
+      - 'sentiment analysis on translated transcription': examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_translated_transcription.md
+    - multi-step search and RAG pipeline examples:
+      - 'overview': examples/search_pipeline_examples/search_pipelines_overview.md
+      - 'semantic search': examples/search_pipeline_examples/multi_basic_semantic_search.md
+      - 'semantic search on snippets': examples/search_pipeline_examples/multi_snippet_semantic_search.md
+      - 'keyword search': examples/search_pipeline_examples/multi_basic_keyword-search.md
+      - 'semantically-searchable transcription': examples/search_pipeline_examples/multi_semantically_searchable_transcription.md
+      - 'keyword-searchable transcription': examples/search_pipeline_examples/multi_keyword_searchable_transcription.md
+      - 'semantically-searchable translation': examples/search_pipeline_examples/multi_semantically_searchable_translation.md
+      - 'semantically-searchable translated transcription': examples/search_pipeline_examples/multi_semantically_searchable_translated_transcription.md
+      - 'semantically-searchable ocr': examples/search_pipeline_examples/multi_semantically_searchable_ocr.md
+      - 'keyword-searchable image captions': examples/search_pipeline_examples/multi_keyword_searchable_image_captions.md
+  - Modules:
+    - 'overview': modules/modules_overview.md
+    - ai modules:
+      - 'image caption': modules/ai_modules/caption_module.md
+      - 'ocr (optical character recognition)': modules/ai_modules/ocr_module.md
+      - 'sentiment analysis': modules/ai_modules/sentiment_module.md
+      - 'summarization': modules/ai_modules/summarize_module.md
+      - 'text embedder': modules/ai_modules/text-embedder_module.md
+      - 'transcription': modules/ai_modules/transcribe_module.md
+      - 'translation': modules/ai_modules/translate_module.md
+    - database modules:
+      - 'vector database': modules/database_modules/vector-db_module.md
+      - 'keyword database': modules/database_modules/keyword-db_module.md
+    - support function models:
+      - 'json to txt': modules/support_function_modules/json-to-txt_module.md
+      - 'text parser': modules/support_function_modules/parser_module.md
+    - 'adding your own modules or models': modules/adding_your_own_modules_or_models.md
   - System:
     - 'overview': system/system_overview.md
     - initialization:
@@ -26,54 +74,6 @@ nav:
       - 'keyword search': system/search_methods/keyword_search_method.md
     - convenience methods:
       - 'convenience methods': system/convenience_methods/convenience_methods.md
-  - Modules:
-    - 'overview': modules/modules_overview.md
-    - ai modules:
-      - 'image caption': modules/ai_modules/caption_module.md
-      - 'ocr (optical character recognition)': modules/ai_modules/ocr_module.md
-      - 'sentiment analysis': modules/ai_modules/sentiment_module.md
-      - 'summarization': modules/ai_modules/summarize_module.md
-      - 'text embedder': modules/ai_modules/text-embedder_module.md
-      - 'transcription': modules/ai_modules/transcribe_module.md
-      - 'translation': modules/ai_modules/translate_module.md
-    - database modules:
-      - 'vector database': modules/database_modules/vector-db_module.md
-      - 'keyword database': modules/database_modules/keyword-db_module.md
-    - support function models:
-      - 'json to txt': modules/support_function_modules/json-to-txt_module.md
-      - 'text parser': modules/support_function_modules/parser_module.md
-    - 'adding your own modules or models': modules/adding_your_own_modules_or_models.md
-  - Pipeline examples:
-    - 'overview': examples/pipeline_examples_overview.md
-    - single-module pipelines:
-      - 'image caption': examples/single_module_pipelines/single_caption.md
-      - 'ocr (optical character recognition)': examples/single_module_pipelines/single_ocr.md
-      - 'sentiment analysis': examples/single_module_pipelines/single_sentiment.md
-      - 'summarization': examples/single_module_pipelines/single_summarize.md
-      - 'text embedder': examples/single_module_pipelines/single_text-embedder.md
-      - 'text parser': examples/single_module_pipelines/single_parser.md
-      - 'transcription': examples/single_module_pipelines/single_transcribe.md
-      - 'translation': examples/single_module_pipelines/single_translate.md
-      - 'keyword database': examples/single_module_pipelines/single_keyword-db.md
-      - 'vector database': examples/single_module_pipelines/single_vector-db.md
-      - 'json to txt': examples/single_module_pipelines/single_json-to-txt.md
-    - multi-module (non-search) pipeline examples:
-      - 'recursive summarization': examples/multi_module_non_search_pipeline_examples/multi_recursive_summarization.md
-      - 'translated transcription': examples/multi_module_non_search_pipeline_examples/multi_translated_transcription.md
-      - 'sentiment analysis on transcription': examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_transcription.md
-      - 'sentiment analysis on translation': examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_translation.md
-      - 'sentiment analysis on translated transcription': examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_translated_transcription.md
-    - search pipeline examples:
-      - 'overview': examples/search_pipeline_examples/search_pipelines_overview.md
-      - 'semantic search': examples/search_pipeline_examples/multi_basic_semantic_search.md
-      - 'semantic search on snippets': examples/search_pipeline_examples/multi_snippet_semantic_search.md
-      - 'keyword search': examples/search_pipeline_examples/multi_basic_keyword-search.md
-      - 'semantically-searchable transcription': examples/search_pipeline_examples/multi_semantically_searchable_transcription.md
-      - 'keyword-searchable transcription': examples/search_pipeline_examples/multi_keyword_searchable_transcription.md
-      - 'semantically-searchable translation': examples/search_pipeline_examples/multi_semantically_searchable_translation.md
-      - 'semantically-searchable translated transcription': examples/search_pipeline_examples/multi_semantically_searchable_translated_transcription.md
-      - 'semantically-searchable ocr': examples/search_pipeline_examples/multi_semantically_searchable_ocr.md
-      - 'keyword-searchable image captions': examples/search_pipeline_examples/multi_keyword_searchable_image_captions.md
   - The future of Krixik:
     - 'the future of krixik': future/future_of_krixik.md
 theme: 
@@ -87,4 +87,3 @@ repo_name: krixik-docs
 repo_url: https://github.com/krixik-ai/krixik-docs
 edit_uri: blob/main/docs/
 copyright: © Krixik 2024 All Rights Reserved
-  # - section-index

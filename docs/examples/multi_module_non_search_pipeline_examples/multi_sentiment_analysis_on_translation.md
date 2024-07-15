@@ -2,7 +2,9 @@
 
 ## Multi-Module Pipeline: Sentiment Analysis on Translation
 
-This document details a modular pipeline that takes in an a text file in a non-English language, [`translates`](../../modules/ai_modules/translate_module.md) it into English, and then performs [`sentiment analysis`](../../modules/ai_modules/sentiment_module.md) on each sentence of the translation.
+This document details a multi-modular pipeline that takes in an a text file in a non-English language, [`translates`](../../modules/ai_modules/translate_module.md) it into English, and then performs [`sentiment analysis`](../../modules/ai_modules/sentiment_module.md) on each sentence of the translation.
+
+A pipeline that can translate and perform sentiment analysis enables users to understand the emotional tone of translated text, aiding in cross-cultural communication, market research, and customer feedback analysis across different languages. This technology is particularly useful for gauging public opinion, refining global marketing strategies, and enhancing user experience in multilingual contexts.
 
 The document is divided into the following sections:
 
@@ -19,7 +21,7 @@ To achieve what we've described above, let's set up a pipeline sequentially cons
 
 - A [`sentiment`](../../modules/ai_modules/sentiment_module.md) module.
 
-We do this by leveraging the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
+We do this by leveraging the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
 
 
 ```python
@@ -31,7 +33,7 @@ pipeline = krixik.create_pipeline(name="multi_sentiment_analysis_on_translation"
 
 Given that we're [`translating`](../../modules/ai_modules/translate_module.md) and then performing [`sentiment analysis`](../../modules/ai_modules/sentiment_module.md), we'll start with a file in Spanish. Since the input text is in Spanish, we'll use the (non-default) [`opus-mt-es-en`](https://huggingface.co/Helsinki-NLP/opus-mt-es-en) model of the [`translate`](../../modules/ai_modules/translate_module.md) module to translate it into English.
 
-We will use the default models for every other module in the pipeline, so they don't have to be specified in the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+We will use the default models for every other module in the pipeline, so they don't have to be specified in the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 
 ```python
@@ -46,7 +48,7 @@ process_output = pipeline.process(
 )  # specify a non-default model for use in the second module
 ```
 
-The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+The output of this process is printed below. To learn more about each component of the output, review documentation for the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 Because the output of this particular module-model pair is a JSON file, the process output is provided in this object as well (this is only the case for JSON outputs).  Moreover, the output file itself has been saved to the location noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 

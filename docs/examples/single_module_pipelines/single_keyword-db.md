@@ -2,7 +2,11 @@
 
 ## Single-Module Pipeline: `keyword-db`
 
-This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`keyword-db`](../../modules/database_modules/keyword-db_module.md) module. It's divided into the following sections:
+This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`keyword-db`](../../modules/database_modules/keyword-db_module.md) module. 
+
+A keyword search database enables efficient retrieval of information by indexing and querying large volumes of data based on specific keywords, enhancing search accuracy and speed for users.  Keyword search is essential in diverse fields such as information retrieval, e-commerce, customer support, legal research, digital marketing, healthcare, security, and social media monitoring, enabling efficient and accurate access to relevant data and content.
+
+The remainder of this document divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)
@@ -14,7 +18,7 @@ This document is a walkthrough of how to assemble and use a single-module pipeli
 
 Let's first instantiate a single-module [`keyword-db`](../../modules/database_modules/keyword-db_module.md) pipeline.
 
-We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`keyword-db`](../../modules/database_modules/keyword-db_module.md) module name into `module_chain`.
+We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`keyword-db`](../../modules/database_modules/keyword-db_module.md) module name into `module_chain`.
 
 
 ```python
@@ -46,7 +50,7 @@ with open(data_dir + "input/1984_very_short.txt", "r") as file:
 
 Let's process our test input file using the [`keyword-db`](../../modules/database_modules/keyword-db_module.md) module's default (and currently only) [model](../../modules/database_modules/keyword-db_module.md#available-models-in-the-keyword-db-module): `base`.
 
-Given that this is the default model, we need not specify model selection through the optional [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+Given that this is the default model, we need not specify model selection through the optional [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 
 ```python
@@ -60,7 +64,7 @@ process_output = pipeline.process(
 )  # do not display process update printouts upon running code
 ```
 
-The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+The output of this process is printed below. To learn more about each component of the output, review documentation for the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 
 ```python
@@ -86,11 +90,11 @@ Because the output of this particular module-model pair is an `SQLlite` database
 
 ### Using the `keyword_search` method
 
-Any pipeline containing a [`keyword-db`](../../modules/database_modules/keyword-db_module.md) module has access to the [`.keyword_search`](../../system/search_methods/keyword_search_method.md) method. This provides you with the convenient ability to effect keyword queries on the created keyword database(s).
+Any pipeline containing a [`keyword-db`](../../modules/database_modules/keyword-db_module.md) module has access to the [`keyword_search`](../../system/search_methods/keyword_search_method.md) method. This provides you with the convenient ability to effect keyword queries on the created keyword database(s).
 
 ### Querying Output Databases Locally
 
-In addition to what's provided by the [`.keyword_search`](../../system/search_methods/keyword_search_method.md) method, you can **locally** perform queries on the generated keyword database whose location is indicated in `process_output_files`.
+In addition to what's provided by the [`keyword_search`](../../system/search_methods/keyword_search_method.md) method, you can **locally** perform queries on the generated keyword database whose location is indicated in `process_output_files`.
 
 Below is a simple function for locally performing single keyword queries on the above-outputted database:
 
@@ -122,7 +126,7 @@ def query_db(query_keyword: str, keyword_db_local_file_name: str) -> list:
         keyword_number
     """
 
-    # excute query
+    # execute query
     keyword_cursor.execute(query_pattern)
 
     # Fetch and process the results
@@ -130,7 +134,7 @@ def query_db(query_keyword: str, keyword_db_local_file_name: str) -> list:
     return rows
 ```
 
-We query our small database using a single keyword query with the function above. The results are printed below:
+The results are printed below:
 
 
 ```python

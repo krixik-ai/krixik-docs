@@ -4,7 +4,9 @@
 
 A practical way to achieve short and abstract (but representative) summaries of long or medium-length documents is to apply summarization *recursively*.  This concept was discussed in our overview of the single-module [`summarize` pipeline](../single_module_pipelines/single_summarize.md), where we applied a single [`summarize`](../../modules/ai_modules/summarize_module.md) module pipeline several times to create terser and terser summary representations of an input text.
 
-In this document we reproduce the same result via a pipeline consisting of multiple [`summarize`](../../modules/ai_modules/summarize_module.md) modules in immediate succession. Processing files through this pipeline recursively summarizes with a single pipeline invocation. If you require further summarization, you can build a similar pipeline with more [`summarize`](../../modules/ai_modules/summarize_module.md) models in it.
+Recursively summarizing a document allows you to progressively condense its content into increasingly concise forms, facilitating quicker understanding of key ideas across different levels of detail. This approach is useful for creating hierarchical summaries, optimizing information retrieval, and providing varying levels of detail depending on user needs or application requirements.
+
+In this document we reproduce the same result via a pipeline consisting of multiple [`summarize`](../../modules/ai_modules/summarize_module.md) modules in immediate succession. Processing files through this pipeline recursively summarizes with a single pipeline invocation. If you require further summarization, you can build a similar pipeline with more [`summarize`](../../modules/ai_modules/summarize_module.md) modules in it.
 
 The document is divided into the following sections:
 
@@ -15,7 +17,7 @@ The document is divided into the following sections:
 
 To achieve what we've described above, let's set up a pipeline consisting of three sequential [`summarize`](../../modules/ai_modules/summarize_module.md) modules.
 
-We do this by leveraging the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
+We do this by leveraging the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
 
 
 ```python
@@ -140,7 +142,7 @@ process_output = pipeline.process(
 )  # do not display process update printouts upon running code
 ```
 
-The output of this process is printed below. To learn more about each component of the output, review documentation for the [``](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+The output of this process is printed below. To learn more about each component of the output, review documentation for the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 The output text file itself has been saved to the location noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 

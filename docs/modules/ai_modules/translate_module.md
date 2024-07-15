@@ -7,6 +7,7 @@ This overview of the `translate` module is divided into the following sections:
 - [Inputs and Outputs of the `translate` Module](#inputs-and-outputs-of-the-translate-module)
 - [Available Models in the `translate` Module](#available-models-in-the-translate-module)
 - [Model Parameters in the `translate` Module](#model-parameters-in-the-translate-module)
+- [Input File Size Limit](#input-file-size-limit)
 - [A Single-Module Pipeline for the `translate` Module](#a-single-module-pipeline-for-the-translate-module)
 - [Further Information on `translate` Module IO and Clickability](#further-information-on-translate-module-io-and-clickability)
 
@@ -46,6 +47,10 @@ modules={'translate': {'model':'opus-mt-zh-en',
                        'params': {}}}
 ```
 
+### Input File Size Limit
+
+`translate` module input JSON files can currently be no larger than 3MB.
+
 ### A Single-Module Pipeline for the `translate` Module
 
 Please click [here](../../examples/single_module_pipelines/single_translate.md) to visit the `Pipeline Examples` section of our documentation and review an example of a single-module pipeline for the `translate` module.
@@ -56,4 +61,4 @@ Please click [here](../../system/convenience_methods/convenience_methods.md) to 
 
 - [View Module Input and Output Examples](../../system/convenience_methods/convenience_methods.md#view-module-input-and-output-examples)
 
-- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-click_data-method)
+- [View Module Click Data with the `click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-click_data-method)

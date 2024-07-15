@@ -2,7 +2,9 @@
 
 ## Multi-Module Pipeline: Semantically-Searchable Translation
 
-This document details a modular pipeline that takes in text, [`translates`](../../modules/ai_modules/translate_module.md) it into a desired language, and makes the result [`semantically searchable`](../../system/search_methods/semantic_search_method.md).
+This document details a multi-modular pipeline that takes in text, [`translates`](../../modules/ai_modules/translate_module.md) it into a desired language, and makes the result [`semantically searchable`](../../system/search_methods/semantic_search_method.md).
+
+A pipeline that can translate text between languages and create semantic searches on the translated content enhances global communication by enabling users to retrieve and understand information across linguistic barriers with improved context and relevance.  Such a pipeline could be beneficial for multilingual content management, cross-cultural research, and international collaboration, facilitating efficient information retrieval and knowledge sharing across diverse language communities.
 
 The document is divided into the following sections:
 
@@ -22,7 +24,7 @@ To achieve what we've described above, let's set up a pipeline sequentially cons
 
 - A [`vector-db`](../../modules/database_modules/vector-db_module.md) module.
 
-We do this by leveraging the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
+We do this by leveraging the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
 
 
 ```python
@@ -75,7 +77,7 @@ with open(data_dir + "input/don_esp.txt", "r") as file:
 
 Since the input text is in Spanish, we'll use the (non-default) [`opus-mt-es-en`](https://huggingface.co/Helsinki-NLP/opus-mt-es-en) model of the [`translate`](../../modules/ai_modules/translate_module.md) module to translate it into English.
 
-We will use the default models for every other module in the pipeline, so they don't have to be specified in the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+We will use the default models for every other module in the pipeline, so they don't have to be specified in the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 
 ```python
@@ -90,7 +92,7 @@ process_output = pipeline.process(
 )  # specify a non-default model for use in the translate module
 ```
 
-The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+The output of this process is printed below. To learn more about each component of the output, review documentation for the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 Because the output of this particular module-model pair is a [FAISS](https://github.com/facebookresearch/faiss) database file, `process_output` is "null". However, the output file has been saved to the location noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 
@@ -116,9 +118,9 @@ print(json.dumps(process_output, indent=2))
 
 ### Performing Semantic Search
 
-Krixik's [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method enables semantic search on documents processed through certain pipelines. Given that the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method both [embeds](../../modules/ai_modules/text-embedder_module.md) the query and performs the search, it can only be used with pipelines containing both a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module and a [`vector-db`](../../modules/database_modules/vector-db_module.md) module in immediate succession.
+Krixik's [`semantic_search`](../../system/search_methods/semantic_search_method.md) method enables semantic search on documents processed through certain pipelines. Given that the [`semantic_search`](../../system/search_methods/semantic_search_method.md) method both [embeds](../../modules/ai_modules/text-embedder_module.md) the query and performs the search, it can only be used with pipelines containing both a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module and a [`vector-db`](../../modules/database_modules/vector-db_module.md) module in immediate succession.
 
-Since our pipeline satisfies this condition, it has access to the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method. Let's use it to query our text with natural language, as shown below:
+Since our pipeline satisfies this condition, it has access to the [`semantic_search`](../../system/search_methods/semantic_search_method.md) method. Let's use it to query our text with natural language, as shown below:
 
 
 ```python

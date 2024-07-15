@@ -2,7 +2,11 @@
 
 ## Single-Module Pipeline: `summarize`
 
-This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`summarize`](../../modules/ai_modules/summarize_module.md) module. It's divided into the following sections:
+This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`summarize`](../../modules/ai_modules/summarize_module.md) module. 
+
+Summarization involves condensing a large amount of information into a concise form while retaining its key points and main ideas. Its applications include creating executive summaries, generating abstracts for academic papers, news article summarization for quick updates, and improving information retrieval by providing succinct overviews of documents.
+
+The remainder of this document divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)
@@ -14,7 +18,7 @@ This document is a walkthrough of how to assemble and use a single-module pipeli
 
 Let's first instantiate a single-module [`summarize`](../../modules/ai_modules/summarize_module.md) pipeline.
 
-We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`summarize`](../../modules/ai_modules/summarize_module.md) module name into `module_chain`.
+We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`summarize`](../../modules/ai_modules/summarize_module.md) module name into `module_chain`.
 
 
 ```python
@@ -131,7 +135,7 @@ with open(data_dir + "input/1984_short.txt", "r") as file:
 
 Let's process our test input file using the [`summarize`](../../modules/ai_modules/summarize_module.md) module's [default model](../../modules/ai_modules/summarize_module.md#available-models-in-the-summarize-module): [`bart-large-cnn`](https://huggingface.co/facebook/bart-large-cnn).
 
-Given that this is the default model, we need not specify model selection through the optional [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+Given that this is the default model, we need not specify model selection through the optional [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 
 ```python
@@ -145,7 +149,7 @@ process_output = pipeline.process(
 )  # do not display process update printouts upon running code
 ```
 
-The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+The output of this process is printed below. To learn more about each component of the output, review documentation for the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 The output file itself has been saved to the location noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 
@@ -205,7 +209,7 @@ with open(process_output["process_output_files"][0], "r") as file:
 
 ### Using a Non-Default Model
 
-To use a [non-default model](../../modules/ai_modules/summarize_module.md#available-models-in-the-summarize-module) like [`text-summarization`](https://huggingface.co/Falconsai/text_summarization), we must enter it explicitly through the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+To use a [non-default model](../../modules/ai_modules/summarize_module.md#available-models-in-the-summarize-module) like [`text-summarization`](https://huggingface.co/Falconsai/text_summarization), we must enter it explicitly through the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 
 ```python
@@ -283,7 +287,7 @@ process_output = pipeline.process(
 )
 ```
 
-Once this [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) run finishes we receive our even-shorter summary as an output file.
+Once this [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) run finishes we receive our even-shorter summary as an output file.
 
 Let's examine the new summary file.
 
@@ -309,7 +313,7 @@ This is a more concise, if more abstract, summary of the original input text.
 
 Lets recurse one more time, seeking to achieve an even briefer summary of the original.
 
-Once again, almost nothing changes about how we use the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method: we only point `local_file_path` to the output of our second summarization.
+Once again, almost nothing changes about how we use the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method: we only point `local_file_path` to the output of our second summarization.
 
 
 ```python

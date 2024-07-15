@@ -1,12 +1,13 @@
 ## The `parser` Module
 
-The `parser` module takes a text document, cuts it up into pieces, and returns the spliced input as snippets in a JSON file.
+The `parser` module takes a text document, cuts it up into pieces, and returns the fragmented input as snippets in a JSON file.
 
 This overview of the `parser` module is divided into the following sections:
 
 - [Inputs and Outputs of the `parser` Module](#inputs-and-outputs-of-the-parser-module)
 - [Available Models in the `parser` Module](#available-models-in-the-parser-module)
 - [Model Parameters in the `parser` Module](#model-parameters-in-the-parser-module)
+- [Input File Size Limit](#input-file-size-limit)
 - [A Single-Module Pipeline for the `parser` Module](#a-single-module-pipeline-for-the-parser-module)
 - [Further Information on `parser` Module IO and Clickability](#further-information-on-parser-module-io-and-clickability)
 
@@ -90,6 +91,12 @@ modules={'parser': {"model": "fixed",
                     "params": {"chunk_size": 8, "overlap_size": 3}}}
 ```
 
+### Input File Size Limit
+
+`parser` module input TXT files can currently be no larger than 2MB.
+
+DOCX, PDF, and PPTX input files can currently be no larger than 100MB. Once they are converted to TXT, the resultant TXT file will then be held to the aforementioned 2MB limit.
+
 ### A Single-Module Pipeline for the `parser` Module
 
 Please click [here](../../examples/single_module_pipelines/single_parser.md) to visit the `Pipeline Examples` section of our documentation and review an example of a single-module pipeline for the `parser` module.
@@ -100,4 +107,4 @@ Please click [here](../../system/convenience_methods/convenience_methods.md) to 
 
 - [View Module Input and Output Examples](../../system/convenience_methods/convenience_methods.md#view-module-input-and-output-examples)
 
-- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-click_data-method)
+- [View Module Click Data with the `click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-click_data-method)

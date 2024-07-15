@@ -2,7 +2,7 @@
 
 ## Multi-Module Pipeline: Semantic Search on Snippets
 
-This document details a modular pipeline that takes in a series of text snippets in a JSON file and enables [`semantic search`](../../system/search_methods/semantic_search_method.md) on them.
+This document details a multi-modular pipeline that takes in a series of text snippets in a JSON file and enables [`semantic search`](../../system/search_methods/semantic_search_method.md) on them.
 
 The document is divided into the following sections:
 
@@ -18,7 +18,7 @@ To achieve what we've described above, let's set up a pipeline sequentially cons
 
 - A [`vector-db`](../../modules/database_modules/vector-db_module.md) module.
 
-We do this by leveraging the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
+We do this by leveraging the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
 
 
 ```python
@@ -30,7 +30,7 @@ pipeline = krixik.create_pipeline(name="multi_snippets_semantic_search", module_
 
 Lets take a quick look at a test file before processing.
 
-The input format to this pipeline is a JSON file (given that it's the input format of its [first module](../../modules/ai_modules/text-embedder_module.md)). JSON input must always be in a [specific format](../../system/parameters_processing_files_through_pipelines/JSON_input_format.md), or the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method will not work.
+The input format to this pipeline is a JSON file (given that it's the input format of its [first module](../../modules/ai_modules/text-embedder_module.md)). JSON input must always be in a [specific format](../../system/parameters_processing_files_through_pipelines/JSON_input_format.md), or the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method will not work.
 
 
 ```python
@@ -42,7 +42,7 @@ with open(data_dir + "input/1984_snippets.json", "r") as file:
     [{"snippet": "It was a bright cold day in April, and the clocks were striking thirteen.", "line_numbers": [1]}, {"snippet": "Winston Smith, his chin nuzzled into his breast in an effort to escape the\nvile wind, slipped quickly through the glass doors of Victory Mansions,\nthough not quickly enough to prevent a swirl of gritty dust from entering\nalong with him.", "line_numbers": [2, 3, 4, 5]}]
 
 
-We will use the default models for every module in the pipeline, so the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method doesn't need to be leveraged.
+We will use the default models for every module in the pipeline, so the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method doesn't need to be leveraged.
 
 
 ```python
@@ -56,7 +56,7 @@ process_output = pipeline.process(
 )  # do not display process update printouts upon running code
 ```
 
-The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+The output of this process is printed below. To learn more about each component of the output, review documentation for the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 Because the output of this particular module-model pair is a [FAISS](https://github.com/facebookresearch/faiss) database file, the process output is null. However, the output file has been saved to the location noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 
@@ -82,9 +82,9 @@ print(json.dumps(process_output, indent=2))
 
 ### Performing Semantic Search
 
-Krixik's [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method enables semantic search on documents processed through certain pipelines. Given that the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method both [embeds](../../modules/ai_modules/text-embedder_module.md) the query and performs the search, it can only be used with pipelines containing both a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module and a [`vector-db`](../../modules/database_modules/vector-db_module.md) module in immediate succession.
+Krixik's [`semantic_search`](../../system/search_methods/semantic_search_method.md) method enables semantic search on documents processed through certain pipelines. Given that the [`semantic_search`](../../system/search_methods/semantic_search_method.md) method both [embeds](../../modules/ai_modules/text-embedder_module.md) the query and performs the search, it can only be used with pipelines containing both a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module and a [`vector-db`](../../modules/database_modules/vector-db_module.md) module in immediate succession.
 
-Since our pipeline satisfies this condition, it has access to the [`.semantic_search`](../../system/search_methods/semantic_search_method.md) method. Let's use it to query our text with natural language, as shown below:
+Since our pipeline satisfies this condition, it has access to the [`semantic_search`](../../system/search_methods/semantic_search_method.md) method. Let's use it to query our text with natural language, as shown below:
 
 
 ```python

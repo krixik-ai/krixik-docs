@@ -1,12 +1,13 @@
 ## The `keyword-db` Module
 
-The `keyword-db` module takes document input, parses the documents for non-trivial keywords, identifies each of their lemmatized stems, and returns an `SQLite` database with this content.
+The `keyword-db` module takes document input, parses the document for non-trivial keywords, identifies each of their lemmatized stems, and returns an `SQLite` database with this content.
 
 This overview of the `keyword-db` module is divided into the following sections:
 
 - [Inputs and Outputs of the `keyword-db` Module](#inputs-and-outputs-of-the-keyword-db-module)
 - [Available Models in the `keyword-db` Module](#available-models-in-the-keyword-db-module)
 - [Model Parameters in the `keyword-db` Module](#model-parameters-in-the-keyword-db-module)
+- [Input File Size Limit](#input-file-size-limit)
 - [A Single-Module Pipeline for the `keyword-db` Module and Local Querying](#a-single-module-pipeline-for-the-keyword-db-module-and-local-querying)
 - [The `keyword_search` Method](#the-keyword_search-method)
 - [Further Information on `keyword-db` Module IO and Clickability](#further-information-on-keyword-db-module-io-and-clickability)
@@ -43,6 +44,12 @@ modules={'keyword-db': {'model':'base',
                         'params': {}}}
 ```
 
+### Input File Size Limit
+
+`keyword-db` module input TXT files can currently be no larger than 2MB.
+
+DOCX, PDF, and PPTX input files can currently be no larger than 100MB. Once they are converted to TXT, the resultant TXT file will then be held to the aforementioned 2MB limit.
+
 ### A Single-Module Pipeline for the `keyword-db` Module and Local Querying
 
 Please click [here](../../examples/single_module_pipelines/single_keyword-db.md) to visit the `Pipeline Examples` section of our documentation and review an example of a single-module pipeline for the `keyword-db` module.
@@ -61,4 +68,4 @@ Please click [here](../../system/convenience_methods/convenience_methods.md) to 
 
 - [View Module Input and Output Examples](../../system/convenience_methods/convenience_methods.md#view-module-input-and-output-examples)
 
-- [View Module Click Data with the `.click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-click_data-method)
+- [View Module Click Data with the `click_data` Method](../../system/convenience_methods/convenience_methods.md#view-module-click-data-with-the-click_data-method)

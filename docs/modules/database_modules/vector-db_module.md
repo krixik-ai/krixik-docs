@@ -9,6 +9,7 @@ This overview of the `vector-db` module is divided into the following sections:
 - [Inputs and Outputs of the `vector-db` Module](#inputs-and-outputs-of-the-vector-db-module)
 - [Available Models in the `vector-db` Module](#available-models-in-the-vector-db-module)
 - [Model Parameters in the `vector-db` Module](#model-parameters-in-the-vector-db-module)
+- [Input File Size Limit](#input-file-size-limit)
 - [A Single-Module Pipeline for the `vector-db` Module and Local Querying](#a-single-module-pipeline-for-the-vector-db-module-and-local-querying)
 - [The `semantic_search` Method](#the-semantic_search-method)
 - [Further Information on `vector-db` Module IO and Clickability](#further-information-on-vector-db-module-io-and-clickability)
@@ -53,9 +54,13 @@ The `vector-db` module model is not parameterizable. Consequently, should you wi
 
 ```python
 # example model selection for vector-db module in process
-modules={'vector-db': {'model':'base',
+modules={'vector-db': {'model':'faiss',
                        'params': {}}}
 ```
+
+### Input File Size Limit
+
+`vector-db` module input NPY files can currently be no larger than 3MB.
 
 ### A Single-Module Pipeline for the `vector-db` Module and Local Querying
 

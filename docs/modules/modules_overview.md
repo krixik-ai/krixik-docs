@@ -14,9 +14,7 @@ Given that the list of Krixik modules—and of the models within them—will con
 
 - [Summarize](ai_modules/summarize_module.md): Summarizes input text. 
 
-- [Text Embedder](ai_modules/text-embedder_module.md): Converts input text into numerical vectors. These can then be stored in a Vector database to enable [`.semantic_search`](../system/search_methods/semantic_search_method.md).
-
-- [Parser](support_function_modules/parser_module.md): Divides input text files into (potentially overlapping) snippets in a JSON file.
+- [Text Embedder](ai_modules/text-embedder_module.md): Converts input text into numerical vectors. These can then be stored in a Vector database to enable [`semantic search`](../system/search_methods/semantic_search_method.md).
 
 - [Transcribe](ai_modules/transcribe_module.md): Transcribes an audio file's contents into text.
 
@@ -24,11 +22,13 @@ Given that the list of Krixik modules—and of the models within them—will con
 
 ### Database Modules
 
-- [Vector database](database_modules/vector-db_module.md): Creates a vector database with set of input vectors. Enables [`.semantic_search`](../system/search_methods/semantic_search_method.md).
+- [Vector database](database_modules/vector-db_module.md): Creates a vector database with set of input vectors. Enables [`semantic search`](../system/search_methods/semantic_search_method.md).
 
-- [Keyword database](database_modules/keyword-db_module.md): Creates a relational database of keywords drawn from an input text file. Enables [`.keyword_search`](../system/search_methods/keyword_search_method.md).
+- [Keyword database](database_modules/keyword-db_module.md): Creates a relational database of keywords drawn from an input text file. Enables [`keyword search`](../system/search_methods/keyword_search_method.md).
 
 ### Support Function Modules
+
+- [Parser](support_function_modules/parser_module.md): Divides input text files into (potentially overlapping) snippets in a JSON file.
 
 - [JSON-to-TXT](support_function_modules/json-to-txt_module.md): Converts an input JSON file to a TXT file.
 

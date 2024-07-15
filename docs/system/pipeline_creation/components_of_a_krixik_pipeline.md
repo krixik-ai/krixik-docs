@@ -1,12 +1,12 @@
-## Components of a Krixik pipeline
+## Components of a Krixik Pipeline
 
-Krixik [**pipelines**](create_pipeline.md) are comprised of one or more sequentially connected [**modules**](../../modules/modules_overview.md). These modules are containers for a range of [**parameterizable**](../parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) AI [**models**](../parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) or support functions.
+Krixik [**pipelines**](create_pipeline.md) are composed of one or more sequentially connected [**modules**](../../modules/modules_overview.md). These modules are containers for a range of [**parameterizable**](../parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) AI [**models**](../parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) or support functions.
 
 Let's examine each of the key terms in the above sentence.
 
 A [**pipeline**](create_pipeline.md) is a self-contained sequence of one or more modules that is consumed via a serverless API.  
 
-A [**modules**](../../modules/modules_overview.md) is a processing step with a unique input/output data footprint. Each model contains a parameterizable AI model or support function.
+A [**module**](../../modules/modules_overview.md) is a processing step with a unique input/output data footprint. Each module contains a parameterizable AI model or support function.
 
 A [**model**](../parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) is a bespoke processing function contained within a module. Many of these are AI models, but some are simpler "support functions" for inter-pipeline data preparation or transformation.
 
@@ -14,7 +14,7 @@ A [**model**](../parameters_processing_files_through_pipelines/process_method.md
 
 --
 
-New modules and models will constantly be added to the Krixik library. To see all available modules at any given time, use the [`.available_modules`](../convenience_methods/convenience_methods.md#view-all-available-modules-with-the-available_modules-property) property:
+New modules and models will constantly be added to the Krixik library. To see all available modules at any given time, use the [`available_modules`](../convenience_methods/convenience_methods.md#view-all-available-modules-with-the-available_modules-property) property:
 
 ```python
 krixik.available_modules

@@ -2,7 +2,9 @@
 
 ## Multi-Module Pipeline: Sentiment Analysis on Translated Transcription
 
-This document details a modular pipeline that takes in an audio file in a non-English language, [`transcribes`](../../modules/ai_modules/transcribe_module.md) it, [`translates`](../../modules/ai_modules/translate_module.md) the transcript into English, and then performs [`sentiment analysis`](../../modules/ai_modules/sentiment_module.md) on each sentence of the translated transcript.
+This document details a multi-modular pipeline that takes in an audio file in a non-English language, [`transcribes`](../../modules/ai_modules/transcribe_module.md) it, [`translates`](../../modules/ai_modules/translate_module.md) the transcript into English, and then performs [`sentiment analysis`](../../modules/ai_modules/sentiment_module.md) on each sentence of the translated transcript.
+
+A pipeline that can transcribe, translate, and perform sentiment analysis on the result allows for comprehensive understanding and communication across language barriers, enabling nuanced insights into emotional context and sentiment from spoken interactions. This technology is beneficial for international business negotiations, customer service interactions, media monitoring across diverse linguistic regions, and enhancing cross-cultural communication strategies.
 
 The document is divided into the following sections:
 
@@ -25,7 +27,7 @@ To achieve what we've described above, let's set up a pipeline sequentially cons
 
 We use the [`json-to-txt`](../../modules/support_function_modules/json-to-txt_module.md) and [`parser`](../../modules/support_function_modules/parser_module.md) combination, which combines the transcribed snippets into one document and then splices it again, to make sure that any pauses in speech don't make for partial snippets that can confuse the [`sentiment`](../../modules/ai_modules/sentiment_module.md) model.
 
-Pipeline setup is accomplished through the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
+Pipeline setup is accomplished through the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
 
 
 ```python
@@ -37,7 +39,7 @@ pipeline = krixik.create_pipeline(
 
 ### Processing an Input File
 
-Lets take a quick look at a test file before processing. Given that we're [`translating`](../../modules/ai_modules/translate_module.md) before performing [`sentiment`](../../modules/ai_modules/sentiment_module.md), we'll start with a Spanish-language audio file.
+Lets take a quick look at a test file before processing. Given that we're [`translating`](../../modules/ai_modules/translate_module.md) before performing [`sentiment analysis`](../../modules/ai_modules/sentiment_module.md), we'll start with a Spanish-language audio file.
 
 
 ```python
@@ -61,7 +63,7 @@ IPython.display.Audio(data_dir + "input/deadlift.mp3")
 
 Since the input audio is in Spanish, we'll use the (non-default) [`opus-mt-es-en`](https://huggingface.co/Helsinki-NLP/opus-mt-es-en) model of the [`translate`](../../modules/ai_modules/translate_module.md) module to translate its transcript into English. We will also leverage a stronger model than the [default](../../modules/ai_modules/transcribe_module.md#available-models-in-the-transcribe-module) for our [`transcription`](../../modules/ai_modules/transcribe_module.md).
 
-We will use the default models for every other module in the pipeline as well, so they don't have to be specified in the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+We will use the default models for every other module in the pipeline as well, so they don't have to be specified in the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 
 ```python
@@ -76,7 +78,7 @@ process_output = pipeline.process(
 )  # specify a non-default model for use in two modules whose type is only present once each in the pipeline (otherwise, would have to refer to them positionally)
 ```
 
-The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+The output of this process is printed below. To learn more about each component of the output, review documentation for the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 Because the output of this particular module-model pair is a JSON file, the process output is provided in this object as well (this is only the case for JSON outputs).  Moreover, the output file itself has been saved to the location noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 
