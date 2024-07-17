@@ -74,7 +74,7 @@ The outputs of [this pipeline](https://krixik-docs.readthedocs.io/latest/example
 
 ### Extending your Pipeline
 
-[Suppose you wanted to perform vector search on `transcribe` module output.](https://krixik-docs.readthedocs.io/latest/examples/search_pipeline_examples/multi_semantically_searchable_transcription/)
+[Suppose you wanted to perform semantic (a.k.a. vector) search on `transcribe` module output.](https://krixik-docs.readthedocs.io/latest/examples/search_pipeline_examples/multi_semantically_searchable_transcription/)
 
 You would need to do the following after transcription:
 
@@ -83,7 +83,7 @@ You would need to do the following after transcription:
 3.  *Embed* each snippet using an appropriate text embedder
 4.  *Store* the resulting vectors in a vector database
 5.  *Index* said database
-6.  *Enable* vector search on the database
+6.  *Enable* vector (semantic) search on the database
 
 Locally creating and testing this sequence of steps would be time consuming—orchestrating them in a secure production service even more so. And that's without trying to make the entire process serverless.
 
@@ -112,7 +112,7 @@ pipeline.semantic_search(query="The text you wish to semantically search for goe
                          file_ids=['the_file_id_from_above'])
 ```
 
-That's it! You have now transcribed a file, processed the transcript, performed vector search on it, and can reuse [the pipeline](https://krixik-docs.readthedocs.io/latest/examples/search_pipeline_examples/multi_semantically_searchable_transcription/) for as many files and queries as you like... all of it in a couple of minutes and with a few lines of code.
+That's it! You have now transcribed a file, processed the transcript, performed semantic (vector) search on it, and can reuse [the pipeline](https://krixik-docs.readthedocs.io/latest/examples/search_pipeline_examples/multi_semantically_searchable_transcription/) for as many files and queries as you like... all of it in a couple of minutes and with a few lines of code.
 
 ### Optional: Pull the [Krixik Docs Repo](https://github.com/krixik-ai/krixik-docs)
 

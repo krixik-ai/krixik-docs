@@ -4,7 +4,7 @@ nav:
     - 'overview': examples/pipeline_examples_overview.md
     - single-module pipelines:
       - 'image caption': examples/single_module_pipelines/single_caption.md
-      - 'ocr (optical character recognition)': examples/single_module_pipelines/single_ocr.md
+      - 'OCR (optical character recognition)': examples/single_module_pipelines/single_ocr.md
       - 'sentiment analysis': examples/single_module_pipelines/single_sentiment.md
       - 'summarization': examples/single_module_pipelines/single_summarize.md
       - 'text embedder': examples/single_module_pipelines/single_text-embedder.md
@@ -22,20 +22,20 @@ nav:
       - 'sentiment analysis on translated transcription': examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_translated_transcription.md
     - multi-step search and RAG pipeline examples:
       - 'overview': examples/search_pipeline_examples/search_pipelines_overview.md
-      - 'semantic search': examples/search_pipeline_examples/multi_basic_semantic_search.md
-      - 'semantic search on snippets': examples/search_pipeline_examples/multi_snippet_semantic_search.md
+      - 'semantic (vector) search': examples/search_pipeline_examples/multi_basic_semantic_search.md
+      - 'semantic (vector) search on snippets': examples/search_pipeline_examples/multi_snippet_semantic_search.md
       - 'keyword search': examples/search_pipeline_examples/multi_basic_keyword-search.md
       - 'semantically-searchable transcription': examples/search_pipeline_examples/multi_semantically_searchable_transcription.md
       - 'keyword-searchable transcription': examples/search_pipeline_examples/multi_keyword_searchable_transcription.md
       - 'semantically-searchable translation': examples/search_pipeline_examples/multi_semantically_searchable_translation.md
       - 'semantically-searchable translated transcription': examples/search_pipeline_examples/multi_semantically_searchable_translated_transcription.md
-      - 'semantically-searchable ocr': examples/search_pipeline_examples/multi_semantically_searchable_ocr.md
+      - 'semantically-searchable OCR': examples/search_pipeline_examples/multi_semantically_searchable_ocr.md
       - 'keyword-searchable image captions': examples/search_pipeline_examples/multi_keyword_searchable_image_captions.md
   - Modules:
     - 'overview': modules/modules_overview.md
     - ai modules:
       - 'image caption': modules/ai_modules/caption_module.md
-      - 'ocr (optical character recognition)': modules/ai_modules/ocr_module.md
+      - 'OCR (optical character recognition)': modules/ai_modules/ocr_module.md
       - 'sentiment analysis': modules/ai_modules/sentiment_module.md
       - 'summarization': modules/ai_modules/summarize_module.md
       - 'text embedder': modules/ai_modules/text-embedder_module.md
@@ -54,7 +54,7 @@ nav:
       - 'install your client': system/initialization/install_client.md
       - 'initialize and authenticate': system/initialization/initialize_and_authenticate.md  
     - pipeline creation:
-      - 'components of a krixik pipeline': system/pipeline_creation/components_of_a_krixik_pipeline.md
+      - 'components of a Krixik pipeline': system/pipeline_creation/components_of_a_krixik_pipeline.md
       - 'create a pipeline': system/pipeline_creation/create_pipeline.md
       - 'pipeline config': system/pipeline_creation/pipeline_config.md
       - 'save and load a pipeline': system/pipeline_creation/saving_and_loading_pipelines.md
@@ -75,7 +75,7 @@ nav:
     - convenience methods:
       - 'convenience methods': system/convenience_methods/convenience_methods.md
   - The future of Krixik:
-    - 'the future of krixik': future/future_of_krixik.md
+    - 'the future of Krixik': future/future_of_krixik.md
 theme: 
   name: readthedocs
 plugins:
