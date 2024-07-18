@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## 2024-07-16
 
+module_details detail, OCR module detail
+
+### Changed
+
+- Gave a bit more detail on module_details output in the convenience methods documentation
+- Added a couple of words to the opening description of what image captioning is in the image caption module document
+
+
+## 2024-07-16
+
 OCR clarification, minor grammatical/continuity edits, vector/semantic search clarification, embedder/vdb clarification
 
 ### Changed
@@ -13,6 +23,7 @@ OCR clarification, minor grammatical/continuity edits, vector/semantic search cl
 - Capitalized OCR in mkdocs for readthedocs TOC
 - Turned "semantic search" into "semantic (vector) search" or "semantic (a.k.a. vector) search everywhere it was relevant
 - Added further context on self-standing vector-db and text-embedder modules vs when they're joined to have semantic search across a few different docs
+
 
 ## 2024-07-13
 
