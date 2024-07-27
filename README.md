@@ -3,11 +3,11 @@
 
 
 
-# Welcome to Krixik!
+# Krixik - AI Prototyping for Developers
 
-Sequentially assembling multiple AI models into a single pipeline can be painful and expensive. Consuming even a single model can often be draining.
+Sequentially assembling multiple AI models into a single pipeline can be painful and expensive. Consuming even a single model can often be draining. Doing so iteratively while prototyping is thus often unfeasible.
 
-That's why we're here. **Welcome to Krixik**, where you can easily assemble and serverlessly consume modular AI pipelines through secure APIs.
+That's why we're here. **Welcome to Krixik**, where you can easily and swiftly experiment with, assemble, and consume modular production-ready AI pipelines through secure APIs.
 
 ### Table of Contents
 

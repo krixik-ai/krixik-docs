@@ -1,6 +1,15 @@
 # Change Log
 All notable changes to this project will be documented in this file.
- 
+
+
+## 2024-07-27
+
+Narrative update in README and Future doc
+
+### Changed
+
+- Changed first section of README to reflect new prototyping focus in narrative
+- Added prototyping to Future of Krixik document
 
 ## 2024-07-16
 
