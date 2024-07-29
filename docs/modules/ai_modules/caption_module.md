@@ -1,6 +1,6 @@
 ## The `caption` Module
 
-The `caption` module takes an image as input and returns a text description of that image.
+The `caption` module takes an image as input and returns a natural language text description of that image.
 
 This overview of the `caption` module is divided into the following sections:
 

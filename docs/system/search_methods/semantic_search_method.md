@@ -2,7 +2,7 @@
 
 ## The `semantic_search` Method
 
-Krixik's `semantic_search` method enables semantic search on documents processed through certain pipelines. Much has been written about semantic search, but in a nutshell, instead of searching a document for specific keywords, it searches for text similar in _meaning_ to the string that's been queried for. Contrast this to [keyword search](keyword_search_method.md).
+Krixik's `semantic_search` method enables semantic (a.k.a. vector) search on documents processed through certain pipelines. Much has been written about semantic search, but in a nutshell, instead of searching a document for specific keywords, it searches for text similar in _meaning_ to the string that's been queried for. Contrast this to [keyword search](keyword_search_method.md).
 
 Given that the `semantic_search` method both [embeds](../../modules/ai_modules/text-embedder_module.md) the query and performs the search, it can only be used with pipelines containing both a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module and a [`vector-db`](../../modules/database_modules/vector-db_module.md) module in immediate succession.
 
@@ -35,11 +35,11 @@ Finally, the `semantic_search` method accepts one optional argument that is uniq
 
 ### Example Pipeline Setup and File Processing
 
-For this document's examples we will use a pipeline consisting of three modules: a [`parser`](../../modules/support_function_modules/parser_module.md) module, a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module, and a [`vector-db`](../../modules/database_modules/vector-db_module.md) module. This is the basic semantic search [pipeline](../../examples/search_pipeline_examples/multi_basic_semantic_search.md). We use the [`create_pipeline`](../pipeline_creation/create_pipeline.md) method to instantiate the pipeline.
+For this document's examples we will use a pipeline consisting of three modules: a [`parser`](../../modules/support_function_modules/parser_module.md) module, a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module, and a [`vector-db`](../../modules/database_modules/vector-db_module.md) module. This is the basic semantic (a.k.a. vector) search [pipeline](../../examples/search_pipeline_examples/multi_basic_semantic_search.md). We use the [`create_pipeline`](../pipeline_creation/create_pipeline.md) method to instantiate the pipeline.
 
 
 ```python
-# create the basic semantic search pipeline
+# create the basic semantic (vector) search pipeline
 pipeline = krixik.create_pipeline(
     name="semantic_search_method_1_parser_text-embedder_vector-db", module_chain=["parser", "text-embedder", "vector-db"]
 )

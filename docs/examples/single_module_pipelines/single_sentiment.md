@@ -4,9 +4,9 @@
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`sentiment`](../../modules/ai_modules/sentiment_module.md) module. 
 
-Sentiment analysis is a technique used to determine the emotional tone behind a body of text, categorizing it as positive, negative, or neutral. Its applications include gauging public opinion on social media, enhancing customer service through feedback analysis, monitoring brand reputation, and improving marketing strategies by understanding consumer sentiments.
+Sentiment analysis is used to determine the emotional tone of a body of text. It determines to what extent the text is positive, negative, and neutral. Its applications include gauging public opinion on social media, enhancing customer service through feedback analysis, monitoring brand reputation, and improving marketing strategies by understanding consumer sentiments.
 
-The remainder of this document divided into the following sections:
+The document is divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)

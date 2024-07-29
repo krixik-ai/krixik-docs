@@ -2,9 +2,9 @@
 
 ## Multi-Module Pipeline: Semantically-Searchable Translation
 
-This document details a multi-modular pipeline that takes in text, [`translates`](../../modules/ai_modules/translate_module.md) it into a desired language, and makes the result [`semantically searchable`](../../system/search_methods/semantic_search_method.md).
+This document details a multi-modular pipeline that takes in text, [`translates`](../../modules/ai_modules/translate_module.md) it into a desired language, and makes the result [`semantically (vector) searchable`](../../system/search_methods/semantic_search_method.md).
 
-A pipeline that can translate text between languages and create semantic searches on the translated content enhances global communication by enabling users to retrieve and understand information across linguistic barriers with improved context and relevance.  Such a pipeline could be beneficial for multilingual content management, cross-cultural research, and international collaboration, facilitating efficient information retrieval and knowledge sharing across diverse language communities.
+This pipeline can help to enhance global communication by enabling users to retrieve and understand information across linguistic barriers with improved context and relevance. It can be beneficial for multilingual content management, cross-cultural research, and international collaboration—among other possibilities—facilitating efficient information retrieval and knowledge sharing across diverse language communities.
 
 The document is divided into the following sections:
 
@@ -118,7 +118,7 @@ print(json.dumps(process_output, indent=2))
 
 ### Performing Semantic Search
 
-Krixik's [`semantic_search`](../../system/search_methods/semantic_search_method.md) method enables semantic search on documents processed through certain pipelines. Given that the [`semantic_search`](../../system/search_methods/semantic_search_method.md) method both [embeds](../../modules/ai_modules/text-embedder_module.md) the query and performs the search, it can only be used with pipelines containing both a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module and a [`vector-db`](../../modules/database_modules/vector-db_module.md) module in immediate succession.
+Krixik's [`semantic_search`](../../system/search_methods/semantic_search_method.md) method enables semantic (a.k.a. vector) search on documents processed through certain pipelines. Given that the [`semantic_search`](../../system/search_methods/semantic_search_method.md) method both [embeds](../../modules/ai_modules/text-embedder_module.md) the query and performs the search, it can only be used with pipelines containing both a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module and a [`vector-db`](../../modules/database_modules/vector-db_module.md) module in immediate succession.
 
 Since our pipeline satisfies this condition, it has access to the [`semantic_search`](../../system/search_methods/semantic_search_method.md) method. Let's use it to query our text with natural language, as shown below:
 

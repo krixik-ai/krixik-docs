@@ -1,6 +1,38 @@
 # Change Log
 All notable changes to this project will be documented in this file.
- 
+
+
+## 2024-07-27
+
+Narrative update in README and Future doc
+
+### Changed
+
+- Changed first section of README to reflect new prototyping focus in narrative
+- Added prototyping to Future of Krixik document
+
+## 2024-07-16
+
+module_details detail, OCR module detail
+
+### Changed
+
+- Gave a bit more detail on module_details output in the convenience methods documentation
+- Added a couple of words to the opening description of what image captioning is in the image caption module document
+
+
+## 2024-07-16
+
+OCR clarification, minor grammatical/continuity edits, vector/semantic search clarification, embedder/vdb clarification
+
+### Changed
+
+- Specified that OCR output includes coordinates in OCR single-module pipeline example
+- Multiple minor grammatical/continuity edits in example documentation
+- Capitalized OCR in mkdocs for readthedocs TOC
+- Turned "semantic search" into "semantic (vector) search" or "semantic (a.k.a. vector) search everywhere it was relevant
+- Added further context on self-standing vector-db and text-embedder modules vs when they're joined to have semantic search across a few different docs
+
 
 ## 2024-07-13
 
@@ -13,10 +45,16 @@ TOC rearrangement, subsection re-naming, context added to example tops.
 - OCR single example data input updated
 
 
-
 ## 2024-07-13
 
-???
+Keyword search method example improvement, model language specification, size limit incorporation, and various small edits
+
+### Changed
+
+- Changed file and query string in keyword search method examples to have a good number of returned results
+- Specified languages for each model in each module, assuming that languages are mentioned in the HF+ model card
+- Incorporated a section in each module's documentation in which the maximum allowed file size is specified
+- Assorted minor changes, edits, and corrections, notably including all removal of video/MP4 references, removal of periods from method references, and multiple errors in the list method documentation.
 
 
 ## 2024-07-11

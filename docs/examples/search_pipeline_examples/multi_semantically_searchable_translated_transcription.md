@@ -2,9 +2,9 @@
 
 ## Multi-Module Pipeline: Semantically-Searchable Translated Transcription
 
-This document details a multi-modular pipeline that takes in an audio file, [`transcribes`](../../modules/ai_modules/transcribe_module.md) it, [`translates`](../../modules/ai_modules/translate_module.md) the transcription into a desired language, and makes the result [`semantically searchable`](../../system/search_methods/semantic_search_method.md).
+This document details a multi-modular pipeline that takes in an audio file, [`transcribes`](../../modules/ai_modules/transcribe_module.md) it, [`translates`](../../modules/ai_modules/translate_module.md) the transcription into a desired language, and makes the result [`semantically (vector) searchable`](../../system/search_methods/semantic_search_method.md).
 
-A pipeline that can transcribe audio from video, translate the text, and create semantic searches on the translated transcriptions facilitates cross-language communication and global information access, enabling users to understand and interact with video content in their preferred languages with enhanced context.  Such a pipeline has potential applications for international business collaborations, educational content localization, and improving accessibility to multimedia information across diverse linguistic audiences.
+This pipeline facilitates cross-language communication and global information access, enabling users to understand and interact with video and audio content in their preferred language and with enhanced context. It has, among other possibilities, potential application in international business collaborations, educational content localization, and improving accessibility to multimedia information across diverse linguistic audiences.
 
 The document is divided into the following sections:
 
@@ -37,7 +37,7 @@ Pipeline setup is accomplished through the [`create_pipeline`](../../system/pipe
 # create a pipeline as detailed above
 pipeline = krixik.create_pipeline(
     name="multi_semantically_searchable_translated_transcription",
-    module_chain=["transcribe", "translate", "json-to-txt", "parser", "text-embedder", "vector-db"]
+    module_chain=["transcribe", "translate", "json-to-txt", "parser", "text-embedder", "vector-db"],
 )
 ```
 
@@ -78,7 +78,7 @@ process_output = pipeline.process(
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # wait for process to complete before returning IDE control to user
     verbose=False,  # do not display process update printouts upon running code
-    modules={"translate": {"model": "opus-mt-es-en"}}
+    modules={"translate": {"model": "opus-mt-es-en"}},
 )  # specify a non-default model for use in the translate module
 ```
 
@@ -108,7 +108,7 @@ print(json.dumps(process_output, indent=2))
 
 ### Performing Semantic Search
 
-Krixik's [`semantic_search`](../../system/search_methods/semantic_search_method.md) method enables semantic search on documents processed through certain pipelines. Given that the [`semantic_search`](../../system/search_methods/semantic_search_method.md) method both [embeds](../../modules/ai_modules/text-embedder_module.md) the query and performs the search, it can only be used with pipelines containing both a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module and a [`vector-db`](../../modules/database_modules/vector-db_module.md) module in immediate succession.
+Krixik's [`semantic_search`](../../system/search_methods/semantic_search_method.md) method enables semantic (a.k.a. vector) search on documents processed through certain pipelines. Given that the [`semantic_search`](../../system/search_methods/semantic_search_method.md) method both [embeds](../../modules/ai_modules/text-embedder_module.md) the query and performs the search, it can only be used with pipelines containing both a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module and a [`vector-db`](../../modules/database_modules/vector-db_module.md) module in immediate succession.
 
 Since our pipeline satisfies this condition, it has access to the [`semantic_search`](../../system/search_methods/semantic_search_method.md) method. Let's use it to query our text with natural language, as shown below:
 

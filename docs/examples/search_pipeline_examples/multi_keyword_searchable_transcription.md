@@ -4,7 +4,7 @@
 
 This document details a multi-modular pipeline that takes in an audio file, [`transcribes`](../../modules/ai_modules/transcribe_module.md) it, and makes the result [`keyword searchable`](../../system/search_methods/keyword_search_method.md).
 
-A pipeline that can transcribe audio from videos and create keyword searches on these transcriptions facilitates easy navigation and retrieval of specific content within video archives, improving accessibility and content management.  Such pipelines may be beneficial for video platforms, educational institutions, and businesses for efficient content indexing, search engine optimization, and enhancing user engagement through targeted content delivery.
+This pipeline facilitates easy navigation and retrieval of specific content within audio and video archives, improving accessibility and content management. It can for example be applied in video platforms, educational institutions, and businesses for efficient content indexing, search engine optimization, and enhancing user engagement through targeted content delivery.
 
 The document is divided into the following sections:
 

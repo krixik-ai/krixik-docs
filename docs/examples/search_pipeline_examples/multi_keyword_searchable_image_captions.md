@@ -4,7 +4,7 @@
 
 This document details a multi-modular pipeline that takes in an image, generates a [`textual caption`](../../modules/ai_modules/caption_module.md) of it, and makes the caption [`keyword searchable`](../../system/search_methods/keyword_search_method.md).
 
-A pipeline that can caption images and create keyword searches based on these captions enables efficient image categorization, retrieval, and content organization, enhancing accessibility and searchability of visual information.  Applications of such pipelines could include image libraries, e-commerce platforms, and educational resources, facilitating quicker access to relevant images and improving user navigation and discovery experiences.
+This pipeline can enable efficient image categorization, retrieval, and content organization, enhancing the accessibility and searchability of visual information. It can be applied in image libraries, e-commerce platforms, and educational platforms (among other options), facilitating quicker access to relevant images and improving user navigation and discovery.
 
 The document is divided into the following sections:
 

@@ -46,20 +46,20 @@ Then we delve into a few examples of multi-module pipelines, which is where the 
 
 - [Search Pipeline Overview](search_pipeline_examples/search_pipelines_overview.md): Search pipelines call for the use of one of two additional methods. Read about it here.
 
-- [Semantic Search](search_pipeline_examples/multi_basic_semantic_search.md): Enables `semantic search` on an input text file.
+- [Semantic (Vector) Search](search_pipeline_examples/multi_basic_semantic_search.md): Enables `semantic (vector) search` on an input text file.
 
-- [Semantic Search on Snippets](search_pipeline_examples/multi_snippet_semantic_search.md): Enables `semantic search` on snippets in an input JSON file.
+- [Semantic (Vector) Search on Snippets](search_pipeline_examples/multi_snippet_semantic_search.md): Enables `semantic (vector) search` on snippets in an input JSON file.
 
 - [Keyword Search](search_pipeline_examples/multi_basic_keyword-search.md): Enables `keyword search` on an input text file.
 
-- [Semantically-Searchable Transcription](search_pipeline_examples/multi_semantically_searchable_transcription.md): [`Transcribes`](../modules/ai_modules/transcribe_module.md) an input audio file and then enables `semantic search` on the transcript.
+- [Semantically-Searchable Transcription](search_pipeline_examples/multi_semantically_searchable_transcription.md): [`Transcribes`](../modules/ai_modules/transcribe_module.md) an input audio file and then enables `semantic (vector) search` on the transcript.
 
 - [Keyword-Searchable Transcription](search_pipeline_examples/multi_keyword_searchable_transcription.md): [`Transcribes`](../modules/ai_modules/transcribe_module.md) an input audio file and then enables `keyword search` on the transcript.
 
-- [Semantically-Searchable Translation](search_pipeline_examples/multi_semantically_searchable_translation.md): [`Translates`](../modules/ai_modules/translate_module.md) an input text file and then enables `semantic search` on the translation.
+- [Semantically-Searchable Translation](search_pipeline_examples/multi_semantically_searchable_translation.md): [`Translates`](../modules/ai_modules/translate_module.md) an input text file and then enables `semantic (vector) search` on the translation.
 
-- [Semantically-Searchable Translated Transcription](search_pipeline_examples/multi_semantically_searchable_translated_transcription.md): [`Transcribes`](../modules/ai_modules/transcribe_module.md) an input audio file, [`translates`](../modules/ai_modules/translate_module.md) it into English, and then enables `semantic search` on the translation.
+- [Semantically-Searchable Translated Transcription](search_pipeline_examples/multi_semantically_searchable_translated_transcription.md): [`Transcribes`](../modules/ai_modules/transcribe_module.md) an input audio file, [`translates`](../modules/ai_modules/translate_module.md) it into English, and then enables `semantic (vector) search` on the translation.
 
-- [Semantically-Searchable OCR](search_pipeline_examples/multi_semantically_searchable_ocr.md): [`Extracts text`](../modules/ai_modules/ocr_module.md) from an input image and then enables `semantic search` on the extracted text.
+- [Semantically-Searchable OCR](search_pipeline_examples/multi_semantically_searchable_ocr.md): [`Extracts text`](../modules/ai_modules/ocr_module.md) from an input image and then enables `semantic (vector) search` on the extracted text.
 
 - [Keyword-Searchable Image Captions](search_pipeline_examples/multi_keyword_searchable_image_captions.md): Generates a [`textual caption`](../modules/ai_modules/caption_module.md) for an input image and then enables `keyword search` on the caption.
