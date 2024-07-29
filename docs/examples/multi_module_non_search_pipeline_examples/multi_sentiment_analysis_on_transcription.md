@@ -4,7 +4,7 @@
 
 This document details a multi-modular pipeline that takes in an audio file in English, [`transcribes`](../../modules/ai_modules/transcribe_module.md) it, and then performs [`sentiment analysis`](../../modules/ai_modules/sentiment_module.md) on each sentence of the transcript.
 
-Performing sentiment analysis on transcriptions from audio can uncover emotional cues and attitudes expressed verbally, providing deeper insights into speaker sentiment, customer feedback, or public opinion in contexts where spoken communication is prevalent. This analysis is valuable for improving customer service, refining marketing strategies, and understanding sentiment trends in spoken interactions that may not be captured through text alone.
+Performing sentiment analysis on audio transcriptions can uncover verbally-expressed emotional cues and attitudes, providing deeper insights into speaker sentiment, customer feedback, or public opinion in contexts where spoken communication is prevalent. This analysis can be valuable for improving customer service, refining marketing strategies, and understanding sentiment trends in spoken interactions, among other possibilities.
 
 The document is divided into the following sections:
 

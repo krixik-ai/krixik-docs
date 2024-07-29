@@ -4,15 +4,18 @@
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module. 
 
-Text embedding involves converting words or sentences into numerical vectors in a high-dimensional space, preserving semantic relationships and contextual meanings. Its applications include improving natural language processing tasks such as sentiment analysis, machine translation, information retrieval, and recommendation systems by capturing nuanced semantic similarities between words and texts.
+Text embedding involves converting words or sentences into numerical vectors in a high-dimensional space. The vectors preserve the semantic relationships and contextual meanings of the text. Its applications include improving natural language (NLP) processing tasks like sentiment analysis, machine translation, information retrieval, and recommendation systems by mathematically capturing nuanced semantic similarities between words and texts.
 
-The remainder of this document divided into the following sections:
+For a slightly more complex pipeline that combines a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module with a [`vector-db`](../../modules/database_modules/vector-db_module.md) module to enable [`semantic (vector) search`](../../system/search_methods/semantic_search_method.md), [click here](../search_pipeline_examples/multi_basic_semantic_search.md).
+
+The document is divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)
 - [Using the Default Model](#using-the-default-model)
 - [Examining Process Output Locally](#examining-process-output-locally)
 - [Using a Non-Default Model](#using-a-non-default-model)
+- [Using the `semantic_search` Method](#using-the-semantic_search-method)
 
 ### Pipeline Setup
 
@@ -162,3 +165,9 @@ print(json.dumps(process_output, indent=2))
       ]
     }
 
+
+### Using the `semantic_search` method
+
+Any pipeline containing a [`vector-db`](../../modules/database_modules/vector-db_module.md) module preceded by a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module has access to the [`semantic_search`](../../system/search_methods/semantic_search_method.md) method. This provides you with the convenient ability to effect semantic queries on the created vector database(s).
+
+As the single-module pipeline created above lacks the [`vector-db`](../../modules/database_modules/vector-db_module.md) module, the [`semantic_search`](../../system/search_methods/semantic_search_method.md) method will not work on it. Review documentation for this [pipeline example](../../examples/search_pipeline_examples/multi_basic_semantic_search.md) or this [pipeline example](../../examples/search_pipeline_examples/multi_snippet_semantic_search.md), both of which meet the requirements for the method: the former ingests TXT files, and the latter JSON files.

@@ -39,7 +39,7 @@ As you can see, pipeline setup syntax is the same as above. The order of the mod
 
 
 ```python
-# create a basic semantic search multi-module pipeline
+# create a basic semantic (vector) search multi-module pipeline
 pipeline = krixik.create_pipeline(name="create_pipeline_2_parser_embedder_vector", module_chain=["parser", "text-embedder", "vector-db"])
 ```
 

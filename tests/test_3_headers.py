@@ -1,6 +1,5 @@
 from utilities.header_check import check_file_headers
 from utilities.converter import collect_mkdocks_toc
-from utilities.link_check import check_file_links
 import pytest
 
 

@@ -4,9 +4,9 @@
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`translate`](../../modules/ai_modules/translate_module.md) module. 
 
-Machine translation involves using algorithms and artificial intelligence to translate text or speech from one language to another automatically. Its applications include facilitating global communication, translating documents and websites, enabling multilingual customer support, and enhancing accessibility to information across linguistic barriers.
+Machine translation involves using algorithms and artificial intelligence to translate text from one language to another. Its applications include facilitating global communication, translating documents and websites, enabling multilingual customer support, and enhancing accessibility to information across linguistic barriers.
 
-The remainder of this document divided into the following sections:
+The document is divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)

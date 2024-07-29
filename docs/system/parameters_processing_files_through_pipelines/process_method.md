@@ -182,7 +182,7 @@ modules={'text-embedder': {'model':'multi-qa-MiniLM-L6-cos-v1', 'params': {'quan
 
 `quantize` is a parameter that you can set for [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module models, and only for [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module models.
 
-The `modules` argument syntax for multi-module pipelines is similar to the above, but in that case there's one sub-dictionary for every module. For instance, the `modules` argument for a [vector search pipeline](../../examples/search_pipeline_examples/multi_basic_semantic_search.md) that sequentially chains together [`parser`](../../modules/support_function_modules/parser_module.md), [`text-embedder`](../../modules/ai_modules/text-embedder_module.md), and [`vector-db`](../../modules/database_modules/vector-db_module.md) modules might look like this:
+The `modules` argument syntax for multi-module pipelines is similar to the above, but in that case there's one sub-dictionary for every module. For instance, the `modules` argument for a [vector (semantic) search pipeline](../../examples/search_pipeline_examples/multi_basic_semantic_search.md) that sequentially chains together [`parser`](../../modules/support_function_modules/parser_module.md), [`text-embedder`](../../modules/ai_modules/text-embedder_module.md), and [`vector-db`](../../modules/database_modules/vector-db_module.md) modules might look like this:
 
 ```python
 modules={'parser': {'model':'fixed', 'params': {"chunk_size": 10, "overlap_size": 5}},

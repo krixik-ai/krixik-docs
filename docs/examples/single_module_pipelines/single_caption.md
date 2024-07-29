@@ -4,9 +4,9 @@
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`caption`](../../modules/ai_modules/caption_module.md) module. 
 
-Image captioning is a machine learning process that automatically generates natural language descriptions of images, allowing users to understand the content of an image in a textual format.  Image captioning has various applications in enhancing accessibility for visually impaired individuals, improving image search engines, and aiding in automated content creation and social media management.
+Image captioning is a machine learning process that automatically generates natural language descriptions of images, thus allowing users to understand the content of an image in a textual format. Image captioning has various applications, such as in enhancing accessibility for visually impaired individuals, improving image search engines, and assisting in automated content creation and social media management.
 
-This document is divided into the following sections:
+The document is divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)
