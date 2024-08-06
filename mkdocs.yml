@@ -8,11 +8,11 @@ nav:
       - 'sentiment analysis': examples/single_module_pipelines/single_sentiment.md
       - 'summarization': examples/single_module_pipelines/single_summarize.md
       - 'text embedder': examples/single_module_pipelines/single_text-embedder.md
-      - 'text parser': examples/single_module_pipelines/single_parser.md
       - 'transcription': examples/single_module_pipelines/single_transcribe.md
       - 'translation': examples/single_module_pipelines/single_translate.md
-      - 'keyword database': examples/single_module_pipelines/single_keyword-db.md
       - 'vector database': examples/single_module_pipelines/single_vector-db.md
+      - 'keyword database': examples/single_module_pipelines/single_keyword-db.md
+      - 'text parser': examples/single_module_pipelines/single_parser.md
       - 'json to txt': examples/single_module_pipelines/single_json-to-txt.md
     - multi-step conversion pipeline examples:
       - 'recursive summarization': examples/multi_module_non_search_pipeline_examples/multi_recursive_summarization.md
@@ -45,9 +45,9 @@ nav:
       - 'vector database': modules/database_modules/vector-db_module.md
       - 'keyword database': modules/database_modules/keyword-db_module.md
     - support function models:
-      - 'json to txt': modules/support_function_modules/json-to-txt_module.md
       - 'text parser': modules/support_function_modules/parser_module.md
-    - 'adding your own modules or models': modules/adding_your_own_modules_or_models.md
+      - 'json to txt': modules/support_function_modules/json-to-txt_module.md
+    y- 'adding your own modules or models': modules/adding_your_own_modules_or_models.md
   - System:
     - 'overview': system/system_overview.md
     - initialization:
