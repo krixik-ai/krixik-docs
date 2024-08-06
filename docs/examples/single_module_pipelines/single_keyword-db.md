@@ -4,9 +4,9 @@
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`keyword-db`](../../modules/database_modules/keyword-db_module.md) module. 
 
-A keyword search database enables efficient retrieval of information by indexing and querying large volumes of data based on specific keywords, enhancing search accuracy and speed for users.  Keyword search is essential in diverse fields such as information retrieval, e-commerce, customer support, legal research, digital marketing, healthcare, security, and social media monitoring, enabling efficient and accurate access to relevant data and content.
+A keyword search database enables efficient retrieval of information by indexing and querying large volumes of data based on specific keywords, enhancing search accuracy and speed for users.  Keyword search is essential in fields as diverse as information retrieval, e-commerce, customer support, legal research, digital marketing, healthcare, security, and social media monitoring, enabling efficient and accurate access to relevant data and content.
 
-The remainder of this document divided into the following sections:
+The document is divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)

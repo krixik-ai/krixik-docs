@@ -1,10 +1,10 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/search_pipeline_examples/multi_basic_semantic_search.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
-## Multi-Module Pipeline: Basic Semantic Search
+## Multi-Module Pipeline: Basic Semantic (Vector) Search
 
 This document details a multi-modular pipeline that takes in a text document and enables [`semantic search`](../../system/search_methods/semantic_search_method.md) on it.
 
-Semantic search involves understanding the intent and contextual meaning behind search queries to deliver more relevant and accurate results, improving user experience and information retrieval. Its applications include enhancing search engines, recommendation systems, content discovery platforms, and personalized user interactions by leveraging natural language understanding and semantic analysis techniques.
+Semantic (a.k.a. vector) search involves an understanding of the intent and context behind natural language search queries to deliver more relevant and accurate results, improving user experience and information retrieval. Its applications include enhancing search engines, recommendation systems, content discovery platforms, and personalized user interactions.
 
 The document is divided into the following sections:
 
@@ -173,7 +173,7 @@ print(json.dumps(process_output, indent=2))
 
 ### Performing Semantic Search
 
-Krixik's [`semantic_search`](../../system/search_methods/semantic_search_method.md) method enables semantic search on documents processed through certain pipelines. Given that the [`semantic_search`](../../system/search_methods/semantic_search_method.md) method both [embeds](../../modules/ai_modules/text-embedder_module.md) the query and performs the search, it can only be used with pipelines containing both a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module and a [`vector-db`](../../modules/database_modules/vector-db_module.md) module in immediate succession.
+Krixik's [`semantic_search`](../../system/search_methods/semantic_search_method.md) method enables semantic (vector) search on documents processed through certain pipelines. Given that the [`semantic_search`](../../system/search_methods/semantic_search_method.md) method both [embeds](../../modules/ai_modules/text-embedder_module.md) the query and performs the search, it can only be used with pipelines containing both a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module and a [`vector-db`](../../modules/database_modules/vector-db_module.md) module in immediate succession.
 
 Since our pipeline satisfies this condition, it has access to the [`semantic_search`](../../system/search_methods/semantic_search_method.md) method. Let's use it to query our text with natural language, as shown below:
 
@@ -251,3 +251,5 @@ print(json.dumps(semantic_output, indent=2))
       ]
     }
 
+
+To view detail on a pipeline that enables search over text snippets in a JSON file instead of straight text documents, [click here](multi_snippet_semantic_search.md).

@@ -72,7 +72,7 @@ This example will also include an overview of how to [locally query](../../examp
 
 ### The `semantic_search` Method
 
-Any pipeline containing a `vector-db` module preceded by a [`text-embedder`](../ai_modules/text-embedder_module.md) module has access to the [`semantic_search`](../../system/search_methods/semantic_search_method.md) method. This provides you with the convenient ability to effect semantic queries on the created vector database(s).
+Any pipeline containing a `vector-db` module preceded by a [`text-embedder`](../ai_modules/text-embedder_module.md) module has access to the [`semantic_search`](../../system/search_methods/semantic_search_method.md) method. This provides you with the convenient ability to effect semantic (a.k.a. vector) queries on the created vector database(s).
 
 ### Further Information on `vector-db` Module IO and Clickability
 

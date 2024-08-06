@@ -4,9 +4,9 @@
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`transcribe`](../../modules/ai_modules/transcribe_module.md) module. 
 
-Transcription is the process of converting spoken language into written text. Its applications include creating accurate subtitles for videos, facilitating accessible content for the hearing-impaired, automating meeting minutes, and generating searchable archives of spoken information for easy reference.
+Transcription is the process of converting spoken language into written text. Its applications include creating subtitles for videos, facilitating accessible content for the hearing-impaired, automating meeting minutes, and generating searchable archives of spoken information for easy reference.
 
-The remainder of this document divided into the following sections:
+The document is divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)

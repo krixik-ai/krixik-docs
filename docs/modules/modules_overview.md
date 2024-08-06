@@ -14,7 +14,7 @@ Given that the list of Krixik modules—and of the models within them—will con
 
 - [Summarize](ai_modules/summarize_module.md): Summarizes input text. 
 
-- [Text Embedder](ai_modules/text-embedder_module.md): Converts input text into numerical vectors. These can then be stored in a Vector database to enable [`semantic search`](../system/search_methods/semantic_search_method.md).
+- [Text Embedder](ai_modules/text-embedder_module.md): Converts input text into numerical vectors. These can then be stored in a vector database to enable [`semantic (vector) search`](../system/search_methods/semantic_search_method.md).
 
 - [Transcribe](ai_modules/transcribe_module.md): Transcribes an audio file's contents into text.
 
@@ -22,7 +22,7 @@ Given that the list of Krixik modules—and of the models within them—will con
 
 ### Database Modules
 
-- [Vector database](database_modules/vector-db_module.md): Creates a vector database with set of input vectors. Enables [`semantic search`](../system/search_methods/semantic_search_method.md).
+- [Vector database](database_modules/vector-db_module.md): Creates a vector database with set of input vectors. Enables [`semantic (vector) search`](../system/search_methods/semantic_search_method.md).
 
 - [Keyword database](database_modules/keyword-db_module.md): Creates a relational database of keywords drawn from an input text file. Enables [`keyword search`](../system/search_methods/keyword_search_method.md).
 

@@ -4,7 +4,7 @@
 
 This document details a multi-modular pipeline that takes in an audio file in a non-English language, [`transcribes`](../../modules/ai_modules/transcribe_module.md) it, [`translates`](../../modules/ai_modules/translate_module.md) the transcript into English, and then performs [`sentiment analysis`](../../modules/ai_modules/sentiment_module.md) on each sentence of the translated transcript.
 
-A pipeline that can transcribe, translate, and perform sentiment analysis on the result allows for comprehensive understanding and communication across language barriers, enabling nuanced insights into emotional context and sentiment from spoken interactions. This technology is beneficial for international business negotiations, customer service interactions, media monitoring across diverse linguistic regions, and enhancing cross-cultural communication strategies.
+This pipeline allows for comprehensive understanding and communication across language barriers, enabling nuanced insights into emotional context and sentiment from spoken interactions. This technology is beneficial for international business negotiations, customer service interactions, media monitoring across diverse linguistic regions, and the enhancement of cross-cultural communication strategies, among other possibilities.
 
 The document is divided into the following sections:
 

@@ -4,9 +4,9 @@
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`summarize`](../../modules/ai_modules/summarize_module.md) module. 
 
-Summarization involves condensing a large amount of information into a concise form while retaining its key points and main ideas. Its applications include creating executive summaries, generating abstracts for academic papers, news article summarization for quick updates, and improving information retrieval by providing succinct overviews of documents.
+Summarization involves condensing a large amount of information while retaining its key points and main ideas. Its applications include creating executive summaries, generating abstracts for academic papers, news article summarization for quick updates, and improving information retrieval by providing succinct overviews of documents.
 
-The remainder of this document divided into the following sections:
+The document is divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)

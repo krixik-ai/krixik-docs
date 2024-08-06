@@ -4,9 +4,9 @@
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes an [`ocr`](../../modules/ai_modules/ocr_module.md) module. 
 
-Optical Character Recognition (OCR) is a technology that converts different types of documents, such as scanned paper documents, PDFs, or images captured by a digital camera, into editable and searchable data. OCR applications include digitizing printed texts for archival, automating data entry processes, enabling text-to-speech for accessibility, and extracting information for machine learning and data analytics.
+Optical Character Recognition (OCR) is a technology that converts different types of documents, such as scanned paper documents, PDFs, and images captured by a digital camera, into editable and searchable data by extracting and organizing all text from the source document. OCR applications include digitizing printed texts for archiving, automating data entry processes, enabling text-to-speech for accessibility, and extracting information for machine learning and data analytics.
 
-The remainder of this document divided into the following sections:
+The document is divided into the following sections:
 
 - [Pipeline Setup](#pipeline-setup)
 - [Required Input Format](#required-input-format)
@@ -17,7 +17,7 @@ The remainder of this document divided into the following sections:
 
 Let's first instantiate a single-module [`ocr`](../../modules/ai_modules/ocr_module.md) pipeline.
 
-We use the [`.create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`ocr`](../../modules/ai_modules/ocr_module.md) module name into `module_chain`.
+We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method for this, passing only the [`ocr`](../../modules/ai_modules/ocr_module.md) module name into `module_chain`.
 
 
 ```python
@@ -52,7 +52,7 @@ Image(filename=data_dir + "input/menu_1.png")
 
 Let's process our test input file using the [`ocr`](../../modules/ai_modules/ocr_module.md) module's [`default model`](../../modules/ai_modules/ocr_module.md#available-models-in-the-ocr-module): [`tesseract-en`](https://github.com/tesseract-ocr/tesseract).
 
-Given that this is the default model, we need not specify model selection through the optional [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+Given that this is the default model, we need not specify model selection through the optional [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 
 ```python
@@ -66,7 +66,7 @@ process_output = pipeline.process(
 )  # do not display process update printouts upon running code
 ```
 
-The output of this process is printed below. To learn more about each component of the output, review documentation for the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+Part of the output of this process is printed below—for readability, text box coordinates have been excluded. To learn more about each component of the output, review documentation for the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 Because the output of this particular module-model pair is a JSON file, the process output is provided in this object as well (this is only the case for JSON outputs).  Moreover, the output file itself has been saved to the location noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 
@@ -146,7 +146,7 @@ with open(process_output["process_output_files"][0]) as f:
 
 ### Using a Non-Default Model
 
-To use a [non-default model](../../modules/ai_modules/ocr_module.md#available-models-in-the-ocr-module) like [`tesseract-es`](https://github.com/tesseract-ocr/tesseract), we must enter it explicitly through the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`.process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
+To use a [non-default model](../../modules/ai_modules/ocr_module.md#available-models-in-the-ocr-module) like [`tesseract-es`](https://github.com/tesseract-ocr/tesseract), we must enter it explicitly through the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
 
 ```python

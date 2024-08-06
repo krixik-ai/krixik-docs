@@ -90,7 +90,7 @@ modules={'text-embedder': {"model": "all-mpnet-base-v2",
 
 Please click [here](../../examples/single_module_pipelines/single_text-embedder.md) to visit the `Pipeline Examples` section of our documentation and review an example of a single-module pipeline for the `text-embedder` module.
 
-Keep in mind that the output of this pipeline will be an NPY file, which is not human-readable (it's an array of vectors).
+Keep in mind that the output of this pipeline will be an NPY file, which is not human-readable (it's an array of vectors). The `text-embedder` module is easier consumed when paired with a [`vector-db`](../database_modules/vector-db_module.md) module to enable [`semantic (vector) search`](../../system/search_methods/semantic_search_method.md).
 
 ### Further Information on `text-embedder` Module IO and Clickability
 
