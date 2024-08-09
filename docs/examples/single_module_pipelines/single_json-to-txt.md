@@ -17,7 +17,8 @@ We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md
 
 ```python
 # create a pipeline with a single json-to-txtmodule
-pipeline = krixik.create_pipeline(name="single_json-to-txt_1", module_chain=["json-to-txt"])
+pipeline = krixik.create_pipeline(name="single_json-to-txt_1",
+                                  module_chain=["json-to-txt"])
 ```
 
 ### Required Input Format

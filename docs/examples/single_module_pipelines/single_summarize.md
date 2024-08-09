@@ -23,7 +23,8 @@ We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md
 
 ```python
 # create a pipeline with a single sentiment module
-pipeline = krixik.create_pipeline(name="single_summarize_1", module_chain=["summarize"])
+pipeline = krixik.create_pipeline(name="single_summarize_1",
+                                  module_chain=["summarize"])
 ```
 
 ### Required Input Format

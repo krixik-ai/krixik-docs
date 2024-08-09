@@ -4,7 +4,7 @@
 
 This document details a multi-modular pipeline that takes in an a text file in a non-English language, [`translates`](../../modules/ai_modules/translate_module.md) it into English, and then performs [`sentiment analysis`](../../modules/ai_modules/sentiment_module.md) on each sentence of the translation.
 
-Performing sentiment analysis on translations enables users to understand the emotional tone of translated text, aiding in cross-cultural communication, market research, and customer feedback analysis across different languages, among other possibilities. This technology is particularly useful for gauging public opinion, refining global marketing strategies, and enhancing user experience in multilingual contexts, among other possibilities.
+Performing sentiment analysis on translations helps users understand the emotional tone of translated text, aiding in cross-cultural communication, market research, public opinion measurement, and customer feedback analysis across different languages, among other possibilities.
 
 The document is divided into the following sections:
 
@@ -26,12 +26,27 @@ We do this by leveraging the [`create_pipeline`](../../system/pipeline_creation/
 
 ```python
 # create a pipeline as detailed above
-pipeline = krixik.create_pipeline(name="multi_sentiment_analysis_on_translation", module_chain=["parser", "translate", "sentiment"])
+pipeline = krixik.create_pipeline(name="multi_sentiment_analysis_on_translation",
+                                  module_chain=["parser", "translate", "sentiment"])
 ```
 
 ### Processing an Input File
 
-Given that we're [`translating`](../../modules/ai_modules/translate_module.md) and then performing [`sentiment analysis`](../../modules/ai_modules/sentiment_module.md), we'll start with a file in Spanish. Since the input text is in Spanish, we'll use the (non-default) [`opus-mt-es-en`](https://huggingface.co/Helsinki-NLP/opus-mt-es-en) model of the [`translate`](../../modules/ai_modules/translate_module.md) module to translate it into English.
+A pipeline's valid input formats are determined by its first module—in this case, a [`parser`](../../modules/support_function_modules/parser_module.md) module. Therefore, this pipeline only accepts textual document inputs.
+
+Given that we're [`translating`](../../modules/ai_modules/translate_module.md) and then performing [`sentiment analysis`](../../modules/ai_modules/sentiment_module.md), we'll start with a file in Spanish. Let's take a quick look at the file before proceeding (corrupted accent marks are a quirk of the print mechanism, but they do not thus flow into the AI model):
+
+
+```python
+# examine contents of the input file
+with open(data_dir + "input/spanish_review.txt", "r") as file:
+    print(file.read())
+```
+
+    Para los trabajos que estoy haciendo me resultÃ³ muy bueno. En una hora carga la baterÃ­a y dura mÃ¡s de 3 horas de trabajo continuo. Un golazo contar con una segunda baterÃ­a. CÃ³modo y con buen torque. Estoy conforme.
+
+
+Since the input text is in Spanish, we'll use the (non-default) [`opus-mt-es-en`](https://huggingface.co/Helsinki-NLP/opus-mt-es-en) model of the [`translate`](../../modules/ai_modules/translate_module.md) module to translate it into English.
 
 We will use the default models for every other module in the pipeline, so they don't have to be specified in the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 

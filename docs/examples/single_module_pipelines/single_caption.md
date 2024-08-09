@@ -22,7 +22,8 @@ We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md
 
 ```python
 # create a pipeline with a single caption module
-pipeline = krixik.create_pipeline(name="single_caption_1", module_chain=["caption"])
+pipeline = krixik.create_pipeline(name="single_caption_1",
+                                  module_chain=["caption"])
 ```
 
 ### Required Input Format

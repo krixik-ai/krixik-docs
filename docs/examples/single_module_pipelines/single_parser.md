@@ -4,7 +4,7 @@
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`parser`](../../modules/support_function_modules/parser_module.md) module. 
 
-Text parsing involves breaking text into its constituent parts, which may be words, phrases, or data elements, to aid in then processing or analyzing and extracting meaningful information from it. It has applications in natural language processing (NLP), data extraction from documents, code analysis, and in enhancing search engine capabilities through better understanding the structure and context of text.
+Text parsing involves breaking text into its constituent parts, which may be words, phrases, or data elements, to aid in then processing or analyzing it. It has applications in natural language processing (NLP), data extraction, code analysis, and in enhancing search engine capabilities, among other possibilities.
 
 The document is divided into the following sections:
 
@@ -22,7 +22,8 @@ We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md
 
 ```python
 # create a pipeline with a single parser module
-pipeline = krixik.create_pipeline(name="single_parser_1", module_chain=["parser"])
+pipeline = krixik.create_pipeline(name="single_parser_1",
+                                  module_chain=["parser"])
 ```
 
 ### Required Input Format

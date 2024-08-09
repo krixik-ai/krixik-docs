@@ -4,7 +4,7 @@
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`sentiment`](../../modules/ai_modules/sentiment_module.md) module. 
 
-Sentiment analysis is used to determine the emotional tone of a body of text. It determines to what extent the text is positive, negative, and neutral. Its applications include gauging public opinion on social media, enhancing customer service through feedback analysis, monitoring brand reputation, and improving marketing strategies by understanding consumer sentiments.
+Sentiment analysis is used to determine the emotional tone of a body of text—to what extent it's positive, negative, and neutral. Its applications include gauging public opinion on social media, enhancing customer service through feedback analysis, monitoring brand reputation, and improving marketing strategies by understanding consumer sentiments.
 
 The document is divided into the following sections:
 
@@ -22,7 +22,8 @@ We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md
 
 ```python
 # create a pipeline with a single sentiment module
-pipeline = krixik.create_pipeline(name="single_sentiment_1", module_chain=["sentiment"])
+pipeline = krixik.create_pipeline(name="single_sentiment_1",
+                                  module_chain=["sentiment"])
 ```
 
 ### Required Input Format
@@ -50,7 +51,7 @@ with open(data_dir + "input/valid.json") as f:
 
 ### Using the Default Model
 
-Let's process our test input file using the [`sentiment`](../../modules/ai_modules/sentiment_module.md) module's [default model](../../modules/ai_modules/sentiment_module.md#available-models-in-the-sentiment-module): `base`.
+Let's process our test input file using the [`sentiment`](../../modules/ai_modules/sentiment_module.md) module's [default model](../../modules/ai_modules/sentiment_module.md#available-models-in-the-sentiment-module): [distilbert-base-uncased-finetuned-sst-2-english](https://huggingface.co/distilbert/distilbert-base-uncased-finetuned-sst-2-english).
 
 Given that this is the default model, we need not specify model selection through the optional [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument in the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 

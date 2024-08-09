@@ -4,7 +4,7 @@
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`translate`](../../modules/ai_modules/translate_module.md) module. 
 
-Machine translation involves using algorithms and artificial intelligence to translate text from one language to another. Its applications include facilitating global communication, translating documents and websites, enabling multilingual customer support, and enhancing accessibility to information across linguistic barriers.
+Machine translation involves using artificial intelligence to translate text from one human language to another. Its applications include facilitating global communication, enabling multilingual customer support, and enhancing access to information across linguistic barriers.
 
 The document is divided into the following sections:
 
@@ -22,7 +22,8 @@ We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md
 
 ```python
 # create a pipeline with a single translate module
-pipeline = krixik.create_pipeline(name="single_translate_1", module_chain=["translate"])
+pipeline = krixik.create_pipeline(name="single_translate_1",
+                                  module_chain=["translate"])
 ```
 
 ### Required Input Format
@@ -116,6 +117,8 @@ with open(process_output["process_output_files"][0]) as f:
     ]
 
 
+As you can see, vowels with accent marks are missing from the translated text. This is a pecularity of the selected translating model; always be sure to familiarize yourself with any model's quirks before using it in production.
+
 ### Using a Non-Default Model
 
 To use a [non-default model](../../modules/ai_modules/translate_module.md#available-models-in-the-translate-module) like Spanish-to-English [`opus-mt-es-en`](https://huggingface.co/Helsinki-NLP/opus-mt-es-en) you must enter it explicitly through the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument when invoking the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
@@ -146,26 +149,20 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "single_translate_1",
-      "request_id": "b65ab7cf-7aee-4c95-95da-d2d0f9c78679",
-      "file_id": "cd6a91a1-a82d-4e16-be6c-18ce71fdd3f0",
-      "message": "SUCCESS - output fetched for file_id cd6a91a1-a82d-4e16-be6c-18ce71fdd3f0.Output saved to location(s) listed in process_output_files.",
+      "request_id": "d82d9ebc-b07f-428f-84c5-f3db8fef7975",
+      "file_id": "2a070d10-a78a-4f76-b59a-6950d5585662",
+      "message": "SUCCESS - output fetched for file_id 2a070d10-a78a-4f76-b59a-6950d5585662.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": [
         {
-          "snippet": "I love this movie and see it over and over again!"
+          "snippet": "I love this book and I've read it over and over again!"
         },
         {
-          "snippet": "The operating profit amounted to EUR 9,4 million, compared with EUR 11,7 million in 2004."
+          "snippet": "The production of the factory amounted to 9.4 million units, compared to 11.7 million units in 2004."
         }
       ],
       "process_output_files": [
-        "../../../data/output/cd6a91a1-a82d-4e16-be6c-18ce71fdd3f0.json"
+        "../../../data/output/2a070d10-a78a-4f76-b59a-6950d5585662.json"
       ]
     }
 
-
-
-```python
-# delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
-```

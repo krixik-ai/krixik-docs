@@ -4,7 +4,7 @@
 
 This document details a multi-modular pipeline that takes in an image, generates a [`textual caption`](../../modules/ai_modules/caption_module.md) of it, and makes the caption [`keyword searchable`](../../system/search_methods/keyword_search_method.md).
 
-This pipeline can enable efficient image categorization, retrieval, and content organization, enhancing the accessibility and searchability of visual information. It can be applied in image libraries, e-commerce platforms, and educational platforms (among other options), facilitating quicker access to relevant images and improving user navigation and discovery.
+This pipeline can enable efficient image categorization, retrieval, and content organization, enhancing the accessibility and searchability of visual information. It can be applied in image libraries, e-commerce platforms, and educational platforms, among other possibilities.
 
 The document is divided into the following sections:
 
@@ -27,10 +27,13 @@ We do this by leveraging the [`create_pipeline`](../../system/pipeline_creation/
 
 ```python
 # create a pipeline as detailed above
-pipeline = krixik.create_pipeline(name="multi_keyword_searchable_image_captions", module_chain=["caption", "json-to-txt", "keyword-db"])
+pipeline = krixik.create_pipeline(name="multi_keyword_searchable_image_captions",
+                                  module_chain=["caption", "json-to-txt", "keyword-db"])
 ```
 
 ### Processing an Input File
+
+A pipeline's valid input formats are determined by its first module—in this case, a [`caption`](../../modules/ai_modules/caption_module.md) module. Therefore, this pipeline only accepts image inputs.
 
 Lets take a quick look at a test file before processing.
 
@@ -98,7 +101,8 @@ Since our pipeline satisfies this condition, it has access to the [`keyword_sear
 
 ```python
 # perform keyword search over the file in the pipeline
-keyword_output = pipeline.keyword_search(query="people bar sitting tables dinner drinks", file_ids=[process_output["file_id"]])
+keyword_output = pipeline.keyword_search(query="people bar sitting tables dinner drinks",
+                                         file_ids=[process_output["file_id"]])
 
 # nicely print the output of this process
 print(json.dumps(keyword_output, indent=2))

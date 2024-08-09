@@ -4,7 +4,7 @@
 
 This document details a multi-modular pipeline that takes in a text document and enables [`semantic search`](../../system/search_methods/semantic_search_method.md) on it.
 
-Semantic (a.k.a. vector) search involves an understanding of the intent and context behind natural language search queries to deliver more relevant and accurate results, improving user experience and information retrieval. Its applications include enhancing search engines, recommendation systems, content discovery platforms, and personalized user interactions.
+Semantic (a.k.a. vector) search involves an understanding of the intent and context behind natural language search queries to deliver more relevant and flexible results. Its applications include enhancing search engines, recommendation systems, content discovery platforms, and personalized user interactions.
 
 The document is divided into the following sections:
 
@@ -27,10 +27,13 @@ We do this by leveraging the [`create_pipeline`](../../system/pipeline_creation/
 
 ```python
 # create a pipeline as detailed above
-pipeline = krixik.create_pipeline(name="multi_basic_semantic_search", module_chain=["parser", "text-embedder", "vector-db"])
+pipeline = krixik.create_pipeline(name="multi_basic_semantic_search",
+                                  module_chain=["parser", "text-embedder", "vector-db"])
 ```
 
 ### Processing an Input File
+
+A pipeline's valid input formats are determined by its first module—in this case, a [`parser`](../../modules/support_function_modules/parser_module.md) module. Therefore, this pipeline only accepts textual document inputs.
 
 Lets take a quick look at a test file before processing.
 
@@ -180,7 +183,8 @@ Since our pipeline satisfies this condition, it has access to the [`semantic_sea
 
 ```python
 # perform semantic_search over the file in the pipeline
-semantic_output = pipeline.semantic_search(query="it was cold night", file_ids=[process_output["file_id"]])
+semantic_output = pipeline.semantic_search(query="it was cold night",
+                                           file_ids=[process_output["file_id"]])
 
 # nicely print the output of this process
 print(json.dumps(semantic_output, indent=2))

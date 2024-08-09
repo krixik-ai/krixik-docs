@@ -4,7 +4,7 @@
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`vector-db`](../../modules/database_modules/vector-db_module.md) module.
 
-Vector databases store and manage data points represented as vectors in multidimensional space, thus enabling efficient similarity searches and analytics based on vector distances.  Applications include RAG (Retrieval-Augmented Generation), recommendation systems, image and video retrieval based on content similarity, personalized content delivery, and anomaly detection in large datasets.
+Vector databases store and manage data points represented as vectors in multidimensional space, thus enabling efficient searches and analytics based on vector distances. They can be applied in Retrieval-Augmented Generation (RAG), recommendation systems, image and video retrieval based on content similarity, and anomaly detection in large datasets.
 
 Note that this module by itself will not generate a particularly easy-to-use pipeline, given that you must already have NPY files ready to process. We suggest also taking a look at this [example pipeline](../../examples/search_pipeline_examples/multi_basic_semantic_search.md) or this [example pipeline](../../examples/search_pipeline_examples/multi_snippet_semantic_search.md), which respectively take TXT files and JSON files and enable vector (a.k.a. semantic) search on them.
 
@@ -25,7 +25,8 @@ We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md
 
 ```python
 # create a pipeline with a single vector-db module
-pipeline = krixik.create_pipeline(name="modules-vector-db-docs", module_chain=["vector-db"])
+pipeline = krixik.create_pipeline(name="modules-vector-db-docs",
+                                  module_chain=["vector-db"])
 ```
 
 ### Required Input Format

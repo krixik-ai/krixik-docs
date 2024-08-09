@@ -13,7 +13,7 @@ This overview of the `parser` module is divided into the following sections:
 
 ### Inputs and Outputs of the `parser` Module
 
-The `parser` module accepts document inputs. Acceptable file formats are the following:
+The `parser` module accepts textual document inputs. Acceptable file formats are the following:
 
 - TXT
 

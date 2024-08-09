@@ -4,7 +4,7 @@
 
 This document details a multi-modular pipeline that takes in an audio file, [`transcribes`](../../modules/ai_modules/transcribe_module.md) it, and makes the result [`semantically (vector) searchable`](../../system/search_methods/semantic_search_method.md).
 
-This pipeline enables users to efficiently navigate and extract meaningful insights from audio and video content based on contextual understanding and intent. It can, for example, help in enhancing video content management, improving the accessibility of spoken information, and enabling advanced analytics and research applications.
+Semantic search involves an understanding of the intent and context behind natural language queries to deliver more relevant and flexible results. This pipeline can help in enhancing video content management, improving the accessibility of spoken information, and enabling advanced analytics on audio, among other possibilities.
 
 The document is divided into the following sections:
 
@@ -34,11 +34,13 @@ Pipeline setup is accomplished through the [`create_pipeline`](../../system/pipe
 ```python
 # create a pipeline as detailed above
 pipeline = krixik.create_pipeline(
-    name="multi_semantically_searchable_transcription", module_chain=["transcribe", "json-to-txt", "parser", "text-embedder", "vector-db"]
-)
+    name="multi_semantically_searchable_transcription",
+    module_chain=["transcribe", "json-to-txt", "parser", "text-embedder", "vector-db"])
 ```
 
 ### Processing an Input File
+
+A pipeline's valid input formats are determined by its first module—in this case, a [`transcribe`](../../modules/ai_modules/transcribe_module.md) module. Therefore, this pipeline only accepts audio file inputs.
 
 Lets take a quick look at a test file before processing.
 
@@ -109,7 +111,8 @@ Since our pipeline satisfies this condition, it has access to the [`semantic_sea
 
 ```python
 # perform semantic_search over the file in the pipeline
-semantic_output = pipeline.semantic_search(query="Let's talk about the country of Colombia", file_ids=[process_output["file_id"]])
+semantic_output = pipeline.semantic_search(query="Let's talk about the country of Colombia",
+                                           file_ids=[process_output["file_id"]])
 
 # nicely print the output of this process
 print(json.dumps(semantic_output, indent=2))
