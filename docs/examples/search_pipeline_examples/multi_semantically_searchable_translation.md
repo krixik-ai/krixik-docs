@@ -4,7 +4,7 @@
 
 This document details a multi-modular pipeline that takes in text, [`translates`](../../modules/ai_modules/translate_module.md) it into a desired language, and makes the result [`semantically (vector) searchable`](../../system/search_methods/semantic_search_method.md).
 
-This pipeline can help to enhance global communication by enabling users to retrieve and understand information across linguistic barriers with improved context and relevance. It can be beneficial for multilingual content management, cross-cultural research, and international collaboration—among other possibilities—facilitating efficient information retrieval and knowledge sharing across diverse language communities.
+Semantic search involves an understanding of the intent and context behind natural language queries to deliver more relevant and flexible results. This pipeline can help with multilingual content management, cross-cultural research, and international collaboration—among other possibilities—as it facilitates efficient information retrieval and knowledge sharing across diverse language communities.
 
 The document is divided into the following sections:
 
@@ -30,11 +30,13 @@ We do this by leveraging the [`create_pipeline`](../../system/pipeline_creation/
 ```python
 # create a pipeline as detailed above
 pipeline = krixik.create_pipeline(
-    name="multi_semantically_searchable_translation", module_chain=["parser", "translate", "text-embedder", "vector-db"]
-)
+    name="multi_semantically_searchable_translation",
+    module_chain=["parser", "translate", "text-embedder", "vector-db"])
 ```
 
 ### Processing an Input File
+
+A pipeline's valid input formats are determined by its first module—in this case, a [`parser`](../../modules/support_function_modules/parser_module.md) module. Therefore, this pipeline only accepts textual document inputs.
 
 Lets take a quick look at a test file before processing.
 
@@ -125,7 +127,8 @@ Since our pipeline satisfies this condition, it has access to the [`semantic_sea
 
 ```python
 # perform semantic_search over the file in the pipeline
-semantic_output = pipeline.semantic_search(query="Sterile ideas bring little to man", file_ids=[process_output["file_id"]])
+semantic_output = pipeline.semantic_search(query="Sterile ideas bring little to man",
+                                           file_ids=[process_output["file_id"]])
 
 # nicely print the output of this process
 print(json.dumps(semantic_output, indent=2))

@@ -22,10 +22,13 @@ We do this by leveraging the [`create_pipeline`](../../system/pipeline_creation/
 
 ```python
 # create a pipeline as detailed above
-pipeline = krixik.create_pipeline(name="multi_recursive_summarization", module_chain=["summarize", "summarize", "summarize"])
+pipeline = krixik.create_pipeline(name="multi_recursive_summarization",
+                                  module_chain=["summarize", "summarize", "summarize"])
 ```
 
 ### Processing an Input File
+
+A pipeline's valid input formats are determined by its first module—in this case, a [`summarize`](../../modules/ai_modules/summarize_module.md) module. Therefore, this pipeline only accepts textual document inputs.
 
 Let's take a quick look at a short test file before processing.
 

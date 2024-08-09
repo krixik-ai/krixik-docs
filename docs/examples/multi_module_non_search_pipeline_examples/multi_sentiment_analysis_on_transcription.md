@@ -4,7 +4,7 @@
 
 This document details a multi-modular pipeline that takes in an audio file in English, [`transcribes`](../../modules/ai_modules/transcribe_module.md) it, and then performs [`sentiment analysis`](../../modules/ai_modules/sentiment_module.md) on each sentence of the transcript.
 
-Performing sentiment analysis on audio transcriptions can uncover verbally-expressed emotional cues and attitudes, providing deeper insights into speaker sentiment, customer feedback, or public opinion in contexts where spoken communication is prevalent. This analysis can be valuable for improving customer service, refining marketing strategies, and understanding sentiment trends in spoken interactions, among other possibilities.
+Performing sentiment analysis on audio transcripts can help uncover verbally-expressed emotional cues and attitudes, providing deeper and quantified insights into speaker sentiment, customer feedback, or public opinion in contexts where spoken communication is prevalent.
 
 The document is divided into the following sections:
 
@@ -23,17 +23,20 @@ To achieve what we've described above, let's set up a pipeline sequentially cons
 
 - A [`sentiment`](../../modules/ai_modules/sentiment_module.md) module.
 
-We use the [`json-to-txt`](../../modules/support_function_modules/json-to-txt_module.md) and [`parser`](../../modules/support_function_modules/parser_module.md) combination, which combines the transcribed snippets into one document and then splices it again, to make sure that any pauses in speech don't make for partial snippets that can confuse the [`sentiment`](../../modules/ai_modules/sentiment_module.md) model.
+We use the [`json-to-txt`](../../modules/support_function_modules/json-to-txt_module.md) and [`parser`](../../modules/support_function_modules/parser_module.md) combination, which combines the transcribed snippets into one document and then fragments it again, to make sure that any pauses in speech don't make for partial snippets that can confuse the [`sentiment`](../../modules/ai_modules/sentiment_module.md) model.
 
 Pipeline setup is accomplished through the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md) method, as follows:
 
 
 ```python
 # create a pipeline as detailed above
-pipeline = krixik.create_pipeline(name="multi_sentiment_analysis_on_transcription", module_chain=["transcribe", "json-to-txt", "parser", "sentiment"])
+pipeline = krixik.create_pipeline(name="multi_sentiment_analysis_on_transcription",
+                                  module_chain=["transcribe", "json-to-txt", "parser", "sentiment"])
 ```
 
 ### Processing an Input File
+
+A pipeline's valid input formats are determined by its first module—in this case, a [`transcribe`](../../modules/ai_modules/transcribe_module.md) module. Therefore, this pipeline only accepts audio file inputs.
 
 Lets take a quick look at a short test file before processing.
 

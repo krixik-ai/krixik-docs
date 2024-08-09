@@ -22,7 +22,8 @@ We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md
 
 ```python
 # create a pipeline with a single transcribe module
-pipeline = krixik.create_pipeline(name="single_transcribe_1", module_chain=["transcribe"])
+pipeline = krixik.create_pipeline(name="single_transcribe_1",
+                                  module_chain=["transcribe"])
 ```
 
 ### Required Input Format
@@ -85,7 +86,7 @@ with open(process_output["process_output_files"][0]) as f:
     "That's episode looking at the great country of Columbia. We looked at some really basic facts. It's name, a bit of its history, the type of people that live there, land size and all that jazz. But in this video, we're gonna go into a little bit more of a detailed look. Yo, what is going on guys? Welcome back to F2D facts. The channel where I look at people cultures and places, my name is Dave Wouple. And today we are gonna be looking more at Columbia in our Columbia Part 2 video. Which just reminds me guys, this is part of our Columbia playlist. I'll put it down in the description box below and I'll talk about that more at the end of the video. But if you're new here, join me every single Monday to learn about new countries from around the world. You can do that by hitting that subscribe and that belt notification button. But that skits."
 
 
-As anticipated, the returned JSON file has not only the snippets of transcribed text, but along with each includes timestamps and a "confidence" value for the accuracy of each transcription.
+The returned JSON file has not only the snippets of transcribed text, but along with each includes timestamps and a "confidence" value for the accuracy of each transcription. Those timestamps and confidence values have been excluded from the above printout for simplicity's sake.
 
 ### Using a Non-Default Model
 
@@ -112,3 +113,6 @@ process_output = pipeline.process(
 with open(process_output["process_output_files"][0]) as f:
     print(json.dumps(json.load(f)[0]["transcript"].strip(), indent=2))
 ```
+
+    "Episode looking at the great country of Colombia We looked at some really just basic facts its name a bit of its history the type of people that live there Landsize and all that jazz, but in this video, we're gonna go into a little bit more of a detailed look Yo, what is going on guys? Welcome back to have to D facts a channel where I look at people cultures and places My name is Dave Walpole and today we are gonna be looking more at Colombia in our Columbia part 2 video Which just reminds me guys, this is part of our Columbia playlist I'll put it down there in the description box below and I'll talk about that more at the end of the video But if you're new here join me every single Monday to learn about new countries from around the world You can do that by hitting that subscribe and that belt notification button, but let's get started"
+

@@ -4,12 +4,34 @@ All notable changes to this project will be documented in this file.
 
 ## 2024-07-27
 
+Numerous tweaks mostly to example docs, clarifying intro paragraph, code cell structure, input formats, etc.
+
+### Changed
+
+
+- In most if not all example docs put arguments in 'create_pipeline' code cell on separate lines, enhancing readability, and also in the 'search' one where applicable
+- In most example docs specified what the input format of the pipeline is
+- In most example docs improved writing of intro paragraphs that gives context about why pipeline is useful
+- In summarize, keyword-db, and parser module docs, specified that input documents must be textual
+- In mkdocs, standardized order of vector/keyword search and of parser/json-to-txt
+- In valid_spanish.json improved the writing so the Spanish isn't poorly written
+- In single-module sentiment analysis doc fixed error in reference to default model
+- In transcribe single-module doc clarified point on simplicify of printout and set code to actually output from non-default model
+- In translate single-module doc added remove_cell tag to final code cell, also changed the file for the last example so the output is better, and added a note on missing accent mark characters being a quirk of the model
+- In multi-module sentiment on transcription doc changed the word "splice", which was misused
+- In multi-module sentiment on translation doc added display of input file, which was missing, and clarified about accent mark characters
+- In multi-module semantically searchable translated transcription doc specified that "whisper-tiny" can transcribe in Spanish. Also in 1-2 other docs where it applies
+
+
+## 2024-07-27
+
 Narrative update in README and Future doc
 
 ### Changed
 
 - Changed first section of README to reflect new prototyping focus in narrative
 - Added prototyping to Future of Krixik document
+
 
 ## 2024-07-16
 

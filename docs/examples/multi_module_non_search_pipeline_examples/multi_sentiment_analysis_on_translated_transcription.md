@@ -4,7 +4,7 @@
 
 This document details a multi-modular pipeline that takes in an audio file in a non-English language, [`transcribes`](../../modules/ai_modules/transcribe_module.md) it, [`translates`](../../modules/ai_modules/translate_module.md) the transcript into English, and then performs [`sentiment analysis`](../../modules/ai_modules/sentiment_module.md) on each sentence of the translated transcript.
 
-This pipeline allows for comprehensive understanding and communication across language barriers, enabling nuanced insights into emotional context and sentiment from spoken interactions. This technology is beneficial for international business negotiations, customer service interactions, media monitoring across diverse linguistic regions, and the enhancement of cross-cultural communication strategies, among other possibilities.
+For context, this pipeline can provide nuanced insight into emotional context and sentiment in spoken interactions across language barriers. This technology is beneficial for international business negotiations, customer service interactions, media monitoring across diverse linguistic regions, and the enhancement of cross-cultural communication strategies, among other possibilities.
 
 The document is divided into the following sections:
 
@@ -33,11 +33,13 @@ Pipeline setup is accomplished through the [`create_pipeline`](../../system/pipe
 ```python
 # create a pipeline as detailed above
 pipeline = krixik.create_pipeline(
-    name="multi_sentiment_analysis_on_translated_transcription", module_chain=["transcribe", "translate", "json-to-txt", "parser", "sentiment"]
-)
+    name="multi_sentiment_analysis_on_translated_transcription",
+    module_chain=["transcribe", "translate", "json-to-txt", "parser", "sentiment"])
 ```
 
 ### Processing an Input File
+
+A pipeline's valid input formats are determined by its first module—in this case, a [`transcribe`](../../modules/ai_modules/transcribe_module.md) module. Therefore, this pipeline only accepts audio file inputs.
 
 Lets take a quick look at a test file before processing. Given that we're [`translating`](../../modules/ai_modules/translate_module.md) before performing [`sentiment analysis`](../../modules/ai_modules/sentiment_module.md), we'll start with a Spanish-language audio file.
 

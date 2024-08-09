@@ -24,10 +24,13 @@ We do this by leveraging the [`create_pipeline`](../../system/pipeline_creation/
 
 ```python
 # create a pipeline as detailed above
-pipeline = krixik.create_pipeline(name="multi_translated_transcription", module_chain=["transcribe", "translate"])
+pipeline = krixik.create_pipeline(name="multi_translated_transcription",
+                                  module_chain=["transcribe", "translate"])
 ```
 
 ### Processing an Input File
+
+A pipeline's valid input formats are determined by its first module—in this case, a [`transcribe`](../../modules/ai_modules/transcribe_module.md) module. Therefore, this pipeline only accepts audio file inputs.
 
 Lets take a quick look at a short test file before processing.
 

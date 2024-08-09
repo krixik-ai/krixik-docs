@@ -14,7 +14,7 @@ This overview of the `summarize` module is divided into the following sections:
 
 ### Inputs and Outputs of the `summarize` Module
 
-The `summarize` module accepts document inputs. Acceptable file formats are the following:
+The `summarize` module accepts textual document inputs. Acceptable file formats are the following:
 
 - TXT
 

@@ -4,7 +4,7 @@
 
 This document details a multi-modular pipeline that takes in an audio file, [`transcribes`](../../modules/ai_modules/transcribe_module.md) it, and makes the result [`keyword searchable`](../../system/search_methods/keyword_search_method.md).
 
-This pipeline facilitates easy navigation and retrieval of specific content within audio and video archives, improving accessibility and content management. It can for example be applied in video platforms, educational institutions, and businesses for efficient content indexing, search engine optimization, and enhancing user engagement through targeted content delivery.
+This pipeline facilitates easy navigation and retrieval of specific content within audio and video archives, improving accessibility and content management. It can, for example, be applied in video platforms, educational institutions, and businesses for efficient content indexing, search engine optimization, and enhancing user engagement through targeted content delivery.
 
 The document is divided into the following sections:
 
@@ -27,10 +27,13 @@ We do this by leveraging the [`create_pipeline`](../../system/pipeline_creation/
 
 ```python
 # create a pipeline as detailed above
-pipeline = krixik.create_pipeline(name="multi_keyword_searchable_transcription", module_chain=["transcribe", "json-to-txt", "keyword-db"])
+pipeline = krixik.create_pipeline(name="multi_keyword_searchable_transcription",
+                                  module_chain=["transcribe", "json-to-txt", "keyword-db"])
 ```
 
 ### Processing an Input File
+
+A pipeline's valid input formats are determined by its first module—in this case, a [`transcribe`](../../modules/ai_modules/transcribe_module.md) module. Therefore, this pipeline only accepts audio file inputs.
 
 Lets take a quick look at a test file before processing.
 
@@ -101,7 +104,8 @@ Since our pipeline satisfies this condition, it has access to the [`keyword_sear
 
 ```python
 # perform keyword search over the file in the pipeline
-keyword_output = pipeline.keyword_search(query="lets talk about the country of Colombia", file_ids=[process_output["file_id"]])
+keyword_output = pipeline.keyword_search(query="lets talk about the country of Colombia",
+                                         file_ids=[process_output["file_id"]])
 
 # nicely print the output of this process
 print(json.dumps(keyword_output, indent=2))

@@ -14,7 +14,7 @@ This overview of the `keyword-db` module is divided into the following sections:
 
 ### Inputs and Outputs of the `keyword-db` Module
 
-The `keyword-db` module accepts document inputs. Acceptable file formats are the following:
+The `keyword-db` module accepts textual document inputs. Acceptable file formats are the following:
 
 - TXT
 

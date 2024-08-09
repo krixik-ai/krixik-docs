@@ -4,7 +4,7 @@
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module. 
 
-Text embedding involves converting words or sentences into numerical vectors in a high-dimensional space. The vectors preserve the semantic relationships and contextual meanings of the text. Its applications include improving natural language (NLP) processing tasks like sentiment analysis, machine translation, information retrieval, and recommendation systems by mathematically capturing nuanced semantic similarities between words and texts.
+Text embedding involves converting words or sentences into numerical vectors in a high-dimensional space. The vectors are mathematical representations that preserve the semantic relationships and contextual meanings of the text. Its applications lie in improving Natural Language Processing (NLP) tasks like semantic/vector search, sentiment analysis, machine translation, information retrieval, and recommendation systems, among other possibilities.
 
 For a slightly more complex pipeline that combines a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module with a [`vector-db`](../../modules/database_modules/vector-db_module.md) module to enable [`semantic (vector) search`](../../system/search_methods/semantic_search_method.md), [click here](../search_pipeline_examples/multi_basic_semantic_search.md).
 
@@ -26,7 +26,8 @@ We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md
 
 ```python
 # create a pipeline with a single text-embedder module
-pipeline = krixik.create_pipeline(name="single_text-embedder-1", module_chain=["text-embedder"])
+pipeline = krixik.create_pipeline(name="single_text-embedder-1",
+                                  module_chain=["text-embedder"])
 ```
 
 ### Required Input Format

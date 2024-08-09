@@ -22,7 +22,8 @@ We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md
 
 ```python
 # create a pipeline with a single ocr module
-pipeline = krixik.create_pipeline(name="single_ocr_1", module_chain=["ocr"])
+pipeline = krixik.create_pipeline(name="single_ocr_1",
+                                  module_chain=["ocr"])
 ```
 
 ### Required Input Format

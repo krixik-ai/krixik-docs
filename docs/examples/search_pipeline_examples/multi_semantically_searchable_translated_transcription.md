@@ -37,11 +37,12 @@ Pipeline setup is accomplished through the [`create_pipeline`](../../system/pipe
 # create a pipeline as detailed above
 pipeline = krixik.create_pipeline(
     name="multi_semantically_searchable_translated_transcription",
-    module_chain=["transcribe", "translate", "json-to-txt", "parser", "text-embedder", "vector-db"],
-)
+    module_chain=["transcribe", "translate", "json-to-txt", "parser", "text-embedder", "vector-db"])
 ```
 
 ### Processing an Input File
+
+A pipeline's valid input formats are determined by its first module—in this case, a [`transcribe`](../../modules/ai_modules/transcribe_module.md) module. Therefore, this pipeline only accepts audio file inputs.
 
 Lets take a quick look at a test file before processing.
 
@@ -65,7 +66,7 @@ IPython.display.Audio(data_dir + "input/deadlift.mp3")
 
 
 
-Since the input audio is in Spanish, we'll use the (non-default) [`opus-mt-es-en`](https://huggingface.co/Helsinki-NLP/opus-mt-es-en) model of the [`translate`](../../modules/ai_modules/translate_module.md) module to translate it into English.
+Since the input audio is in Spanish, you'll use the (non-default) [`opus-mt-es-en`](https://huggingface.co/Helsinki-NLP/opus-mt-es-en) model of the [`translate`](../../modules/ai_modules/translate_module.md) module to translate its transcript into English. The transcript itself you can generate with the transcribe module's default model, [`whisper-tiny`](https://huggingface.co/openai/whisper-tiny), which as the model card indicates also transcribes in Spanish.
 
 We will use the default models for every other module in the pipeline, so they don't have to be specified in the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method.
 
@@ -115,7 +116,8 @@ Since our pipeline satisfies this condition, it has access to the [`semantic_sea
 
 ```python
 # perform semantic_search over the file in the pipeline
-semantic_output = pipeline.semantic_search(query="be sure to hold the weights very firmly", file_ids=[process_output["file_id"]])
+semantic_output = pipeline.semantic_search(query="be sure to hold the weights very firmly",
+                                           file_ids=[process_output["file_id"]])
 
 # nicely print the output of this process
 print(json.dumps(semantic_output, indent=2))
