@@ -26,8 +26,7 @@ We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md
 
 ```python
 # create a pipeline with a single text-embedder module
-pipeline = krixik.create_pipeline(name="single_text-embedder-1",
-                                  module_chain=["text-embedder"])
+pipeline = krixik.create_pipeline(name="single_text-embedder-1", module_chain=["text-embedder"])
 ```
 
 ### Required Input Format
@@ -62,7 +61,7 @@ with open(data_dir + "input/1984_snippets.json", "r") as file:
         ]
       }
     ]
-
+    
 
 ### Using the Default Model
 
@@ -106,7 +105,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/ce4ddfa5-12c6-4dcb-86af-4f6d30ed6188.npy"
       ]
     }
-
+    
 
 ### Examining Process Output Locally
 
@@ -122,7 +121,7 @@ print(vectors.shape)
 ```
 
     (2, 384)
-
+    
 
 In other words, the array has 2 rows with 384 values in each row. 
 
@@ -165,7 +164,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/1dcbde04-d4f2-414f-acaf-577c355bbb88.npy"
       ]
     }
-
+    
 
 ### Using the `semantic_search` method
 

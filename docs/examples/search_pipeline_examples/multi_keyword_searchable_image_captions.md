@@ -27,8 +27,7 @@ We do this by leveraging the [`create_pipeline`](../../system/pipeline_creation/
 
 ```python
 # create a pipeline as detailed above
-pipeline = krixik.create_pipeline(name="multi_keyword_searchable_image_captions",
-                                  module_chain=["caption", "json-to-txt", "keyword-db"])
+pipeline = krixik.create_pipeline(name="multi_keyword_searchable_image_captions", module_chain=["caption", "json-to-txt", "keyword-db"])
 ```
 
 ### Processing an Input File
@@ -90,7 +89,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/913dce6e-2fbe-4d5a-bbd2-84c6a0a73932.db"
       ]
     }
-
+    
 
 ### Performing Keyword Search
 
@@ -101,8 +100,7 @@ Since our pipeline satisfies this condition, it has access to the [`keyword_sear
 
 ```python
 # perform keyword search over the file in the pipeline
-keyword_output = pipeline.keyword_search(query="people bar sitting tables dinner drinks",
-                                         file_ids=[process_output["file_id"]])
+keyword_output = pipeline.keyword_search(query="people bar sitting tables dinner drinks", file_ids=[process_output["file_id"]])
 
 # nicely print the output of this process
 print(json.dumps(keyword_output, indent=2))
@@ -134,4 +132,4 @@ print(json.dumps(keyword_output, indent=2))
         }
       ]
     }
-
+    

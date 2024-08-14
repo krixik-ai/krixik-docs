@@ -27,8 +27,7 @@ We do this by leveraging the [`create_pipeline`](../../system/pipeline_creation/
 
 ```python
 # create a pipeline as detailed above
-pipeline = krixik.create_pipeline(name="multi_basic_semantic_search",
-                                  module_chain=["parser", "text-embedder", "vector-db"])
+pipeline = krixik.create_pipeline(name="multi_basic_semantic_search", module_chain=["parser", "text-embedder", "vector-db"])
 ```
 
 ### Processing an Input File
@@ -134,7 +133,7 @@ with open(data_dir + "input/1984_short.txt", "r") as file:
       WAR IS PEACE
       FREEDOM IS SLAVERY
       IGNORANCE IS STRENGTH
-
+    
 
 We will use the default models for every module in the pipeline, so the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method doesn't need to be leveraged.
 
@@ -172,7 +171,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/3c9f01fe-1a93-43f4-b87c-5270225a0575.faiss"
       ]
     }
-
+    
 
 ### Performing Semantic Search
 
@@ -183,8 +182,7 @@ Since our pipeline satisfies this condition, it has access to the [`semantic_sea
 
 ```python
 # perform semantic_search over the file in the pipeline
-semantic_output = pipeline.semantic_search(query="it was cold night",
-                                           file_ids=[process_output["file_id"]])
+semantic_output = pipeline.semantic_search(query="it was cold night", file_ids=[process_output["file_id"]])
 
 # nicely print the output of this process
 print(json.dumps(semantic_output, indent=2))
@@ -254,6 +252,6 @@ print(json.dumps(semantic_output, indent=2))
         }
       ]
     }
-
+    
 
 To view detail on a pipeline that enables search over text snippets in a JSON file instead of straight text documents, [click here](multi_snippet_semantic_search.md).

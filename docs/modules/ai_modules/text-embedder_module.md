@@ -50,7 +50,7 @@ with open(test_file, "r") as file:
         ]
       }
     ]
-
+    
 
 ### Available Models in the `text-embedder` Module
 

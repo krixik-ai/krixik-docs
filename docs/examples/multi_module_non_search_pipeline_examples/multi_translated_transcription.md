@@ -24,8 +24,7 @@ We do this by leveraging the [`create_pipeline`](../../system/pipeline_creation/
 
 ```python
 # create a pipeline as detailed above
-pipeline = krixik.create_pipeline(name="multi_translated_transcription",
-                                  module_chain=["transcribe", "translate"])
+pipeline = krixik.create_pipeline(name="multi_translated_transcription", module_chain=["transcribe", "translate"])
 ```
 
 ### Processing an Input File
@@ -96,7 +95,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/b3b7d81b-2e81-4f53-806a-87e637e01b59.json"
       ]
     }
-
+    
 
 To confirm that everything went as it should have, let's load in the text file output from `process_output_files`:
 
@@ -108,4 +107,4 @@ with open(process_output["process_output_files"][0], "r") as file:
 ```
 
     [{"snippet": "Ese es un episodio mirando el gran pas de Columbia. Miramos algunos hechos realmente bsicos. Es el nombre, un poco de su historia, el tipo de gente que vive all, el tamao de la tierra y todo ese jazz. Pero en este video, vamos a entrar en un poco ms de una mirada detallada. Yo, qu est pasando chicos? Bienvenidos de nuevo a los hechos F2D. El canal donde miro las culturas y lugares de la gente, mi nombre es Dave Wouple. Y hoy vamos a mirar ms a Columbia en nuestro video de la Parte 2 de Columbia. Lo que me recuerda chicos, esto es parte de nuestra lista de Columbia. Lo pondr en el cuadro de descripcin de abajo y hablar ms sobre eso al final del video. Pero si eres nuevo aqu, nete a m todos los lunes para aprender sobre nuevos pases de todo el mundo. Usted puede hacer eso pulsando que suscribirse y ese botn de notificacin de cinturn. Pero eso es lo que pasa."}]
-
+    

@@ -30,8 +30,8 @@ We do this by leveraging the [`create_pipeline`](../../system/pipeline_creation/
 ```python
 # create a pipeline as detailed above
 pipeline = krixik.create_pipeline(
-    name="multi_semantically_searchable_translation",
-    module_chain=["parser", "translate", "text-embedder", "vector-db"])
+    name="multi_semantically_searchable_translation", module_chain=["parser", "translate", "text-embedder", "vector-db"]
+)
 ```
 
 ### Processing an Input File
@@ -75,7 +75,7 @@ with open(data_dir + "input/don_esp.txt", "r") as file:
     obligación; y así, puedes decir de la historia todo aquello que te
     pareciere, sin temor que te calunien por el mal ni te premien por el bien
     que dijeres della.
-
+    
 
 Since the input text is in Spanish, we'll use the (non-default) [`opus-mt-es-en`](https://huggingface.co/Helsinki-NLP/opus-mt-es-en) model of the [`translate`](../../modules/ai_modules/translate_module.md) module to translate it into English.
 
@@ -116,7 +116,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/d51f32f5-09d1-4656-a0d5-5da9bdb0a69c.faiss"
       ]
     }
-
+    
 
 ### Performing Semantic Search
 
@@ -127,8 +127,7 @@ Since our pipeline satisfies this condition, it has access to the [`semantic_sea
 
 ```python
 # perform semantic_search over the file in the pipeline
-semantic_output = pipeline.semantic_search(query="Sterile ideas bring little to man",
-                                           file_ids=[process_output["file_id"]])
+semantic_output = pipeline.semantic_search(query="Sterile ideas bring little to man", file_ids=[process_output["file_id"]])
 
 # nicely print the output of this process
 print(json.dumps(semantic_output, indent=2))
@@ -190,4 +189,4 @@ print(json.dumps(semantic_output, indent=2))
         }
       ]
     }
-
+    

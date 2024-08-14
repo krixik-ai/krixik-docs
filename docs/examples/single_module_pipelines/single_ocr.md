@@ -22,8 +22,7 @@ We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md
 
 ```python
 # create a pipeline with a single ocr module
-pipeline = krixik.create_pipeline(name="single_ocr_1",
-                                  module_chain=["ocr"])
+pipeline = krixik.create_pipeline(name="single_ocr_1", module_chain=["ocr"])
 ```
 
 ### Required Input Format
@@ -104,7 +103,7 @@ print(process_output["process_output"][0]["text"])
     Order here: www.culines.com e 218-237-5684
     
     
-
+    
 
 To confirm that everything went as it should have, let's load in the text file output from `process_output_files`:
 
@@ -143,7 +142,7 @@ with open(process_output["process_output_files"][0]) as f:
     Order here: www.culines.com e 218-237-5684
     
     
-
+    
 
 ### Using a Non-Default Model
 
@@ -200,4 +199,4 @@ print(process_output["process_output"][0]["text"])
     Order here: www.culines.com e 218-237-5684
     
     
-
+    

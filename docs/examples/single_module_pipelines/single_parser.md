@@ -22,8 +22,7 @@ We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md
 
 ```python
 # create a pipeline with a single parser module
-pipeline = krixik.create_pipeline(name="single_parser_1",
-                                  module_chain=["parser"])
+pipeline = krixik.create_pipeline(name="single_parser_1", module_chain=["parser"])
 ```
 
 ### Required Input Format
@@ -44,7 +43,7 @@ with open(data_dir + "input/1984_very_short.txt", "r") as file:
     vile wind, slipped quickly through the glass doors of Victory Mansions,
     though not quickly enough to prevent a swirl of gritty dust from entering
     along with him.
-
+    
 
 ### Using the Default Model
 
@@ -102,7 +101,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/60542629-7470-476f-b94e-40e2c53608bf.json"
       ]
     }
-
+    
 
 We can see from `process_output` that our two-sentence paragraph input has been separated correctly. Each sentence is also accompanied by its corresponding line number(s).
 
@@ -132,7 +131,7 @@ with open(process_output["process_output_files"][0]) as f:
         ]
       }
     ]
-
+    
 
 ### Using a Non-Default Model
 
@@ -223,4 +222,4 @@ with open(process_output["process_output_files"][0]) as f:
         ]
       }
     ]
-
+    

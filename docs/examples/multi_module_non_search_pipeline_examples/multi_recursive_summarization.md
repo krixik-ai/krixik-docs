@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/multi_module_non_search_pipeline_examples/multi_recursive_summarization.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Multi-Module Pipeline: Recursive Summarization
+[Spanish version of this document 🇨🇴🇪🇸](https://krixik-docs.readthedocs.io/es-main/ejemplos/ejemplos_pipelines_multi_modulo_sin_busqueda/multi_resumen_recursivo/)
 
 A practical way to achieve short and abstract (but representative) summaries of long or medium-length documents is to apply summarization *recursively*.  This concept was discussed in our overview of the single-module [`summarize` pipeline](../single_module_pipelines/single_summarize.md), where we applied a single [`summarize`](../../modules/ai_modules/summarize_module.md) module pipeline several times to create terser and terser summary representations of an input text.
 
@@ -22,8 +23,7 @@ We do this by leveraging the [`create_pipeline`](../../system/pipeline_creation/
 
 ```python
 # create a pipeline as detailed above
-pipeline = krixik.create_pipeline(name="multi_recursive_summarization",
-                                  module_chain=["summarize", "summarize", "summarize"])
+pipeline = krixik.create_pipeline(name="multi_recursive_summarization", module_chain=["summarize", "summarize", "summarize"])
 ```
 
 ### Processing an Input File
@@ -129,7 +129,7 @@ with open(data_dir + "input/1984_short.txt", "r") as file:
       WAR IS PEACE
       FREEDOM IS SLAVERY
       IGNORANCE IS STRENGTH
-
+    
 
 With the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method we run this input through the pipeline. We use the default model for the [`summarize`](../../modules/ai_modules/summarize_module.md) module each time, so the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument doesn't have to be leveraged.
 
@@ -167,7 +167,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/33d00458-6d3d-4a43-92c4-e7027c908c38.txt"
       ]
     }
-
+    
 
 To confirm that everything went as it should have, let's load in the text file output from `process_output_files`:
 
@@ -181,4 +181,4 @@ with open(process_output["process_output_files"][0], "r") as file:
     Winston Smith walked through the glass doors of Victory Mansions. The hallway
     smelled of boiled cabbage and old rag mats. A kilometre away, his
     place of work, the Ministry of Truth, towered vast and white.
-
+    

@@ -106,7 +106,7 @@ print(json.dumps(output_3, indent=2))
         "../../../data/output/81163fa1-72c1-4434-9690-c2f859dcb728.db"
       ]
     }
-
+    
 
 The value of `process_output` is `null` because the return object is an `SQLite` keyword database—one consisting of all non-trivial `(keyword, line_number, word_number)` tuples identified in the input file—so it cannot be printed here. You can review this database in the local location provided in `process_output_files`.
 
@@ -132,7 +132,7 @@ print(json.dumps(keyword_output, indent=2))
       "warnings": [],
       "items": []
     }
-
+    
 
 
 ```python
@@ -199,7 +199,7 @@ print(json.dumps(keyword_output, indent=2))
         }
       ]
     }
-
+    
 
 The `keyword_search` method returns each appearance of each searched-for keyword. As you can see, for every searched-through file there is an entry for every keyword appearance. The entry indicates both line number and the word number within that line.
 
@@ -312,7 +312,7 @@ print(json.dumps(keyword_output, indent=2))
         }
       ]
     }
-
+    
 
 The searched-for keywords are present in three of the four files. The fourth, which you know to be <u>Moby Dick</u>, doesn't seem to include any of them.
 
@@ -331,4 +331,4 @@ with open(data_dir + "other/stop_words.txt", "r") as file:
 ```
 
     stop_words = ['i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you', "you're", "you've", "you'll", "you'd", 'your', 'yours', 'yourself', 'yourselves', 'he', 'him', 'his', 'himself', 'she', "she's", 'her', 'hers', 'herself', 'it', "it's", 'its', 'itself', 'they', 'them', 'their', 'theirs', 'themselves', 'what', 'which', 'who', 'whom', 'this', 'that', "that'll", 'these', 'those', 'am', 'is', 'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'having', 'do', 'does', 'did', 'doing', 'a', 'an', 'the', 'and', 'but', 'if', 'or', 'because', 'as', 'until', 'while', 'of', 'at', 'by', 'for', 'with', 'about', 'against', 'between', 'into', 'through', 'during', 'before', 'after', 'above', 'below', 'to', 'from', 'up', 'down', 'in', 'out', 'on', 'off', 'over', 'under', 'again', 'further', 'then', 'once', 'here', 'there', 'when', 'where', 'why', 'how', 'all', 'any', 'both', 'each', 'few', 'more', 'most', 'other', 'some', 'such', 'no', 'nor', 'not', 'only', 'own', 'same', 'so', 'than', 'too', 'very', 's', 't', 'can', 'will', 'just', 'don', "don't", 'should', "should've", 'now', 'd', 'll', 'm', 'o', 're', 've', 'y', 'ain', 'aren', "aren't", 'couldn', "couldn't", 'didn', "didn't", 'doesn', "doesn't", 'hadn', "hadn't", 'hasn', "hasn't", 'haven', "haven't", 'isn', "isn't", 'ma', 'mightn', "mightn't", 'mustn', "mustn't", 'needn', "needn't", 'shan', "shan't", 'shouldn', "shouldn't", 'wasn', "wasn't", 'weren', "weren't", 'won', "won't", 'wouldn', "wouldn't"]
-
+    

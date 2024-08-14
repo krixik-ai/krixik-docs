@@ -111,7 +111,7 @@ print(json.dumps(output_2, indent=2))
         "../../../data/output/a94765c2-0250-4b3d-98af-20fc167640e8.faiss"
       ]
     }
-
+    
 
 The value of `process_output` is `null` because the return object is a database, so it cannot be printed here. You can review this database in the local location provided in the `process_output_files`.
 
@@ -200,7 +200,7 @@ print(json.dumps(semantic_output, indent=2))
         }
       ]
     }
-
+    
 
 In addition to seeing the returned snippets that are closest in meaning to your query, you also see the calculated vector distance (in a way, the distance in meaning) between each result and the query. The shorter this distance is, the closer in meaning the result to the query. The `semantic_search` method returns the snippets with the shortest vector distance to query, ranked in ascending order within each file.
 
@@ -535,7 +535,7 @@ print(json.dumps(semantic_output, indent=2))
         }
       ]
     }
-
+    
 
 As you can see, results from all the files have been combined, and the result ranked at the top has the shortest query-result distance of the entire file set.
 

@@ -4,10 +4,18 @@ All notable changes to this project will be documented in this file.
 
 ## 2024-07-27
 
-Numerous tweaks mostly to example docs, clarifying intro paragraph, code cell structure, input formats, etc.
+Added link to Spanish version of each doc.
 
 ### Changed
 
+- Each document has a link to its spanish version right under the title. Link includes little Colombian flag.
+
+
+## 2024-07-27
+
+Numerous tweaks mostly to example docs, clarifying intro paragraph, code cell structure, input formats, etc.
+
+### Changed
 
 - In most if not all example docs put arguments in 'create_pipeline' code cell on separate lines, enhancing readability, and also in the 'search' one where applicable
 - In most example docs specified what the input format of the pipeline is

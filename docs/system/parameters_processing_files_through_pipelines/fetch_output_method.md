@@ -72,7 +72,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/83f7bc97-bf47-4b3d-8268-b1a147be8950.json"
       ]
     }
-
+    
 
 Armed with its `file_id`, you can use the `fetch_output` method to suit your purpose:
 
@@ -118,6 +118,6 @@ print(json.dumps(fetched_output, indent=2))
         "../../../data/output/83f7bc97-bf47-4b3d-8268-b1a147be8950.json"
       ]
     }
-
+    
 
 At the end of this return the local directory to which the output has been downloaded is displayed.

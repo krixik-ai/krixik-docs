@@ -33,8 +33,8 @@ Pipeline setup is accomplished through the [`create_pipeline`](../../system/pipe
 ```python
 # create a pipeline as detailed above
 pipeline = krixik.create_pipeline(
-    name="multi_sentiment_analysis_on_translated_transcription",
-    module_chain=["transcribe", "translate", "json-to-txt", "parser", "sentiment"])
+    name="multi_sentiment_analysis_on_translated_transcription", module_chain=["transcribe", "translate", "json-to-txt", "parser", "sentiment"]
+)
 ```
 
 ### Processing an Input File
@@ -115,7 +115,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/6c7c8bf3-8288-40ef-880c-c829f7a39839.json"
       ]
     }
-
+    
 
 To confirm that everything went as it should have, let's load in the text file output from `process_output_files`:
 
@@ -140,4 +140,4 @@ with open(process_output["process_output_files"][0]) as f:
         "neutral": 0.0
       }
     ]
-
+    

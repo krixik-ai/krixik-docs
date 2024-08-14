@@ -112,7 +112,7 @@ print(json.dumps(list_output, indent=2))
         }
       ]
     }
-
+    
 
 We can use the `update` method to update the file's metadata.
 
@@ -367,7 +367,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/e53d3c35-6f4c-466f-ab7c-6971a6312a09.json"
       ]
     }
-
+    
 
 Now we invoke the [`list`](list_method.md) method to confirm that all metadata has indeed been updated as requested:
 
@@ -429,7 +429,7 @@ print(json.dumps(list_output, indent=2))
         }
       ]
     }
-
+    
 
 ### Observations on the `update` Method
 

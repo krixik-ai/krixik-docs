@@ -66,27 +66,27 @@ pipeline = krixik.create_pipeline(name="create_pipeline_3_parser_caption", modul
           1 # attempt to create a pipeline sequentially comprised of a parser and a caption module
     ----> 3 pipeline_3 = krixik.create_pipeline(name="create_pipeline_3_parser_caption",
           4                                     module_chain=["parser", "caption"])
-
+    
 
     File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\main.py:70, in krixik.create_pipeline(cls, name, module_chain)
          68         raise ValueError(f"module_chain item - {item} - is not a currently one of the currently available modules -{available_modules}")
          69 module_chain_ = [Module(m_name) for m_name in module_chain]
     ---> 70 custom = BuildPipeline(name=name, module_chain=module_chain_)
          71 return cls.load_pipeline(pipeline=custom)
-
+    
 
     File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\pipeline_builder\pipeline.py:63, in BuildPipeline.__init__(self, name, module_chain, config_path)
          61 chain_check(module_chain)
          62 for module in module_chain:
     ---> 63     self._add(module)
          64 self.test_connections()
-
+    
 
     File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\pipeline_builder\pipeline.py:86, in BuildPipeline._add(self, module, insert_index)
          83 self.__module_chain_configs.append(module.config)
          84 self.__module_chain_output_process_keys.append(module.output_process_key)
     ---> 86 self.test_connections()
-
+    
 
     File c:\Users\Lucas\Desktop\krixikdocsnoodle\myenv\Lib\site-packages\krixik\pipeline_builder\pipeline.py:160, in BuildPipeline.test_connections(self)
         158 # check format compatibility
@@ -96,7 +96,7 @@ pipeline = krixik.create_pipeline(name="create_pipeline_3_parser_caption", modul
         162     )
         164 # check process key type compatibility
         165 if prev_module_output_process_key_type != curr_module_input_process_key_type:
-
+    
 
     TypeError: format type mismatch between parser - whose output format is json - and caption - whose input format is image
 

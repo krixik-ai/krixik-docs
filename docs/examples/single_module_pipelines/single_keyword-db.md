@@ -23,8 +23,7 @@ We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md
 
 ```python
 # create a pipeline with a single keyword-db module
-pipeline = krixik.create_pipeline(name="single_keyword-db_1",
-                                  module_chain=["keyword-db"])
+pipeline = krixik.create_pipeline(name="single_keyword-db_1", module_chain=["keyword-db"])
 ```
 
 ### Required Input Format
@@ -45,7 +44,7 @@ with open(data_dir + "input/1984_very_short.txt", "r") as file:
     vile wind, slipped quickly through the glass doors of Victory Mansions,
     though not quickly enough to prevent a swirl of gritty dust from entering
     along with him.
-
+    
 
 ### Using the Default Model
 
@@ -85,7 +84,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/530270a9-0430-4c7d-98d0-a858efa7c879.db"
       ]
     }
-
+    
 
 Because the output of this particular module-model pair is an `SQLlite` database file, `process_output` is "null". However, the output file has been saved to the location noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 

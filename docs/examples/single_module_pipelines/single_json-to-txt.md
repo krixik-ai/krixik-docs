@@ -17,8 +17,7 @@ We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md
 
 ```python
 # create a pipeline with a single json-to-txtmodule
-pipeline = krixik.create_pipeline(name="single_json-to-txt_1",
-                                  module_chain=["json-to-txt"])
+pipeline = krixik.create_pipeline(name="single_json-to-txt_1", module_chain=["json-to-txt"])
 ```
 
 ### Required Input Format
@@ -52,7 +51,7 @@ with open(test_file, "r") as file:
         ]
       }
     ]
-
+    
 
 ### Using the Default Model
 
@@ -94,7 +93,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data//output/67b7c6cf-829b-4afa-99ff-3c1387b3db02.txt"
       ]
     }
-
+    
 
 To confirm that everything went as it should have, let's load in the text file output from `process_output_files`:
 
@@ -112,6 +111,6 @@ with open(process_output["process_output_files"][0], "r") as file:
     vile wind, slipped quickly through the glass doors of Victory Mansions,
     though not quickly enough to prevent a swirl of gritty dust from entering
     along with him.
-
+    
 
 You can confirm that the module has merged the two snippet values from the input dictionaries into a single string.

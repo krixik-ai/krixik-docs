@@ -22,8 +22,7 @@ We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md
 
 ```python
 # create a pipeline with a single caption module
-pipeline = krixik.create_pipeline(name="single_caption_1",
-                                  module_chain=["caption"])
+pipeline = krixik.create_pipeline(name="single_caption_1", module_chain=["caption"])
 ```
 
 ### Required Input Format
@@ -93,7 +92,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/ab32fe99-5bf8-4712-aa39-b7af9fac27f6.json"
       ]
     }
-
+    
 
 To confirm that everything went as it should have, let's load in the text file output from `process_output_files`:
 
@@ -109,7 +108,7 @@ with open(process_output["process_output_files"][0]) as f:
         "caption": "a large group of people are in a restaurant"
       }
     ]
-
+    
 
 ### Using a Non-Default Model
 
@@ -154,4 +153,4 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/c290b26b-d02b-40f3-8112-06a595f3b924.json"
       ]
     }
-
+    

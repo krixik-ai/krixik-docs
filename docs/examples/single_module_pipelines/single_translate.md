@@ -22,8 +22,7 @@ We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md
 
 ```python
 # create a pipeline with a single translate module
-pipeline = krixik.create_pipeline(name="single_translate_1",
-                                  module_chain=["translate"])
+pipeline = krixik.create_pipeline(name="single_translate_1", module_chain=["translate"])
 ```
 
 ### Required Input Format
@@ -47,7 +46,7 @@ with open(data_dir + "input/valid.json", "r") as file:
         "snippet": "Operating profit totaled EUR 9.4 mn, down from EUR 11.7 mn in 2004."
       }
     ]
-
+    
 
 ### Using the Default Model
 
@@ -96,7 +95,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/a2439789-e57d-4cd1-a91e-ab1907edd2a5.json"
       ]
     }
-
+    
 
 To confirm that everything went as it should have, let's load in the text file output from `process_output_files`:
 
@@ -115,7 +114,7 @@ with open(process_output["process_output_files"][0]) as f:
         "snippet": "El beneficio de explotacin ascendi a 9,4 millones EUR, frente a 11,7 millones EUR en 2004."
       }
     ]
-
+    
 
 As you can see, vowels with accent marks are missing from the translated text. This is a pecularity of the selected translating model; always be sure to familiarize yourself with any model's quirks before using it in production.
 
@@ -165,4 +164,4 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/2a070d10-a78a-4f76-b59a-6950d5585662.json"
       ]
     }
-
+    

@@ -78,7 +78,7 @@ show_tree_output = pipeline.show_tree(symbolic_directory_path="/*")
                 ├── file_num_two.txt
                 └── /subpath
                     └── file_num_three.txt
-
+    
 
 Note that directory names are preceded by a forward slash (`/`) character and file names are not. This allows you to easily differentiate between them.
 

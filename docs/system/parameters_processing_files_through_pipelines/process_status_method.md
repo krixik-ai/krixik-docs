@@ -60,7 +60,7 @@ print(json.dumps(process_output, indent=2))
       "file_tags": null,
       "file_description": null
     }
-
+    
 
 That's all you see because you retook control of the IDE as soon as the upload to Krixik was completed; the `process_output` variable doesn't know how the rest of the process went.
 
@@ -86,7 +86,7 @@ print(json.dumps(process_1_status, indent=2))
       },
       "overall_status": "ongoing"
     }
-
+    
 
 Here you can see that your process has not yet finalized; its `overall_status` shows as `"ongoing"`.
 
@@ -112,7 +112,7 @@ print(json.dumps(process_status_output, indent=2))
       },
       "overall_status": "complete"
     }
-
+    
 
 ### `process_status` Example with Deleted File
 

@@ -22,8 +22,7 @@ We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md
 
 ```python
 # create a pipeline with a single sentiment module
-pipeline = krixik.create_pipeline(name="single_sentiment_1",
-                                  module_chain=["sentiment"])
+pipeline = krixik.create_pipeline(name="single_sentiment_1", module_chain=["sentiment"])
 ```
 
 ### Required Input Format
@@ -47,7 +46,7 @@ with open(data_dir + "input/valid.json") as f:
         "snippet": "Operating profit totaled EUR 9.4 mn, down from EUR 11.7 mn in 2004."
       }
     ]
-
+    
 
 ### Using the Default Model
 
@@ -102,7 +101,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/b29385f1-b570-4ad6-b6a4-70ddff919a32.json"
       ]
     }
-
+    
 
 To confirm that everything went as it should have, let's load in the text file output from `process_output_files`:
 
@@ -127,7 +126,7 @@ with open(process_output["process_output_files"][0]) as f:
         "neutral": 0.0
       }
     ]
-
+    
 
 ### Using a Non-Default Model
 
@@ -181,4 +180,4 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/bd95c63c-c826-4e91-af07-6da37bd5bea6.json"
       ]
     }
-
+    

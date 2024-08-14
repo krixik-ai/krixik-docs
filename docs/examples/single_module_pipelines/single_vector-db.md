@@ -25,8 +25,7 @@ We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md
 
 ```python
 # create a pipeline with a single vector-db module
-pipeline = krixik.create_pipeline(name="modules-vector-db-docs",
-                                  module_chain=["vector-db"])
+pipeline = krixik.create_pipeline(name="modules-vector-db-docs", module_chain=["vector-db"])
 ```
 
 ### Required Input Format
@@ -92,7 +91,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/63c88fdc-8b62-4f74-af20-c4816ee0bb88.faiss"
       ]
     }
-
+    
 
 ### Using the `semantic_search` method
 
@@ -132,7 +131,7 @@ def query_vector_db(query_vector: np.ndarray, k: int, db_file_path: str) -> Tupl
     
     [1m[[0m[34;49mnotice[0m[1;39;49m][0m[39;49m A new release of pip is available: [0m[31;49m23.3.1[0m[39;49m -> [0m[32;49m24.0[0m
     [1m[[0m[34;49mnotice[0m[1;39;49m][0m[39;49m To update, run: [0m[32;49mpip install --upgrade pip[0m
-
+    
 
 Now query your database using a small sample array with the function above. The results are printed below:
 
@@ -154,4 +153,4 @@ print(f"distance from query to this vector: {distances[0][1]}")
     distance from query to this vector: 0.0
     second closest vector from original: [1 1]
     distance from query to this vector: 0.2928932309150696
-
+    

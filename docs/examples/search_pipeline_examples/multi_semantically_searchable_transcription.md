@@ -34,8 +34,8 @@ Pipeline setup is accomplished through the [`create_pipeline`](../../system/pipe
 ```python
 # create a pipeline as detailed above
 pipeline = krixik.create_pipeline(
-    name="multi_semantically_searchable_transcription",
-    module_chain=["transcribe", "json-to-txt", "parser", "text-embedder", "vector-db"])
+    name="multi_semantically_searchable_transcription", module_chain=["transcribe", "json-to-txt", "parser", "text-embedder", "vector-db"]
+)
 ```
 
 ### Processing an Input File
@@ -100,7 +100,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/9177ce5e-1662-4b5d-bf67-7b538a0d2837.faiss"
       ]
     }
-
+    
 
 ### Performing Semantic Search
 
@@ -111,8 +111,7 @@ Since our pipeline satisfies this condition, it has access to the [`semantic_sea
 
 ```python
 # perform semantic_search over the file in the pipeline
-semantic_output = pipeline.semantic_search(query="Let's talk about the country of Colombia",
-                                           file_ids=[process_output["file_id"]])
+semantic_output = pipeline.semantic_search(query="Let's talk about the country of Colombia", file_ids=[process_output["file_id"]])
 
 # nicely print the output of this process
 print(json.dumps(semantic_output, indent=2))
@@ -174,4 +173,4 @@ print(json.dumps(semantic_output, indent=2))
         }
       ]
     }
-
+    

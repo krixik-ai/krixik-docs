@@ -50,6 +50,6 @@ krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
 ```
 
     SUCCESS: You are now authenticated.
-
+    
 
 Alright, you're good to go! It's time to [assemble some pipelines](../pipeline_creation/create_pipeline.md).

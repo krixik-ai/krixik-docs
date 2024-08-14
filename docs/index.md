@@ -1,4 +1,5 @@
 # Welcome to Krixik!
+[🇨🇴 Spanish version of this document](https://krixik-docs.readthedocs.io/es-main/)
 
 Sequentially assembling multiple AI models into a single pipeline can be painful and expensive. Consuming even a single model can often be draining.
 

@@ -25,8 +25,7 @@ We do this by leveraging the [`create_pipeline`](../../system/pipeline_creation/
 
 ```python
 # create a pipeline as detailed above
-pipeline = krixik.create_pipeline(name="multi_snippets_semantic_search",
-                                  module_chain=["text-embedder", "vector-db"])
+pipeline = krixik.create_pipeline(name="multi_snippets_semantic_search", module_chain=["text-embedder", "vector-db"])
 ```
 
 ### Processing an Input File
@@ -43,7 +42,7 @@ with open(data_dir + "input/1984_snippets.json", "r") as file:
 ```
 
     [{"snippet": "It was a bright cold day in April, and the clocks were striking thirteen.", "line_numbers": [1]}, {"snippet": "Winston Smith, his chin nuzzled into his breast in an effort to escape the\nvile wind, slipped quickly through the glass doors of Victory Mansions,\nthough not quickly enough to prevent a swirl of gritty dust from entering\nalong with him.", "line_numbers": [2, 3, 4, 5]}]
-
+    
 
 We will use the default models for every module in the pipeline, so the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method doesn't need to be leveraged.
 
@@ -81,7 +80,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/f52906bb-eca6-408c-a929-504ea8954e76.faiss"
       ]
     }
-
+    
 
 ### Performing Semantic Search
 
@@ -92,8 +91,7 @@ Since our pipeline satisfies this condition, it has access to the [`semantic_sea
 
 ```python
 # perform semantic_search over the file in the pipeline
-semantic_output = pipeline.semantic_search(query="it was cold night",
-                                           file_ids=[process_output["file_id"]])
+semantic_output = pipeline.semantic_search(query="it was cold night", file_ids=[process_output["file_id"]])
 
 # nicely print the output of this process
 print(json.dumps(semantic_output, indent=2))
@@ -137,6 +135,6 @@ print(json.dumps(semantic_output, indent=2))
         }
       ]
     }
-
+    
 
 To view detail on a pipeline that enables search over straight text documents instead of text snippets in a JSON file, [click here](multi_basic_semantic_search.md).
