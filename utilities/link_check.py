@@ -8,6 +8,25 @@ from utilities.utilities import extract_headings_from_markdown, nono_chars
 headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36"}
 
 
+def cleaner(x: str) -> str:
+    return (
+        x.replace("`", "")
+        .replace("*", "")
+        .replace("'", "")
+        .replace('"', "")
+        .replace("(", "")
+        .replace(")", "")
+        .replace("?", "")
+        .lower()
+        .replace("ú", "u")
+        .replace("é", "e")
+        .replace("ó", "o")
+        .replace(":", "")
+        .replace("¿", "")
+        .replace("í", "i")
+    )
+
+
 def extract_links_from_markdown(markdown_file: str) -> tuple:
     with open(markdown_file, "r", encoding="utf-8") as file:
         markdown_content = file.read()
@@ -20,7 +39,7 @@ def extract_links_from_markdown(markdown_file: str) -> tuple:
     outer_links = []
     for link in links:
         if link[0] == "#":
-            intra_links.append(link)
+            intra_links.append(cleaner(link))
         elif link[:4] == "http":
             outer_links.append(link)
         else:
@@ -40,6 +59,7 @@ def check_file_links(filepath: str, toc_files: list) -> list:
     try:
         intra_links, inter_links, outer_links = extract_links_from_markdown(f"{base_dir}/docs/" + filepath)
         headings = extract_headings_from_markdown(f"{base_dir}/docs/" + filepath)
+        headings_intra = [cleaner(h) for h in headings]
     except FileNotFoundError:
         print(f"FAILURE: check_file_links failed - file {filepath} does not exist")
     except Exception as e:
@@ -53,7 +73,7 @@ def check_file_links(filepath: str, toc_files: list) -> list:
             if no in link:
                 dead_links.append(link)
                 continue
-        if link not in headings:
+        if link not in headings_intra:
             dead_links.append(link)
 
     # check inter_links for dead links
@@ -76,6 +96,7 @@ def check_file_links(filepath: str, toc_files: list) -> list:
                 dead_links.append(link)
                 continue
             headings = extract_headings_from_markdown(f"{base_dir}/" + page)
+            headings = [cleaner(h) for h in headings]
             if "#" + specific_heading not in headings:
                 dead_links.append(link)
         elif link not in toc_files:
@@ -102,6 +123,7 @@ def check_readme_links() -> list:
         filepath = f"{base_dir}/" + "README.md"
         intra_links, inter_links, outer_links = extract_links_from_markdown(filepath)
         headings = extract_headings_from_markdown(filepath)
+        headings = [cleaner(h) for h in headings]
     except FileNotFoundError:
         print(f"FAILURE: check_file_links failed - file {filepath} does not exist")
     except Exception as e:
@@ -116,6 +138,7 @@ def check_readme_links() -> list:
                 dead_links.append(link)
                 break
         if link not in headings:
+            print(f"link --> {link}")
             dead_links.append(link)
 
     for link in outer_links:
