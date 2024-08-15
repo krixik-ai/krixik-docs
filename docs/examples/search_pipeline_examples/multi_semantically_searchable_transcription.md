@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/search_pipeline_examples/multi_semantically_searchable_transcription.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Multi-Module Pipeline: Semantically-Searchable Transcription
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_semantica_sobre_transcripcion/)
 
 This document details a multi-modular pipeline that takes in an audio file, [`transcribes`](../../modules/ai_modules/transcribe_module.md) it, and makes the result [`semantically (vector) searchable`](../../system/search_methods/semantic_search_method.md).
 
@@ -100,7 +101,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/9177ce5e-1662-4b5d-bf67-7b538a0d2837.faiss"
       ]
     }
-    
+
 
 ### Performing Semantic Search
 
@@ -173,4 +174,4 @@ print(json.dumps(semantic_output, indent=2))
         }
       ]
     }
-    
+

@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/single_module_pipelines/single_keyword-db.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Single-Module Pipeline: `keyword-db`
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/ejemplos/ejemplos_pipelines_modulo_unico/unico_keyword-db_base_de_datos_de_palabras_clave/)
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`keyword-db`](../../modules/database_modules/keyword-db_module.md) module. 
 
@@ -44,7 +45,7 @@ with open(data_dir + "input/1984_very_short.txt", "r") as file:
     vile wind, slipped quickly through the glass doors of Victory Mansions,
     though not quickly enough to prevent a swirl of gritty dust from entering
     along with him.
-    
+
 
 ### Using the Default Model
 
@@ -84,7 +85,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/530270a9-0430-4c7d-98d0-a858efa7c879.db"
       ]
     }
-    
+
 
 Because the output of this particular module-model pair is an `SQLlite` database file, `process_output` is "null". However, the output file has been saved to the location noted in the `process_output_files` key.  The `file_id` of the processed input is used as a filename prefix for the output file.
 

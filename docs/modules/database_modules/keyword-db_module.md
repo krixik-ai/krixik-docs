@@ -1,4 +1,5 @@
 ## The `keyword-db` Module
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/modulos/modulos_de_bases_de_datos/modulo_keyword-db_base_de_datos_de_palabras_clave/)
 
 The `keyword-db` module takes document input, parses the document for non-trivial keywords, identifies each of their lemmatized stems, and returns an `SQLite` database with this content.
 

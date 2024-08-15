@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/search_pipeline_examples/multi_basic_semantic_search.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Multi-Module Pipeline: Basic Semantic (Vector) Search
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_semantica_basica/)
 
 This document details a multi-modular pipeline that takes in a text document and enables [`semantic search`](../../system/search_methods/semantic_search_method.md) on it.
 
@@ -133,7 +134,7 @@ with open(data_dir + "input/1984_short.txt", "r") as file:
       WAR IS PEACE
       FREEDOM IS SLAVERY
       IGNORANCE IS STRENGTH
-    
+
 
 We will use the default models for every module in the pipeline, so the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method doesn't need to be leveraged.
 
@@ -171,7 +172,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/3c9f01fe-1a93-43f4-b87c-5270225a0575.faiss"
       ]
     }
-    
+
 
 ### Performing Semantic Search
 
@@ -252,6 +253,6 @@ print(json.dumps(semantic_output, indent=2))
         }
       ]
     }
-    
+
 
 To view detail on a pipeline that enables search over text snippets in a JSON file instead of straight text documents, [click here](multi_snippet_semantic_search.md).

@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/single_module_pipelines/single_sentiment.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Single-Module Pipeline: `sentiment`
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/ejemplos/ejemplos_pipelines_modulo_unico/unico_sentiment_analisis_de_sentimiento/)
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`sentiment`](../../modules/ai_modules/sentiment_module.md) module. 
 
@@ -46,7 +47,7 @@ with open(data_dir + "input/valid.json") as f:
         "snippet": "Operating profit totaled EUR 9.4 mn, down from EUR 11.7 mn in 2004."
       }
     ]
-    
+
 
 ### Using the Default Model
 
@@ -101,7 +102,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/b29385f1-b570-4ad6-b6a4-70ddff919a32.json"
       ]
     }
-    
+
 
 To confirm that everything went as it should have, let's load in the text file output from `process_output_files`:
 
@@ -126,7 +127,7 @@ with open(process_output["process_output_files"][0]) as f:
         "neutral": 0.0
       }
     ]
-    
+
 
 ### Using a Non-Default Model
 
@@ -180,4 +181,4 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/bd95c63c-c826-4e91-af07-6da37bd5bea6.json"
       ]
     }
-    
+

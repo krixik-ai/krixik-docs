@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/search_pipeline_examples/multi_semantically_searchable_ocr.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Multi-Module Pipeline: Semantically-Searchable OCR
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_semantica_sobre_roc/)
 
 This document details a multi-modular pipeline that takes in an image, [`extracts all text`](../../modules/ai_modules/ocr_module.md) found within it, and makes the extracted text [`semantically (vector) searchable`](../../system/search_methods/semantic_search_method.md).
 
@@ -97,7 +98,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/7360a295-435b-4beb-8174-d27aec08aa04.faiss"
       ]
     }
-    
+
 
 ### Performing Semantic Search
 
@@ -174,4 +175,4 @@ print(json.dumps(semantic_output, indent=2))
         }
       ]
     }
-    
+

@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/search_pipeline_examples/multi_semantically_searchable_translation.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Multi-Module Pipeline: Semantically-Searchable Translation
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_semantica_sobre_traduccion/)
 
 This document details a multi-modular pipeline that takes in text, [`translates`](../../modules/ai_modules/translate_module.md) it into a desired language, and makes the result [`semantically (vector) searchable`](../../system/search_methods/semantic_search_method.md).
 
@@ -75,7 +76,7 @@ with open(data_dir + "input/don_esp.txt", "r") as file:
     obligación; y así, puedes decir de la historia todo aquello que te
     pareciere, sin temor que te calunien por el mal ni te premien por el bien
     que dijeres della.
-    
+
 
 Since the input text is in Spanish, we'll use the (non-default) [`opus-mt-es-en`](https://huggingface.co/Helsinki-NLP/opus-mt-es-en) model of the [`translate`](../../modules/ai_modules/translate_module.md) module to translate it into English.
 
@@ -116,7 +117,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/d51f32f5-09d1-4656-a0d5-5da9bdb0a69c.faiss"
       ]
     }
-    
+
 
 ### Performing Semantic Search
 
@@ -189,4 +190,4 @@ print(json.dumps(semantic_output, indent=2))
         }
       ]
     }
-    
+

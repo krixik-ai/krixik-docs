@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/single_module_pipelines/single_summarize.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Single-Module Pipeline: `summarize`
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/ejemplos/ejemplos_pipelines_modulo_unico/unico_summarize_resumen/)
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`summarize`](../../modules/ai_modules/summarize_module.md) module. 
 
@@ -129,7 +130,7 @@ with open(data_dir + "input/1984_short.txt", "r") as file:
       WAR IS PEACE
       FREEDOM IS SLAVERY
       IGNORANCE IS STRENGTH
-    
+
 
 ### Using the Default Model
 
@@ -171,7 +172,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/718948f7-685a-4e8e-b610-254b454897ce.txt"
       ]
     }
-    
+
 
 To confirm that everything went as it should have, let's load in the text file output from `process_output_files`:
 
@@ -205,7 +206,7 @@ with open(process_output["process_output_files"][0], "r") as file:
     The Ministry of Truth--Minitrue, in Newspeak [Newspeak was the officiallanguage of Oceania]--was
     startlingly different from any other object in sight. It was an enormous
     pyramidal structure of glittering white concrete, soaring 300 metres into the air.
-    
+
 
 ### Using a Non-Default Model
 
@@ -262,7 +263,7 @@ with open(process_output_nd["process_output_files"][0], "r") as file:
     up, terrace after terrace, 300 metres into the air . From where
     Winston stood it was just possible to read, picked out on its
     white face in elegant lettering .
-    
+
 
 ### Recursive Summarization
 
@@ -307,7 +308,7 @@ with open(process_output["process_output_files"][0], "r") as file:
     Winston kept his back turned to the telescreen. It was safer; though,
     he well knew, even a back can be revealing. A kilometre away
     the Ministry of Truth, his place of work, towered vast and white.
-    
+
 
 This is a more concise, if more abstract, summary of the original input text.
 
@@ -342,7 +343,7 @@ with open(process_output["process_output_files"][0], "r") as file:
     Winston Smith walked through the glass doors of Victory Mansions. The hallway
     smelled of boiled cabbage and old rag mats. A kilometre away, his
     place of work, the Ministry of Truth, towered vast and white.
-    
+
 
 As you can see, this is very terse but representative summary of our original text.
 

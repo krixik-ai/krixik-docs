@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/single_module_pipelines/single_vector-db.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Single-Module Pipeline: `vector-db`
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/ejemplos/ejemplos_pipelines_modulo_unico/unico_vector-db_base_de_datos_vectorial/)
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`vector-db`](../../modules/database_modules/vector-db_module.md) module.
 
@@ -91,7 +92,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/63c88fdc-8b62-4f74-af20-c4816ee0bb88.faiss"
       ]
     }
-    
+
 
 ### Using the `semantic_search` method
 
@@ -131,7 +132,7 @@ def query_vector_db(query_vector: np.ndarray, k: int, db_file_path: str) -> Tupl
     
     [1m[[0m[34;49mnotice[0m[1;39;49m][0m[39;49m A new release of pip is available: [0m[31;49m23.3.1[0m[39;49m -> [0m[32;49m24.0[0m
     [1m[[0m[34;49mnotice[0m[1;39;49m][0m[39;49m To update, run: [0m[32;49mpip install --upgrade pip[0m
-    
+
 
 Now query your database using a small sample array with the function above. The results are printed below:
 
@@ -153,4 +154,4 @@ print(f"distance from query to this vector: {distances[0][1]}")
     distance from query to this vector: 0.0
     second closest vector from original: [1 1]
     distance from query to this vector: 0.2928932309150696
-    
+

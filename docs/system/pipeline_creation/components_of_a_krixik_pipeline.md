@@ -1,4 +1,5 @@
 ## Components of a Krixik Pipeline
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/sistema/creacion_de_pipelines/componentes_de_un_pipeline_de_krixik/)
 
 Krixik [**pipelines**](create_pipeline.md) are composed of one or more sequentially connected [**modules**](../../modules/modules_overview.md). These modules are containers for a range of [**parameterizable**](../parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) AI [**models**](../parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) or support functions.
 

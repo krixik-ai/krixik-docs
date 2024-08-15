@@ -1,4 +1,5 @@
 ## The `caption` Module
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/modulos/modulos_ia/modulo_caption_leyenda_de_imagen/)
 
 The `caption` module takes an image as input and returns a natural language text description of that image.
 

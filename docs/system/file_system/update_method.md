@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/file_system/update_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## The `update` Method
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/sistema/sistema_de_archivos/metodo_update_actualizar/)
 
 You can update any metadata of any processed file by using the `update` method.
 
@@ -112,7 +113,7 @@ print(json.dumps(list_output, indent=2))
         }
       ]
     }
-    
+
 
 We can use the `update` method to update the file's metadata.
 
@@ -367,7 +368,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/e53d3c35-6f4c-466f-ab7c-6971a6312a09.json"
       ]
     }
-    
+
 
 Now we invoke the [`list`](list_method.md) method to confirm that all metadata has indeed been updated as requested:
 
@@ -429,7 +430,7 @@ print(json.dumps(list_output, indent=2))
         }
       ]
     }
-    
+
 
 ### Observations on the `update` Method
 

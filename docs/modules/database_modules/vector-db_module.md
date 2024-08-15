@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/modules/database_modules/vector-db_module.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## The `vector-db` Module
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/modulos/modulos_de_bases_de_datos/modulo_vector-db_base_de_datos_vectorial/)
 
 The `vector-db` module takes as input a NumPy array, indexes its vectors, and returns an indexed [FAISS database](https://github.com/facebookresearch/faiss).
 

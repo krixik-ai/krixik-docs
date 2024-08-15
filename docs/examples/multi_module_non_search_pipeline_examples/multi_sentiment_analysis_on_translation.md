@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_translation.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Multi-Module Pipeline: Sentiment Analysis on Translation
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/ejemplos/ejemplos_pipelines_multi_modulo_sin_busqueda/multi_analisis_de_sentimiento_sobre_traduccion/)
 
 This document details a multi-modular pipeline that takes in an a text file in a non-English language, [`translates`](../../modules/ai_modules/translate_module.md) it into English, and then performs [`sentiment analysis`](../../modules/ai_modules/sentiment_module.md) on each sentence of the translation.
 
@@ -43,7 +44,7 @@ with open(data_dir + "input/spanish_review.txt", "r") as file:
 ```
 
     Para los trabajos que estoy haciendo me resultÃ³ muy bueno. En una hora carga la baterÃ­a y dura mÃ¡s de 3 horas de trabajo continuo. Un golazo contar con una segunda baterÃ­a. CÃ³modo y con buen torque. Estoy conforme.
-    
+
 
 Since the input text is in Spanish, we'll use the (non-default) [`opus-mt-es-en`](https://huggingface.co/Helsinki-NLP/opus-mt-es-en) model of the [`translate`](../../modules/ai_modules/translate_module.md) module to translate it into English.
 
@@ -115,7 +116,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/ed5b8fa4-3f4b-4e10-b61d-05536db5e929.json"
       ]
     }
-    
+
 
 To confirm that everything went as it should have, let's load in the text file output from `process_output_files`:
 
@@ -158,6 +159,6 @@ with open(process_output["process_output_files"][0]) as f:
         "neutral": 0.0
       }
     ]
-    
+
 
 You may note that, in the first returned snippet, the word "sillón" is missing its second vowel and is printed as "silln". This is a model issue: the [`translate`](../../modules/ai_modules/translate_module.md#available-models-in-the-translate-module) model with which we processed the file may have trouble with accented characters and/or outright remove them. It's important that you familiarize yourself with the peculiarities of AI models you intend to leverage often.
