@@ -13,7 +13,7 @@ Added links to English version of each doc.
 
 ## 2024-June or July, date unlogged
 
-Initial version uploaded
+Initial version uploaded.
 
 ### Changed
 
