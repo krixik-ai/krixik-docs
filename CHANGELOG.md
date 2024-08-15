@@ -4,11 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## 2024-08-15
 
-Translated links to Spanish version.
+Translated links to Spanish version. Filled out create_pipeline TOC
 
 ### Changed
 
 - The links to each Spanish version were in English. Now they are more reasonably in Spanish.
+- The Table of Contents in the create_pipeline article was incomplete. Fixed that.
 
 
 ## 2024-08-14
