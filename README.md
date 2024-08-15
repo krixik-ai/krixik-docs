@@ -4,6 +4,7 @@
 
 
 # Krixik - AI Prototyping for Developers
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/)
 
 Sequentially assembling multiple AI models into a single pipeline can be painful and expensive. Consuming even a single model can often be draining. Doing so iteratively while prototyping is thus often unfeasible.
 

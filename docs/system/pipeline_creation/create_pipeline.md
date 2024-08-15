@@ -1,12 +1,15 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/pipeline_creation/create_pipeline.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Creating a Pipeline
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/sistema/creacion_de_pipelines/creacion_de_pipelines/)
 
 This overview on creating pipelines is divided into the following sections:
 
 - [The `create_pipeline` Method](#the-create_pipeline-method)
 - [A Single-Module Pipeline](#a-single-module-pipeline)
 - [A Multi-Module Pipeline](#a-multi-module-pipeline)
+- [Module Sequence Validation](#module-sequence-validation)
+- [Pipeline Name Repetition](#pipeline-name-repetition)
 
 ### The `create_pipeline` Method
 

@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/convenience_methods/convenience_methods.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Convenience Methods (and More!)
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/sistema/metodos_de_conveniencia/metodos_de_conveniencia/)
 
 This document introduces several useful properties of the main Krixik object and of Krixik pipelines that range from useful (advanced) metadata to convenience functions designed to facilitate input testing. All of these properties can be leveraged *without* necessarily having [initialized a session](../initialization/initialize_and_authenticate.md).
 
@@ -12,7 +13,6 @@ The document is broken down as follows:
 - [Test Pipeline Input with the `test_input` Method](#test-pipeline-input-with-the-test_input-method)
 - [View Module Input and Output Examples](#view-module-input-and-output-examples)
 - [View Module Click Data with the `click_data` Method](#view-module-click-data-with-the-click_data-method)
-
 
 ### View All Available Modules with the `available_modules` Property
 

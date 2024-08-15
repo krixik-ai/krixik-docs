@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/single_module_pipelines/single_keyword-db.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Single-Module Pipeline: `keyword-db`
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/ejemplos/ejemplos_pipelines_modulo_unico/unico_keyword-db_base_de_datos_de_palabras_clave/)
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`keyword-db`](../../modules/database_modules/keyword-db_module.md) module. 
 
@@ -23,8 +24,7 @@ We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md
 
 ```python
 # create a pipeline with a single keyword-db module
-pipeline = krixik.create_pipeline(name="single_keyword-db_1",
-                                  module_chain=["keyword-db"])
+pipeline = krixik.create_pipeline(name="single_keyword-db_1", module_chain=["keyword-db"])
 ```
 
 ### Required Input Format

@@ -1,4 +1,5 @@
 ## The `transcribe` Module
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/modulos/modulos_ia/modulo_transcribe_transcripcion/)
 
 The `transcribe` module takes audio input and returns a text transcript of all words spoken therein.
 

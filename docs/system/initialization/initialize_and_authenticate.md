@@ -1,4 +1,5 @@
 ## Initialize and Authenticate To Get Started
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/sistema/inicializacion/inicializacion_y_autenticacion/)
 
 Once you've [installed the Python Client](install_client.md), import Krixik and initialize your session (performing the necessary authentication) to get started.
 

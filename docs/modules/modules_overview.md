@@ -1,4 +1,5 @@
 ## Currently Available Modules
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/modulos/introduccion_modulos/)
 
 What follows is a list of all [modules](../system/pipeline_creation/components_of_a_krixik_pipeline.md) currently available to [build](../system/pipeline_creation/create_pipeline.md) Krixik pipelines with. As you review the list and begin to ideate pipeline possibilities, keep in mind that (as long as outputs and inputs [match](../system/convenience_methods/convenience_methods.md)) there are no restrictions on how you can put these together. Repetition, even serial repetition, is permitted. Also keep in mind that it's possible for you to incorporate your own modules and models into Krixik.
 

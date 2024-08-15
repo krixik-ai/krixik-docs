@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/search_pipeline_examples/multi_semantically_searchable_ocr.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Multi-Module Pipeline: Semantically-Searchable OCR
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_semantica_sobre_roc/)
 
 This document details a multi-modular pipeline that takes in an image, [`extracts all text`](../../modules/ai_modules/ocr_module.md) found within it, and makes the extracted text [`semantically (vector) searchable`](../../system/search_methods/semantic_search_method.md).
 
@@ -34,8 +35,8 @@ Pipeline setup is accomplished through the [`create_pipeline`](../../system/pipe
 ```python
 # create a pipeline as detailed above
 pipeline = krixik.create_pipeline(
-    name="multi_semantically_searchable_ocr",
-    module_chain=["ocr", "json-to-txt", "parser", "text-embedder", "vector-db"])
+    name="multi_semantically_searchable_ocr", module_chain=["ocr", "json-to-txt", "parser", "text-embedder", "vector-db"]
+)
 ```
 
 ### Processing an Input File
@@ -108,8 +109,7 @@ Since our pipeline satisfies this condition, it has access to the [`semantic_sea
 
 ```python
 # perform semantic_search over the file in the pipeline
-semantic_output = pipeline.semantic_search(query="The man sounds like he's dying.",
-                                           file_ids=[process_output["file_id"]])
+semantic_output = pipeline.semantic_search(query="The man sounds like he's dying.", file_ids=[process_output["file_id"]])
 
 print(json.dumps(semantic_output, indent=2))
 ```

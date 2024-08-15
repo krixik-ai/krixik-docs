@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/search_methods/semantic_search_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## The `semantic_search` Method
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/sistema/metodos_de_busqueda/metodo_semantic_search_busqueda_semantica/)
 
 Krixik's `semantic_search` method enables semantic (a.k.a. vector) search on documents processed through certain pipelines. Much has been written about semantic search, but in a nutshell, instead of searching a document for specific keywords, it searches for text similar in _meaning_ to the string that's been queried for. Contrast this to [keyword search](keyword_search_method.md).
 

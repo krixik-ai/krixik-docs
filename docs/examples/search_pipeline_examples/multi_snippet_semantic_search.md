@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/search_pipeline_examples/multi_snippet_semantic_search.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Multi-Module Pipeline: Semantic (Vector) Search on Snippets
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_semantica_sobre_fragmentos/)
 
 This document details a multi-modular pipeline that takes in a series of text snippets in a JSON file and enables [`semantic (vector) search`](../../system/search_methods/semantic_search_method.md) on them.
 
@@ -25,8 +26,7 @@ We do this by leveraging the [`create_pipeline`](../../system/pipeline_creation/
 
 ```python
 # create a pipeline as detailed above
-pipeline = krixik.create_pipeline(name="multi_snippets_semantic_search",
-                                  module_chain=["text-embedder", "vector-db"])
+pipeline = krixik.create_pipeline(name="multi_snippets_semantic_search", module_chain=["text-embedder", "vector-db"])
 ```
 
 ### Processing an Input File
@@ -92,8 +92,7 @@ Since our pipeline satisfies this condition, it has access to the [`semantic_sea
 
 ```python
 # perform semantic_search over the file in the pipeline
-semantic_output = pipeline.semantic_search(query="it was cold night",
-                                           file_ids=[process_output["file_id"]])
+semantic_output = pipeline.semantic_search(query="it was cold night", file_ids=[process_output["file_id"]])
 
 # nicely print the output of this process
 print(json.dumps(semantic_output, indent=2))

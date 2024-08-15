@@ -1,4 +1,5 @@
 ## Krixik Search Pipelines
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/ejemplos/ejemplos_pipelines_de_busqueda/introduccion_pipelines_de_busqueda/)
 
 ### Search Pipeline Overview
 

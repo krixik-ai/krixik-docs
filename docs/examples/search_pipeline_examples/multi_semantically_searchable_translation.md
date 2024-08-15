@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/search_pipeline_examples/multi_semantically_searchable_translation.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Multi-Module Pipeline: Semantically-Searchable Translation
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_semantica_sobre_traduccion/)
 
 This document details a multi-modular pipeline that takes in text, [`translates`](../../modules/ai_modules/translate_module.md) it into a desired language, and makes the result [`semantically (vector) searchable`](../../system/search_methods/semantic_search_method.md).
 
@@ -30,8 +31,8 @@ We do this by leveraging the [`create_pipeline`](../../system/pipeline_creation/
 ```python
 # create a pipeline as detailed above
 pipeline = krixik.create_pipeline(
-    name="multi_semantically_searchable_translation",
-    module_chain=["parser", "translate", "text-embedder", "vector-db"])
+    name="multi_semantically_searchable_translation", module_chain=["parser", "translate", "text-embedder", "vector-db"]
+)
 ```
 
 ### Processing an Input File
@@ -127,8 +128,7 @@ Since our pipeline satisfies this condition, it has access to the [`semantic_sea
 
 ```python
 # perform semantic_search over the file in the pipeline
-semantic_output = pipeline.semantic_search(query="Sterile ideas bring little to man",
-                                           file_ids=[process_output["file_id"]])
+semantic_output = pipeline.semantic_search(query="Sterile ideas bring little to man", file_ids=[process_output["file_id"]])
 
 # nicely print the output of this process
 print(json.dumps(semantic_output, indent=2))

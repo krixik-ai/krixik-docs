@@ -1,4 +1,5 @@
 ## The `summarize` Module
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/modulos/modulos_ia/modulo_summarize_resumen/)
 
 The `summarize` module takes a text document and returns a summarized version of it.
 

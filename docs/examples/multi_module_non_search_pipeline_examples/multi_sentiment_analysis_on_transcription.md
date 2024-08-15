@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_transcription.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Multi-Module Pipeline: Sentiment Analysis on Transcription
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/ejemplos/ejemplos_pipelines_multi_modulo_sin_busqueda/multi_analisis_de_sentimiento_sobre_transcripcion/)
 
 This document details a multi-modular pipeline that takes in an audio file in English, [`transcribes`](../../modules/ai_modules/transcribe_module.md) it, and then performs [`sentiment analysis`](../../modules/ai_modules/sentiment_module.md) on each sentence of the transcript.
 
@@ -30,8 +31,7 @@ Pipeline setup is accomplished through the [`create_pipeline`](../../system/pipe
 
 ```python
 # create a pipeline as detailed above
-pipeline = krixik.create_pipeline(name="multi_sentiment_analysis_on_transcription",
-                                  module_chain=["transcribe", "json-to-txt", "parser", "sentiment"])
+pipeline = krixik.create_pipeline(name="multi_sentiment_analysis_on_transcription", module_chain=["transcribe", "json-to-txt", "parser", "sentiment"])
 ```
 
 ### Processing an Input File

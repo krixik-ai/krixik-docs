@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/modules/ai_modules/text-embedder_module.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## The `text-embedder` Module
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/modulos/modulos_ia/modulo_text-embedder_encaje_lexico/)
 
 The `text-embedder` module takes one or more text snippets, transforms each into a vector (a mathematical representation of the snippet that retains its meaning), and returns an array containing every generated vector. Vector arrays can then be fed into a vector database to enable semantic (a.k.a. vector) search.
 

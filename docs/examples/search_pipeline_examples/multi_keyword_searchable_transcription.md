@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/search_pipeline_examples/multi_keyword_searchable_transcription.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Multi-Module Pipeline: Keyword-Searchable Transcription
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_por_palabras_clave_sobre_transcripcion/)
 
 This document details a multi-modular pipeline that takes in an audio file, [`transcribes`](../../modules/ai_modules/transcribe_module.md) it, and makes the result [`keyword searchable`](../../system/search_methods/keyword_search_method.md).
 
@@ -27,8 +28,7 @@ We do this by leveraging the [`create_pipeline`](../../system/pipeline_creation/
 
 ```python
 # create a pipeline as detailed above
-pipeline = krixik.create_pipeline(name="multi_keyword_searchable_transcription",
-                                  module_chain=["transcribe", "json-to-txt", "keyword-db"])
+pipeline = krixik.create_pipeline(name="multi_keyword_searchable_transcription", module_chain=["transcribe", "json-to-txt", "keyword-db"])
 ```
 
 ### Processing an Input File
@@ -104,8 +104,7 @@ Since our pipeline satisfies this condition, it has access to the [`keyword_sear
 
 ```python
 # perform keyword search over the file in the pipeline
-keyword_output = pipeline.keyword_search(query="lets talk about the country of Colombia",
-                                         file_ids=[process_output["file_id"]])
+keyword_output = pipeline.keyword_search(query="lets talk about the country of Colombia", file_ids=[process_output["file_id"]])
 
 # nicely print the output of this process
 print(json.dumps(keyword_output, indent=2))

@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/single_module_pipelines/single_text-embedder.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Single-Module Pipeline: `text-embedder`
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/ejemplos/ejemplos_pipelines_modulo_unico/unico_text-embedder_encaje_lexico/)
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module. 
 
@@ -26,8 +27,7 @@ We use the [`create_pipeline`](../../system/pipeline_creation/create_pipeline.md
 
 ```python
 # create a pipeline with a single text-embedder module
-pipeline = krixik.create_pipeline(name="single_text-embedder-1",
-                                  module_chain=["text-embedder"])
+pipeline = krixik.create_pipeline(name="single_text-embedder-1", module_chain=["text-embedder"])
 ```
 
 ### Required Input Format
