@@ -47,7 +47,7 @@ nav:
     - support function models:
       - 'text parser': modules/support_function_modules/parser_module.md
       - 'json to txt': modules/support_function_modules/json-to-txt_module.md
-    y- 'adding your own modules or models': modules/adding_your_own_modules_or_models.md
+      - 'adding your own modules or models': modules/adding_your_own_modules_or_models.md
   - System:
     - 'overview': system/system_overview.md
     - initialization:
