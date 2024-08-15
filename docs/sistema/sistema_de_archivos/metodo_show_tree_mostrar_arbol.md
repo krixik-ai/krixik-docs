@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/file_system/show_tree_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## El Método `show_tree` (Mostrar Árbol)
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/system/file_system/show_tree_method/)
 
 El método `show_tree` te permite visualizar, ya sea por tu terminal o como salida en tu IDE, todos los archivos actualmente en tu *pipeline*. Está diseñado como una versión simple y análoga del comando ['tree' de UNIX](https://www.tecmint.com/linux-tree-command-examples/).
 
@@ -23,8 +24,7 @@ Primero debes crear un *pipeline* sobre el cual puedas ejecutar este ejemplo. Un
 
 ```python
 # crea un pipeline para este ejemplo con un módulo parser
-pipeline = krixik.create_pipeline(name="metodo_show_tree_1_parser",
-                                  module_chain=["parser"])
+pipeline = krixik.create_pipeline(name="metodo_show_tree_1_parser", module_chain=["parser"])
 ```
 
 Para facilitar las cosas, establece la ubicación de un archivo y guárdalo como una variable; luego usarás el mismo archivo varias veces pero con diferentes nombres. Lo haces de la siguiente manera:
@@ -41,31 +41,31 @@ Ahora usa el método [`process`](../parametros_y_procesar_archivos_a_traves_de_p
 ```python
 # procesa el mismo archivo por el pipeline varias veces
 process_output = pipeline.process(
-    local_file_path=test_file, # indícale a Krixik que quieres el archivo antes definido y guardado en una variable
-    local_save_directory=data_dir + "output", # el directorio local en el que se guardará el archivo de salida
+    local_file_path=test_file,  # indícale a Krixik que quieres el archivo antes definido y guardado en una variable
+    local_save_directory=data_dir + "output",  # el directorio local en el que se guardará el archivo de salida
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # espera que el proceso termine antes de devolver control del IDE al usuario
-    verbose=False, # no mostrar actualizaciones de proceso al ejecutar el código
+    verbose=False,  # no mostrar actualizaciones de proceso al ejecutar el código
     symbolic_directory_path="/mi/ruta/personalizada",
     file_name="archivo_num_uno.txt",
 )
 
 process_output = pipeline.process(
-    local_file_path=test_file, # indícale a Krixik que quieres el archivo antes definido y guardado en una variable
+    local_file_path=test_file,  # indícale a Krixik que quieres el archivo antes definido y guardado en una variable
     local_save_directory=data_dir + "output",  # el directorio local en el que se guardará el archivo de salida
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # espera que el proceso termine antes de devolver control del IDE al usuario
-    verbose=False, # no mostrar actualizaciones de proceso al ejecutar el código
+    verbose=False,  # no mostrar actualizaciones de proceso al ejecutar el código
     symbolic_directory_path="/mi/ruta/personalizada",
     file_name="archivo_num_dos.txt",
 )
 
 process_output = pipeline.process(
-    local_file_path=test_file, # indícale a Krixik que quieres el archivo antes definido y guardado en una variable
+    local_file_path=test_file,  # indícale a Krixik que quieres el archivo antes definido y guardado en una variable
     local_save_directory=data_dir + "output",  # el directorio local en el que se guardará el archivo de salida
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # espera que el proceso termine antes de devolver control del IDE al usuario
-    verbose=False, # no mostrar actualizaciones de proceso al ejecutar el código
+    verbose=False,  # no mostrar actualizaciones de proceso al ejecutar el código
     symbolic_directory_path="/mi/ruta/personalizada/subdir",
     file_name="archivo_num_tres.txt",
 )

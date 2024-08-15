@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/parameters_processing_files_through_pipelines/fetch_output_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## El Método `fetch_output` (Obtener Salida)
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/system/parameters_processing_files_through_pipelines/fetch_output_method/)
 
 El método `fetch_output` se usa para descargar la salida de un [`proceso`](../parametros_y_procesar_archivos_a_traves_de_pipelines/metodo_process_procesar.md) de *pipeline*. Esto es particularmente útil cuando usas el método [`process`](../parametros_y_procesar_archivos_a_traves_de_pipelines/metodo_process_procesar.md) poniendo `wait_for_process` como `False`, dado que en ese caso la salida del proceso no será inmediatamente reproducida por el método [`process`](../parametros_y_procesar_archivos_a_traves_de_pipelines/metodo_process_procesar.md).
 
@@ -20,8 +21,7 @@ Primero debes crear un *pipeline* sobre el cual puedas ejecutar este ejemplo. Un
 
 ```python
 # crea un pipeline de módulo único con un módulo parser para este ejemplo
-pipeline = krixik.create_pipeline(name="metodo_fetch-output_1_parser",
-                                  module_chain=["parser"])
+pipeline = krixik.create_pipeline(name="metodo_fetch-output_1_parser", module_chain=["parser"])
 ```
 
 Ahora procesa un archivo a través de este *pipeline*. Usa un breve archivo TXT que contiene el primer párrafo de <u>1984</u>, por George Orwell:
@@ -34,7 +34,7 @@ process_output = pipeline.process(
     local_save_directory=data_dir + "output",  # el directorio local en el que se guardará el archivo de salida
     expire_time=60 * 60 * 24 * 7,  # data de este proceso se eliminará del sistema Krixik en 7 días
     wait_for_process=True,  # espera que el proceso termine antes de devolver control del IDE al usuario
-    verbose=False, # no mostrar actualizaciones de proceso al ejecutar el código
+    verbose=False,  # no mostrar actualizaciones de proceso al ejecutar el código
 )
 ```
 
@@ -81,8 +81,7 @@ Ya con el `file_id` puedes usar el método `fetch_output` para recuperar esta sa
 
 ```python
 # recupera la salida de este proceso con el método fetch_output y el file_id
-fetched_output = pipeline.fetch_output(file_id=process_output["file_id"],
-                                       local_save_directory="../../../data/output")
+fetched_output = pipeline.fetch_output(file_id=process_output["file_id"], local_save_directory="../../../data/output")
 ```
 
 Reproducir la salida recuperada muestra el JSON que buscabas y alguna información adicional. Esta información adicional es muy similar a la salida del método [`process`](../parametros_y_procesar_archivos_a_traves_de_pipelines/metodo_process_procesar.md):

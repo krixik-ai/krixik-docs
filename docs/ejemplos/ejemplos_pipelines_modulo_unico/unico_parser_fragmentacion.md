@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/single_module_pipelines/single_parser.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## *Pipeline* de Módulo Único: `parser` (Fragmentación de Texto)
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/examples/single_module_pipelines/single_parser/)
 
 Este documento presenta una guía de cómo ensamblar y consumir un *pipeline* de módulo único que solo incluye un módulo [`parser` (fragmentación de texto)](../../modulos/modulos_de_funciones_de_apoyo/modulo_parser_fragmentacion.md). Se divide en las siguientes secciones:
 
@@ -18,8 +19,7 @@ Usa el método [`create_pipeline`](../../sistema/creacion_de_pipelines/creacion_
 
 ```python
 # crea un pipeline con un solo módulo parser
-pipeline = krixik.create_pipeline(name="unico_parser_1",
-                                  module_chain=["parser"])
+pipeline = krixik.create_pipeline(name="unico_parser_1", module_chain=["parser"])
 ```
 
 ### Formato de Entrada Requerido
@@ -143,7 +143,9 @@ process_output = pipeline.process(
     expire_time=60 * 30,
     wait_for_process=True,
     verbose=False,
-    modules={"parser": {"model": "fixed", "params": {"chunk_size": 9, "overlap_size": 3}}}, # especifica un modelo no-predeterminado (y sus parámetros) para este proceso
+    modules={
+        "parser": {"model": "fixed", "params": {"chunk_size": 9, "overlap_size": 3}}
+    },  # especifica un modelo no-predeterminado (y sus parámetros) para este proceso
 )
 ```
 

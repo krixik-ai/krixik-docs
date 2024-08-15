@@ -1,4 +1,5 @@
 ## El Módulo `caption` (Leyenda de Imagen)
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/modules/ai_modules/caption_module/)
 
 El módulo `caption` (leyenda de imagen) toma como entrada un archivo de imagen y devuelve una descripción textual de esa imagen.
 

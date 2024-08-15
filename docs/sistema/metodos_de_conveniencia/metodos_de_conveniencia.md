@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/convenience_methods/convenience_methods.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Métodos de Conveniencia (¡y Más!)
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/system/convenience_methods/convenience_methods/)
 
 Este documento introduce una variedad de propiedades útiles del objeto principal Krixik y de *pipelines* Krixik que van desde metadata avanzada hasta funciones de conveniencia diseñadas para facilitar pruebas sobre entradas. Todas estas propiedades pueden ser usadas *sin* necesariamente haber antes [inicializado una sesión](../inicializacion/inicializacion_y_autenticacion.md).
 

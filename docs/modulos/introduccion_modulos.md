@@ -1,8 +1,9 @@
 ## Introducción a Módulos Krixik (Módulos Hoy Disponibles)
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/modules/modules_overview/)
 
 A continuación encontrarás una lista de todos los [módulos](../sistema/creacion_de_pipelines/componentes_de_un_pipeline_de_krixik.md) actualmente disponibles para el [ensamblaje](../sistema/creacion_de_pipelines/creacion_de_pipelines.md) de *pipelines* Krixik. Al estudiar la lista y empezar a tener ideas sobre posibles *pipelines*, ten en cuenta que (siempre y cuando encajen sus entradas y salidas) no hay restricción en cuanto a cómo puedes conectar los módulos. La repetición, incluso la repetición en serie, está permitida. También ten en cuenta que las puertas están abiertas para que incorpores [tus propios módulos y modelos](agrega_tus_propios_modulos_o_modelos.md) a Krixik.
 
-Dado que la lista de módulos Krixik—y de los modelos dentro de ellos—crecerá constantement, sugerimos que marques esta página como una de tus favoritas.
+Dado que la lista de módulos Krixik—y de los modelos dentro de ellos—crecerá constantemente, sugerimos que marques esta página como una de tus favoritas.
 
 ### Módulos IA
 

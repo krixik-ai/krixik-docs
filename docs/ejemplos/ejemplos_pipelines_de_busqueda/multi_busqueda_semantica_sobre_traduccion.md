@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/search_pipeline_examples/multi_semantically_searchable_translation.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## *Pipeline* Multimodular: Búsqueda Semántica Sobre Traducción
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/examples/search_pipeline_examples/multi_semantically_searchable_translation/)
 
 Este documento detalla un *pipeline* multimodular que recibe un archivo de texto como entrada, [traduce el texto](../../modulos/modulos_ia/modulo_translate_traduccion.md) a otro idioma, y habilita [búsqueda semántica](../../sistema/metodos_de_busqueda/metodo_semantic_search_busqueda_semantica.md) sobre la traducción.
 
@@ -27,8 +28,9 @@ Para esto usarás el método [`create_pipeline`](../../sistema/creacion_de_pipel
 
 ```python
 # creación del pipeline descrito
-pipeline = krixik.create_pipeline(name="multi_busqueda_semantica_sobre_traduccion",
-                                  module_chain=["parser", "translate", "text-embedder", "vector-db"])
+pipeline = krixik.create_pipeline(
+    name="multi_busqueda_semantica_sobre_traduccion", module_chain=["parser", "translate", "text-embedder", "vector-db"]
+)
 ```
 
 ### Procesa un Archivo de Entrada
@@ -85,7 +87,7 @@ process_output = pipeline.process(
     expire_time=60 * 30,  # data de este proceso se eliminará del sistema Krixik en 30 minutos
     wait_for_process=True,  # espera que el proceso termine antes de devolver control del IDE al usuario
     verbose=False,  # no mostrar actualizaciones de proceso al ejecutar el código
-    modules={"translate": {"model": "opus-mt-es-en"}}, # especificar un modelo no-predeterminado para el módulo de traducción
+    modules={"translate": {"model": "opus-mt-es-en"}},  # especificar un modelo no-predeterminado para el módulo de traducción
 )
 ```
 

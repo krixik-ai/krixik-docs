@@ -1,4 +1,5 @@
 ## Inicializa y Autentica para Empezar
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/system/initialization/initialize_and_authenticate/)
 
 Tras [instalar el cliente Krixik](instalacion_del_cliente.md), importa Krixik e inicializa tu sesión (completando la autenticación necesaria) para empezar a usar Krixik.
 
@@ -46,8 +47,7 @@ Ahora inicializa tu sesión con tus secretos:
 
 ```python
 # inicializa tu sesión con tus secretos
-krixik.init(api_key=MI_API_KEY,
-            api_url=MI_API_URL)
+krixik.init(api_key=MI_API_KEY, api_url=MI_API_URL)
 ```
 
     SUCCESS: You are now authenticated.

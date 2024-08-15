@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/single_module_pipelines/single_json-to-txt.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## *Pipeline* de Módulo Único: `json-to-txt`
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/examples/single_module_pipelines/single_json-to-txt/)
 
 Este documento presenta una guía de cómo ensamblar y consumir un *pipeline* de módulo único que solo incluye un módulo [`json-to-txt`](../../modulos/modulos_de_funciones_de_apoyo/modulo_json-to-txt.md). Se divide en las siguientes secciones:
 
@@ -17,8 +18,7 @@ Usa el método [`create_pipeline`](../../sistema/creacion_de_pipelines/creacion_
 
 ```python
 # crea un pipeline con un solo módulo json-to-txt
-pipeline = krixik.create_pipeline(name="unico_json-to-txt_1",
-                                  module_chain=["json-to-txt"])
+pipeline = krixik.create_pipeline(name="unico_json-to-txt_1", module_chain=["json-to-txt"])
 ```
 
 ### Formato de Entrada Requerido
@@ -68,7 +68,7 @@ process_output = pipeline.process(
     local_save_directory=data_dir + "output",  # el directorio local en el que se guarda el archivo de salida
     expire_time=60 * 30,  # data de este proceso se eliminará del sistema Krixik en 30 minutos
     wait_for_process=True,  # espera que el proceso termine antes de devolver control del IDE al usuario
-    verbose=False, # no mostrar actualizaciones de proceso al ejecutar el código
+    verbose=False,  # no mostrar actualizaciones de proceso al ejecutar el código
 )
 ```
 

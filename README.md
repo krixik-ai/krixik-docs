@@ -4,6 +4,7 @@
 
 
 # ¡Bienvenidos a Krixik!
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/)
 
 Ensamblar un *pipeline* secuencialmente compuesto de varios modelos de IA puede ser difícil y costoso. Incluso consumir un solo modelo es a menudo una tarea desgastante.
 
