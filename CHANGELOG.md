@@ -2,7 +2,16 @@
 All notable changes to this project will be documented in this file.
 
 
-## 2024-07-27
+## 2024-08-15
+
+Translated links to Spanish version.
+
+### Changed
+
+- The links to each Spanish version were in English. Now they are more reasonably in Spanish.
+
+
+## 2024-08-14
 
 Added link to Spanish version of each doc.
 
