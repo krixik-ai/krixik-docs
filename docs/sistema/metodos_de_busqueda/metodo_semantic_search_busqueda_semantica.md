@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/search_methods/semantic_search_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## El Método `semantic_search` (Búsqueda Semántica)
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/system/search_methods/semantic_search_method/)
 
 El método `semantic_search` de Krixik habilita búsqueda semántica sobre documentos procesados a través de ciertos *pipelines*. Mucho se ha escrito sobre la búsqueda semántica, pero en breve, en vez de buscar palabras clave en un documento, este método busca texto que es similar en _significado_ al *string* que se ha enviado. Esto es diferente a lo que ofrece el [`keyword_search`](metodo_keyword_search_busqueda_por_palabras_clave.md).
 
@@ -40,10 +41,7 @@ Para los ejemplos de este documento usarás un *pipeline* que consiste de tres m
 
 ```python
 # crea el pipeline básico de búsqueda semántica
-pipeline = krixik.create_pipeline(
-    name="metodo_semantic_search_1",
-    module_chain=["parser", "text-embedder", "vector-db"]
-)
+pipeline = krixik.create_pipeline(name="metodo_semantic_search_1", module_chain=["parser", "text-embedder", "vector-db"])
 ```
 
 Una vez creado el *pipeline*, puedes [`procesar`](../parametros_y_procesar_archivos_a_traves_de_pipelines/metodo_process_procesar.md) algunos archivos de texto a través de él para tener sobre qué buscar:
@@ -56,7 +54,7 @@ salida_1 = pipeline.process(
     local_save_directory=data_dir + "output",  # el directorio local en el que se guardará el archivo de salida
     expire_time=60 * 30,  # data de este proceso se eliminará del sistema Krixik en 30 minutos
     wait_for_process=True,  # espera que el proceso termine antes de devolver control del IDE al usuario
-    verbose=False, # no mostrar actualizaciones de proceso al ejecutar el código
+    verbose=False,  # no mostrar actualizaciones de proceso al ejecutar el código
     symbolic_directory_path="/novelas/gotica",
     file_name="Frankenstein.txt",
 )
@@ -66,7 +64,7 @@ salida_2 = pipeline.process(
     local_save_directory=data_dir + "output",  # el directorio local en el que se guardará el archivo de salida
     expire_time=60 * 30,  # data de este proceso se eliminará del sistema Krixik en 30 minutos
     wait_for_process=True,  # espera que el proceso termine antes de devolver control del IDE al usuario
-    verbose=False, # no mostrar actualizaciones de proceso al ejecutar el código
+    verbose=False,  # no mostrar actualizaciones de proceso al ejecutar el código
     symbolic_directory_path="/novelas/romance",
     file_name="Pride and Prejudice.txt",
 )
@@ -76,7 +74,7 @@ salida_3 = pipeline.process(
     local_save_directory=data_dir + "output",  # el directorio local en el que se guardará el archivo de salida
     expire_time=60 * 30,  # data de este proceso se eliminará del sistema Krixik en 30 minutos
     wait_for_process=True,  # espera que el proceso termine antes de devolver control del IDE al usuario
-    verbose=False, # no mostrar actualizaciones de proceso al ejecutar el código
+    verbose=False,  # no mostrar actualizaciones de proceso al ejecutar el código
     symbolic_directory_path="/novelas/aventura",
     file_name="Moby Dick.txt",
 )
@@ -86,7 +84,7 @@ salida_4 = pipeline.process(
     local_save_directory=data_dir + "output",  # el directorio local en el que se guardará el archivo de salida
     expire_time=60 * 30,  # data de este proceso se eliminará del sistema Krixik en 30 minutos
     wait_for_process=True,  # espera que el proceso termine antes de devolver control del IDE al usuario
-    verbose=False, # no mostrar actualizaciones de proceso al ejecutar el código
+    verbose=False,  # no mostrar actualizaciones de proceso al ejecutar el código
     symbolic_directory_path="/novelas/bildungsroman",
     file_name="Little Women.txt",
 )
@@ -125,8 +123,7 @@ Con el siguiente código puedes buscar semánticamente sobre uno de los archivos
 
 ```python
 # haz semantic_search sobre un archivo
-semantic_output = pipeline.semantic_search(query="It was cold night.",
-                                           file_names=["Little Women.txt"])
+semantic_output = pipeline.semantic_search(query="It was cold night.", file_names=["Little Women.txt"])
 
 # nítidamente reproduce la salida de este proceso
 print(json.dumps(semantic_output, indent=2))
@@ -211,10 +208,7 @@ Cuando el argumento `sort_order` tiene el valor 'global', los resultados de todo
 
 ```python
 # haz búsqueda semántica sobre varios archivos
-semantic_output_2 = pipeline.semantic_search(query="It was cold night.",
-                                             symbolic_directory_paths=["/novelas*"],
-                                             sort_order="global",
-                                             k=4)
+semantic_output_2 = pipeline.semantic_search(query="It was cold night.", symbolic_directory_paths=["/novelas*"], sort_order="global", k=4)
 
 # nicely print the output of this search
 print(json.dumps(semantic_output_2, indent=2))

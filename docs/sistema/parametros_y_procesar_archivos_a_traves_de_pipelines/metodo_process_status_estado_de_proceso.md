@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/parameters_processing_files_through_pipelines/process_status_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## El Método `process_status` (Estado de Proceso)
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/system/parameters_processing_files_through_pipelines/process_status_method/)
 
 El método `process_status` (estado de proceso) está disponible para todo *pipeline* Krixik. Se usa cuando quieres revisar el estado de archivos que se están procesando por un *pipeline*.
 
@@ -27,8 +28,7 @@ Primero debes crear un *pipeline* sobre el cual puedas ejecutar este ejemplo. Un
 
 ```python
 # crea un pipeline de módulo único con un módulo keyword-db para este ejemplo
-pipeline = krixik.create_pipeline(name="metodo_process_status_1_keyword-db",
-                                  module_chain=["keyword-db"])
+pipeline = krixik.create_pipeline(name="metodo_process_status_1_keyword-db", module_chain=["keyword-db"])
 ```
 
 Ahora procesa un archivo a través de este *pipeline*. Usa un breve archivo TXT que contiene una porción de <u>Moby Dick</u>, de Herman Melville:
@@ -41,7 +41,7 @@ process_output = pipeline.process(
     local_save_directory=data_dir + "output",  # el directorio local en el que se guardará el archivo de salida
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # espera que el proceso termine antes de devolver control del IDE al usuario
-    verbose=False, # no mostrar actualizaciones de proceso al ejecutar el código
+    verbose=False,  # no mostrar actualizaciones de proceso al ejecutar el código
 )
 ```
 

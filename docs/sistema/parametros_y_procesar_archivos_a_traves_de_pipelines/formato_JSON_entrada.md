@@ -1,4 +1,5 @@
 ## Formato JSON para Entradas
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/system/parameters_processing_files_through_pipelines/JSON_input_format/)
 
 ### Detalles del Formato JSON
 

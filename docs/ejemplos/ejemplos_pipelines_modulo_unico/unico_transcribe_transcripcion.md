@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/single_module_pipelines/single_transcribe.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## *Pipeline* de Módulo Único: `transcribe` (Transcripción)
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/examples/single_module_pipelines/single_transcribe/)
 
 Este documento presenta una guía de cómo ensamblar y consumir un *pipeline* de módulo único que solo incluye un módulo [`transcribe` (transcripción)](../../modulos/modulos_ia/modulo_transcribe_transcripcion.md). Se divide en las siguientes secciones:
 
@@ -18,8 +19,7 @@ Usa el método [`create_pipeline`](../../sistema/creacion_de_pipelines/creacion_
 
 ```python
 # crea un pipeline con un solo módulo transcribe
-pipeline = krixik.create_pipeline(name="unico_transcribe_1",
-                                  module_chain=["transcribe"])
+pipeline = krixik.create_pipeline(name="unico_transcribe_1", module_chain=["transcribe"])
 ```
 
 ### Formato de Entrada Requerido
@@ -62,7 +62,7 @@ process_output = pipeline.process(
     local_save_directory=data_dir + "output",  # el directorio local en el que se guardará el archivo de salida
     expire_time=60 * 30,  # data de este proceso se eliminará del sistema Krixik en 30 minutos
     wait_for_process=True,  # espera que el proceso termine antes de devolver control del IDE al usuario
-    verbose=False, # no mostrar actualizaciones de proceso al ejecutar el código
+    verbose=False,  # no mostrar actualizaciones de proceso al ejecutar el código
 )
 ```
 
@@ -95,7 +95,7 @@ process_output = pipeline.process(
     expire_time=60 * 30,
     wait_for_process=True,
     verbose=False,
-    modules={"transcribe": {"model": "whisper-large-v3"}}, # especifica un modelo no-predeterminado (y sus parámetros) para este proceso
+    modules={"transcribe": {"model": "whisper-large-v3"}},  # especifica un modelo no-predeterminado (y sus parámetros) para este proceso
 )
 ```
 

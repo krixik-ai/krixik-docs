@@ -1,4 +1,5 @@
 ## Agrega tus Propios Módulos o Modelos
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/modules/adding_your_own_modules_or_models/)
 
 ¿Hay algún módulo o modelo que quieras agregar a Krixik? Tal vez:
 

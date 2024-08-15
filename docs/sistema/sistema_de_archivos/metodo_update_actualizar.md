@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/file_system/update_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## El Método `update` (Actualizar)
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/system/file_system/update_method/)
 
 Puedes actualizar cualquier metadato de un archivo procesado con el método `update`.
 
@@ -50,7 +51,7 @@ process_output = pipeline.process(
     local_save_directory=data_dir + "output",  # el directorio local en el que se guardará el archivo de salida
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # espera que el proceso termine antes de devolver control del IDE al usuario
-    verbose=False, # no mostrar actualizaciones de proceso al ejecutar el código
+    verbose=False,  # no mostrar actualizaciones de proceso al ejecutar el código
     symbolic_directory_path="/novelas/gotica",
     file_name="Draculas.txt",
     file_tags=[{"escritor": "Shelley"}, {"categoria": "gotica"}, {"siglo": "19"}],

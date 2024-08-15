@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/search_pipeline_examples/multi_semantically_searchable_translated_transcription.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## *Pipeline* Multimodular: Búsqueda Semántica Sobre Transcripción Traducida
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/examples/search_pipeline_examples/multi_semantically_searchable_translated_transcription/)
 
 Este documento detalla un *pipeline* multimodular que recibe un archivo de audio como entrada, lo [`transcribe`](../../modulos/modulos_ia/modulo_transcribe_transcripcion.md), [`traduce`](../../modulos/modulos_ia/modulo_translate_traduccion.md) la transcripción, y habilita [`búsqueda semántica`](../../sistema/metodos_de_busqueda/metodo_semantic_search_busqueda_semantica.md) sobre la transcripción.
 
@@ -33,8 +34,10 @@ Para crear el pipeline usarás el método [`create_pipeline`](../../sistema/crea
 
 ```python
 # creación del pipeline descrito
-pipeline = krixik.create_pipeline(name="multi_busqueda_semantica_sobre_transcripcion_traducida",
-                                  module_chain=["transcribe", "translate", "json-to-txt", "parser", "text-embedder", "vector-db"])
+pipeline = krixik.create_pipeline(
+    name="multi_busqueda_semantica_sobre_transcripcion_traducida",
+    module_chain=["transcribe", "translate", "json-to-txt", "parser", "text-embedder", "vector-db"],
+)
 ```
 
 ### Procesa un Archivo de Entrada
@@ -69,12 +72,12 @@ Dado que el audio de entrada está en español, usarás uno de los modelos no-pr
 ```python
 # procesa el archivo a través del pipeline según lo arriba descrito
 process_output = pipeline.process(
-    local_file_path=data_dir + "input/peso_muerto.mp3", # la ruta de archivo inicial en la que yace el archivo de entrada
+    local_file_path=data_dir + "input/peso_muerto.mp3",  # la ruta de archivo inicial en la que yace el archivo de entrada
     local_save_directory=data_dir + "output",  # el directorio local en el que se guardará el archivo de salida
     expire_time=60 * 30,  # data de este proceso se eliminará del sistema Krixik en 30 minutos
-    wait_for_process=True, # espera que el proceso termine antes de devolver control del IDE al usuario
+    wait_for_process=True,  # espera que el proceso termine antes de devolver control del IDE al usuario
     verbose=False,  # no mostrar actualizaciones de proceso al ejecutar el código
-    modules={"translate": {"model": "opus-mt-es-en"}} # especificar un modelo no-predeterminado para el módulo de traducción
+    modules={"translate": {"model": "opus-mt-es-en"}},  # especificar un modelo no-predeterminado para el módulo de traducción
 )
 ```
 

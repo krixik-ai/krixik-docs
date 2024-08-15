@@ -1,4 +1,5 @@
 ## El Módulo `ocr` (ROC - Reconocimiento Óptico de Caracteres)
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/modules/ai_modules/ocr_module/)
 
 El módulo `ocr` (ROC - Reconocimiento Óptico de Caracteres) toma como entrada un archivo de imagen y devuelve todo texto encontrado dentro de esa imagen en un archivo JSON.
 

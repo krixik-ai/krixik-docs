@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/file_system/list_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## El Método `list` (Lista)
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/system/file_system/list_method/)
 
 Tras usar el método [`process`](../parametros_y_procesar_archivos_a_traves_de_pipelines/metodo_process_procesar.md) para procesar uno o varios archivos a través de un *pipeline* puedes recuperar el registro de cualquiera de esos archivos con el método `list` (lista). Puedes `list` por `file_id` o por cualquier otro metadato que incluiste al inicialmente procesar el archivo.
 
@@ -65,8 +66,7 @@ Tendrás que crear un *pipeline* y [`procesar`](../parametros_y_procesar_archivo
 
 ```python
 # crea un pipeline de módulo único
-pipeline = krixik.create_pipeline(name="metodo_list_1_parser",
-                                  module_chain=["parser"])
+pipeline = krixik.create_pipeline(name="metodo_list_1_parser", module_chain=["parser"])
 ```
 
 
@@ -102,7 +102,7 @@ for entry in archivos:
         local_save_directory=data_dir + "output",  # el directorio local en el que se guardará el archivo de salida
         expire_time=60 * 30,  # data de este proceso se eliminará del sistema Krixik en 30 minutos
         wait_for_process=True,  # espera que el proceso termine antes de devolver control del IDE al usuario
-        verbose=False, # no mostrar actualizaciones de proceso al ejecutar el código
+        verbose=False,  # no mostrar actualizaciones de proceso al ejecutar el código
         file_name=entry["file_name"],
         symbolic_directory_path=entry["symbolic_directory_path"],
         file_tags=entry["file_tags"],
@@ -725,7 +725,7 @@ process_output = pipeline.process(
     local_save_directory=data_dir + "output",  # el directorio local en el que se guardará el archivo de salida
     expire_time=60 * 30,  # data de este proceso se eliminará del sistema Krixik en 30 minutos
     wait_for_process=True,  # espera que el proceso termine antes de devolver control del IDE al usuario
-    verbose=False, # no mostrar actualizaciones de proceso al ejecutar el código
+    verbose=False,  # no mostrar actualizaciones de proceso al ejecutar el código
     symbolic_directory_path="/novelas/distopia",
     file_name="1984.txt",
     file_tags=[{"escritor": "Orwell"}, {"categoria": "distopia"}, {"siglo": "20"}],
@@ -1135,9 +1135,7 @@ hora_actual_2 = datetime.now(tz=timezone.utc).strftime(format="%Y-%m-%d %H:%M:%S
 
 # lista registros combinando argumentos
 list_output = pipeline.list(
-    created_at_end=hora_actual_2,
-    symbolic_file_paths=["/novelas/gotica/Pride and Prejudice.txt"],
-    file_tags=[({"escritor": "Orwell"})]
+    created_at_end=hora_actual_2, symbolic_file_paths=["/novelas/gotica/Pride and Prejudice.txt"], file_tags=[({"escritor": "Orwell"})]
 )
 
 # nítidamente reproduce la salida de este proceso

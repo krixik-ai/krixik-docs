@@ -1,4 +1,5 @@
 ## El Módulo `parser` (Fragmentación de Texto)
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/modules/support_function_modules/parser_module/)
 
 El módulo `parser` (fragmentación de texto) toma como entrada un documento textual, lo fragmenta en pequeñas frases de palabras consecutivas, y devuelve todos los fragmentos separados en un archivo JSON.
 

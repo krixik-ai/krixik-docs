@@ -1,4 +1,5 @@
 ## El Módulo `json-to-txt`
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/modules/support_function_modules/json-to-txt_module/)
 
 El módulo `json-to-txt` toma como entrada una serie de fragmentos de texto, los concatena en un solo *string* en el que los antiguos fragmentos ahora son separados por un espacio doble ("  ") y devuelve este nuevo *string* en un archivo de texto.
 

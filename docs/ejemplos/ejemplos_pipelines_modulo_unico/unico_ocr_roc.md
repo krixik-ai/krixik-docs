@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/single_module_pipelines/single_ocr.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## *Pipeline* de Módulo Único: `ocr` (ROC - Reconocimiento Óptico de Caracteres)
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/examples/single_module_pipelines/single_ocr/)
 
 Este documento presenta una guía de cómo ensamblar y consumir un *pipeline* de módulo único que solo incluye un módulo [`ocr` (ROC - Reconocimiento Óptico de Caracteres)](../../modulos/modulos_ia/modulo_ocr_roc.md). Se divide en las siguientes secciones:
 
@@ -18,8 +19,7 @@ Usa el método [`create_pipeline`](../../sistema/creacion_de_pipelines/creacion_
 
 ```python
 # crea un pipeline con un solo módulo ocr
-pipeline = krixik.create_pipeline(name="unico_ocr_1",
-                                  module_chain=["ocr"])
+pipeline = krixik.create_pipeline(name="unico_ocr_1", module_chain=["ocr"])
 ```
 
 ### Formato de Entrada Requerido
@@ -53,7 +53,7 @@ Dado que este es el modelo predeterminado, no hace falta que especifiques qué m
 
 
 ```python
- # no mostrar actualizaciones de proceso al ejecutar el código
+# no mostrar actualizaciones de proceso al ejecutar el código
 process_output = pipeline.process(
     local_file_path=data_dir + "input/sello.png",  # la ruta de archivo inicial en la que yace el archivo de entrada
     local_save_directory=data_dir + "output",  # el directorio local en el que se guardará el archivo de salida
@@ -1948,7 +1948,7 @@ process_output = pipeline.process(
     expire_time=60 * 30,
     wait_for_process=True,
     verbose=False,
-    modules={"ocr": {"model": "tesseract-es"}} # especifica un modelo no-predeterminado para este proceso
+    modules={"ocr": {"model": "tesseract-es"}},  # especifica un modelo no-predeterminado para este proceso
 )
 ```
 

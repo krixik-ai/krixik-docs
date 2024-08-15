@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/search_pipeline_examples/multi_keyword_searchable_transcription.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## *Pipeline* Multimodular: Búsqueda por Palabras Clave sobre Transcripción
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/examples/search_pipeline_examples/multi_keyword_searchable_transcription/)
 
 Este documento detalla un *pipeline* multimodular que recibe un archivo de audio como entrada, lo [`transcribe`](../../modulos/modulos_ia/modulo_transcribe_transcripcion.md), y habilita [`búsqueda por palabras clave`](../../sistema/metodos_de_busqueda/metodo_keyword_search_busqueda_por_palabras_clave.md) sobre la transcripción.
 
@@ -25,8 +26,7 @@ Para esto usarás el método [`create_pipeline`](../../sistema/creacion_de_pipel
 
 ```python
 # creación del pipeline descrito
-pipeline = krixik.create_pipeline(name="multi_busqueda_por_palabras_clave_transcripcion",
-                                  module_chain=["transcribe", "json-to-txt", "keyword-db"])
+pipeline = krixik.create_pipeline(name="multi_busqueda_por_palabras_clave_transcripcion", module_chain=["transcribe", "json-to-txt", "keyword-db"])
 ```
 
 ### Procesa un Archivo de Entrada
@@ -63,7 +63,7 @@ process_output = pipeline.process(
     local_save_directory=data_dir + "output",  # el directorio local en el que se guardará el archivo de salida
     expire_time=60 * 30,  # data de este proceso se eliminará del sistema Krixik en 30 minutos
     wait_for_process=True,  # espera que el proceso termine antes de devolver control del IDE al usuario
-    verbose=False, # no mostrar actualizaciones de proceso al ejecutar el código
+    verbose=False,  # no mostrar actualizaciones de proceso al ejecutar el código
 )
 ```
 
@@ -100,8 +100,7 @@ Dado que tu *pipeline* satisface esta condición tiene acceso al método [`keywo
 
 ```python
 # haz búsqueda por palabras clave sobre la transcripción generada con base en el audio procesado por el pipeline
-keyword_output = pipeline.keyword_search(query="lets talk about the country of Colombia",
-                                         file_ids=[process_output["file_id"]])
+keyword_output = pipeline.keyword_search(query="lets talk about the country of Colombia", file_ids=[process_output["file_id"]])
 
 # nítidamente reproduce la salida de esta búsqueda
 print(json.dumps(keyword_output, indent=2))

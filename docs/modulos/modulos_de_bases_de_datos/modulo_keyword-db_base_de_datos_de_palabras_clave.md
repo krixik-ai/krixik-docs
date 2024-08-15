@@ -1,4 +1,5 @@
 ## El Módulo `keyword-db` (Base de Datos de Palabras Clave)
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/modules/database_modules/keyword-db_module/)
 
 El módulo `keyword-db` (base de datos de palabras clave) toma como un entrada un documento textual, extrae todas sus palabras clave, identifica el truncamiento lematizado de cada una, y devuelve una base de datos `SQLite` con ese contenido.
 

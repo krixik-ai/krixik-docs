@@ -1,4 +1,5 @@
 ## El Módulo `transcribe` (Transcripción)
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/modules/ai_modules/transcribe_module/)
 
 El módulo `transcribe` (transcripción) toma audio como entrada y devuelve una transcripción textual de todas las palabras pronunciadas en ese audio.
 

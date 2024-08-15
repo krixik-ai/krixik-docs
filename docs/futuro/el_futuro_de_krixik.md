@@ -1,4 +1,5 @@
 ## El Futuro de Krixik
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/future/future_of_krixik/)
 
 Gracias por acompañarnos desde hoy, desde el principio. Creemos que Krixik ya es un producto rico, gratificante y completo. También sabemos que a donde vamos mañana va a eclipsar donde estamos hoy.
 

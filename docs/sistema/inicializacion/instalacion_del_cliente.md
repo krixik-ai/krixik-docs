@@ -1,4 +1,5 @@
 ## Instalación del Cliente Krixik
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/system/initialization/install_client/)
 
 Ejecuta la siguiente línea de código en tu terminal para instalar el cliente Python de Krixik con `pip`.
 

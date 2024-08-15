@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/search_methods/keyword_search_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## El Método `keyword_search` (Búsqueda por Palabras Clave)
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/system/search_methods/keyword_search_method/)
 
 El método `keyword_search` de Krixik habilita búsqueda por palabras clave sobre documentos procesados a través de ciertos *pipelines*. La búsqueda por palabras clave es algo que los usuarios de internet conocen hace mucho tiempo: una serie de palabras es enviado como la consulta (*the query*), y la búsqueda devuelve toda aparición de cada una de esas palabras. Es muy diferente a [búsqueda semántica](metodo_semantic_search_busqueda_semantica.md).
 
@@ -37,8 +38,7 @@ Para los ejemplos de este documento usarás un *pipeline* que consiste de un sol
 
 ```python
 # crea el pipeline básico para búsqueda por palabras clave
-pipeline = krixik.create_pipeline(name="metodo_keyword_search_1_keyword-db",
-                                  module_chain=["keyword-db"])
+pipeline = krixik.create_pipeline(name="metodo_keyword_search_1_keyword-db", module_chain=["keyword-db"])
 ```
 
 Ahora que el *pipeline* está listo puedes [`procesar`](../parametros_y_procesar_archivos_a_traves_de_pipelines/metodo_process_procesar.md) algunos archivos de texto a través de él para que tengas documentos sobre los cuales puedas hacer búsquedas:
@@ -51,7 +51,7 @@ salida_1 = pipeline.process(
     local_save_directory=data_dir + "output",  # el directorio local en el que se guardará el archivo de salida
     expire_time=60 * 30,  # data de este proceso se eliminará del sistema Krixik en 30 minutos
     wait_for_process=True,  # espera que el proceso termine antes de devolver control del IDE al usuario
-    verbose=False, # no mostrar actualizaciones de proceso al ejecutar el código
+    verbose=False,  # no mostrar actualizaciones de proceso al ejecutar el código
     symbolic_directory_path="/novelas/gotica",
     file_name="Frankenstein.txt",
 )
@@ -61,7 +61,7 @@ salida_2 = pipeline.process(
     local_save_directory=data_dir + "output",  # el directorio local en el que se guardará el archivo de salida
     expire_time=60 * 30,  # data de este proceso se eliminará del sistema Krixik en 30 minutos
     wait_for_process=True,  # espera que el proceso termine antes de devolver control del IDE al usuario
-    verbose=False, # no mostrar actualizaciones de proceso al ejecutar el código
+    verbose=False,  # no mostrar actualizaciones de proceso al ejecutar el código
     symbolic_directory_path="/novelas/romance",
     file_name="Pride and Prejudice.txt",
 )
@@ -71,7 +71,7 @@ salida_3 = pipeline.process(
     local_save_directory=data_dir + "output",  # el directorio local en el que se guardará el archivo de salida
     expire_time=60 * 30,  # data de este proceso se eliminará del sistema Krixik en 30 minutos
     wait_for_process=True,  # espera que el proceso termine antes de devolver control del IDE al usuario
-    verbose=False, # no mostrar actualizaciones de proceso al ejecutar el código
+    verbose=False,  # no mostrar actualizaciones de proceso al ejecutar el código
     symbolic_directory_path="/novelas/aventura",
     file_name="Moby Dick.txt",
 )
@@ -81,7 +81,7 @@ salida_4 = pipeline.process(
     local_save_directory=data_dir + "output",  # el directorio local en el que se guardará el archivo de salida
     expire_time=60 * 30,  # data de este proceso se eliminará del sistema Krixik en 30 minutos
     wait_for_process=True,  # espera que el proceso termine antes de devolver control del IDE al usuario
-    verbose=False, # no mostrar actualizaciones de proceso al ejecutar el código
+    verbose=False,  # no mostrar actualizaciones de proceso al ejecutar el código
     symbolic_directory_path="/novelas/bildungsroman",
     file_name="Little Women.txt",
 )
@@ -120,8 +120,7 @@ Con el siguiente código puedes buscar una serie de palabras en uno de los archi
 
 ```python
 # haz keyword_search sobre un archivo
-keyword_output = pipeline.keyword_search(query="mansion adolescence party enemy romance",
-                                         file_names=["Little Women.txt"])
+keyword_output = pipeline.keyword_search(query="mansion adolescence party enemy romance", file_names=["Little Women.txt"])
 
 # nítidamente reproduce la salida de este proceso
 print(json.dumps(keyword_output, indent=2))
@@ -149,8 +148,7 @@ Funciona igual de bien cuando buscas sobre varios archivos con el [operador como
 
 ```python
 # hacer keyword_search sobre varios archivos
-keyword_output = pipeline.keyword_search(query="mansion adolescence party enemy romance",
-                                         symbolic_directory_paths=["/novelas*"])
+keyword_output = pipeline.keyword_search(query="mansion adolescence party enemy romance", symbolic_directory_paths=["/novelas*"])
 
 # nítidamente reproduce la salida de este proceso
 print(json.dumps(keyword_output, indent=2))

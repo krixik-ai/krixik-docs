@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/file_system/delete_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## El Método `delete` (Eliminar)
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/system/file_system/delete_method/)
 
 Puedes borrar todo registro de un archivo procesado del sistema Krixik con el método `delete` (eliminar). Esta es la versión manual de permitir que se venza el [`expire_time`](../parametros_y_procesar_archivos_a_traves_de_pipelines/metodo_process_procesar.md#argumentos-principales-del-metodo-process) de un archivo.
 
@@ -22,8 +23,7 @@ Primero debes crear un *pipeline* sobre el cual puedas ejecutar este ejemplo. Un
 
 ```python
 # crea un pipeline de módulo único con un módulo parser
-pipeline = krixik.create_pipeline(name="metodo_delete_1_parser",
-                                  module_chain=["parser"])
+pipeline = krixik.create_pipeline(name="metodo_delete_1_parser", module_chain=["parser"])
 ```
 
 Ahora usa el método [`process`](../parametros_y_procesar_archivos_a_traves_de_pipelines/metodo_process_procesar.md) para procesar un archivo a través del *pipeline*:
@@ -36,7 +36,7 @@ process_output = pipeline.process(
     local_save_directory=data_dir + "output",  # el directorio local en el que se guardará el archivo de salida
     expire_time=60 * 30,  # process data will be deleted from the Krixik system in 30 minutes
     wait_for_process=True,  # espera que el proceso termine antes de devolver control del IDE al usuario
-    verbose=False, # no mostrar actualizaciones de proceso al ejecutar el código
+    verbose=False,  # no mostrar actualizaciones de proceso al ejecutar el código
     symbolic_directory_path="/novelas/siglo-20",
     file_name="1984_muestra.txt",
     file_tags=[{"escritor": "Orwell"}, {"categoria": "distopia"}, {"siglo": "20"}],
