@@ -1,76 +1,5 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/pipeline_creation/saving_and_loading_pipelines.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
-
-```python
-import os
-import sys
-import json
-import importlib
-from pathlib import Path
-
-# preparación de demo - incuye instanciación de secretos, instalación de requerimientos, y definición de rutas
-if os.getenv("COLAB_RELEASE_TAG"):
-    # si estás usando este notebook en Google Colab, ingresa tus secretos acá
-    MY_API_KEY = "TU_API_KEY_VA_AQUI"
-    MY_API_URL = "TU_API_URL_VA_AQUI"
-
-    # si estás usando este notebook en Google Colab, instala requerimientos y descarga los subdirectorios requeridos
-    # instala el cliente Python de Krixik
-    !pip install krixik
-
-    # instala github-clone, que permite clonación fácil de los subdirectorios del repositorio de documentación XXX
-    !pip install github-clone
-
-    # clona los conjuntos de datos
-    if not Path("data").is_dir():
-        !ghclone XXXX #(in english it's https://github.com/krixik-ai/krixik-docs/tree/main/data)
-    else:
-        print("ya se clonaron los conjuntos de datos de documentación!")
-
-    # define la variable 'data_dir' para tus rutas
-    data_dir = "./data/"
-
-    # crea directorio de salidas
-    from pathlib import Path
-
-    Path(data_dir + "/salidas").mkdir(parents=True, exist_ok=True)
-
-    # descarga utilidades
-    if not Path("utilities").is_dir():
-        !ghclone XXXX # (in english it's https://github.com/krixik-ai/krixik-docs/tree/main/utilities)
-    else:
-        print("ya has clonado las utilidades de documentación!")
-else:
-    # si estás usando una descarga local de la documentación, define las rutas relativas a la estructura local de la documentación
-    # importa utilidades
-    sys.path.append("../../../")
-
-    # define la variable 'data_dir' para tus rutas
-    data_dir = "../../../data/"
-
-    # si estás usando este notebook localmente desde el repositorio de documentación Krixik, carga tus secretos de un archivo .env ubicado en la base del repositorio de documentación
-    from dotenv import load_dotenv
-
-    load_dotenv("../../../.env")
-
-    MY_API_KEY = os.getenv("MY_API_KEY")
-    MY_API_URL = os.getenv("MY_API_URL")
-
-
-# carga 'reset'
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-
-# importa Krixik e inicializa sesión con tus secretos personales
-from krixik import krixik
-
-krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ## Guardar y Cargar *Pipelines*
 
 Esta introducción a guardar y cargar *pipelines* se divide en las siguientes secciones:
@@ -94,7 +23,7 @@ Para ver cómo funciona, primero tendrás que crear un *pipeline* con el método
 
 ```python
 # primero crea un pipeline
-pipeline_1 = krixik.create_pipeline(
+pipeline = krixik.create_pipeline(
     name="guardar_y_cargar_pipelines_1",
     module_chain=["summarize", "summarize", "keyword-db"]
 )
@@ -105,7 +34,7 @@ Ahora que tienes un *pipeline* puedes usar el método `save_pipeline` para guard
 
 ```python
 # guardar la configuración de un pipeline en disco (con ejemplo de ruta; la ruta debe obedecer lo que dicte tu sistema operativo)
-pipeline_1.save_pipeline(config_path=data_dir + "configs-de-pipeline/guarda-demo-pipeline.yaml")
+pipeline.save_pipeline(config_path=data_dir + "configs-de-pipeline/guarda-demo-pipeline.yaml")
 ```
 
 Para facilitar las cosas, si un archivo con ese nombre de archivo no existe en la ubicación indicada, Krixik creará el archivo localmente y luego guardará tu *pipeline* en él.
@@ -140,18 +69,12 @@ La función `reset_pipeline` toma un argumento (requerido):
 
 - `pipeline`: La variable en el que objeto *pipeline* está guardado.
 
-Ten en cuenta que esta variable _no_ es el `name` del *pipeline*. Por ejemplo, si quisieras reiniciar el primer *pipeline* creado en este documento, el argumento `pipeline` para la función `reset_pipeline` tendría el valor `pipeline_1` (y no el valor `guardar_y_cargar_pipelines_1`), de la siguiente manera:
+Ten en cuenta que esta variable _no_ es el `name` del *pipeline*. Por ejemplo, si quisieras reiniciar el primer *pipeline* creado en este documento, el argumento `pipeline` para la función `reset_pipeline` tendría el valor `pipeline` (y no el valor `guardar_y_cargar_pipelines_1`), de la siguiente manera:
 
 
 ```python
 # elimina todos los datos procesados pertenecientes a este pipeline
-reset_pipeline(pipeline_1)
+reset_pipeline(pipeline)
 ```
 
 Dicho de otra manera, el argumento `pipeline` de la función `reset_pipeline` es una variable al que se ha asignado un objeto *pipeline*, y `reset_pipeline` eliminará todo dato asociado al `name` de ese objeto *pipeline* en el sistema Krixik.
-
-
-```python
-# elimina todos los datos procesados pertenecientes a este pipeline
-reset_pipeline(pipeline_1)
-```

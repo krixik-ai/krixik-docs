@@ -1,80 +1,12 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/pipeline_creation/create_pipeline.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
-
-```python
-import os
-import sys
-import json
-import importlib
-from pathlib import Path
-
-# preparación de demo - incuye instanciación de secretos, instalación de requerimientos, y definición de rutas
-if os.getenv("COLAB_RELEASE_TAG"):
-    # si estás usando este notebook en Google Colab, ingresa tus secretos acá
-    MY_API_KEY = "TU_API_KEY_VA_AQUI"
-    MY_API_URL = "TU_API_URL_VA_AQUI"
-
-    # si estás usando este notebook en Google Colab, instala requerimientos y descarga los subdirectorios requeridos
-    # instala el cliente Python de Krixik
-    !pip install krixik
-
-    # instala github-clone, que permite clonación fácil de los subdirectorios del repositorio de documentación XXX
-    !pip install github-clone
-
-    # clona los conjuntos de datos
-    if not Path("data").is_dir():
-        !ghclone XXXX #(in english it's https://github.com/krixik-ai/krixik-docs/tree/main/data)
-    else:
-        print("ya se clonaron los conjuntos de datos de documentación!")
-
-    # define la variable 'data_dir' para tus rutas
-    data_dir = "./data/"
-
-    # crea directorio de salidas
-    from pathlib import Path
-
-    Path(data_dir + "/salidas").mkdir(parents=True, exist_ok=True)
-
-    # descarga utilidades
-    if not Path("utilities").is_dir():
-        !ghclone XXXX # (in english it's https://github.com/krixik-ai/krixik-docs/tree/main/utilities)
-    else:
-        print("ya has clonado las utilidades de documentación!")
-else:
-    # si estás usando una descarga local de la documentación, define las rutas relativas a la estructura local de la documentación
-    # importa utilidades
-    sys.path.append("../../../")
-
-    # define la variable 'data_dir' para tus rutas
-    data_dir = "../../../data/"
-
-    # si estás usando este notebook localmente desde el repositorio de documentación Krixik, carga tus secretos de un archivo .env ubicado en la base del repositorio de documentación
-    from dotenv import load_dotenv
-
-    load_dotenv("../../../.env")
-
-    MY_API_KEY = os.getenv("MY_API_KEY")
-    MY_API_URL = os.getenv("MY_API_URL")
-
-
-# carga 'reset'
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-
-# importa Krixik e inicializa sesión con tus secretos personales
-from krixik import krixik
-
-krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
-```
-
 ## Creación de Pipelines
 
 Esta introducción a cómo crear pipelines se divide en las siguientes secciones:
 
 - [El Método `create_pipeline`](#el-metodo-create_pipeline)
-- [Un *Pipeline* de Módulo Único](#un-pipeline-de-modulo-unico)
-- [Un *Pipeline* Multimodular](#un-pipeline-multimodular)
+- [Un Pipeline de Módulo Único](#un-pipeline-de-modulo-unico)
+- [Un Pipeline Multimodular](#un-pipeline-multimodular)
 - [Validación de Secuencias de Módulos](#validacion-de-secuencias-de-modulos)
 - [Repetición de Nombres de Pipelines](#repeticion-de-nombres-de-pipelines)
 
@@ -179,9 +111,3 @@ pipeline = krixik.create_pipeline(name="create_pipeline_3_parser_caption",
 Krixik no te permite crear un *pipeline* con el `name` de otro *pipeline* que ya has creado. La única excepción es si el nuevo *pipeline* tiene una cadena de módulos idéntica a la anterior.
 
 Ten en cuenta que si intentas crear un nuevo *pipeline* con el `name` de un *pipeline* anterior y con un `module_chain` diferente, la creación inicial del *pipeline* no fallará. Podrás ejecutar el método `create_pipeline` sin problema. Sin embargo, cuando dos *pipelines* con el mismo nombre y diferentes `module_chain`s existen y ya has [`procesado`](../parametros_y_procesar_archivos_a_traves_de_pipelines/metodo_process_procesar.md) al menos un archivo a través de uno de ellos, **no** podrás procesar un archivo a través del otro *pipeline* como consecuencia de esta duplicación de `name`s.
-
-
-```python
-# elimina todos los datos procesados pertenecientes a este pipeline
-reset_pipeline(pipeline)
-```

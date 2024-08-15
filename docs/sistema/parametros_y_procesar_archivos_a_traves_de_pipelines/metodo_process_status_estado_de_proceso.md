@@ -1,76 +1,5 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/parameters_processing_files_through_pipelines/process_status_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
-
-```python
-import os
-import sys
-import json
-import importlib
-from pathlib import Path
-
-# preparación de demo - incuye instanciación de secretos, instalación de requerimientos, y definición de rutas
-if os.getenv("COLAB_RELEASE_TAG"):
-    # si estás usando este notebook en Google Colab, ingresa tus secretos acá
-    MY_API_KEY = "TU_API_KEY_VA_AQUI"
-    MY_API_URL = "TU_API_URL_VA_AQUI"
-
-    # si estás usando este notebook en Google Colab, instala requerimientos y descarga los subdirectorios requeridos
-    # instala el cliente Python de Krixik
-    !pip install krixik
-
-    # instala github-clone, que permite clonación fácil de los subdirectorios del repositorio de documentación XXX
-    !pip install github-clone
-
-    # clona los conjuntos de datos
-    if not Path("data").is_dir():
-        !ghclone XXXX #(in english it's https://github.com/krixik-ai/krixik-docs/tree/main/data)
-    else:
-        print("ya se clonaron los conjuntos de datos de documentación!")
-
-    # define la variable 'data_dir' para tus rutas
-    data_dir = "./data/"
-
-    # crea directorio de salidas
-    from pathlib import Path
-
-    Path(data_dir + "/salidas").mkdir(parents=True, exist_ok=True)
-
-    # descarga utilidades
-    if not Path("utilities").is_dir():
-        !ghclone XXXX # (in english it's https://github.com/krixik-ai/krixik-docs/tree/main/utilities)
-    else:
-        print("ya has clonado las utilidades de documentación!")
-else:
-    # si estás usando una descarga local de la documentación, define las rutas relativas a la estructura local de la documentación
-    # importa utilidades
-    sys.path.append("../../../")
-
-    # define la variable 'data_dir' para tus rutas
-    data_dir = "../../../data/"
-
-    # si estás usando este notebook localmente desde el repositorio de documentación Krixik, carga tus secretos de un archivo .env ubicado en la base del repositorio de documentación
-    from dotenv import load_dotenv
-
-    load_dotenv("../../../.env")
-
-    MY_API_KEY = os.getenv("MY_API_KEY")
-    MY_API_URL = os.getenv("MY_API_URL")
-
-
-# carga 'reset'
-reset = importlib.import_module("utilities.reset")
-reset_pipeline = reset.reset_pipeline
-
-
-# importa Krixik e inicializa sesión con tus secretos personales
-from krixik import krixik
-
-krixik.init(api_key=MY_API_KEY, api_url=MY_API_URL)
-```
-
-    SUCCESS: You are now authenticated.
-
-
 ## El Método `process_status` (Estado de Proceso)
 
 El método `process_status` (estado de proceso) está disponible para todo *pipeline* Krixik. Se usa cuando quieres revisar el estado de archivos que se están procesando por un *pipeline*.
@@ -166,13 +95,6 @@ Si esperas un poco y vuelves a intentar, obtendrás confirmación de que el proc
 
 
 ```python
-import time
-
-time.sleep(30)
-```
-
-
-```python
 # usar process_status nuevamente
 process_status_output = pipeline.process_status(request_id=process_output["request_id"])
 
@@ -200,12 +122,3 @@ Como has visto, usar `process_status` sobre una instancia fallida de [`process`]
 Pero ¿qué ocurre cuando el archivo sobre el que usas `process_status` se [vence](metodo_process_procesar.md#argumentos-principales-del-metodo-process) o se [elimina](../sistema_de_archivos/metodo_delete_eliminar.md) manualmente del sistema Krixik?
 
 En Krixik nos tomamos la eliminación de archivos muy en serio: si un archivo es [eliminado](../sistema_de_archivos/metodo_delete_eliminar.md) se borra totalmente del sistema. Por ende, si usas el método `process_status` sobre un archivo [vencido](metodo_process_procesar.md#argumentos-principales-del-metodo-process) o manualmente [eliminado](../sistema_de_archivos/metodo_delete_eliminar.md) el sistema te indicará que el `request_id` que usaste como argumento no fue hallado. El archivo ya no está, y tampoco está ningún registro de su haber sido procesado inicialmente.
-
-
-```python
-# elimina todos datos procesados pertenecientes a este pipeline
-import time
-
-time.sleep(30)
-reset_pipeline(pipeline)
-```
