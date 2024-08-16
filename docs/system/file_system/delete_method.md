@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/file_system/delete_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## The `delete` Method
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/sistema/sistema_de_archivos/metodo_delete_eliminar/)
 
 You can delete all records of a processed file from the Krixik system with the `delete` method. This is the manual version of letting the [`expire_time`](../parameters_processing_files_through_pipelines/process_method.md#core-process-method-arguments) run out on a file.
 
@@ -97,7 +98,7 @@ print(json.dumps(list_output, indent=2))
         }
       ]
     }
-    
+
 
 The file's records are properly showing up.
 
@@ -119,7 +120,7 @@ print(json.dumps(delete_output, indent=2))
       "message": "Successfully deleted file_id: ad927578-a8f1-4ace-acbc-3dee2391075c",
       "warnings": []
     }
-    
+
 
 We can check that the file has been deleted by using the [`list`](list_method.md) method on the same `symbolic_directory_path`:
 
@@ -149,6 +150,6 @@ print(json.dumps(list_output, indent=2))
       ],
       "items": []
     }
-    
+
 
 As expected, only one of the two previously [processed](../parameters_processing_files_through_pipelines/process_method.md) files shows up; the other has been deleted.

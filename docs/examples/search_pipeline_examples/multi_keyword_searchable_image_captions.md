@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/search_pipeline_examples/multi_keyword_searchable_image_captions.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Multi-Module Pipeline: Keyword-Searchable Image Captions
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_por_palabras_clave_sobre_leyendas_de_imagen/)
 
 This document details a multi-modular pipeline that takes in an image, generates a [`textual caption`](../../modules/ai_modules/caption_module.md) of it, and makes the caption [`keyword searchable`](../../system/search_methods/keyword_search_method.md).
 
@@ -89,7 +90,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/913dce6e-2fbe-4d5a-bbd2-84c6a0a73932.db"
       ]
     }
-    
+
 
 ### Performing Keyword Search
 
@@ -132,4 +133,4 @@ print(json.dumps(keyword_output, indent=2))
         }
       ]
     }
-    
+

@@ -1,4 +1,5 @@
 ## Getting Started and Beyond: An Overview of the Krixik System
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/sistema/introduccion_al_sistema/)
 
 In this section we take a deeper look at the methods and underlying concepts of the Krixik system—at all the tools you will need to assemble, parameterize, and consume Krixik pipelines. The topics we'll review herein are the following:
 

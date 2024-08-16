@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/single_module_pipelines/single_caption.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Single-Module Pipeline: `caption`
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/ejemplos/ejemplos_pipelines_modulo_unico/unico_caption_leyenda_de_imagen/)
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`caption`](../../modules/ai_modules/caption_module.md) module. 
 
@@ -92,7 +93,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/ab32fe99-5bf8-4712-aa39-b7af9fac27f6.json"
       ]
     }
-    
+
 
 To confirm that everything went as it should have, let's load in the text file output from `process_output_files`:
 
@@ -108,7 +109,7 @@ with open(process_output["process_output_files"][0]) as f:
         "caption": "a large group of people are in a restaurant"
       }
     ]
-    
+
 
 ### Using a Non-Default Model
 
@@ -153,4 +154,4 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/c290b26b-d02b-40f3-8112-06a595f3b924.json"
       ]
     }
-    
+

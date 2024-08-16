@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/parameters_processing_files_through_pipelines/process_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## The Parameterizable `process` Method
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/sistema/parametros_y_procesar_archivos_a_traves_de_pipelines/metodo_process_procesar/)
 
 The `process` method, available on every Krixik pipeline, is invoked whenever you wish to process files through a pipeline.
 
@@ -102,7 +103,7 @@ print(json.dumps(process_demo_output, indent=2))
         "../../../data/output/6a314cdb-6938-4663-aef5-a0258341c120.json"
       ]
     }
-    
+
 
 Let's break down the output:
 
@@ -156,7 +157,7 @@ with open(process_demo_output["process_output_files"][0], "r") as file:
         "neutral": 0.0
       }
     ]
-    
+
 
 ### Selecting Models Via the `modules` Argument
 

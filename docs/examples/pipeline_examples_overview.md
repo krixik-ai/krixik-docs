@@ -1,4 +1,5 @@
 ## Krixik Pipeline Examples
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/ejemplos/introduccion_ejemplos_de_pipelines/)
 
 Ready to see some pipeline examples to draw inspiration from? Let's dive in!
 

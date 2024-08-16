@@ -1,4 +1,5 @@
 ## The `ocr` Module
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/modulos/modulos_ia/modulo_ocr_roc/)
 
 The `ocr` module takes an image as input and returns any text found within that image in a JSON file.
 

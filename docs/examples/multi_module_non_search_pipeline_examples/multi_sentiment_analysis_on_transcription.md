@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_transcription.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Multi-Module Pipeline: Sentiment Analysis on Transcription
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/ejemplos/ejemplos_pipelines_multi_modulo_sin_busqueda/multi_analisis_de_sentimiento_sobre_transcripcion/)
 
 This document details a multi-modular pipeline that takes in an audio file in English, [`transcribes`](../../modules/ai_modules/transcribe_module.md) it, and then performs [`sentiment analysis`](../../modules/ai_modules/sentiment_module.md) on each sentence of the transcript.
 
@@ -174,7 +175,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/8dacac08-f079-4a83-996f-02eefd748776.json"
       ]
     }
-    
+
 
 To confirm that everything went as it should have, let's load in the text file output from `process_output_files`:
 
@@ -265,4 +266,4 @@ with open(process_output["process_output_files"][0]) as f:
         "neutral": 0.0
       }
     ]
-    
+

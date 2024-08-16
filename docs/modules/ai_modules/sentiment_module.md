@@ -1,4 +1,5 @@
 ## The `sentiment` Module
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/modulos/modulos_ia/modulo_sentiment_analisis_de_sentimiento/)
 
 The `sentiment` module takes one or several text snippets and returns a numerical sentiment breakdown analysis (between positive, negative, and neutral) of each snippet along with each snippet.
 

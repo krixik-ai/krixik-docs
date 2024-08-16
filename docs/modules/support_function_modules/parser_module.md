@@ -1,4 +1,5 @@
 ## The `parser` Module
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/modulos/modulos_de_funciones_de_apoyo/modulo_parser_fragmentacion/)
 
 The `parser` module takes a text document, cuts it up into pieces, and returns the fragmented input as snippets in a JSON file.
 

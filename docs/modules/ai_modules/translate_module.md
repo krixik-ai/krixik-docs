@@ -1,4 +1,5 @@
 ## The `translate` Module
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/modulos/modulos_ia/modulo_translate_traduccion/)
 
 The `translate` module takes one or several text snippets and returns their translations in the selected model's output language.
 

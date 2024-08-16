@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/parameters_processing_files_through_pipelines/fetch_output_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## The `fetch_output` Method
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/sistema/parametros_y_procesar_archivos_a_traves_de_pipelines/metodo_fetch_output_obtener_salida/)
 
 The `fetch_output` method is used to download the output of a pipeline process.  This is particularly useful when using the [`process`](../parameters_processing_files_through_pipelines/process_method.md) method with `wait_for_process` set to `False`, as your output is in that case not immediately yielded by the [`process`](../parameters_processing_files_through_pipelines/process_method.md) method.
 
@@ -72,7 +73,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/83f7bc97-bf47-4b3d-8268-b1a147be8950.json"
       ]
     }
-    
+
 
 Armed with its `file_id`, you can use the `fetch_output` method to suit your purpose:
 
@@ -118,6 +119,6 @@ print(json.dumps(fetched_output, indent=2))
         "../../../data/output/83f7bc97-bf47-4b3d-8268-b1a147be8950.json"
       ]
     }
-    
+
 
 At the end of this return the local directory to which the output has been downloaded is displayed.

@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/file_system/list_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## The `list` Method
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/sistema/sistema_de_archivos/metodo_list_lista/)
 
 After using the [`process`](../parameters_processing_files_through_pipelines/process_method.md) method to process one or several files through your chosen pipeline, you can retrieve the record of any file(s) with the `list` method. You can `list` by `file_id` or by any other metadata you included when initially processing the file.  
 
@@ -230,7 +231,7 @@ print(json.dumps(all_process_output[-1], indent=2))
         "../../../data/output/60d6e243-91bd-4561-a17d-291539cd651a.json"
       ]
     }
-    
+
 
 ### Listing by `file_ids`
 
@@ -382,7 +383,7 @@ print(json.dumps(list_output, indent=2))
         }
       ]
     }
-    
+
 
 As you can see, a full record for each file was returned. To learn more about each metadata item, visit the documentation for the [`process`](../parameters_processing_files_through_pipelines/process_method.md) method, where they are gone into detail on.
 
@@ -448,7 +449,7 @@ print(json.dumps(list_output, indent=2))
         }
       ]
     }
-    
+
 
 As you can see, a full record for each file was returned. To learn more about each metadata item, visit the documentation for the [`process`](../parameters_processing_files_through_pipelines/process_method.md) method, where they are gone into detail on.
 
@@ -555,7 +556,7 @@ print(json.dumps(list_output, indent=2))
         }
       ]
     }
-    
+
 
 As you can see, a full record for each file was returned. To learn more about each metadata item, visit the documentation for the [`process`](../parameters_processing_files_through_pipelines/process_method.md) method, where they are gone into detail on.
 
@@ -703,7 +704,7 @@ print(json.dumps(list_output, indent=2))
         }
       ]
     }
-    
+
 
 Given that every file included the file tag `{"century": 19}` when initially processed, all three files were listed. <u>Little Women</u> also included the file tag `{"author": "Melville"}`, but there's no duplication of results, so that file's record is only listed once.
 
@@ -799,7 +800,7 @@ print(json.dumps(list_output, indent=2))
         }
       ]
     }
-    
+
 
 Keep in mind that timestamp bookend arguments operate with **AND** logic: to be listed, a file _must_ fall within the specified timestamp window. This also means that if two timestamp arguments are provided and there is no overlap between them, the `list` method will return nothing.
 
@@ -883,7 +884,7 @@ print(json.dumps(list_output, indent=2))
         }
       ]
     }
-    
+
 
 The above will return records for every file whose `file_name` ends with "e.txt".
 
@@ -915,7 +916,7 @@ print(json.dumps(list_output, indent=2))
       ],
       "items": []
     }
-    
+
 
 The above will return records for every file whose `symbolic_directory_path` begins with "/my/".
 
@@ -1102,7 +1103,7 @@ print(json.dumps(list_output, indent=2))
         }
       ]
     }
-    
+
 
 The above will return records for every file that has a `file_tag` whose key is "author", regardless of the value.
 
@@ -1200,7 +1201,7 @@ print(json.dumps(list_output, indent=2))
         }
       ]
     }
-    
+
 
 Although <u>Pride and Prejudice</u> and <u>Little Women</u> are respectively covered by the `symbolic_file_paths` and `file_tags` arguments, neither of them falls within the indicated timestamp window. Consequently, they are both excluded from the above result.
 

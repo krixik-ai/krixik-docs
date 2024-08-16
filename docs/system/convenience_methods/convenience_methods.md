@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/convenience_methods/convenience_methods.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Convenience Methods (and More!)
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/sistema/metodos_de_conveniencia/metodos_de_conveniencia/)
 
 This document introduces several useful properties of the main Krixik object and of Krixik pipelines that range from useful (advanced) metadata to convenience functions designed to facilitate input testing. All of these properties can be leveraged *without* necessarily having [initialized a session](../initialization/initialize_and_authenticate.md).
 
@@ -12,7 +13,6 @@ The document is broken down as follows:
 - [Test Pipeline Input with the `test_input` Method](#test-pipeline-input-with-the-test_input-method)
 - [View Module Input and Output Examples](#view-module-input-and-output-examples)
 - [View Module Click Data with the `click_data` Method](#view-module-click-data-with-the-click_data-method)
-
 
 ### View All Available Modules with the `available_modules` Property
 
@@ -149,7 +149,7 @@ pipeline.test_input(local_file_path=data_dir + "input/Interesting Facts About Co
 ```
 
     SUCCESS: local file '../../../data/input/Interesting Facts About Colombia.mp3' passed pipeline input test passed
-    
+
 
 Now let's test with an input that won't work with this pipeline. The [`transcribe`](../../modules/ai_modules/transcribe_module.md) module that the pipeline begins with will **not** accept a TXT file, so the result of this test looks thus:
 
@@ -168,7 +168,7 @@ pipeline.test_input(local_file_path=data_dir + "input/1984_very_short.txt")
          46             raise ValueError(f"invalid file extension: '{extension}'")
     ---> 47     return func(*args, **kwargs)
          48 except ValueError as e:
-    
+
 
     File ~/Desktop/krixik/code/krixik-docs/docs_venv/lib/python3.10/site-packages/krixik/pipeline_builder/pipeline.py:130, in BuildPipeline.test_input(self, local_file_path)
         123 """test input file will flow through pipeline correctly via simulation (currently in beta)
@@ -179,32 +179,32 @@ pipeline.test_input(local_file_path=data_dir + "input/1984_very_short.txt")
         129 """
     --> 130 input_check(local_file_path, self.__module_chain)
         131 print(f"SUCCESS: local file '{local_file_path}' passed pipeline input test passed")
-    
+
 
     File ~/Desktop/krixik/code/krixik-docs/docs_venv/lib/python3.10/site-packages/krixik/pipeline_builder/utilities/input_checker.py:20, in input_check(local_file_path, module_chain)
          19 if file_ext_format != first_module_input_format:
     ---> 20     raise TypeError(f"file extension '{file_ext}' does not match the expected input format {first_module_input_format}")
          21 is_valid(first_module.name, local_file_path)
-    
+
 
     TypeError: file extension '.txt' does not match the expected input format audio
 
     
     During handling of the above exception, another exception occurred:
-    
+
 
     Exception                                 Traceback (most recent call last)
 
     Cell In[7], line 2
           1 # use test_input on a file that won't work for this pipeline
     ----> 2 pipeline.test_input(local_file_path=data_dir + "input/1984_very_short.txt")
-    
+
 
     File ~/Desktop/krixik/code/krixik-docs/docs_venv/lib/python3.10/site-packages/krixik/utilities/validators/data/utilities/decorators.py:51, in datatype_validator.<locals>.wrapper(*args, **kwargs)
          49     raise ValueError(e)
          50 except Exception as e:
     ---> 51     raise Exception(e)
-    
+
 
     Exception: file extension '.txt' does not match the expected input format audio
 
@@ -247,7 +247,7 @@ print(json.dumps(io.OutputStructure().data_example, indent=2))
       ],
       "other": null
     }
-    
+
 
 Here `"other"` denotes any other key in your input.  Its value is arbitrary because, as far as any model you connect the [`parser`](../../modules/support_function_modules/parser_module.md) module into is concerned, it's irrelevant. Only the snippet is passed through.
 

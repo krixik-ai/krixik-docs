@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/search_pipeline_examples/multi_keyword_searchable_transcription.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Multi-Module Pipeline: Keyword-Searchable Transcription
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_por_palabras_clave_sobre_transcripcion/)
 
 This document details a multi-modular pipeline that takes in an audio file, [`transcribes`](../../modules/ai_modules/transcribe_module.md) it, and makes the result [`keyword searchable`](../../system/search_methods/keyword_search_method.md).
 
@@ -92,7 +93,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/6b4d7dc2-4010-4f8b-9a18-9b54ed8c14dd.db"
       ]
     }
-    
+
 
 ### Performing Keyword Search
 
@@ -153,4 +154,4 @@ print(json.dumps(keyword_output, indent=2))
         }
       ]
     }
-    
+

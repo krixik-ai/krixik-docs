@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/search_pipeline_examples/multi_snippet_semantic_search.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Multi-Module Pipeline: Semantic (Vector) Search on Snippets
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_semantica_sobre_fragmentos/)
 
 This document details a multi-modular pipeline that takes in a series of text snippets in a JSON file and enables [`semantic (vector) search`](../../system/search_methods/semantic_search_method.md) on them.
 
@@ -42,7 +43,7 @@ with open(data_dir + "input/1984_snippets.json", "r") as file:
 ```
 
     [{"snippet": "It was a bright cold day in April, and the clocks were striking thirteen.", "line_numbers": [1]}, {"snippet": "Winston Smith, his chin nuzzled into his breast in an effort to escape the\nvile wind, slipped quickly through the glass doors of Victory Mansions,\nthough not quickly enough to prevent a swirl of gritty dust from entering\nalong with him.", "line_numbers": [2, 3, 4, 5]}]
-    
+
 
 We will use the default models for every module in the pipeline, so the [`modules`](../../system/parameters_processing_files_through_pipelines/process_method.md#selecting-models-via-the-modules-argument) argument of the [`process`](../../system/parameters_processing_files_through_pipelines/process_method.md) method doesn't need to be leveraged.
 
@@ -80,7 +81,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/f52906bb-eca6-408c-a929-504ea8954e76.faiss"
       ]
     }
-    
+
 
 ### Performing Semantic Search
 
@@ -135,6 +136,6 @@ print(json.dumps(semantic_output, indent=2))
         }
       ]
     }
-    
+
 
 To view detail on a pipeline that enables search over straight text documents instead of text snippets in a JSON file, [click here](multi_basic_semantic_search.md).

@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/file_system/show_tree_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## The `show_tree` Method
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/sistema/sistema_de_archivos/metodo_show_tree_mostrar_arbol/)
 
 The `show_tree` method allows you to visualize—at your terminal or IDE output—all files currently in your pipeline.  It is designed as a simple analog to the standard UNIX [tree command](https://www.tecmint.com/linux-tree-command-examples/).
 
@@ -78,7 +79,7 @@ show_tree_output = pipeline.show_tree(symbolic_directory_path="/*")
                 ├── file_num_two.txt
                 └── /subpath
                     └── file_num_three.txt
-    
+
 
 Note that directory names are preceded by a forward slash (`/`) character and file names are not. This allows you to easily differentiate between them.
 

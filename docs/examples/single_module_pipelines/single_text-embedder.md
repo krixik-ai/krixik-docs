@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/single_module_pipelines/single_text-embedder.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Single-Module Pipeline: `text-embedder`
+[🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/ejemplos/ejemplos_pipelines_modulo_unico/unico_text-embedder_encaje_lexico/)
 
 This document is a walkthrough of how to assemble and use a single-module pipeline that only includes a [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module. 
 
@@ -61,7 +62,7 @@ with open(data_dir + "input/1984_snippets.json", "r") as file:
         ]
       }
     ]
-    
+
 
 ### Using the Default Model
 
@@ -105,7 +106,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/ce4ddfa5-12c6-4dcb-86af-4f6d30ed6188.npy"
       ]
     }
-    
+
 
 ### Examining Process Output Locally
 
@@ -121,7 +122,7 @@ print(vectors.shape)
 ```
 
     (2, 384)
-    
+
 
 In other words, the array has 2 rows with 384 values in each row. 
 
@@ -164,7 +165,7 @@ print(json.dumps(process_output, indent=2))
         "../../../data/output/1dcbde04-d4f2-414f-acaf-577c355bbb88.npy"
       ]
     }
-    
+
 
 ### Using the `semantic_search` method
 
