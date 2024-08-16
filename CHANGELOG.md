@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2024-08-16
+
+Minor capitalization adjustment in one document.
+
+### Changed
+
+- Capitalized "Python" in installation doc.
+
+
 ## 2024-08-15
 
 Translated links to Spanish version. Filled out create_pipeline TOC
