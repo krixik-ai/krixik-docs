@@ -1,4 +1,5 @@
 ## El Módulo `translate` (Traducción)
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/modules/ai_modules/translate_module/)
 
 El módulo `translate` (traducción) toma como entrada uno o varios fragmentos de texto y devuelve sus traducciones en el idioma de salida del modelo seleccionado.
 

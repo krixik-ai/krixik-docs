@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_translated_transcription.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## *Pipeline* Multimodular: Análisis de Sentimiento Sobre Transcripción Traducida
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_translated_transcription/)
 
 Este documento detalla un *pipeline* multimodular que recibe un archivo de audio, lo [`transcribe`](../../modulos/modulos_ia/modulo_transcribe_transcripcion.md), lo [`traduce`](../../modulos/modulos_ia/modulo_translate_traduccion.md) (por lo pronto al inglés) y hace [`análisis de sentimiento`](../../modulos/modulos_ia/modulo_sentiment_analisis_de_sentimiento.md) sobre cada frase transcrita.
 
@@ -31,8 +32,7 @@ Para crear el pipeline usarás el método [`create_pipeline`](../../sistema/crea
 ```python
 # creación del pipeline descrito
 pipeline = krixik.create_pipeline(
-    name="multi_analisis_de_sentimiento_sobre_transcripcion_traducida",
-    module_chain=["transcribe", "translate", "json-to-txt", "parser", "sentiment"]
+    name="multi_analisis_de_sentimiento_sobre_transcripcion_traducida", module_chain=["transcribe", "translate", "json-to-txt", "parser", "sentiment"]
 )
 ```
 
@@ -72,8 +72,11 @@ process_output = pipeline.process(
     local_save_directory=data_dir + "output",  # el directorio local en el que se guardará el archivo de salida
     expire_time=60 * 30,  # data de este proceso se eliminará del sistema Krixik en 30 minutos
     wait_for_process=True,  # espera que el proceso termine antes de devolver control del IDE al usuario
-    verbose=False, # no mostrar actualizaciones de proceso al ejecutar el código
-    modules={"transcribe": {"model": "whisper-base"}, "translate": {"model": "opus-mt-es-en"}} # especifica modelos no-predeterminados para usar en dos de los módulos del pipeline
+    verbose=False,  # no mostrar actualizaciones de proceso al ejecutar el código
+    modules={
+        "transcribe": {"model": "whisper-base"},
+        "translate": {"model": "opus-mt-es-en"},
+    },  # especifica modelos no-predeterminados para usar en dos de los módulos del pipeline
 )
 ```
 

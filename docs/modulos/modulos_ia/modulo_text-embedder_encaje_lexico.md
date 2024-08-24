@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/modules/ai_modules/text-embedder_module.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## El Módulo `text-embedder` (Encaje Léxico)
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/modules/ai_modules/text-embedder_module/)
 
 El módulo `text-embedder` (encaje léxico) toma como entrada uno o varios fragmentos de texto, convierte cada uno en un vector (una representación matemática del fragmento que conserva su significado) y devuelve un arreglo que contiene todos los vectores generados. Estos arreglos vectoriales pueden luego ser ingresados en una base de datos vectorial para habilitar búsqueda semántica (también conocida como búsqueda vectorial).
 

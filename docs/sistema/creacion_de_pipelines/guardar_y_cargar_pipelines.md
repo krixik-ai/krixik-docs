@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/pipeline_creation/saving_and_loading_pipelines.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Guardar y Cargar *Pipelines*
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/system/pipeline_creation/saving_and_loading_pipelines/)
 
 Esta introducción a guardar y cargar *pipelines* se divide en las siguientes secciones:
 
@@ -23,10 +24,7 @@ Para ver cómo funciona, primero tendrás que crear un *pipeline* con el método
 
 ```python
 # primero crea un pipeline
-pipeline = krixik.create_pipeline(
-    name="guardar_y_cargar_pipelines_1",
-    module_chain=["summarize", "summarize", "keyword-db"]
-)
+pipeline = krixik.create_pipeline(name="guardar_y_cargar_pipelines_1", module_chain=["summarize", "summarize", "keyword-db"])
 ```
 
 Ahora que tienes un *pipeline* puedes usar el método `save_pipeline` para guardar ese *pipeline* en disco:

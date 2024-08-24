@@ -1,4 +1,5 @@
 ## El Módulo `summarize` (Resumen)
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/modules/ai_modules/summarize_module/)
 
 El módulo `summarize` (resumen) toma un documento textual como entrada y devuelve una versión resumida del mismo.
 

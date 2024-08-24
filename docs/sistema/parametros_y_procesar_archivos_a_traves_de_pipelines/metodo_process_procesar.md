@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/parameters_processing_files_through_pipelines/process_method.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## El Método `process` (Procesar) y Sus Parámetros
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/system/parameters_processing_files_through_pipelines/process_method/)
 
 El método `process`, disponible para todo *pipeline* Krixik, se usa cuando deseas procesar archivos a través de un *pipeline*.
 
@@ -36,8 +37,7 @@ Primero crea un *pipeline* de módulo único para esta demostración del método
 
 ```python
 # crea un pipeline de módulo único para esta demostración del método process
-pipeline = krixik.create_pipeline(name="metodo_process_1_sentiment",
-                                  module_chain=["sentiment"])
+pipeline = krixik.create_pipeline(name="metodo_process_1_sentiment", module_chain=["sentiment"])
 ```
 
 En el directorio local hemos creado un archivo JSON que contiene tres fragmentos de texto que simulan reseñas de productos. Los fragmentos dicen lo siguiente [la traducción no está en el archivo]:
@@ -58,7 +58,7 @@ process_demo_output = pipeline.process(
     local_save_directory=data_dir + "output",  # el directorio local en el que se guardará el archivo de salida
     expire_time=60 * 30,  # data de este proceso se eliminará del sistema Krixik en 30 minutos
     wait_for_process=True,  # espera que el proceso termine antes de devolver control del IDE al usuario
-    verbose=False, # no mostrar actualizaciones de proceso al ejecutar el código
+    verbose=False,  # no mostrar actualizaciones de proceso al ejecutar el código
 )
 ```
 

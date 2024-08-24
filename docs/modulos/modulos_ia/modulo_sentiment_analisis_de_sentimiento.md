@@ -1,4 +1,5 @@
 ## El Módulo `sentiment` (Análisis de Sentimiento)
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/modules/ai_modules/sentiment_module/)
 
 El módulo `sentiment` (análisis de sentimiento) toma como entrada uno o varios fragmentos de texto y devuelve cada fragmento acompañado de su desglose numérico de sentimiento (entre positivo, negativo y neutral).
 

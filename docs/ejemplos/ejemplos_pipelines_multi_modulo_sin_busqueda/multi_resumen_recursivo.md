@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/examples/multi_module_non_search_pipeline_examples/multi_recursive_summarization.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## *Pipeline* Multimodular: Resumen Recursivo
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/examples/multi_module_non_search_pipeline_examples/multi_recursive_summarization/)
 
 Una manera práctica para lograr resúmenes más cortos (tal vez más abstractos, pero igual representativos) de documentos medios o largos es resumir recursivamente. Este concepto se detalla en [la documentación](../ejemplos_pipelines_modulo_unico/unico_summarize_resumen.md) del *pipeline* de módulo único con un módulo [`summarize` (resumen)](../../modulos/modulos_ia/modulo_summarize_resumen.md), en el que se aplica ese *pipeline* varias veces para crear resúmenes más y más breves del texto de entrada.
 
@@ -20,8 +21,7 @@ Para crear el pipeline usarás el método [`create_pipeline`](../../sistema/crea
 
 ```python
 # creación del pipeline descrito
-pipeline = krixik.create_pipeline(name="multi_resumen_recursivo",
-                                  module_chain=["summarize", "summarize", "summarize"])
+pipeline = krixik.create_pipeline(name="multi_resumen_recursivo", module_chain=["summarize", "summarize", "summarize"])
 ```
 
 ### Procesa un Archivo de Entrada
@@ -137,7 +137,7 @@ process_output = pipeline.process(
     local_save_directory=data_dir + "output",  # el directorio local en el que se guardará el archivo de salida
     expire_time=60 * 30,  # data de este proceso se eliminará del sistema Krixik en 30 minutos
     wait_for_process=True,  # espera que el proceso termine antes de devolver control del IDE al usuario
-    verbose=False # no mostrar actualizaciones de proceso al ejecutar el código
+    verbose=False,  # no mostrar actualizaciones de proceso al ejecutar el código
 )
 ```
 

@@ -1,6 +1,7 @@
 <a href="https://colab.research.google.com/github/krixik-ai/krixik-docs/blob/main/docs/system/pipeline_creation/create_pipeline.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ## Creación de Pipelines
+[🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/system/pipeline_creation/create_pipeline/)
 
 Esta introducción a cómo crear pipelines se divide en las siguientes secciones:
 
@@ -26,8 +27,7 @@ Usa el método `create_pipeline` para crear un *pipeline* de módulo único. Usa
 
 ```python
 # crea un pipeline con un solo módulo parser
-pipeline = krixik.create_pipeline(name="create_pipeline_1_parser",
-                                  module_chain=["parser"])
+pipeline = krixik.create_pipeline(name="create_pipeline_1_parser", module_chain=["parser"])
 ```
 
 Asegúrate que has [inicializado tu sesión](../inicializacion/inicializacion_y_autenticacion.md  ) antes de ejecutar este código.
@@ -43,8 +43,7 @@ Como puedes ver, la sintaxis para el montaje del *pipeline* es igual que antes. 
 
 ```python
 # crea un pipeline multimodular básico de búsqueda semántica
-pipeline = krixik.create_pipeline(name="create_pipeline_2_parser_embedder_vector",
-                                  module_chain=["parser", "text-embedder", "vector-db"])
+pipeline = krixik.create_pipeline(name="create_pipeline_2_parser_embedder_vector", module_chain=["parser", "text-embedder", "vector-db"])
 ```
 
 Explora una variedad de ejemplos de *pipelines* multimodulares [aquí](../../ejemplos/introduccion_ejemplos_de_pipelines.md).
@@ -58,8 +57,7 @@ Por ejemplo, tratar de crear un *pipeline* bimodular que consiste de un módulo 
 
 ```python
 # intenta crear un pipeline compuesto de un módulo parser seguido de un módulo caption
-pipeline = krixik.create_pipeline(name="create_pipeline_3_parser_caption",
-                                  module_chain=["parser", "caption"])
+pipeline = krixik.create_pipeline(name="create_pipeline_3_parser_caption", module_chain=["parser", "caption"])
 ```
 
 
