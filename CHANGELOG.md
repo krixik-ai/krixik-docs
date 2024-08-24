@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2024-08-23
+
+Small change to convenience method doc.
+
+### Changed
+
+- It used to say .view_module_details, now it's correctly .module_details
+
+
 ## 2024-08-15
 
 Added links to English version of each doc.
