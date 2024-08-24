@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2024-08-23
+
+Minor change to Convenience Methods doc.
+
+### Changed
+
+- Changed the code for module_details, which still said .view_module_config
+
+
 ## 2024-08-16
 
 Minor capitalization adjustment in one document.
