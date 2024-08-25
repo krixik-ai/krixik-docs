@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2024-08-24
+
+Minor capitalization change to installation doc.
+
+### Changed
+
+- Capitalized "Client" in both headers for consistency.
+
+
 ## 2024-08-23
 
 Minor change to Convenience Methods doc.
