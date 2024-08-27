@@ -50,7 +50,7 @@ Any module's [configuration](../pipeline_creation/pipeline_config.md) can be vie
 
 ```python
 # view the configuration of a Krixik module - in this example, transcribe
-krixik.view_module_config(module_name="transcribe")
+krixik.module_details(module_name="transcribe")
 ```
 
 

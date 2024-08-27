@@ -2,6 +2,33 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2024-08-24
+
+Minor capitalization change to installation doc.
+
+### Changed
+
+- Capitalized "Client" in both headers for consistency.
+
+
+## 2024-08-23
+
+Minor change to Convenience Methods doc.
+
+### Changed
+
+- Changed the code for module_details, which still said .view_module_config
+
+
+## 2024-08-16
+
+Minor capitalization adjustment in one document.
+
+### Changed
+
+- Capitalized "Python" in installation doc.
+
+
 ## 2024-08-15
 
 Translated links to Spanish version. Filled out create_pipeline TOC
