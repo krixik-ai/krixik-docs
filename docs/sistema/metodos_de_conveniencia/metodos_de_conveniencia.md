@@ -50,7 +50,7 @@ La [configuración](../creacion_de_pipelines/configuracion_de_pipelines.md) de c
 
 ```python
 # ver la configuración de un módulo Krixik (en este ejemplo, del módulo transcribe)
-krixik.view_module_config(module_name="transcribe")
+krixik.module_details(module_name="transcribe")
 ```
 
 
