@@ -8,7 +8,7 @@ Este documento introduce una variedad de propiedades útiles del objeto principa
 El documento se divide en las siguientes secciones:
 
 - [Ve Todos los Módulos Disponibles con la Propiedad `available_modules`](#ve-todos-los-modulos-disponibles-con-la-propiedad-available_modules)
-- [Examina la Configuración de un Módulo con el Método `module_details`](#examina-la-configuracion-de-un-modulo-con-el-metodo-module_details)
+- [Examina la Configuración de un Módulo con el Método `view_module_config`](#examina-la-configuracion-de-un-modulo-con-el-metodo-view_module_config)
 - [Ve la Cadena de Módulos de un *Pipeline* con la Propiedad `module_chain`](#ve-la-cadena-de-modulos-de-un-pipeline-con-la-propiedad-module_chain)
 - [Haz Pruebas Sobre Entradas a un *Pipeline* con el Método `test_input`](#haz-pruebas-sobre-entradas-a-un-pipeline-con-el-metodo-test_input)
 - [Ve Ejemplos de Entradas y Salidas de un Módulo](#ve-ejemplos-de-entradas-y-salidas-de-un-modulo)
@@ -43,14 +43,14 @@ krixik.available_modules
 
 Lo arriba generado es una lista de los nómbres exactos de cada módulo que usarías al montar el `module_chain` de un [nuevo *pipeline*](../creacion_de_pipelines/creacion_de_pipelines.md).
 
-### Examina la Configuracion de un Modulo con el Metodo `module_details`
+### Examina la Configuracion de un Modulo con el Metodo `view_module_config`
 
-La [configuración](../creacion_de_pipelines/configuracion_de_pipelines.md) de cualquier módulo puede detallarse con el método `module_details` de Krixik. Esto se puede hacer localmente sin antes haber [inicializado una sesión](../inicializacion/inicializacion_y_autenticacion.md) de la siguiente manera:
+La [configuración](../creacion_de_pipelines/configuracion_de_pipelines.md) de cualquier módulo puede detallarse con el método `view_module_config` de Krixik. Esto se puede hacer localmente sin antes haber [inicializado una sesión](../inicializacion/inicializacion_y_autenticacion.md) de la siguiente manera:
 
 
 ```python
 # ver la configuración de un módulo Krixik (en este ejemplo, del módulo transcribe)
-krixik.module_details(module_name="transcribe")
+krixik.view_module_config(module_name="transcribe")
 ```
 
 
