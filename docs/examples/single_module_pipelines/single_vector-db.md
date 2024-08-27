@@ -83,13 +83,13 @@ print(json.dumps(process_output, indent=2))
     {
       "status_code": 200,
       "pipeline": "modules-vector-db-docs",
-      "request_id": "536c9e0b-41ed-4c41-99dc-11cdabf32ecc",
-      "file_id": "63c88fdc-8b62-4f74-af20-c4816ee0bb88",
-      "message": "SUCCESS - output fetched for file_id 63c88fdc-8b62-4f74-af20-c4816ee0bb88.Output saved to location(s) listed in process_output_files.",
+      "request_id": "1b5e2995-bb36-4789-a14a-2653642284ca",
+      "file_id": "7030acbe-2342-4899-b38e-9501788a0bf9",
+      "message": "SUCCESS - output fetched for file_id 7030acbe-2342-4899-b38e-9501788a0bf9.Output saved to location(s) listed in process_output_files.",
       "warnings": [],
       "process_output": null,
       "process_output_files": [
-        "../../../data/output/63c88fdc-8b62-4f74-af20-c4816ee0bb88.faiss"
+        "../../../data/output/7030acbe-2342-4899-b38e-9501788a0bf9.faiss"
       ]
     }
 
@@ -127,10 +127,11 @@ def query_vector_db(query_vector: np.ndarray, k: int, db_file_path: str) -> Tupl
     return distances, indices
 ```
 
-    Requirement already satisfied: faiss-cpu in /Users/jeremywatt/Desktop/krixik/code/krixik-docs/docs_venv/lib/python3.10/site-packages (1.8.0)
-    Requirement already satisfied: numpy in /Users/jeremywatt/Desktop/krixik/code/krixik-docs/docs_venv/lib/python3.10/site-packages (from faiss-cpu) (1.26.4)
+    Requirement already satisfied: faiss-cpu in /Users/jeremywatt/Desktop/krixik-docs/venv/lib/python3.10/site-packages (1.8.0.post1)
+    Requirement already satisfied: numpy<2.0,>=1.0 in /Users/jeremywatt/Desktop/krixik-docs/venv/lib/python3.10/site-packages (from faiss-cpu) (1.26.4)
+    Requirement already satisfied: packaging in /Users/jeremywatt/Desktop/krixik-docs/venv/lib/python3.10/site-packages (from faiss-cpu) (24.1)
     
-    [1m[[0m[34;49mnotice[0m[1;39;49m][0m[39;49m A new release of pip is available: [0m[31;49m23.3.1[0m[39;49m -> [0m[32;49m24.0[0m
+    [1m[[0m[34;49mnotice[0m[1;39;49m][0m[39;49m A new release of pip is available: [0m[31;49m23.3.1[0m[39;49m -> [0m[32;49m24.2[0m
     [1m[[0m[34;49mnotice[0m[1;39;49m][0m[39;49m To update, run: [0m[32;49mpip install --upgrade pip[0m
 
 
