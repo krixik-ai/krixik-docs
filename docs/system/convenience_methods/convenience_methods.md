@@ -8,7 +8,7 @@ This document introduces several useful properties of the main Krixik object and
 The document is broken down as follows:
 
 - [View All Available Modules with the `available_modules` Property](#view-all-available-modules-with-the-available_modules-property)
-- [Examine Configuration of a Module with the `module_details` Method](#examine-configuration-of-a-module-with-the-module_details-method)
+- [Examine Configuration of a Module with the `view_module_config` Method](#examine-configuration-of-a-module-with-the-view_module_config-method)
 - [View Pipeline Module Chain with the `module_chain` Property](#view-pipeline-module-chain-with-the-module_chain-property)
 - [Test Pipeline Input with the `test_input` Method](#test-pipeline-input-with-the-test_input-method)
 - [View Module Input and Output Examples](#view-module-input-and-output-examples)
@@ -43,9 +43,9 @@ krixik.available_modules
 
 The above is a list of the exact module names you would use when setting up a [new pipeline's](../pipeline_creation/create_pipeline.md) `module_chain`.
 
-### Examine Configuration of a Module with the `module_details` Method
+### Examine Configuration of a Module with the `view_module_config` Method
 
-Any module's [configuration](../pipeline_creation/pipeline_config.md) can be viewed by using the Krixik `module_details` method. Among other things, it lists all of the module's available models and indicates which of those is active by default. When viable, it also displays input and output examples. Using this method can be done locally and without [first initializing](../initialization/initialize_and_authenticate.md), as follows:
+Any module's [configuration](../pipeline_creation/pipeline_config.md) can be viewed by using the Krixik `view_module_config` method. Among other things, it lists all of the module's available models and indicates which of those is active by default. When viable, it also displays input and output examples. Using this method can be done locally and without [first initializing](../initialization/initialize_and_authenticate.md), as follows:
 
 
 ```python

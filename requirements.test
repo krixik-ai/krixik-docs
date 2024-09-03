@@ -3,3 +3,7 @@ pytest
 markdown
 requests
 jupyter
+pytest-xdist
+pytest-subtests
+numpy
+faiss-cpu
