@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## 2024-08-23
 
+Fixed view_module_click_data in convenience doc, shuffled mkdocs
+
+### Changed
+
+- It used to say click_data method, now view_module_click_data in convenience methods doc
+- Shuffled order of search multi-module examples in mkdocs so it looks better
+
+
+## 2024-08-23
+
 Small change to convenience method doc.
 
 ### Changed
