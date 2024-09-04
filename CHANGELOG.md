@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2024-09-03
+
+Fixed view_module_click_data detail on convenience docs, improved mkdocs order
+
+### Changed
+
+- Changed all references to the click_data method to be to the view_module_click_data method in the convenience methods doc
+- Changed order of multi-module search examples section of mkdocs so it looks better
+
+
 ## 2024-08-24
 
 Minor capitalization change to installation doc.

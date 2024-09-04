@@ -19,4 +19,4 @@ def test_1(docpath):
             break
     if create_exist:
         print(code_blocks[-1])
-        assert "reset_pipeline(pipeline)" in code_blocks[-1], f".reset_pipeline not found in final code block of {docpath}"
+        assert "krixik.reset_pipeline(pipeline)" in code_blocks[-1], f".reset_pipeline not found in final code block of {docpath}"

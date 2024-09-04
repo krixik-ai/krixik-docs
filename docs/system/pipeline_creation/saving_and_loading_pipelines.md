@@ -75,7 +75,7 @@ Note that this is _not_ the `name` of the pipeline. For instance, if you wished 
 
 ```python
 # delete all processed datapoints belonging to this pipeline
-reset_pipeline(pipeline)
+krixik.reset_pipeline(pipeline)
 ```
 
 In other words, the `pipeline` argument to the `reset_pipeline` function is a Python variable that a pipeline object has been assigned to, and `reset_pipeline` will delete any datapoints associated with that pipeline object's `name` on the Krixik system.

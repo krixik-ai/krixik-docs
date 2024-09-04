@@ -23,13 +23,13 @@ nav:
     - multi-step search and RAG pipeline examples:
       - 'overview': examples/search_pipeline_examples/search_pipelines_overview.md
       - 'semantic (vector) search': examples/search_pipeline_examples/multi_basic_semantic_search.md
-      - 'semantic (vector) search on snippets': examples/search_pipeline_examples/multi_snippet_semantic_search.md
-      - 'keyword search': examples/search_pipeline_examples/multi_basic_keyword-search.md
-      - 'semantically-searchable transcription': examples/search_pipeline_examples/multi_semantically_searchable_transcription.md
-      - 'keyword-searchable transcription': examples/search_pipeline_examples/multi_keyword_searchable_transcription.md
+      - 'semantic (vector) search on snippets': examples/search_pipeline_examples/multi_snippet_semantic_search.md      
+      - 'semantically-searchable transcription': examples/search_pipeline_examples/multi_semantically_searchable_transcription.md      
       - 'semantically-searchable translation': examples/search_pipeline_examples/multi_semantically_searchable_translation.md
       - 'semantically-searchable translated transcription': examples/search_pipeline_examples/multi_semantically_searchable_translated_transcription.md
       - 'semantically-searchable OCR': examples/search_pipeline_examples/multi_semantically_searchable_ocr.md
+      - 'keyword search': examples/search_pipeline_examples/multi_basic_keyword-search.md
+      - 'keyword-searchable transcription': examples/search_pipeline_examples/multi_keyword_searchable_transcription.md
       - 'keyword-searchable image captions': examples/search_pipeline_examples/multi_keyword_searchable_image_captions.md
   - Modules:
     - 'overview': modules/modules_overview.md
