@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2024-09-03
+
+`reset_pipeline` addition to core in 1.1.19 rolled out throughout.
+
 
 ## 2024-09-03
 
