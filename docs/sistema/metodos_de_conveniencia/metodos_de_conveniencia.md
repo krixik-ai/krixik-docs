@@ -12,7 +12,7 @@ El documento se divide en las siguientes secciones:
 - [Ve la Cadena de Módulos de un *Pipeline* con la Propiedad `module_chain`](#ve-la-cadena-de-modulos-de-un-pipeline-con-la-propiedad-module_chain)
 - [Haz Pruebas Sobre Entradas a un *Pipeline* con el Método `test_input`](#haz-pruebas-sobre-entradas-a-un-pipeline-con-el-metodo-test_input)
 - [Ve Ejemplos de Entradas y Salidas de un Módulo](#ve-ejemplos-de-entradas-y-salidas-de-un-modulo)
-- [Ve Data de Conectividad de un Módulo con el Método `click_data`](#ve-data-de-conectividad-de-un-modulo-con-el-metodo-click_data)
+- [Ve Data de Conectividad de un Módulo con el Método `view_module_click_data`](#ve-data-de-conectividad-de-un-modulo-con-el-metodo-view_module_click_data)
 
 ### Ve Todos los Modulos Disponibles con la Propiedad `available_modules`
 
@@ -251,9 +251,9 @@ print(json.dumps(io.OutputStructure().data_example, indent=2))
 
 `"other"` acá indica toda otra clave en tu archivo de entrada. Su valor no importa porque, en lo que concierne a cualquier módulo que conectes al módulo [`parser`](../../modulos/modulos_de_funciones_de_apoyo/modulo_parser_fragmentacion.md), es irrelevante: en el *pipeline*, lo único que pasa al siguiente módulo son los fragmentos de texto.
 
-### Ve Data de Conectividad de un Modulo con el Metodo `click_data`
+### Ve Data de Conectividad de un Modulo con el Metodo `view_module_click_data`
 
-El método `click_data` muestra toda los datos básicos que necesitas para saber qué modulos se pueden conectar, o hacer "click", con qué otros módulos. Esta es la data que se consulta "tras bambalinas" de Krixik cuando creas un *pipeline* con el método [`create_pipeline`](../creacion_de_pipelines/creacion_de_pipelines.md). Detalla cada componente de su salida:
+El método `view_module_click_data` muestra toda los datos básicos que necesitas para saber qué modulos se pueden conectar, o hacer "click", con qué otros módulos. Esta es la data que se consulta "tras bambalinas" de Krixik cuando creas un *pipeline* con el método [`create_pipeline`](../creacion_de_pipelines/creacion_de_pipelines.md). Detalla cada componente de su salida:
 
 Primero aparece el formato de datos de entrada y salida del módulo. Un módulo como [`transcribe`](../../modulos/modulos_ia/modulo_transcribe_transcripcion.md) toma entradas audio y devuelve salidas JSON, mientras que el módulo [`text-embedder`](../../modulos/modulos_ia/modulo_text-embedder_encaje_lexico.md) toma entradas JSON y devuelve salidas NPY.
 
@@ -267,7 +267,7 @@ Detalla ahora el `click_data` de dos módulos para determinar qué dice sobre su
 
 
 ```python
-# examina la "conectabilidad" de un módulo con el método click_data
+# examina la "conectabilidad" de un módulo con el método view_module_click_data
 krixik.view_module_click_data(module_name="text-embedder")
 ```
 
@@ -286,7 +286,7 @@ krixik.view_module_click_data(module_name="text-embedder")
 
 
 ```python
-# examina la "conectabilidad" de otro módulo con el método click_data
+# examina la "conectabilidad" de otro módulo con el método view_module_click_data
 krixik.view_module_click_data(module_name="vector-db")
 ```
 
