@@ -66,13 +66,13 @@ nav:
     - ejemplos de pipelines de búsqueda:
       - 'introducción': ejemplos/ejemplos_pipelines_de_busqueda/introduccion_pipelines_de_busqueda.md
       - 'búsqueda semántica básica': ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_semantica_basica.md
-      - 'búsqueda semántica sobre fragmentos': ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_semantica_sobre_fragmentos.md
-      - 'búsqueda por palabras clave básica': ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_por_palabras_clave_basica.md
-      - 'búsqueda semántica sobre transcripción': ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_semantica_sobre_transcripcion.md
-      - 'búsqueda por palabras clave sobre transcripción': ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_por_palabras_clave_sobre_transcripcion.md
+      - 'búsqueda semántica sobre fragmentos': ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_semantica_sobre_fragmentos.md      
+      - 'búsqueda semántica sobre transcripción': ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_semantica_sobre_transcripcion.md      
       - 'búsqueda semántica sobre traducción': ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_semantica_sobre_traduccion.md
       - 'búsqueda semántica sobre transcripción traducida': ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_semantica_sobre_transcripcion_traducida.md
       - 'búsqueda semántica sobre roc': ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_semantica_sobre_roc.md
+      - 'búsqueda por palabras clave básica': ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_por_palabras_clave_basica.md
+      - 'búsqueda por palabras clave sobre transcripción': ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_por_palabras_clave_sobre_transcripcion.md
       - 'búsqueda por palabras clave sobre leyendas de imagen': ejemplos/ejemplos_pipelines_de_busqueda/multi_busqueda_por_palabras_clave_sobre_leyendas_de_imagen.md
   - El futuro de Krixik:
     - 'el futuro de krixik': futuro/el_futuro_de_krixik.md

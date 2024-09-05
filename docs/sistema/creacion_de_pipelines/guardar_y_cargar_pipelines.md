@@ -72,7 +72,7 @@ Ten en cuenta que esta variable _no_ es el `name` del *pipeline*. Por ejemplo, s
 
 ```python
 # elimina todos los datos procesados pertenecientes a este pipeline
-reset_pipeline(pipeline)
+krixik.reset_pipeline(pipeline)
 ```
 
 Dicho de otra manera, el argumento `pipeline` de la función `reset_pipeline` es una variable al que se ha asignado un objeto *pipeline*, y `reset_pipeline` eliminará todo dato asociado al `name` de ese objeto *pipeline* en el sistema Krixik.
