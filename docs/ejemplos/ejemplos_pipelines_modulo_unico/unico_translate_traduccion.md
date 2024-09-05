@@ -162,5 +162,5 @@ print(json.dumps(process_output, indent=2))
 
 ```python
 # elimina todos los datos procesados pertenecientes a este pipeline
-reset_pipeline(pipeline)
+krixik.reset_pipeline(pipeline)
 ```
