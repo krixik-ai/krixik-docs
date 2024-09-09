@@ -1,6 +1,17 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+
+## 2024-09-03
+
+Added krixik_version, updated reset_pipeline doc
+
+### Changed
+
+- krixik_version file did not exist; added it
+- Updated doc section on reset_pipeline in system docs
+
+
 ## 2024-09-03
 
 `reset_pipeline` addition to core in 1.1.19 rolled out throughout.
