@@ -12,7 +12,7 @@ The document is broken down as follows:
 - [View Pipeline Module Chain with the `module_chain` Property](#view-pipeline-module-chain-with-the-module_chain-property)
 - [Test Pipeline Input with the `test_input` Method](#test-pipeline-input-with-the-test_input-method)
 - [View Module Input and Output Examples](#view-module-input-and-output-examples)
-- [View Module Click Data with the `click_data` Method](#view-module-click-data-with-the-click_data-method)
+- [View Module Click Data with the `view_module_click_data` Method](#view-module-click-data-with-the-view_module_click_data-method)
 
 ### View All Available Modules with the `available_modules` Property
 
@@ -251,9 +251,9 @@ print(json.dumps(io.OutputStructure().data_example, indent=2))
 
 Here `"other"` denotes any other key in your input.  Its value is arbitrary because, as far as any model you connect the [`parser`](../../modules/support_function_modules/parser_module.md) module into is concerned, it's irrelevant. Only the snippet is passed through.
 
-### View Module Click Data with the `click_data` Method
+### View Module Click Data with the `view_module_click_data` Method
 
-The `click_data` method displays all the basic data required to know which modules can be "clicked" into which other modules.  This is the data referenced "under the hood" of Krixik when you build a pipeline with the [`create_pipeline`](../pipeline_creation/create_pipeline.md) method. Let's go through this piece by piece.
+The `view_module_click_data` method displays all the basic data required to know which modules can be "clicked" into which other modules.  This is the data referenced "under the hood" of Krixik when you build a pipeline with the [`create_pipeline`](../pipeline_creation/create_pipeline.md) method. Let's go through this piece by piece.
 
 First there's the module's input/output data format. A module like [`transcribe`](../../modules/ai_modules/transcribe_module.md) takes in audio and outputs `JSON`, while the [`text-embedder`](../../modules/ai_modules/text-embedder_module.md) module takes in `JSON` and outputs `NPY`.  
 
@@ -267,7 +267,7 @@ Lets take a look at the `click_data` of two modules and discuss what it says abo
 
 
 ```python
-# examine a module's "clickability" data by using the .click_data method
+# examine a module's "clickability" data by using the view_module_click_data method
 krixik.view_module_click_data(module_name="text-embedder")
 ```
 
@@ -286,7 +286,7 @@ krixik.view_module_click_data(module_name="text-embedder")
 
 
 ```python
-# examine a module's "clickability" data by using the .click_data method
+# examine a module's "clickability" data by using the view_module_click_data method
 krixik.view_module_click_data(module_name="vector-db")
 ```
 
