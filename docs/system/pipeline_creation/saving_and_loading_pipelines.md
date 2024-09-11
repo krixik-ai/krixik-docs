@@ -7,7 +7,7 @@ This overview of the saving and loading pipelines is divided into the following 
 
 - [The `save_pipeline` Method](#the-save_pipeline-method)
 - [The `load_pipeline` Method](#the-load_pipeline-method)
-- [The `reset_pipeline` Function](#the-reset_pipeline-function)
+- [The `reset_pipeline` Method](#the-reset_pipeline-method)
 
 ### The `save_pipeline` Method
 
@@ -55,27 +55,27 @@ Using the `load_pipeline` method looks like this:
 
 ```python
 # load a pipeline into memory via its valid configuration file
-pipeline = krixik.load_pipeline(config_path=data_dir + "pipeline_configs/save-pipeline-demo.yaml")
+my_pipeline = krixik.load_pipeline(config_path=data_dir + "pipeline_configs/save-pipeline-demo.yaml")
 ```
 
 Note that you don't need to have previously dealt with the saved pipeline yourself. For instance, a colleague may have shared a pipeline [configuration](pipeline_config.md) file with you, or you may have written the file from scratch. As long as the config is properly formatted, the `load_pipeline` method will work as it should.
 
-### The `reset_pipeline` Function
+### The `reset_pipeline` Method
 
 The `load_pipeline` method discussed above reinstantiates a previously existing pipeline with the same `name` and `module_chain`. Since files processed through a pipeline are attached to the pipeline's `name`, those files would continue to be attached to this newly instantiated pipeline.
 
-If you wish to recreate a pipeline but seek to do so with a blank slate, the easiest way to do it is with the `reset_pipeline` function, which deletes all processed datapoints attached to that pipeline (i.e. anything relating to any files previously processed through it).
+If you wish to recreate a pipeline but seek to do so with a blank slate, the easiest way to do it is with the `reset_pipeline` method, which deletes all processed datapoints attached to that pipeline (i.e. anything relating to any files previously processed through it).
 
-The `reset_pipeline` function takes one argument (required):
+The `reset_pipeline` method takes one argument (required):
 
 - `pipeline`: The Python variable that the pipeline object is currently saved to.
 
-Note that this is _not_ the `name` of the pipeline. For instance, if you wished to reset the pipeline in the `load_pipeline` method example code immediately above, the `pipeline` argument for the `reset_pipeline` function would be set to `my_pipeline_2`, as follows:
+Note that this is _not_ the `name` of the pipeline. For instance, if you wished to reset the pipeline in the `load_pipeline` method example code immediately above, the `pipeline` argument for the `reset_pipeline` method would be set to `my_pipeline_2`, as follows:
 
 
 ```python
 # delete all processed datapoints belonging to this pipeline
-krixik.reset_pipeline(pipeline)
+krixik.reset_pipeline(my_pipeline)
 ```
 
-In other words, the `pipeline` argument to the `reset_pipeline` function is a Python variable that a pipeline object has been assigned to, and `reset_pipeline` will delete any datapoints associated with that pipeline object's `name` on the Krixik system.
+In other words, the `pipeline` argument to the `reset_pipeline` method is a Python variable that a pipeline object has been assigned to, and `reset_pipeline` will delete any datapoints associated with that pipeline object's `name` on the Krixik system.
