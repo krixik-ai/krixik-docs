@@ -77,7 +77,10 @@ nav:
   - The future of Krixik:
     - 'the future of Krixik': future/future_of_krixik.md
 theme: 
-  name: readthedocs
+  name: material
+  custom_dir: overrides
+  logo: assets/images/krixik_logo.png
+  favicon: assets/images/krixik_logo.png
 plugins:
   - mkdocstrings:
       default_handler: python
@@ -86,4 +89,3 @@ site_name: krixik docs
 repo_name: krixik-docs
 repo_url: https://github.com/krixik-ai/krixik-docs
 edit_uri: blob/main/docs/
-copyright: © Krixik 2024 All Rights Reserved
