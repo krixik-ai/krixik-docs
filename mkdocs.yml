@@ -77,7 +77,10 @@ nav:
   - El futuro de Krixik:
     - 'el futuro de krixik': futuro/el_futuro_de_krixik.md
 theme: 
-  name: readthedocs
+  name: material
+  custom_dir: overrides
+  logo: assets/images/krixik_logo.png
+  favicon: assets/images/krixik_logo.png
 plugins:
   - mkdocstrings:
       default_handler: python

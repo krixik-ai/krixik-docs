@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2024-08-23
+
+Updated reset_pipeline doc
+
+### Changed
+
+- Updated system doc that refers to reset_pipeline función instead of método.
+
+
 ## 2024-09-03
 
 `reset_pipeline` addition to core in 1.1.19 rolled out throughout.
@@ -10,6 +19,7 @@ All notable changes to this project will be documented in this file.
 ## 2024-09-03
 
 Fixed view_module_click_data detail on convenience docs, improved mkdocs order
+
 
 ## 2024-08-23
 
