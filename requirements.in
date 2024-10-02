@@ -5,7 +5,7 @@ mkdocs
 mkdocstrings
 mkdocstrings - python
 mkdocs - section - index
-mkdocs - material
+mkdocs-material
 nbconvert
 nbmake
 markdown
