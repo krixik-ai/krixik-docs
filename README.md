@@ -6,9 +6,9 @@
 # ¡Bienvenidos a Krixik!
 [🇺🇸 English version of this document](https://krixik-docs.readthedocs.io/latest/)
 
-Ensamblar un *pipeline* secuencialmente compuesto de varios modelos de IA puede ser difícil y costoso. Incluso consumir un solo modelo es a menudo una tarea desgastante.
+Los modelos de IA pequeños/especializados son a menudo un complemento (o alternativa) necesario(a) a la "IA grande". Sin embargo, la infraestructura para la IA pequeña tiende a ser insuficiente, por lo cual construir con ella puede ser difícil, prolongado, e incluso costoso. Iterar con diferentes modelos, y particularmente con combinaciones de estos modelos, puede volverse inviable.
 
-Por eso estamos acá. **Bienvenidos a Krixik**, donde puedes fácilmente ensamblar y consumir sin servidor pipelines modulares de IA a través de APIs seguros.
+Por eso estamos acá. **Bienvenidos a Krixik**, donde puedes fácil y rápidamente experimentar, prototipar, y construir con modelos de IA pequeños/especializados secuenciados o independientes a través de APIs seguros. Los modelos que usas a través de Krixik pueden ser de código abierto o fine-tuned/entrenados por ti.
 
 ### Table of Contents
 
