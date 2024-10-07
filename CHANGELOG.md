@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2024-10-06
+
+Actualización a README
+
+### Changed
+
+- Actualización a los dos primeros párrafos del README para que esté mejor alineado con nuestra narrativa.
+
+
 ## 2024-08-23
 
 Updated reset_pipeline doc
