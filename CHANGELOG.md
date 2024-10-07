@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2024-10-06
+
+README update
+
+### Changed
+
+Changed the two intro paragraphs of the readme to reflect evolution to our narrative.
+
+
 ## 2024-09-03
 
 Added krixik_version, updated reset_pipeline doc
