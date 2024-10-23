@@ -1,4 +1,5 @@
 # Welcome to Krixik!
+
 [🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/)
 
 Sequentially assembling multiple AI models into a single pipeline can be painful and expensive. Consuming even a single model can often be draining.
@@ -27,25 +28,23 @@ Run the following command to [install](https://krixik-docs.readthedocs.io/latest
 pip install krixik
 ```
 
-Note: Python version 3.10 or higher is required.
-
+Note: Python version 3.8 or higher is required.
 
 ### Initialize your Session
 
-To [initialize](https://krixik-docs.readthedocs.io/latest/system/initialization/initialize_and_authenticate/) your Krixik Client session you will need your unique `api_key` and `api_url` secrets.  Beta testers will receive their secrets from Krixik admin.
+To [initialize](https://krixik-docs.readthedocs.io/latest/system/initialization/initialize_and_authenticate/) your Krixik Client session you will need your unique `api_key` and `api_url` secrets. Beta testers will receive their secrets from Krixik admin.
 
 Instead of handling your secrets directly, we strongly recommend storing them in an `.env` file and loading them via [python-dotenv](https://pypi.org/project/python-dotenv/).
 
 Once you have your secrets, [initialize](https://krixik-docs.readthedocs.io/latest/system/initialization/initialize_and_authenticate/) your session as follows:
 
-
 ```python
 from krixik import krixik
-krixik.init(api_key=MY_API_KEY, 
+krixik.init(api_key=MY_API_KEY,
             api_url=MY_API_URL)
 ```
 
-...where  `MY_API_KEY` and `MY_API_URL` are your account secrets.
+...where `MY_API_KEY` and `MY_API_URL` are your account secrets.
 
 If you've misplaced your secrets, please reach out to us directly.
 
@@ -55,7 +54,7 @@ If you've misplaced your secrets, please reach out to us directly.
 
 ```python
 # create a simple transcription pipeline
-pipeline = krixik.create_pipeline(name='my_transcribe-pipeline-1', 
+pipeline = krixik.create_pipeline(name='my_transcribe-pipeline-1',
                                   module_chain=["transcribe"])
 ```
 
@@ -67,19 +66,18 @@ pipeline.process(local_file_path='./path/to/my/mp3/or/mp4')
 
 The outputs of [this pipeline](https://krixik-docs.readthedocs.io/latest/examples/single_module_pipelines/single_transcribe/) will be a timestamped transcript of your input audio/video file, a `file_id` for the processed file, and a `request_id` for the process itself.
 
-
 ### Extending your Pipeline
 
 [Suppose you wanted to immediately perform vector search on `transcribe` module output.](https://krixik-docs.readthedocs.io/latest/examples/search_pipeline_examples/multi_semantically_searchable_transcription/)
 
 You would need to do the following after transcription:
 
-1.  *Transform* the transcript into a text file
-2.  *Parse* the text using a sliding window, chunking it into (possibly overlapping) snippets
-3.  *Embed* each snippet using an appropriate text embedder
-4.  *Store* the resulting vectors in a vector database
-5.  *Index* said database
-6.  *Enable* vector search on the database
+1.  _Transform_ the transcript into a text file
+2.  _Parse_ the text using a sliding window, chunking it into (possibly overlapping) snippets
+3.  _Embed_ each snippet using an appropriate text embedder
+4.  _Store_ the resulting vectors in a vector database
+5.  _Index_ said database
+6.  _Enable_ vector search on the database
 
 Locally creating and testing this sequence of steps would be time consuming—orchestrating them in a secure production service even more so. And that's without trying to make the entire process serverless.
 
@@ -87,11 +85,11 @@ With **Krixik**, however, you can rapidly incorporate this functionality to your
 
 ```python
 # create pipeline with the above-alluded-to modules
-pipeline = krixik.create_pipeline(name='transcribe_vsearch', 
+pipeline = krixik.create_pipeline(name='transcribe_vsearch',
                                   module_chain=["transcribe",
                                                 "json-to-txt",
-                                                "parser", 
-                                                "text-embedder", 
+                                                "parser",
+                                                "text-embedder",
                                                 "vector-db"])
 ```
 

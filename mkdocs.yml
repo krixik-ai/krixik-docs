@@ -1,95 +1,97 @@
 nav:
   - Home: index.md
   - Pipeline examples:
-    - 'overview': examples/pipeline_examples_overview.md
-    - single-module pipelines:
-      - 'image caption': examples/single_module_pipelines/single_caption.md
-      - 'OCR (optical character recognition)': examples/single_module_pipelines/single_ocr.md
-      - 'sentiment analysis': examples/single_module_pipelines/single_sentiment.md
-      - 'summarization': examples/single_module_pipelines/single_summarize.md
-      - 'text embedder': examples/single_module_pipelines/single_text-embedder.md
-      - 'transcription': examples/single_module_pipelines/single_transcribe.md
-      - 'translation': examples/single_module_pipelines/single_translate.md
-      - 'vector database': examples/single_module_pipelines/single_vector-db.md
-      - 'keyword database': examples/single_module_pipelines/single_keyword-db.md
-      - 'text parser': examples/single_module_pipelines/single_parser.md
-      - 'json to txt': examples/single_module_pipelines/single_json-to-txt.md
-    - multi-step conversion pipeline examples:
-      - 'recursive summarization': examples/multi_module_non_search_pipeline_examples/multi_recursive_summarization.md
-      - 'translated transcription': examples/multi_module_non_search_pipeline_examples/multi_translated_transcription.md
-      - 'sentiment analysis on transcription': examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_transcription.md
-      - 'sentiment analysis on translation': examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_translation.md
-      - 'sentiment analysis on translated transcription': examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_translated_transcription.md
-    - multi-step search and RAG pipeline examples:
-      - 'overview': examples/search_pipeline_examples/search_pipelines_overview.md
-      - 'semantic (vector) search': examples/search_pipeline_examples/multi_basic_semantic_search.md
-      - 'semantic (vector) search on snippets': examples/search_pipeline_examples/multi_snippet_semantic_search.md      
-      - 'semantically-searchable transcription': examples/search_pipeline_examples/multi_semantically_searchable_transcription.md      
-      - 'semantically-searchable translation': examples/search_pipeline_examples/multi_semantically_searchable_translation.md
-      - 'semantically-searchable translated transcription': examples/search_pipeline_examples/multi_semantically_searchable_translated_transcription.md
-      - 'semantically-searchable OCR': examples/search_pipeline_examples/multi_semantically_searchable_ocr.md
-      - 'keyword search': examples/search_pipeline_examples/multi_basic_keyword-search.md
-      - 'keyword-searchable transcription': examples/search_pipeline_examples/multi_keyword_searchable_transcription.md
-      - 'keyword-searchable image captions': examples/search_pipeline_examples/multi_keyword_searchable_image_captions.md
+      - "overview": examples/pipeline_examples_overview.md
+      - single-module pipelines:
+          - "image caption": examples/single_module_pipelines/single_caption.md
+          - "OCR (optical character recognition)": examples/single_module_pipelines/single_ocr.md
+          - "sentiment analysis": examples/single_module_pipelines/single_sentiment.md
+          - "summarization": examples/single_module_pipelines/single_summarize.md
+          - "text embedder": examples/single_module_pipelines/single_text-embedder.md
+          - "transcription": examples/single_module_pipelines/single_transcribe.md
+          - "translation": examples/single_module_pipelines/single_translate.md
+          - "vector database": examples/single_module_pipelines/single_vector-db.md
+          - "keyword database": examples/single_module_pipelines/single_keyword-db.md
+          - "text parser": examples/single_module_pipelines/single_parser.md
+          - "json to txt": examples/single_module_pipelines/single_json-to-txt.md
+      - multi-step conversion pipeline examples:
+          - "recursive summarization": examples/multi_module_non_search_pipeline_examples/multi_recursive_summarization.md
+          - "translated transcription": examples/multi_module_non_search_pipeline_examples/multi_translated_transcription.md
+          - "sentiment analysis on transcription": examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_transcription.md
+          - "sentiment analysis on translation": examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_translation.md
+          - "sentiment analysis on translated transcription": examples/multi_module_non_search_pipeline_examples/multi_sentiment_analysis_on_translated_transcription.md
+      - multi-step search and RAG pipeline examples:
+          - "overview": examples/search_pipeline_examples/search_pipelines_overview.md
+          - "semantic (vector) search": examples/search_pipeline_examples/multi_basic_semantic_search.md
+          - "semantic (vector) search on snippets": examples/search_pipeline_examples/multi_snippet_semantic_search.md
+          - "semantically-searchable transcription": examples/search_pipeline_examples/multi_semantically_searchable_transcription.md
+          - "semantically-searchable translation": examples/search_pipeline_examples/multi_semantically_searchable_translation.md
+          - "semantically-searchable translated transcription": examples/search_pipeline_examples/multi_semantically_searchable_translated_transcription.md
+          - "semantically-searchable OCR": examples/search_pipeline_examples/multi_semantically_searchable_ocr.md
+          - "keyword search": examples/search_pipeline_examples/multi_basic_keyword-search.md
+          - "keyword-searchable transcription": examples/search_pipeline_examples/multi_keyword_searchable_transcription.md
+          - "keyword-searchable image captions": examples/search_pipeline_examples/multi_keyword_searchable_image_captions.md
   - Modules:
-    - 'overview': modules/modules_overview.md
-    - ai modules:
-      - 'image caption': modules/ai_modules/caption_module.md
-      - 'OCR (optical character recognition)': modules/ai_modules/ocr_module.md
-      - 'sentiment analysis': modules/ai_modules/sentiment_module.md
-      - 'summarization': modules/ai_modules/summarize_module.md
-      - 'text embedder': modules/ai_modules/text-embedder_module.md
-      - 'transcription': modules/ai_modules/transcribe_module.md
-      - 'translation': modules/ai_modules/translate_module.md
-    - database modules:
-      - 'vector database': modules/database_modules/vector-db_module.md
-      - 'keyword database': modules/database_modules/keyword-db_module.md
-    - support function models:
-      - 'text parser': modules/support_function_modules/parser_module.md
-      - 'json to txt': modules/support_function_modules/json-to-txt_module.md
-      - 'adding your own modules or models': modules/adding_your_own_modules_or_models.md
+      - "overview": modules/modules_overview.md
+      - ai modules:
+          - "image caption": modules/ai_modules/caption_module.md
+          - "OCR (optical character recognition)": modules/ai_modules/ocr_module.md
+          - "sentiment analysis": modules/ai_modules/sentiment_module.md
+          - "summarization": modules/ai_modules/summarize_module.md
+          - "text embedder": modules/ai_modules/text-embedder_module.md
+          - "transcription": modules/ai_modules/transcribe_module.md
+          - "translation": modules/ai_modules/translate_module.md
+      - database modules:
+          - "vector database": modules/database_modules/vector-db_module.md
+          - "keyword database": modules/database_modules/keyword-db_module.md
+      - support function models:
+          - "text parser": modules/support_function_modules/parser_module.md
+          - "json to txt": modules/support_function_modules/json-to-txt_module.md
+          - "adding your own modules or models": modules/adding_your_own_modules_or_models.md
   - System:
-    - 'overview': system/system_overview.md
-    - initialization:
-      - 'install your client': system/initialization/install_client.md
-      - 'initialize and authenticate': system/initialization/initialize_and_authenticate.md  
-    - pipeline creation:
-      - 'components of a Krixik pipeline': system/pipeline_creation/components_of_a_krixik_pipeline.md
-      - 'create a pipeline': system/pipeline_creation/create_pipeline.md
-      - 'pipeline config': system/pipeline_creation/pipeline_config.md
-      - 'save and load a pipeline': system/pipeline_creation/saving_and_loading_pipelines.md
-    - parameters + processing files through pipelines:
-      - 'the parameterizable process method': system/parameters_processing_files_through_pipelines/process_method.md
-      - 'json input format': system/parameters_processing_files_through_pipelines/JSON_input_format.md
-      - 'the process_status method': system/parameters_processing_files_through_pipelines/process_status_method.md
-      - 'the fetch_output method': system/parameters_processing_files_through_pipelines/fetch_output_method.md
-      - 'data deletion policy': system/parameters_processing_files_through_pipelines/data_deletion_policy.md
-    - file system:
-      - 'the list method': system/file_system/list_method.md
-      - 'the update method': system/file_system/update_method.md
-      - 'the delete method': system/file_system/delete_method.md
-      - 'the show_tree method': system/file_system/show_tree_method.md
-    - search methods:
-      - 'semantic (vector) search': system/search_methods/semantic_search_method.md
-      - 'keyword search': system/search_methods/keyword_search_method.md
-    - convenience methods:
-      - 'convenience methods': system/convenience_methods/convenience_methods.md
+      - "overview": system/system_overview.md
+      - initialization:
+          - "install your client": system/initialization/install_client.md
+          - "initialize and authenticate": system/initialization/initialize_and_authenticate.md
+      - pipeline creation:
+          - "components of a Krixik pipeline": system/pipeline_creation/components_of_a_krixik_pipeline.md
+          - "create a pipeline": system/pipeline_creation/create_pipeline.md
+          - "pipeline config": system/pipeline_creation/pipeline_config.md
+          - "save and load a pipeline": system/pipeline_creation/saving_and_loading_pipelines.md
+      - parameters + processing files through pipelines:
+          - "the parameterizable process method": system/parameters_processing_files_through_pipelines/process_method.md
+          - "json input format": system/parameters_processing_files_through_pipelines/JSON_input_format.md
+          - "the process_status method": system/parameters_processing_files_through_pipelines/process_status_method.md
+          - "the fetch_output method": system/parameters_processing_files_through_pipelines/fetch_output_method.md
+          - "data deletion policy": system/parameters_processing_files_through_pipelines/data_deletion_policy.md
+      - file system:
+          - "the list method": system/file_system/list_method.md
+          - "the update method": system/file_system/update_method.md
+          - "the delete method": system/file_system/delete_method.md
+          - "the show_tree method": system/file_system/show_tree_method.md
+      - search methods:
+          - "semantic (vector) search": system/search_methods/semantic_search_method.md
+          - "keyword search": system/search_methods/keyword_search_method.md
+      - convenience methods:
+          - "convenience methods": system/convenience_methods/convenience_methods.md
   - The future of Krixik:
-    - 'the future of Krixik': future/future_of_krixik.md
-theme: 
+      - "the future of Krixik": future/future_of_krixik.md
+theme:
   name: material
   custom_dir: overrides
   logo: assets/images/krixik_logo.png
   favicon: assets/images/krixik_logo.png
   palette:
-  - scheme: slate
-    toggle:
-      icon: material/brightness-4
-      name: Switch to light mode
-  - scheme: default
-    toggle:
-      icon: material/brightness-7 
-      name: Switch to dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+  features:
+    - search.suggest
 plugins:
   - mkdocstrings:
       default_handler: python
