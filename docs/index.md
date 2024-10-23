@@ -27,7 +27,7 @@ Ejecuta el siguiente comando para [instalar](https://krixik-docs.readthedocs.io/
 pip install krixik
 ```
 
-Nota: Se requiere la versión 3.10 (o mayor) de Python.
+Nota: Se requiere la versión 3.8 (o mayor) de Python.
 
 
 ### Inicializa tu Sesión
