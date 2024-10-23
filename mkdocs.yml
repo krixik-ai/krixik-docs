@@ -90,6 +90,8 @@ theme:
     toggle:
       icon: material/brightness-7 
       name: Switch to dark mode
+  features:
+    - search.suggest
 plugins:
   - mkdocstrings:
       default_handler: python
