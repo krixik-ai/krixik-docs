@@ -2,9 +2,10 @@
 
 [🇨🇴 Versión en español de este documento](https://krixik-docs.readthedocs.io/es-main/)
 
-Sequentially assembling multiple AI models into a single pipeline can be painful and expensive. Consuming even a single model can often be draining.
+Small/specialized AI models are an oft-necessary complement—or alternative—to "big AI" offerings. However, infrastructure for small AI tends to be underwhelming, so building with specialized AI can be difficult, time-consuming, and even expensive. Iterating with different models, and particularly with different combinations of these models, can thus be rendered unfeasible.
 
-That's why we're here. **Welcome to Krixik**, where you can easily assemble and serverlessly consume modular AI pipelines through secure Python APIs.
+That's why we're here. **Welcome to Krixik**, where you can easily and swiftly experiment, prototype, and build with sequenced or single-standing small/specialized AI models through secure APIs. The models you leverage through Krixik can be either open source or trained/fine-tuned by you.
+
 
 ### Table of Contents
 
